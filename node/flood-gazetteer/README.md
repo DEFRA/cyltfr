@@ -35,3 +35,7 @@ use `db.currentOp()` to see the progress of the index creation.
 ### test service
 
 `npm test`
+
+### Use service
+
+do http `GET` on `http://localhost:3002/addressbypostcode/{postcode}`
