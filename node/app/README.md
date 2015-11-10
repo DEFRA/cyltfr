@@ -11,8 +11,12 @@
 ### Start server
 `npm start`
 
+Open `http://localhost:3001`
+
 ### Start server (dev mode)
 `npm run dev`
+
+Open `http://localhost:3001`
 
 ### Start server (production)
 `forever start index` (Assumes forever is installed globally `npm i -g forever`)

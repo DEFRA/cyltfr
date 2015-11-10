@@ -5,18 +5,18 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "./bin/clean",
+    "test": "npm run lint",
+    "clean": "bin/clean",
     "precopy": "npm run clean",
-    "copy": "./bin/copy-files",
+    "copy": "bin/copy-files",
     "postcopy": "npm run fixlayout",
-    "fixlayout": "./bin/fix-layout.js",
-    "build:css": "./bin/build-css",
+    "fixlayout": "bin/fix-layout.js",
+    "build:css": "bin/build-css",
     "lint": "standard",
     "dev": "nodemon index.js"
   },
   "author": "ea.gov.uk",
-  "license": "MIT",
+  "license": "OGL",
   "dependencies": {
     "boom": "2.10.0",
     "config": "1.16.0",
@@ -29,7 +29,7 @@
     "inert": "3.2.0",
     "joi": "6.9.1",
     "lout": "7.2.0",
-    "openlayers": "^3.10.1",
+    "openlayers": "3.10.1",
     "vision": "3.0.0",
     "wreck": "7.0.0"
   },
