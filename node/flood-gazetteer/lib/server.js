@@ -1,9 +1,9 @@
 function server (startServerCallback) {
   var Hapi = require('hapi')
-  var Config = require('config')
+  var config = require('config')
   var routes = require('./routes')
   var plugins = require('./plugins')
-  var options = Config.get('server')
+  var options = config.get('server')
 
   var server = new Hapi.Server()
 

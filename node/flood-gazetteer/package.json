@@ -6,23 +6,26 @@
   "scripts": {
     "start": "node index",
     "test": "lab -r console -o stdout -r html -o coverage.html",
+    "lint": "standard",
     "dev": "nodemon index.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "ea.gov.uk",
+  "license": "OGL",
   "dependencies": {
-    "boom": "^3.0.0",
-    "config": "^1.16.0",
-    "good": "^6.4.0",
-    "good-console": "^5.2.0",
-    "good-file": "^5.1.0",
-    "hapi": "^11.1.0",
-    "hapi-mongodb": "^4.0.1",
-    "joi": "^7.0.0"
+    "boom": "3.0.0",
+    "config": "1.16.0",
+    "good": "6.4.0",
+    "good-console": "5.1.0",
+    "good-file": "5.1.0",
+    "hapi": "11.1.0",
+    "hapi-mongodb": "4.0.1",
+    "joi": "7.0.0"
   },
   "devDependencies": {
-    "code": "^2.0.1",
-    "lab": "^7.2.0",
-    "sinon": "^1.17.2"
+    "code": "2.0.1",
+    "lab": "7.2.0",
+    "nodemon": "1.8.1",
+    "sinon": "1.17.2",
+    "standard": "5.3.1"
   }
 }
