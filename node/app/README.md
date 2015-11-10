@@ -8,6 +8,9 @@
 ### Install dependencies
 `npm i`
 
+### Build
+`npm run build`
+
 ### Start server
 `npm start`
 

@@ -12,6 +12,7 @@
     "postcopy": "npm run fixlayout",
     "fixlayout": "bin/fix-layout.js",
     "build:css": "bin/build-css",
+    "build": "npm run copy && npm run build:css",
     "lint": "standard",
     "dev": "nodemon index.js"
   },
@@ -24,13 +25,13 @@
     "good-console": "5.1.0",
     "good-file": "^5.1.0",
     "h2o2": "4.0.2",
-    "handlebars": "4.0.4",
+    "handlebars": "^4.0.4",
     "hapi": "11.1.0",
     "inert": "3.2.0",
     "joi": "7.0.0",
     "lout": "7.2.0",
     "openlayers": "3.10.1",
-    "vision": "3.0.0",
+    "vision": "4.0.1",
     "wreck": "7.0.0"
   },
   "devDependencies": {

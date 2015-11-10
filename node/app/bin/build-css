@@ -1,1 +1,1 @@
-node-sass --output-style=expanded --include-path=govuk_modules/govuk_template/assets/stylesheets --include-path=govuk_modules/govuk_frontend_toolkit/stylesheets --output=public/stylesheets assets/sass
+node-sass --output-style=expanded --include-path=govuk/govuk_template/assets/stylesheets --include-path=govuk/govuk_frontend_toolkit/stylesheets --output=public/stylesheets assets/sass
