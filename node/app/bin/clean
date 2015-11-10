@@ -1,0 +1,2 @@
+rm -rf govuk && mkdir govuk &&
+rm -rf views/layouts && mkdir views/layouts

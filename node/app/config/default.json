@@ -1,0 +1,23 @@
+{
+  "server": {
+    "protocol": "http",
+    "host": "127.0.0.1",
+    "port": 3001
+  },
+  "plugins": {
+    "logging": {
+      "path": "logs",
+      "rotate": {
+        "interval": "daily"
+      }
+    }
+  },
+  "service": {
+    "protocol": "http",
+    "host": "127.0.0.1",
+    "port": 9999
+  },
+  "pageRefreshTime": 900,
+  "cacheExpiry": 900000,
+  "analyticsAccount" : ""
+}
