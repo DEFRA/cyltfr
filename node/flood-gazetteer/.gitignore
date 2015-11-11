@@ -2,3 +2,4 @@ node_modules
 logs
 public
 npm-debug.log
+coverage.html

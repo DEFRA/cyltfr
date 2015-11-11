@@ -7,13 +7,16 @@ var lab = exports.lab = Lab.script()
 
 lab.experiment('addressByPostcode', function (done) {
   var options = [{
-    url: '/addressbypostcode/M67PW',
+    url: '/addressbypostcode/wa4%201ht',
     method: 'GET'
   }, {
     url: '/addressbypostcode/',
     method: 'GET'
   }, {
     url: '/khsgfdjsfd/sdfds',
+    method: 'GET'
+  }, {
+    url: '/addressbypostcode/WA41HT',
     method: 'GET'
   }]
 
@@ -27,9 +30,10 @@ lab.experiment('addressByPostcode', function (done) {
     })
   })
 
-  lab.test('Makes the request successfully', function (done) {
+  lab.test('Makes a successful request with a lower case postcode with a space and gets 15 results', function (done) {
     server.inject(options[0], function (response) {
       Code.expect(response.statusCode).to.equal(200)
+      Code.expect(response.result.length).to.equal(15)
       done()
     })
   })
@@ -44,6 +48,14 @@ lab.experiment('addressByPostcode', function (done) {
   lab.test('Makes request to unknown url', function (done) {
     server.inject(options[2], function (response) {
       Code.expect(response.statusCode).to.equal(404)
+      done()
+    })
+  })
+
+  lab.test('Makes a successful request with an upper case postcode with no space and gets 15 results', function (done) {
+    server.inject(options[0], function (response) {
+      Code.expect(response.statusCode).to.equal(200)
+      Code.expect(response.result.length).to.equal(15)
       done()
     })
   })
