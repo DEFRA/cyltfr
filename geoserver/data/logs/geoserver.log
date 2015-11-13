@@ -1,0 +1,58 @@
+2015-11-13 09:30:30,801 INFO [org.geoserver] - Loaded style 'polygon'
+2015-11-13 09:30:30,802 INFO [org.geoserver] - Loaded style 'raster'
+2015-11-13 09:30:30,803 INFO [org.geoserver] - Loaded style 'point'
+2015-11-13 09:30:30,804 INFO [org.geoserver] - Loaded style 'line'
+2015-11-13 09:30:30,805 INFO [org.geoserver] - Loaded default workspace risk
+2015-11-13 09:30:30,809 INFO [org.geoserver] - Loaded workspace 'risk'
+2015-11-13 09:30:30,895 INFO [storage.DefaultStorageFinder] - **************************************************************************************************************************************
+2015-11-13 09:30:30,895 INFO [storage.DefaultStorageFinder] - *** Found Java environment variable GEOSERVER_DATA_DIR set to /home/ltfridev/ltfri/geoserver/data, using it as the default prefix. ***
+2015-11-13 09:30:30,895 INFO [storage.DefaultStorageFinder] - **************************************************************************************************************************************
+2015-11-13 09:30:30,895 INFO [config.XMLConfiguration] - Will look for geowebcache.xml in '/home/ltfridev/ltfri/geoserver/data/gwc'
+2015-11-13 09:30:30,998 INFO [gwc.layer] - Initializing GWC configuration based on GeoServer's Catalog
+2015-11-13 09:30:30,999 INFO [gwc.layer] - GeoServer TileLayer store base directory is: /home/ltfridev/ltfri/geoserver/data/gwc-layers
+2015-11-13 09:30:30,999 INFO [gwc.layer] - Loading tile layers from /home/ltfridev/ltfri/geoserver/data/gwc-layers
+2015-11-13 09:30:31,010 INFO [gwc.layer] - GWC configuration based on GeoServer's Catalog loaded successfuly
+2015-11-13 09:30:31,010 INFO [layer.TileLayerDispatcher] - Configuration GeoServer Catalog Configuration contained no layers.
+2015-11-13 09:30:31,010 INFO [config.XMLConfiguration] - Found configuration file in /home/ltfridev/ltfri/geoserver/data/gwc
+2015-11-13 09:30:31,057 INFO [config.XMLConfiguration] - Configuration file validated fine.
+2015-11-13 09:30:31,065 INFO [config.XMLConfiguration] - Initializing GridSets from /home/ltfridev/ltfri/geoserver/data/gwc
+2015-11-13 09:30:31,065 INFO [config.XMLConfiguration] - Initializing layers from /home/ltfridev/ltfri/geoserver/data/gwc
+2015-11-13 09:30:31,065 INFO [layer.TileLayerDispatcher] - Configuration /home/ltfridev/ltfri/geoserver/data/gwc contained no layers.
+2015-11-13 09:30:31,096 INFO [diskquota.ConfigLoader] - DiskQuota configuration not found: /home/ltfridev/ltfri/geoserver/data/gwc/geowebcache-diskquota.xml
+2015-11-13 09:30:31,103 INFO [diskquota.ConfigLoader] - DiskQuota configuration not found: /home/ltfridev/ltfri/geoserver/data/gwc/geowebcache-diskquota.xml
+2015-11-13 09:30:31,104 INFO [diskquota.DiskQuotaMonitor] - Setting up disk quota periodic enforcement task
+2015-11-13 09:30:31,105 INFO [diskquota.DiskQuotaMonitor] - 0 layers configured with their own quotas. 
+2015-11-13 09:30:31,106 INFO [diskquota.DiskQuotaMonitor] - 0 layers attached to global quota 500.0 MB
+2015-11-13 09:30:31,115 INFO [diskquota.DiskQuotaMonitor] - Disk quota periodic enforcement task set up every 10 SECONDS
+2015-11-13 09:30:31,182 INFO [org.geoserver] - Loaded service 'WCSInfoImpl-500e64e7:150fcd642d7:-7ffc', enabled
+2015-11-13 09:30:31,199 INFO [org.geoserver] - Loaded service 'WFSInfoImpl-500e64e7:150fcd642d7:-7ffb', enabled
+2015-11-13 09:30:31,215 INFO [org.geoserver] - Loaded service 'WMSInfoImpl-500e64e7:150fcd642d7:-7ffa', enabled
+2015-11-13 09:30:31,222 INFO [gwc.config] - Initializing GeoServer specific GWC configuration from gwc-gs.xml
+2015-11-13 09:30:31,287 INFO [ows.OWSHandlerMapping] - Mapped URL path [/gwc/service/**] onto handler 'dispatcher'
+2015-11-13 09:30:31,313 INFO [geowebcache.GeoWebCacheDispatcher] - Invoked setServletPrefix(gwc)
+2015-11-13 09:30:31,325 INFO [georss.GeoRSSPoller] - Initializing GeoRSS poller in a background job...
+2015-11-13 09:30:31,329 INFO [georss.GeoRSSPoller] - No enabled GeoRSS feeds found, poller will not run.
+2015-11-13 09:30:31,396 INFO [rest.RESTDispatcher] - Created RESTDispatcher with 14 paths
+2015-11-13 09:30:31,418 INFO [wms.WMSService] - Will NOT recombine tiles for non-tiling clients.
+2015-11-13 09:30:31,418 INFO [wms.WMSService] - Will proxy requests to backend that are not getmap or getcapabilities.
+2015-11-13 09:30:32,265 INFO [ows.OWSHandlerMapping] - Mapped URL path [/kml] onto handler 'dispatcher'
+2015-11-13 09:30:32,269 INFO [ows.OWSHandlerMapping] - Mapped URL path [/kml/*] onto handler 'dispatcher'
+2015-11-13 09:30:32,269 INFO [ows.OWSHandlerMapping] - Mapped URL path [/kml/icon/**/*] onto handler 'kmlIconService'
+2015-11-13 09:30:32,340 INFO [ows.OWSHandlerMapping] - Mapped URL path [/ows/**] onto handler 'dispatcher'
+2015-11-13 09:30:32,340 INFO [ows.OWSHandlerMapping] - Mapped URL path [/ows] onto handler 'dispatcher'
+2015-11-13 09:30:32,349 INFO [org.geoserver] - GeoServer configuration lock is enabled
+2015-11-13 09:30:32,449 INFO [ows.OWSHandlerMapping] - Mapped URL path [/wcs] onto handler 'dispatcher'
+2015-11-13 09:30:32,449 INFO [ows.OWSHandlerMapping] - Mapped URL path [/wcs/**] onto handler 'dispatcher'
+2015-11-13 09:30:33,300 INFO [ows.OWSHandlerMapping] - Mapped URL path [/wfs/*] onto handler 'dispatcher'
+2015-11-13 09:30:33,300 INFO [ows.OWSHandlerMapping] - Mapped URL path [/TestWfsPost] onto handler 'wfsTestServlet'
+2015-11-13 09:30:33,300 INFO [ows.OWSHandlerMapping] - Mapped URL path [/wfs] onto handler 'dispatcher'
+2015-11-13 09:30:36,358 INFO [ows.OWSHandlerMapping] - Mapped URL path [/wms/*] onto handler 'dispatcher'
+2015-11-13 09:30:36,358 INFO [ows.OWSHandlerMapping] - Mapped URL path [/wms] onto handler 'dispatcher'
+2015-11-13 09:30:36,408 INFO [ows.OWSHandlerMapping] - Mapped URL path [/animate] onto handler 'dispatcher'
+2015-11-13 09:30:36,408 INFO [ows.OWSHandlerMapping] - Mapped URL path [/animate/*] onto handler 'dispatcher'
+2015-11-13 09:30:36,511 WARN [geoserver.security] - /home/ltfridev/ltfri/geoserver/data/security/masterpw.info is a security risk. Please read this file and remove it afterward
+2015-11-13 09:30:36,545 INFO [geoserver.security] - AuthenticationCache Initialized with 1000 Max Entries, 300 seconds idle time, 600 seconds time to live and 3 concurrency level
+2015-11-13 09:30:36,545 INFO [geoserver.security] - AuthenticationCache Eviction Task created to run every 600 seconds
+2015-11-13 09:30:36,831 INFO [geoserver.security] - Start reloading user/grous for service named default
+2015-11-13 09:30:36,835 INFO [geoserver.security] - Reloading user/groups successful for service named default
+2015-11-13 09:30:38,026 INFO [geoserver.security] - Strong cryptography is available
