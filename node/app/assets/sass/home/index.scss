@@ -1,0 +1,51 @@
+@import "colours";
+@import "typography";
+@import "css3";
+@import "_sidebar";
+
+h1.heading-xlarge {
+  margin-bottom: 0;
+}
+
+h2.heading-medium {
+  margin-top: 0.5em;
+}
+
+.map-container {
+  height: 690px;
+  @include media(mobile) {
+    height: auto;
+  }
+
+  margin-top: 24px;
+
+  .grid-row {
+
+    margin: 0;
+
+    height: 100%;
+    > div {
+      height: 100%;
+
+      &.column-third {
+        border-right: $yellow 6px solid;
+      }
+      &.column-third, &.column-two-thirds {
+        padding: 0;
+      }
+    }
+  }
+
+  .visible-mobile {
+    select {
+      @include core-19;
+      width: 100%;
+      @include box-sizing(border-box);
+      padding: 4px;
+      background-color: $white;
+      border: 1px solid $border-colour;
+      border-radius: 0;
+      margin-bottom: 2px;
+    }
+  }
+}

@@ -41,13 +41,9 @@
   @include phase-tag(beta); // Change this to (beta) for a beta tag
 }
 
-// Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you,
-// either add and import new partial files, or modify those in GOV.UK elements to fit your user needs.
-
-
-
-
-///////////// Application Specific Styling
+/*
+ * Application Specific Styling
+ */
 
 //http://thesassway.com/intermediate/mixins-for-semi-transparent-colors
 @mixin alpha-attribute($attribute, $color, $background) {
@@ -58,670 +54,62 @@
   #{$attribute}: $color;
 }
 
-
 // Extra Colours for Warnings
 $flood-alert: #f18700;
 $flood-warning: #e3000f;
 $flood-expired: #797979;
 
-// Typical river level blue - Use alpha-attribute mixin adding for opacity.
-$river-level-typical: #97BBCD;
-
-
-// Homepage
-#content .intro{
-
-  h1{
-    margin-bottom: 0px;
-  }
-  .form-hint{
-    margin-top: 0;
-  }
-}
-.intro{
-
-  time{
-    display: block;
-  }
-
-  a{
-    &.warning{
-      text-decoration: none;
-    }
-    &.alert{
-      text-decoration: none;
-    }
-  }
-
-  // Homepage Warings
-  mark{
-    padding:8px 10px 5px 10px;
-    margin: 30px 0 0 0;
-    display: block;
-    background: $grey-3;
-      &.warning{
-        background: $flood-warning;
-        color: $page-colour;
-      }
-      &.alert{
-        background: $flood-alert;
-        color: $page-colour;
-      }
-
-      &.river-level-typical {
-        @include alpha-attribute('background-color', rgba($river-level-typical, 1), white);
-        color: $page-colour;
-      }
-      &.banner-error{
-        background: white;
-        border: 1px solid #bfc1c3;
-      }
-
-    span.pseudo-link{
-      text-decoration: underline;
-    }
-
-  }
-}
-
-// Custom Search Form
-.search-warnings{
-
-  .form-control{
-
-    height: 46px;
-    padding: 5px 0px 0px 10px;
-
-    @include media(desktop){
-      width: 73%;
-    }
-    @include media($max-width: 980px){
-      width: 100%;
-    }
-    @include media($max-width: 640px){
-      height: 33px;
-    }
-
-  }
-
-  #error-message{
-    border-left: 3px solid $error-colour;
-    color: $error-colour;
-    padding-left: 10px;
-    margin: 20px 15px 0px 0px;
-  }
-
-  .button-get-started{
-    margin: 0;
-    @include media(desktop){
-      float: right;
-    }
-    @include media($max-width: 980px){
-      float: none;
-      margin: 10px 0 0 0;
-    }
-  }
-
-}
-
-// Related Content
-.related{
-  margin-top: 43px;
-  p{
-    &:first-child
-    {
-      border-top: 10px solid $link-colour;
-      padding-top: 10px;
-    }
-  }
-}
-
-// Supporting Information
-.supporting-info{
-  margin-top: 30px;
-  padding-top:30px;
-  border-top: 1px solid $border-colour;
-}
-
-// Feedback Related
-.noscript-iframe
-{
-  display:block;
-  margin-top:30px;
-}
-.js .noscript-iframe
-{
-  display:none;
-}
-
-
 // Turn off when Javascript is off
-.nojs-hide
-{
+.nojs-hide {
   display: none;
 }
-.js-enabled .nojs-hide
-{
+
+.js-enabled .nojs-hide {
   display: block;
 }
+
 // Turn on when Javascript is off
-.nojs-show
-{
+.nojs-show {
   display: block;
 }
-.js-enabled .nojs-show
-{
+
+.js-enabled .nojs-show {
   display: none;
 }
+
 // IE 6/7/8 Turn off when Javascript is turned on
-.lte-ie8{
-  .ie-hide
-  {
+.lte-ie8 {
+  .ie-hide {
     display:none;
   }
-  .ie-show
-  {
+  .ie-show {
     display:block;
   }
 }
-.ie-show{
+
+.ie-show {
   display:none;
 }
+
 // General Hide / Show
-.show{
+.show {
   display:block;
 }
-.hide{
+
+.hide {
   display:none;
 }
 
-
-// Map
-.mapMin{
-  height: 450px;
-  overflow: hidden;
-
-  @include media($max-width: 500px){
-    height: 400px;
-  }
-
-}
-.mapMin,
-.mapEnlarge{
-  margin-top: 30px;
-
-
-  .grid-row{
-    background: $page-colour;
-    margin-bottom: 15px;
-  }
-  i{
-    color: $link-colour;
-    margin-left: 10px;
-  }
-  a{
-    margin-right: 15px;
-  }
-  .form-label{
-    float:left;
-    padding-right: 15px;
-    padding-top: 7px;
-    @include media($max-width: 500px){
-      display: none;
-    }
-  }
-  input
-  {
-    float:left;
-    margin-right: 15px;
-    width: 64%;
-    padding: 4px 6px 2px 9px;
-    font-size: 19px;
-    line-height: 1.3157894737;
-    font-weight: 400;
-    &:focus{
-      margin: 0px 15px 0px 0;
-    }
-    @include media($max-width: 460px){
-      width: 76%;
-    }
-    @include media($max-width: 360px){
-      width: 70%;
-    }
-  }
-  .column-three-quarters{
-    @include media($max-width: 850px){
-      width: 100%;
-    }
-  }
-  .button
-  {
-    float:left;
-    margin: 0px 0px 0px 0;
-    &:focus{
-      margin: 2px 0px 0px 0;
-    }
-    @include media($max-width: 460px){
-      margin: 0;
-    }
-    i{
-      width: 21px;
-      margin-left: -1px;
-      color: $page-colour;
-    }
-  }
-  nav{
-    float: right;
-    display:block;
-    padding-top: 6px;
-    @include media($max-width: 850px){
-      float:left;
-      display: block;
-      padding-left: 15px;
-      padding-top: 10px;
-    }
-  }
-  #errorMessage{
-    clear:both;
-    background: $page-colour;
-    display:block;
-    padding-left: 10px;
-    margin: 10px 15px 5px 15px;
-    border-left: 3px solid $error-colour;
-    color: $error-colour;
-  }
-}
-
-// Map Enlarge
-.mapEnlarge {
-  //overflow: hidden;
-  background: $page-colour;
-  position: absolute;
-  margin: 0;
-  padding-top: 0;
-//  @include media($max-width: 765px){
-//    padding-top: 15px;
-//  }
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 90%;
-  z-index: 1000;
-
-  .grid-row{
-    margin: 0;
-    margin-bottom: 15px;
-    @include media($max-width: 765px){
-      margin: 10px;
-    }
-  }
-}
-
-
-// Start of Results
-#warningssummary,
-#warningsfull{
-  margin-top: 30px;
-
-  li{
-    list-style-type: none;
-    clear: both;
-    position: relative;
-    display:block;
-    margin-bottom: 15px;
-    font-weight: bold;
-
-
-    details.show{
-      position:relative;
-      margin: 0;
-      summary.first{
-        display: block;
-        border: none;
-        //padding: 4.5% 0 4% 14.5%;
-        padding:8px 10px 5px 10px;
-        margin: 0 0 0 0;
-        /*padding: 4.5% 0 4% 14.5%;
-        @include media($max-width: 788px){
-          padding: 5% 15px 5% 18.5%;
-        }
-        @include media($max-width: 600px){
-          padding: 7% 15px 7% 24%;
-        }
-        @include media($max-width: 500px){
-          padding: 5% 15px 5% 25%;
-        }
-        @include media($max-width: 400px){
-          padding: 3% 15px 3% 26.5%;
-        }
-        */
-        /* IE 8/7 Fixing */
-        //@include ie-lte(8){
-        //  padding: 3.5% 0 3% 12%;
-        //}
-      }
-    }
-
-    details{
-      summary{
-        //color: $text-colour;
-        display: block;
-        padding:8px 10px 5px 10px;
-        margin: 0 0 0 0;
-        //padding: 15px 15px 10px 15px;
-        //margin: 15px 15px 15px 15px;
-        //border: 1px solid $grey-3;
-        span{
-          font-weight: normal;
-        }
-      }
-    }
-  }
-
-
-
-  a.blocklink{
+.visible-mobile {
+  display: none;
+  @include media(mobile) {
     display: block;
-    text-decoration: none;
-    font-weight: normal;
-  }
-  figure{
-    display: inline-block;
-    width: 12%;
-    margin: 15px 15px 7px 15px;
-    vertical-align: middle;
-    @include media($max-width: 786px){
-      width: 15%;
-    }
-    @include media($max-width: 600px){
-      width: 20%;
-    }
-    @include ie-lte(8){
-      width: 10%;
-      margin-left:10px;
-    }
-
-    img{
-      width: 95%;
-      height: auto;
-    }
-  }
-  figure.img-fix{
-    position: absolute;
-  }
-  figcaption{
-    display: inline-block;
-    vertical-align: middle;
-    //margin-right: 15px;
-    //font-weight: bold;
-    //color: $text-colour;
-    //margin-right: 15px;
-    padding:8px 10px 5px 10px;
-    margin: 0 0 0 0;
-    &.summary{
-      color: $page-colour;
-      font-weight: bold;
-    }
-
-    @include media($max-width: 788px){
-      width: 70%;
-    }
-    @include media($max-width: 600px){
-      width: 60%;
-    }
-    span{
-      font-weight: normal;
-    }
-  }
-
-  .header1, .header2{border: 2px solid $flood-warning;}
-  .header3{border: 2px solid $flood-alert}
-  .header4{border: 2px solid $flood-expired}
-
-  .header4{
-    /* IE 7 Fixing */
-    @include ie-lte(7){
-      height: 125px;
-      margin-left: -15px;
-    }
-  }
-
-}
-
-// Warnings Full Actual Description
-.warning-desc{
-  padding-top: 10px;
-  section{
-  //  margin: 0 15px 15px 15px;
-    margin: 0px 0px 5px;
-    //border: 1px solid $grey-3;
-  }
-  aside{
-    clear: both;
-    margin: 0 15px 15px 15px;
-    padding:15px 15px 12px 15px;
-    border: 1px solid $grey-3;
-    background: $highlight-colour;
-    &:after{
-
-      visibility: hidden;
-      display: block;
-      font-size: 0;
-      content: " ";
-      clear: both;
-      height: 0;
-    }
-    h3{
-      display: block;
-      margin: 0 0 10px 0;
-      padding: 0;
-    }
-    a{
-      margin-right: 15px;
-      font-weight: normal;
-      float: left;
-    }
-  }
-  h3{
-  margin: 5px 0 15px 0;
-  }
-  .column-three-quarters{
-    time{
-      margin-top:15px;
-    }
-    /* IE 7 Fixing */
-    @include ie-lte(7){
-      width: 600px;
-    }
-  }
-  .column-quarter{
-    margin-bottom: 15px;
-    text-align: center;
-    /* IE 7 Fixing */
-    @include ie-lte(7){
-      width: 250px;
-    }
-    img{
-      width:100%;
-      height: auto;
-      margin-top: 15px;
-      @include media($max-width: 641px){
-        width: 50%;
-      }
-      @include ie-lte(8){
-        width: 100%;
-      }
-
-    }
-
-    time{
-      margin-top:15px;
-      text-align: center;
-    }
-  }
-  time{
-    display:block;
-    /* IE 7 Fixing */
-    @include ie-lte(7){
-      margin-bottom: 15px;
-    }
   }
 }
 
-// Fix for large gray warning Icon
-  .header4{
-    .warning-desc{
-      .column-quarter{
-        img{
-          width: 35%;
-        }
-      }
-    }
-  }
-
-a{
-  &.warning{
-    background: $flood-warning;
-    color: $page-colour;
-  }
-  &.alert{
-    background: $flood-alert;
-    color: $page-colour;
+.hidden-mobile {
+  display: block;
+  @include media(mobile) {
+    display: none;
   }
 }
-
-/* /// Screen Reader Fix /// */
-.sr-fix {
-  position:absolute;
-  left:-10000px;
-  top:auto;
-  width:1px;
-  height:1px;
-  overflow:hidden;
-
-}
-
-button{
-  &.ol-full-screen-false{
-    width: auto;
-    padding: 5px;
-    font-weight: normal;
-    &:after{
-      content: '';
-    }
-  }
-}
-
-span{
-  &.chart-line{
-    width:20px;
-    height:2px;
-    float:left;
-    margin-top:9px;
-    margin-right:4px;
-    &#record{
-      background-color: blue;
-    }
-    &#possible{
-      background-color: $flood-alert;
-    }
-    &#reading{
-      background-color: rgba(151,187,205,1);
-    }
-  }
-
-}
-
-.ol-attribution {
-  top: 0.5em;
-  right: 0.5em;
-  height: 27px;
-}
-
-
-ul.station-list{
-  //list-style-image: url('public/images/station-icon.png')
-  list-style-type: none;
-}
-
-li.station{
-  background: url('/public/images/station-icon.png') no-repeat left top;
-  //height: 25px;
-  padding-top: 5px;
-  padding-left: 25px;
-}
-
-li.station:hover {
-  background: url('/public/images/station-icon-hover.png') no-repeat left top;
-}
-
-.column-three-quarters {
-  @include grid-column( 3/4 );
-  padding: 0px 15px 0px 30px;
-}
-
-.act-now {
-    clear: both;
-    margin: 15px 0px 0px;
-    padding: 15px 15px 12px;
-    //border: 1px solid #DEE0E2;
-    //background: #F8F8F8 none repeat scroll 0% 0%;
-}
-
-
-.warning-desc .act-now .heading-medium {
-    margin: 0px;
-}
-
-#summary-severity-1, #summary-severity-2{
-    background: $flood-warning;
-    color: $page-colour;
-    &:focus{
-      outline: 3px solid $flood-warning;
-    }
-  }
-
-  #summary-severity-3{
-    background: $flood-alert;
-    color: $page-colour;
-    &:focus{
-      outline: 3px solid $flood-alert;
-    }
-  }
-  #summary-severity-4{
-    color: $page-colour;
-    background: $flood-expired;
-    &:focus{
-      outline: 3px solid $flood-expired;
-    }
-  }
-
-  #details-content-severity-1 details summary:focus{
-    outline: 3px solid $flood-warning;
-  }
-  #details-content-severity-2 details summary:focus{
-    outline: 3px solid $flood-warning;
-  }
-  #details-content-severity-3 details summary:focus{
-    outline: 3px solid $flood-alert;
-  }
-  #details-content-severity-4 details summary:focus{
-    outline: 3px solid $flood-expired;
-  }
-
-  #details-content-severity-1 details {
-    border-bottom: 1px solid #bfc1c3;
-  }
-  #details-content-severity-2 details {
-    border-bottom: 1px solid #bfc1c3;
-  }
-  #details-content-severity-3 details {
-    border-bottom: 1px solid #bfc1c3;
-  }
-  #details-content-severity-4 details {
-    border-bottom: 1px solid #bfc1c3;
-  }
-
-  strong {
-    font-weight: 700;
-  }

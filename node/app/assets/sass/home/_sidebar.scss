@@ -1,0 +1,54 @@
+@import "colours";
+
+ul.sidebar {
+  height: 100%;
+  color: $white;
+  background-color: $light-blue;
+
+  > li {
+    background-repeat: no-repeat;
+    background-position: right 8px top 36px;
+    background-image: url(/public/images/arrow-right.png);
+    border-bottom: solid 1px $grey-1;
+
+    h3 {
+      height: 90px;
+      padding: 0 30px;
+      cursor: pointer;
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    &.selected {
+      background-color: $link-colour;
+      background-image: url(/public/images/arrow-down.png);
+
+      ul {
+        display: block;
+      }
+    }
+  }
+  ul {
+    display: none;
+    color: $black;
+    background-color: $grey-4;
+
+    > li {
+      border-bottom: solid 1px $grey-3;
+
+      h4 {
+        height: 44px;
+        padding: 0 35px;
+        cursor: pointer;
+        overflow: hidden;
+        line-height: 44px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      &.selected {
+        background-color: $yellow;
+      }
+    }
+  }
+}
