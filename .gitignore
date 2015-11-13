@@ -1,1 +1,3 @@
 geoserver/data/logs
+geoserver/data/gwc/*
+prototype_area
