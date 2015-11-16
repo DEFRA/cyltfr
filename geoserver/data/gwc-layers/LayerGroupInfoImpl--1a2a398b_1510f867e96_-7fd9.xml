@@ -1,7 +1,7 @@
 <GeoServerTileLayer>
-  <id>LayerGroupInfoImpl-7929d142:151009880af:-7fe7</id>
+  <id>LayerGroupInfoImpl--1a2a398b:1510f867e96:-7fd9</id>
   <enabled>true</enabled>
-  <name>risk:6-SW-Extent</name>
+  <name>risk:1-ROFRS</name>
   <mimeFormats>
     <string>image/png</string>
   </mimeFormats>
