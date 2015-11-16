@@ -84,7 +84,8 @@ var sw_options = ol.source.WMTS.optionsFromCapabilities(
 var sw_source = new ol.source.WMTS(sw_options)
 
 var sw_layer = new ol.layer.Tile({
-  source: sw_source
+  source: sw_source,
+  opacity: 0.8
 })
 
 map = new ol.Map({
