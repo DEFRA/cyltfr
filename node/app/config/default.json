@@ -17,6 +17,11 @@
     "host": "127.0.0.1",
     "port": 9999
   },
+  "geoserver": {
+    "protocol": "http",
+    "host": "127.0.0.1",
+    "port": "8080"
+  },
   "pageRefreshTime": 900,
   "cacheExpiry": 900000,
   "analyticsAccount" : ""

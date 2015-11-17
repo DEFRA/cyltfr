@@ -1,0 +1,116 @@
+<html>
+<head>
+</head>
+<body>
+  <h1>Openlayers test</h1>
+  <div id="map" class="map">
+  </div>
+</body>
+</html>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol-debug.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.12/proj4.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.css">
+<script type="text/javascript">
+<!--https://astuntechnology.github.io/osgis-ol3-leaflet/ol3/01-OSGB-MAP.html-->
+
+
+var parser = new ol.format.WMTSCapabilities();
+
+//var extent = [-84667.14, 11795.97, 608366.68, 1230247.30];
+var extent = [0,0,800000,1400000];
+
+//var resolutions = [896,448,224,112,56,28,14,7,3.5,1.75,0.875];
+//var matrixIds = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10"];
+
+//might need an array of origins
+
+
+
+
+proj4.defs("EPSG:27700","+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.06,0.15,0.247,0.842,-20.489 +units=m +no_defs");
+
+var projection = ol.proj.get('EPSG:27700');
+
+projection.setExtent(extent);
+
+var request = new XMLHttpRequest();
+request.open('GET', 'http://ondemandapi.ordnancesurvey.co.uk/osmapapi/wmtsgc/segab6nu/GetCapabilities?SERVICE=WMTS&VERSION=1.0.0&REQUEST=GetCapabilities&URL=https://flood-warning-information.service.gov.uk/', false);
+//request.open('GET', 'http://localhost:3002/public/test_int.xml', false)
+request.send(null);
+
+//bug parser is not getting the matrixwidth and matrixheight values when parsing,
+//therefore sizes is set to undefined array, which sets fullTileRanges_
+//to an array of undefineds thus breaking the map
+var result = parser.read(request.responseXML);
+
+//var result = parser.read('')
+
+var options = ol.source.WMTS.optionsFromCapabilities(
+  result,
+  {
+    layer: 'osgb',
+    matrixSet: 'ZoomMap',
+  //  projection: 'EPSG:27700',
+  //  extent: extent
+  }
+)
+
+options.urls[0] += 'URL=https://flood-warning-information.service.gov.uk/'
+var source = new ol.source.WMTS(options);
+
+// array of ol.tileRange can't find any reference to this object in ol3 documentation, but is set to NaN and stops the map from functioning
+source.tileGrid.fullTileRanges_ = null;
+
+var layer = new ol.layer.Tile({
+  source: source
+})
+
+
+//loading the surface water WMTS
+var swrequest = new XMLHttpRequest();
+swrequest.open('GET', 'http://localhost:3001/geoserver/gwc/service/wmts?REQUEST=GetCapabilities',false)
+swrequest.send(null);
+
+var sw_result = parser.read(swrequest.responseText)
+
+var sw_options = ol.source.WMTS.optionsFromCapabilities(
+  sw_result,
+  {
+    layer: 'risk:6-SW-Extent',
+    matrixSet: 'EPSG:27700'
+  }
+)
+
+var sw_source = new ol.source.WMTS(sw_options)
+
+var sw_layer = new ol.layer.Tile({
+  source: sw_source,
+  opacity: 0.8
+})
+
+map = new ol.Map({
+   layers: [
+     layer,
+     sw_layer
+
+   ],
+   target: 'map',
+   view: new ol.View({
+     resolutions: source.tileGrid.getResolutions(),
+     projection: projection,
+     center: [440000, 300000],
+     zoom: 0
+   })
+ });
+
+
+map.on('singleclick', function (event) {
+
+
+  var pt = map.getCoordinateFromPixel(event.pixel);
+
+  alert(pt)
+
+})
+
+</script>
