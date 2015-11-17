@@ -1,5 +1,6 @@
 var plugin = require('vision')
 var handlebars = require('handlebars')
+var layouts = require('handlebars-layouts')
 var config = require('config')
 var pageRefreshTime = config.get('pageRefreshTime')
 
@@ -17,15 +18,17 @@ module.exports = function (server) {
       server.log('error', err)
       throw err
     }
+    var engine = handlebars.create()
+    layouts.register(engine)
 
     server.views({
       engines: {
-        html: handlebars
+        html: engine
       },
       relativeTo: process.cwd(),
       path: 'views',
-      layout: 'govuk_template',
-      layoutPath: 'views/layouts',
+      // layout: 'govuk_template',
+      // layoutPath: 'views/layouts',
       partialsPath: 'views/partials',
       helpersPath: 'views/helpers',
       context: defaultContext
