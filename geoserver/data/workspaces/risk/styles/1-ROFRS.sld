@@ -22,10 +22,10 @@
           <Title>High Probability</Title>
 
         <ogc:Filter>
-          <ogc:PropertyIsLike  wildCard="*" singleChar="." escape="!">
+          <ogc:PropertyIsEqualTo>
             <ogc:PropertyName>prob_4band</ogc:PropertyName>
-            <ogc:Literal>High*</ogc:Literal>
-            </ogc:PropertyIsLike>
+            <ogc:Literal>High</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
         </ogc:Filter>
           <PolygonSymbolizer>
             <Fill>
@@ -40,10 +40,10 @@
 
           <!-- like a polygonsymbolizer -->
         <ogc:Filter>
-          <ogc:PropertyIsLike  wildCard="*" singleChar="." escape="!">
+          <ogc:PropertyIsEqualTo>
             <ogc:PropertyName>prob_4band</ogc:PropertyName>
-            <ogc:Literal>Medium*</ogc:Literal>
-            </ogc:PropertyIsLike>
+            <ogc:Literal>Medium</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
         </ogc:Filter>
           <PolygonSymbolizer>
             <Fill>
@@ -57,10 +57,10 @@
           <Title>Low Probability</Title>
 
         <ogc:Filter>
-          <ogc:PropertyIsLike  wildCard="*" singleChar="." escape="!">
+          <ogc:PropertyIsEqualTo>
             <ogc:PropertyName>prob_4band</ogc:PropertyName>
-            <ogc:Literal>Low*</ogc:Literal>
-            </ogc:PropertyIsLike>
+            <ogc:Literal>Low</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
         </ogc:Filter>
           <PolygonSymbolizer>
             <Fill>
@@ -74,10 +74,10 @@
           <Title>Very Low Probability</Title>
 
         <ogc:Filter>
-          <ogc:PropertyIsLike  wildCard="*" singleChar="." escape="!">
+          <ogc:PropertyIsEqualTo>
             <ogc:PropertyName>prob_4band</ogc:PropertyName>
-            <ogc:Literal>Very Low*</ogc:Literal>
-            </ogc:PropertyIsLike>
+            <ogc:Literal>Very Low</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
         </ogc:Filter>
           <PolygonSymbolizer>
             <Fill>

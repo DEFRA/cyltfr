@@ -1,0 +1,26 @@
+<layerGroup>
+  <id>LayerGroupInfoImpl--1a2a398b:1510f867e96:-7fd1</id>
+  <name>3-ROFR</name>
+  <mode>SINGLE</mode>
+  <title>Map 3: Risk of flooding from Reservoirs</title>
+  <workspace>
+    <id>WorkspaceInfoImpl-500e64e7:150fcd642d7:-7fe6</id>
+  </workspace>
+  <publishables>
+    <published type="layer">
+      <id>LayerInfoImpl--1a2a398b:1510f867e96:-7ff7</id>
+    </published>
+  </publishables>
+  <styles>
+    <style>
+      <id>StyleInfoImpl-7929d142:151009880af:-7ffa</id>
+    </style>
+  </styles>
+  <bounds>
+    <minx>0.0</minx>
+    <maxx>700000.0</maxx>
+    <miny>0.0</miny>
+    <maxy>800000.0</maxy>
+    <crs class="projected">EPSG:27700</crs>
+  </bounds>
+</layerGroup>
