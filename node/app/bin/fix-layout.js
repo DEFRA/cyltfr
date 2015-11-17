@@ -23,7 +23,7 @@ var cmd = "sed -i \
 -e 's${{{ afterHeader }}}${{> afterHeader }}$g' \
 -e 's${{{ footerTop }}}${{> footerTop }}$g' \
 -e 's${{{ footerSupportLinks }}}${{> footerSupportLinks }}$g' \
--e 's${{{ bodyEnd }}}${{> bodyEnd }}$g' \
+-e 's${{{ bodyEnd }}}${{> bodyEnd }}\r\r\t\t{{#block \"bodyEnd\"}}\r\t\t{{/block}} $g' \
 views/partials/layout.html"
 
 exec(cmd, function (err) {
