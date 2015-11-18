@@ -1,1 +1,1 @@
-watchify assets/javascripts/index.js -d -o public/javascripts/index.js
+watchify assets/javascripts/index.js -d -o 'exorcist public/javascripts/index.js.map > public/javascripts/index.js'
