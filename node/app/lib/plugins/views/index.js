@@ -18,8 +18,19 @@ module.exports = function (server) {
       server.log('error', err)
       throw err
     }
+
+    // Create the handlebars engine
+    //  and register handlebars-layouts
     var engine = handlebars.create()
     layouts.register(engine)
+
+    // Register global helpers
+    var helpers = require('./helpers')
+    for (var key in helpers) {
+      if (helpers.hasOwnProperty(key)) {
+        engine.registerHelper(key, helpers[key])
+      }
+    }
 
     server.views({
       engines: {
@@ -27,10 +38,7 @@ module.exports = function (server) {
       },
       relativeTo: process.cwd(),
       path: 'views',
-      // layout: 'govuk_template',
-      // layoutPath: 'views/layouts',
       partialsPath: 'views/partials',
-      helpersPath: 'views/helpers',
       context: defaultContext
     })
   })

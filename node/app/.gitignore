@@ -3,4 +3,4 @@ govuk
 logs
 public
 npm-debug.log
-views/layout/govuk_template.html
+views/partials/layout.html

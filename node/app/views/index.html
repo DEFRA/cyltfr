@@ -2,7 +2,6 @@
 
   {{#content "head"}}
     <link rel="stylesheet" type="text/css" href="{{{ assetPath }}}stylesheets/home/index.css">
-    <script src="{{{ assetPath }}}javascripts/index.js"></script>
   {{/content}}
 
   {{#content "content"}}
@@ -10,12 +9,12 @@
     <h2 class="heading-medium">Floods destroy. Be prepared.</h2>
     <h3 class="lede">Risk of flooding from Surface Water - Extent of flood:</h3>
     <div class="map-container">
-    <div class="visible-mobile">
-      {{> selector }}
-    </div>
+      <div class="visible-mobile">
+        {{> map/selector }}
+      </div>
       <div class="grid-row">
         <div class="column-third hidden-mobile">
-          {{> sidebar }}
+          {{> map/sidebar }}
         </div>
         <div class="column-two-thirds">
           <div id="map" class="map" style="width: 100%; height:100%"></div>
@@ -23,6 +22,10 @@
         </div>
       </div>
     </div>
+  {{/content}}
+
+  {{#content "bodyEnd"}}
+    <script src="{{{ assetPath }}}javascripts/index.js"></script>
   {{/content}}
 
 {{/extend}}
