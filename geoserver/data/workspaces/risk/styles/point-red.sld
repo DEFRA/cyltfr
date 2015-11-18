@@ -16,14 +16,14 @@
 			<Abstract>A sample style that just prints out a purple square</Abstract>
 			<!-- FeatureTypeStyles describe how to render different features -->
 			<!-- a feature type for points -->
-
+          
 			<FeatureTypeStyle>
 				<!--FeatureTypeName>Feature</FeatureTypeName-->
 				<Rule>
 					<Name>Rule 1</Name>
 					<Title>Red circle</Title>
 					<Abstract>A red circle</Abstract>
-
+ 
 					<!-- like a linesymbolizer but with a fill too -->
 					<PointSymbolizer>
 						<Graphic>
@@ -33,7 +33,7 @@
 									<CssParameter name="fill">#FF0000</CssParameter>
 								</Fill>
 							</Mark>
-							<Size>6</Size>
+							<Size>10</Size>
 						</Graphic>
 					</PointSymbolizer>
 				</Rule>

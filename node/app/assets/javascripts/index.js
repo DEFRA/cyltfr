@@ -13,6 +13,7 @@ $(function () {
 
   function loadMap (ref) {
     $selector.val(ref)
+    riskMap.showMap('risk:' + ref.substring(ref.indexOf('_') + 1))
     console.log('loading map', ref)
   }
 
@@ -42,5 +43,5 @@ $(function () {
     loadMap($this.attr('id'))
   })
 
-  openMapNav('SurfaceWater_VelocityHigh')
+  openMapNav('RiversOrSea_1-ROFRS')
 })
