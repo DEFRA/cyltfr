@@ -1,9 +1,38 @@
 var $ = require('jquery')
-var maps = require('../../lib/models/map.json')
+// var Maps = require('../../lib/models/maps')
+// var maps = new Maps()
+//
+// $(function () {
+//   var selected = 'selected'
+//   var $container = $('.map-container')
+//   var $sidebar = $('ul.sidebar', $container)
+//   var $selector = $('select', $container)
+//   var $categories = $sidebar.children('li.category')
+//   var $maps = $categories.find('li')
+//
+//   // Store a reference to the map title element
+//   var $title = $('h3.lede')
+//
+//   // Store a reference to the map title element
+//   var $title = $('h3.lede')
+//
+//   function setCurrentMap (ref) {
+//     var currMap = maps.setCurrentMap(ref)
+//     var currCategory = maps.currCategory
+//
+//     // Update the title
+//     $title.text(maps.currMap.title)
+//
+//     // Update the main nav
+//     $categories.removeClass(selected)
+//     $categories.find('#' + currCategory.ref).addClass(selected)
+//
+//     // Update the mobile nav
+//   }
+//
+//   setCurrentMap('RiversOrSea_1-ROFRS')
+// })
 
-/*
- * Todo: This needs redoing/finishing off.
- */
 $(function () {
   var selected = 'selected'
   var $container = $('.map-container')

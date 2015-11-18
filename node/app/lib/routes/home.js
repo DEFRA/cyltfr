@@ -1,4 +1,4 @@
-var maps = require('../models/map.json')
+var maps = require('../models/maps.json')
 
 module.exports = {
   method: 'GET',
