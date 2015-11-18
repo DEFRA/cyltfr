@@ -30,8 +30,8 @@
 
 {{/extend}}
 
-<!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol-debug.js"></script>-->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol-debug.js"></script>
+<!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.js"></script>-->
 <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.min.js"></script>-->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.12/proj4.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.css">
@@ -62,11 +62,16 @@ var riskMap = function(){
     result,
     {
       layer: 'osgb',
-      matrixSet: 'ZoomMap'/*,
-      projection: 'EPSG:27700',
-      extent: extent*/
+      matrixSet: 'ZoomMap'
+
     }
   );
+
+  options.attributions = [
+    new ol.Attribution({
+      html: '&#169; Crown copyright and database rights 2015 <a href="http://www.ordnancesurvey.co.uk">Ordnance Survey</a>'
+    })
+  ]
 
   options.urls[0] += 'URL=https://flood-warning-information.service.gov.uk/'
 
@@ -124,6 +129,7 @@ var riskMap = function(){
   controls.push(new ol.control.FullScreen({
     // can change the default symbology for the fullscreen button in here
   }));
+
 
   map = new ol.Map({
      layers: layers,
