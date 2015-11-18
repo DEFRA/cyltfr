@@ -11,6 +11,7 @@
     "copy:assets": "bin/clean-public && bin/copy-assets",
     "build:css": "bin/build-css",
     "build:js": "bin/build-js",
+    "watch:js": "bin/watch-js",
     "build": "npm run copy && npm run build:css && npm run build:js",
     "lint": "standard",
     "dev": "bin/dev"
@@ -37,10 +38,12 @@
   },
   "devDependencies": {
     "browserify": "12.0.1",
+    "exorcist": "0.4.0",
     "govuk_frontend_toolkit": "3.1.0",
     "govuk_template_mustache": "0.12.0",
     "node-sass": "3.4.1",
     "nodemon": "1.8.1",
-    "standard": "5.3.1"
+    "standard": "5.3.1",
+    "watchify": "3.6.1"
   }
 }

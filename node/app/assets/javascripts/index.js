@@ -1,4 +1,5 @@
 var $ = require('jquery')
+var maps = require('../../lib/models/map.json')
 
 /*
  * Todo: This needs redoing/finishing off.
