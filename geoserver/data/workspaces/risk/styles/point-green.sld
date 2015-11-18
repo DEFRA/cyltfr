@@ -33,7 +33,7 @@
 									<CssParameter name="fill">#00FF00</CssParameter>
 								</Fill>
 							</Mark>
-							<Size>6</Size>
+							<Size>10</Size>
 						</Graphic>
 					</PointSymbolizer>
 				</Rule>
