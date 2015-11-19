@@ -24,7 +24,6 @@ var options = ol.source.WMTS.optionsFromCapabilities(
   {
     layer: 'osgb',
     matrixSet: 'ZoomMap'
-
   }
 )
 
