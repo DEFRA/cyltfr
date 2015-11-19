@@ -1,2 +1,1 @@
-nodemon --ignore govuk --ignore public --ignore assets --ignore bin index.js &
-watchify assets/javascripts/index.js -d -o public/javascripts/index.js
+nodemon --ignore govuk --ignore public --ignore assets --ignore bin index.js
