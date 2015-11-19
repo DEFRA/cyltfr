@@ -7,12 +7,14 @@
         {
           "ref": "RiversOrSea_1-ROFRS",
           "name": "Risk of flooding from Rivers or Sea",
-          "title": "Risk of flooding from Rivers or Sea"
+          "title": "Risk of flooding from Rivers or Sea",
+          "legend": "<ul><li>Leg 1</li><li>Leg 2</li></ul>"
         },
         {
           "ref": "RiversOrSea_2-FWLRSF",
           "name": "Flow and Water Level from Rivers and Sea flooding",
-          "title": "Flow and Water Level from Rivers and Sea flooding"
+          "title": "Flow and Water Level from Rivers and Sea flooding",
+          "legend": "<ul><li>Leg 11</li><li>Leg 21</li></ul>"
         }
       ]
     },
@@ -23,37 +25,44 @@
         {
           "ref": "SurfaceWater_6-SW-Extent",
           "name": "Risk of flooding from Surface Water",
-          "title": "Risk of flooding from Surface Water"
+          "title": "Risk of flooding from Surface Water",
+          "legend": "<ul><li>Leg 12</li><li>Leg 22</li></ul>"
         },
         {
           "ref": "SurfaceWater_9-SWDH",
           "name": "Surface Water Depth - High Chance of Occuring",
-          "title": "Surface Water Depth - High Chance of Occuring"
+          "title": "Surface Water Depth - High Chance of Occuring",
+          "legend": "<ul><li>Leg 13</li><li>Leg 23</li></ul>"
         },
         {
           "ref": "SurfaceWater_8-SWDM",
           "name": "Surface Water Depth - Medium Chance of Occuring",
-          "title": "Surface Water Depth - Medium Chance of Occuring"
+          "title": "Surface Water Depth - Medium Chance of Occuring",
+          "legend": "<ul><li>Leg 14</li><li>Leg 24</li></ul>"
         },
         {
           "ref": "SurfaceWater_7-SWDL",
           "name": "Surface Water Depth - Low Chance of Occuring",
-          "title": "Surface Water Depth - Low Chance of Occuring"
+          "title": "Surface Water Depth - Low Chance of Occuring",
+          "legend": "<ul><li>Leg 15</li><li>Leg 25</li></ul>"
         },
         {
           "ref": "SurfaceWater_12-SWVH",
           "name": "Surface Water Velocity - High Chance of Occuring",
-          "title": "Surface Water Velocity - High Chance of Occuring"
+          "title": "Surface Water Velocity - High Chance of Occuring",
+          "legend": "<ul><li>Leg 16</li><li>Leg 26</li></ul>"
         },
         {
           "ref": "SurfaceWater_11-SWVM",
           "name": "Surface Water Velocity - Medium Chance of Occuring",
-          "title": "Surface Water Velocity - Medium Chance of Occuring"
+          "title": "Surface Water Velocity - Medium Chance of Occuring",
+          "legend": "<ul><li>Leg 17</li><li>Leg 27</li></ul>"
         },
         {
           "ref": "SurfaceWater_10-SWVL",
           "name": "Surface Water Velocity - Low Chance of Occuring",
-          "title": "Surface Water Velocity - Low Chance of Occuring"
+          "title": "Surface Water Velocity - Low Chance of Occuring",
+          "legend": "<ul><li>Leg 18</li><li>Leg 28</li></ul>"
         }
       ]
     },
@@ -64,17 +73,20 @@
         {
           "ref": "Reservoirs_3-ROFR",
           "name": "Risk of flooding from Reservoirs",
-          "title": "Risk of flooding from Reservoirs"
+          "title": "Risk of flooding from Reservoirs",
+          "legend": "<ul><li>Leg 19</li><li>Leg 29</li></ul>"
         },
         {
           "ref": "Reservoirs_4-DOFR",
           "name": "Depth of flooding from Reservoirs",
-          "title": "Depth of flooding from Reservoirs"
+          "title": "Depth of flooding from Reservoirs",
+          "legend": "<ul><li>Leg 10</li><li>Leg 20</li></ul>"
         },
         {
           "ref": "Reservoirs_5-SOFR",
           "name": "Speed of flooding from Reservoirs",
-          "title": "Speed of flooding from Reservoirs"
+          "title": "Speed of flooding from Reservoirs",
+          "legend": "<ul><li>Leg 111</li><li>Leg 211</li></ul>"
         }
       ]
     }

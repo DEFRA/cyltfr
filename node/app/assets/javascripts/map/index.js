@@ -14,6 +14,9 @@ $(function () {
   // Store a reference to the map title element
   var $title = $('h3.lede')
 
+  // Store a reference to the map legend element
+  var $legend = $('.legend')
+
   function setCurrent (ref) {
     maps.setCurrent(ref)
 
@@ -22,6 +25,9 @@ $(function () {
 
     // Update the title
     $title.text(currMap.title)
+
+    // Update the legend
+    $legend.html(currMap.legend)
 
     // Update the main nav
     $categories.removeClass(selected)

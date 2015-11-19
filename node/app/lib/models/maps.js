@@ -6,7 +6,7 @@ function Maps (ref) {
   this.setCurrent(ref)
 }
 /**
- * [setCurrent description]
+ * setCurrent
  * @param {string} ref The ref of either a category or map. If a category ref is passed, the first map in that category is used.
  */
 Maps.prototype.setCurrent = function (ref) {
