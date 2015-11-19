@@ -63,15 +63,14 @@ swrequest.send(null)
 var sw_result = parser.read(swrequest.responseText)
 
 for (var i = 0; i < sw_result.Contents.Layer.length; i++) {
-  var options = ol.source.WMTS.optionsFromCapabilities(sw_result, {layer: sw_result.Contents.Layer[i].Identifier, matrixSet: 'EPSG:27700'})
-  var source = new ol.source.WMTS(options)
+  options = ol.source.WMTS.optionsFromCapabilities(sw_result, {layer: sw_result.Contents.Layer[i].Identifier, matrixSet: 'EPSG:27700'})
+  source = new ol.source.WMTS(options)
 
   layers.push(new ol.layer.Tile({
     source: source,
     opacity: 0.8,
     visible: false
   }))
-
 }
 
 // setup additional controls
@@ -86,7 +85,7 @@ controls.push(new ol.control.FullScreen({
   // can change the default symbology for the fullscreen button in here
 }))
 
-map = new ol.Map({
+var map = new ol.Map({
   layers: layers,
   target: 'map',
   controls: controls,
@@ -101,11 +100,10 @@ map = new ol.Map({
 function showMap (ref) {
   map.getLayers().forEach(function (layer) {
     var name = layer.getSource().getLayer()
-    if (name != 'osgb') {
+    if (name !== 'osgb') {
       layer.setVisible(name === ref)
     }
   })
-
 }
 
 module.exports = {
