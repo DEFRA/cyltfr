@@ -36,28 +36,30 @@ $(function () {
     loadMap.showMap('risk:' + currMap.ref.substring(currMap.ref.indexOf('_') + 1))
   }
 
-  // Handle the category header clicks
-  $categories.on('click', 'h3', function (e) {
-    var $category = $(this).parent()
-    if ($category.hasClass(selected)) {
-      $category.removeClass(selected)
-    } else if ($category.find('.selected').length) {
-      $category.addClass(selected)
-    } else {
-      setCurrent($category.attr('id'))
-    }
-  })
-
-  // Handle the map selector clicks
-  $maps.on('click', function (e) {
-    setCurrent($(this).attr('id'))
-  })
-
-  // Handle the mobile map selector change
-  $selector.on('change', function (e) {
-    setCurrent($(this).val())
-  })
-
   // Default to the first category/map
-  setCurrent()
+  loadMap.onReady(function () {
+    // Handle the category header clicks
+    $categories.on('click', 'h3', function (e) {
+      var $category = $(this).parent()
+      if ($category.hasClass(selected)) {
+        $category.removeClass(selected)
+      } else if ($category.find('.selected').length) {
+        $category.addClass(selected)
+      } else {
+        setCurrent($category.attr('id'))
+      }
+    })
+
+    // Handle the map selector clicks
+    $maps.on('click', function (e) {
+      setCurrent($(this).attr('id'))
+    })
+
+    // Handle the mobile map selector change
+    $selector.on('change', function (e) {
+      setCurrent($(this).val())
+    })
+
+    setCurrent()
+  })
 })
