@@ -31,7 +31,18 @@
             <Fill>
               <CssParameter name="fill">#000080</CssParameter>
             </Fill>
+          <!--  <Stroke>
+              <CssParameter name="stroke">#000080</CssParameter>
+              <CssParameter name="stroke-width">0.5</CssParameter>
+            </Stroke>-->
           </PolygonSymbolizer>
+          <LineSymbolizer>
+         <Stroke>
+           <CssParameter name="stroke">#000080</CssParameter>
+           <CssParameter name="stroke-width">0.5</CssParameter>
+         </Stroke>
+         <PerpendicularOffset>-2</PerpendicularOffset>
+       </LineSymbolizer>
         </Rule>
         
         <Rule>

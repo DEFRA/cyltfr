@@ -3,7 +3,7 @@
   <directWMSIntegrationEnabled>true</directWMSIntegrationEnabled>
   <WMSCEnabled>true</WMSCEnabled>
   <WMTSEnabled>true</WMTSEnabled>
-  <TMSEnabled>true</TMSEnabled>
+  <TMSEnabled>false</TMSEnabled>
   <securityEnabled>false</securityEnabled>
   <cacheLayersByDefault>false</cacheLayersByDefault>
   <cacheNonDefaultStyles>true</cacheNonDefaultStyles>
@@ -15,15 +15,15 @@
     <string>EPSG:900913</string>
   </defaultCachingGridSetIds>
   <defaultCoverageCacheFormats>
-    <string>image/jpeg</string>
     <string>image/png</string>
+    <string>image/jpeg</string>
   </defaultCoverageCacheFormats>
   <defaultVectorCacheFormats>
-    <string>image/jpeg</string>
     <string>image/png</string>
+    <string>image/jpeg</string>
   </defaultVectorCacheFormats>
   <defaultOtherCacheFormats>
-    <string>image/jpeg</string>
     <string>image/png</string>
+    <string>image/jpeg</string>
   </defaultOtherCacheFormats>
 </GeoServerGWCConfig>

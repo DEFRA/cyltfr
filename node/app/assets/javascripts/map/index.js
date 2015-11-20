@@ -1,7 +1,9 @@
 var $ = require('jquery')
-var loadMap = require('./load')
+var loadMap = require('./map')
 var Maps = require('../../../lib/models/maps')
 var maps = new Maps()
+
+loadMap.loadMap()
 
 $(function () {
   var selected = 'selected'

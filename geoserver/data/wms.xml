@@ -13,6 +13,20 @@
   <citeCompliant>false</citeCompliant>
   <schemaBaseURL>http://schemas.opengis.net</schemaBaseURL>
   <verbose>false</verbose>
+  <metadata>
+    <entry key="jpegCompression">25</entry>
+    <entry key="pngCompression">25</entry>
+    <entry key="kmlSuperoverlayMode">auto</entry>
+    <entry key="framesDelay">1000</entry>
+    <entry key="kmlReflectorMode">refresh</entry>
+    <entry key="kmlKmscore">40</entry>
+    <entry key="svgAntiAlias">false</entry>
+    <entry key="kmlPlacemark">false</entry>
+    <entry key="kmlAttr">true</entry>
+    <entry key="maxAllowedFrames">2147483647</entry>
+    <entry key="scalehintMapunitsPixel">false</entry>
+    <entry key="loopContinuously">false</entry>
+  </metadata>
   <watermark class="org.geoserver.wms.WatermarkInfoImpl">
     <enabled>false</enabled>
     <position>BOT_RIGHT</position>
