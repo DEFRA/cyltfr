@@ -1,7 +1,7 @@
 var $ = require('jquery')
 // proj4 is accessed using global variable within openlayers library
 window.proj4 = require('proj4')
-//var ol = require('openlayers')
+var ol = require('openlayers')
 var parser = new ol.format.WMTSCapabilities()
 var wmsparser = new ol.format.WMSCapabilities()
 var config = require('./map-config.json')
