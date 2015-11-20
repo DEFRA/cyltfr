@@ -1,7 +1,7 @@
 var $ = require('jquery')
 // proj4 is accessed using global variable within openlayers library
 window.proj4 = require('proj4')
-var ol = require('openlayers')
+//var ol = require('openlayers')
 var parser = new ol.format.WMTSCapabilities()
 var wmsparser = new ol.format.WMSCapabilities()
 var config = require('./map-config.json')
@@ -94,6 +94,34 @@ function loadMap () {
       }))
     }
 
+    var polygonHighlight = function (feature, resolution) {
+      return [
+        new ol.style.Style({
+          stroke: new ol.style.Stroke({
+            color: 'rgba(255,0,0,1)',
+            width: 1
+          }),
+          fill: new ol.style.Fill({
+            color: 'rgba(255,0,0,1)'
+          })
+        })
+      ]
+    }
+
+    var highlightSource = new ol.source.Vector({
+        format: new ol.format.GeoJSON(),
+        projection: 'EPSG:27700'
+    })
+
+    var highlightLayer = new ol.layer.Vector({
+      ref: 'overlay',
+      source: highlightSource,
+      style: polygonHighlight,
+      visible: true
+    })
+
+    layers.push(highlightLayer)
+
     map = new ol.Map({
       layers: layers,
       target: 'map',
@@ -112,6 +140,7 @@ function loadMap () {
       })
     })
 
+
     // Map interaction functions
     map.on('singleclick', function (e) {
       if (!bullseye(e.pixel)) {
@@ -127,6 +156,17 @@ function loadMap () {
 
       $.get(url, function (data) {
         $('.feature').html(JSON.stringify(data))
+
+        var geom = new ol.geom.MultiPolygon(data.features[0].geometry.coordinates)
+
+        var feature = new ol.Feature({
+          name: 'help',
+          geometry: geom
+        })
+
+        highlightSource.clear()
+
+        highlightSource.addFeature(feature)
       })
     })
 
@@ -149,7 +189,7 @@ function loadMap () {
 function showMap (ref) {
   map.getLayers().forEach(function (layer) {
     var name = layer.getProperties().ref
-    if (name !== config.OSLayer) {
+    if (name !== config.OSLayer && name !== 'overlay') {
       currentLayer = name === ref ? layer : currentLayer
       layer.setVisible(name === ref)
     }
