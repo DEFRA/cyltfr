@@ -193,13 +193,13 @@ function loadMap () {
 
         // strip out the geoms for text temporarily
 
+        var textReturn = data.features.length + ' features. </br>'
+
         for (var i = 0; i < data.features.length; i++) {
-          delete data.features[i].geometry
+          textReturn += data.features[i].id + ': ' + JSON.stringify(data.features[i].properties) + '</br>'
         }
 
-        $('.feature').html(JSON.stringify(data))
-
-        $('.feature-popup-content').html(JSON.stringify(data))
+        $('.feature-popup-content').html(textReturn)
         overlay.setPosition(e.coordinate)
       })
     })
