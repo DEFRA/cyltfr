@@ -5,7 +5,7 @@ var ol = require('openlayers')
 var parser = new ol.format.WMTSCapabilities()
 var wmsparser = new ol.format.WMSCapabilities()
 var config = require('./map-config.json')
-var map, callback, currentLayer
+var map, callback, currentLayer, highlightSource, overlay
 
 function loadMap () {
   // add the projection to Window.proj4
@@ -68,49 +68,65 @@ function loadMap () {
       }))
     }
 */
-    var wms_result = wmsparser.read(WMS[0])
+    var wmsResult = wmsparser.read(WMS[0])
 
-    for (var i = 0; i < wms_result.Capability.Layer.Layer.length; i++) {
+    // I can't find a better way of doing this for a tileWMS source, WMTS souce has
+    // optionsFromCapabilities function which does some of the work for you, but it looks
+    // like that function just does this anyway, although i think the WMTS version does a lot more with setting up matrixSet and things
+    for (var i = 0; i < wmsResult.Capability.Layer.Layer.length; i++) {
       var WMSsource = new ol.source.TileWMS({
         url: config.GSWMS,
         params: {
-          'LAYERS': wms_result.Capability.Layer.Layer[i].Name,
-          'SRS': config.projection.ref,
+          'LAYERS': wmsResult.Capability.Layer.Layer[i].Name,
           'TILED': true,
-          'VERSION': wms_result.version},
-        serverType: 'geoserver',
+          'VERSION': wmsResult.version},
         tileGrid: new ol.tilegrid.TileGrid({
-          extent: wms_result.Capability.Layer.Layer[i].BoundingBox[0].extent,
+          extent: wmsResult.Capability.Layer.Layer[i].BoundingBox[0].extent,
           resolutions: source.tileGrid.getResolutions(),
           tileSize: [250, 250]
         })
       })
 
       layers.push(new ol.layer.Tile({
-        ref: wms_result.Capability.Layer.Layer[i].Name,
+        ref: wmsResult.Capability.Layer.Layer[i].Name,
         source: WMSsource,
         opacity: 0.8,
         visible: false
       }))
     }
 
-    var polygonHighlight = function (feature, resolution) {
-      return [
+    var styles = {
+      'MultiPolygon': [
         new ol.style.Style({
           stroke: new ol.style.Stroke({
             color: 'rgba(255,0,0,1)',
             width: 1
           }),
           fill: new ol.style.Fill({
-            color: 'rgba(255,0,0,1)'
+            color: 'rgba(255,0,0,0.4)'
+          })
+        })
+      ],
+      'Point': [
+        new ol.style.Style({
+          fill: new ol.style.Fill({
+            color: 'rgba(255,0, 0, 0.4)'
+          }),
+          stroke: new ol.style.Stroke({
+            color: 'rgba(255,0,0,1)',
+            width: 1
           })
         })
       ]
     }
 
-    var highlightSource = new ol.source.Vector({
-        format: new ol.format.GeoJSON(),
-        projection: 'EPSG:27700'
+    var polygonHighlight = function (feature, resolution) {
+      return styles[feature.getGeometry().getType()]
+    }
+
+    highlightSource = new ol.source.Vector({
+      format: new ol.format.GeoJSON(),
+      projection: 'EPSG:27700'
     })
 
     var highlightLayer = new ol.layer.Vector({
@@ -122,9 +138,17 @@ function loadMap () {
 
     layers.push(highlightLayer)
 
+    var $popup = $('.feature-popup')
+
+    overlay = new ol.Overlay({
+      element: $popup,
+      autopan: true,
+      autoPanAnimation: {
+        duration: 250
+      }
+    })
+
     map = new ol.Map({
-      layers: layers,
-      target: 'map',
       controls: ol.control.defaults().extend([
         new ol.control.ScaleLine({
           units: 'imperial',
@@ -132,6 +156,9 @@ function loadMap () {
         }),
         new ol.control.FullScreen()
       ]),
+      layers: layers,
+      overlays: [overlay],
+      target: 'map',
       view: new ol.View({
         resolutions: source.tileGrid.getResolutions(),
         projection: projection,
@@ -139,7 +166,6 @@ function loadMap () {
         zoom: 0
       })
     })
-
 
     // Map interaction functions
     map.on('singleclick', function (e) {
@@ -151,22 +177,30 @@ function loadMap () {
         e.coordinate,
         map.getView().getResolution(),
         config.projection.ref,
-        {'INFO_FORMAT': 'application/json'}
+        {
+          'INFO_FORMAT': 'application/json',
+          'FEATURE_COUNT': 10
+        }
       )
 
       $.get(url, function (data) {
-        $('.feature').html(JSON.stringify(data))
-
-        var geom = new ol.geom.MultiPolygon(data.features[0].geometry.coordinates)
-
-        var feature = new ol.Feature({
-          name: 'help',
-          geometry: geom
-        })
-
+        // At some point will need some logic to decide which polygon to query, as low medium high maps may have overlapping
+        // and potentially only the highest details will want to be used.
+        closePopup()
         highlightSource.clear()
 
-        highlightSource.addFeature(feature)
+        highlightSource.addFeatures((new ol.format.GeoJSON()).readFeatures(data))
+
+        // strip out the geoms for text temporarily
+
+        for (var i = 0; i < data.features.length; i++) {
+          delete data.features[i].geometry
+        }
+
+        $('.feature').html(JSON.stringify(data))
+
+        $('.feature-popup-content').html(JSON.stringify(data))
+        overlay.setPosition(e.coordinate)
       })
     })
 
@@ -187,6 +221,9 @@ function loadMap () {
 }
 
 function showMap (ref) {
+  highlightSource.clear()
+  $('.feature').html(JSON.stringify(''))
+  closePopup()
   map.getLayers().forEach(function (layer) {
     var name = layer.getProperties().ref
     if (name !== config.OSLayer && name !== 'overlay') {
@@ -205,9 +242,16 @@ function bullseye (pixel) {
   })
 }
 
+function closePopup () {
+  overlay.setPosition(undefined)
+  highlightSource.clear()
+  return false
+}
+
 module.exports = {
   loadMap: loadMap,
   showMap: showMap,
+  closePopup: closePopup,
   onReady: function (fn) {
     callback = fn
   }

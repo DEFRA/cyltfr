@@ -70,4 +70,8 @@ $(function () {
 
     setCurrent()
   })
+
+  $('.feature-popup-closer').click(function () {
+    return loadMap.closePopup()
+  })
 })
