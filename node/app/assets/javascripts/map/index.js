@@ -5,6 +5,17 @@ var maps = new Maps()
 
 loadMap.loadMap()
 
+function generateLegend (meta) {
+  var str = '<ul>'
+  var key
+  for (var i = 0; i < meta.length; i++) {
+    key = meta[i]
+    str += '<li class="' + key.color + ' ' + key.shape + '">' + key.text + '</li>'
+  }
+  str += '</ul>'
+  return str
+}
+
 $(function () {
   var selected = 'selected'
   var $container = $('.map-container')
@@ -29,7 +40,7 @@ $(function () {
     $title.text(currMap.title)
 
     // Update the legend
-    $legend.html(currMap.legend)
+    $legend.html(generateLegend(currMap.legend))
 
     // Update the main nav
     $categories.removeClass(selected)

@@ -19,14 +19,13 @@
           {{> map/sidebar }}
         </div>
         <div class="column-two-thirds">
-          <div id="map" class="map" style="width: 100%; height:100%"></div>
-          <!--<img src="{{{ assetPath }}}images/map.png" style="width: 100%"/>-->
+          <div id="map" class="map"></div>
         </div>
       </div>
     </div>
     <div class="legend"></div>
     <div class="feature"></div>
-    <div class="feature-popup" style="background-color: rgba(255, 255, 255, 0.8); padding: 10px;">
+    <div class="feature-popup">
       <a href="#"class="feature-popup-closer"></a>
       <div class="feature-popup-content"></div>
     </div>
@@ -35,51 +34,6 @@
 
   {{#content "bodyEnd"}}
     <script src="{{{ assetPath }}}javascripts/index.js"></script>
-    <style>
-    .feature-popup {
-      position: absolute;
-      background-color: white;
-      -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-      filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-      padding: 15px;
-      border-radius: 10px;
-      border: 1px solid #cccccc;
-      bottom: 12px;
-      left: -50px;
-      min-width: 280px;
-    }
-    .feature-popup:after, .feature-popup:before {
-      top: 100%;
-      border: solid transparent;
-      content: " ";
-      height: 0;
-      width: 0;
-      position: absolute;
-      pointer-events: none;
-    }
-    .feature-popup:after {
-      border-top-color: white;
-      border-width: 10px;
-      left: 48px;
-      margin-left: -10px;
-    }
-    .feature-popup:before {
-      border-top-color: #cccccc;
-      border-width: 11px;
-      left: 48px;
-      margin-left: -11px;
-    }
-    .feature-popup-closer {
-      text-decoration: none;
-      position: absolute;
-      top: 2px;
-      right: 8px;
-    }
-    .feature-popup-closer:after {
-      content: "✖";
-    }
-    </style>
-
   {{/content}}
 
 {{/extend}}
