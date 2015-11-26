@@ -7,6 +7,6 @@ module.exports = [
   require('./risk'),
   require('./map'),
   require('./statics'),
-  // require('./404')
-  require('./proxy')
+  require('./proxy'),
+  require('./404')
 ]
