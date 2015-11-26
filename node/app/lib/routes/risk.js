@@ -26,8 +26,7 @@ module.exports = {
             return reply(Boom.badRequest())
           }
 
-          var riskViewModel = new RiskViewModel(risk, address)
-          reply.view('risk', riskViewModel)
+          reply.view('risk', new RiskViewModel(risk, address))
         })
       })
     },

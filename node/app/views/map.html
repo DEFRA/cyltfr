@@ -1,21 +1,21 @@
 {{#extend "layout"}}
 
   {{#content "head"}}
+    <link rel="stylesheet" type="text/css" href="{{{ assetPath }}}stylesheets/ol.css">
     <link rel="stylesheet" type="text/css" href="{{{ assetPath }}}stylesheets/map/index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.css">
   {{/content}}
 
   {{#content "content"}}
     <h1 class="heading-xlarge">Risk of flooding - all sources</h1>
     <h2 class="heading-medium">Floods destroy. Be prepared.</h2>
-    <h3 class="lede">Risk of flooding from Surface Water - Extent of flood:</h3>
+    <h3 class="lede"></h3>
     <div class="map-container">
       <div class="visible-mobile">
-        {{> map/selector }}
+        {{> map/selector maps }}
       </div>
       <div class="grid-row">
         <div class="column-third hidden-mobile">
-          {{> map/sidebar }}
+          {{> map/sidebar maps }}
         </div>
         <div class="column-two-thirds">
           <div id="map" class="map"></div>
@@ -28,7 +28,6 @@
       <a href="#"class="feature-popup-closer"></a>
       <div class="feature-popup-content"></div>
     </div>
-
   {{/content}}
 
   {{#content "bodyEnd"}}

@@ -1,5 +1,5 @@
-function MapsViewModel (id, easting, northing) {
-  this.id = id
+function MapsViewModel (maps, easting, northing) {
+  this.maps = maps
   this.easting = easting
   this.northing = northing
 }
