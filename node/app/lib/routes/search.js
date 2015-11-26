@@ -1,6 +1,6 @@
 var Joi = require('joi')
 var Boom = require('boom')
-var lookup = require('../services/postcode-lookup')
+var addressService = require('../services/address')
 
 module.exports = {
   method: 'GET',
@@ -10,7 +10,7 @@ module.exports = {
     handler: function (request, reply) {
       var postcode = request.query.postcode
 
-      lookup(postcode, function (err, addresses) {
+      addressService.findByPostcode(postcode, function (err, addresses) {
         if (err) {
           request.log('error', err)
           return reply(Boom.badRequest())

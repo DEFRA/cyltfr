@@ -9,11 +9,11 @@
     <p>Select an address</p>
     <div class="grid-row">
       <div class="column-two-thirds">
-        <form method="get" action="/search">
+        <form method="post" action="/risk">
           <div class="form-group">
             <label class="form-label" for="postcode">Postcode</label>
             <h4 class="heading-small postcode-display">{{ postcode }}</h4>
-            <select required>
+            <select name="address" required>
               <option></option>
               {{#each addresses}}
                 <option value="{{ this.id }}">{{ this.text }}</option>

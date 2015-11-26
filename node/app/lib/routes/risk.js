@@ -1,18 +1,39 @@
 var Joi = require('joi')
-var maps = require('../models/maps.json')
+var Boom = require('boom')
+var riskService = require('../services/risk')
+var addressService = require('../services/address')
+var RiskViewModel = require('../models/risk-view')
 
 module.exports = {
-  method: 'GET',
-  path: '/risk/{easting}/{northing}',
+  method: 'POST',
+  path: '/risk',
   config: {
-    description: 'Get risk text result',
+    description: 'Get risk text page',
     handler: function (request, reply) {
-      reply.view('risk', maps)
+      addressService.findById(request.payload.address, function (err, address) {
+        if (err) {
+          request.log('error', err)
+          return reply(Boom.badRequest())
+        }
+
+        var x = address.easting
+        var y = address.northing
+        var radius = 10
+
+        riskService.getByCoordinates(x, y, radius, function (err, risk) {
+          if (err) {
+            request.log('error', err)
+            return reply(Boom.badRequest())
+          }
+
+          var riskViewModel = new RiskViewModel(risk, address)
+          reply.view('risk', riskViewModel)
+        })
+      })
     },
     validate: {
-      params: {
-        easting: Joi.number().required(),
-        northing: Joi.number().required()
+      payload: {
+        address: Joi.objectId().required()
       }
     }
   }
