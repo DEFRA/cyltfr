@@ -1,6 +1,8 @@
 var Joi = require('joi')
 var Boom = require('boom')
 var addressService = require('../services/address')
+var HomeViewModel = require('../models/home-view')
+var SearchViewModel = require('../models/search-view')
 
 module.exports = {
   method: 'GET',
@@ -16,10 +18,11 @@ module.exports = {
           return reply(Boom.badRequest())
         }
 
-        reply.view('search', {
-          postcode: postcode,
-          addresses: addresses
-        })
+        if (!addresses.length) {
+          reply.view('home', new HomeViewModel('Please enter a valid postcode in England'))
+        } else {
+          reply.view('search', new SearchViewModel(postcode, addresses))
+        }
       })
     },
     validate: {

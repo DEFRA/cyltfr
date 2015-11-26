@@ -11,7 +11,7 @@ module.exports = {
     description: 'Get risk text page',
     handler: function (request, reply) {
       addressService.findById(request.payload.address, function (err, address) {
-        if (!err) {
+        if (err) {
           request.log('error', err)
           return reply(Boom.badRequest())
         }

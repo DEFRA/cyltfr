@@ -13,6 +13,9 @@
           <div class="form-group">
             <label class="form-label" for="postcode">Postcode</label>
             <input class="form-control" name="postcode" id="postcode" type="text" required autocomplete="off">
+            {{#if hasErrorMessage}}
+              <div class="error-message">{{ errorMessage }}</div>
+            {{/if}}
           </div>
           <div class="form-group">
             <button class="button" type="submit" title="Find address">Find address</button>
@@ -20,7 +23,14 @@
         </form>
       </div>
     </div>
-    <a href="#">I don't know the postcode</a>
+    <details>
+      <summary><span class="summary">I don't know the postcode</span></summary>
+      <div class="panel-indent">
+        <p>
+          Find a postcode using the <a href="http://www.royalmail.com/find-a-postcode" target="_blank">Royal Mail postcode lookup service</a>
+        </p>
+      </div>
+    </details>
   {{/content}}
 
   {{#content "bodyEnd"}}
