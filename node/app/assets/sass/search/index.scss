@@ -1,0 +1,17 @@
+@import "colours";
+@import "typography";
+@import "css3";
+
+h1.heading-xlarge {
+  margin-bottom: 30px;
+}
+
+.postcode-display {
+  text-transform: uppercase;
+}
+
+.button {
+  @include media(mobile) {
+    width: 100%;
+  }
+}

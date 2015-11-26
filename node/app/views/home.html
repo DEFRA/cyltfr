@@ -1,0 +1,30 @@
+{{#extend "layout"}}
+
+  {{#content "head"}}
+    <link rel="stylesheet" type="text/css" href="{{{ assetPath }}}stylesheets/home/index.css">
+  {{/content}}
+
+  {{#content "content"}}
+    <h1 class="heading-xlarge">What's your location</h1>
+    <p>Enter a postcode and select an address</p>
+    <div class="grid-row">
+      <div class="column-third">
+        <form method="get" action="/search">
+          <div class="form-group">
+            <label class="form-label" for="postcode">Postcode</label>
+            <input class="form-control" name="postcode" id="postcode" type="text" required>
+          </div>
+          <div class="form-group">
+            <button class="button" type="submit" title="Find address">Find address</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <a href="#">I don't know the postcode</a>
+  {{/content}}
+
+  {{#content "bodyEnd"}}
+    <script src="{{{ assetPath }}}javascripts/home.js"></script>
+  {{/content}}
+
+{{/extend}}
