@@ -222,7 +222,6 @@ function loadMap () {
 
 function showMap (ref) {
   highlightSource.clear()
-  // $('.feature').html(JSON.stringify(''))
   closePopup()
   map.getLayers().forEach(function (layer) {
     var name = layer.getProperties().ref

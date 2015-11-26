@@ -96,7 +96,7 @@ h2.heading-medium {
 
 .feature-popup {
   position: absolute;
-  background-color: white;
+  background-color: rgba(255,255,255,0.8);
   -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
   filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
   padding: 15px;
@@ -105,8 +105,6 @@ h2.heading-medium {
   bottom: 12px;
   left: -50px;
   min-width: 280px;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 10px;
 }
 
 .feature-popup:after, .feature-popup:before {
