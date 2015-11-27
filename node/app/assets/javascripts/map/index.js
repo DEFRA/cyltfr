@@ -16,6 +16,13 @@ function generateLegend (meta) {
   return str
 }
 
+function getParameterByName (name) {
+  name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]')
+  var regex = new RegExp('[\\?&]' + name + '=([^&#]*)')
+  var results = regex.exec(window.location.search)
+  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
+}
+
 $(function () {
   var selected = 'selected'
   var $container = $('.map-container')
@@ -80,6 +87,12 @@ $(function () {
     })
 
     setCurrent()
+
+    var easting = getParameterByName('easting')
+    var northing = getParameterByName('northing')
+    if (easting && northing) {
+      loadMap.panTo(easting, northing)
+    }
   })
 
   $('.feature-popup-closer').click(function () {

@@ -247,10 +247,16 @@ function closePopup () {
   return false
 }
 
+function panTo (easting, northing) {
+  map.getView().setCenter([easting, northing])
+  map.getView().setZoom(9)
+}
+
 module.exports = {
   loadMap: loadMap,
   showMap: showMap,
   closePopup: closePopup,
+  panTo: panTo,
   onReady: function (fn) {
     callback = fn
   }
