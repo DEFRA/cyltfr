@@ -25,7 +25,7 @@ server.route(routes)
 
 server.ext('onPreResponse', function (request, reply) {
   if (request.response) {
-    if (request.response.isBoom && !request.response.variety === 'view') {
+    if (request.response.isBoom) {
       // If an error was raised during
       // processing the request, return a 500 view
       var err = request.response

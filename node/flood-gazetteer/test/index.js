@@ -18,6 +18,9 @@ lab.experiment('addressByPostcode', function (done) {
   }, {
     url: '/addressbypostcode/WA41HT',
     method: 'GET'
+  }, {
+    url: '/postcodes/m67',
+    method: 'GET'
   }]
 
   var server
@@ -30,6 +33,7 @@ lab.experiment('addressByPostcode', function (done) {
     })
   })
 
+  // addressByPostcode
   lab.test('Makes a successful request with a lower case postcode with a space and gets 15 results', function (done) {
     server.inject(options[0], function (response) {
       Code.expect(response.statusCode).to.equal(200)
@@ -53,9 +57,18 @@ lab.experiment('addressByPostcode', function (done) {
   })
 
   lab.test('Makes a successful request with an upper case postcode with no space and gets 15 results', function (done) {
-    server.inject(options[0], function (response) {
+    server.inject(options[3], function (response) {
       Code.expect(response.statusCode).to.equal(200)
       Code.expect(response.result.length).to.equal(15)
+      done()
+    })
+  })
+
+  // postcodes
+  lab.test('Makes a successful request for partial postcode', function (done) {
+    server.inject(options[4], function (response) {
+      Code.expect(response.statusCode).to.equal(200)
+      Code.expect(response.result.length).to.equal(181)
       done()
     })
   })

@@ -1,0 +1,38 @@
+{{#extend "layout"}}
+
+  {{#content "head"}}
+    <link rel="stylesheet" type="text/css" href="{{{ assetPath }}}stylesheets/search/index.css">
+  {{/content}}
+
+  {{#content "content"}}
+    <h1 class="heading-xlarge">What's your location</h1>
+    <p>Select an address</p>
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <form method="post" action="/risk">
+          <div class="form-group">
+            <label class="form-label" for="address">Postcode</label>
+            <h4 class="heading-small postcode-display">{{ postcode }}</h4><a href="/">Change</a>
+            <select id="address" name="address" required>
+              {{#if multipleAddressesFound}}
+                <option value="">(Please choose)</option>
+              {{/if}}
+              {{#each addresses}}
+                <option value="{{ this.id }}">{{ this.text }}</option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="form-group">
+            <button class="button" type="submit" title="Continue">Continue</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <a href="/">The address I want is not in this list</a>
+  {{/content}}
+
+  {{#content "bodyEnd"}}
+    <script src="{{{ assetPath }}}javascripts/search.js"></script>
+  {{/content}}
+
+{{/extend}}

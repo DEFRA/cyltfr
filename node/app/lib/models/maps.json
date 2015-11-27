@@ -7,12 +7,30 @@
         {
           "ref": "RiversOrSea_1-ROFRS",
           "name": "Risk of flooding from Rivers or Sea",
-          "title": "Risk of flooding from Rivers or Sea"
+          "title": "Risk of flooding from Rivers or Sea",
+          "legend": [{
+            "text": "0.15 - 0.25m",
+            "color": "purple",
+            "shape": "square"
+          }, {
+            "text": "0.05 - 0.15m",
+            "color": "blue",
+            "shape": "round"
+          }]
         },
         {
           "ref": "RiversOrSea_2-FWLRSF",
           "name": "Flow and Water Level from Rivers and Sea flooding",
-          "title": "Flow and Water Level from Rivers and Sea flooding"
+          "title": "Flow and Water Level from Rivers and Sea flooding",
+          "legend": [{
+            "text": "0.15 - 0.25m",
+            "color": "green",
+            "shape": "round"
+          }, {
+            "text": "0.05 - 0.15m",
+            "color": "red",
+            "shape": "round"
+          }]
         }
       ]
     },
@@ -23,37 +41,100 @@
         {
           "ref": "SurfaceWater_6-SW-Extent",
           "name": "Risk of flooding from Surface Water",
-          "title": "Risk of flooding from Surface Water"
+          "title": "Risk of flooding from Surface Water",
+          "legend": [{
+            "text": "0.15 - 0.25m",
+            "color": "purple",
+            "shape": "square"
+          }, {
+            "text": "0.05 - 0.15m",
+            "color": "blue",
+            "shape": "round"
+          }]
         },
         {
           "ref": "SurfaceWater_9-SWDH",
           "name": "Surface Water Depth - High Chance of Occuring",
-          "title": "Surface Water Depth - High Chance of Occuring"
+          "title": "Surface Water Depth - High Chance of Occuring",
+          "legend": [{
+            "text": "0.15 - 0.25m",
+            "color": "purple",
+            "shape": "square"
+          }, {
+            "text": "0.05 - 0.15m",
+            "color": "blue",
+            "shape": "round"
+          }]
         },
         {
           "ref": "SurfaceWater_8-SWDM",
           "name": "Surface Water Depth - Medium Chance of Occuring",
-          "title": "Surface Water Depth - Medium Chance of Occuring"
+          "title": "Surface Water Depth - Medium Chance of Occuring",
+          "legend": [{
+            "text": "0.15 - 0.25m",
+            "color": "purple",
+            "shape": "square"
+          }, {
+            "text": "0.05 - 0.15m",
+            "color": "blue",
+            "shape": "round"
+          }]
         },
         {
           "ref": "SurfaceWater_7-SWDL",
           "name": "Surface Water Depth - Low Chance of Occuring",
-          "title": "Surface Water Depth - Low Chance of Occuring"
+          "title": "Surface Water Depth - Low Chance of Occuring",
+          "legend": [{
+            "text": "0.15 - 0.25m",
+            "color": "purple",
+            "shape": "square"
+          }, {
+            "text": "0.05 - 0.15m",
+            "color": "blue",
+            "shape": "round"
+          }]
         },
         {
           "ref": "SurfaceWater_12-SWVH",
           "name": "Surface Water Velocity - High Chance of Occuring",
-          "title": "Surface Water Velocity - High Chance of Occuring"
+          "title": "Surface Water Velocity - High Chance of Occuring",
+          "legend": [{
+            "text": "0.15 - 0.25m",
+            "color": "purple",
+            "shape": "square"
+          }, {
+            "text": "0.05 - 0.15m",
+            "color": "blue",
+            "shape": "round"
+          }]
         },
         {
           "ref": "SurfaceWater_11-SWVM",
           "name": "Surface Water Velocity - Medium Chance of Occuring",
-          "title": "Surface Water Velocity - Medium Chance of Occuring"
+          "title": "Surface Water Velocity - Medium Chance of Occuring",
+          "legend": [{
+            "text": "0.15 - 0.25m",
+            "color": "purple",
+            "shape": "square"
+          }, {
+            "text": "0.05 - 0.15m",
+            "color": "blue",
+            "shape": "round"
+          }]
         },
         {
           "ref": "SurfaceWater_10-SWVL",
           "name": "Surface Water Velocity - Low Chance of Occuring",
-          "title": "Surface Water Velocity - Low Chance of Occuring"
+          "title": "Surface Water Velocity - Low Chance of Occuring",
+          "legend": [{
+            "text": "0.15 - 0.25m",
+            "color": "purple",
+            "shape": "square"
+          }, {
+            "text": "0.05 - 0.15m",
+            "color": "blue",
+            "shape": "round"
+          }]
         }
       ]
     },
@@ -64,17 +145,44 @@
         {
           "ref": "Reservoirs_3-ROFR",
           "name": "Risk of flooding from Reservoirs",
-          "title": "Risk of flooding from Reservoirs"
+          "title": "Risk of flooding from Reservoirs",
+          "legend": [{
+            "text": "0.15 - 0.25m",
+            "color": "purple",
+            "shape": "square"
+          }, {
+            "text": "0.05 - 0.15m",
+            "color": "blue",
+            "shape": "round"
+          }]
         },
         {
           "ref": "Reservoirs_4-DOFR",
           "name": "Depth of flooding from Reservoirs",
-          "title": "Depth of flooding from Reservoirs"
+          "title": "Depth of flooding from Reservoirs",
+          "legend": [{
+            "text": "0.15 - 0.25m",
+            "color": "purple",
+            "shape": "square"
+          }, {
+            "text": "0.05 - 0.15m",
+            "color": "blue",
+            "shape": "round"
+          }]
         },
         {
           "ref": "Reservoirs_5-SOFR",
           "name": "Speed of flooding from Reservoirs",
-          "title": "Speed of flooding from Reservoirs"
+          "title": "Speed of flooding from Reservoirs",
+          "legend": [{
+            "text": "0.15 - 0.25m",
+            "color": "purple",
+            "shape": "square"
+          }, {
+            "text": "0.05 - 0.15m",
+            "color": "blue",
+            "shape": "round"
+          }]
         }
       ]
     }

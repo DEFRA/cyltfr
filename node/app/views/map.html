@@ -1,0 +1,37 @@
+{{#extend "layout"}}
+
+  {{#content "head"}}
+    <link rel="stylesheet" type="text/css" href="{{{ assetPath }}}stylesheets/ol.css">
+    <link rel="stylesheet" type="text/css" href="{{{ assetPath }}}stylesheets/map/index.css">
+  {{/content}}
+
+  {{#content "content"}}
+    <h1 class="heading-xlarge">Risk of flooding - all sources</h1>
+    <h2 class="heading-medium">Floods destroy. Be prepared.</h2>
+    <h3 class="lede"></h3>
+    <div class="map-container">
+      <div class="visible-mobile">
+        {{> map/selector maps }}
+      </div>
+      <div class="grid-row">
+        <div class="column-third hidden-mobile">
+          {{> map/sidebar maps }}
+        </div>
+        <div class="column-two-thirds">
+          <div id="map" class="map"></div>
+        </div>
+      </div>
+    </div>
+    <div class="legend"></div>
+    <div class="feature"></div>
+    <div class="feature-popup">
+      <a href="#"class="feature-popup-closer"></a>
+      <div class="feature-popup-content"></div>
+    </div>
+  {{/content}}
+
+  {{#content "bodyEnd"}}
+    <script src="{{{ assetPath }}}javascripts/map.js"></script>
+  {{/content}}
+
+{{/extend}}
