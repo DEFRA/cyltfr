@@ -1,3 +1,5 @@
 geoserver/data/logs
 geoserver/data/gwc/*
+geoserver/data/wfs.xml
+geoserver/data/wms.xml
 prototype_area
