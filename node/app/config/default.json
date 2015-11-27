@@ -24,5 +24,15 @@
   },
   "pageRefreshTime": 900,
   "cacheExpiry": 900000,
-  "analyticsAccount" : ""
+  "analyticsAccount" : "",
+  "gazetteer" : {
+    "protocol": "http",
+    "host": "127.0.0.1",
+    "port": 3002,
+    "routes" : {
+      "address": "/address/{id}",
+      "addressByPostcode": "/addressbypostcode/{postcode}",
+      "postcodes": "/postcodes/{postcode}"
+    }
+  }
 }
