@@ -24,4 +24,4 @@ Within postgres session:
 
 ### Use service
 
-do http `GET` on `http://{host}:8050/addressbypostcode/{x}/{y}/radius`
+do http `GET` on `http://{host}:8050/floodrisk/{x}/{y}/radius`
