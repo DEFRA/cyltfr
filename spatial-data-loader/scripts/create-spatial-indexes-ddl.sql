@@ -1,3 +1,4 @@
+-- Create spatial indexes for long term flood risk layers
 CREATE INDEX extra_info_bv_bng_wkb_geometry_geom_idx
   ON u_ltfri.extra_info_bv_bng
   USING gist
