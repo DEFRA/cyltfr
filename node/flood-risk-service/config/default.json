@@ -1,0 +1,20 @@
+{
+  "server": {
+    "host": "127.0.0.1",
+    "port": 8050
+  },
+  "plugins": {
+    "logging": {
+      "path": "logs",
+      "rotate": {
+        "interval": "daily"
+      }
+    }
+  },
+  "database": {
+    "connectionString": "postgres://u_ltfri:u_ltfri@localhost:5432/ltfridev"
+  },
+  "queries": {
+    "calculateFloodRisk": "select u_ltfri.calculate_flood_risk($1, $2, $3)"
+  }
+}
