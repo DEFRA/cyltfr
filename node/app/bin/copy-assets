@@ -1,2 +1,3 @@
+cp node_modules/openlayers/css/ol.css public/stylesheets/ol.css -r
 cp assets/images public/images -r
 cp assets/html public/html -r

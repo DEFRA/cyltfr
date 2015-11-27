@@ -1,4 +1,4 @@
-var maps = require('../models/maps.json')
+var HomeViewModel = require('../models/home-view')
 
 module.exports = {
   method: 'GET',
@@ -6,7 +6,7 @@ module.exports = {
   config: {
     description: 'Get homepage',
     handler: function (request, reply) {
-      reply.view('index', maps)
+      reply.view('home', new HomeViewModel())
     }
   }
 }

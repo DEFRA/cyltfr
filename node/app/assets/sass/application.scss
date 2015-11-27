@@ -113,3 +113,18 @@ $flood-expired: #797979;
     display: none;
   }
 }
+
+select {
+  @include core-19;
+  width: 100%;
+  @include box-sizing(border-box);
+  padding: 4px;
+  background-color: $white;
+  border: 1px solid $border-colour;
+  border-radius: 0;
+  margin-bottom: 2px;
+}
+
+.error-message {
+  color: $red;
+}

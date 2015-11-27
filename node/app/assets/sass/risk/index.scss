@@ -1,0 +1,25 @@
+@import "colours";
+@import "typography";
+@import "css3";
+
+h1.heading-xlarge {
+  margin-bottom: 30px;
+}
+
+span.severity {
+  display: inline-block;
+  border-width: 2px;
+  border-style: solid;
+}
+
+span.severity.low {
+  border-color: $green;
+}
+
+span.severity.medium {
+  border-color: $yellow;
+}
+
+span.severity.high {
+  border-color: $red;
+}
