@@ -1,0 +1,48 @@
+-- Drop spatial indexes for long term flood risk layers
+DROP INDEX extra_info_bv_bng_wkb_geometry_geom_idx;
+
+DROP INDEX flood_alert_area_bv_bng_wkb_geometry_geom_idx;
+
+DROP INDEX flood_warning_area_bv_bng_wkb_geometry_geom_idx;
+
+DROP INDEX lead_local_flood_authority_bv_bng_wkb_geometry_geom_idx;
+
+DROP INDEX river_level_depth_and_flow_gauges_bv_bng_wkb_geometry_geom_idx;
+
+DROP INDEX rof_reservoir_depth_bv_bng_wkb_geometry_geom_idx;
+
+DROP INDEX rof_reservoir_extent_bv_bng_wkb_geometry_geom_idx;
+
+DROP INDEX rof_reservoir_extent_merged_bv_bng_wkb_geometry_geom_idx;
+
+DROP INDEX rof_reservoir_velocity_bv_bng_wkb_geometry_geom_idx;
+
+DROP INDEX rofrs_england_bv_bng_wkb_geometry_geom_idx;
+
+DROP INDEX sea_level_depth_gauges_bv_bng_wkb_geometry_geom_idx;
+
+DROP INDEX ufmfsw_depth_1_in_1000_bv_bng_wkb_geometry_geom_idx;
+
+DROP INDEX ufmfsw_depth_1_in_100_bv_bng_wkb_geometry_geom_idx;
+
+DROP INDEX ufmfsw_depth_1_in_30_bv_bng_wkb_geometry_geom_idx;
+
+DROP INDEX ufmfsw_extent_1_in_1000_bv_bng_wkb_geometry_geom_idx;
+
+DROP INDEX ufmfsw_extent_1_in_100_bv_bng_wkb_geometry_geom_idx;
+
+DROP INDEX ufmfsw_extent_1_in_30_bv_bng_wkb_geometry_geom_idx;
+
+DROP INDEX ufmfsw_flow_direction_1_in_1000_bv_bng_wkb_geometry_geom_idx;
+
+DROP INDEX ufmfsw_flow_direction_1_in_100_bv_bng_wkb_geometry_geom_idx;
+
+DROP INDEX ufmfsw_flow_direction_1_in_30_bv_bng_wkb_geometry_geom_idx;
+
+DROP INDEX ufmfsw_suitability_bv_bng_wkb_geometry_geom_idx;
+
+DROP INDEX ufmfsw_velocity_1_in_1000_bv_bng_wkb_geometry_geom_idx;
+
+DROP INDEX ufmfsw_velocity_1_in_100_bv_bng_wkb_geometry_geom_idx;
+
+DROP INDEX ufmfsw_velocity_1_in_30_bv_bng_wkb_geometry_geom_idx;

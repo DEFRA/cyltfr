@@ -1,3 +1,5 @@
 module.exports = [
-  require('./addressByPostcode')
+  require('./address'),
+  require('./addressByPostcode'),
+  require('./postcodes')
 ]

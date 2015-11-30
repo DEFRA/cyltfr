@@ -87,10 +87,12 @@ function loadMap () {
         })
       })
 
+
+
       layers.push(new ol.layer.Tile({
         ref: wmsResult.Capability.Layer.Layer[i].Name,
         source: WMSsource,
-        opacity: 0.8,
+        opacity: 0.7,
         visible: false
       }))
     }
@@ -247,10 +249,16 @@ function closePopup () {
   return false
 }
 
+function panTo (easting, northing) {
+  map.getView().setCenter([easting, northing])
+  map.getView().setZoom(9)
+}
+
 module.exports = {
   loadMap: loadMap,
   showMap: showMap,
   closePopup: closePopup,
+  panTo: panTo,
   onReady: function (fn) {
     callback = fn
   }

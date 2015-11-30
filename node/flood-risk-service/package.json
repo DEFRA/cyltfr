@@ -1,0 +1,32 @@
+{
+  "name": "flood-service",
+  "version": "0.0.1",
+  "description": "Flood Service",
+  "main": "index.js",
+  "scripts": {
+    "test": "lab -r console -o stdout -r html -o coverage.html",
+    "start": "node index.js",
+    "lint": "standard"
+  },
+  "author": "ea.gov.uk",
+  "license": "ISC",
+  "dependencies": {
+    "boom": "2.9.0",
+    "config": "1.16.0",
+    "good": "6.4.0",
+    "good-console": "5.1.0",
+    "good-file": "5.1.0",
+    "hapi": "11.0.2",
+    "hapi-node-postgres": "2.1.1",
+    "inert": "3.1.0",
+    "joi": "6.9.1",
+    "lout": "7.2.0",
+    "vision": "3.0.0"
+  },
+  "devDependencies": {
+    "code": "1.5.0",
+    "lab": "6.2.0",
+    "sinon": "1.17.2",
+    "standard": "5.3.1"
+  }
+}
