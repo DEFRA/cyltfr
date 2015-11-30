@@ -41,15 +41,15 @@
   },
   "devDependencies": {
     "browserify": "12.0.1",
-    "code": "^1.5.0",
+    "code": "1.5.0",
     "exorcist": "0.4.0",
     "govuk_frontend_toolkit": "3.1.0",
     "govuk_template_mustache": "0.12.0",
-    "lab": "^6.2.0",
+    "lab": "6.2.0",
     "node-sass": "3.4.1",
     "nodemon": "1.8.1",
-    "proxyquire": "^1.7.3",
-    "sinon": "^1.17.2",
+    "proxyquire": "1.7.3",
+    "sinon": "1.17.2",
     "standard": "5.3.1",
     "watchify": "3.6.1"
   }

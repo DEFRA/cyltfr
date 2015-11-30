@@ -1,4 +1,29 @@
-watchify assets/javascripts/home/index.js -d -o 'exorcist public/javascripts/home.js.map > public/javascripts/home.js' &&
-watchify assets/javascripts/search/index.js -d -o 'exorcist public/javascripts/search.js.map > public/javascripts/search.js' &&
-watchify assets/javascripts/risk/index.js -d -o 'exorcist public/javascripts/risk.js.map > public/javascripts/risk.js' &&
-watchify assets/javascripts/map/index.js -d -o 'exorcist public/javascripts/map.js.map > public/javascripts/map.js'
+# Usage
+# npm run watch:js -- home
+# npm run watch:js -- search
+# npm run watch:js -- risk
+# npm run watch:js -- map
+
+case "$1" in
+
+'home')
+  echo "Watching home.js"
+  watchify assets/javascripts/home/index.js -d -o 'exorcist public/javascripts/home.js.map > public/javascripts/home.js'
+  ;;
+'search')
+  echo "Watching search.js"
+  watchify assets/javascripts/search/index.js -d -o 'exorcist public/javascripts/search.js.map > public/javascripts/search.js'
+  ;;
+'risk')
+  echo "Watching risk.js"
+  watchify assets/javascripts/risk/index.js -d -o 'exorcist public/javascripts/risk.js.map > public/javascripts/risk.js'
+  ;;
+'map')
+  echo "Watching map.js"
+  watchify assets/javascripts/map/index.js -d -o 'exorcist public/javascripts/map.js.map > public/javascripts/map.js'
+  ;;
+*)
+  echo "Script '$1' is not found"
+  ;;
+
+esac
