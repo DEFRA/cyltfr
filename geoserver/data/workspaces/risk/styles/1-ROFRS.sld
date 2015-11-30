@@ -29,20 +29,9 @@
         </ogc:Filter>
           <PolygonSymbolizer>
             <Fill>
-              <CssParameter name="fill">#000080</CssParameter>
+              <CssParameter name="fill">#3D4489</CssParameter>
             </Fill>
-          <!--  <Stroke>
-              <CssParameter name="stroke">#000080</CssParameter>
-              <CssParameter name="stroke-width">0.5</CssParameter>
-            </Stroke>-->
           </PolygonSymbolizer>
-          <LineSymbolizer>
-         <Stroke>
-           <CssParameter name="stroke">#000080</CssParameter>
-           <CssParameter name="stroke-width">0.5</CssParameter>
-         </Stroke>
-         <PerpendicularOffset>-2</PerpendicularOffset>
-       </LineSymbolizer>
         </Rule>
         
         <Rule>
@@ -58,7 +47,7 @@
         </ogc:Filter>
           <PolygonSymbolizer>
             <Fill>
-              <CssParameter name="fill">#0000FF</CssParameter>
+              <CssParameter name="fill">#6699CD</CssParameter>
             </Fill>
           </PolygonSymbolizer>
         </Rule>
@@ -75,7 +64,7 @@
         </ogc:Filter>
           <PolygonSymbolizer>
             <Fill>
-              <CssParameter name="fill">#ADD8E6</CssParameter>
+              <CssParameter name="fill">#A2CFFF</CssParameter>
             </Fill>
           </PolygonSymbolizer>
         </Rule>
@@ -92,7 +81,7 @@
         </ogc:Filter>
           <PolygonSymbolizer>
             <Fill>
-              <CssParameter name="fill">#DEEFF5</CssParameter>
+              <CssParameter name="fill">#C4E1FF</CssParameter>
             </Fill>
           </PolygonSymbolizer>
         </Rule>

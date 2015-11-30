@@ -32,7 +32,7 @@
           
           <PolygonSymbolizer>
             <Fill>
-              <CssParameter name="fill">#ADD8E6</CssParameter>
+              <CssParameter name="fill">#A2CFFF</CssParameter>
             </Fill>
           </PolygonSymbolizer>
         </Rule>
@@ -53,7 +53,7 @@
         </ogc:Filter>
           <PolygonSymbolizer>
             <Fill>
-              <CssParameter name="fill">#000080</CssParameter>
+              <CssParameter name="fill">#3D4489</CssParameter>
             </Fill>
           </PolygonSymbolizer>
         </Rule>

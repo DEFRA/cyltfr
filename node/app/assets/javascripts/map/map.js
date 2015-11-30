@@ -87,10 +87,12 @@ function loadMap () {
         })
       })
 
+
+
       layers.push(new ol.layer.Tile({
         ref: wmsResult.Capability.Layer.Layer[i].Name,
         source: WMSsource,
-        opacity: 0.8,
+        opacity: 0.7,
         visible: false
       }))
     }

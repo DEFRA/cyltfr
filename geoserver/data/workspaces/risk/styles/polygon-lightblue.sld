@@ -27,7 +27,7 @@
           <!-- like a linesymbolizer but with a fill too -->
           <PolygonSymbolizer>
             <Fill>
-              <CssParameter name="fill">#ADD8E6</CssParameter>
+              <CssParameter name="fill">#A2CFFF</CssParameter>
             </Fill>
           </PolygonSymbolizer>
         </Rule>
