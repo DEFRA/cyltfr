@@ -87,8 +87,6 @@ function loadMap () {
         })
       })
 
-
-
       layers.push(new ol.layer.Tile({
         ref: wmsResult.Capability.Layer.Layer[i].Name,
         source: WMSsource,
