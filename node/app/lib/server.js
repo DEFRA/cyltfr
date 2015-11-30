@@ -1,9 +1,22 @@
 var Hapi = require('hapi')
 var config = require('config')
 var options = config.get('server')
+var serverLoadConfig = config.get('server.load')
 var loadPlugins = require('./plugins')
 var routes = require('./routes')
-var server = new Hapi.Server()
+var server = new Hapi.Server({
+  connections: {
+    load: {
+      maxEventLoopDelay: parseInt(serverLoadConfig.maxEventLoopDelay, 10)
+    },
+    routes: {
+      security: true
+    }
+  },
+  load: {
+    sampleInterval: 1000
+  }
+})
 
 /*
  * Server connection

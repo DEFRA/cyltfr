@@ -14,9 +14,9 @@
       <Abstract></Abstract>
       <!-- FeatureTypeStyles describe how to render different features -->
       <!-- A FeatureTypeStyle for rendering polygons -->
+      
+      
       <FeatureTypeStyle>
-        
-        
         <Rule>
           <Name>less than 0.25m</Name>
           <Title>less than 0.25m</Title>
@@ -36,7 +36,9 @@
             </Fill>
           </PolygonSymbolizer>
         </Rule>
-        
+      </FeatureTypeStyle>
+      
+      <FeatureTypeStyle>
         <Rule>
           <Name>over 0.25m</Name>
           <Title>over 0.25m</Title>
@@ -57,10 +59,8 @@
             </Fill>
           </PolygonSymbolizer>
         </Rule>
-        
-      
-        
       </FeatureTypeStyle>
+        
     </UserStyle>
   </NamedLayer>
 </StyledLayerDescriptor>

@@ -14,36 +14,36 @@
       <Abstract></Abstract>
       <!-- FeatureTypeStyles describe how to render different features -->
       <!-- A FeatureTypeStyle for rendering polygons -->
-      <FeatureTypeStyle>
-        
-        
+      
+             <FeatureTypeStyle>
         <Rule>
-          <Name>> 0.9m</Name>
-          <Title>> 0.9m</Title>
-          
+          <Name>0 - 0.3m</Name>
+          <Title>0 - 0.3m</Title>
+
         <ogc:Filter>
           <ogc:Or>
-            
+
             <ogc:PropertyIsEqualTo>
               <ogc:PropertyName>depth</ogc:PropertyName>
-              <ogc:Literal>0.90 - 1.20</ogc:Literal>
-             </ogc:PropertyIsEqualTo>
-            
-            <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>depth</ogc:PropertyName>
-              <ogc:Literal>> 1.20</ogc:Literal>
+              <ogc:Literal>0.15 - 0.30</ogc:Literal>
             </ogc:PropertyIsEqualTo>
-            
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>depth</ogc:PropertyName>
+              <ogc:Literal>0.00 - 0.15</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+
           </ogc:Or>
-        </ogc:Filter>
           
+        </ogc:Filter>
           <PolygonSymbolizer>
             <Fill>
-              <CssParameter name="fill">#3D4489</CssParameter>
+              <CssParameter name="fill">#A2CFFF</CssParameter>
             </Fill>
           </PolygonSymbolizer>
         </Rule>
-        
+      </FeatureTypeStyle>
+      
+             <FeatureTypeStyle>
         <Rule>
           <Name>0.3 - 0.9m</Name>
           <Title>0.3 - 0.9m</Title>
@@ -71,34 +71,39 @@
             </Fill>
           </PolygonSymbolizer>
         </Rule>
-        
+       </FeatureTypeStyle>
+      
+      <FeatureTypeStyle>
         <Rule>
-          <Name>0 - 0.3m</Name>
-          <Title>0 - 0.3m</Title>
-
+          <Name>> 0.9m</Name>
+          <Title>> 0.9m</Title>
+          
         <ogc:Filter>
           <ogc:Or>
-
+            
             <ogc:PropertyIsEqualTo>
               <ogc:PropertyName>depth</ogc:PropertyName>
-              <ogc:Literal>0.15 - 0.30</ogc:Literal>
-            </ogc:PropertyIsEqualTo>
+              <ogc:Literal>0.90 - 1.20</ogc:Literal>
+             </ogc:PropertyIsEqualTo>
+            
             <ogc:PropertyIsEqualTo>
               <ogc:PropertyName>depth</ogc:PropertyName>
-              <ogc:Literal>0.00 - 0.15</ogc:Literal>
+              <ogc:Literal>> 1.20</ogc:Literal>
             </ogc:PropertyIsEqualTo>
-
+            
           </ogc:Or>
-          
         </ogc:Filter>
+          
           <PolygonSymbolizer>
             <Fill>
-              <CssParameter name="fill">#A2CFFF</CssParameter>
+              <CssParameter name="fill">#3D4489</CssParameter>
             </Fill>
           </PolygonSymbolizer>
         </Rule>
-        
-      </FeatureTypeStyle>
+       </FeatureTypeStyle>
+
+
+      
     </UserStyle>
   </NamedLayer>
 </StyledLayerDescriptor>

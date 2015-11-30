@@ -14,5 +14,5 @@ export LTFRI_DB_PASSWORD=u_ltfri
 export LTFRI_GDB_ROOT=~/ltfri_local/gdb/
 # Spatial load source geodatabase suffix (used for switching between national and non-national subsets).
 export LTFRI_GDB_POSTFIX=_subset
-# A flag that controls spatiakl index generation.
+# A flag that controls spatial index generation.
 export LTFRI_GENERATE_SPATIAL_INDEX=FALSE

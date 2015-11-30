@@ -15,24 +15,25 @@
       <!-- FeatureTypeStyles describe how to render different features -->
       <!-- A FeatureTypeStyle for rendering polygons -->
       <FeatureTypeStyle>
-        
-        
         <Rule>
-          <Name>> 2.0m</Name>
-          <Title>> 2.0m</Title>
+          <Name>0 - 0.3m</Name>
+          <Title>0 - 0.3m</Title>
+
         <ogc:Filter>
           <ogc:PropertyIsEqualTo>
             <ogc:PropertyName>depth</ogc:PropertyName>
-            <ogc:Literal>> 2.0m</ogc:Literal>
+            <ogc:Literal>0 - 0.3m</ogc:Literal>
             </ogc:PropertyIsEqualTo>
         </ogc:Filter>
           <PolygonSymbolizer>
             <Fill>
-              <CssParameter name="fill">#3D4489</CssParameter>
+              <CssParameter name="fill">#A2CFFF</CssParameter>
             </Fill>
           </PolygonSymbolizer>
         </Rule>
-        
+      </FeatureTypeStyle>
+      
+      <FeatureTypeStyle>
         <Rule>
           <Name>0.3 - 2.0m</Name>
           <Title>0.3 - 2.0m</Title>
@@ -50,25 +51,33 @@
             </Fill>
           </PolygonSymbolizer>
         </Rule>
-        
+      </FeatureTypeStyle>
+      
+      <FeatureTypeStyle>
         <Rule>
-          <Name>0 - 0.3m</Name>
-          <Title>0 - 0.3m</Title>
-
+          <Name>> 2.0m</Name>
+          <Title>> 2.0m</Title>
         <ogc:Filter>
           <ogc:PropertyIsEqualTo>
             <ogc:PropertyName>depth</ogc:PropertyName>
-            <ogc:Literal>0 - 0.3m</ogc:Literal>
+            <ogc:Literal>> 2.0m</ogc:Literal>
             </ogc:PropertyIsEqualTo>
         </ogc:Filter>
           <PolygonSymbolizer>
             <Fill>
-              <CssParameter name="fill">#A2CFFF</CssParameter>
+              <CssParameter name="fill">#3D4489</CssParameter>
             </Fill>
           </PolygonSymbolizer>
         </Rule>
-        
       </FeatureTypeStyle>
+        
+        
+        
+        
+        
+        
+
+        
     </UserStyle>
   </NamedLayer>
 </StyledLayerDescriptor>
