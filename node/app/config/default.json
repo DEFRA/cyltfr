@@ -2,7 +2,10 @@
   "server": {
     "protocol": "http",
     "host": "127.0.0.1",
-    "port": 3001
+    "port": 3001,
+    "load": {
+      "maxEventLoopDelay": 100
+    }
   },
   "plugins": {
     "logging": {
@@ -15,12 +18,12 @@
   "service": {
     "protocol": "http",
     "host": "127.0.0.1",
-    "port": 9999
+    "port": 3002
   },
   "geoserver": {
     "protocol": "http",
     "host": "127.0.0.1",
-    "port": "8080"
+    "port": "3002"
   },
   "pageRefreshTime": 900,
   "cacheExpiry": 900000,

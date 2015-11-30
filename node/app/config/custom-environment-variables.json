@@ -1,0 +1,10 @@
+{
+  "server": {
+    "protocol": "LTFRI_WEB_APPLICATION_PROTOCOL",
+    "host": "LTFRI_WEB_APPLICATION_LISTEN_ADDRESS",
+    "port": "LTFRI_WEB_APPLICATION_LISTEN_PORT",
+    "load": {
+      "maxEventLoopDelay": "LTFRI_WEB_APPLICATION_LOAD_MAX_EVENT_LOOP_DELAY"
+    }
+  }
+}
