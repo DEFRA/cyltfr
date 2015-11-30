@@ -1,9 +1,9 @@
 function RiskViewModel (data, address) {
-  this.address = address
+  this.fullAddress = address.fullAddress
   this.severityClass = 'medium'
   this.severityText = 'MEDIUM RISK'
-  this.easting = address.EASTING
-  this.northing = address.NORTHING
+  this.easting = address.easting
+  this.northing = address.northing
 }
 
 module.exports = RiskViewModel

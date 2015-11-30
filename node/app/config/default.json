@@ -23,7 +23,7 @@
   "geoserver": {
     "protocol": "http",
     "host": "127.0.0.1",
-    "port": "3002"
+    "port": 8080
   },
   "pageRefreshTime": 900,
   "cacheExpiry": 900000,
@@ -31,11 +31,6 @@
   "gazetteer" : {
     "protocol": "http",
     "host": "127.0.0.1",
-    "port": 3002,
-    "routes" : {
-      "address": "/address/{id}",
-      "addressByPostcode": "/addressbypostcode/{postcode}",
-      "postcodes": "/postcodes/{postcode}"
-    }
+    "port": 3002
   }
 }

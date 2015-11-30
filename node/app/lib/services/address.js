@@ -1,27 +1,30 @@
-var config = require('config').gazetteer
 var wreck = require('wreck')
+var config = require('config').gazetteer
+var url = config.protocol + '://' + config.host + ':' + config.port
+var findByIdUrl = url + '/address/'
+var findByPostcodeUrl = url + '/addressbypostcode/'
 
 function findById (id, callback) {
-  var uri = config.protocol + '://' + config.host + ':' + config.port + config.routes.address.replace('{id}', id)
+  var uri = findByIdUrl + id
 
-  wreck.get(uri, {}, function (err, res, payload) {
+  wreck.get(uri, { json: true }, function (err, res, payload) {
     if (err) {
-      callback(err)
+      return callback(err)
     }
 
-    callback(null, JSON.parse(payload.toString()))
+    callback(null, payload)
   })
 }
 
 function findByPostcode (postcode, callback) {
-  var uri = config.protocol + '://' + config.host + ':' + config.port + config.routes.addressByPostcode.replace('{postcode}', postcode)
+  var uri = findByPostcodeUrl + postcode
 
-  wreck.get(uri, {}, function (err, res, payload) {
+  wreck.get(uri, { json: true }, function (err, res, payload) {
     if (err) {
-      callback(err)
+      return callback(err)
     }
 
-    callback(null, JSON.parse(payload.toString()))
+    callback(null, payload)
   })
 }
 

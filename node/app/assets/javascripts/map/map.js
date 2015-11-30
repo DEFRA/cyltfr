@@ -242,7 +242,7 @@ function bullseye (pixel) {
 }
 
 function closePopup () {
-  overlay.setPosition(undefined)
+  overlay.setPosition()
   highlightSource.clear()
   return false
 }

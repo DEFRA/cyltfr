@@ -4,7 +4,7 @@ module.exports = {
   method: 'GET',
   path: '/address/{id}',
   config: {
-    description: 'Get address by ID',
+    description: 'Get address by id',
     handler: require('../controllers/address'),
     validate: {
       params: {
