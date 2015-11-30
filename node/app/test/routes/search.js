@@ -3,7 +3,6 @@ var Code = require('code')
 var Sinon = require('sinon')
 var server = require('../../lib/server')
 var service = require('../../lib/services/address')
-var HomeViewModel = require('../../lib/models/home-view')
 var lab = exports.lab = Lab.script()
 var it = lab.it
 var beforeEach = lab.beforeEach
