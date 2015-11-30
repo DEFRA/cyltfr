@@ -18,7 +18,7 @@
                 <option value="">(Please choose)</option>
               {{/if}}
               {{#each addresses}}
-                <option value="{{ this.id }}">{{ this.text }}</option>
+                <option value="{{ this._id }}">{{ this.BLDGNAME }}{{ this.BLDGNUMBER }} {{ this.THOROUGHFARE }}</option>
               {{/each}}
             </select>
           </div>

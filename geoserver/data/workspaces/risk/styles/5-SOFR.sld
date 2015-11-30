@@ -15,24 +15,25 @@
       <!-- FeatureTypeStyles describe how to render different features -->
       <!-- A FeatureTypeStyle for rendering polygons -->
       <FeatureTypeStyle>
-        
-        
         <Rule>
-          <Name>> 2.0m/s</Name>
-          <Title>> 2.0m/s</Title>
+          <Name>0 - 0.5m/s</Name>
+          <Title>0 - 0.5m/s</Title>
+
         <ogc:Filter>
           <ogc:PropertyIsEqualTo>
             <ogc:PropertyName>velocity</ogc:PropertyName>
-            <ogc:Literal>> 2.0m/s</ogc:Literal>
+            <ogc:Literal>0 - 0.5m/s</ogc:Literal>
             </ogc:PropertyIsEqualTo>
         </ogc:Filter>
           <PolygonSymbolizer>
             <Fill>
-              <CssParameter name="fill">#000080</CssParameter>
+              <CssParameter name="fill">#A2CFFF</CssParameter>
             </Fill>
           </PolygonSymbolizer>
         </Rule>
-        
+      </FeatureTypeStyle>
+      
+      <FeatureTypeStyle>
         <Rule>
           <Name>0.5 - 2.0m/s</Name>
           <Title>0.5 - 2.0m/s</Title>
@@ -46,29 +47,38 @@
         </ogc:Filter>
           <PolygonSymbolizer>
             <Fill>
-              <CssParameter name="fill">#0000FF</CssParameter>
+              <CssParameter name="fill">#6699CD</CssParameter>
             </Fill>
           </PolygonSymbolizer>
         </Rule>
-        
-        <Rule>
-          <Name>0 - 0.5m/s</Name>
-          <Title>0 - 0.5m/s</Title>
-
+      </FeatureTypeStyle>
+      
+      <FeatureTypeStyle>
+                <Rule>
+          <Name>> 2.0m/s</Name>
+          <Title>> 2.0m/s</Title>
         <ogc:Filter>
           <ogc:PropertyIsEqualTo>
             <ogc:PropertyName>velocity</ogc:PropertyName>
-            <ogc:Literal>0 - 0.5m/s</ogc:Literal>
+            <ogc:Literal>> 2.0m/s</ogc:Literal>
             </ogc:PropertyIsEqualTo>
         </ogc:Filter>
           <PolygonSymbolizer>
             <Fill>
-              <CssParameter name="fill">#ADD8E6</CssParameter>
+              <CssParameter name="fill">#3D4489</CssParameter>
             </Fill>
           </PolygonSymbolizer>
         </Rule>
-        
       </FeatureTypeStyle>
+          
+        
+        
+
+        
+        
+        
+        
+        
     </UserStyle>
   </NamedLayer>
 </StyledLayerDescriptor>

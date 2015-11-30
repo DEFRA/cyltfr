@@ -6,7 +6,7 @@
 
   {{#content "content"}}
     <h1 class="heading-xlarge">Long term flood risk for:</h1>
-    <h2 class="heading-medium">{{ address }}</h2>
+    <h2 class="heading-medium">{{ address.BLDGNUMBER }} {{ address.THOROUGHFARE }}, {{ address.POSTTOWN }}</h2>
     <span class="severity {{ severityClass }}">{{ severityText }}</span>
     <a href="#">What does this mean</a>
     <h3 class="lede">Floods Destroy. Be prepared.</h3>

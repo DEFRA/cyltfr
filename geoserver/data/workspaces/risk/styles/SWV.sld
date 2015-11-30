@@ -14,9 +14,9 @@
       <Abstract></Abstract>
       <!-- FeatureTypeStyles describe how to render different features -->
       <!-- A FeatureTypeStyle for rendering polygons -->
+      
+      
       <FeatureTypeStyle>
-        
-        
         <Rule>
           <Name>less than 0.25m</Name>
           <Title>less than 0.25m</Title>
@@ -32,11 +32,13 @@
           
           <PolygonSymbolizer>
             <Fill>
-              <CssParameter name="fill">#ADD8E6</CssParameter>
+              <CssParameter name="fill">#A2CFFF</CssParameter>
             </Fill>
           </PolygonSymbolizer>
         </Rule>
-        
+      </FeatureTypeStyle>
+      
+      <FeatureTypeStyle>
         <Rule>
           <Name>over 0.25m</Name>
           <Title>over 0.25m</Title>
@@ -53,14 +55,12 @@
         </ogc:Filter>
           <PolygonSymbolizer>
             <Fill>
-              <CssParameter name="fill">#000080</CssParameter>
+              <CssParameter name="fill">#3D4489</CssParameter>
             </Fill>
           </PolygonSymbolizer>
         </Rule>
-        
-      
-        
       </FeatureTypeStyle>
+        
     </UserStyle>
   </NamedLayer>
 </StyledLayerDescriptor>
