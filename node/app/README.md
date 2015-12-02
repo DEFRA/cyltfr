@@ -5,11 +5,11 @@
 ### Clone
 `git clone git@gitlab.envage.co.uk:flood/ltfri.git`
 
-# Enable use of module specific environment variables
-# Add the following line to .profile
+### Enable use of module specific environment variables
+### Add the following line to .profile
 source $HOME/ltfri/node/app/etc/.profile
 
-# Source ~/.profile or logout/login or reboot for .profile changes to take effect
+### Source ~/.profile or logout/login or reboot for .profile changes to take effect
 
 ### Install dependencies
 `npm i`
@@ -17,15 +17,16 @@ source $HOME/ltfri/node/app/etc/.profile
 ### Build
 `npm run build`
 
-### Start server
-`npm start`
+### Test
+`npm test`
 
-Open `http://localhost:3001`
+## Start
+Before starting, ensure `pm2` is installed globally `npm i -g pm2`
 
-### Start server (dev mode)
+### Start server (dev)
 `npm run dev`
 
 Open `http://localhost:3001`
 
 ### Start server (production)
-`forever start index` (Assumes forever is installed globally `npm i -g forever`)
+`npm start` (Assumes `pm2` is installed globally `npm i -g forever`)
