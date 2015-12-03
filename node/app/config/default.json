@@ -15,10 +15,10 @@
       }
     }
   },
-  "service": {
+  "floodRiskService": {
     "protocol": "http",
     "host": "127.0.0.1",
-    "port": 3002
+    "port": 8050
   },
   "geoserver": {
     "protocol": "http",

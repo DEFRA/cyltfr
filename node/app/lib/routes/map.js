@@ -15,7 +15,8 @@ module.exports = {
     validate: {
       query: {
         easting: Joi.number(),
-        northing: Joi.number()
+        northing: Joi.number(),
+        map: Joi.string()
       }
     }
   }

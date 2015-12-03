@@ -1,9 +1,17 @@
-/*
- * TODO: Replace with real risk implementation
- */
+var wreck = require('wreck')
+var config = require('config').floodRiskService
+var url = config.protocol + '://' + config.host + ':' + config.port
+var floodRiskURL = url + '/floodrisk/'
+
 function getByCoordinates (x, y, radius, callback) {
-  process.nextTick(function () {
-    callback(null, {})
+  var uri = floodRiskURL + parseInt(x) + '/' + parseInt(y) + '/' + radius
+
+  wreck.get(uri, { json: true }, function (err, res, payload) {
+    if (err) {
+      return callback(err)
+    }
+
+    return callback(null, payload)
   })
 }
 

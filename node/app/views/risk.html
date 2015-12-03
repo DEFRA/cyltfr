@@ -5,21 +5,57 @@
   {{/content}}
 
   {{#content "content"}}
-    <h1 class="heading-xlarge">Long term flood risk for:</h1>
-    <h2 class="heading-medium">{{ fullAddress }}</h2>
-    <span class="severity {{ severityClass }}">{{ severityText }}</span>
-    <a href="#">What does this mean</a>
-    <h3 class="lede">Floods Destroy. Be prepared.</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc imperdiet tortor in nisl iaculis, at pretium nulla feugiat. Mauris ac massa quis ligula rhoncus fermentum. Proin gravida ornare placerat. Vivamus efficitur elit ipsum, nec cursus arcu consectetur et. Sed sed nibh sed massa malesuada mattis in eu elit. Pellentesque turpis nisi, sagittis et auctor eu, pharetra vel ex. Fusce eleifend rhoncus neque, non feugiat mi tincidunt in. Phasellus nec nunc nec nulla rhoncus eleifend. Mauris diam nisi, iaculis in posuere ut, laoreet in purus. Etiam ac consectetur arcu, ac porta neque. Cras ac sem quis mi molestie posuere in id lacus. Donec in vestibulum enim.</p>
-    <p>Proin sed cursus nunc. Nulla auctor malesuada odio, nec porttitor tellus consectetur pretium. Vivamus in aliquam lorem, eu elementum purus. Suspendisse ornare, lorem vitae accumsan imperdiet, ipsum mi commodo dolor, sed ornare risus turpis vel ipsum. Maecenas molestie augue et turpis pharetra iaculis. Maecenas id est ac dolor feugiat lacinia at eu ligula. Donec rhoncus vulputate nisl. Fusce pellentesque nulla egestas nulla congue, ac pellentesque dui interdum. Phasellus elementum urna sit amet diam malesuada rutrum.</p>
-    <ol class="list-number">
-      <li>Nulla non est quis libero congue convallis.</li>
-      <li>Duis pellentesque turpis in lectus auctor pharetra.</li>
-      <li>Vivamus eget eros mollis, cursus eros accumsan, gravida urna.</li>
-      <li>Nulla a nisi ultrices, ornare ante a, consequat nisl.</li>
-    </ol>
-    <a href="/">Search again in a different area</a>
-    <a href="/map?easting={{easting}}&northing={{northing}}">View this information on a map</a>
+    <h1 class="heading-xlarge">Location-specific long term flood risk</h1>
+
+    <div class="grid-row">
+      <div class="column-half">
+        <div class="grey-banner">
+          <div class="severity {{ severityClass }}">
+            <h3 class="heading-medium" style="padding-top: 20px">Flood risk category:</h3>
+            <h2 class="heading-large" style="padding-bottom: 20px">{{ severityText }}</h2>
+          </div>
+
+          <div style="padding: 0 20px 20px 20px">
+            <h3 class="heading-medium">
+              {{ fullAddress }}
+            </h3>
+            <p><a href="/">Find the flood risk for another address</a></p>
+
+            {{#if sources}}
+              Potential source of flooding:
+              <ul class="sources">
+                {{#each sources}}
+                  <li class="{{this}}">{{ text }} <a href="/map?easting={{ ../easting }}&amp;northing={{ ../northing }}&amp;map={{ ref }}">View map</a></li>
+                {{/each}}
+              </ul>
+            {{/if}}
+
+            {{#if targetArea}}<p>This location is in or near an area at risk of flooding. <a href="#">Take action now</a></p>{{/if}}
+            <p>Got questions? Need advice?</p>
+            <p>Call Floodline: 0345 988 1188 (24 hours)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="column-half">
+
+        <h2 class="heading-large">Dump of risk data</h2>
+        <p>{{ allData }}</p>
+
+        <h4 class="heading-small">Scotland and Wales flood warning information</h4>
+        <p><!--Flood warning information for Scotland is available on the-->
+          <a role="link" rel="external" href="http://www.sepa.org.uk/flooding.aspx" title="Scottish Environment Protection Agency website">Scottish Environment Protection Agency website</a>
+        </p>
+        <p><!--Flood warning information for Wales is also available on the-->
+          <a role="link" rel="external" href="http://naturalresources.wales/splash?orig=/flooding/alerts-and-warnings/flood-alerts-and-warnings" title="Natural Resources Wales website">Natural Resources Wales website</a>
+        </p>
+
+      </div>
+
+
+
+    </div>
+
   {{/content}}
 
   {{#content "bodyEnd"}}
