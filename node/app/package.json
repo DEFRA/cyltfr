@@ -4,8 +4,9 @@
   "description": "Long term flood risk information",
   "main": "index.js",
   "scripts": {
-    "start": "node index",
-    "test": "npm run lint",
+    "start": "bin/live",
+    "dev": "bin/dev",
+    "test": "npm run lint && npm run unit-test",
     "unit-test": "bin/unit-test",
     "copy": "npm run copy:gov && npm run copy:assets",
     "copy:gov": "bin/clean-gov && bin/copy-gov && bin/fix-layout.js",
@@ -14,8 +15,7 @@
     "build:js": "bin/build-js",
     "watch:js": "bin/watch-js",
     "build": "npm run copy && npm run build:css && npm run build:js",
-    "lint": "standard",
-    "dev": "bin/dev"
+    "lint": "standard"
   },
   "author": "ea.gov.uk",
   "license": "OGL",
@@ -47,7 +47,6 @@
     "govuk_template_mustache": "0.12.0",
     "lab": "6.2.0",
     "node-sass": "3.4.1",
-    "nodemon": "1.8.1",
     "proxyquire": "1.7.3",
     "sinon": "1.17.2",
     "standard": "5.3.1",

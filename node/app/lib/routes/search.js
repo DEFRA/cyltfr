@@ -21,7 +21,7 @@ module.exports = {
         if (!addresses.length) {
           reply.view('home', new HomeViewModel('Please enter a valid postcode in England'))
         } else {
-          reply.view('search', new SearchViewModel(addresses))
+          reply.view('search', new SearchViewModel(postcode, addresses))
         }
       })
     },

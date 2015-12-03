@@ -7,14 +7,14 @@ var routes = require('./routes')
 var server = new Hapi.Server({
   connections: {
     load: {
-      maxEventLoopDelay: parseInt(serverLoadConfig.maxEventLoopDelay, 10)
+      maxEventLoopDelay: serverLoadConfig.maxEventLoopDelay
     },
     routes: {
       security: true
     }
   },
   load: {
-    sampleInterval: 1000
+    sampleInterval: serverLoadConfig.sampleInterval
   }
 })
 
@@ -36,6 +36,9 @@ loadPlugins(server)
  */
 server.route(routes)
 
+/*
+ * Handle route errors
+ */
 server.ext('onPreResponse', function (request, reply) {
   if (request.response) {
     if (request.response.isBoom) {

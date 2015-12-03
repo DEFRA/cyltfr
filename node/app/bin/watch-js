@@ -1,3 +1,5 @@
+# Watch a single javascript bundle
+#
 # Usage
 # npm run watch:js -- home
 # npm run watch:js -- search
@@ -23,7 +25,7 @@ case "$1" in
   watchify assets/javascripts/map/index.js -d -o 'exorcist public/javascripts/map.js.map > public/javascripts/map.js'
   ;;
 *)
-  echo "Script '$1' is not found"
+  echo "Script '$1' is not found - exiting"
   ;;
 
 esac
