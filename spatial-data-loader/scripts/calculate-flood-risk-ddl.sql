@@ -31,11 +31,11 @@ begin
   -- Food warning area point in polygon query.
   select exists(select fwa.fwis_code from u_ltfri.flood_warning_area_bv_bng fwa where st_intersects(st_setsrid(st_makepoint(_x, _y), 27700), fwa.wkb_geometry)) as in_flood_warning_area into flood_warning_area_result;
   -- High surface water risk radial buffered point in polygon query.
-  select distinct 3 as ufmfsw_risk from u_ltfri.ufmfsw_extent_1_in_1000_bv_bng u where st_intersects(st_buffer(st_setsrid(st_makepoint(_x, _y), 27700), _radius), u.wkb_geometry) into high_surface_water_result;
+  select distinct 1 as ufmfsw_risk from u_ltfri.ufmfsw_extent_1_in_1000_bv_bng u where st_intersects(st_buffer(st_setsrid(st_makepoint(_x, _y), 27700), _radius), u.wkb_geometry) into high_surface_water_result;
   -- Medium surface water risk radial buffered point in polygon query.
   select distinct 2 as ufmfsw_risk from u_ltfri.ufmfsw_extent_1_in_100_bv_bng u where st_intersects(st_buffer(st_setsrid(st_makepoint(_x, _y), 27700), _radius), u.wkb_geometry) into medium_surface_water_result;
   -- Low surface water risk radial buffered point in polygon query.
-  select distinct 1 as ufmfsw_risk from u_ltfri.ufmfsw_extent_1_in_30_bv_bng u where st_intersects(st_buffer(st_setsrid(st_makepoint(_x, _y), 27700), _radius), u.wkb_geometry) into low_surface_water_result;
+  select distinct 3 as ufmfsw_risk from u_ltfri.ufmfsw_extent_1_in_30_bv_bng u where st_intersects(st_buffer(st_setsrid(st_makepoint(_x, _y), 27700), _radius), u.wkb_geometry) into low_surface_water_result;
   -- Surface water risk results suitability point in polygon query.
   select suitability from u_ltfri.ufmfsw_suitability_bv_bng s where st_intersects(st_setsrid(st_makepoint(_x, _y), 27700), s.wkb_geometry) into suitability_result;
   -- Lead local flodd authority point in polygon query.
