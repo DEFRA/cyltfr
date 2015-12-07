@@ -5,11 +5,10 @@
 ### Clone
 `git clone git@gitlab.envage.co.uk:flood/ltfri.git`
 
-### Enable use of module specific environment variables
-### Add the following line to .profile
-source $HOME/ltfri/node/app/etc/.profile
-
-### Source ~/.profile or logout/login or reboot for .profile changes to take effect
+### Cloud deployment only
+### Override module specific environment variables by copying the contents of
+### etc/.profile to .profile on the target machine and configuring for the
+### target environment accordingly.
 
 ### Install dependencies
 `npm i`

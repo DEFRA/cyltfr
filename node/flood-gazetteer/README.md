@@ -10,21 +10,43 @@ The Csv is roughly 2Gb and 29 million rows of data.
 
 Install mongodb version 3.0.7 following the instructions at https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-14-04
 
-Get a copy of the latest nrd csv from `\\prodds.ntnl\shared\NW\RFH\Groups\Cis\Business Solutions\Home2\Projects\JTB\NRD2014_v1.zip`
+Get a copy of the latest nrd csv from `\\prodds.ntnl\shared\NW\RFH\Groups\Cis\Business Solutions\Home2\Projects\JTB\`
+
+As of 03/12/2015 it is version 4, which contains 2 additional fields ADDRESS1_PAO and ADDRESS1_SAO
 
 ### Mongoimport (actual data)
 
-`mongoimport -d gazetteer -c address --type csv --file NRD2014_v2.csv --headerline`
+If reimporting ensure you drop the current address collection
+Terminal > `mongo`
+`use gazetteer`
+`db.address.drop()`
 
-Note that you'll need roughly 20gb of space for the full dataload, if you don't want to do this follow the _test data_ import below
+Back to terminal, cd to your address data file
+`mongoimport -d gazetteer -c address --type csv --file NRD2014_v4.csv --headerline`
 
-Then create a simple index on the PC_NOSPACE field of the documents created.
+Then, inside mongo, create a simple index on the PC_NOSPACE field of the documents created.
 
+On the terminal > `mongo`
+`use gazetteer`
 `db.address.createIndex({PC_NOSPACE: 1})`
 
 Note that this takes roughly 5 minutes to complete.
 
 use `db.currentOp()` to see the progress of the index creation.
+
+### Distinct postcodes (optional import)
+
+This data needs to be imported in order to access the /postcodes end point
+
+Get the stripped postcodes from the network directory for the address data, the postcodes are in the v3 file.
+
+Import as per the address file
+`mongoimport -d gazetteer -c postcode --type csv --file NRD_v3_csv.csv --headerline`
+
+Create same index
+On the terminal > `mongo`
+`use gazetteer`
+`db.postcode.createIndex({PC_NOSPACE: 1})`
 
 ### Mongoimport (test data)
 

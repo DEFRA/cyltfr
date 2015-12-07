@@ -86,7 +86,7 @@ $(function () {
       setCurrent($(this).val())
     })
 
-    setCurrent()
+    setCurrent(getParameterByName('map'))
 
     var easting = getParameterByName('easting')
     var northing = getParameterByName('northing')

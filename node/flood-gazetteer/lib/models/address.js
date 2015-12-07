@@ -13,26 +13,25 @@ function Address (doc) {
   this.postcode = doc.POSTCODE
   this.easting = doc.EASTING
   this.northing = doc.NORTHING
+  this.sao = doc.ADDRESS1_SAO
+  this.pao = doc.ADDRESS1_PAO
 
   // Full address
-  this.fullAddress = (this.buildingName || '')
-  if (this.buildingNumber) {
-    this.fullAddress += ' ' + this.buildingNumber
-  }
-  if (this.subBuildingName) {
-    this.fullAddress += ' ' + this.subBuildingName
+  this.fullAddress = (this.pao || '')
+  if (this.sao) {
+    this.fullAddress += ', ' + this.sao
   }
   if (this.thoroughfare) {
-    this.fullAddress += ' ' + this.thoroughfare
+    this.fullAddress += ', ' + this.thoroughfare
   }
   if (this.locality) {
-    this.fullAddress += ' ' + this.locality
+    this.fullAddress += ', ' + this.locality
   }
   if (this.posttown) {
-    this.fullAddress += ' ' + this.posttown
+    this.fullAddress += ', ' + this.posttown
   }
   if (this.postcode) {
-    this.fullAddress += ' ' + this.postcode
+    this.fullAddress += ', ' + this.postcode
   }
 }
 

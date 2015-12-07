@@ -4,6 +4,7 @@
     "host": "LTFRI_WEB_APPLICATION_LISTEN_ADDRESS",
     "port": "LTFRI_WEB_APPLICATION_LISTEN_PORT",
     "load": {
+      "sampleInterval": "LTFRI_WEB_APPLICATION_LOAD_SAMPLE_INTERVAL",
       "maxEventLoopDelay": "LTFRI_WEB_APPLICATION_LOAD_MAX_EVENT_LOOP_DELAY"
     }
   }
