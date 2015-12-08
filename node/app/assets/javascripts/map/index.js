@@ -6,11 +6,12 @@ var maps = new Maps()
 loadMap.loadMap()
 
 function generateLegend (meta) {
-  var str = '<ul>'
+  var str = '<span>Legend:</span><ul>'
+  var keys = meta.keys
   var key
-  for (var i = 0; i < meta.length; i++) {
-    key = meta[i]
-    str += '<li class="' + key.color + ' ' + key.shape + '">' + key.text + '</li>'
+  for (var i = 0; i < keys.length; i++) {
+    key = keys[i]
+    str += '<li class="' + key.icon + ' ' + (key.shape || '') + '">' + key.text + '</li>'
   }
   str += '</ul>'
   return str
@@ -24,9 +25,10 @@ function getParameterByName (name) {
 }
 
 $(function () {
+  var open = 'open'
   var selected = 'selected'
   var $container = $('.map-container')
-  var $sidebar = $('ul.sidebar', $container)
+  var $sidebar = $('ul.nav', $container)
   var $selector = $('select', $container)
   var $categories = $sidebar.children('li.category')
   var $maps = $categories.find('li')
@@ -37,7 +39,12 @@ $(function () {
   // Store a reference to the map legend element
   var $legend = $('.legend')
 
+  function closeAll () {
+    $categories.removeClass(open)
+  }
+
   function setCurrent (ref) {
+    closeAll()
     maps.setCurrent(ref)
 
     var currMap = maps.currMap
@@ -67,17 +74,25 @@ $(function () {
     // Handle the category header clicks
     $categories.on('click', 'h3', function (e) {
       var $category = $(this).parent()
-      if ($category.hasClass(selected)) {
-        $category.removeClass(selected)
-      } else if ($category.find('.selected').length) {
-        $category.addClass(selected)
-      } else {
+      if (!$category.hasClass(selected)) {
         setCurrent($category.attr('id'))
+      }
+    })
+
+    // Handle the category caret clicks
+    $categories.on('click', 'a.caret', function (e) {
+      var $category = $(this).parent()
+      if ($category.hasClass(open)) {
+        $category.removeClass(open)
+      } else {
+        closeAll()
+        $category.addClass(open)
       }
     })
 
     // Handle the map selector clicks
     $maps.on('click', function (e) {
+      closeAll()
       setCurrent($(this).attr('id'))
     })
 

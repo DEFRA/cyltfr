@@ -1,7 +1,7 @@
-<ul class="sidebar">
+<ul class="nav">
   {{#each categories}}
-    <li id="{{ ref }}" class="category">
-      <h3>{{ name }}</h3>
+    <li id="{{ ref }}" title="{{ title }}" class="category">
+      <h3>{{ name }}</h3><a class="caret"></a>
       <ul>
         {{#each maps}}
           <li id="{{ ref }}" title="{{ title }}">
@@ -11,4 +11,4 @@
       </ul>
     </li>
   {{/each}}
-<ul>
+</ul>
