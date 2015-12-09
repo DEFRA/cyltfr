@@ -6,6 +6,10 @@ h1.heading-xlarge {
   margin-bottom: 30px;
 }
 
+#postcode {
+  text-transform: uppercase;
+}
+
 .button {
   @include media(mobile) {
     width: 100%;

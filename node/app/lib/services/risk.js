@@ -4,7 +4,7 @@ var url = config.protocol + '://' + config.host + ':' + config.port
 var floodRiskURL = url + '/floodrisk/'
 
 function getByCoordinates (x, y, radius, callback) {
-  var uri = floodRiskURL + parseInt(x) + '/' + parseInt(y) + '/' + radius
+  var uri = floodRiskURL + x + '/' + y + '/' + radius
 
   wreck.get(uri, { json: true }, function (err, res, payload) {
     if (err) {
