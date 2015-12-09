@@ -1,10 +1,10 @@
 var plugin = require('hapi-mongodb')
-var Config = require('config')
+var config = require('config')
 
 module.exports = function (server, startServerCallback) {
-  var errHandler = function (err) {
+  function errHandler (err) {
     if (err) {
-      console.log('error', err)
+      server.log('error', err)
       throw err
     }
     startServerCallback(server)
@@ -12,6 +12,6 @@ module.exports = function (server, startServerCallback) {
 
   server.register({
     register: plugin,
-    options: Config.get('database')
+    options: config.get('database')
   }, errHandler)
 }
