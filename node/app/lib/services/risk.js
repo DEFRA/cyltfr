@@ -7,8 +7,8 @@ function getByCoordinates (x, y, radius, callback) {
   var uri = floodRiskURL + x + '/' + y + '/' + radius
 
   wreck.get(uri, { json: true }, function (err, res, payload) {
-    if (err) {
-      return callback(err)
+    if (err || res.statusCode !== 200) {
+      return callback(err || payload || new Error('Unknown error'))
     }
 
     return callback(null, payload)

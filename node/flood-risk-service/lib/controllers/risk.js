@@ -8,7 +8,7 @@ module.exports = function getFloodRisk (request, reply) {
   service.calculateFloodRisk(db, params.x, params.y, params.radius, function (err, result) {
     if (err) {
       request.log('error', err)
-      return reply(Boom.badRequest())
+      return reply(Boom.badRequest('Database call failed', err))
     }
 
     if (!result || !result.rows || result.rows.length !== 1) {

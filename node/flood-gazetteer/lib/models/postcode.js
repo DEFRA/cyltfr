@@ -1,6 +1,6 @@
-function postcode (doc) {
+function Postcode (doc) {
   this.postcode = doc.POSTCODE
   this.postcodeNoSpace = doc.PC_NOSPACE
 }
 
-module.exports = postcode
+module.exports = Postcode
