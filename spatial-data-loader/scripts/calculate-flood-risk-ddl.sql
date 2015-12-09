@@ -132,10 +132,6 @@ begin
   -- Convert the result to JSON.  Unfortunately this does seem to support camel case attribute names even when camel case aliases are used in the SQL.
   select row_to_json(data) from data into result;
   return result;
-exception when others then
-  -- If construction of the JSON to be returned causes an error, degrade gracefully and return an indication to the client.
-  select '{"error": true}' into result;
-  return result;
 end;
 $BODY$
   LANGUAGE plpgsql VOLATILE
