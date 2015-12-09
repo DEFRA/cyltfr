@@ -19,6 +19,13 @@
 ### Test
 `npm test`
 
+or individually
+
+`npm run lint`
+`npm run unit-test`
+`npm run e2e-test`
+`npm run e2e-test-remote`
+
 ## Start
 Before starting, ensure `pm2` is installed globally `npm i -g pm2`
 
@@ -29,3 +36,6 @@ Open `http://localhost:3001`
 
 ### Start server (production)
 `npm start` (Assumes `pm2` is installed globally `npm i -g forever`)
+
+
+[The OGL License](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/)

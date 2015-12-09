@@ -3,4 +3,7 @@ govuk
 logs
 public
 npm-debug.log
+selenium-debug.log
+coverage.html
+test/e2e/reports
 views/partials/layout.html

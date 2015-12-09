@@ -15,7 +15,7 @@ var content = '\
 var cmd = "sed -i \
 -e 's${{{ content }}}$" + content + "$g' \
 -e 's${{{ topOfPage }}}${{> topOfPage }}$g' \
--e 's${{{ head }}}${{> head }}\r\r\t\t{{#block \"head\"}}\r\t\t{{/block}} $g' \
+-e 's${{{ head }}}${{> head }}\r\r\t\t{{#block \"head\"}}\r\t\t{{/block}}$g' \
 -e 's${{{ bodyStart }}}${{> bodyStart }}$g' \
 -e 's${{{ cookieMessage }}}${{> cookieMessage }}$g' \
 -e 's${{{ insideHeader }}}${{> insideHeader }}$g' \
