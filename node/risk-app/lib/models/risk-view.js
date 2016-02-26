@@ -21,7 +21,7 @@ var sources = {
 }
 
 function RiskViewModel (risk, address) {
-  var rofrsVal, sfVal
+/*  var rofrsVal, sfVal
   rofrsVal = risk.rofrs_risk ? riskLevels[risk.rofrs_risk.prob_4band.toLowerCase()] : -1
   sfVal = risk.surface_water_risk ? riskLevels[risk.surface_water_risk.toLowerCase()] : -1
 
@@ -44,7 +44,7 @@ function RiskViewModel (risk, address) {
   if (risk.reservoir_risk) {
     this.sources.push(sources.Reservoirs)
   }
-
+*/
   this.fullAddress = address.fullAddress
   this.targetArea = risk.in_flood_alert_area || risk.in_flood_warning_area
   this.easting = address.easting
