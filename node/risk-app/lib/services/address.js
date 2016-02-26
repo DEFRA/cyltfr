@@ -1,5 +1,5 @@
 var wreck = require('wreck')
-var config = require('config').gazetteer
+var config = require('../../config').gazetteer
 var url = config.protocol + '://' + config.host + ':' + config.port
 var findByIdUrl = url + '/address/'
 var findByPostcodeUrl = url + '/addressbypostcode/'

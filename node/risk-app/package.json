@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "Long term flood risk information",
   "main": "index.js",
+  "engine": "4.3.0",
   "scripts": {
-    "start": "bin/live",
-    "dev": "bin/dev",
+    "start": "pm2 start config/pm2.json",
     "clean": "bin/clean-public",
     "copy": "npm run copy:assets && npm run copy:gov",
     "copy:gov": "bin/copy-gov && bin/fix-layout.js",
@@ -24,7 +24,6 @@
   "license": "OGL",
   "dependencies": {
     "boom": "3.1.2",
-    "config": "1.19.0",
     "glue": "3.2.0",
     "good": "6.6.0",
     "good-console": "5.3.1",

@@ -1,4 +1,4 @@
-var config = require('config').get('geoserver')
+var config = require('../../config').geoserver
 
 module.exports = {
   method: 'GET',
