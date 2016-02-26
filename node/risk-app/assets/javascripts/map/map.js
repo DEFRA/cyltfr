@@ -40,7 +40,8 @@ function loadMap () {
     // openlayers doesn't expose fulltileranges as a property, so when using minified ol have to set tilegrid.a to null, which is what fulltileranges
     // is mapped as, hopefully OS will fix their service, otherwise something more robust needs sorting out
     source.tileGrid.fullTileRanges_ = null
-    source.tileGrid.a = null
+    source.tileGrid.b = null
+
 
     var layer = new ol.layer.Tile({
       ref: config.OSLayer,
@@ -140,13 +141,13 @@ function loadMap () {
 
     var $popup = $('.feature-popup')
 
-    overlay = new ol.Overlay({
+  /*  overlay = new ol.Overlay({
       element: $popup,
       autopan: true,
       autoPanAnimation: {
         duration: 250
       }
-    })
+    })*/
 
     map = new ol.Map({
       controls: ol.control.defaults().extend([
@@ -157,7 +158,7 @@ function loadMap () {
         new ol.control.FullScreen()
       ]),
       layers: layers,
-      overlays: [overlay],
+    //  overlays: [overlay],
       target: 'map',
       view: new ol.View({
         resolutions: source.tileGrid.getResolutions(),
@@ -200,7 +201,7 @@ function loadMap () {
         }
 
         $('.feature-popup-content').html(textReturn)
-        overlay.setPosition(e.coordinate)
+        //overlay.setPosition(e.coordinate)
       })
     })
 
@@ -242,7 +243,7 @@ function bullseye (pixel) {
 }
 
 function closePopup () {
-  overlay.setPosition()
+//  overlay.setPosition()
   highlightSource.clear()
   return false
 }
