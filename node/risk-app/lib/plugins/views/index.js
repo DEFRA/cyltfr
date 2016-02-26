@@ -3,13 +3,22 @@ var handlebars = require('handlebars')
 var layouts = require('handlebars-layouts')
 var config = require('config')
 var pageRefreshTime = config.get('pageRefreshTime')
+var analyticsAccount = config.analyticsAccount
+var appVersion = ''// require('../package.json').version
 
 var defaultContext = {
-  pageRefreshTime: pageRefreshTime,
+  globalHeaderText: 'GOV.UK',
   pageTitle: 'Long Term Flood Risk Information - GOV.UK',
+  skipLinkMessage: 'Skip to main content',
+  homepageUrl: 'https://www.gov.uk/',
+  logoLinkTitle: 'Go to the GOV.UK homepage',
+  crownCopyrightMessage: '© Crown copyright',
   assetPath: '/public/',
   htmlLang: 'en',
-  headerClass: 'with-proposition'
+  headerClass: 'with-proposition',
+  pageRefreshTime: pageRefreshTime,
+  analyticsAccount: analyticsAccount,
+  appVersion: appVersion
 }
 
 module.exports = function (server) {

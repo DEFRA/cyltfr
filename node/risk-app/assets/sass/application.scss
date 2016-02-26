@@ -1,11 +1,13 @@
 // Import GOV.UK elements, this will import the frontend toolkit and some base styles.
 // Take a look at elements.scss to see which files are imported.
-@import 'elements';
+@import 'govuk-elements';
 
 // Set up your page container, using the frontend toolkit grid layout.
 
 // Content wraps the entire site content block, between the header and footer.
 // See elements _layout.scss line 8.
+//
+/*
 #contentWrapper {
   @include site-width-container;
   @include contain-floats;
@@ -14,7 +16,7 @@
   @include media(desktop) {
     padding-bottom: $gutter*3;
   }
-}
+}*/
 
 // Here's an example heading
 // See elements _typography.scss line 11.
@@ -29,17 +31,6 @@
   }
 }
 */
-// Set up the phase banner
-// See elements _layout.scss line 22.
-.alpha-banner  {
-  @include phase-banner(beta); // Change this to (beta) for a beta banner
-  strong {
-    text-transform: uppercase;
-  }
-}
-.alpha-tag {
-  @include phase-tag(beta); // Change this to (beta) for a beta tag
-}
 
 /*
  * Application Specific Styling
