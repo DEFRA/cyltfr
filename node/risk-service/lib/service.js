@@ -1,5 +1,5 @@
-var config = require('config')
-var queryConfig = config.get('queries')
+var config = require('../config')
+var queryConfig = config.queries
 
 var floodRiskService = {
   calculateFloodRisk: function (db, x, y, radius, callback) {

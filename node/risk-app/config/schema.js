@@ -7,14 +7,16 @@ var serviceSchema = Joi.object().required().keys({
   host: Joi.string().hostname().required(),
   port: Joi.number().required()
 })
-/*
+
 var serverSchema = Joi.object().required().keys({
+  protocol: Joi.string().required().allow(['http', 'https']),
   host: Joi.string().hostname().required(),
-  port: Joi.number().required()
+  port: Joi.number().required(),
+  load: Joi.object().required()
 })
-*/
+
 module.exports = {
-  server: Joi.object(), // sort this out
+  server: serverSchema, // sort this out
   geoserver: serviceSchema,
   floodRiskService: serviceSchema,
   gazetteer: serviceSchema,

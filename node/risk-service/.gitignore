@@ -3,3 +3,5 @@ logs
 public
 npm-debug.log
 coverage.html
+config/server.json
+config/pm2.json
