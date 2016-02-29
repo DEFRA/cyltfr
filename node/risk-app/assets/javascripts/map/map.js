@@ -139,15 +139,15 @@ function loadMap () {
 
     layers.push(highlightLayer)
 
-    var $popup = $('.feature-popup')
+    var popup = document.getElementById('feature-popup')
 
-  /*  overlay = new ol.Overlay({
-      element: $popup,
+    overlay = new ol.Overlay({
+      element: popup,
       autopan: true,
       autoPanAnimation: {
         duration: 250
       }
-    })*/
+    })
 
     map = new ol.Map({
       controls: ol.control.defaults().extend([
@@ -158,7 +158,7 @@ function loadMap () {
         new ol.control.FullScreen()
       ]),
       layers: layers,
-    //  overlays: [overlay],
+      overlays: [overlay],
       target: 'map',
       view: new ol.View({
         resolutions: source.tileGrid.getResolutions(),
@@ -201,7 +201,7 @@ function loadMap () {
         }
 
         $('.feature-popup-content').html(textReturn)
-        //overlay.setPosition(e.coordinate)
+        overlay.setPosition(e.coordinate)
       })
     })
 
@@ -243,7 +243,7 @@ function bullseye (pixel) {
 }
 
 function closePopup () {
-//  overlay.setPosition()
+  overlay.setPosition()
   highlightSource.clear()
   return false
 }

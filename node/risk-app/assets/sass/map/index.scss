@@ -11,6 +11,11 @@ h2.heading-medium {
   margin-top: 0.5em;
 }
 
+.map {
+  height: 100%;
+  width: 100%;
+}
+
 .map-container {
   @include media(mobile) {
     height: auto;
