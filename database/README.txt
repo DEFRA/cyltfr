@@ -13,8 +13,8 @@ add a symbolic link to use liquibase on your command line:
 `sudo ln -s /home/ltfridev/liquibase-3.4.2-bin/liquibase /usr/local/bin/liquibase`
 
 
-Once Your spatial tables and data have been setup run in.
+Once Your spatial tables and data have been setup run in, this is controlled seperately from the "spatial-data-loader" or TBC.
 
-`liquibase changeLogSync` -- to create the liquibase tables.
+`liquibase changeLogSync` -- to create the liquibase tables baseline.
 
 `liquibase update -- to run in latest changes.
