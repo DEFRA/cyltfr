@@ -6,7 +6,8 @@ var routes = require('./routes')
 var config = require('../config')
 var pageRefreshTime = config.pageRefreshTime
 var analyticsAccount = config.analyticsAccount
-var appVersion = ''// require('../package.json').version
+var appVersion = require('../package.json').version
+var appName = require('../package.json').name
 
 var defaultContext = {
   globalHeaderText: 'GOV.UK',
@@ -20,7 +21,8 @@ var defaultContext = {
   headerClass: 'with-proposition',
   pageRefreshTime: pageRefreshTime,
   analyticsAccount: analyticsAccount,
-  appVersion: appVersion
+  appVersion: appVersion,
+  appName: appName
 }
 
 var options = {
