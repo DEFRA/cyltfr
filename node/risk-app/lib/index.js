@@ -1,6 +1,6 @@
 var Glue = require('glue')
 var handlebars = require('handlebars')
-var layouts = require('handlebars-layouts')
+var handlebars = require('handlebars')
 var manifest = require('./manifest')
 var routes = require('./routes')
 var config = require('../config')
@@ -40,35 +40,49 @@ Glue.compose(manifest, options, function (err, server) {
    * Handle route errors
    */
   server.ext('onPreResponse', function (request, reply) {
-    if (request.response) {
-      if (request.response.isBoom) {
-        // If an error was raised during
-        // processing the request, return a 500 view
-        var err = request.response
-        var errName = 'An error occured'
-        var statusCode = err.output.statusCode
+    var response = request.response
 
-        return reply.view('500', {
-          statusCode: statusCode,
-          errName: errName
-        }).code(statusCode)
+    if (response.isBoom) {
+      // An error was raised during
+      // processing the request
+      var statusCode = response.output.statusCode
+
+      // In the event of 404
+      // return the `404` view
+      if (statusCode === 404) {
+        return reply.view('404').code(statusCode)
       }
+
+      request.log('error', {
+        statusCode: statusCode,
+        data: response.data,
+        message: response.message
+      })
+
+      // The return the `500` view
+      return reply.view('500').code(statusCode)
     }
     return reply.continue()
   })
 
   /*
-  * Create the handlebars engine
-  */
+   * Create the handlebars engine
+   */
   var engine = handlebars.create()
-  layouts.register(engine)
 
-  // Register global helpers
+  /*
+   * Create the handlebars engine
+   */
   var helpers = require('./helpers')
   for (var key in helpers) {
     if (helpers.hasOwnProperty(key)) {
       engine.registerHelper(key, helpers[key])
     }
+  }
+
+  var cacheViews = config.cacheViews
+  if (!cacheViews) {
+    server.log('info', 'Handlebars views are not being cached')
   }
 
   server.views({
@@ -78,7 +92,9 @@ Glue.compose(manifest, options, function (err, server) {
     relativeTo: process.cwd(),
     path: 'views',
     partialsPath: 'views/partials',
-    context: defaultContext
+    context: defaultContext,
+    layout: true,
+    isCached: cacheViews
   })
 
   server.start(function (err) {
