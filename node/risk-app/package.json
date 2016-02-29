@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "Long term flood risk information",
   "main": "index.js",
-  "engine": "4.3.0",
+  "engines": {
+    "node": "4.3.0"
+  },
   "scripts": {
     "start": "pm2 start config/pm2.json",
     "clean": "bin/clean-public",
