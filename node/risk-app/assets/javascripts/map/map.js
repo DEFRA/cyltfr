@@ -164,7 +164,8 @@ function loadMap () {
         resolutions: source.tileGrid.getResolutions(),
         projection: projection,
         center: [440000, 310000],
-        zoom: 0
+        zoom: 0,
+        extent: config.projection.extent
       })
     })
 
