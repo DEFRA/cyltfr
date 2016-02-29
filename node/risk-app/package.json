@@ -15,10 +15,8 @@
     "watch:js": "bin/watch-js",
     "build": "npm run clean && npm run copy && npm run build:css && npm run build:js",
     "lint": "standard",
-    "test": "npm run lint && npm run unit-test && npm run e2e-test",
-    "unit-test": "bin/unit-test",
-    "e2e-test": "bin/e2e-test --env default,chrome -c test/e2e/config/local.json",
-    "e2e-test-remote": "bin/e2e-test --env default,chrome -c test/e2e/config/remote.json"
+    "test": "npm run lint && npm run unit-test",
+    "unit-test": "bin/unit-test"
   },
   "author": "ea.gov.uk",
   "license": "OGL",
@@ -49,7 +47,6 @@
     "govuk-elements-sass": "1.1.2",
     "govuk_template_mustache": "0.16.4",
     "lab": "10.0.0",
-    "nightwatch": "0.8.16",
     "node-sass": "3.4.2",
     "sinon": "1.17.3",
     "standard": "6.0.7",
