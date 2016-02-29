@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "pm2 start config/pm2.json",
-    "test": "lab -r console -o stdout -r html -o coverage.html",
     "lint": "standard"
   },
   "author": "ea.gov.uk",
@@ -24,9 +23,6 @@
     "vision": "4.0.1"
   },
   "devDependencies": {
-    "code": "2.1.0",
-    "lab": "10.0.0",
-    "sinon": "1.17.3",
     "standard": "6.0.7"
   }
 }

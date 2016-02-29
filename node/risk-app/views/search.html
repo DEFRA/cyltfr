@@ -1,7 +1,7 @@
 {{#extend "layout"}}
 
   {{#content "head"}}
-    <link rel="stylesheet" type="text/css" href="{{{ assetPath }}}stylesheets/search/index.css">
+    <link rel="stylesheet" type="text/css" href="{{{assetPath}}}stylesheets/search/index.css">
   {{/content}}
 
   {{#content "content"}}
@@ -12,14 +12,14 @@
         <form method="post" action="/risk">
           <div class="form-group">
             <span class="form-label">Postcode</span>
-            <h4 class="heading-small postcode-display">{{ postcode }}</h4><a href="/">Change</a>
+            <h4 class="heading-small postcode-display">{{postcode}}</h4><a href="/">Change</a>
             <label class="form-label" for="address">Address</label>
             <select id="address" name="address" required>
               {{#if multipleAddressesFound}}
                 <option value="">(Please choose)</option>
               {{/if}}
               {{#each addresses}}
-                <option value="{{ this._id }}">{{ this.fullAddress }}</option>
+                <option value="{{this._id}}">{{this.fullAddress}}</option>
               {{/each}}
             </select>
           </div>
@@ -33,7 +33,7 @@
   {{/content}}
 
   {{#content "bodyEnd"}}
-    <script src="{{{ assetPath }}}javascripts/search.js"></script>
+    <script src="{{{assetPath}}}javascripts/search.js"></script>
   {{/content}}
 
 {{/extend}}

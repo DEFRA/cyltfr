@@ -8,7 +8,7 @@
       "maxEventLoopDelay": 0
     }
   },
-  "floodRiskService": {
+  "service": {
     "protocol": "http",
     "host": "127.0.0.1",
     "port": 8050

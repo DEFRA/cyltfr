@@ -1,1 +1,0 @@
-lab test/unit/routes/search.js -r console -o stdout -r html -o coverage.html

@@ -1,5 +1,5 @@
 var wreck = require('wreck')
-var config = require('../../config').floodRiskService
+var config = require('../../config').service
 var url = config.protocol + '://' + config.host + ':' + config.port
 var floodRiskURL = url + '/floodrisk/'
 

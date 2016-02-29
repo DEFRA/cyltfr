@@ -83,7 +83,7 @@ Glue.compose(manifest, options, function (err, server) {
 
   server.start(function (err) {
     var details = {
-      name: 'ltfri-app',
+      name: 'risk-app',
       uri: server.info.uri
     }
 

@@ -1,35 +1,22 @@
-{{#extend "layout"}}
-
-  {{#content "head"}}
-    <link rel="stylesheet" type="text/css" href="{{{ assetPath }}}stylesheets/ol.css">
-    <link rel="stylesheet" type="text/css" href="{{{ assetPath }}}stylesheets/map/index.css">
-  {{/content}}
-
-  {{#content "content"}}
-    <h1 class="heading-xlarge">Risk of flooding - all sources</h1>
-    <h2 class="heading-medium">Floods destroy. Be prepared.</h2>
-    <h3 class="lede"></h3>
-    <div class="map-container">
-      <div class="visible-mobile">
-        {{> map/selector maps }}
-      </div>
-      <div class="hidden-mobile">
-        {{> map/nav maps }}
-      </div>
-      <div id="map" class="map"></div>
+  <link rel="stylesheet" type="text/css" href="{{{assetPath}}}stylesheets/ol.css">
+  <link rel="stylesheet" type="text/css" href="{{{assetPath}}}stylesheets/map/index.css">
+  <h1 class="heading-xlarge">Risk of flooding - all sources</h1>
+  <h2 class="heading-medium">Floods destroy. Be prepared.</h2>
+  <h3 class="lede"></h3>
+  <div class="map-container">
+    <div class="visible-mobile">
+      {{> map/selector maps}}
     </div>
-    <div class="legend"></div>
-    <p>Wrong location? <a href="/">Search again</a></p>
-    <div class="feature"></div>
-    <div id="feature-popup" class="feature-popup">
-      <a href="#"class="feature-popup-closer"></a>
-      <div class="feature-popup-content"></div>
+    <div class="hidden-mobile">
+      {{> map/nav maps}}
     </div>
-  {{/content}}
-
-  {{#content "bodyEnd"}}
-  <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.14.0/ol-debug.js"></script>-->
-    <script src="{{{ assetPath }}}javascripts/map.js"></script>
-  {{/content}}
-
-{{/extend}}
+    <div id="map" class="map"></div>
+  </div>
+  <div class="legend"></div>
+  <p>Wrong location? <a href="/">Search again</a></p>
+  <div class="feature"></div>
+  <div id="feature-popup" class="feature-popup">
+    <a href="#"class="feature-popup-closer"></a>
+    <div class="feature-popup-content"></div>
+  </div>
+  <script src="{{{assetPath}}}javascripts/map.js"></script>

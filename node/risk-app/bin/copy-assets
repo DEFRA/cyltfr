@@ -1,3 +1,5 @@
-cp node_modules/openlayers/css/ol.css public/stylesheets/ol.css -r
+cp node_modules/jquery/dist/jquery.min.js public/javascripts/jquery.min.js
+cp node_modules/jquery/dist/jquery.min.js public/javascripts/jquery.min.map
+cp node_modules/openlayers/css/ol.css public/stylesheets/ol.css
 cp assets/images public/images -r
-cp assets/html public/html -r
+cp assets/robots.txt public/robots.txt

@@ -1,67 +1,50 @@
-{{#extend "layout"}}
-
-  {{#content "head"}}
-    <link rel="stylesheet" type="text/css" href="{{{ assetPath }}}stylesheets/risk/index.css">
-  {{/content}}
-
-  {{#content "content"}}
-    <h1 class="heading-xlarge">Location-specific long term flood risk</h1>
-
-    <div class="grid-row">
-      <div class="column-half">
-        <div class="grey-banner">
-          <div class="severity {{ severityClass }}">
-            <h3 class="heading-medium" style="padding-top: 20px">Flood risk category:</h3>
-            <h2 class="heading-large" style="padding-bottom: 20px">{{ severityText }}</h2>
-          </div>
-
-          <div style="padding: 0 20px 20px 20px">
-            <h3 class="heading-medium">
-              {{ fullAddress }}
-            </h3>
-            <p><a href="/">Find the flood risk for another address</a></p>
-
-            <a href="/map?easting={{ easting }}&amp;northing={{ northing }}">View map</a>
-
-            {{#if sources}}
-              Potential source of flooding:
-              <ul class="sources">
-                {{#each sources}}
-                  <li class="{{this}}">{{ text }} <a href="/map?easting={{ ../easting }}&amp;northing={{ ../northing }}&amp;map={{ ref }}">View map</a></li>
-                {{/each}}
-              </ul>
-            {{/if}}
-
-            {{#if targetArea}}<p>This location is in or near an area at risk of flooding. <a href="#">Take action now</a></p>{{/if}}
-            <p>Got questions? Need advice?</p>
-            <p>Call Floodline: 0345 988 1188 (24 hours)</p>
-          </div>
-        </div>
+<link rel="stylesheet" type="text/css" href="{{{assetPath}}}stylesheets/risk/index.css">
+<h1 class="heading-xlarge">Location-specific long term flood risk</h1>
+<div class="grid-row">
+  <div class="column-half">
+    <div class="grey-banner">
+      <div class="severity {{severityClass}}">
+        <h3 class="heading-medium" style="padding-top: 20px">Flood risk category:</h3>
+        <h2 class="heading-large" style="padding-bottom: 20px">{{severityText}}</h2>
       </div>
 
-      <div class="column-half">
+      <div style="padding: 0 20px 20px 20px">
+        <h3 class="heading-medium">
+          {{fullAddress}}
+        </h3>
+        <p><a href="/">Find the flood risk for another address</a></p>
 
-        <h2 class="heading-large">Dump of risk data</h2>
-        <p>{{ allData }}</p>
+        <a href="/map?easting={{easting}}&amp;northing={{northing}}">View map</a>
 
-        <h4 class="heading-small">Scotland and Wales flood warning information</h4>
-        <p><!--Flood warning information for Scotland is available on the-->
-          <a role="link" rel="external" href="http://www.sepa.org.uk/flooding.aspx" title="Scottish Environment Protection Agency website">Scottish Environment Protection Agency website</a>
-        </p>
-        <p><!--Flood warning information for Wales is also available on the-->
-          <a role="link" rel="external" href="http://naturalresources.wales/splash?orig=/flooding/alerts-and-warnings/flood-alerts-and-warnings" title="Natural Resources Wales website">Natural Resources Wales website</a>
-        </p>
+        {{#if sources}}
+          Potential source of flooding:
+          <ul class="sources">
+            {{#each sources}}
+              <li class="{{this}}">{{text}} <a href="/map?easting={{../easting}}&amp;northing={{../northing}}&amp;map={{ref}}">View map</a></li>
+            {{/each}}
+          </ul>
+        {{/if}}
 
+        {{#if targetArea}}<p>This location is in or near an area at risk of flooding. <a href="#">Take action now</a></p>{{/if}}
+        <p>Got questions? Need advice?</p>
+        <p>Call Floodline: 0345 988 1188 (24 hours)</p>
       </div>
-
-
-
     </div>
+  </div>
 
-  {{/content}}
+  <div class="column-half">
 
-  {{#content "bodyEnd"}}
-    <script src="{{{ assetPath }}}javascripts/risk.js"></script>
-  {{/content}}
+    <h2 class="heading-large">Dump of risk data</h2>
+    <p>{{allData}}</p>
 
-{{/extend}}
+    <h4 class="heading-small">Scotland and Wales flood warning information</h4>
+    <p><!--Flood warning information for Scotland is available on the-->
+      <a role="link" rel="external" href="http://www.sepa.org.uk/flooding.aspx" title="Scottish Environment Protection Agency website">Scottish Environment Protection Agency website</a>
+    </p>
+    <p><!--Flood warning information for Wales is also available on the-->
+      <a role="link" rel="external" href="http://naturalresources.wales/splash?orig=/flooding/alerts-and-warnings/flood-alerts-and-warnings" title="Natural Resources Wales website">Natural Resources Wales website</a>
+    </p>
+
+  </div>
+</div>
+<script src="{{{assetPath}}}javascripts/risk.js"></script>
