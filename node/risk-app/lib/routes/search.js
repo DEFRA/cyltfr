@@ -14,8 +14,7 @@ module.exports = {
 
       addressService.findByPostcode(postcode, function (err, addresses) {
         if (err) {
-          request.log('error', err)
-          return reply(Boom.badRequest())
+          return reply(Boom.badRequest('Failed to find addresses by postcode', err))
         }
 
         if (!addresses.length) {

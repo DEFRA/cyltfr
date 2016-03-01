@@ -8,5 +8,6 @@ module.exports = [
   require('./map'),
   require('./statics'),
   require('./proxy'),
+  require('./robots'),
   require('./404')
 ]

@@ -12,8 +12,7 @@ module.exports = {
     handler: function (request, reply) {
       addressService.findById(request.payload.address, function (err, address) {
         if (err) {
-          request.log('error', err)
-          return reply(Boom.badRequest())
+          return reply(Boom.badRequest('An error occurred finding the address by id', err))
         }
 
         var x = address.easting
@@ -22,8 +21,7 @@ module.exports = {
 
         riskService.getByCoordinates(x, y, radius, function (err, risk) {
           if (err) {
-            request.log('error', err)
-            return reply(Boom.badRequest())
+            return reply(Boom.badRequest('An error occurred finding getting the risk profile', err))
           }
 
           reply.view('risk', new RiskViewModel(risk, address))
