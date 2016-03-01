@@ -1,6 +1,5 @@
 var Glue = require('glue')
 var handlebars = require('handlebars')
-var handlebars = require('handlebars')
 var manifest = require('./manifest')
 var routes = require('./routes')
 var config = require('../config')
@@ -21,8 +20,7 @@ var defaultContext = {
   headerClass: 'with-proposition',
   pageRefreshTime: pageRefreshTime,
   analyticsAccount: analyticsAccount,
-  appVersion: appVersion,
-  appName: appName
+  appVersion: appVersion
 }
 
 var options = {
@@ -70,9 +68,6 @@ Glue.compose(manifest, options, function (err, server) {
    */
   var engine = handlebars.create()
 
-  /*
-   * Create the handlebars engine
-   */
   var helpers = require('./helpers')
   for (var key in helpers) {
     if (helpers.hasOwnProperty(key)) {
@@ -99,7 +94,7 @@ Glue.compose(manifest, options, function (err, server) {
 
   server.start(function (err) {
     var details = {
-      name: 'risk-app',
+      name: appName,
       uri: server.info.uri
     }
 

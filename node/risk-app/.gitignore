@@ -6,6 +6,6 @@ npm-debug.log
 selenium-debug.log
 coverage.html
 test/e2e/reports
-views/partials/layout.html
+views/layout.html
 config/pm2.json
 config/server.json
