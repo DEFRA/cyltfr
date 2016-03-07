@@ -18,6 +18,7 @@ module.exports = {
   service: serviceSchema,
   gazetteer: serviceSchema,
   logging: Joi.object(),
+  cacheViews: Joi.boolean().required(),
   pageRefreshTime: Joi.number().required().min(0).max(3600),
   analyticsAccount: Joi.string().required().allow('')
 }

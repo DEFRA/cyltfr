@@ -43,5 +43,6 @@
   },
   "pageRefreshTime": 900,
   "cacheExpiry": 900000,
-  "analyticsAccount" : ""
+  "analyticsAccount" : "",
+  "cacheViews": false
 }

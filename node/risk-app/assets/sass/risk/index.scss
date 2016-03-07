@@ -2,29 +2,92 @@
 @import "typography";
 @import "css3";
 
-h1.heading-xlarge {
-  margin-bottom: 30px;
-}
+.risk {
+  header {
+    padding: 10px;
 
-div.grey-banner {
-  background-color: #DEE0E2;
-}
+    address {
+      font-style: normal;
+    }
 
-div.severity {
-  text-align: center;
-}
+    img {
+      float: right;
+      height: 100px;
+      max-width: 50%;
+    }
+  }
 
-div.severity.low {
-  background-color: $green;
-  color: $white;
-}
+  &.at-risk header {
+    background-color: #FFBF47;
 
-div.severity.medium {
-  background-color: $orange;
-  color: $black;
-}
+    address {
+      color: #000;
+      font-style: normal;
+    }
+  }
 
-div.severity.high {
-  background-color: $red;
-  color: $white;
+  &.low-risk header {
+    background-color: #28A197;
+
+    address {
+      color: #fff;
+      font-style: normal;
+    }
+  }
+
+  article {
+    padding: 10px;
+    border: solid 5px #000;
+
+    .heading-small {
+      font-weight: normal;
+    }
+
+    .heading-large {
+      margin-top: 0;
+    }
+
+    .phone-number {
+      margin: 0;
+      font-weight: normal;
+    }
+
+    .date {
+      display: block;
+      margin-top: 10px;
+      font-size: medium;
+      color: $secondary-text-colour;
+    }
+
+    .column-quarter {
+      img {
+        max-width: 100%;
+        max-height: 140px;
+        vertical-align: middle;
+      }
+    }
+
+    ol {
+      counter-reset: section;
+      list-style-type: none;
+      padding-left: 0;
+
+      @include media(mobile) {
+        padding-left: 50px;
+      }
+
+      >li {
+        position: relative;
+        &::before {
+          counter-increment: section;
+          content: counter(section);
+          font-size: 45px;
+          position: absolute;
+          left: -45px;
+          font-weight: bold;
+          top: -10px;
+        }
+      }
+    }
+  }
 }

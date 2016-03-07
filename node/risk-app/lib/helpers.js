@@ -1,34 +1,4 @@
-function lt (value, test, options) {
-  if (value > test) {
-    return options.fn(this)
-  } else {
-    return options.inverse(this)
-  }
-}
-
-function gt (value, test, options) {
-  if (value > test) {
-    return options.fn(this)
-  } else {
-    return options.inverse(this)
-  }
-}
-
-function lte (value, test, options) {
-  if (value <= test) {
-    return options.fn(this)
-  } else {
-    return options.inverse(this)
-  }
-}
-
-function gte (value, test, options) {
-  if (value >= test) {
-    return options.fn(this)
-  } else {
-    return options.inverse(this)
-  }
-}
+var util = require('./util')
 
 function is (value, test, options) {
   if (value === test) {
@@ -46,11 +16,16 @@ function isnt (value, test, options) {
   }
 }
 
+function formatDate (value, format) {
+  if (typeof format === 'string') {
+    return util.formatDate(value, format)
+  } else {
+    return util.formatDate(value)
+  }
+}
+
 module.exports = {
-  lt: lt,
-  gt: gt,
   is: is,
   isnt: isnt,
-  lte: lte,
-  gte: gte
+  formatDate: formatDate
 }

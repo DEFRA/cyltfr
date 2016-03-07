@@ -1,57 +1,38 @@
-var riskLevels = {
-  'very low': 0,
-  'low': 1,
-  'medium': 2,
-  'high': 3
-}
-
-var sources = {
-  'RiversOrSea': {
-    ref: 'RiversOrSea',
-    text: 'River and sea'
-  },
-  'SurfaceWater': {
-    ref: 'SurfaceWater',
-    text: 'Surface water'
-  },
-  'Reservoirs': {
-    ref: 'Reservoirs',
-    text: 'Reservoir'
-  }
+var RiskLevel = {
+  AtRisk: 1,
+  AtRiskMonitor: 2,
+  LowRisk: 3,
+  VeryLowRisk: 4
 }
 
 function RiskViewModel (risk, address) {
-/*  var rofrsVal, sfVal
-  rofrsVal = risk.rofrs_risk ? riskLevels[risk.rofrs_risk.prob_4band.toLowerCase()] : -1
-  sfVal = risk.surface_water_risk ? riskLevels[risk.surface_water_risk.toLowerCase()] : -1
+  var inTargetArea = risk.inFloodWarningArea || risk.inFloodAlertArea
+  var isReservoirRisk = !!risk.reservoirRisk
+  var riverAndSeaRisk = risk.riverAndSeaRisk && risk.riverAndSeaRisk.probabilityForBand
+  var surfaceWaterRisk = risk.surfaceWaterRisk
 
-  this.severityText = (sfVal > rofrsVal ? risk.surface_water_risk : risk.rofrs_risk.prob_4band).toUpperCase()
-  this.severityClass = this.severityText.toLowerCase()
-
-  // Need to build up sources of flooding in their correct severity order
-  this.sources = []
-
-  if (rofrsVal >= sfVal) {
-    this.sources.push(sources.RiversOrSea)
-    this.sources.push(sources.SurfaceWater)
-  } else if (rofrsVal > -1) {
-    this.sources.push(sources.SurfaceWater)
-    this.sources.push(sources.RiversOrSea)
+  if (inTargetArea) {
+    this.status = RiskLevel.AtRisk
   } else {
-    this.sources.push(sources.SurfaceWater)
+    if ((!riverAndSeaRisk || riverAndSeaRisk === 'Low') && !isReservoirRisk) {
+      this.status = surfaceWaterRisk === 'Low' ? RiskLevel.LowRisk : RiskLevel.VeryLowRisk
+    } else {
+      this.status = RiskLevel.AtRiskMonitor
+    }
   }
 
-  if (risk.reservoir_risk) {
-    this.sources.push(sources.Reservoirs)
-  }
-*/
-  this.fullAddress = address.fullAddress
-  this.targetArea = risk.in_flood_alert_area || risk.in_flood_warning_area
+  this.isAtRisk = this.status === RiskLevel.AtRisk
+  this.isAtRiskMonitor = this.status === RiskLevel.AtRiskMonitor
+  this.isLowRisk = this.status === RiskLevel.LowRisk
+  this.isVeryLowRisk = this.status === RiskLevel.VeryLowRisk
+  this.isRisk = this.isAtRisk || this.isAtRiskMonitor
+
+  this.address = address.fullAddress.split(', ')
   this.easting = address.easting
   this.northing = address.northing
-
-  // just dump out risk data for time being
-  this.allData = JSON.stringify(risk)
+  this.address = address.fullAddress.split(', ')
+  this.className = this.isAtRisk ? 'at-risk' : 'low-risk'
+  this.date = Date.now()
 }
 
 module.exports = RiskViewModel

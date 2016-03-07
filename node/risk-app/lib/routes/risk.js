@@ -5,12 +5,12 @@ var addressService = require('../services/address')
 var RiskViewModel = require('../models/risk-view')
 
 module.exports = {
-  method: 'POST',
+  method: 'GET',
   path: '/risk',
   config: {
     description: 'Get risk text page',
     handler: function (request, reply) {
-      addressService.findById(request.payload.address, function (err, address) {
+      addressService.findById(request.query.address, function (err, address) {
         if (err) {
           return reply(Boom.badRequest('An error occurred finding the address by id', err))
         }
@@ -29,7 +29,7 @@ module.exports = {
       })
     },
     validate: {
-      payload: {
+      query: {
         address: Joi.objectId().required()
       }
     }

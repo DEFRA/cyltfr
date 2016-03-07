@@ -1,14 +1,14 @@
-  <link rel="stylesheet" type="text/css" href="{{{ assetPath }}}stylesheets/home/index.css">
+  <link rel="stylesheet" type="text/css" href="{{{assetPath}}}stylesheets/home/index.css">
   <h1 class="heading-xlarge">What's your location?</h1>
   <p>Enter a postcode and select an address</p>
   <div class="grid-row">
-    <div class="column-third">
+    <div class="column-half">
       <form method="get" action="/search">
         <div class="form-group">
           <label class="form-label" for="postcode">Postcode</label>
           <input class="form-control" name="postcode" id="postcode" type="text" required autocomplete="off">
           {{#if hasErrorMessage}}
-            <div class="error-message">{{ errorMessage }}</div>
+            <div class="error-message">{{errorMessage}}</div>
           {{/if}}
         </div>
         <div class="form-group">
@@ -25,4 +25,4 @@
       </p>
     </div>
   </details>
-  <script src="{{{ assetPath }}}javascripts/home.js"></script>
+  <script src="{{{assetPath}}}javascripts/home.js"></script>

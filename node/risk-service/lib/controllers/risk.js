@@ -10,20 +10,18 @@ module.exports = function getFloodRisk (request, reply) {
      * Do some assertions around the result we get back from the database
      */
     if (err) {
-      request.log('error', err)
-      return reply(Boom.badRequest('Database call failed'))
+      return reply(Boom.badRequest('Database call failed', err))
     }
 
     if (!result || !Array.isArray(result.rows) || result.rows.length !== 1) {
-      request.log('error', new Error('Invalid result'))
-      return reply(Boom.badRequest('Invalid result'))
+      return reply(Boom.badRequest('Invalid result'), new Error('Expected an Array'))
     }
 
     var risk = result.rows[0].calculate_flood_risk
 
     if (!risk) {
-      request.log('error', new Error('Invalid result - missing calculate_flood_risk key'))
-      return reply(Boom.badRequest('Invalid result - missing calculate_flood_risk key'))
+      request.log('error')
+      return reply(Boom.badRequest('Invalid result'), new Error('Missing calculate_flood_risk key'))
     }
 
     /*

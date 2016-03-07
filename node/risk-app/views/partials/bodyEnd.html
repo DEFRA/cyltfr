@@ -1,10 +1,10 @@
 {{#if analyticsAccount}}
-  <script src="{{{ assetPath }}}javascripts/stageprompt.js"></script>
+  <script src="{{{assetPath}}}javascripts/stageprompt.js"></script>
   <script type="text/javascript">
-    var analyticsAccount = '{{ analyticsAccount }}'
+    var analyticsAccount = '{{analyticsAccount}}'
 
     if (analyticsAccount) {
-      // Google Analytics: Specific account for lfwm
+      // Google Analytics: Specific account for ltfri
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', analyticsAccount]);
       _gaq.push(['_trackPageview']);
@@ -18,6 +18,5 @@
         GOVUK.performance.stageprompt.setupForGoogleAnalytics()
       })
     }
-
   </script>
 {{/if}}

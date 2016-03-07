@@ -2,36 +2,6 @@
 // Take a look at elements.scss to see which files are imported.
 @import 'govuk-elements';
 
-// Set up your page container, using the frontend toolkit grid layout.
-
-// Content wraps the entire site content block, between the header and footer.
-// See elements _layout.scss line 8.
-//
-/*
-#contentWrapper {
-  @include site-width-container;
-  @include contain-floats;
-  display: block;
-  padding-bottom: $gutter;
-  @include media(desktop) {
-    padding-bottom: $gutter*3;
-  }
-}*/
-
-// Here's an example heading
-// See elements _typography.scss line 11.
-/*
-#contentWrapper h1 {
-  @include bold-48();
-  margin-top: $gutter-half;
-  margin-bottom: $gutter;
-  @include media(tablet) {
-    margin-top: $gutter;
-    margin-bottom: $gutter*2;
-  }
-}
-*/
-
 /*
  * Application Specific Styling
  */
@@ -118,4 +88,11 @@ select {
 
 .error-message {
   color: $red;
+  margin-top: 10px;
+  padding-left: 10px;
+  border-left: solid 3px $red;
+}
+
+.column-three-quarters {
+  @include grid-column( 3/4 );
 }
