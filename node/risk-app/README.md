@@ -1,6 +1,6 @@
-# Long term flood risk information (ltfri)
+# Long term flood risk information (risk)
 
-## Web application component (ltfri-app)
+## Web application component (risk-app)
 
 ### Clone
 `git clone git@gitlab.envage.co.uk:flood/ltfri.git`
@@ -17,25 +17,19 @@
 `npm run build`
 
 ### Test
-`npm test`
-
-or individually
-
-`npm run lint`
-`npm run unit-test`
-`npm run e2e-test`
-`npm run e2e-test-remote`
+e2e tests can be found in the project risk-app-tests
 
 ## Start
 Before starting, ensure `pm2` is installed globally `npm i -g pm2`
 
-### Start server (dev)
-`npm run dev`
+Ensure dependent services are running (risk-service and risk-gazetteer)
+
+### Start server
+
+Ensure risk-app/config/pm2.json contains the correct options for production or development
+
+`npm start` (Assumes `pm2` is installed globally)
 
 Open `http://localhost:3001`
-
-### Start server (production)
-`npm start` (Assumes `pm2` is installed globally `npm i -g forever`)
-
 
 [The OGL License](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/)
