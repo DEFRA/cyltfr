@@ -96,3 +96,15 @@ select {
 .column-three-quarters {
   @include grid-column( 3/4 );
 }
+
+.phone-number {
+  margin: 0;
+  font-weight: normal;
+}
+
+.date {
+  display: block;
+  margin-top: 10px;
+  font-size: medium;
+  color: $secondary-text-colour;
+}

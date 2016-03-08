@@ -1,11 +1,15 @@
 <ul class="nav">
   {{#each categories}}
     <li id="{{ref}}" title="{{title}}" class="category">
-      <h3>{{name}}</h3><a class="caret"></a>
+      <h3>
+        <img src="/public/images/icon-{{icon}}.png" alt="icon" class="icon">
+        <img src="/public/images/icon-{{icon}}-selected.png" alt="icon" class="icon-selected">
+        <span>{{name}}</span>
+      </h3>
       <ul>
         {{#each maps}}
           <li id="{{ref}}" title="{{title}}">
-            <h4>{{name}}</h4>
+            <span>{{name}}</span>
           </li>
         {{/each}}
       </ul>

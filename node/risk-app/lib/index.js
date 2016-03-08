@@ -20,7 +20,8 @@ var defaultContext = {
   headerClass: 'with-proposition',
   pageRefreshTime: pageRefreshTime,
   analyticsAccount: analyticsAccount,
-  appVersion: appVersion
+  appVersion: appVersion,
+  floodWarningsUrl: config.floodWarningsUrl
 }
 
 var options = {

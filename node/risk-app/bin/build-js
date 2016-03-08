@@ -1,3 +1,4 @@
+browserify assets/javascripts/core/index.js -d | exorcist public/javascripts/core.js.map > public/javascripts/core.js &&
 browserify assets/javascripts/home/index.js -d | exorcist public/javascripts/home.js.map > public/javascripts/home.js &&
 browserify assets/javascripts/search/index.js -d | exorcist public/javascripts/search.js.map > public/javascripts/search.js &&
 browserify assets/javascripts/risk/index.js -d | exorcist public/javascripts/risk.js.map > public/javascripts/risk.js &&

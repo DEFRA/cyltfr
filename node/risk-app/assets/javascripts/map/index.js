@@ -6,12 +6,12 @@ var maps = new Maps()
 loadMap.loadMap()
 
 function generateLegend (meta) {
-  var str = '<span>Legend:</span><ul>'
+  var str = '<ul>'
   var keys = meta.keys
   var key
   for (var i = 0; i < keys.length; i++) {
     key = keys[i]
-    str += '<li class="' + key.icon + ' ' + (key.shape || '') + '">' + key.text + '</li>'
+    str += '<li class="round ' + key.icon + '"><div>' + key.text + '</div></li>'
   }
   str += '</ul>'
   return str
@@ -25,7 +25,6 @@ function getParameterByName (name) {
 }
 
 $(function () {
-  var open = 'open'
   var selected = 'selected'
   var $container = $('.map-container')
   var $sidebar = $('ul.nav', $container)
@@ -33,25 +32,14 @@ $(function () {
   var $categories = $sidebar.children('li.category')
   var $maps = $categories.find('li')
 
-  // Store a reference to the map title element
-  var $title = $('h3.lede')
-
   // Store a reference to the map legend element
   var $legend = $('.legend')
 
-  function closeAll () {
-    $categories.removeClass(open)
-  }
-
   function setCurrent (ref) {
-    closeAll()
     maps.setCurrent(ref)
 
     var currMap = maps.currMap
     var currCategory = maps.currCategory
-
-    // Update the title
-    $title.text(currMap.title)
 
     // Update the legend
     $legend.html(generateLegend(currMap.legend))
@@ -73,31 +61,22 @@ $(function () {
   loadMap.onReady(function () {
     // Handle the category header clicks
     $categories.on('click', 'h3', function (e) {
+      e.preventDefault()
       var $category = $(this).parent()
       if (!$category.hasClass(selected)) {
         setCurrent($category.attr('id'))
       }
     })
 
-    // Handle the category caret clicks
-    $categories.on('click', 'a.caret', function (e) {
-      var $category = $(this).parent()
-      if ($category.hasClass(open)) {
-        $category.removeClass(open)
-      } else {
-        closeAll()
-        $category.addClass(open)
-      }
-    })
-
     // Handle the map selector clicks
     $maps.on('click', function (e) {
-      closeAll()
+      e.preventDefault()
       setCurrent($(this).attr('id'))
     })
 
     // Handle the mobile map selector change
     $selector.on('change', function (e) {
+      e.preventDefault()
       setCurrent($(this).val())
     })
 
@@ -113,4 +92,14 @@ $(function () {
   $('.feature-popup-closer').click(function () {
     return loadMap.closePopup()
   })
+
+  $('.map-container')
+    .on('click', '.map-switch a', function (e) {
+      e.preventDefault()
+      $(e.delegateTarget).toggleClass('advanced')
+    })
+    .on('click', '.print button', function (e) {
+      e.preventDefault()
+      window.print()
+    })
 })

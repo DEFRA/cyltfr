@@ -7,14 +7,10 @@
     <li>communications networks</li>
   </ul>
   <p>
-    <a href="#">View maps showing the potential extent of flooding in this area</a>
+    <a href="/map?easting={{easting}}&northing={{northing}}">View maps showing the potential extent of flooding in this area</a>
   </p>
   <p>
     <a href="#">View more information</a>
   </p>
-  <span>Got questions? Need advice? Call floodline</span>
-  <h1 class="heading-xlarge phone-number">0345 988 1188</h1>
-  <span>(24 hours. Calls charged at local rate.)</span>
-  <br>
-  <datetime class="date" datetime="{{date}}">{{formatDate date 'DD MMM YYYY'}}</datetime>
+  {{> common/floodline}}
 </div>

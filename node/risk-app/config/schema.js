@@ -20,5 +20,6 @@ module.exports = {
   logging: Joi.object(),
   cacheViews: Joi.boolean().required(),
   pageRefreshTime: Joi.number().required().min(0).max(3600),
-  analyticsAccount: Joi.string().required().allow('')
+  analyticsAccount: Joi.string().required().allow(''),
+  floodWarningsUrl: Joi.string().uri().required()
 }

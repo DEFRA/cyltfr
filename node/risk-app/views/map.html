@@ -1,19 +1,42 @@
   <link rel="stylesheet" type="text/css" href="{{{assetPath}}}stylesheets/ol.css">
   <link rel="stylesheet" type="text/css" href="{{{assetPath}}}stylesheets/map/index.css">
-  <h1 class="heading-xlarge">Risk of flooding - all sources</h1>
-  <h2 class="heading-medium">Floods destroy. Be prepared.</h2>
-  <h3 class="lede"></h3>
+  <h1 class="heading-xlarge">Select the maps you want to see</h1>
+  <p class="lede">
+    Use these maps to learn more about the specific types of flood risk.<br>
+    Select using the panels on the left.
+  </p>
   <div class="map-container">
     <div class="visible-mobile">
       {{> map/selector maps}}
     </div>
-    <div class="hidden-mobile">
-      {{> map/nav maps}}
+    <div class="grid-row">
+      <div class="column-quarter hidden-mobile">
+        {{> map/nav maps}}
+      </div>
+      <div class="column-three-quarters">
+        <div id="map" class="map"></div>
+        <aside class="controls">
+          <div class="print hidden-mobile">
+            <button>Print</button>
+          </div>
+          <h3 class="heading-small">Flood risk:</h3>
+          <div class="legend"></div>
+        </aside>
+      </div>
     </div>
-    <div id="map" class="map"></div>
+    <div class="map-switch hidden-mobile">
+      <a>
+      Basic&nbsp;
+      <img src="{{{assetPath}}}images/icon-advanced-off.png" alt="basic" class="basic">
+      <img src="{{{assetPath}}}images/icon-advanced-on.png" alt="advanced" class="advanced">
+      &nbsp;Advanced
+      </a>
+    </div>
   </div>
-  <div class="legend"></div>
-  <p>Wrong location? <a href="/">Search again</a></p>
+  <p><a href="/">View flood risk information for another location</a></p>
+  <p><a href="/">Go back to flood risk guidance for this address</a></p>
+  <p><a href="{{floodWarningsUrl}}">Go to the national flood information service</a></p>
+  {{> common/floodline}}
   <div class="feature"></div>
   <div id="feature-popup" class="feature-popup">
     <a href="#"class="feature-popup-closer"></a>

@@ -42,7 +42,6 @@ function loadMap () {
     source.tileGrid.fullTileRanges_ = null
     source.tileGrid.b = null
 
-
     var layer = new ol.layer.Tile({
       ref: config.OSLayer,
       source: source
@@ -78,9 +77,9 @@ function loadMap () {
       var WMSsource = new ol.source.TileWMS({
         url: config.GSWMS,
         params: {
-          'LAYERS': wmsResult.Capability.Layer.Layer[i].Name,
-          'TILED': true,
-          'VERSION': wmsResult.version},
+          LAYERS: wmsResult.Capability.Layer.Layer[i].Name,
+          TILED: true,
+          VERSION: wmsResult.version},
         tileGrid: new ol.tilegrid.TileGrid({
           extent: wmsResult.Capability.Layer.Layer[i].BoundingBox[0].extent,
           resolutions: source.tileGrid.getResolutions(),
@@ -97,7 +96,7 @@ function loadMap () {
     }
 
     var styles = {
-      'MultiPolygon': [
+      MultiPolygon: [
         new ol.style.Style({
           stroke: new ol.style.Stroke({
             color: 'rgba(255,0,0,1)',
@@ -108,7 +107,7 @@ function loadMap () {
           })
         })
       ],
-      'Point': [
+      Point: [
         new ol.style.Style({
           fill: new ol.style.Fill({
             color: 'rgba(255,0, 0, 0.4)'
@@ -180,8 +179,8 @@ function loadMap () {
         map.getView().getResolution(),
         config.projection.ref,
         {
-          'INFO_FORMAT': 'application/json',
-          'FEATURE_COUNT': 10
+          INFO_FORMAT: 'application/json',
+          FEATURE_COUNT: 10
         }
       )
 
