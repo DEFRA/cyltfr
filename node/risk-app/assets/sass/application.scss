@@ -102,6 +102,29 @@ select {
   font-weight: normal;
 }
 
+.media {
+  overflow: hidden;
+  margin-bottom: 20px;
+  display: inline-block;
+  .img {
+    float: left;
+    display: block;
+    margin-right: 10px;
+  }
+  .content {
+    overflow: hidden;
+    display: block;
+  }
+}
+
+.secondary-links {
+  .media {
+    .img {
+      width: 60px;
+    }
+  }
+}
+
 .date {
   display: block;
   margin-top: 10px;
