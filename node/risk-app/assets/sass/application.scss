@@ -75,6 +75,12 @@ $flood-expired: #797979;
   }
 }
 
+.mission {
+  ul.list-bullet {
+    margin-left: 20px;
+  }
+}
+
 select {
   @include core-19;
   width: 100%;
