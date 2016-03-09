@@ -2,11 +2,7 @@
   "server": {
     "protocol": "http",
     "host": "127.0.0.1",
-    "port": 3001,
-    "load": {
-      "sampleInterval": 0,
-      "maxEventLoopDelay": 0
-    }
+    "port": 3001
   },
   "service": {
     "protocol": "http",
@@ -42,7 +38,6 @@
   }]
   },
   "pageRefreshTime": 900,
-  "cacheExpiry": 900000,
   "analyticsAccount": "",
   "cacheViews": false,
   "floodWarningsUrl": "https://flood-warning-information.service.gov.uk/"
