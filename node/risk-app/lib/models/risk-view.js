@@ -27,11 +27,10 @@ function RiskViewModel (risk, address) {
   this.isVeryLowRisk = this.status === RiskLevel.VeryLowRisk
   this.isRisk = this.isAtRisk || this.isAtRiskMonitor
 
-  this.address = address.fullAddress.split(', ')
   this.easting = address.easting
   this.northing = address.northing
   this.address = address.fullAddress.split(', ')
-  this.className = this.isAtRisk ? 'at-risk' : 'low-risk'
+  this.className = this.isRisk ? 'at-risk' : 'low-risk'
   this.date = Date.now()
 }
 
