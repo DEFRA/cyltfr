@@ -193,18 +193,18 @@ h1.heading-xlarge {
       width: 60px;
       vertical-align: middle;
 
-      &.advanced {
+      &.detailed {
         display: none;
       }
     }
   }
 
-  &.advanced {
+  &.detailed {
     .map-switch {
       img.basic {
         display: none;
       }
-      img.advanced {
+      img.detailed {
         display: inline;
       }
     }
@@ -235,4 +235,8 @@ h1.heading-xlarge {
 
 .ol-rotate {
   top: 3em;
+}
+
+.eu-directive {
+  color: $secondary-text-colour;
 }

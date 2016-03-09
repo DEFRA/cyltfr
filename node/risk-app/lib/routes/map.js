@@ -10,13 +10,15 @@ module.exports = {
     handler: function (request, reply) {
       var easting = request.query.easting
       var northing = request.query.northing
-      reply.view('map', new MapsViewModel(maps, easting, northing))
+      var address = request.query.address
+      reply.view('map', new MapsViewModel(maps, easting, northing, address))
     },
     validate: {
       query: {
         easting: Joi.number(),
         northing: Joi.number(),
-        map: Joi.string()
+        map: Joi.string(),
+        address: Joi.objectId().required()
       }
     }
   }
