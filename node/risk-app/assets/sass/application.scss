@@ -75,6 +75,12 @@ $flood-expired: #797979;
   }
 }
 
+.mission {
+  ul.list-bullet {
+    margin-left: 20px;
+  }
+}
+
 select {
   @include core-19;
   width: 100%;
@@ -100,6 +106,29 @@ select {
 .phone-number {
   margin: 0;
   font-weight: normal;
+}
+
+.media {
+  overflow: hidden;
+  margin-bottom: 20px;
+  display: inline-block;
+  .img {
+    float: left;
+    display: block;
+    margin-right: 10px;
+  }
+  .content {
+    overflow: hidden;
+    display: block;
+  }
+}
+
+.secondary-links {
+  .media {
+    .img {
+      width: 60px;
+    }
+  }
 }
 
 .date {

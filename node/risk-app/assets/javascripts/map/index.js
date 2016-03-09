@@ -96,7 +96,7 @@ $(function () {
   $('.map-container')
     .on('click', '.map-switch a', function (e) {
       e.preventDefault()
-      $(e.delegateTarget).toggleClass('advanced')
+      $(e.delegateTarget).toggleClass('detailed')
     })
     .on('click', '.print button', function (e) {
       e.preventDefault()

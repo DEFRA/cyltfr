@@ -29,7 +29,9 @@ function RiskViewModel (risk, address) {
 
   this.easting = address.easting
   this.northing = address.northing
-  this.address = address.fullAddress.split(', ')
+  this.postcode = address.postcode
+  this.lines = address.fullAddress.split(', ')
+  this.address = address._id
   this.className = this.isRisk ? 'at-risk' : 'low-risk'
   this.date = Date.now()
 }
