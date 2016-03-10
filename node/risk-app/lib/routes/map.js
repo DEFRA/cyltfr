@@ -11,6 +11,7 @@ module.exports = {
       var easting = request.query.easting
       var northing = request.query.northing
       var address = request.query.address
+
       reply.view('map', new MapsViewModel(maps, easting, northing, address))
     },
     validate: {

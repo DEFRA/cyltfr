@@ -1,30 +1,41 @@
-var RiskLevel = {
+const RiskStatus = {
   AtRisk: 1,
   AtRiskMonitor: 2,
   LowRisk: 3,
   VeryLowRisk: 4
 }
 
+const RiskLevel = {
+  VeryLow: 'Very Low',
+  Low: 'Low',
+  Medium: 'Medium',
+  High: 'High'
+}
+
 function RiskViewModel (risk, address) {
   var inTargetArea = risk.inFloodWarningArea || risk.inFloodAlertArea
-  var isReservoirRisk = !!risk.reservoirRisk
-  var riverAndSeaRisk = risk.riverAndSeaRisk && risk.riverAndSeaRisk.probabilityForBand
-  var surfaceWaterRisk = risk.surfaceWaterRisk
+  var riverAndSeaRisk = risk.riverAndSeaRisk ? risk.riverAndSeaRisk.probabilityForBand : RiskLevel.VeryLow
+  var surfaceWaterRisk = risk.surfaceWaterRisk || RiskLevel.VeryLow
 
   if (inTargetArea) {
-    this.status = RiskLevel.AtRisk
+    this.status = RiskStatus.AtRisk
   } else {
-    if ((!riverAndSeaRisk || riverAndSeaRisk === 'Low') && !isReservoirRisk) {
-      this.status = surfaceWaterRisk === 'Low' ? RiskLevel.LowRisk : RiskLevel.VeryLowRisk
+    if ((riverAndSeaRisk === RiskLevel.High || riverAndSeaRisk === RiskLevel.Medium) ||
+        (surfaceWaterRisk === RiskLevel.High || surfaceWaterRisk === RiskLevel.Medium)) {
+      this.status = RiskStatus.AtRiskMonitor
     } else {
-      this.status = RiskLevel.AtRiskMonitor
+      if (riverAndSeaRisk === RiskLevel.VeryLow && surfaceWaterRisk === RiskLevel.VeryLow) {
+        this.status = RiskStatus.VeryLowRisk
+      } else {
+        this.status = RiskStatus.LowRisk
+      }
     }
   }
 
-  this.isAtRisk = this.status === RiskLevel.AtRisk
-  this.isAtRiskMonitor = this.status === RiskLevel.AtRiskMonitor
-  this.isLowRisk = this.status === RiskLevel.LowRisk
-  this.isVeryLowRisk = this.status === RiskLevel.VeryLowRisk
+  this.isAtRisk = this.status === RiskStatus.AtRisk
+  this.isAtRiskMonitor = this.status === RiskStatus.AtRiskMonitor
+  this.isLowRisk = this.status === RiskStatus.LowRisk
+  this.isVeryLowRisk = this.status === RiskStatus.VeryLowRisk
   this.isRisk = this.isAtRisk || this.isAtRiskMonitor
 
   this.easting = address.easting
