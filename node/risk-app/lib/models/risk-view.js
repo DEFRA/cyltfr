@@ -13,9 +13,9 @@ const RiskLevel = {
 }
 
 function RiskViewModel (risk, address) {
-  var inTargetArea = risk.inFloodWarningArea || risk.inFloodAlertArea
-  var riverAndSeaRisk = risk.riverAndSeaRisk ? risk.riverAndSeaRisk.probabilityForBand : RiskLevel.VeryLow
-  var surfaceWaterRisk = risk.surfaceWaterRisk || RiskLevel.VeryLow
+  const inTargetArea = risk.inFloodWarningArea || risk.inFloodAlertArea
+  const riverAndSeaRisk = risk.riverAndSeaRisk ? risk.riverAndSeaRisk.probabilityForBand : RiskLevel.VeryLow
+  const surfaceWaterRisk = risk.surfaceWaterRisk || RiskLevel.VeryLow
 
   if (inTargetArea) {
     this.status = RiskStatus.AtRisk
