@@ -11,7 +11,6 @@ function findById (id, callback) {
     if (err || res.statusCode !== 200) {
       return callback(err || payload || new Error('Unknown error'))
     }
-    console.log(payload.results)
     callback(null, payload.results)
   })
 }

@@ -15,7 +15,7 @@ module.exports = {
         if (err) {
           return reply(Boom.badRequest('Failed to find addresses by postcode', err))
         }
-        if (!addresses.length) {
+        if (addresses == null) {
           reply.view('home', new HomeViewModel('Please enter a valid postcode in England'))
         } else {
           reply.view('search', new SearchViewModel(postcode, addresses))
