@@ -15,22 +15,23 @@ module.exports = {
           return reply(Boom.badRequest('An error occurred finding the address by id', err))
         }
 
-        var x = address.easting
-        var y = address.northing
+        var singleAddress = address[0].DPA
+        var x = singleAddress.X_COORDINATE
+        var y = singleAddress.Y_COORDINATE
         var radius = 10
 
         riskService.getByCoordinates(x, y, radius, function (err, risk) {
           if (err) {
             return reply(Boom.badRequest('An error occurred finding getting the risk profile', err))
           }
-
-          reply.view('risk', new RiskViewModel(risk, address))
+          console.log(risk)
+          reply.view('risk', new RiskViewModel(risk, singleAddress))
         })
       })
     },
     validate: {
       query: {
-        address: Joi.objectId().required()
+        address: Joi.number().required()
       }
     }
   }

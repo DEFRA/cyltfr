@@ -11,12 +11,10 @@ module.exports = {
     description: 'Get postcode search results',
     handler: function (request, reply) {
       var postcode = request.query.postcode
-
       addressService.findByPostcode(postcode, function (err, addresses) {
         if (err) {
           return reply(Boom.badRequest('Failed to find addresses by postcode', err))
         }
-
         if (!addresses.length) {
           reply.view('home', new HomeViewModel('Please enter a valid postcode in England'))
         } else {
