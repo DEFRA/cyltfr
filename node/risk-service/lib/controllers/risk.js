@@ -52,6 +52,7 @@ module.exports = function getFloodRisk (request, reply) {
     }
 
     var response = {
+      inEngland: risk.in_england,
       inFloodAlertArea: risk.in_flood_alert_area,
       inFloodWarningArea: risk.in_flood_warning_area,
       leadLocalFloodAuthority: risk.lead_local_flood_authority,
@@ -60,7 +61,6 @@ module.exports = function getFloodRisk (request, reply) {
       surfaceWaterRisk: risk.surface_water_risk,
       surfaceWaterSuitability: risk.surface_water_suitability
     }
-
     reply(response)
   })
 }

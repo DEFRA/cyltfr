@@ -21,7 +21,11 @@ module.exports = {
           if (err) {
             return reply(Boom.badRequest('An error occurred finding getting the risk profile', err))
           }
-          reply.view('risk', new RiskViewModel(risk, address))
+          if (!risk.inEngland) {
+            reply.redirect('/?err=Please enter a valid postcode in England')
+          } else {
+            reply.view('risk', new RiskViewModel(risk, address))
+          }
         })
       })
     },

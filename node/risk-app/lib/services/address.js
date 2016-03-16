@@ -1,4 +1,3 @@
-var wreck = require('wreck')
 var config = require('../../config').gazetteer
 var url = config.protocol + '://' + config.host
 var key = 'key=' + require('../../config').gazetteerKey
@@ -21,6 +20,11 @@ function findById (id, callback) {
 
 function findByPostcode (postcode, callback) {
   var validPostcode = postcode.toUpperCase().replace(' ', '')
+  var postcodeRegex = /[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}/gi
+  var postcodeMatch = postcode.match(postcodeRegex)
+  if (!postcodeMatch) {
+    return callback(new Error('postcodeMatchError'))
+  }
   var uri = findByPostcodeUrl + validPostcode + '&' + key
   util.getJson(uri, function (err, payload) {
     if (err) {
@@ -30,6 +34,9 @@ function findByPostcode (postcode, callback) {
     var results = payload.results
     for (var i in results) {
       addresses.push({uprn: results[i].DPA.UPRN, address: results[i].DPA.ADDRESS})
+    }
+    if (!addresses.length) {
+      return callback(new Error('postcodeMatchError'))
     }
     callback(null, addresses)
   })
