@@ -6,7 +6,7 @@ module.exports = {
   config: {
     description: 'Get homepage',
     handler: function (request, reply) {
-      reply.view('home', new HomeViewModel())
+      reply.view('home', new HomeViewModel(request.query.err))
     }
   }
 }

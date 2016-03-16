@@ -14,23 +14,24 @@ module.exports = {
         if (err) {
           return reply(Boom.badRequest('An error occurred finding the address by id', err))
         }
-
-        var x = address.easting
-        var y = address.northing
+        var x = address.x
+        var y = address.y
         var radius = 10
-
         riskService.getByCoordinates(x, y, radius, function (err, risk) {
           if (err) {
             return reply(Boom.badRequest('An error occurred finding getting the risk profile', err))
           }
-
-          reply.view('risk', new RiskViewModel(risk, address))
+          if (!risk.inEngland) {
+            reply.redirect('/?err=Please enter a valid postcode in England')
+          } else {
+            reply.view('risk', new RiskViewModel(risk, address))
+          }
         })
       })
     },
     validate: {
       query: {
-        address: Joi.objectId().required()
+        address: Joi.number().required()
       }
     }
   }

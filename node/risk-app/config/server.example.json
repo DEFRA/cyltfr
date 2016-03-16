@@ -10,9 +10,9 @@
     "port": 8050
   },
   "gazetteer" : {
-    "protocol": "http",
-    "host": "127.0.0.1",
-    "port": 3002
+    "protocol": "https",
+    "host": "api.ordnancesurvey.co.uk",
+    "port": 80
   },
   "geoserver": {
     "protocol": "http",
@@ -40,5 +40,6 @@
   "pageRefreshTime": 900,
   "analyticsAccount": "",
   "cacheViews": false,
-  "floodWarningsUrl": "https://flood-warning-information.service.gov.uk/"
+  "floodWarningsUrl": "https://flood-warning-information.service.gov.uk/",
+  "gazetteerKey": "ABaud2MzINxGoFvFxXWXGnB1rDLxsY0q"
 }
