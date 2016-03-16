@@ -21,13 +21,11 @@ function loadMap () {
     // to an array of undefineds thus breaking the map
     var result = parser.read(OS[0])
 
-    var options = ol.source.WMTS.optionsFromCapabilities(
-      result,
-      {
-        layer: config.OSLayer,
-        matrixSet: config.OSMatrixSet
-      }
-    )
+    var options = ol.source.WMTS.optionsFromCapabilities(result, {
+      layer: config.OSLayer,
+      matrixSet: config.OSMatrixSet
+    })
+
     options.attributions = [
       new ol.Attribution({
         html: config.OSAttribution
@@ -177,8 +175,7 @@ function loadMap () {
       var url = currentLayer.getSource().getGetFeatureInfoUrl(
         e.coordinate,
         map.getView().getResolution(),
-        config.projection.ref,
-        {
+        config.projection.ref, {
           INFO_FORMAT: 'application/json',
           FEATURE_COUNT: 10
         }
