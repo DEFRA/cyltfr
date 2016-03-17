@@ -12,15 +12,20 @@ var serviceSchema = Joi.object().required().keys({
   port: Joi.number().required()
 })
 
+var ordnanceSurveySchema = Joi.object().required().keys({
+  key: Joi.string().required(),
+  urlUprn: Joi.string().uri().required(),
+  urlPostcode: Joi.string().uri().required()
+})
+
 module.exports = {
   server: serverSchema,
   geoserver: serviceSchema,
   service: serviceSchema,
-  gazetteer: serviceSchema,
   logging: Joi.object(),
   cacheViews: Joi.boolean().required(),
   pageRefreshTime: Joi.number().required().min(0).max(3600),
   analyticsAccount: Joi.string().required().allow(''),
   floodWarningsUrl: Joi.string().uri().required(),
-  gazetteerKey: Joi.string().required()
+  ordnanceSurvey: ordnanceSurveySchema
 }

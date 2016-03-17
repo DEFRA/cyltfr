@@ -14,6 +14,7 @@ module.exports = {
         if (err) {
           return reply(Boom.badRequest('An error occurred finding the address by id', err))
         }
+
         var x = address.x
         var y = address.y
         var radius = 10
@@ -21,8 +22,9 @@ module.exports = {
           if (err) {
             return reply(Boom.badRequest('An error occurred finding getting the risk profile', err))
           }
+
           if (!risk.inEngland) {
-            reply.redirect('/?err=Please enter a valid postcode in England')
+            reply.redirect('/?err=postcode')
           } else {
             reply.view('risk', new RiskViewModel(risk, address))
           }

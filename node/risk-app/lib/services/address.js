@@ -1,43 +1,58 @@
-var config = require('../../config').gazetteer
-var url = config.protocol + '://' + config.host
-var key = 'key=' + require('../../config').gazetteerKey
+var sprintf = require('sprintf-js')
 var util = require('../util')
-var findByIdUrl = url + '/places/v1/addresses/uprn?lr=EN&fq=logical_status_code%3A1&dataset=DPA&uprn='
-var findByPostcodeUrl = url + '/places/v1/addresses/postcode?lr=EN&fq=logical_status_code%3A1&dataset=DPA&postcode='
+var config = require('../../config').ordnanceSurvey
+var findByIdUrl = config.urlUprn
+var findByPostcodeUrl = config.urlPostcode
 
 function findById (id, callback) {
-  var uri = findByIdUrl + id + '&' + key
+  var uri = sprintf.vsprintf(findByIdUrl, [id, config.key])
+
   util.getJson(uri, function (err, payload) {
     if (err) {
       return callback(err)
     }
-    var result = payload.results[0]
-    var address = ({uprn: result.DPA.UPRN, postcode: result.DPA.POSTCODE, x: result.DPA.X_COORDINATE,
-                  y: result.DPA.Y_COORDINATE, address: result.DPA.ADDRESS})
+
+    if (!payload || !payload.results || payload.results.length !== 1) {
+      return callback(new Error('Invalid response'))
+    }
+
+    var result = payload.results[0].DPA
+    var address = {
+      uprn: result.UPRN,
+      postcode: result.POSTCODE,
+      x: result.X_COORDINATE,
+      y: result.Y_COORDINATE,
+      address: result.ADDRESS
+    }
+
     callback(null, address)
   })
 }
 
 function findByPostcode (postcode, callback) {
-  var validPostcode = postcode.toUpperCase().replace(' ', '')
-  var postcodeRegex = /[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}/gi
-  var postcodeMatch = postcode.match(postcodeRegex)
-  if (!postcodeMatch) {
-    return callback(new Error('postcodeMatchError'))
-  }
-  var uri = findByPostcodeUrl + validPostcode + '&' + key
+  var uri = sprintf.vsprintf(findByPostcodeUrl, [postcode, config.key])
+
   util.getJson(uri, function (err, payload) {
     if (err) {
       return callback(err)
     }
-    var addresses = []
+
+    if (!payload || !payload.results) {
+      return callback(new Error('Invalid response'))
+    }
+
     var results = payload.results
-    for (var i in results) {
-      addresses.push({uprn: results[i].DPA.UPRN, address: results[i].DPA.ADDRESS})
-    }
+    var addresses = results.map(function (item) {
+      return {
+        uprn: item.DPA.UPRN,
+        address: item.DPA.ADDRESS
+      }
+    })
+
     if (!addresses.length) {
-      return callback(new Error('postcodeMatchError'))
+      return callback(new Error('Postcode match error'))
     }
+
     callback(null, addresses)
   })
 }

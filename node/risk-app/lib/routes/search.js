@@ -10,16 +10,20 @@ module.exports = {
     description: 'Get postcode search results',
     handler: function (request, reply) {
       var postcode = request.query.postcode
-      addressService.findByPostcode(postcode, function (err, addresses) {
+      var validPostcode = postcode.toUpperCase().replace(' ', '')
+      var postcodeRegex = /[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}/gi
+      var postcodeMatch = postcode.match(postcodeRegex)
+
+      if (!postcodeMatch) {
+        return reply.redirect('/?err=postcode')
+      }
+
+      addressService.findByPostcode(validPostcode, function (err, addresses) {
         if (err) {
-          if (err.message === 'postcodeMatchError') {
-            reply.redirect('/?err=Please enter a valid postcode in England')
-          } else {
-            return reply(Boom.badRequest('Failed to find addresses by postcode', err))
-          }
-        } else {
-          reply.view('search', new SearchViewModel(postcode, addresses))
+          return reply(Boom.badRequest('Failed to find addresses by postcode', err))
         }
+
+        reply.view('search', new SearchViewModel(postcode, addresses))
       })
     },
     validate: {

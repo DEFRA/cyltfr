@@ -1,14 +1,17 @@
-var wreck = require('wreck')
+var util = require('../util')
 var config = require('../../config').service
-var url = config.protocol + '://' + config.host + ':' + config.port
-var floodRiskURL = url + '/floodrisk/'
+var protocol = config.protocol
+var host = config.host
+var port = config.port
+var url = protocol + '://' + host + ':' + port
+var floodRiskUrl = url + '/floodrisk/'
 
 function getByCoordinates (x, y, radius, callback) {
-  var uri = floodRiskURL + x + '/' + y + '/' + radius
+  var uri = floodRiskUrl + x + '/' + y + '/' + radius
 
-  wreck.get(uri, { json: true }, function (err, res, payload) {
-    if (err || res.statusCode !== 200) {
-      return callback(err || payload || new Error('Unknown error'))
+  util.getJson(uri, function (err, payload) {
+    if (err) {
+      return callback(err)
     }
 
     return callback(null, payload)
