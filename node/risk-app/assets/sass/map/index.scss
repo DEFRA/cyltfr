@@ -9,7 +9,7 @@ h1.heading-xlarge {
 }
 
 .map {
-  height: 672px;
+  height: 627px;
 
   @include media(tablet) {
     border: solid $yellow;
@@ -183,6 +183,7 @@ h1.heading-xlarge {
   }
 
   .map-switch {
+    font-size: 16px;
     padding: 10px 0 0 20px;
 
     a {

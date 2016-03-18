@@ -1,79 +1,7 @@
-// Import GOV.UK elements, this will import the frontend toolkit and some base styles.
-// Take a look at elements.scss to see which files are imported.
 @import 'govuk-elements';
-
-/*
- * Application Specific Styling
- */
-
-//http://thesassway.com/intermediate/mixins-for-semi-transparent-colors
-@mixin alpha-attribute($attribute, $color, $background) {
-  $percent: alpha($color) * 100%;
-  $opaque: opacify($color, 1);
-  $solid-color: mix($opaque, $background, $percent);
-  #{$attribute}: $solid-color;
-  #{$attribute}: $color;
-}
-
-// Extra Colours for Warnings
-$flood-alert: #f18700;
-$flood-warning: #e3000f;
-$flood-expired: #797979;
-
-// Turn off when Javascript is off
-.nojs-hide {
-  display: none;
-}
-
-.js-enabled .nojs-hide {
-  display: block;
-}
-
-// Turn on when Javascript is off
-.nojs-show {
-  display: block;
-}
-
-.js-enabled .nojs-show {
-  display: none;
-}
-
-// IE 6/7/8 Turn off when Javascript is turned on
-.lte-ie8 {
-  .ie-hide {
-    display:none;
-  }
-  .ie-show {
-    display:block;
-  }
-}
-
-.ie-show {
-  display:none;
-}
-
-// General Hide / Show
-.show {
-  display:block;
-}
-
-.hide {
-  display:none;
-}
-
-.visible-mobile {
-  display: none;
-  @include media(mobile) {
-    display: block;
-  }
-}
-
-.hidden-mobile {
-  display: block;
-  @include media(mobile) {
-    display: none;
-  }
-}
+@import 'branding';
+@import 'util';
+@import 'grids';
 
 .mission {
   ul.list-bullet {
@@ -99,36 +27,9 @@ select {
   border-left: solid 3px $red;
 }
 
-.column-three-quarters {
-  @include grid-column( 3/4 );
-}
-
 .phone-number {
   margin: 0;
   font-weight: normal;
-}
-
-.media {
-  overflow: hidden;
-  margin-bottom: 20px;
-  display: block;
-  .img {
-    float: left;
-    display: block;
-    margin-right: 10px;
-  }
-  .content {
-    overflow: hidden;
-    display: block;
-  }
-}
-
-.secondary-links {
-  .media {
-    .img {
-      width: 60px;
-    }
-  }
 }
 
 .date {

@@ -1,4 +1,5 @@
-  <link rel="stylesheet" type="text/css" href="{{{assetPath}}}stylesheets/home/index.css">
+<link rel="stylesheet" type="text/css" href="{{{assetPath}}}stylesheets/home/index.css">
+<main id="home-page">
   {{> common/mission}}
   <p>
     Enter an postcode to see long term flood risk information for a specific area
@@ -37,17 +38,18 @@
         </a>
       </div>
       <div class="column-third">
-        <a class="media" href="{{{floodWarningsUrl}}}river-and-sea-levels">
+        <a class="media" href="{{{floodWarningsUrl}}}/river-and-sea-levels">
           <img class="img" src="{{{assetPath}}}images/ball-river-sea-level.png" alt="View the latest river and sea levels near you">
           <span class="content">View the latest river and sea levels near you</span>
         </a>
       </div>
       <div class="column-third">
-        <a class="media" href="{{{floodWarningsUrl}}}map">
+        <a class="media" href="{{{floodWarningsUrl}}}/map">
           <img class="img" src="{{{assetPath}}}images/ball-map.png" alt="View the current national flood situation">
           <span class="content">View the current national flood situation</span>
         </a>
       </div>
     </div>
   </section>
-  <script src="{{{assetPath}}}javascripts/home.js"></script>
+</main>
+<script src="{{{assetPath}}}javascripts/home.js"></script>

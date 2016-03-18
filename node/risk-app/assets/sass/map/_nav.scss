@@ -26,6 +26,7 @@
       h3 {
         color: $white;
         cursor: pointer;
+        font-size: 16px;
       }
 
       &.selected {
@@ -58,6 +59,7 @@
         padding: 8px;
         display: block;
         cursor: pointer;
+        font-size: 16px;
         padding-left: 34px;
         border-top: solid 1px #E2E4E5;
         background-size: 18px 18px;

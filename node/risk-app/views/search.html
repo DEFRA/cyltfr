@@ -1,29 +1,43 @@
 <link rel="stylesheet" type="text/css" href="{{{assetPath}}}stylesheets/search/index.css">
-{{> common/mission}}
-<p>
-  Please select your address from the list below
-</p>
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <form method="get" action="/risk">
-      <div class="form-group">
-        <span class="form-label">Postcode</span>
-        <h4 class="heading-small postcode-display">{{postcode}}</h4><a href="/">Change</a>
-        <label class="form-label" for="address">Address</label>
-        <select id="address" name="address" required>
-          {{#if multipleAddressesFound}}
-            <option value="">(Please choose)</option>
-          {{/if}}
-          {{#each addresses}}
-            <option value="{{this.uprn}}">{{this.address}}</option>
-          {{/each}}
-        </select>
+<main id="search-page">
+  {{#if banner}}
+    {{#if banner.url}}
+      <a href="{{banner.url}}" class="message {{banner.className}}">
+        <img src="{{{assetPath}}}images/{{banner.icon}}-icon.gif" alt="{{banner.icon}}">
+        {{banner.message}}&nbsp;<span class="pseudo-link">View details</span>
+      </a>
+    {{else}}
+      <div class="message">
+        {{banner.message}}
       </div>
-      <div class="form-group">
-        <button class="button" type="submit" title="Continue">Continue</button>
-      </div>
-    </form>
+    {{/if}}
+  {{/if}}
+  {{> common/mission}}
+  <p>
+    Please select your address from the list below
+  </p>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <form method="get" action="/risk">
+        <div class="form-group">
+          <span class="form-label">Postcode</span>
+          <h4 class="heading-small postcode-display">{{postcode}}</h4><a href="/">Change</a>
+          <label class="form-label" for="address">Address</label>
+          <select id="address" name="address" required>
+            {{#if multipleAddressesFound}}
+              <option value="">(Please choose)</option>
+            {{/if}}
+            {{#each addresses}}
+              <option value="{{this.uprn}}">{{this.address}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="form-group">
+          <button class="button" type="submit" title="Continue">Continue</button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
-<a href="/">The address I want is not in this list</a>
+  <a href="/">The address I want is not in this list</a>
+</main>
 <script src="{{{assetPath}}}javascripts/search.js"></script>

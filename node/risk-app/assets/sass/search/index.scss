@@ -1,6 +1,53 @@
-@import "colours";
-@import "typography";
-@import "css3";
+@import 'conditionals';
+@import "../branding";
+@import "../message";
+
+.message {
+  img {
+    width: 30px;
+    vertical-align: middle;
+  }
+}
+
+// .banner {
+//   padding: 8px;
+//   display: block;
+//   overflow: hidden;
+//   white-space: nowrap;
+//   text-decoration: none;
+//   vertical-align: middle;
+//
+//   img {
+//     width: 30px;
+//     vertical-align: middle;
+//   }
+//
+//   // &:before {
+//   //   left: 0;
+//   //   right: 0;
+//   //   content: "";
+//   //   height: 40px;
+//   //   position: absolute;
+//   // }
+//
+//   &.warning {
+//     color: $page-colour;
+//     background-color: $flood-warning;
+//
+//     // &:before {
+//     //   background-color: $flood-warning;
+//     // }
+//   }
+//
+//   &.alert {
+//     color: $black;
+//     background-color: $flood-alert;
+//
+//     // &:before {
+//     //   background-color: $flood-alert;
+//     // }
+//   }
+// }
 
 h1.heading-xlarge {
   margin-bottom: 30px;
