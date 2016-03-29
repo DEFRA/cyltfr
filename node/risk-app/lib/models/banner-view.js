@@ -1,7 +1,7 @@
 var config = require('../../config')
 var floodWarningsUrl = config.floodWarningsUrl
 
-function WarningsViewModel (postcode, warnings) {
+function BannerViewModel (postcode, warnings) {
   if (warnings && warnings.message) {
     if (warnings.severity) {
       var summary = warnings.summary[warnings.severity - 1]
@@ -15,4 +15,4 @@ function WarningsViewModel (postcode, warnings) {
   }
 }
 
-module.exports = WarningsViewModel
+module.exports = BannerViewModel

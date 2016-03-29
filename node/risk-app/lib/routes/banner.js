@@ -1,6 +1,7 @@
 var Joi = require('joi')
+var Boom = require('boom')
 var floodService = require('../services/flood')
-var WarningsViewModel = require('../models/warnings-view')
+var BannerViewModel = require('../models/banner-view')
 
 module.exports = {
   method: 'GET',
@@ -11,11 +12,10 @@ module.exports = {
       var postcode = request.query.postcode
       floodService.findWarnings(postcode, function (err, warnings) {
         if (err) {
-          request.log('error', err)
-          return reply('Unable to obtain the warnings banner').code(500)
+          return reply(Boom.badRequest('Unable to obtain the warnings banner', err))
         }
 
-        var model = new WarningsViewModel(postcode, warnings)
+        var model = new BannerViewModel(postcode, warnings)
         reply.view('partials/common/banner', model, {
           layout: false
         })
