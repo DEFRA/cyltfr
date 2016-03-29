@@ -1,12 +1,19 @@
 <link rel="stylesheet" type="text/css" href="{{{assetPath}}}stylesheets/ol.css">
 <link rel="stylesheet" type="text/css" href="{{{assetPath}}}stylesheets/map/index.css">
 <main id="map-page">
-  <h1 class="heading-xlarge">Types of flood risk in this area</h1>
+  <h1 class="heading-xlarge">Learn more about this area's flood risk</h1>
   <p class="lede">
-    Choose the map information you want to see<br>
-    Select a risk type from the list
+    Select the information you want to see
   </p>
   <div class="map-container">
+    <div class="map-switch hidden-mobile">
+      <a>
+      Basic&nbsp;
+      <img src="{{{assetPath}}}images/icon-detailed-off.png" alt="basic" class="basic">
+      <img src="{{{assetPath}}}images/icon-detailed-on.png" alt="detailed" class="detailed">
+      &nbsp;Detailed
+      </a>
+    </div>
     <div class="visible-mobile">
       {{> map/selector maps}}
     </div>
@@ -17,21 +24,10 @@
       <div class="column-three-quarters">
         <div id="map" class="map"></div>
         <aside class="controls">
-          <div class="print hidden-mobile">
-            <button>Print</button>
-          </div>
           <h3 class="heading-small">Flood risk:</h3>
           <div class="legend"></div>
         </aside>
       </div>
-    </div>
-    <div class="map-switch hidden-mobile">
-      <a>
-      Basic&nbsp;
-      <img src="{{{assetPath}}}images/icon-detailed-off.png" alt="basic" class="basic">
-      <img src="{{{assetPath}}}images/icon-detailed-on.png" alt="detailed" class="detailed">
-      &nbsp;Detailed
-      </a>
     </div>
   </div>
   <p><a href="/risk?address={{address}}">View the flood risk information for the location you originally searched for</a></p>

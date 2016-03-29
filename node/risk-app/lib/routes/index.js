@@ -6,5 +6,6 @@ module.exports = [
   require('./statics'),
   require('./proxy'),
   require('./robots'),
+  require('./banner'),
   require('./404')
 ]

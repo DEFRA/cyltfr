@@ -1,17 +1,6 @@
 <link rel="stylesheet" type="text/css" href="{{{assetPath}}}stylesheets/search/index.css">
 <main id="search-page">
-  {{#if banner}}
-    {{#if banner.url}}
-      <a href="{{banner.url}}" class="message {{banner.className}}">
-        <img src="{{{assetPath}}}images/{{banner.icon}}-icon.gif" alt="{{banner.icon}}">
-        {{banner.message}}&nbsp;<span class="pseudo-link">View details</span>
-      </a>
-    {{else}}
-      <div class="message">
-        {{banner.message}}
-      </div>
-    {{/if}}
-  {{/if}}
+  <div id="banner"></div>
   {{> common/mission}}
   <p>
     Please select your address from the list below
@@ -41,3 +30,10 @@
   <a href="/">The address I want is not in this list</a>
 </main>
 <script src="{{{assetPath}}}javascripts/search.js"></script>
+<script>
+  $(function () {
+    (new LTFRI.SearchPage({
+      postcode: '{{postcode}}'
+    }))
+  })
+</script>

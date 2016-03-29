@@ -2,14 +2,14 @@
 <main id="home-page">
   {{> common/mission}}
   <p>
-    Enter an postcode to see long term flood risk information for a specific area
+    Enter a postcode to see long term flood risk information for a specific area
   </p>
   <div class="grid-row">
     <div class="column-half">
       <form method="get" action="/search">
         <div class="form-group">
           <label class="form-label" for="postcode">Postcode</label>
-          <input class="form-control" name="postcode" id="postcode" type="text" title="A valid postcode in England is required" pattern="[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}" required autocomplete="off">
+          <input class="form-control" name="postcode" id="postcode" type="text" title="A valid postcode in England is required" patternx="[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}" required autocomplete="off">
           {{#if hasErrorMessage}}
             <div class="error-message">{{errorMessage}}</div>
           {{/if}}

@@ -2,16 +2,18 @@
 @import "typography";
 @import "css3";
 
-h1.heading-xlarge {
-  margin-bottom: 30px;
-}
+#home-page {  
+  h1.heading-xlarge {
+    margin-bottom: 30px;
+  }
 
-#postcode {
-  text-transform: uppercase;
-}
+  #postcode {
+    text-transform: uppercase;
+  }
 
-.button {
-  @include media(mobile) {
-    width: 100%;
+  .button {
+    @include media(mobile) {
+      width: 100%;
+    }
   }
 }
