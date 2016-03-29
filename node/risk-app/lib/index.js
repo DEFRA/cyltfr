@@ -36,16 +36,6 @@ Glue.compose(manifest, options, function (err, server) {
   server.route(routes)
 
   /*
-   * Set is XMLHTTPrequest flag. Errors that occur
-   * during Ajax requests are handled differently.
-   * See `onPreResponse` below
-   */
-  server.ext('onRequest', function (request, reply) {
-    request.xhr = request.headers['x-requested-with'] === 'XMLHttpRequest'
-    return reply.continue()
-  })
-
-  /*
    * Handle route errors
    */
   server.ext('onPreResponse', function (request, reply) {
@@ -55,10 +45,11 @@ Glue.compose(manifest, options, function (err, server) {
       // An error was raised during
       // processing the request
       var statusCode = response.output.statusCode
+      var useErrorPages = request.route.settings.app.useErrorPages !== false
 
       // In the event of 404
       // return the `404` view
-      if (!request.xhr && statusCode === 404) {
+      if (useErrorPages && statusCode === 404) {
         return reply.view('404').code(statusCode)
       }
 
@@ -69,7 +60,7 @@ Glue.compose(manifest, options, function (err, server) {
       })
 
       // The return the `500` view
-      if (!request.xhr) {
+      if (useErrorPages) {
         return reply.view('500').code(statusCode)
       }
     }

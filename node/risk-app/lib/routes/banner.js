@@ -21,6 +21,9 @@ module.exports = {
         })
       })
     },
+    app: {
+      useErrorPages: false
+    },
     validate: {
       query: {
         postcode: Joi.string().required()
