@@ -25,7 +25,6 @@ module.exports = {
   logging: Joi.object(),
   cacheViews: Joi.boolean().required(),
   httpTimeoutMs: Joi.number().required().min(0).max(30000),
-  pageRefreshTime: Joi.number().required().min(0).max(3600),
   analyticsAccount: Joi.string().required().allow(''),
   floodWarningsUrl: Joi.string().uri().required(),
   ordnanceSurvey: ordnanceSurveySchema

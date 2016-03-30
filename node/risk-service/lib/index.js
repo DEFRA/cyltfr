@@ -1,6 +1,7 @@
 var Glue = require('glue')
 var routes = require('./routes')
 var manifest = require('./manifest')
+var appName = require('../package.json').name
 var options = {
   relativeTo: __dirname
 }
@@ -37,7 +38,7 @@ Glue.compose(manifest, options, function (err, server) {
 
   server.start(function (err) {
     var details = {
-      name: 'flood-risk-service',
+      name: appName,
       uri: server.info.uri
     }
 

@@ -17,11 +17,11 @@
     <div class="visible-mobile">
       {{> map/selector maps}}
     </div>
-    <div class="grid-row">
-      <div class="column-quarter hidden-mobile">
+    <div class="clearfix">
+      <div class="lhs">
         {{> map/nav maps}}
       </div>
-      <div class="column-three-quarters">
+      <div class="rhs">
         <div id="map" class="map"></div>
         <aside class="controls">
           <h3 class="heading-small">Flood risk:</h3>
@@ -33,7 +33,12 @@
   <p><a href="/risk?address={{address}}">View the flood risk information for the location you originally searched for</a></p>
   <p><a href="/">View the flood risk information for another location</a></p>
   <p><a href="{{{floodWarningsUrl}}}">Go to the national flood information service</a></p>
-  {{> common/floodline}}
+  <details>
+    <summary>Other ways to get this information</summary>
+    {{> common/floodline}}
+  </details>
+  <datetime class="date" datetime="{{date}}">{{formatDate date 'DD MMM YYYY'}}</datetime>
+  <br>
   <p class="eu-directive">
     This information meets the requirements of the EU Flood Directive
   </p>

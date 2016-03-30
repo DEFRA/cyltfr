@@ -12,6 +12,5 @@ var databaseSchema = Joi.object().required().keys({
 module.exports = {
   server: serverSchema,
   logging: Joi.object(),
-  database: databaseSchema,
-  queries: Joi.object()
+  database: databaseSchema
 }

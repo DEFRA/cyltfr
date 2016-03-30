@@ -1,8 +1,8 @@
 @import "colours";
 @import "typography";
 @import "css3";
-@import "_nav";
-@import "./popup.scss";
+@import "./nav";
+@import "./popup";
 
 #map-page {
   h1.heading-xlarge {
@@ -10,7 +10,7 @@
   }
 
   .map {
-    height: 639px;
+    height: 648px;
 
     @include media(tablet) {
       border: solid $yellow;
@@ -30,12 +30,21 @@
       padding: 15px;
     }
 
-    .column-quarter {
-      padding-right: 0;
+    .lhs {
+      width: 215px;
+      float: left;
+      @include media(mobile) {
+        display: none;
+      }
     }
 
-    .column-three-quarters {
+    .rhs {
       position: relative;
+
+      @include media(tablet) {
+        margin-left: 215px;
+      }
+
       @include media(tablet) {
         padding-left: 0;
       }
@@ -45,7 +54,7 @@
           padding: 14px;
           position: absolute;
           top: 2px;
-          right: 16px;
+          right: 2px;
           width: 90px;
           bottom: 2px;
           text-align: center;
@@ -158,6 +167,7 @@
 
     .map-switch {
       font-size: 16px;
+      text-align: right;
       margin-bottom: 10px;
 
       a {

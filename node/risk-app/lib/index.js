@@ -3,7 +3,6 @@ var handlebars = require('handlebars')
 var manifest = require('./manifest')
 var routes = require('./routes')
 var config = require('../config')
-var pageRefreshTime = config.pageRefreshTime
 var analyticsAccount = config.analyticsAccount
 var appVersion = require('../package.json').version
 var appName = require('../package.json').name
@@ -18,7 +17,6 @@ var defaultContext = {
   assetPath: '/public/',
   htmlLang: 'en',
   headerClass: 'with-proposition',
-  pageRefreshTime: pageRefreshTime,
   analyticsAccount: analyticsAccount,
   appVersion: appVersion,
   floodWarningsUrl: config.floodWarningsUrl

@@ -1,0 +1,3 @@
+{
+  "calculateFloodRisk": "select u_ltfri.calculate_flood_risk($1, $2, $3)"
+}

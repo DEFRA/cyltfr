@@ -33,7 +33,6 @@
     }]
   },
   "httpTimeoutMs": 10000,
-  "pageRefreshTime": 900,
   "analyticsAccount": "",
   "cacheViews": false,
   "floodWarningsUrl": "https://flood-warning-information.service.gov.uk/",

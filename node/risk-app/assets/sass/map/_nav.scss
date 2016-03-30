@@ -13,14 +13,6 @@
         width: 20%;
         float: left;
         padding: 0 8px 0px 4px;
-
-        &.icon {
-          display: inline;
-        }
-
-        &.icon-selected {
-          display: none;
-        }
       }
 
       h3 {
@@ -29,36 +21,17 @@
         font-size: 16px;
         padding-top: 4px;
       }
-
-      &.selected {
-        background-color: $yellow;
-
-        h3 {
-          color: $black;
-        }
-
-        img {
-          &.icon {
-            display: none;
-          }
-
-          &.icon-selected {
-            display: inline;
-          }
-        }
-      }
     }
 
     ul {
       clear: both;
       color: $black;
-      display: none;
       background-color: $white;
       border-left: solid 22px #E2E4E5;
 
       > li {
         padding: 8px;
-        display: block;
+        display: none;
         cursor: pointer;
         font-size: 16px;
         padding-left: 34px;
@@ -73,12 +46,16 @@
           background-color: rgba(255, 207, 116, 0.4);
           background-image: url(../../images/icon-radio-on.png);
         }
+
+        &:first-child {
+          display: block;
+        }
       }
     }
   }
 
   &.detailed {
-    ul.nav ul {
+    ul.nav ul > li {
       display: block;
     }
   }

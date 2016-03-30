@@ -2,7 +2,9 @@
 
 function SearchPage (options) {
   var $banner = $('#banner')
-  $banner.load('/banner?postcode=' + window.encodeURIComponent(options.postcode), function (response, status, xhr) {
+  var postcode = window.encodeURIComponent(options.postcode)
+
+  $banner.load('/banner?postcode=' + postcode, function (response, status, xhr) {
     if (status === 'success' && response) {
       $banner.slideDown()
     }

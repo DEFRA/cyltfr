@@ -52,7 +52,7 @@
       "maps": [
         {
           "ref": "SurfaceWater_6-SW-Extent",
-          "name": "Extent of Flood",
+          "name": "Flood extent",
           "title": "Risk of flooding from Surface Water",
           "legend": {
             "keys": [{
