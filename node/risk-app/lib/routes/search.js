@@ -22,15 +22,12 @@ module.exports = {
         if (err) {
           return reply(Boom.badRequest('Failed to find addresses by postcode', err))
         }
-        reply.view('search', new SearchViewModel(postcode, addresses))
 
-        // floodService.findWarnings(validPostcode, function (err, warnings) {
-        //   if (err) {
-        //     request.log('error', err)
-        //   }
-        //
-        //   reply.view('search', new SearchViewModel(postcode, addresses, warnings))
-        // })
+        if (!addresses || !addresses.length) {
+          return reply.redirect('/?err=postcode')
+        }
+
+        reply.view('search', new SearchViewModel(postcode, addresses))
       })
     },
     validate: {

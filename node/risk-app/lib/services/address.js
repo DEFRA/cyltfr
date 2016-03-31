@@ -38,7 +38,7 @@ function findByPostcode (postcode, callback) {
     }
 
     if (!payload || !payload.results) {
-      return callback(new Error('Invalid response'))
+      return callback(null, [])
     }
 
     var results = payload.results

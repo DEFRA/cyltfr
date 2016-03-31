@@ -38,3 +38,12 @@ select {
   font-size: medium;
   color: $secondary-text-colour;
 }
+
+details {
+  .panel-border-narrow {
+    margin-left: 4px;
+  }
+  .panel.panel-border-wide {
+    margin-left: 1px;
+  }
+}

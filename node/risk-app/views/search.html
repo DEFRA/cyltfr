@@ -2,16 +2,13 @@
 <main id="search-page">
   <div id="banner"></div>
   {{> common/mission}}
-  <p>
-    Please select your address from the list below
-  </p>
   <div class="grid-row">
     <div class="column-two-thirds">
       <form method="get" action="/risk">
         <div class="form-group">
           <span class="form-label">Postcode</span>
           <h4 class="heading-small postcode-display">{{postcode}}</h4><a href="/">Change</a>
-          <label class="form-label" for="address">Address</label>
+          <label class="form-label" for="address">Please select your address from the list below</label>
           <select id="address" name="address" required>
             {{#if multipleAddressesFound}}
               <option value="">(Please choose)</option>
@@ -27,7 +24,38 @@
       </form>
     </div>
   </div>
-  <a href="/">The address I want is not in this list</a>
+  <br>
+  <details>
+    <summary><span class="summary">Flood information for Wales, Scotland and Northern Ireland</span></summary>
+    <div class="panel panel-border-wide">
+      <a href="https://naturalresources.wales/splash?orig=/" rel="external">Natural Resources Wales</a><br>
+      <a href="http://www.sepa.org.uk/" rel="external">Scottish Environment Protection Agency</a><br>
+      <a href="http://www.nidirect.gov.uk/" rel="external">Northern Ireland Direct</a>
+    </div>
+  </details>
+  <br>
+  <section class="secondary-links">
+    <div class="grid-row">
+      <div class="column-third">
+        <a class="media" href="{{{floodWarningsUrl}}}">
+          <img class="img" src="{{{assetPath}}}images/ball-home.png" alt="National flood information service">
+          <span class="content">National flood information service</span>
+        </a>
+      </div>
+      <div class="column-third">
+        <a class="media" href="{{{floodWarningsUrl}}}/river-and-sea-levels">
+          <img class="img" src="{{{assetPath}}}images/ball-river-sea-level.png" alt="View the latest river and sea levels near you">
+          <span class="content">View the latest river and sea levels near you</span>
+        </a>
+      </div>
+      <div class="column-third">
+        <a class="media" href="{{{floodWarningsUrl}}}/map">
+          <img class="img" src="{{{assetPath}}}images/ball-map.png" alt="View the current national flood situation">
+          <span class="content">View the current national flood situation</span>
+        </a>
+      </div>
+    </div>
+  </section>
 </main>
 <script src="{{{assetPath}}}javascripts/search.js"></script>
 <script>
