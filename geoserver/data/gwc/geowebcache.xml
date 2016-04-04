@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<gwcConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://geowebcache.org/schema/1.6.0 http://geowebcache.org/schema/1.6.0/geowebcache.xsd" xmlns="http://geowebcache.org/schema/1.6.0">
-  <version>1.6.0</version>
+<gwcConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://geowebcache.org/schema/1.8.0 http://geowebcache.org/schema/1.8.0/geowebcache.xsd" xmlns="http://geowebcache.org/schema/1.8.0">
+  <version>1.8.0</version>
   <backendTimeout>120</backendTimeout>
+  <blobStores>
+    <S3BlobStore default="false">
+      <id>ltfri</id>
+      <enabled>true</enabled>
+      <bucket></bucket>
+      <prefix>geoserver-cache</prefix>
+      <awsAccessKey></awsAccessKey>
+      <awsSecretKey></awsSecretKey>
+      <maxConnections>50</maxConnections>
+      <useHTTPS>true</useHTTPS>
+      <useGzip>false</useGzip>
+    </S3BlobStore>
+  </blobStores>
   <gridSets>
     <gridSet>
       <name>EPSG:27700</name>

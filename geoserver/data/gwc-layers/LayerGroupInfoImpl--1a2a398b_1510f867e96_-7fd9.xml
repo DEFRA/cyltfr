@@ -2,12 +2,21 @@
   <id>LayerGroupInfoImpl--1a2a398b:1510f867e96:-7fd9</id>
   <enabled>true</enabled>
   <name>risk:1-ROFRS</name>
+  <blobStoreId>ltfri</blobStoreId>
   <mimeFormats>
     <string>image/png</string>
   </mimeFormats>
   <gridSubsets>
     <gridSubset>
       <gridSetName>EPSG:27700</gridSetName>
+      <extent>
+        <coords>
+          <double>1393.0196</double>
+          <double>13494.9764</double>
+          <double>673393.0196</double>
+          <double>800000.0</double>
+        </coords>
+      </extent>
     </gridSubset>
   </gridSubsets>
   <metaWidthHeight>
@@ -20,6 +29,7 @@
     <stringParameterFilter>
       <key>WORKSPACE</key>
       <defaultValue>risk</defaultValue>
+      <normalize/>
       <values/>
     </stringParameterFilter>
   </parameterFilters>

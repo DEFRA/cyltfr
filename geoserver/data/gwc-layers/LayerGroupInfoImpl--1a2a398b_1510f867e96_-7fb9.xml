@@ -2,6 +2,7 @@
   <id>LayerGroupInfoImpl--1a2a398b:1510f867e96:-7fb9</id>
   <enabled>true</enabled>
   <name>risk:9-SWDH</name>
+  <blobStoreId>ltfri</blobStoreId>
   <mimeFormats>
     <string>image/png</string>
   </mimeFormats>
@@ -28,6 +29,7 @@
     <stringParameterFilter>
       <key>WORKSPACE</key>
       <defaultValue>risk</defaultValue>
+      <normalize/>
       <values/>
     </stringParameterFilter>
   </parameterFilters>
