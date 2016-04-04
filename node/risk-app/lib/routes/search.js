@@ -1,6 +1,5 @@
 var Joi = require('joi')
 var Boom = require('boom')
-var floodService = require('../services/flood')
 var addressService = require('../services/address')
 var SearchViewModel = require('../models/search-view')
 
