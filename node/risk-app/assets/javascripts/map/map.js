@@ -20,6 +20,10 @@ function loadMap () {
     // therefore sizes is set to undefined array, which sets fullTileRanges_
     // to an array of undefineds thus breaking the map
     var result = parser.read(OS[0])
+    // TODO
+    // need to set tiles to https
+    // follow up with OS
+    result.OperationsMetadata.GetTile.DCP.HTTP.Get[0].href = result.OperationsMetadata.GetTile.DCP.HTTP.Get[0].href.replace('http://', 'https://')
 
     var options = ol.source.WMTS.optionsFromCapabilities(result, {
       layer: config.OSLayer,
