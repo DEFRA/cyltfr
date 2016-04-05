@@ -8,10 +8,10 @@
         <div class="form-group">
           <span class="form-label">Postcode</span>
           <h4 class="heading-small postcode-display">{{postcode}}</h4><a href="/">Change</a>
-          <label class="form-label" for="address">Please select your address from the list below</label>
+          <label class="form-label" for="address">Choose your address from this list</label>
           <select id="address" name="address" required>
             {{#if multipleAddressesFound}}
-              <option value="">(Please choose)</option>
+              <option value="">Please choose</option>
             {{/if}}
             {{#each addresses}}
               <option value="{{this.uprn}}">{{this.address}}</option>
@@ -24,15 +24,18 @@
       </form>
     </div>
   </div>
-  <br>
   <details>
-    <summary><span class="summary">Flood information for Wales, Scotland and Northern Ireland</span></summary>
-    <div class="panel panel-border-narrow">
-      <a href="https://naturalresources.wales/splash?orig=/" rel="external">Natural Resources Wales</a><br>
-      <a href="http://www.sepa.org.uk/" rel="external">Scottish Environment Protection Agency</a><br>
-      <a href="http://www.nidirect.gov.uk/" rel="external">Northern Ireland Direct</a>
+    <summary aria-expanded="false" role="button"><span class="summary">The address I want isn’t here</span></summary>
+    <div class="panel panel-border-narrow" aria-hidden="true">
+      The address you’re looking for may not be listed if it’s part of a newly-built development.
+      <br>
+      <br>
+      Choose another address nearby to see a flood risk map of the general area or <a href="/">start your search again.</a>
     </div>
   </details>
+  <br>
+  {{> common/floodline}}
+  <br>
   <br>
   <section class="secondary-links">
     <div class="grid-row">

@@ -70,7 +70,7 @@
           &::before {
             counter-increment: section;
             content: counter(section);
-            font-size: 45px;
+            font-size: 3em;
             position: absolute;
             left: -45px;
             font-weight: bold;

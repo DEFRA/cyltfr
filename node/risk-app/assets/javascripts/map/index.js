@@ -31,7 +31,7 @@ $(function () {
   var $selector = $('select', $container)
   var $categories = $sidebar.children('li.category')
   var $maps = $categories.find('li')
-
+  var $description = $('#category-description')
   // Store a reference to the map legend element
   var $legend = $('.legend')
 
@@ -49,6 +49,9 @@ $(function () {
     $categories.filter('#' + currCategory.ref).addClass(selected)
     $maps.removeClass(selected)
     $maps.filter('#' + currMap.ref).addClass(selected)
+
+    // Update the description
+    $description.html(currCategory.description)
 
     // Update the mobile nav
     $selector.val(currMap.ref)
@@ -97,9 +100,5 @@ $(function () {
     .on('click', '.map-switch a', function (e) {
       e.preventDefault()
       $(e.delegateTarget).toggleClass('detailed')
-    })
-    .on('click', '.print button', function (e) {
-      e.preventDefault()
-      window.print()
     })
 })

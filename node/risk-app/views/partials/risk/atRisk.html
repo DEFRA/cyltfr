@@ -61,11 +61,28 @@
       </li>
       <li>
         <div class="panel panel-border-wide">
-          <h3 class="heading-small">View the <a href="#">flood risk summary for this area</a></h3>
-          <h3 class="heading-small">Browse <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}">maps showing the potential extent of flooding</a></h3>
+          <p>
+            The flood risk in this area from rivers or the sea is {{riverAndSeaRisk}}
+          </p>
+          <p>
+            The flood risk in this area from surface water is {{surfaceWaterRisk}}<br>
+          </p>
+          <p>
+            The flood risk in this area from reservoirs is {{reservoirRisk}}
+          </p>
+          <p>
+            View maps showing the <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}">potential extent of flooding in this location</a>
+          </p>
+          <p>
+            <a href="/" onclick="alert('Not implemented yet'); return false;">View detailed flood risk information for this area</a>
+          </p>
         </div>
+        {{> common/floodline}}
+        <br>
+        <p>
+          View the <a href="/">flood risk information for another location</a>
+        </p>
       </li>
     </ol>
-    {{> common/floodline}}
   </div>
 </div>

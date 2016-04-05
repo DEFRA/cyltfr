@@ -2,14 +2,14 @@
 <main id="home-page">
   {{> common/mission}}
   <p>
-    Enter a postcode to see long term flood risk information for a specific area
+    Enter an English postcode to see long term flood risk information for a specific location.
   </p>
   <div class="grid-row">
     <div class="column-half">
       <form method="get" action="/search">
         <div class="form-group">
           <label class="form-label" for="postcode">Postcode</label>
-          <input class="form-control" name="postcode" id="postcode" type="text" title="A valid postcode in England is required" required autocomplete="off">
+          <input class="form-control" name="postcode" id="postcode" type="text" placeholder="Enter a postcode" title="A valid postcode in England is required" autocomplete="off">
           {{#if hasErrorMessage}}
             <div class="error-message">{{errorMessage}}</div>
           {{/if}}
@@ -20,9 +20,12 @@
       </form>
     </div>
   </div>
-  <p>
-    <a href="http://www.royalmail.com/find-a-postcode" target="_blank">I don't know the postcode</a>
-  </p>
+  <details>
+    <summary><span class="summary">I don't know the postcode</span></summary>
+    <div class="panel panel-border-narrow">
+      You can look for postcodes using the <a href="http://www.royalmail.com/find-a-postcode" target="_blank">Royal Mail find a postcode service</a>
+    </div>
+  </details>
   <br>
   <details>
     <summary><span class="summary">Flood information for Wales, Scotland and Northern Ireland</span></summary>
@@ -32,6 +35,7 @@
       <a href="http://www.nidirect.gov.uk/" rel="external">Northern Ireland Direct</a>
     </div>
   </details>
+  <br>
   <br>
   <section class="secondary-links">
     <div class="grid-row">

@@ -37,7 +37,7 @@ function findByPostcode (postcode, callback) {
       return callback(err)
     }
 
-    if (!payload || !payload.results) {
+    if (!payload || !payload.results || !payload.results.length) {
       return callback(null, [])
     }
 
@@ -48,10 +48,6 @@ function findByPostcode (postcode, callback) {
         address: item.DPA.ADDRESS
       }
     })
-
-    if (!addresses.length) {
-      return callback(new Error('Postcode match error'))
-    }
 
     callback(null, addresses)
   })
