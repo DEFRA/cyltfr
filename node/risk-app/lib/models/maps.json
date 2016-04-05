@@ -50,8 +50,7 @@
       "icon": "surface-water",
       "name": "Risk of flooding from Surface Water",
       "title": "Risk of flooding from Surface Water",
-      "description": "You can use the infor
->>>>>>> mastermation currently displayed to see the approximate areas that would flood, and which parts would be shallower or deeper.",
+      "description": "You can use the information currently displayed to see the approximate areas that would flood, and which parts would be shallower or deeper.",
       "maps": [
         {
           "ref": "SurfaceWater_6-SW-Extent",
