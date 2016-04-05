@@ -9,7 +9,7 @@
       <form method="get" action="/search">
         <div class="form-group">
           <label class="form-label" for="postcode">Postcode</label>
-          <input class="form-control" name="postcode" id="postcode" type="text" title="A valid postcode in England is required" required autocomplete="off">
+          <input class="form-control" name="postcode" id="postcode" type="text" placeholder="Enter a postcode" title="A valid postcode in England is required" autocomplete="off">
           {{#if hasErrorMessage}}
             <div class="error-message">{{errorMessage}}</div>
           {{/if}}

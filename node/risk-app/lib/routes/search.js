@@ -31,7 +31,7 @@ module.exports = {
     },
     validate: {
       query: {
-        postcode: Joi.string().required()
+        postcode: Joi.string().required().allow('')
       }
     }
   }

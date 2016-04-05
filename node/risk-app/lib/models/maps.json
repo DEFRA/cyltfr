@@ -5,6 +5,7 @@
       "icon": "rivers-sea",
       "name": "Risk of flooding from Rivers or Sea",
       "title": "Risk of flooding from Rivers or Sea",
+      "description": "You can use the information currently displayed to see which areas are more likely to flood first, deepest, or most often./nLand areas not highlighted as high, medium or low risk should be considered very Low risk.",
       "maps": [
         {
           "ref": "RiversOrSea_1-ROFRS",
@@ -32,11 +33,11 @@
           "title": "Flow and Water Level from Rivers and Sea flooding",
           "legend": {
             "keys": [{
-              "text": "River Level Guage",
+              "text": "River level monitoring station",
               "icon": "green",
               "shape": "round"
             }, {
-              "text": "Sea Level Guage",
+              "text": "Sea level monitoring station",
               "icon": "red",
               "shape": "round"
             }]
@@ -49,6 +50,7 @@
       "icon": "surface-water",
       "name": "Risk of flooding from Surface Water",
       "title": "Risk of flooding from Surface Water",
+      "description": "You can use the information currently displayed to see the approximate areas that would flood, and which parts would be shallower or deeper.",
       "maps": [
         {
           "ref": "SurfaceWater_6-SW-Extent",
@@ -179,6 +181,7 @@
       "icon": "reservoir",
       "name": "Risk of flooding from Reservoirs",
       "title": "Risk of flooding from Reservoirs",
+      "description": "You can use the information currently displayed to see the areas that would flood, as well as how deep and fast the water would be. You can also use this information to see which properties would flood.",
       "maps": [
         {
           "ref": "Reservoirs_3-ROFR",
