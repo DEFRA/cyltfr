@@ -51,7 +51,8 @@ $(function () {
     $maps.filter('#' + currMap.ref).addClass(selected)
 
     // Update the description
-    $description.text(currCategory.description)
+    $description.html(currCategory.description)
+
     // Update the mobile nav
     $selector.val(currMap.ref)
 

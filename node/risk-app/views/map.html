@@ -4,16 +4,19 @@
   <h1 class="heading-xlarge">Learn more about this area's flood risk</h1>
   <p>
     From the list on the left, select the information you’re interested in. The map view will then update.
-    <p id="category-description">
-    </p>
+  </p>
+  <p>
+    Switch to the 'Detailed view' for more options.
+  </p>
+  <p id="category-description">
   </p>
   <div class="map-container">
     <div class="map-switch hidden-mobile">
       <a>
-      Basic&nbsp;
+      Basic view&nbsp;
       <img src="{{{assetPath}}}images/icon-detailed-off.png" alt="basic" class="basic">
       <img src="{{{assetPath}}}images/icon-detailed-on.png" alt="detailed" class="detailed">
-      &nbsp;Detailed
+      &nbsp;Detailed view
       </a>
     </div>
     <div class="visible-mobile">
@@ -35,10 +38,7 @@
   <p><a href="/risk?address={{address}}">View the flood risk information for the location you originally searched for</a></p>
   <p><a href="/">View the flood risk information for another location</a></p>
   <p><a href="{{{floodWarningsUrl}}}">Go to the national flood information service</a></p>
-  <details>
-    <summary>Other ways to get this information</summary>
-    {{> common/floodline}}
-  </details>
+  {{> common/floodline}}
   <datetime class="date" datetime="{{date}}">{{formatDate date 'DD MMM YYYY'}}</datetime>
   <br>
   <p class="eu-directive">
