@@ -1,21 +1,24 @@
-<div>
-  <h1 class="heading-medium">This address is in an area at {{#if isVeryLowRisk}}very{{/if}} low risk of flooding</h1>
+<div id="risk-summary">
+  <h1 class="heading-large">This address is in an area at {{#if isVeryLowRisk}}very{{/if}} low risk of flooding</h1>
   <p>Even if flooding doesn't threaten your location directly, it may still affect:</p>
   <ul class="list list-bullet">
     <li>transport</li>
     <li>power</li>
     <li>communications networks</li>
   </ul>
-  <h3>Further information</h3>
+  <h3 class="heading-medium">Further information</h3>
   <p>
     <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}">View maps showing the potential extent of flooding in this location</a>
   </p>
   <p>
-    <a href="/" onclick="alert('Not implemented yet'); return false;">View detailed flood risk information for this area</a>
+    <a href="#risk-detail" toggle>View detailed flood risk information for this area</a>
   </p>
   {{> common/floodline}}
   <br>
   <p>
     <a href="/">View the flood risk information for another location</a>
   </p>
+</div>
+<div id="risk-detail">
+  {{> risk/lowRiskDetail}}
 </div>
