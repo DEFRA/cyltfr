@@ -79,6 +79,17 @@
         }
       }
     }
+
+    #risk-detail {
+      .column-quarter {
+        img {
+          width: 90px;
+          @include media(tablet) {
+            float: right;
+          }
+        }
+      }
+    }
   }
 }
 
