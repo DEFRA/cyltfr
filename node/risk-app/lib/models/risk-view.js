@@ -48,6 +48,7 @@ function RiskViewModel (risk, address) {
   if (risk.reservoirRisk) {
     this.reservoirs = [{
       name: risk.reservoirRisk.reservoirName,
+      owner: risk.reservoirRisk.leadLocalFloodAuthority,
       authority: risk.reservoirRisk.leadLocalFloodAuthority,
       location: risk.reservoirRisk.location
     }]
