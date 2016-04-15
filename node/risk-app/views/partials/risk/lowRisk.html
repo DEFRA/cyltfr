@@ -11,14 +11,12 @@
     <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}">View maps showing the potential extent of flooding in this location</a>
   </p>
   <p>
-    <a href="#risk-detail" toggle>View detailed flood risk information for this area</a>
+    <a href="/risk-detail?address={{address}}">View detailed flood risk information for this area</a>
   </p>
   {{> common/floodline}}
   <br>
   <p>
     <a href="/">View the flood risk information for another location</a>
   </p>
-</div>
-<div id="risk-detail">
-  {{> risk/lowRiskDetail}}
+  <datetime class="date" datetime="{{date}}">{{formatDate date 'DD MMMM YYYY'}}</datetime>
 </div>

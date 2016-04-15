@@ -4,6 +4,7 @@
 # npm run watch:js -- home
 # npm run watch:js -- search
 # npm run watch:js -- risk
+# npm run watch:js -- risk-detail
 # npm run watch:js -- map
 
 case "$1" in
@@ -19,6 +20,10 @@ case "$1" in
 'risk')
   echo "Watching risk.js"
   watchify assets/javascripts/risk/index.js -d -o 'exorcist public/javascripts/risk.js.map > public/javascripts/risk.js'
+  ;;
+'risk-detail')
+  echo "Watching risk-detail.js"
+  watchify assets/javascripts/risk-detail/index.js -d -o 'exorcist public/javascripts/risk-detail.js.map > public/javascripts/risk-detail.js'
   ;;
 'map')
   echo "Watching map.js"

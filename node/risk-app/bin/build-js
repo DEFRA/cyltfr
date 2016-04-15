@@ -2,4 +2,5 @@ browserify assets/javascripts/core/index.js -d -s LTFRI.Global | exorcist public
 browserify assets/javascripts/home/index.js -d -s LTFRI.HomePage | exorcist public/javascripts/home.js.map > public/javascripts/home.js &&
 browserify assets/javascripts/search/index.js -d -s LTFRI.SearchPage | exorcist public/javascripts/search.js.map > public/javascripts/search.js &&
 browserify assets/javascripts/risk/index.js -d -s LTFRI.RiskPage | exorcist public/javascripts/risk.js.map > public/javascripts/risk.js &&
+browserify assets/javascripts/risk-detail/index.js -d -s LTFRI.RiskDetailPage | exorcist public/javascripts/risk-detail.js.map > public/javascripts/risk-detail.js &&
 browserify assets/javascripts/map/index.js -d -s LTFRI.MapPage | exorcist public/javascripts/map.js.map > public/javascripts/map.js
