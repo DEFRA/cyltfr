@@ -11,7 +11,6 @@
 
   .map {
     height: 648px;
-    width: 100%;
 
     @include media(tablet) {
       border: solid $yellow;
@@ -55,7 +54,7 @@
           padding: 14px;
           position: absolute;
           top: 2px;
-          right: -10px;
+          right: 2px;
           width: 90px;
           bottom: 2px;
           text-align: center;
@@ -205,18 +204,22 @@
 
   .map:-moz-full-screen {
     height: 100%;
+    width: 100%;
   }
 
   .map:-webkit-full-screen {
     height: 100%;
+    width: 100%;
   }
 
   .map:-ms-fullscreen {
     height: 100%;
+    width: 100%;
   }
 
   .map:fullscreen {
     height: 100%;
+    width: 100%;
   }
 
   .ol-rotate {
