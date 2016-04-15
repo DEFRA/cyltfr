@@ -3,7 +3,10 @@ var loadMap = require('./map')
 var Maps = require('../../../lib/models/maps')
 var maps = new Maps()
 
-loadMap.loadMap()
+var easting = getParameterByName('easting')
+var northing = getParameterByName('northing')
+
+loadMap.loadMap(easting ? [easting, northing] : undefined)
 
 function generateLegend (meta) {
   var str = '<ul>'
@@ -84,12 +87,6 @@ $(function () {
     })
 
     setCurrent(getParameterByName('map'))
-
-    var easting = getParameterByName('easting')
-    var northing = getParameterByName('northing')
-    if (easting && northing) {
-      loadMap.panTo(easting, northing)
-    }
   })
 
   $('.feature-popup-closer').click(function () {
