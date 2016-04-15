@@ -11,6 +11,7 @@
 
   .map {
     height: 648px;
+    width: 100%;
 
     @include media(tablet) {
       border: solid $yellow;
@@ -54,7 +55,7 @@
           padding: 14px;
           position: absolute;
           top: 2px;
-          right: 2px;
+          right: -10px;
           width: 90px;
           bottom: 2px;
           text-align: center;
