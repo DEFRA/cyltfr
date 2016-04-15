@@ -45,11 +45,22 @@ function RiskViewModel (risk, address) {
     this.reservoirRisk = reservoirRisk.toLowerCase()
   }
 
+  if (risk.reservoirRisk) {
+    this.reservoirs = [{
+      name: risk.reservoirRisk.reservoirName,
+      owner: risk.reservoirRisk.leadLocalFloodAuthority,
+      authority: risk.reservoirRisk.leadLocalFloodAuthority,
+      location: risk.reservoirRisk.location
+    }]
+  }
+
   this.easting = address.x
   this.northing = address.y
   this.postcode = address.postcode
   this.lines = address.address.split(', ')
   this.address = address.uprn
+  this.surfaceWaterManagement = risk.leadLocalFloodAuthority
+  this.leadLocalFloodAuthority = risk.leadLocalFloodAuthority
   this.className = this.isRisk ? 'at-risk' : 'low-risk'
   this.date = Date.now()
 }

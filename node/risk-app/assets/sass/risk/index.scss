@@ -40,8 +40,8 @@
       padding: 10px;
       border: solid 5px #000;
 
-      .heading-small {
-        font-weight: normal;
+      .heading-large {
+        margin-top: 0.75em;
       }
 
       .heading-medium {
@@ -79,5 +79,31 @@
         }
       }
     }
+
+    #risk-detail {
+      .column-quarter {
+        img {
+          width: 90px;
+          @include media(tablet) {
+            float: right;
+          }
+        }
+      }
+    }
+  }
+}
+
+.js-enabled {
+  #risk-detail {
+    display: none;
+  }
+}
+
+.risk.detail {
+  #risk-summary {
+    display: none;
+  }
+  #risk-detail {
+    display: block;
   }
 }
