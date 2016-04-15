@@ -1,0 +1,60 @@
+<link rel="stylesheet" type="text/css" href="{{{assetPath}}}stylesheets/risk-detail/index.css">
+<main id="risk-detail-page">
+  <section class="risk {{className}}">
+    <header>
+      {{#if isAtRisk}}
+        <img class="visible-mobile" src="{{assetPath}}images/at-risk-icon.png" alt="At risk of flooding">
+      {{/if}}
+      <address>
+        {{#each lines}}
+          {{this}}<br>
+        {{/each}}
+      </address>
+    </header>
+    <article>
+      {{#if isRisk}}
+        {{> risk/atRiskDetail}}
+      {{else}}
+        {{> risk/lowRiskDetail}}
+      {{/if}}
+    </article>
+  </section>
+  <br>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <section class="secondary-links">
+        <div class="grid-row">
+          <div class="column-half">
+            <a class="media" href="{{{floodWarningsUrl}}}/warnings?location={{{postcode}}}">
+              <img class="img" src="{{{assetPath}}}images/ball-warnings.png" alt="Are there any current flood warnings here?">
+              <span class="content">Are there any current flood warnings here?</span>
+            </a>
+          </div>
+          <div class="column-half">
+            <a class="media" href="{{{floodWarningsUrl}}}">
+              <img class="img" src="{{{assetPath}}}images/ball-home.png" alt="National flood information service">
+              <span class="content">National flood information service</span>
+            </a>
+          </div>
+        </div>
+        {{#if isRisk}}
+          <div class="grid-row">
+            <div class="column-half">
+              <a class="media" href="{{{floodWarningsUrl}}}/river-and-sea-levels">
+                <img class="img" src="{{{assetPath}}}images/ball-river-sea-level.png" alt="View the latest river and sea levels near you">
+                <span class="content">View the latest river and sea levels near you</span>
+              </a>
+            </div>
+            <div class="column-half">
+              <a class="media" href="{{{floodWarningsUrl}}}/map">
+                <img class="img" src="{{{assetPath}}}images/ball-map.png" alt="View the current national flood situation">
+                <span class="content">View the current national flood situation</span>
+              </a>
+            </div>
+          </div>
+        {{/if}}
+      </section>
+    </div>
+  </div>
+</main>
+<script src="{{{assetPath}}}javascripts/risk-detail.js"></script>

@@ -75,7 +75,7 @@
               <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}">View maps showing the potential extent of flooding in this location</a>
             </p>
             <p>
-              <a href="#risk-detail" toggle>View detailed flood risk information for this area</a>
+              <a href="/risk-detail?address={{address}}">View detailed flood risk information for this area</a>
             </p>
           </div>
           {{> common/floodline}}
@@ -88,7 +88,4 @@
       </ol>
     </div>
   </div>
-</div>
-<div id="risk-detail">
-  {{> risk/atRiskDetail}}
 </div>
