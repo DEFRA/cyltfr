@@ -171,48 +171,54 @@ function loadMap (point) {
 
     // Map interaction functions
     map.on('singleclick', function (e) {
-      if (!bullseye(e.pixel)) {
-        return
-      }
+      // TODO: this needs to be only for the flood depth layer but we don't have technical details yet.
+      // depends on FLO-901
+      return
 
-      var url = currentLayer.getSource().getGetFeatureInfoUrl(
-        e.coordinate,
-        map.getView().getResolution(),
-        config.projection.ref, {
-          INFO_FORMAT: 'application/json',
-          FEATURE_COUNT: 10
-        }
-      )
-
-      $.get(url, function (data) {
-        // At some point will need some logic to decide which polygon to query, as low medium high maps may have overlapping
-        // and potentially only the highest details will want to be used.
-        closePopup()
-        highlightSource.clear()
-
-        highlightSource.addFeatures((new ol.format.GeoJSON()).readFeatures(data))
-
-        // strip out the geoms for text temporarily
-
-        var textReturn = data.features.length + ' features. </br>'
-
-        for (var i = 0; i < data.features.length; i++) {
-          textReturn += data.features[i].id + ': ' + JSON.stringify(data.features[i].properties) + '</br>'
-        }
-
-        $('.feature-popup-content').html(textReturn)
-        overlay.setPosition(e.coordinate)
-      })
+      // if (!bullseye(e.pixel)) {
+      //   return
+      // }
+      //
+      // var url = currentLayer.getSource().getGetFeatureInfoUrl(
+      //   e.coordinate,
+      //   map.getView().getResolution(),
+      //   config.projection.ref, {
+      //     INFO_FORMAT: 'application/json',
+      //     FEATURE_COUNT: 10
+      //   }
+      // )
+      //
+      // $.get(url, function (data) {
+      //   // At some point will need some logic to decide which polygon to query, as low medium high maps may have overlapping
+      //   // and potentially only the highest details will want to be used.
+      //   closePopup()
+      //   highlightSource.clear()
+      //
+      //   highlightSource.addFeatures((new ol.format.GeoJSON()).readFeatures(data))
+      //
+      //   // strip out the geoms for text temporarily
+      //
+      //   var textReturn = data.features.length + ' features. </br>'
+      //
+      //   for (var i = 0; i < data.features.length; i++) {
+      //     textReturn += data.features[i].id + ': ' + JSON.stringify(data.features[i].properties) + '</br>'
+      //   }
+      //
+      //   $('.feature-popup-content').html(textReturn)
+      //   overlay.setPosition(e.coordinate)
+      // })
     })
 
     map.on('pointermove', function (evt) {
-      if (evt.dragging) {
-        return
-      }
-
-      var pixel = map.getEventPixel(evt.originalEvent)
-
-      document.body.style.cursor = bullseye(pixel) ? 'pointer' : 'default'
+      // TODO: again dependent on FLO-901
+      return
+      // if (evt.dragging) {
+      //   return
+      // }
+      //
+      // var pixel = map.getEventPixel(evt.originalEvent)
+      //
+      // document.body.style.cursor = bullseye(pixel) ? 'pointer' : 'default'
     })
 
     if (callback) {
