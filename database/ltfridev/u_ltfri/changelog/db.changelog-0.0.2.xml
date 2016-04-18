@@ -4,6 +4,13 @@ xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 xmlns:ora="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-	<include file="./changelog/db.changelog-0.0.1.xml" />
-	<include file="./changelog/db.changelog-0.0.2.xml" />
+		<changeSet author="pmshaw" id="2">
+		<sqlFile path="./0.0.2/u_ltfri.calculate_flood_risk.sql" splitStatements="false"/>
+		<rollback>
+			DROP FUNCTION u_ltfri.calculate_flood_risk(numeric, numeric, integer);
+		</rollback>
+		<rollback>
+			<sqlFile path="./0.0.1/u_ltfri.calculate_flood_risk.sql" splitStatements="false"/>
+		</rollback>
+	</changeSet>
 </databaseChangeLog>
