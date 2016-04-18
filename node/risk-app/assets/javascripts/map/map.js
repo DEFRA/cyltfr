@@ -7,7 +7,7 @@ var wmsparser = new ol.format.WMSCapabilities()
 var config = require('./map-config.json')
 var map, callback, currentLayer, highlightSource, overlay
 
-function loadMap () {
+function loadMap (point) {
   // add the projection to Window.proj4
   window.proj4.defs(config.projection.ref, config.projection.proj4)
 
@@ -52,24 +52,6 @@ function loadMap () {
     // add the base map layer
     layers.push(layer)
 
-    // This commented code is to plug in the WMTS layers, below it plugs in the WMS-C layers
-
-  /*  var sw_result = parser.read(GS[0])
-
-    for (var i = 0; i < sw_result.Contents.Layer.length; i++) {
-
-      var WMTSoptions = ol.source.WMTS.optionsFromCapabilities(sw_result, {layer: sw_result.Contents.Layer[i].Identifier, matrixSet: config.projection.ref})
-      WMTSoptions.urls = [config.GSWMTS]
-      var WMTSSource = new ol.source.WMTS(WMTSoptions)
-
-      layers.push(new ol.layer.Tile({
-        ref: sw_result.Contents.Layer[i].Identifier,
-        source: WMTSSource,
-        opacity: 0.8,
-        visible: false
-      }))
-    }
-*/
     var wmsResult = wmsparser.read(WMS[0])
 
     // I can't find a better way of doing this for a tileWMS source, WMTS souce has
@@ -139,6 +121,23 @@ function loadMap () {
     })
 
     layers.push(highlightLayer)
+    if (point) {
+      var centreLayer = new ol.layer.Vector({
+        ref: 'crosshair',
+        visible: true,
+        source: new ol.source.Vector({
+          features: [new ol.Feature({
+            geometry: new ol.geom.Point(point)
+          })]
+        }),
+        style: new ol.style.Style({
+          image: new ol.style.Icon({
+            src: '/public/images/crosshair.png'
+          })
+        })
+      })
+      layers.push(centreLayer)
+    }
 
     var popup = document.getElementById('feature-popup')
 
@@ -164,56 +163,62 @@ function loadMap () {
       view: new ol.View({
         resolutions: source.tileGrid.getResolutions(),
         projection: projection,
-        center: [440000, 310000],
-        zoom: 0,
+        center: point ? point : [440000, 310000],
+        zoom: point ? 9 : 0,
         extent: config.projection.extent
       })
     })
 
     // Map interaction functions
     map.on('singleclick', function (e) {
-      if (!bullseye(e.pixel)) {
-        return
-      }
+      // TODO: this needs to be only for the flood depth layer but we don't have technical details yet.
+      // depends on FLO-901
+      return
 
-      var url = currentLayer.getSource().getGetFeatureInfoUrl(
-        e.coordinate,
-        map.getView().getResolution(),
-        config.projection.ref, {
-          INFO_FORMAT: 'application/json',
-          FEATURE_COUNT: 10
-        }
-      )
-
-      $.get(url, function (data) {
-        // At some point will need some logic to decide which polygon to query, as low medium high maps may have overlapping
-        // and potentially only the highest details will want to be used.
-        closePopup()
-        highlightSource.clear()
-
-        highlightSource.addFeatures((new ol.format.GeoJSON()).readFeatures(data))
-
-        // strip out the geoms for text temporarily
-
-        var textReturn = data.features.length + ' features. </br>'
-
-        for (var i = 0; i < data.features.length; i++) {
-          textReturn += data.features[i].id + ': ' + JSON.stringify(data.features[i].properties) + '</br>'
-        }
-
-        $('.feature-popup-content').html(textReturn)
-        overlay.setPosition(e.coordinate)
-      })
+      // if (!bullseye(e.pixel)) {
+      //   return
+      // }
+      //
+      // var url = currentLayer.getSource().getGetFeatureInfoUrl(
+      //   e.coordinate,
+      //   map.getView().getResolution(),
+      //   config.projection.ref, {
+      //     INFO_FORMAT: 'application/json',
+      //     FEATURE_COUNT: 10
+      //   }
+      // )
+      //
+      // $.get(url, function (data) {
+      //   // At some point will need some logic to decide which polygon to query, as low medium high maps may have overlapping
+      //   // and potentially only the highest details will want to be used.
+      //   closePopup()
+      //   highlightSource.clear()
+      //
+      //   highlightSource.addFeatures((new ol.format.GeoJSON()).readFeatures(data))
+      //
+      //   // strip out the geoms for text temporarily
+      //
+      //   var textReturn = data.features.length + ' features. </br>'
+      //
+      //   for (var i = 0; i < data.features.length; i++) {
+      //     textReturn += data.features[i].id + ': ' + JSON.stringify(data.features[i].properties) + '</br>'
+      //   }
+      //
+      //   $('.feature-popup-content').html(textReturn)
+      //   overlay.setPosition(e.coordinate)
+      // })
     })
 
     map.on('pointermove', function (evt) {
-      if (evt.dragging) {
-        return
-      }
-
-      var pixel = map.getEventPixel(evt.originalEvent)
-
-      document.body.style.cursor = bullseye(pixel) ? 'pointer' : 'default'
+      // TODO: again dependent on FLO-901
+      return
+      // if (evt.dragging) {
+      //   return
+      // }
+      //
+      // var pixel = map.getEventPixel(evt.originalEvent)
+      //
+      // document.body.style.cursor = bullseye(pixel) ? 'pointer' : 'default'
     })
 
     if (callback) {
@@ -227,7 +232,7 @@ function showMap (ref) {
   closePopup()
   map.getLayers().forEach(function (layer) {
     var name = layer.getProperties().ref
-    if (name !== config.OSLayer && name !== 'overlay') {
+    if (name !== config.OSLayer && name !== 'overlay' && name !== 'crosshair') {
       currentLayer = name === ref ? layer : currentLayer
       layer.setVisible(name === ref)
     }
@@ -249,16 +254,10 @@ function closePopup () {
   return false
 }
 
-function panTo (easting, northing) {
-  map.getView().setCenter([easting, northing])
-  map.getView().setZoom(9)
-}
-
 module.exports = {
   loadMap: loadMap,
   showMap: showMap,
   closePopup: closePopup,
-  panTo: panTo,
   onReady: function (fn) {
     callback = fn
   }
