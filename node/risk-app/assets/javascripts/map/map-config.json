@@ -8,8 +8,6 @@
   "OSAttribution": "&#169; Crown copyright and database rights 2015 <a href='http://www.ordnancesurvey.co.uk'>Ordnance Survey</a>",
   "OSLayer": "osgb",
   "OSMatrixSet": "ZoomMap",
-  "GSGetCapabilities": "/geoserver/gwc/service/wmts?REQUEST=GetCapabilities",
-  "GSWMTS": "/geoserver/gwc/service/wmts?",
-  "GSWMSGetCapabilities": "/geoserver/gwc/service/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=getcapabilities&TILED=true",
-  "GSWMS": "/geoserver/gwc/service/wms?"
+  "GSWMSGetCapabilities": "/gwc-proxy?SERVICE=WMS&VERSION=1.1.1&REQUEST=getcapabilities&TILED=true",
+  "GSWMS": "/gwc-proxy?"
 }

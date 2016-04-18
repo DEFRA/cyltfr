@@ -15,7 +15,7 @@ function loadMap (point) {
 
   projection.setExtent(config.projection.extent)
 
-  $.when($.get(config.OSGetCapabilities), /* $.get(config.GSGetCapabilities), */$.get(config.GSWMSGetCapabilities)).done(function (OS, /* GS, */ WMS) {
+  $.when($.get(config.OSGetCapabilities), $.get(config.GSWMSGetCapabilities)).done(function (OS, /* GS, */ WMS) {
     // bug: parser is not getting the matrixwidth and matrixheight values when parsing,
     // therefore sizes is set to undefined array, which sets fullTileRanges_
     // to an array of undefineds thus breaking the map
