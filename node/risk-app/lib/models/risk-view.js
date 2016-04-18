@@ -22,8 +22,7 @@ function RiskViewModel (risk, address) {
     this.status = RiskStatus.AtRisk
   } else {
     if ((riverAndSeaRisk === RiskLevel.High || riverAndSeaRisk === RiskLevel.Medium) ||
-        (surfaceWaterRisk === RiskLevel.High || surfaceWaterRisk === RiskLevel.Medium) ||
-        (reservoirRisk === RiskLevel.High)) {
+        (surfaceWaterRisk === RiskLevel.High || surfaceWaterRisk === RiskLevel.Medium)) {
       this.status = RiskStatus.AtRiskMonitor
     } else {
       if (riverAndSeaRisk === RiskLevel.VeryLow && surfaceWaterRisk === RiskLevel.VeryLow) {
