@@ -5,7 +5,7 @@
     </div>
     <div class="column-three-quarters">
       <div class="panel panel-border-wide hidden-mobile">
-        <h1 class="heading-medium">This address is in a flood risk area</h1>
+        <h1 class="heading-large">This address is in a flood risk area</h1>
         <h1 class="heading-medium">Be prepared: things you should do</h1>
       </div>
       <div class="visible-mobile">
@@ -63,16 +63,16 @@
         <li>
           <div class="panel panel-border-wide">
             <p>
-              The flood risk in this area from rivers or the sea is {{riverAndSeaRisk}}
+              This address is in a flood risk area.<br>
             </p>
             <p>
-              The flood risk in this area from surface water is {{surfaceWaterRisk}}<br>
+              The flood risk from rivers or the sea is {{riverAndSeaRisk}} <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}&map=RiversOrSea">See map</a>
             </p>
             <p>
-              The flood risk in this area from reservoirs is {{reservoirRisk}}
+              The flood risk from surface water is {{surfaceWaterRisk}} <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}&map=SurfaceWater">See map</a>
             </p>
             <p>
-              <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}">View maps showing the potential extent of flooding in this location</a>
+              The flood risk from reservoirs is {{reservoirRisk}} <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}&map=Reservoirs">See map</a>
             </p>
             <p>
               <a href="/risk-detail?address={{address}}">View detailed flood risk information for this area</a>
