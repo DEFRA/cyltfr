@@ -27,12 +27,20 @@
       }
     }
 
-    &.low-risk header {
+    &.low-risk {
+      header {
       background-color: #28A197;
 
-      address {
-        color: #fff;
-        font-style: normal;
+        address {
+          color: #fff;
+          font-style: normal;
+        }
+      }
+      article {
+        padding: 20px 20px 30px 20px;
+      }
+      .list-bullet {
+        margin-left: 15px;
       }
     }
 
@@ -53,7 +61,21 @@
           max-width: 100%;
           max-height: 140px;
           vertical-align: middle;
+          float: right;
         }
+      }
+
+      .column-three-quarters {
+        .panel {
+          margin-bottom: 45px;
+        }
+        ol {
+          .panel {
+            padding-top: 0px;
+            padding-bottom: 0px;
+          }
+        }
+
       }
 
       ol {
@@ -79,6 +101,8 @@
         }
       }
     }
+
+
 
     #risk-detail {
       .column-quarter {
