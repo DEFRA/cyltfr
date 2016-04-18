@@ -3,6 +3,8 @@
 @import "css3";
 
 #risk-page {
+  @import "../risk";
+
   .risk {
     header {
       padding: 10px;
@@ -18,44 +20,7 @@
       }
     }
 
-    &.at-risk header {
-      background-color: #FFBF47;
-
-      address {
-        color: #000;
-        font-style: normal;
-      }
-    }
-
-    &.low-risk {
-      header {
-      background-color: #28A197;
-
-        address {
-          color: #fff;
-          font-style: normal;
-        }
-      }
-      article {
-        padding: 20px 20px 30px 20px;
-      }
-      .list-bullet {
-        margin-left: 15px;
-      }
-    }
-
     article {
-      padding: 10px;
-      border: solid 5px #000;
-
-      .heading-large {
-        margin-top: 0.75em;
-      }
-
-      .heading-medium {
-        margin-top: 0.75em;
-      }
-
       .column-quarter {
         img {
           max-width: 100%;
@@ -63,19 +28,6 @@
           vertical-align: middle;
           float: right;
         }
-      }
-
-      .column-three-quarters {
-        .panel {
-          margin-bottom: 45px;
-        }
-        ol {
-          .panel {
-            padding-top: 0px;
-            padding-bottom: 0px;
-          }
-        }
-
       }
 
       ol {
@@ -101,33 +53,5 @@
         }
       }
     }
-
-
-
-    #risk-detail {
-      .column-quarter {
-        img {
-          width: 90px;
-          @include media(tablet) {
-            float: right;
-          }
-        }
-      }
-    }
-  }
-}
-
-.js-enabled {
-  #risk-detail {
-    display: none;
-  }
-}
-
-.risk.detail {
-  #risk-summary {
-    display: none;
-  }
-  #risk-detail {
-    display: block;
   }
 }
