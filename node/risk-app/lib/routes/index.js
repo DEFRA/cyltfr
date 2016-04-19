@@ -8,5 +8,6 @@ module.exports = [
   require('./gwc-proxy'),
   require('./robots'),
   require('./banner'),
-  require('./404')
+  require('./404'),
+  require('./os-get-capabilities')
 ]

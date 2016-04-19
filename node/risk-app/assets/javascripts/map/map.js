@@ -1,6 +1,7 @@
 var $ = require('jquery')
 // proj4 is accessed using global variable within openlayers library
 window.proj4 = require('proj4')
+var raf = require('raf')
 var ol = require('openlayers')
 var parser = new ol.format.WMTSCapabilities()
 var wmsparser = new ol.format.WMSCapabilities()
@@ -11,11 +12,14 @@ function loadMap (point) {
   // add the projection to Window.proj4
   window.proj4.defs(config.projection.ref, config.projection.proj4)
 
+  // ie9 requires polyfill for window.requestAnimationFrame
+  raf.polyfill()
+
   var projection = ol.proj.get(config.projection.ref)
 
   projection.setExtent(config.projection.extent)
 
-  $.when($.get(config.OSGetCapabilities), $.get(config.GSWMSGetCapabilities)).done(function (OS, /* GS, */ WMS) {
+  $.when($.get(config.OSGetCapabilities), $.get(config.GSWMSGetCapabilities)).done(function (OS, WMS) {
     // bug: parser is not getting the matrixwidth and matrixheight values when parsing,
     // therefore sizes is set to undefined array, which sets fullTileRanges_
     // to an array of undefineds thus breaking the map

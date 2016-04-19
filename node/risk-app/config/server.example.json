@@ -39,6 +39,7 @@
   "ordnanceSurvey": {
     "key": "",
     "urlUprn": "",
-    "urlPostcode": ""
+    "urlPostcode": "",
+    "urlGetCapabilities": ""
   }
 }

@@ -38,6 +38,7 @@
     "moment": "2.11.2",
     "openlayers": "3.14.0",
     "proj4": "2.3.12",
+    "raf": "3.2.0",
     "sprintf-js": "1.0.3",
     "vision": "4.0.1",
     "wreck": "7.0.0"
