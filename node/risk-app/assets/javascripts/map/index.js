@@ -9,7 +9,18 @@ var northing = getParameterByName('northing')
 loadMap.loadMap(easting ? [easting, northing] : undefined)
 
 function generateLegend (meta) {
-  var str = '<ul>'
+  var str = ''
+
+  if (meta.title) {
+    str += '<h4 class="heading-small">' + meta.title + '</h4>'
+  }
+
+  if (meta.subTitle) {
+    str += '<h5 class="subtitle">' + meta.subTitle + '</h5>'
+  }
+
+  str += '<br><ul>'
+
   var keys = meta.keys
   var key
   for (var i = 0; i < keys.length; i++) {
