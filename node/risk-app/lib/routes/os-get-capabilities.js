@@ -1,8 +1,8 @@
 var Boom = require('boom')
+var config = require('../../config')
 var wreck = require('wreck').defaults({
   timeout: config.httpTimeoutMs
 })
-var config = require('../../config')
 
 module.exports = {
   method: 'GET',
