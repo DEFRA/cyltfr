@@ -5,8 +5,9 @@ module.exports = [
   require('./risk-detail'),
   require('./map'),
   require('./statics'),
-  require('./proxy'),
+  require('./gwc-proxy'),
   require('./robots'),
   require('./banner'),
-  require('./404')
+  require('./404'),
+  require('./os-get-capabilities')
 ]

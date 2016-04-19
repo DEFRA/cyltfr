@@ -15,7 +15,8 @@ var serviceSchema = Joi.object().required().keys({
 var ordnanceSurveySchema = Joi.object().required().keys({
   key: Joi.string().required(),
   urlUprn: Joi.string().uri().required(),
-  urlPostcode: Joi.string().uri().required()
+  urlPostcode: Joi.string().uri().required(),
+  urlGetCapabilities: Joi.string().uri().required()
 })
 
 module.exports = {
