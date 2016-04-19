@@ -167,7 +167,7 @@ function loadMap (point) {
       view: new ol.View({
         resolutions: source.tileGrid.getResolutions(),
         projection: projection,
-        center: point ? point : [440000, 310000],
+        center: point || [440000, 310000],
         zoom: point ? 9 : 0,
         extent: config.projection.extent
       })
@@ -243,14 +243,14 @@ function showMap (ref) {
   })
 }
 
-function bullseye (pixel) {
-  return map.forEachLayerAtPixel(pixel, function (layer) {
-    return true
-  }, null, function (layer) {
-    // filter function to only check current risk layer
-    return layer === currentLayer
-  })
-}
+// function bullseye (pixel) {
+//   return map.forEachLayerAtPixel(pixel, function (layer) {
+//     return true
+//   }, null, function (layer) {
+//     // filter function to only check current risk layer
+//     return layer === currentLayer
+//   })
+// }
 
 function closePopup () {
   overlay.setPosition()
