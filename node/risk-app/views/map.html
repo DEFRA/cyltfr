@@ -2,16 +2,18 @@
 <link rel="stylesheet" type="text/css" href="{{{assetPath}}}stylesheets/map/index.css">
 <main id="map-page">
   <h1 class="heading-xlarge">Learn more about this area's flood risk</h1>
-  <p>
-    From the list on the left, select the information you're interested in. The map view will then update. 'Detailed view' shows more options.
-  </p>
-  <p>
-    Use this information to see which areas are more likely to flood, how deep the flooding might be and the direction in which the flood water could move.
-  </p>
-  <p>
-    Land areas not highlighted as high, medium or low risk should be considered very low risk.
-  </p>
-  <div class="map-container">
+  <div class="nojs-hide ie-hide">
+    <p>
+      From the list on the left, select the information you're interested in. The map view will then update. 'Detailed view' shows more options.
+    </p>
+    <p>
+      Use this information to see which areas are more likely to flood, how deep the flooding might be and the direction in which the flood water could move.
+    </p>
+    <p>
+      Land areas not highlighted as high, medium or low risk should be considered very low risk.
+    </p>
+  </div>
+  <div class="map-container nojs-hide ie-hide">
     <div class="map-switch hidden-mobile">
       <a>
       Basic view&nbsp;
@@ -34,6 +36,14 @@
         </aside>
       </div>
     </div>
+  </div>
+  <div class="nojs-show">
+    <p><strong>You&#39;re missing out. A map should be visible here.</strong></p>
+    <p>Javascript must be enabled.</p>
+  </div>
+  <div class="ie-show">
+    <p><strong>You&#39;re missing out. A map should be visible here.</strong></p>
+    <p><a href="https://www.gov.uk/help/browsers" rel="external">Upgrade your browser to see and use all the features of this service.</a></p>
   </div>
   <p><a href="/risk?address={{address}}">View the flood risk information for the location you originally searched for</a></p>
   <p><a href="/">View the flood risk information for another location</a></p>
