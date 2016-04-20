@@ -51,11 +51,18 @@ function RiskViewModel (risk, address) {
         name: item.reservoirName,
         owner: item.isUtilityCompany,
         authority: item.leadLocalFloodAuthority,
-        location: helpers.convertLocationToNGR(item.location)
+        location: helpers.convertLocationToNGR(item.location),
+        riskDesignation: item.riskDesignation,
+        comments: item.comments
       }
     })
   }
 
+  if (risk.riverAndSeaRisk) {
+    this.riverAndSeaRiskSuitability = risk.riverAndSeaRisk.suitability
+  }
+
+  this.surfaceWaterSuitability = risk.surfaceWaterSuitability
   this.extraInfo = risk.extraInfo
   this.easting = address.x
   this.northing = address.y

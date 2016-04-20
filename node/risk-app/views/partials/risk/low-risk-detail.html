@@ -26,7 +26,8 @@
 
       <h3 class="heading-small">How to use this information</h3>
       <p>
-        You can use this information to <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}&map=RiversOrSea">see which areas are more likely to flood first, deepest, or most often.</a>
+        You can use this information to <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}&map=RiversOrSea">see which areas are more likely to flood first,
+         deepest, or most often.</a> {{riverAndSeaRiskSuitability}}
       </p>
 
       <h3 class="heading-small">Planning a development</h3>
@@ -57,7 +58,7 @@
       <h3 class="heading-small">How to use this information</h3>
       <p>
         You can use this information to <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}&map=SurfaceWater">see the approximate areas that would flood,
-         and which parts would be shallower or deeper.</a>
+         and which parts would be shallower or deeper.</a> {{surfaceWaterSuitability}}
       </p>
     </div>
   </div>
@@ -92,6 +93,8 @@
             <strong class="bold-small">{{name}}</strong>, (grid reference {{location}})<br>
             Owner: {{owner}}<br>
             Lead Local Flood Authority: {{authority}}<br>
+            Risk Designation: {{riskDesignation}}<br>
+            Comments: {{comments}}<br>
           </p>
         {{/each}}
       </div>
@@ -118,7 +121,7 @@
     </p>
 
     <p>
-      <a href="/risk?address={{address}}" class="link-back">Back to flood risk summary</a>
+      <a href="/risk?address={{address}}">Back to flood risk summary</a>
     </p>
     <datetime class="date" datetime="{{date}}">{{formatDate date 'DD MMMM YYYY'}}</datetime>
   </div>
