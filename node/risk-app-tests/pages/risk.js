@@ -6,14 +6,9 @@ module.exports = {
   },
   commands: [{
     getStatus: function (callback) {
-      var self = this
       this.getAttribute('@main', 'data-test-info', function (result) {
-        callback.call(self, result.value)
+        callback(result.value)
       })
-    },
-    submit: function () {
-      return this.waitForElementVisible('@submitBtn', 1000)
-        .click('@submitBtn')
     }
   }]
 }

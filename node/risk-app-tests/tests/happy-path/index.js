@@ -4,7 +4,7 @@ var searchTests = require('../../common/search')
 var riskTests = require('../../common/risk')
 
 module.exports = {
-  'Low risk': function (client) {
+  'happy-path': function (client) {
     // Loop over each postcode
     data.forEach(function (item) {
       var outcome = item.outcome
