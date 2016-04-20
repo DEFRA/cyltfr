@@ -136,7 +136,7 @@ begin
       -- Default to Unknown when the spatial query return no results.
       coalesce(lead_local_flood_authority_result.lead_local_flood_authority, 'Unknown') as lead_local_flood_authority,
       -- Place extra information in an array.
-      array_agg(extra_info_result.extra_info) as extra_info
+      extra_info_result.extra_info
   )
 
   -- Convert the result to JSON.  Unfortunately this does seem to support camel case attribute names even when camel case aliases are used in the SQL.
