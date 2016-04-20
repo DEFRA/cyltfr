@@ -1,11 +1,11 @@
 {
   "name": "risk-app-e2e",
   "version": "0.0.1",
-  "description": "end to end test project for risk-app",
+  "description": "End to end automated test project for risk-app",
   "main": "index.js",
   "scripts": {
     "lint": "standard",
-    "test-e2e-local": "bin/test-e2e.js --env chrome -c config/nightwatch.json",
+    "test-e2e-local": "bin/test-e2e.js --env chrome -c config/nightwatch.conf.js",
     "test-e2e-remote": "bin/test-e2e.js --env android,iPhone,ie,iPad-Retina,safari -c config/saucelabs.json",
     "test": "npm run lint && npm run test-e2e-local"
   },
