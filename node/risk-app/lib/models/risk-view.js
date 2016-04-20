@@ -1,3 +1,5 @@
+var helpers = require('../helpers')
+
 const RiskStatus = {
   AtRisk: 1,
   AtRiskMonitor: 2,
@@ -39,21 +41,29 @@ function RiskViewModel (risk, address) {
   this.isVeryLowRisk = this.status === RiskStatus.VeryLowRisk
   this.isRisk = this.isAtRisk || this.isAtRiskMonitor
 
-  if (this.isRisk) {
-    this.riverAndSeaRisk = riverAndSeaRisk.toLowerCase()
-    this.surfaceWaterRisk = surfaceWaterRisk.toLowerCase()
-    this.reservoirRisk = reservoirRisk.toLowerCase()
-  }
+  this.riverAndSeaRisk = riverAndSeaRisk.toLowerCase()
+  this.surfaceWaterRisk = surfaceWaterRisk.toLowerCase()
+  this.reservoirRisk = reservoirRisk.toLowerCase()
 
   if (risk.reservoirRisk) {
-    this.reservoirs = [{
-      name: risk.reservoirRisk.reservoirName,
-      owner: risk.reservoirRisk.leadLocalFloodAuthority,
-      authority: risk.reservoirRisk.leadLocalFloodAuthority,
-      location: risk.reservoirRisk.location
-    }]
+    this.reservoirs = risk.reservoirRisk.map(function (item) {
+      return {
+        name: item.reservoirName,
+        owner: item.isUtilityCompany,
+        authority: item.leadLocalFloodAuthority,
+        location: helpers.convertLocationToNGR(item.location),
+        riskDesignation: item.riskDesignation,
+        comments: item.comments
+      }
+    })
   }
 
+  if (risk.riverAndSeaRisk) {
+    this.riverAndSeaRiskSuitability = risk.riverAndSeaRisk.suitability
+  }
+
+  this.surfaceWaterSuitability = risk.surfaceWaterSuitability
+  this.extraInfo = risk.extraInfo
   this.easting = address.x
   this.northing = address.y
   this.postcode = address.postcode

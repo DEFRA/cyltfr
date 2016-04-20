@@ -38,15 +38,17 @@ module.exports = {
         var riverAndSeaRisk = null
 
         if (risk.reservoir_risk) {
-          reservoirRisk = {
-            reservoirName: risk.reservoir_risk.resname,
-            location: risk.reservoir_risk.location,
-            riskDesignation: risk.reservoir_risk.risk_desig,
-            isUtilityCompany: risk.reservoir_risk.utcompany,
-            leadLocalFloodAuthority: risk.reservoir_risk.llfa_name,
-            environmentAgencyArea: risk.reservoir_risk.ea_area,
-            comments: risk.reservoir_risk.comments
-          }
+          reservoirRisk = risk.reservoir_risk.map(function (item) {
+            return {
+              reservoirName: item.resname,
+              location: item.location,
+              riskDesignation: item.risk_desig,
+              isUtilityCompany: item.ut_company,
+              leadLocalFloodAuthority: item.llfa_name,
+              environmentAgencyArea: item.ea_area,
+              comments: item.comments
+            }
+          })
         }
 
         if (risk.rofrs_risk) {
@@ -65,9 +67,9 @@ module.exports = {
           reservoirRisk: reservoirRisk,
           riverAndSeaRisk: riverAndSeaRisk,
           surfaceWaterRisk: risk.surface_water_risk,
-          surfaceWaterSuitability: risk.surface_water_suitability
+          surfaceWaterSuitability: risk.surface_water_suitability,
+          extraInfo: risk.extra_info
         }
-
         reply(response)
       })
     },

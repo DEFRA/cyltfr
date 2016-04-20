@@ -1,81 +1,128 @@
-<h1 class="heading-large">Flood risk technical information for this area</h1>
+<div class="grid-row">
+  <div class="column-quarter">
+    &nbsp;
+  </div>
+  <div class="column-three-quarters">
+    <div class="panel panel-border-wide">
+      <h1 class="heading-large">Detailed flood risk information for this area</h1>
+    </div>
+  </div>
+</div>
 
-<!-- Rivers and the sea -->
-<h2 class="heading-medium">The flood risk from rivers or the sea is {{riverAndSeaRisk}}</h2>
-<h3 class="heading-small">What this means</h3>
-<p>
-  High risk means that each year, this area has a chance of flooding of greater than 1 in 99 (1%).
-  This takes into account the effect of any flood defences in the area.
-  These defences reduce, but do not completely stop the chance of flooding as they can be overtopped, or fail.
-</p>
+<div class="grid-row">
+  <div class="column-quarter">
+    <img src="{{{assetPath}}}images/icon-rivers-sea-inverse.png" alt="Rivers and sea icon">
+  </div>
+  <div class="column-three-quarters">
+    <div class="panel panel-border-wide">
+      <!-- Rivers and the sea -->
+      <h2 class="heading-medium">The flood risk from rivers or the sea is {{riverAndSeaRisk}}</h2>
+      <h3 class="heading-small">What this means</h3>
+      <p>
+        High risk means that each year, this area has a chance of flooding of greater than 1 in 30 (3.3%).
+        This takes into account the effect of any flood defences in the area.
+        These defences reduce, but do not completely stop the chance of flooding as they can be overtopped, or fail.
+      </p>
 
-<h3 class="heading-small">How to use this information</h3>
-<p>
-  You can use this information to see which areas are more likely to flood first, deepest, or most often.
-</p>
+      <h3 class="heading-small">How to use this information</h3>
+      <p>
+        You can use this information to <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}&map=RiversOrSea">see which areas are more likely to flood first,
+         deepest, or most often.</a> {{riverAndSeaRiskSuitability}}
+      </p>
 
-<h3 class="heading-small">Planning a development</h3>
-<p>
-  This information is not suitable for use in land-use planning.
-  If you’re planning a development, you must use the Risk of Flooding for Land-Use Planning (Rivers and Sea) for England or Development Advisory Map for Wales.
-  This is information based on flooding without defences.
-</p>
+      <h3 class="heading-small">Planning a development</h3>
+      <p>
+        This information is not suitable for use in land-use planning.
+        If you’re planning a development, you must use the <a href="http://apps.environment-agency.gov.uk/wiyby/151263.aspx">Risk of Flooding for Land-Use Planning (Rivers and Sea)
+        for England</a> or <a href="http://data.wales.gov.uk/apps/floodmapping/">Development Advisory Map for Wales.</a>
+        This is information based on flooding without defences.
+      </p>
+    </div>
+  </div>
+</div>
 
-<!-- Surface water -->
-<h2 class="heading-medium">The flood risk from surface water is {{surfaceWaterRisk}}</h2>
-<h3 class="heading-small">What this means</h3>
-<p>
-  High risk means that each year, this area has a chance of flooding of greater than 1 in 200 (0.5%).
-  Flooding from surface water is difficult to predict as rainfall location and volume are difficult to forecast.
-</p>
+<div class="grid-row">
+  <div class="column-quarter">
+    <img src="{{{assetPath}}}images/icon-surface-water-inverse.png" alt="Surface water icon">
+  </div>
+  <div class="column-three-quarters">
+    <div class="panel panel-border-wide">
+      <!-- Surface water -->
+      <h2 class="heading-medium">The flood risk from surface water is {{surfaceWaterRisk}}</h2>
+      <h3 class="heading-small">What this means</h3>
+      <p>
+        High risk means that each year, this area has a chance of flooding of greater than 1 in 30 (3.3%).
+        Flooding from surface water is difficult to predict as rainfall location and volume are difficult to forecast.
+      </p>
 
-<h3 class="heading-small">How to use this information</h3>
-<p>
-  You can use this information to see the approximate areas that would flood, and which parts would be shallower or deeper.
-</p>
-
-<h3 class="heading-small">Who’s responsible for surface water flood risk management in this area?</h3>
-<p>
-  Surface water is managed in this area by {{surfaceWaterManagement}}
-</p>
-
-<!-- Reservoirs -->
-<h2 class="heading-medium">The flood risk from reservoirs is {{reservoirRisk}}</h2>
-<h3 class="heading-small">What this means</h3>
-<p>
-  Reservoir flooding is extremely unlikely to happen. There has been no loss of life in the UK from reservoir flooding since 1925.
-</p>
-<p>
-  An area is considered at risk if peoples' lives could be threatened by an uncontrolled release of water from a reservoir.
-</p>
-
-<h3 class="heading-small">How to use this information</h3>
-<p>
-  You can <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}">see which areas and which properties would flood</a>,
-  as well as how deep and fast the water would be.
-</p>
+      <h3 class="heading-small">How to use this information</h3>
+      <p>
+        You can use this information to <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}&map=SurfaceWater">see the approximate areas that would flood,
+         and which parts would be shallower or deeper.</a> {{surfaceWaterSuitability}}
+      </p>
+    </div>
+  </div>
+</div>
 
 {{#if reservoirs}}
-  <h3 class="heading-medium">Reservoirs that could affect this area</h3>
-  {{#each reservoirs}}
-    <strong class="bold-small">{{name}}</strong>, {{location}}<br>
-    Owner: {{authority}}<br>
-    Lead Local Flood Authority: {{authority}}
-  {{/each}}
+  <div class="grid-row">
+    <div class="column-quarter">
+      <img src="{{{assetPath}}}images/icon-reservoir-inverse.png" alt="Reservoir icon">
+    </div>
+    <div class="column-three-quarters">
+      <div class="panel panel-border-wide">
+        <!-- Reservoirs -->
+        <h2 class="heading-medium">There's a risk of flooding in this area from reservoirs</h2>
+        <h3 class="heading-small">What this means</h3>
+        <p>
+          Reservoir flooding is extremely unlikely to happen. There has been no loss of life in the UK from reservoir flooding since 1925.
+        </p>
+        <p>
+          An area is considered at risk if peoples' lives could be threatened by an uncontrolled release of water from a reservoir.
+        </p>
+
+        <h3 class="heading-small">How to use this information</h3>
+        <p>
+          You can <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}&map=Reservoirs">see which areas and which properties would flood</a>,
+          as well as how deep and fast the water would be.
+        </p>
+
+        <h3 class="heading-small">Reservoirs that could affect this area</h3>
+        {{#each reservoirs}}
+          <p>
+            <strong class="bold-small">{{name}}</strong>, (grid reference {{location}})<br>
+            Owner: {{owner}}<br>
+            Lead Local Flood Authority: {{authority}}<br>
+            Risk Designation: {{riskDesignation}}<br>
+            Comments: {{comments}}<br>
+          </p>
+        {{/each}}
+      </div>
+    </div>
+  </div>
 {{/if}}
 
-<br>
-<h3 class="heading-medium">Additional information</h3>
-<h3 class="heading-small">Lead local flood authority</h3>
-<p>
-  {{leadLocalFloodAuthority}}
-</p>
+<div class="grid-row">
+  <div class="column-quarter">
+    &nbsp;
+  </div>
+  <div class="column-three-quarters">
+    <h3 class="heading-medium">Additional information</h3>
+    <h3 class="heading-small">Lead local flood authority</h3>
+    <p>
+      {{leadLocalFloodAuthority}}
+    </p>
+    <p>
+      {{extraInfo}}
+    </p>
 
-<p>
-  <a href="/">View the flood risk information for another location</a>
-</p>
+    <p>
+      <a href="/">View the flood risk information for another location</a>
+    </p>
 
-<p>
-  <a href="/risk?address={{address}}" class="link-back">Back to flood risk summary</a>
-</p>
-<datetime class="date" datetime="{{date}}">{{formatDate date 'DD MMMM YYYY'}}</datetime>
+    <p>
+      <a href="/risk?address={{address}}">Back to flood risk summary</a>
+    </p>
+    <datetime class="date" datetime="{{date}}">{{formatDate date 'DD MMMM YYYY'}}</datetime>
+  </div>
+</div>
