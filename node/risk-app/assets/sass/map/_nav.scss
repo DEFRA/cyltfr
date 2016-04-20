@@ -3,7 +3,7 @@
 .map-container {
   ul.nav {
     li.category {
-      background-color: #585858;
+      background-color: #000;
 
       &:not(:last-child) {
         margin-bottom: 20px;
@@ -43,7 +43,7 @@
 
         &.selected {
           text-decoration: underline;
-          background-color: rgba(255, 207, 116, 0.4);
+          background-color: #ffbf47;
           background-image: url(../../images/icon-radio-on.png);
         }
 

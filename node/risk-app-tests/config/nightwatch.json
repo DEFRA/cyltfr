@@ -2,6 +2,7 @@
   "src_folders": [
     "tests"
   ],
+  "page_objects_path": "pages",
   "output_folder": "reports",
   "test_workers": true,
   "selenium": {
@@ -15,9 +16,8 @@
     }
   },
   "test_settings": {
-    "filter": "tests/common",
     "default": {
-      "launch_url": "http://localhost:3000",
+      "launch_url": "http://localhost:3001",
       "selenium_host": "127.0.0.1",
       "selenium_port": 4444,
       "silent": true,

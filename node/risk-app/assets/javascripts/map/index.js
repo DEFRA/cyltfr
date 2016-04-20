@@ -9,7 +9,18 @@ var northing = getParameterByName('northing')
 loadMap.loadMap(easting ? [easting, northing] : undefined)
 
 function generateLegend (meta) {
-  var str = '<ul>'
+  var str = ''
+
+  if (meta.title) {
+    str += '<h4 class="heading-small">' + meta.title + '</h4>'
+  }
+
+  if (meta.subTitle) {
+    str += '<h5 class="subtitle">' + meta.subTitle + '</h5>'
+  }
+
+  str += '<br><ul>'
+
   var keys = meta.keys
   var key
   for (var i = 0; i < keys.length; i++) {
@@ -34,7 +45,6 @@ $(function () {
   var $selector = $('select', $container)
   var $categories = $sidebar.children('li.category')
   var $maps = $categories.find('li')
-  var $description = $('#category-description')
   // Store a reference to the map legend element
   var $legend = $('.legend')
 
@@ -52,9 +62,6 @@ $(function () {
     $categories.filter('#' + currCategory.ref).addClass(selected)
     $maps.removeClass(selected)
     $maps.filter('#' + currMap.ref).addClass(selected)
-
-    // Update the description
-    $description.html(currCategory.description)
 
     // Update the mobile nav
     $selector.val(currMap.ref)

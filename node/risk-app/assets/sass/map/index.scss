@@ -10,7 +10,7 @@
   }
 
   .map {
-    height: 648px;
+    height: 700px;
 
     @include media(tablet) {
       border: solid $yellow;
@@ -51,25 +51,30 @@
 
       @include media(tablet) {
         .controls {
-          padding: 14px;
           position: absolute;
           top: 2px;
           right: 2px;
-          width: 90px;
+          width: 100px;
           bottom: 2px;
           text-align: center;
         }
       }
 
       .controls {
+        padding: 14px;
         overflow: hidden;
-        background-color: rgba(255, 255, 255, 0.8);
+        color: #fff;
+        background-color: rgba(0, 0, 0, 0.7);
 
         .heading-small {
           font-size: medium;
         }
 
         .legend {
+          .subtitle {
+            font-size: 14px;
+          }
+
           ul {
             font-size: 14px;
             display: inline-block;
@@ -114,7 +119,26 @@
             }
 
             li.arrow::before {
-              content: '\2199';
+              content: '\003C';
+              font-size: x-large;
+              -webkit-transform: rotate(30deg);
+              -moz-transform: rotate(30deg);
+              -o-transform: rotate(30deg);
+              -ms-transform: rotate(30deg);
+              transform: rotate(30deg);
+              
+              @include media(mobile) {
+                line-height: 20px;
+              }
+              @include media(tablet) {
+                line-height: 65px;
+              }
+            }
+
+            @include media(tablet) {
+              li {
+                margin-bottom: 10px;
+              }
             }
 
             @include media(mobile) {
@@ -144,10 +168,6 @@
           }
         }
 
-        @include media(mobile) {
-          padding-top: 20px;
-        }
-
         @include media(tablet) {
           .print {
             left: 0;
@@ -160,14 +180,13 @@
 
       @include media(tablet) {
         .ol-full-screen, .ol-attribution {
-          right: 125px;
+          right: 135px;
         }
       }
     }
 
     .map-switch {
       font-size: 16px;
-      text-align: right;
       margin-bottom: 10px;
 
       a {
