@@ -1,5 +1,6 @@
 var $ = require('jquery')
 var loadMap = require('./map')
+var legendTemplate = require('./legend.hbs')
 var Maps = require('../../../lib/models/maps')
 var maps = new Maps()
 
@@ -7,29 +8,6 @@ var easting = getParameterByName('easting')
 var northing = getParameterByName('northing')
 
 loadMap.loadMap(easting ? [easting, northing] : undefined)
-
-function generateLegend (meta) {
-  var str = ''
-
-  if (meta.title) {
-    str += '<h4 class="heading-small">' + meta.title + '</h4>'
-  }
-
-  if (meta.subTitle) {
-    str += '<h5 class="subtitle">' + meta.subTitle + '</h5>'
-  }
-
-  str += '<br><ul>'
-
-  var keys = meta.keys
-  var key
-  for (var i = 0; i < keys.length; i++) {
-    key = keys[i]
-    str += '<li class="round ' + key.icon + '"><div>' + key.text + '</div></li>'
-  }
-  str += '</ul>'
-  return str
-}
 
 function getParameterByName (name) {
   name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]')
@@ -55,7 +33,7 @@ $(function () {
     var currCategory = maps.currCategory
 
     // Update the legend
-    $legend.html(generateLegend(currMap.legend))
+    $legend.html(legendTemplate(currMap.legend))
 
     // Update the main nav
     $categories.removeClass(selected)
