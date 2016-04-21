@@ -29,7 +29,7 @@
         },
         {
           "ref": "RiversOrSea_2-FWLRSF",
-          "name": "Depth and velocity recorded at monitoring stations",
+          "name": "Depth and Flow recorded at monitoring stations",
           "title": "Flow and water level from rivers and sea flooding",
           "legend": {
             "title": "Select monitoring station",
