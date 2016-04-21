@@ -4,6 +4,7 @@ module.exports = [
   require('./risk'),
   require('./risk-detail'),
   require('./map'),
+  require('./feedback'),
   require('./statics'),
   require('./gwc-proxy'),
   require('./robots'),
