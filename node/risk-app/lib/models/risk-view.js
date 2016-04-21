@@ -18,7 +18,7 @@ function RiskViewModel (risk, address) {
   const inTargetArea = risk.inFloodWarningArea || risk.inFloodAlertArea
   const riverAndSeaRisk = risk.riverAndSeaRisk ? risk.riverAndSeaRisk.probabilityForBand : RiskLevel.VeryLow
   const surfaceWaterRisk = risk.surfaceWaterRisk || RiskLevel.VeryLow
-  const reservoirRisk = risk.reservoirRisk ? RiskLevel.High : RiskLevel.Low
+  const reservoirRisk = !!(risk.reservoirRisk && risk.reservoirRisk.length)
 
   if (inTargetArea) {
     this.status = RiskStatus.AtRisk
@@ -43,9 +43,9 @@ function RiskViewModel (risk, address) {
 
   this.riverAndSeaRisk = riverAndSeaRisk.toLowerCase()
   this.surfaceWaterRisk = surfaceWaterRisk.toLowerCase()
-  this.reservoirRisk = reservoirRisk.toLowerCase()
+  this.reservoirRisk = reservoirRisk
 
-  if (risk.reservoirRisk) {
+  if (reservoirRisk) {
     this.reservoirs = risk.reservoirRisk.map(function (item) {
       return {
         name: item.reservoirName,

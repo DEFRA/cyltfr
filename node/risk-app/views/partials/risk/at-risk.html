@@ -71,9 +71,11 @@
             <p>
               The flood risk from surface water is {{surfaceWaterRisk}} <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}&map=SurfaceWater">See map</a>
             </p>
-            <p>
-              The flood risk from reservoirs is {{reservoirRisk}} <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}&map=Reservoirs">See map</a>
-            </p>
+            {{#if reservoirRisk}}
+              <p>
+                There's a risk of flooding in this area from reservoirs <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}&map=Reservoirs">See map</a>
+              </p>
+            {{/if}}
             <p>
               <a href="/risk-detail?address={{address}}">View detailed flood risk information for this area</a>
             </p>
