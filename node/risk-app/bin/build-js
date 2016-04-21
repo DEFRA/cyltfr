@@ -1,3 +1,3 @@
 browserify assets/javascripts/core/index.js -d -s LTFRI.Core | exorcist public/javascripts/core.js.map > public/javascripts/core.js &&
 browserify assets/javascripts/search/index.js -d -s LTFRI.SearchPage | exorcist public/javascripts/search.js.map > public/javascripts/search.js &&
-browserify assets/javascripts/map/index.js -d -s LTFRI.MapPage | exorcist public/javascripts/map.js.map > public/javascripts/map.js
+browserify assets/javascripts/map/index.js -t hbsfy -d -s LTFRI.MapPage | exorcist public/javascripts/map.js.map > public/javascripts/map.js

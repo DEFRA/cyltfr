@@ -1,0 +1,30 @@
+<h3 class="heading-medium">{{heading}}</h3>
+<p class="lede">The environment agency....</p>
+
+{{#if isRiverLevelStation}}
+  <dl>
+    <dt>flow_30</dt>
+    <dd>{{flow_30}}</dd>
+    <dt>flow_100</dt>
+    <dd>{{flow_100}}</dd>
+    <dt>flow_1000</dt>
+    <dd>{{flow_1000}}</dd>
+    <dt>depth_30</dt>
+    <dd>{{depth_30}}</dd>
+    <dt>depth_100</dt>
+    <dd>{{depth_100}}</dd>
+    <dt>depth_1000</dt>
+    <dd>{{depth_1000}}</dd>
+  </dl>
+{{/if}}
+
+{{#if isCoastalStation}}
+  <dl>
+    <dt>lev_30</dt>
+    <dd>{{lev_30}}</dd>
+    <dt>lev_100</dt>
+    <dd>{{lev_100}}</dd>
+    <dt>lev_1000</dt>
+    <dd>{{lev_1000}}</dd>
+  </dl>
+{{/if}}

@@ -48,6 +48,7 @@
     "exorcist": "0.4.0",
     "govuk-elements-sass": "1.1.2",
     "govuk_template_mustache": "0.16.4",
+    "hbsfy": "^2.7.0",
     "node-sass": "3.4.2",
     "standard": "6.0.7",
     "watchify": "3.7.0"

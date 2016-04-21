@@ -6,7 +6,8 @@ var ol = require('openlayers')
 var parser = new ol.format.WMTSCapabilities()
 var wmsparser = new ol.format.WMSCapabilities()
 var config = require('./map-config.json')
-var map, callback, currentLayer, highlightSource, overlay
+var overlayTemplate = require('./overlay.hbs')
+var map, callback, currentLayer, $overlay, $overlayContent
 
 function loadMap (point) {
   // add the projection to Window.proj4
@@ -22,7 +23,7 @@ function loadMap (point) {
   $.when($.get(config.OSGetCapabilities), $.get(config.GSWMSGetCapabilities)).done(function (OS, WMS) {
     // bug: parser is not getting the matrixwidth and matrixheight values when parsing,
     // therefore sizes is set to undefined array, which sets fullTileRanges_
-    // to an array of undefineds thus breaking the map
+    // to an array of undefineds thus breaking the map      return
     var result = parser.read(OS[0])
     // TODO
     // need to set tiles to https
@@ -83,48 +84,6 @@ function loadMap (point) {
       }))
     }
 
-    var styles = {
-      MultiPolygon: [
-        new ol.style.Style({
-          stroke: new ol.style.Stroke({
-            color: 'rgba(255,0,0,1)',
-            width: 1
-          }),
-          fill: new ol.style.Fill({
-            color: 'rgba(255,0,0,0.4)'
-          })
-        })
-      ],
-      Point: [
-        new ol.style.Style({
-          fill: new ol.style.Fill({
-            color: 'rgba(255,0, 0, 0.4)'
-          }),
-          stroke: new ol.style.Stroke({
-            color: 'rgba(255,0,0,1)',
-            width: 1
-          })
-        })
-      ]
-    }
-
-    var polygonHighlight = function (feature, resolution) {
-      return styles[feature.getGeometry().getType()]
-    }
-
-    highlightSource = new ol.source.Vector({
-      format: new ol.format.GeoJSON(),
-      projection: 'EPSG:27700'
-    })
-
-    var highlightLayer = new ol.layer.Vector({
-      ref: 'overlay',
-      source: highlightSource,
-      style: polygonHighlight,
-      visible: true
-    })
-
-    layers.push(highlightLayer)
     if (point) {
       var centreLayer = new ol.layer.Vector({
         ref: 'crosshair',
@@ -143,16 +102,6 @@ function loadMap (point) {
       layers.push(centreLayer)
     }
 
-    var popup = document.getElementById('feature-popup')
-
-    overlay = new ol.Overlay({
-      element: popup,
-      autopan: true,
-      autoPanAnimation: {
-        duration: 250
-      }
-    })
-
     map = new ol.Map({
       controls: ol.control.defaults().extend([
         new ol.control.ScaleLine({
@@ -162,7 +111,6 @@ function loadMap (point) {
         new ol.control.FullScreen()
       ]),
       layers: layers,
-      overlays: [overlay],
       target: 'map',
       view: new ol.View({
         resolutions: source.tileGrid.getResolutions(),
@@ -175,56 +123,53 @@ function loadMap (point) {
 
     // Map interaction functions
     map.on('singleclick', function (e) {
-      // TODO: this needs to be only for the flood depth layer but we don't have technical details yet.
-      // depends on FLO-901
-      return
+      var currentLayerRef = currentLayer && currentLayer.getProperties().ref
 
-      // if (!bullseye(e.pixel)) {
-      //   return
-      // }
-      //
-      // var url = currentLayer.getSource().getGetFeatureInfoUrl(
-      //   e.coordinate,
-      //   map.getView().getResolution(),
-      //   config.projection.ref, {
-      //     INFO_FORMAT: 'application/json',
-      //     FEATURE_COUNT: 10
-      //   }
-      // )
-      //
-      // $.get(url, function (data) {
-      //   // At some point will need some logic to decide which polygon to query, as low medium high maps may have overlapping
-      //   // and potentially only the highest details will want to be used.
-      //   closePopup()
-      //   highlightSource.clear()
-      //
-      //   highlightSource.addFeatures((new ol.format.GeoJSON()).readFeatures(data))
-      //
-      //   // strip out the geoms for text temporarily
-      //
-      //   var textReturn = data.features.length + ' features. </br>'
-      //
-      //   for (var i = 0; i < data.features.length; i++) {
-      //     textReturn += data.features[i].id + ': ' + JSON.stringify(data.features[i].properties) + '</br>'
-      //   }
-      //
-      //   $('.feature-popup-content').html(textReturn)
-      //   overlay.setPosition(e.coordinate)
-      // })
+      // The overlay is only for the FWLRSF
+      if (currentLayerRef !== 'risk:2-FWLRSF' || !bullseye(e.pixel)) {
+        return
+      }
+
+      var resolution = map.getView().getResolution()
+      var url = currentLayer.getSource().getGetFeatureInfoUrl(e.coordinate, resolution, config.projection.ref, {
+        INFO_FORMAT: 'application/json',
+        FEATURE_COUNT: 10
+      })
+
+      $.get(url, function (data) {
+        if (!data || !data.features.length) {
+          return
+        }
+
+        // Get the feature and build a view model from the properties
+        var feature = data.features[0]
+        var properties = feature.properties
+        var viewModel = properties
+
+        viewModel.isRiverLevelStation = feature.id.indexOf('river_level') === 0
+        viewModel.isCoastalStation = !viewModel.isRiverLevelStation
+        viewModel.heading = properties.location || properties.site
+
+        // Get the overlay content html using the template
+        var html = overlayTemplate(viewModel)
+
+        // update the content
+        $overlayContent.html(html)
+
+        // Show the overlay
+        $overlay.show()
+      })
     })
 
-    map.on('pointermove', function (evt) {
-      // TODO: again dependent on FLO-901
-      return
-      // if (evt.dragging) {
-      //   return
-      // }
-      //
-      // var pixel = map.getEventPixel(evt.originalEvent)
-      //
-      // document.body.style.cursor = bullseye(pixel) ? 'pointer' : 'default'
+    // Initialise the overlays
+    $overlay = $('#map-overlay')
+    $overlay.on('click', '.map-overlay-close', function () {
+      $overlay.hide()
     })
 
+    $overlayContent = $('.map-overlay-content', $overlay)
+
+    // Callback to notify map is ready
     if (callback) {
       callback()
     }
@@ -232,36 +177,33 @@ function loadMap (point) {
 }
 
 function showMap (ref) {
-  highlightSource.clear()
-  closePopup()
+  closeOverlay()
   map.getLayers().forEach(function (layer) {
     var name = layer.getProperties().ref
-    if (name !== config.OSLayer && name !== 'overlay' && name !== 'crosshair') {
+    if (name !== config.OSLayer && name !== 'crosshair') {
       currentLayer = name === ref ? layer : currentLayer
       layer.setVisible(name === ref)
     }
   })
 }
 
-// function bullseye (pixel) {
-//   return map.forEachLayerAtPixel(pixel, function (layer) {
-//     return true
-//   }, null, function (layer) {
-//     // filter function to only check current risk layer
-//     return layer === currentLayer
-//   })
-// }
+function bullseye (pixel) {
+  return map.forEachLayerAtPixel(pixel, function (layer) {
+    return true
+  }, null, function (layer) {
+    // filter function to only check current risk layer
+    return layer === currentLayer
+  })
+}
 
-function closePopup () {
-  overlay.setPosition()
-  highlightSource.clear()
-  return false
+function closeOverlay () {
+  $overlay.hide()
 }
 
 module.exports = {
   loadMap: loadMap,
   showMap: showMap,
-  closePopup: closePopup,
+  closeOverlay: closeOverlay,
   onReady: function (fn) {
     callback = fn
   }

@@ -2,7 +2,7 @@
 @import "typography";
 @import "css3";
 @import "./nav";
-@import "./popup";
+@import "./overlay";
 
 #map-page {
   h1.heading-xlarge {
@@ -126,7 +126,7 @@
               -o-transform: rotate(30deg);
               -ms-transform: rotate(30deg);
               transform: rotate(30deg);
-              
+
               @include media(mobile) {
                 line-height: 20px;
               }
