@@ -1,4 +1,4 @@
-var helpers = require('../helpers')
+var util = require('../util')
 
 const RiskStatus = {
   AtRisk: 1,
@@ -51,7 +51,7 @@ function RiskViewModel (risk, address) {
         name: item.reservoirName,
         owner: item.isUtilityCompany,
         authority: item.leadLocalFloodAuthority,
-        location: helpers.convertLocationToNGR(item.location),
+        location: util.convertLocationToNGR(item.location),
         riskDesignation: item.riskDesignation,
         comments: item.comments
       }
