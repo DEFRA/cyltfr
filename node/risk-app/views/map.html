@@ -3,8 +3,11 @@
 <main id="map-page">
   <h1 class="heading-xlarge">Learn more about this area's flood risk</h1>
   <div class="nojs-hide ie-hide">
-    <p>
+    <p class="hidden-mobile">
       From the list on the left, select the information you're interested in. The map view will then update. 'Detailed view' shows more options.
+    </p>
+    <p class="visible-mobile">
+      From the list below, select the information you're interested in. The map view will then update.
     </p>
     <p>
       Use this information to see which areas are more likely to flood, how deep the flooding might be and the direction in which the flood water could move.
@@ -15,7 +18,7 @@
   </div>
   <div class="map-container nojs-hide ie-hide">
     <div class="map-switch hidden-mobile">
-      <a>
+      <a tabindex="0">
       Basic view&nbsp;
       <img src="{{{assetPath}}}images/icon-detailed-off.png" alt="basic" class="basic">
       <img src="{{{assetPath}}}images/icon-detailed-on.png" alt="detailed" class="detailed">

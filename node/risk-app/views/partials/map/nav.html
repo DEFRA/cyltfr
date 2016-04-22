@@ -1,13 +1,13 @@
 <ul class="nav">
   {{#each categories}}
     <li id="{{ref}}" title="{{title}}" class="category">
-      <h3>
-        <img src="/public/images/icon-{{icon}}.png" alt="icon" class="icon">
+      <h2>
+        <img src="/public/images/icon-{{icon}}.png" class="icon">
         <span>{{name}}</span>
-      </h3>
+      </h2>
       <ul>
         {{#each maps}}
-          <li id="{{ref}}" title="{{title}}">
+          <li id="{{ref}}" title="{{title}}" tabindex=0>
             <span>{{name}}</span>
           </li>
         {{/each}}

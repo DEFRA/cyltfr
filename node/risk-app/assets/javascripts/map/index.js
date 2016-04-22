@@ -51,7 +51,7 @@ $(function () {
   // Default to the first category/map
   loadMap.onReady(function () {
     // Handle the category header clicks
-    $categories.on('click', 'h3', function (e) {
+    $categories.on('click', 'h2', function (e) {
       e.preventDefault()
       var $category = $(this).parent()
       if (!$category.hasClass(selected)) {
@@ -63,6 +63,15 @@ $(function () {
     $maps.on('click', function (e) {
       e.preventDefault()
       setCurrent($(this).attr('id'))
+    })
+
+    // Accessibility, allow tab and enter for map selection
+    $maps.keypress(function (e) {
+      var keycode = (e.keyCode ? e.keyCode : e.which)
+      if (keycode === 13) {
+        e.preventDefault()
+        setCurrent($(this).attr('id'))
+      }
     })
 
     // Handle the mobile map selector change
@@ -78,9 +87,16 @@ $(function () {
     return loadMap.closePopup()
   })
 
-  $('.map-container')
-    .on('click', '.map-switch a', function (e) {
+  $container.on('click', '.map-switch a', function (e) {
+    e.preventDefault()
+    $(e.delegateTarget).toggleClass('detailed')
+  })
+
+  $('.map-switch a').keypress(function (e) {
+    var keycode = (e.keyCode ? e.keyCode : e.which)
+    if (keycode === 13) {
       e.preventDefault()
-      $(e.delegateTarget).toggleClass('detailed')
-    })
+      $container.toggleClass('detailed')
+    }
+  })
 })
