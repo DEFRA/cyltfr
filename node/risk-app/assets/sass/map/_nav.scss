@@ -15,7 +15,7 @@
         padding: 0 8px 0px 4px;
       }
 
-      h3 {
+      h2 {
         color: $white;
         cursor: pointer;
         font-size: 16px;
@@ -45,6 +45,9 @@
           text-decoration: underline;
           background-color: #ffbf47;
           background-image: url(../../images/icon-radio-on.png);
+          &:focus {
+            outline: none;
+          }
         }
 
         &:first-child {
@@ -57,6 +60,13 @@
   &.detailed {
     ul.nav ul > li {
       display: block;
+    }
+  }
+
+  .map-switch {
+    a:focus {
+      outline: none;
+      background: none;
     }
   }
 }
