@@ -2,12 +2,12 @@ var data = require('./data')
 var homeTests = require('../../common/home')
 var searchTests = require('../../common/search')
 var riskTests = require('../../common/risk')
+var riskDetailTests = require('../../common/risk-detail')
 
 module.exports = {
   'happy-path': function (client) {
     // Loop over each postcode
     data.forEach(function (item) {
-      var outcome = item.outcome
       var address = item.address
       var postcode = item.postcode
 
@@ -37,8 +37,19 @@ module.exports = {
        */
       var riskPage = client.page.risk()
 
-      // Checkout outcome
-      riskTests.assertOutcome(riskPage, outcome)
+      // Check outcome
+      riskTests.assertOutcome(riskPage, item)
+
+      // Navigate to detail pages
+      riskPage.gotoRiskDetail()
+
+      /**
+       * Create risk detail page object
+       */
+      var riskDetailPage = client.page['risk-detail']()
+
+      // Check outcome
+      riskDetailTests.assertOutcome(riskDetailPage, item)
     })
 
     // Close the window

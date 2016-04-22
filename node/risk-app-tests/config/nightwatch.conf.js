@@ -45,7 +45,7 @@ module.exports = {
       }
     },
     chrome: {
-      // filter: 'tests/invalid-address/index.js',
+      // filter: 'tests/happy-path/index.js',
       desiredCapabilities: {
         browserName: 'chrome',
         javascriptEnabled: true,

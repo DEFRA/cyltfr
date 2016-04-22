@@ -4,9 +4,10 @@ module.exports = {
     'section': '#risk-detail-page .risk'
   },
   commands: [{
-    getStatus: function (callback) {
+    getInfo: function (callback) {
       this.getAttribute('@main', 'data-test-info', function (result) {
-        callback(result.value)
+        var info = JSON.parse(result.value)
+        callback(info)
       })
     },
     loadPageWithAddress: function (addressId) {
