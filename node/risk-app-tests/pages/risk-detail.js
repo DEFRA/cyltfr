@@ -1,8 +1,7 @@
 module.exports = {
   elements: {
-    'main': '#risk-page',
-    'section': '#risk-page .risk',
-    'orderedList': '#risk-page ol.list-number'
+    'main': '#risk-detail-page',
+    'section': '#risk-detail-page .risk'
   },
   commands: [{
     getStatus: function (callback) {
@@ -11,7 +10,7 @@ module.exports = {
       })
     },
     loadPageWithAddress: function (addressId) {
-      var url = this.api.launchUrl + '/risk?address=' + addressId
+      var url = this.api.launchUrl + '/risk-detail?address=' + addressId
       return this.api.url(url)
     }
   }]

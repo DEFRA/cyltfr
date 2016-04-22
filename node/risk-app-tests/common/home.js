@@ -8,5 +8,12 @@ module.exports = {
     homePage
       .setPostcode(postcode)
       .submit()
+  },
+  assertErrorMessage: function (homePage, errorMessage) {
+    if (!errorMessage) {
+      errorMessage = 'Please enter a valid postcode in England'
+    }
+
+    homePage.assert.containsText('@errorMessage', errorMessage)
   }
 }
