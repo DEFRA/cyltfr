@@ -37,7 +37,7 @@ module.exports = {
         var reservoirRisk = null
         var riverAndSeaRisk = null
 
-        if (risk.reservoir_risk) {
+        if (risk.reservoir_risk && risk.reservoir_risk !== 'Error') {
           reservoirRisk = risk.reservoir_risk.map(function (item) {
             return {
               reservoirName: item.resname,
@@ -49,6 +49,8 @@ module.exports = {
               comments: item.comments
             }
           })
+        } else {
+          reservoirRisk = risk.reservoir_risk
         }
 
         if (risk.rofrs_risk) {

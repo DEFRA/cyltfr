@@ -17,7 +17,7 @@ module.exports = {
       var homePage = client.page.home()
 
       // Navigate to the home page & submit postcode
-      homeTests.loadPage(homePage, postcode)
+      homeTests.loadPage(homePage)
       homeTests.setPostcodeAndSubmit(homePage, postcode)
 
       /**

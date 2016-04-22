@@ -1,4 +1,5 @@
 var Joi = require('joi')
+var Boom = require('boom')
 var addressService = require('../services/address')
 var SearchViewModel = require('../models/search-view')
 
@@ -18,8 +19,7 @@ module.exports = {
 
       addressService.findByPostcode(validPostcode, function (err, addresses) {
         if (err) {
-          request.log('error', err)
-          return reply.redirect('/?err=postcode')
+          return reply(Boom.badRequest('An error occurred finding the address by postcode', err))
         }
 
         if (!addresses || !addresses.length) {

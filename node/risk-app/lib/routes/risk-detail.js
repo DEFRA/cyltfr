@@ -23,6 +23,18 @@ module.exports = {
             return reply(Boom.badRequest('An error occurred finding getting the risk profile', err))
           }
 
+          // FLO-1139 If query 1 to 9 errors then throw default error page
+          if (risk.inFloodWarningArea === 'Error' ||
+          risk.inFloodAlertArea === 'Error' ||
+          risk.riverAndSeaRisk === 'Error' ||
+          risk.surfaceWaterRisk === 'Error' ||
+          risk.reservoirRisk === 'Error' ||
+          risk.surfaceWaterSuitability === 'Error' ||
+          risk.leadLocalFloodAuthority === 'Error' ||
+          risk.extraInfo === 'Error') {
+            return reply(Boom.badRequest('An error occurred with the spatial query', { address: address, risk: risk }))
+          }
+
           if (!risk.inEngland) {
             reply.redirect('/?err=postcode')
           } else {

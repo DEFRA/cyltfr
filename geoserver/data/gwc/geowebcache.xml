@@ -3,17 +3,12 @@
   <version>1.8.0</version>
   <backendTimeout>120</backendTimeout>
   <blobStores>
-    <S3BlobStore default="false">
+    <FileBlobStore default="false">
       <id>ltfri</id>
       <enabled>true</enabled>
-      <bucket></bucket>
-      <prefix>geoserver-cache</prefix>
-      <awsAccessKey></awsAccessKey>
-      <awsSecretKey></awsSecretKey>
-      <maxConnections>50</maxConnections>
-      <useHTTPS>true</useHTTPS>
-      <useGzip>false</useGzip>
-    </S3BlobStore>
+      <baseDirectory>/home/ltfridev/ltfri/geoserver/data/gwc</baseDirectory>
+      <fileSystemBlockSize>4096</fileSystemBlockSize>
+    </FileBlobStore>
   </blobStores>
   <gridSets>
     <gridSet>
