@@ -19,7 +19,15 @@
       <h2 class="heading-medium">The flood risk from rivers or the sea is {{riverAndSeaRisk}}</h2>
       <h3 class="heading-small">What this means</h3>
       <p>
-        High risk means that each year, this area has a chance of flooding of greater than 1 in 30 (3.3%).
+        {{#if riverAndSeaRiskIsHigh}}
+          High risk means that each year this area has a chance of flooding of greater than 1 in 30 (3.3%).
+        {{else if riverAndSeaRiskIsMedium}}
+          Medium risk means that each year this area has a chance of flooding of between 1 in 100 (1%) and 1 in 30 (3.3%).
+        {{else if riverAndSeaRiskIsLow}}
+          Low risk means that each year this area has a chance of flooding of between 1 in 1000 (0.1%) and 1 in 100 (1%).
+        {{else if riverAndSeaRiskIsVeryLow}}
+          Very low risk means that each year this area has a chance of flooding of less than 1 in 1000 (0.1%).
+        {{/if}}
         This takes into account the effect of any flood defences in the area.
         These defences reduce, but do not completely stop the chance of flooding as they can be overtopped, or fail.
       </p>
@@ -51,7 +59,15 @@
       <h2 class="heading-medium">The flood risk from surface water is {{surfaceWaterRisk}}</h2>
       <h3 class="heading-small">What this means</h3>
       <p>
-        High risk means that each year, this area has a chance of flooding of greater than 1 in 30 (3.3%).
+        {{#if surfaceWaterRiskIsHigh}}
+          High risk means that each year this area has a chance of flooding of greater than 1 in 30 (3.3%).
+        {{else if surfaceWaterRiskIsMedium}}
+          Medium risk means that each year this area has a chance of flooding of between 1 in 100 (1%) and 1 in 30 (3.3%).
+        {{else if surfaceWaterRiskIsLow}}
+          Low risk means that each year this area has a chance of flooding of between 1 in 1000 (0.1%) and 1 in 100 (1%).
+        {{else if surfaceWaterRiskIsVeryLow}}
+          Very low risk means that each year this area has a chance of flooding of less than 1 in 1000 (0.1%).
+        {{/if}}
         Flooding from surface water is difficult to predict as rainfall location and volume are difficult to forecast.
       </p>
 

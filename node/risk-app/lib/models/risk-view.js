@@ -45,6 +45,15 @@ function RiskViewModel (risk, address) {
   this.surfaceWaterRisk = surfaceWaterRisk.toLowerCase()
   this.reservoirRisk = reservoirRisk
 
+  this.riverAndSeaRiskIsHigh = riverAndSeaRisk === RiskLevel.High
+  this.riverAndSeaRiskIsMedium = riverAndSeaRisk === RiskLevel.Medium
+  this.riverAndSeaRiskIsLow = riverAndSeaRisk === RiskLevel.Low
+  this.riverAndSeaRiskIsVeryLow = riverAndSeaRisk === RiskLevel.VeryLow
+  this.surfaceWaterRiskIsHigh = surfaceWaterRisk === RiskLevel.High
+  this.surfaceWaterRiskIsMedium = surfaceWaterRisk === RiskLevel.Medium
+  this.surfaceWaterRiskIsLow = surfaceWaterRisk === RiskLevel.Low
+  this.surfaceWaterRiskIsVeryLow = surfaceWaterRisk === RiskLevel.VeryLow
+
   if (reservoirRisk) {
     this.reservoirs = risk.reservoirRisk.map(function (item) {
       return {
@@ -73,6 +82,12 @@ function RiskViewModel (risk, address) {
   this.leadLocalFloodAuthority = risk.leadLocalFloodAuthority
   this.className = this.isRisk ? 'at-risk' : 'low-risk'
   this.date = Date.now()
+
+  this.testInfoJSON = JSON.stringify({
+    status: this.status,
+    riverAndSeaRisk: riverAndSeaRisk,
+    surfaceWaterRisk: surfaceWaterRisk
+  })
 }
 
 module.exports = RiskViewModel
