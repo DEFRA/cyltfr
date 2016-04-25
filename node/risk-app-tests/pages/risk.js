@@ -10,10 +10,11 @@ module.exports = {
   },
   commands: [{
     getInfo: function (callback) {
-      this.getAttribute('@main', 'data-test-info', function (result) {
-        var info = JSON.parse(result.value)
-        callback(info)
-      })
+      return this.waitForElementVisible('@main', 1000)
+        .getAttribute('@main', 'data-test-info', function (result) {
+          var info = JSON.parse(result.value)
+          callback(info)
+        })
     },
     loadPageWithAddress: function (addressId) {
       var url = this.api.launchUrl + '/risk?address=' + addressId
