@@ -203,7 +203,7 @@
             "title": "Flood risk",
             "keys": [{
               "text": "Maximum extent of flooding",
-              "icon": "dark-blue"
+              "icon": "blue"
             }]
           }
         },
