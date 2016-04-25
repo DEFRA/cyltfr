@@ -31,5 +31,10 @@ module.exports = {
         riskPage.assert.containsText('@heading', 'This address is in an area at very low risk of flooding')
       }
     })
+  },
+  assertError: function (riskPage) {
+    riskPage.assert.containsText('#content main header h1.heading-xlarge', 'Sorry, this service is temporarily unavailable')
+    riskPage.assert.containsText('#content main p.lede', 'Thank you for your patience')
+    riskPage.assert.containsText('#content main p:not(.lede)', 'Information about long term flood risk is available on')
   }
 }

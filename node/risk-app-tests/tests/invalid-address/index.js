@@ -17,9 +17,7 @@ module.exports = {
       riskTests.loadPage(riskPage, address)
 
       // Assert we're on the error page
-      client.assert.containsText('#content main header h1.heading-xlarge', 'Sorry, this service is temporarily unavailable')
-      client.assert.containsText('#content main p.lede', 'Thank you for your patience')
-      client.assert.containsText('#content main p:not(.lede)', 'Information about all current flood warnings is also available on')
+      riskTests.assertError(riskPage)
     })
 
     // Close the window
@@ -39,9 +37,7 @@ module.exports = {
       riskDetailTests.loadPage(riskDetailPage, address)
 
       // Assert we're on the error page
-      client.assert.containsText('#content main header h1.heading-xlarge', 'Sorry, this service is temporarily unavailable')
-      client.assert.containsText('#content main p.lede', 'Thank you for your patience')
-      client.assert.containsText('#content main p:not(.lede)', 'Information about all current flood warnings is also available on')
+      riskDetailTests.assertError(riskDetailPage)
     })
 
     // Close the window
