@@ -16,6 +16,36 @@ module.exports = {
     mapTests.assertMapParentNotSelected(mapPage, data.mapTypes[1].ref)
     mapTests.assertMapParentNotSelected(mapPage, data.mapTypes[2].ref)
 
+    // select each map from basic view
+    data.mapTypes.forEach(function (item) {
+      mapPage.selectMap(item.ref)
+
+      // check selected
+      mapTests.assertMapParentSelected(mapPage, item.ref)
+
+      // check others not selected
+      data.mapTypes.forEach(function (i) {
+        if (i !== item) {
+          mapTests.assertMapParentNotSelected(mapPage, i.ref)
+        }
+      })
+    })
+
+    // assert is basic view
+    mapTests.assertIsBasicView(mapPage)
+
+    // switch to advanced view
+    mapPage.toggleDetailed()
+
+    // assert detailed view visible
+    mapTests.assertIsDetailedView(mapPage)
+
+    // select each map from advanced view
+
+    // return to basic view
+    mapPage.toggleDetailed()
+    mapTests.assertIsBasicView(mapPage)
+
     // kill
     client.end()
   },

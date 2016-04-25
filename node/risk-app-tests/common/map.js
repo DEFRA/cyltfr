@@ -30,5 +30,11 @@ module.exports = {
   },
   assertLayerNotSelected: function (mapPage, layer) {
     // not implemented
+  },
+  assertIsDetailedView: function (mapPage) {
+    mapPage.assert.cssClassPresent('@mapContainer', 'detailed')
+  },
+  assertIsBasicView: function (mapPage) {
+    mapPage.assert.cssClassNotPresent('@mapContainer', 'detailed')
   }
 }
