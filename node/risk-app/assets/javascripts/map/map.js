@@ -136,6 +136,12 @@ function loadMap (point) {
         FEATURE_COUNT: 10
       })
 
+      function toFixed (number) {
+        if (typeof number !== 'undefined') {
+          return number.toFixed(2)
+        }
+      }
+
       $.get(url, function (data) {
         if (!data || !data.features.length) {
           return
@@ -144,11 +150,17 @@ function loadMap (point) {
         // Get the feature and build a view model from the properties
         var feature = data.features[0]
         var properties = feature.properties
-        var viewModel = properties
-
-        viewModel.isRiverLevelStation = feature.id.indexOf('river_level') === 0
-        viewModel.isCoastalStation = !viewModel.isRiverLevelStation
-        viewModel.heading = properties.location || properties.site
+        var isRiverLevelStation = feature.id.indexOf('river_level') === 0
+        var viewModel = {
+          flow30: isRiverLevelStation && toFixed(properties.flow_30),
+          flow100: isRiverLevelStation && toFixed(properties.flow_100),
+          flow1000: isRiverLevelStation && toFixed(properties.flow_1000),
+          depth30: toFixed(isRiverLevelStation ? properties.depth_30 : properties.lev_30),
+          depth100: toFixed(isRiverLevelStation ? properties.depth_100 : properties.lev_100),
+          depth1000: toFixed(isRiverLevelStation ? properties.depth_1000 : properties.lev_1000),
+          isRiverLevelStation: isRiverLevelStation,
+          stationName: properties.location || properties.site
+        }
 
         // Get the overlay content html using the template
         var html = overlayTemplate(viewModel)
@@ -162,10 +174,14 @@ function loadMap (point) {
     })
 
     // Initialise the overlays
-    $overlay = $('#map-overlay')
-    $overlay.on('click', '.map-overlay-close', function () {
+    function hideOverlay (e) {
+      e.preventDefault()
       $overlay.hide()
-    })
+    }
+    $overlay = $('#map-overlay')
+    $overlay
+      .on('click', '.map-overlay-close', hideOverlay)
+      .on('click', '.map-overlay-close-link', hideOverlay)
 
     $overlayContent = $('.map-overlay-content', $overlay)
 

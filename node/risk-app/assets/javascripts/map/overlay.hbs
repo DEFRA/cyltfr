@@ -1,30 +1,44 @@
-<h3 class="heading-medium">{{heading}}</h3>
-<p class="lede">The environment agency....</p>
+<h3 class="heading-large">Depth and flow estimates for the monitoring station at {{stationName}}</h3>
+<p>The Environment Agency uses 3 risk scenarios to estimate the depth and flow of water that could occur at this location in any given year.</p>
+
+<h4 class="heading-medium">
+  Depth estimates at this monitoring station
+</h4>
+
+<h5 class="heading-small">
+  High chance scenario
+</h5>
+<p>There's a high chance (over 3.3%) that water depth will reach {{depth30}}m</p>
+
+<h5 class="heading-small">
+  Medium chance scenario
+</h5>
+<p>There's a medium chance (over 1%) that water depth will reach {{depth100}}m</p>
+
+<h5 class="heading-small">
+  Low chance scenario
+</h5>
+<p>There's a low chance (under 1%) that water depth will reach {{depth1000}}m</p>
 
 {{#if isRiverLevelStation}}
-  <dl>
-    <dt>flow_30</dt>
-    <dd>{{flow_30}}</dd>
-    <dt>flow_100</dt>
-    <dd>{{flow_100}}</dd>
-    <dt>flow_1000</dt>
-    <dd>{{flow_1000}}</dd>
-    <dt>depth_30</dt>
-    <dd>{{depth_30}}</dd>
-    <dt>depth_100</dt>
-    <dd>{{depth_100}}</dd>
-    <dt>depth_1000</dt>
-    <dd>{{depth_1000}}</dd>
-  </dl>
+  <h4 class="heading-medium">
+    Flow estimates at this monitoring station
+  </h4>
+
+  <h5 class="heading-small">
+    High chance scenario
+  </h5>
+  <p>There's a high chance (over 3.3%) that the flow will reach {{flow30}} cubic metres per second.</p>
+
+  <h5 class="heading-small">
+    Medium chance scenario
+  </h5>
+  <p>There's a medium chance (over 1%) that the flow will reach {{flow100}} cubic metres per second.</p>
+
+  <h5 class="heading-small">
+    Low chance scenario
+  </h5>
+  <p>There's a low chance (under 1%) that the flow will reach {{flow1000}} cubic metres per second.</p>
 {{/if}}
 
-{{#if isCoastalStation}}
-  <dl>
-    <dt>lev_30</dt>
-    <dd>{{lev_30}}</dd>
-    <dt>lev_100</dt>
-    <dd>{{lev_100}}</dd>
-    <dt>lev_1000</dt>
-    <dd>{{lev_1000}}</dd>
-  </dl>
-{{/if}}
+<a href="#" class="map-overlay-close-link">Back to map</a>
