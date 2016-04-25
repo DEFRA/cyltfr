@@ -17,6 +17,10 @@
           <double>800000.0</double>
         </coords>
       </extent>
+      <zoomStart>4</zoomStart>
+      <zoomStop>10</zoomStop>
+      <minCachedLevel>4</minCachedLevel>
+      <maxCachedLevel>10</maxCachedLevel>
     </gridSubset>
   </gridSubsets>
   <metaWidthHeight>
