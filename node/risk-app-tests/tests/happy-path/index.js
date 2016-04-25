@@ -38,7 +38,6 @@ module.exports = {
       var riskPage = client.page.risk()
 
       // Check outcome
-      console.log(postcode)
       riskTests.assertOutcome(riskPage, item)
 
       // Navigate to detail pages
