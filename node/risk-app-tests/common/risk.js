@@ -1,4 +1,3 @@
-const RiskLevel = require('../risk-level')
 const RiskStatus = require('../risk-status')
 
 module.exports = {
