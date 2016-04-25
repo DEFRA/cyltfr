@@ -10,7 +10,7 @@ module.exports = {
   },
   commands: [{
     getInfo: function (callback) {
-      return this.waitForElementVisible('@main', 1000)
+      return this.waitForElementVisible('@main', 5000)
         .getAttribute('@main', 'data-test-info', function (result) {
           var info = JSON.parse(result.value)
           callback(info)
