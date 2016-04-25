@@ -13,7 +13,6 @@ module.exports = {
     if (!errorMessage) {
       errorMessage = 'Please enter a valid postcode in England'
     }
-
     homePage.assert.containsText('@errorMessage', errorMessage)
   }
 }

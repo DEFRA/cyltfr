@@ -1,6 +1,7 @@
 var data = require('./data')
 var riskTests = require('../../common/risk')
 var riskDetailTests = require('../../common/risk-detail')
+var errorTests = require('../../common/error')
 
 module.exports = {
   'invalid-address-risk': function (client) {
@@ -17,7 +18,7 @@ module.exports = {
       riskTests.loadPage(riskPage, address)
 
       // Assert we're on the error page
-      riskTests.assertError(riskPage)
+      errorTests.assertError(riskPage)
     })
 
     // Close the window
@@ -37,7 +38,7 @@ module.exports = {
       riskDetailTests.loadPage(riskDetailPage, address)
 
       // Assert we're on the error page
-      riskDetailTests.assertError(riskDetailPage)
+      errorTests.assertError(riskDetailPage)
     })
 
     // Close the window
