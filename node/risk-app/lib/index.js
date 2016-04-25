@@ -6,6 +6,7 @@ var config = require('../config')
 var analyticsAccount = config.analyticsAccount
 var appVersion = require('../package.json').version
 var appName = require('../package.json').name
+var errors = require('./models/errors.json')
 
 var defaultContext = {
   globalHeaderText: 'GOV.UK',
@@ -59,7 +60,16 @@ Glue.compose(manifest, options, function (err, server) {
 
       // The return the `500` view
       if (useErrorPages) {
-        return reply.view('500').code(statusCode)
+        switch (response.message) {
+          case errors.addressByPostcode.message:
+          case errors.addressById.message:
+            return reply.view('500-address').code(statusCode)
+          case errors.riskProfile.message:
+          case errors.spatialQuery.message:
+            return reply.view('500-risk').code(statusCode)
+          default:
+            return reply.view('500').code(statusCode)
+        }
       }
     }
     return reply.continue()

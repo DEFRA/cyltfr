@@ -54,7 +54,7 @@
     <p><strong>You&#39;re missing out. A map should be visible here.</strong></p>
     <p><a href="https://www.gov.uk/help/browsers" rel="external">Upgrade your browser to see and use all the features of this service.</a></p>
   </div>
-  <p><a href="/risk?address={{address}}">View the flood risk information for the location you originally searched for</a></p>
+  {{#if address}}<p><a href="/risk?address={{address}}">View the flood risk information for the location you originally searched for</a></p>{{/if}}
   <p><a href="/">View the flood risk information for another location</a></p>
   <p><a href="{{{floodWarningsUrl}}}">Go to the national flood information service</a></p>
   {{> common/floodline}}

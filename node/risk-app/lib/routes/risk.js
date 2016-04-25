@@ -3,6 +3,7 @@ var Boom = require('boom')
 var riskService = require('../services/risk')
 var addressService = require('../services/address')
 var RiskViewModel = require('../models/risk-view')
+var errors = require('../models/errors.json')
 
 module.exports = {
   method: 'GET',
@@ -12,7 +13,7 @@ module.exports = {
     handler: function (request, reply) {
       addressService.findById(request.query.address, function (err, address) {
         if (err) {
-          return reply(Boom.badRequest('An error occurred finding the address by id', err))
+          return reply(Boom.badRequest(errors.addressById.message, err))
         }
 
         var x = address.x
@@ -20,7 +21,7 @@ module.exports = {
         var radius = 10
         riskService.getByCoordinates(x, y, radius, function (err, risk) {
           if (err) {
-            return reply(Boom.badRequest('An error occurred finding getting the risk profile', err))
+            return reply(Boom.badRequest(errors.riskProfile.message, err))
           }
 
           // FLO-1139 If query 1 to 6 errors then throw default error page
@@ -29,7 +30,7 @@ module.exports = {
           risk.riverAndSeaRisk === 'Error' ||
           risk.surfaceWaterRisk === 'Error' ||
           risk.reservoirRisk === 'Error') {
-            return reply(Boom.badRequest('An error occurred with the spatial query', { address: address, risk: risk }))
+            return reply(Boom.badRequest(errors.spatialQuery.message, { address: address, risk: risk }))
           }
 
           if (!risk.inEngland) {

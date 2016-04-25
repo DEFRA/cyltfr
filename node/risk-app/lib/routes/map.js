@@ -19,7 +19,7 @@ module.exports = {
         easting: Joi.number(),
         northing: Joi.number(),
         map: Joi.string(),
-        address: Joi.number().required()
+        address: Joi.number()
       }
     }
   }

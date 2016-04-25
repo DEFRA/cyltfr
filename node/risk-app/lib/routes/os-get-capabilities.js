@@ -3,6 +3,7 @@ var config = require('../../config')
 var wreck = require('wreck').defaults({
   timeout: config.httpTimeoutMs
 })
+var error = require('../models/errors.json').oSGetCapabilities
 
 module.exports = {
   method: 'GET',
@@ -10,7 +11,7 @@ module.exports = {
   handler: function (request, reply) {
     wreck.get(config.ordnanceSurvey.urlGetCapabilities, function (err, response, payload) {
       if (err || response.statusCode !== 200) {
-        return reply(Boom.badRequest('Ordnance survey getcapabilities failed', err))
+        return reply(Boom.badRequest(error.message, err))
       }
       reply(payload).type('text/xml')
     })
