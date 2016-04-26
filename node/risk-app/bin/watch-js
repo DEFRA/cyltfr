@@ -1,29 +1,19 @@
 # Watch a single javascript bundle
 #
 # Usage
-# npm run watch:js -- home
+# npm run watch:js -- core
 # npm run watch:js -- search
-# npm run watch:js -- risk
-# npm run watch:js -- risk-detail
 # npm run watch:js -- map
 
 case "$1" in
 
-'home')
-  echo "Watching home.js"
-  watchify assets/javascripts/home/index.js -d -o 'exorcist public/javascripts/home.js.map > public/javascripts/home.js'
+'core')
+  echo "Watching core.js"
+  watchify assets/javascripts/core/index.js -d -o 'exorcist public/javascripts/core.js.map > public/javascripts/core.js'
   ;;
 'search')
   echo "Watching search.js"
   watchify assets/javascripts/search/index.js -d -o 'exorcist public/javascripts/search.js.map > public/javascripts/search.js'
-  ;;
-'risk')
-  echo "Watching risk.js"
-  watchify assets/javascripts/risk/index.js -d -o 'exorcist public/javascripts/risk.js.map > public/javascripts/risk.js'
-  ;;
-'risk-detail')
-  echo "Watching risk-detail.js"
-  watchify assets/javascripts/risk-detail/index.js -d -o 'exorcist public/javascripts/risk-detail.js.map > public/javascripts/risk-detail.js'
   ;;
 'map')
   echo "Watching map.js"
