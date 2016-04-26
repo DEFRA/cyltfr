@@ -14,7 +14,7 @@
     "copy:assets": "bin/copy-assets",
     "build:css": "bin/build-css",
     "build:js": "bin/build-js",
-    "watch:js": "bin/watch-js",
+    "watch": "bin/watch",
     "build": "npm run clean && npm run copy && npm run build:css && npm run build:js",
     "lint": "standard",
     "test": "npm run lint"
@@ -51,6 +51,6 @@
     "hbsfy": "2.7.0",
     "node-sass": "3.4.2",
     "standard": "6.0.7",
-    "watchify": "3.7.0"
+    "wisk": "0.0.1"
   }
 }
