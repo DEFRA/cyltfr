@@ -1,3 +1,4 @@
+#!/bin/bash
 cp node_modules/jquery/dist/jquery.min.js public/javascripts/jquery.min.js
 cp node_modules/jquery/dist/jquery.min.js public/javascripts/jquery.min.map
 cp node_modules/openlayers/css/ol.css public/stylesheets/ol.css

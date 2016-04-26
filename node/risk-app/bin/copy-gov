@@ -1,3 +1,4 @@
+#!/bin/bash
 cp node_modules/govuk-elements-sass/node_modules/govuk_frontend_toolkit/images public/images/icons -r
 cp node_modules/govuk-elements-sass/node_modules/govuk_frontend_toolkit/javascripts/* public/javascripts -r
 cp node_modules/govuk_template_mustache/assets/* public -r
