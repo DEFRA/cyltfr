@@ -25,18 +25,32 @@
     box-sizing: border-box;
 
     .map-overlay-content {
-      float: left;
+      position: absolute;
+      bottom: 0;
+      top: 0;
       overflow: auto;
+
+      .heading-large {
+        margin-top: 10px;
+        padding-right: 70px;
+      }
+
+      .heading-large {
+        margin-top: 10px;
+      }
     }
 
     .map-overlay-close {
       cursor: pointer;
-      float: right;
+      position: absolute;
       width: 45px;
       height: 45px;
       background-size: contain;
       background-repeat: no-repeat;
       background-image: url(../../images/icon-close.png);
+      z-index: 1;
+      right: 20px;
+      background-color: #fff;
 
       @include media(mobile) {
         width: 25px;

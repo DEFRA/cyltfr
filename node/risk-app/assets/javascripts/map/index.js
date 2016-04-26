@@ -83,10 +83,6 @@ $(function () {
     setCurrent(getParameterByName('map'))
   })
 
-  $('.feature-popup-closer').click(function () {
-    return loadMap.closePopup()
-  })
-
   $container.on('click', '.map-switch a', function (e) {
     e.preventDefault()
     $(e.delegateTarget).toggleClass('detailed')

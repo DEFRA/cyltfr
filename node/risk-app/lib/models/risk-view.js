@@ -86,7 +86,8 @@ function RiskViewModel (risk, address) {
   this.testInfoJSON = JSON.stringify({
     status: this.status,
     riverAndSeaRisk: riverAndSeaRisk,
-    surfaceWaterRisk: surfaceWaterRisk
+    surfaceWaterRisk: surfaceWaterRisk,
+    reservoirRisk: reservoirRisk
   })
 }
 

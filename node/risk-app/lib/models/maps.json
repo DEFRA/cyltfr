@@ -3,13 +3,13 @@
     {
       "ref": "RiversOrSea",
       "icon": "rivers-sea",
-      "name": "Risk of flooding from rivers or the sea",
-      "title": "Risk of flooding from rivers or the sea",
+      "name": "Flood risk from rivers or the sea",
+      "title": "Flood risk from rivers or the sea",
       "maps": [
         {
           "ref": "RiversOrSea_1-ROFRS",
           "name": "Extent of flooding",
-          "title": "Risk of flooding from rivers or the sea",
+          "title": "Flood risk from rivers or the sea",
           "legend": {
             "title": "Flood risk",
             "keys": [{
@@ -29,8 +29,8 @@
         },
         {
           "ref": "RiversOrSea_2-FWLRSF",
-          "name": "Depth and Flow recorded at monitoring stations",
-          "title": "Flow and water level from rivers and sea flooding",
+          "name": "Depth and flow recorded at monitoring stations",
+          "title": "Depth and flow recorded at monitoring stations",
           "legend": {
             "title": "Select monitoring station",
             "keys": [{
@@ -49,13 +49,13 @@
     {
       "ref": "SurfaceWater",
       "icon": "surface-water",
-      "name": "Risk of flooding from surface water",
-      "title": "Risk of flooding from surface water",
+      "name": "Flood risk from surface water",
+      "title": "Flood risk from surface water",
       "maps": [
         {
           "ref": "SurfaceWater_6-SW-Extent",
           "name": "Extent of flooding",
-          "title": "Risk of flooding from surface water",
+          "title": "Flood risk from surface water",
           "legend": {
             "title": "Flood risk",
             "keys": [{
@@ -192,18 +192,18 @@
     {
       "ref": "Reservoirs",
       "icon": "reservoir",
-      "name": "Risk of flooding from reservoirs",
-      "title": "Risk of flooding from reservoirs",
+      "name": "Flood risk from reservoirs",
+      "title": "Flood risk from reservoirs",
       "maps": [
         {
           "ref": "Reservoirs_3-ROFR",
           "name": "Extent of flooding",
-          "title": "Risk of flooding from reservoirs",
+          "title": "Flood risk from reservoirs",
           "legend": {
             "title": "Flood risk",
             "keys": [{
               "text": "Maximum extent of flooding",
-              "icon": "dark-blue"
+              "icon": "blue"
             }]
           }
         },

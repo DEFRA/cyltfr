@@ -1,3 +1,5 @@
+const RiskLevel = require('../risk-level')
+
 module.exports = {
   loadPage: function (riskDetailPage, addressId) {
     riskDetailPage.loadPageWithAddress(addressId)
@@ -9,29 +11,49 @@ module.exports = {
       riskDetailPage.assert.equal(info.riverAndSeaRisk, data.riverAndSeaRisk)
       riskDetailPage.assert.equal(info.surfaceWaterRisk, data.surfaceWaterRisk)
 
-      // Check the heading
-      // if (info.status === RiskStatus.AtRisk) {
-      //   riskDetailPage.assert.containsText('@heading', 'This address is in a flood risk area')
-      //   riskDetailPage.assert.containsText('@firstItem', 'This service is free. You can get warnings by phone, email or text message.')
-      //   riskDetailPage.assert.containsText('@lastItem', 'This address is in a flood risk area.')
-      //   riskDetailPage.assert.containsText('@lastItem', 'The flood risk from rivers or the sea is ' + data.riverAndSeaRisk.toLowerCase())
-      //   riskDetailPage.assert.containsText('@lastItem', 'The flood risk from surface water is ' + data.surfaceWaterRisk.toLowerCase())
-      // } else if (info.status === RiskStatus.AtRiskMonitor) {
-      //   riskDetailPage.assert.containsText('@heading', 'This address is in a flood risk area')
-      //   riskDetailPage.assert.containsText('@firstItem', 'Use radio, television and social media to keep up to date with flood events and weather conditions in your area')
-      //   riskDetailPage.assert.containsText('@lastItem', 'This address is in a flood risk area.')
-      //   riskDetailPage.assert.containsText('@lastItem', 'The flood risk from rivers or the sea is ' + data.riverAndSeaRisk.toLowerCase())
-      //   riskDetailPage.assert.containsText('@lastItem', 'The flood risk from surface water is ' + data.surfaceWaterRisk.toLowerCase())
-      // } else if (info.status === RiskStatus.LowRisk) {
-      //   riskDetailPage.assert.containsText('@heading', 'This address is in an area at low risk of flooding')
-      // } else if (info.status === RiskStatus.VeryLowRisk) {
-      //   riskDetailPage.assert.containsText('@heading', 'This address is in an area at very low risk of flooding')
-      // }
+      // River and sea tests
+      riskDetailPage.assert.containsText('@riverAndSeaPanel', 'The flood risk from rivers or the sea is ' + info.riverAndSeaRisk.toLowerCase())
+      switch (info.riverAndSeaRisk) {
+        case RiskLevel.High:
+          riskDetailPage.assert.containsText('@riverAndSeaPanel', 'High risk means that each year this area has a chance of flooding of greater than 1 in 30 (3.3%).')
+          break
+        case RiskLevel.Medium:
+          riskDetailPage.assert.containsText('@riverAndSeaPanel', 'Medium risk means that each year this area has a chance of flooding of between 1 in 100 (1%) and 1 in 30 (3.3%).')
+          break
+        case RiskLevel.Low:
+          riskDetailPage.assert.containsText('@riverAndSeaPanel', 'Low risk means that each year this area has a chance of flooding of between 1 in 1000 (0.1%) and 1 in 100 (1%).')
+          break
+        case RiskLevel.VeryLow:
+          riskDetailPage.assert.containsText('@riverAndSeaPanel', 'Very low risk means that each year this area has a chance of flooding of less than 1 in 1000 (0.1%).')
+          break
+        default:
+          throw new Error('Invalid Risk Level', info.riverAndSeaRisk)
+      }
+
+      // Surface water tests
+      riskDetailPage.assert.containsText('@surfaceWaterPanel', 'The flood risk from surface water is ' + info.surfaceWaterRisk.toLowerCase())
+      switch (info.surfaceWaterRisk) {
+        case RiskLevel.High:
+          riskDetailPage.assert.containsText('@surfaceWaterPanel', 'High risk means that each year this area has a chance of flooding of greater than 1 in 30 (3.3%).')
+          break
+        case RiskLevel.Medium:
+          riskDetailPage.assert.containsText('@surfaceWaterPanel', 'Medium risk means that each year this area has a chance of flooding of between 1 in 100 (1%) and 1 in 30 (3.3%).')
+          break
+        case RiskLevel.Low:
+          riskDetailPage.assert.containsText('@surfaceWaterPanel', 'Low risk means that each year this area has a chance of flooding of between 1 in 1000 (0.1%) and 1 in 100 (1%).')
+          break
+        case RiskLevel.VeryLow:
+          riskDetailPage.assert.containsText('@surfaceWaterPanel', 'Very low risk means that each year this area has a chance of flooding of less than 1 in 1000 (0.1%).')
+          break
+        default:
+          throw new Error('Invalid Risk Level', info.riverAndSeaRisk)
+      }
+
+      // Reservoir tests
+      if (info.reservoirRisk) {
+        riskDetailPage.assert.elementPresent('@reservoirPanel')
+        riskDetailPage.assert.containsText('@reservoirPanel', 'There\'s a risk of flooding in this area from reservoirs')
+      }
     })
-  },
-  assertError: function (riskPage) {
-    riskPage.assert.containsText('#content main header h1.heading-xlarge', 'Sorry, this service is temporarily unavailable')
-    riskPage.assert.containsText('#content main p.lede', 'Thank you for your patience')
-    riskPage.assert.containsText('#content main p:not(.lede)', 'Information about long term flood risk is available on')
   }
 }
