@@ -1,52 +1,82 @@
 var mapTests = require('../../common/map')
 var data = require('./data.js')
-
 module.exports = {
+  'beforeEach': function (client) {
+    // Force browser to pretendo-mobile
+    // client.resizeWindow(300, 600)
+  },
   'vanilla-map': function (client) {
     var mapPage = client.page.map()
-
     // load the map with no parameters
     mapTests.loadPageNoParams(mapPage)
+
+    // client.execute(function() {
+    //   alert('injected')
+    // })
 
     // assert that the return to risk page with address link is hidden
     mapTests.assertRiskAddressHidden(mapPage)
 
-    // assert we have the correct map visible
-    mapTests.assertMapParentSelected(mapPage, data.mapTypes[0].ref)
-    mapTests.assertMapParentNotSelected(mapPage, data.mapTypes[1].ref)
-    mapTests.assertMapParentNotSelected(mapPage, data.mapTypes[2].ref)
+    mapPage.isMobile(function (isMobile) {
+      if (!isMobile) {
+        // assert we have the correct map visible
+        mapTests.assertMapSelected(mapPage, data.mapTypes[0].ref)
+        mapTests.assertMapNotSelected(mapPage, data.mapTypes[1].ref)
+        mapTests.assertMapNotSelected(mapPage, data.mapTypes[2].ref)
 
-    // select each map from basic view
-    data.mapTypes.forEach(function (item) {
-      mapPage.selectMap(item.ref)
+        // select each map from basic view
+        data.mapTypes.forEach(function (item) {
+          mapPage.selectMap(item.ref)
 
-      // check selected
-      mapTests.assertMapParentSelected(mapPage, item.ref)
+          // check selected TODO, this is flakey need to test map for visible layer
+          mapTests.assertMapSelected(mapPage, item.ref)
 
-      // check others not selected
-      data.mapTypes.forEach(function (i) {
-        if (i !== item) {
-          mapTests.assertMapParentNotSelected(mapPage, i.ref)
-        }
-      })
+          // check others not selected
+          data.mapTypes.forEach(function (i) {
+            if (i !== item) {
+              mapTests.assertMapNotSelected(mapPage, i.ref)
+            }
+          })
+        })
+
+        // assert is basic view
+        mapTests.assertIsBasicView(mapPage)
+
+        // switch to advanced view
+        mapPage.toggleDetailed()
+
+        // assert detailed view visible
+        mapTests.assertIsDetailedView(mapPage)
+
+        // select each map from advanced view
+        data.mapTypes.forEach(function (item) {
+          item.maps.forEach(function (i) {
+            // click the map child
+            mapPage.selectMap(i.ref)
+
+            // assert child gets selected class TODO, this is flakey need to test map for visible layer
+            mapTests.assertMapSelected(mapPage, i.ref)
+          })
+        })
+
+        // return to basic view
+        mapPage.toggleDetailed()
+        mapTests.assertIsBasicView(mapPage)
+      } else {
+        // do Mobile version of tests
+
+        // assert we have the correct map visible
+
+        data.mapTypes.forEach(function (item) {
+          item.maps.forEach(function (map) {
+            // select map from drop down
+            mapPage.selectMapMobile(map.ref)
+
+          // assert correct map selected
+          })
+        })
+      }
     })
-
-    // assert is basic view
-    mapTests.assertIsBasicView(mapPage)
-
-    // switch to advanced view
-    mapPage.toggleDetailed()
-
-    // assert detailed view visible
-    mapTests.assertIsDetailedView(mapPage)
-
-    // select each map from advanced view
-
-    // return to basic view
-    mapPage.toggleDetailed()
-    mapTests.assertIsBasicView(mapPage)
-
-    // kill
     client.end()
   },
   'parameterised-map': function (client) {
@@ -59,10 +89,14 @@ module.exports = {
       // assert risk address link visible
       mapTests.assertRiskAddressVisible(mapPage)
 
-      // assert we have the default map visible
-      mapTests.assertMapParentSelected(mapPage, data.mapTypes[0].ref)
-      mapTests.assertMapParentNotSelected(mapPage, data.mapTypes[1].ref)
-      mapTests.assertMapParentNotSelected(mapPage, data.mapTypes[2].ref)
+      mapPage.isMobile(function (isMobile) {
+        if (!isMobile) {
+          // assert we have the default map visible
+          mapTests.assertMapSelected(mapPage, data.mapTypes[0].ref)
+          mapTests.assertMapNotSelected(mapPage, data.mapTypes[1].ref)
+          mapTests.assertMapNotSelected(mapPage, data.mapTypes[2].ref)
+        }
+      })
     })
 
     // kill
@@ -78,12 +112,16 @@ module.exports = {
       // assert risk address link visible
       mapTests.assertRiskAddressVisible(mapPage)
 
-      // assert we have the correct map visible
-      mapTests.assertMapParentSelected(mapPage, item.ref)
+      mapPage.isMobile(function (isMobile) {
+        if (!isMobile) {
+          // assert we have the correct map visible
+          mapTests.assertMapSelected(mapPage, item.ref)
 
-      data.mapTypes.forEach(function (i) {
-        if (i !== item) {
-          mapTests.assertMapParentNotSelected(mapPage, i.ref)
+          data.mapTypes.forEach(function (i) {
+            if (i !== item) {
+              mapTests.assertMapNotSelected(mapPage, i.ref)
+            }
+          })
         }
       })
     })
