@@ -16,7 +16,7 @@ module.exports = {
 
       // Navigate to the home page & submit postcode
       homeTests.loadPage(homePage)
-      homeTests.setPostcodeAndSubmit(homePage, postcode)
+      homePage.setPostcodeAndSubmit(postcode)
 
       /**
        * Create search page object

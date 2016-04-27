@@ -20,6 +20,9 @@ module.exports = {
     submit: function () {
       return this.waitForElementVisible('@submitBtn', 1000)
         .click('@submitBtn')
+    },
+    setPostcodeAndSubmit: function (postcode) {
+      return this.setPostcode(postcode).submit()
     }
   }]
 }

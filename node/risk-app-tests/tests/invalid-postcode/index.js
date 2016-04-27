@@ -14,7 +14,7 @@ module.exports = {
 
       // Navigate to the home page & submit invalid postcode
       homeTests.loadPage(homePage)
-      homeTests.setPostcodeAndSubmit(homePage, postcode)
+      homePage.setPostcodeAndSubmit(postcode)
 
       // Asset we get the default error message
       homeTests.assertErrorMessage(homePage)
