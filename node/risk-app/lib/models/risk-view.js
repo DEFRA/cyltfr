@@ -1,4 +1,5 @@
 var util = require('../util')
+var suitability = require('./suitability')
 
 const RiskStatus = {
   AtRisk: 1,
@@ -67,11 +68,18 @@ function RiskViewModel (risk, address) {
     })
   }
 
-  if (risk.riverAndSeaRisk) {
-    this.riverAndSeaRiskSuitability = risk.riverAndSeaRisk.suitability
+  // River and Sea suitability
+  var riverAndSeaSuitability = risk.riverAndSeaRisk && risk.riverAndSeaRisk.suitability
+  if (riverAndSeaSuitability) {
+    this.riverAndSeaSuitability = suitability.riverAndSea[riverAndSeaSuitability.toLowerCase()]
   }
 
-  this.surfaceWaterSuitability = risk.surfaceWaterSuitability
+  // Surface water suitability
+  var surfaceWaterSuitability = risk.surfaceWaterSuitability
+  if (surfaceWaterSuitability) {
+    this.surfaceWaterSuitability = suitability.surfaceWater[surfaceWaterSuitability.toLowerCase()]
+  }
+
   this.extraInfo = risk.extraInfo
   this.easting = address.x
   this.northing = address.y

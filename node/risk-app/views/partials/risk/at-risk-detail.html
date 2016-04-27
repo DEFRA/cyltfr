@@ -35,8 +35,14 @@
       <h3 class="heading-small">How to use this information</h3>
       <p>
         You can use this information to <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}&map=RiversOrSea">see which areas are more likely to flood first,
-         deepest, or most often.</a> {{riverAndSeaRiskSuitability}}
+         deepest, or most often.</a>
       </p>
+
+      {{#if riverAndSeaSuitability}}
+        <p>
+          {{riverAndSeaSuitability}}
+        </p>
+      {{/if}}
 
       <h3 class="heading-small">Planning a development</h3>
       <p>
@@ -74,8 +80,14 @@
       <h3 class="heading-small">How to use this information</h3>
       <p>
         You can use this information to <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}&map=SurfaceWater">see the approximate areas that would flood,
-         and which parts would be shallower or deeper.</a> {{surfaceWaterSuitability}}
+         and which parts would be shallower or deeper.</a>
       </p>
+
+      {{#if surfaceWaterSuitability}}
+        <p>
+          {{surfaceWaterSuitability}}
+        </p>
+      {{/if}}
     </div>
   </div>
 </div>
@@ -106,10 +118,10 @@
         <h3 class="heading-small">Reservoirs that could affect this area</h3>
         {{#each reservoirs}}
           <p>
-            <strong class="bold-small">{{name}}</strong>, (grid reference {{location}})<br>
+            <strong class="bold-small">{{name}}</strong> (grid reference {{location}})<br>
             Owner: {{owner}}<br>
             Lead Local Flood Authority: {{authority}}<br>
-            Risk Designation: {{riskDesignation}}<br>
+            Risk designation: {{riskDesignation}}<br>
             Comments: {{comments}}<br>
           </p>
         {{/each}}
@@ -124,7 +136,7 @@
   </div>
   <div id="additional-information" class="column-three-quarters">
     <h3 class="heading-medium">Additional information</h3>
-    <h3 class="heading-small">Lead local flood authority</h3>
+    <h3 class="heading-small">Lead Local Flood Authority</h3>
     <p>
       {{leadLocalFloodAuthority}}
     </p>
