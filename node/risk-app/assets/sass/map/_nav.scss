@@ -2,7 +2,7 @@
 
 .map-container {
   ul.nav {
-    li.category {
+    > li {
       background-color: #000;
 
       &:not(:last-child) {
@@ -21,37 +21,49 @@
         font-size: 16px;
         padding-top: 4px;
       }
-    }
 
-    ul {
-      clear: both;
-      color: $black;
-      background-color: $white;
-      border-left: solid 22px #E2E4E5;
+      a {
+        color: $white;
+        text-decoration: none;
 
-      > li {
-        padding: 8px;
-        display: none;
-        cursor: pointer;
-        font-size: 16px;
-        padding-left: 34px;
-        border-top: solid 1px #E2E4E5;
-        background-size: 18px 18px;
-        background-repeat: no-repeat;
-        background-position: 4px center;
-        background-image: url(../../images/icon-radio-off.png);
-
-        &.selected {
-          text-decoration: underline;
-          background-color: #ffbf47;
-          background-image: url(../../images/icon-radio-on.png);
-          &:focus {
-            outline: none;
-          }
+        &:focus {
+          outline: none;
         }
+      }
 
-        &:first-child {
-          display: block;
+      ul {
+        clear: both;
+        color: $black;
+        background-color: $white;
+        border-left: solid 22px #E2E4E5;
+
+        > li {
+          display: none;
+
+          a {
+            color: $black;
+            text-decoration: none;
+            padding: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            padding-left: 34px;
+            border-top: solid 1px #E2E4E5;
+            background-size: 18px 18px;
+            background-repeat: no-repeat;
+            background-position: 4px center;
+            background-image: url(../../images/icon-radio-off.png);
+          }
+
+          &:first-child {
+            display: block;
+          }
+
+          &.selected a {
+            text-decoration: underline;
+            background-color: #ffbf47;
+            background-image: url(../../images/icon-radio-on.png);
+          }
         }
       }
     }
@@ -64,9 +76,12 @@
   }
 
   .map-switch {
-    a:focus {
-      outline: none;
-      background: none;
+    a {
+      text-decoration: none;
+      &:focus {
+        outline: none;
+        background: none;
+      }
     }
   }
 }
