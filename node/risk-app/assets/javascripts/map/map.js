@@ -8,6 +8,10 @@ var wmsparser = new ol.format.WMSCapabilities()
 var config = require('./map-config.json')
 var overlayTemplate = require('./overlay.hbs')
 var map, callback, currentLayer, $overlay, $overlayContent
+var isLoading = false
+var loading = 0
+var loaded = 0
+var loadError = 0
 
 function loadMap (point) {
   // add the projection to Window.proj4
@@ -63,7 +67,7 @@ function loadMap (point) {
     // optionsFromCapabilities function which does some of the work for you, but it looks
     // like that function just does this anyway, although i think the WMTS version does a lot more with setting up matrixSet and things
     for (var i = 0; i < wmsResult.Capability.Layer.Layer.length; i++) {
-      var WMSsource = new ol.source.TileWMS({
+      var WmsSource = new ol.source.TileWMS({
         url: config.GSWMS,
         params: {
           LAYERS: wmsResult.Capability.Layer.Layer[i].Name,
@@ -76,9 +80,29 @@ function loadMap (point) {
         })
       })
 
+      WmsSource.on('tileloadstart', function () {
+        isLoading = true
+        loading++
+      })
+
+      WmsSource.on('tileloadend', function () {
+        loaded++
+        if (loading === loaded) {
+          layerLoaded()
+        }
+      })
+
+      WmsSource.on('tileloaderror', function () {
+        loadError++
+        loaded++
+        if (loading === loaded) {
+          layerLoaded()
+        }
+      })
+
       layers.push(new ol.layer.Tile({
         ref: wmsResult.Capability.Layer.Layer[i].Name,
-        source: WMSsource,
+        source: WmsSource,
         opacity: 0.7,
         visible: false
       }))
@@ -216,10 +240,27 @@ function closeOverlay () {
   $overlay.hide()
 }
 
+function testValues () {
+  return {
+    zoom: map.getView().getZoom(),
+    point: map.getView().getCenter(),
+    layer: currentLayer && currentLayer.getProperties().ref,
+    isLoading: isLoading
+  }
+}
+
+function layerLoaded () {
+  loading = 0
+  loaded = 0
+  loadError = 0
+  isLoading = false
+}
+
 module.exports = {
   loadMap: loadMap,
   showMap: showMap,
   closeOverlay: closeOverlay,
+  testValues: testValues,
   onReady: function (fn) {
     callback = fn
   }
