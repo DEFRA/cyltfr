@@ -1,6 +1,6 @@
 // Get the launchUrl from the argv,
 // otherwise default to localhost:3001
-var url = 'https://fr-tst.envage.co.uk'
+var url = 'http://localhost:3001'
 var urlIdx = process.argv.indexOf('--url')
 
 if (urlIdx > 1) {
