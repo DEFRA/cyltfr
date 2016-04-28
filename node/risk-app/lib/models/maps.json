@@ -9,7 +9,7 @@
         {
           "ref": "RiversOrSea_1-ROFRS",
           "name": "Extent of flooding",
-          "title": "Flood risk from rivers or the sea",
+          "title": "Extent of flooding from rivers or the sea",
           "legend": {
             "title": "Flood risk",
             "keys": [{
@@ -30,7 +30,7 @@
         {
           "ref": "RiversOrSea_2-FWLRSF",
           "name": "Depth and flow estimates at monitoring stations",
-          "title": "Depth and flow estimates at monitoring stations",
+          "title": "Estimated depth and flow of water at river and sea level monitoring stations",
           "legend": {
             "title": "Select monitoring station",
             "keys": [{
@@ -55,7 +55,7 @@
         {
           "ref": "SurfaceWater_6-SW-Extent",
           "name": "Extent of flooding",
-          "title": "Flood risk from surface water",
+          "title": "Extent of flooding from surface water",
           "legend": {
             "title": "Flood risk",
             "keys": [{
@@ -76,7 +76,7 @@
         {
           "ref": "SurfaceWater_9-SWDH",
           "name": "High risk: depth",
-          "title": "Surface water depth - high chance of occuring",
+          "title": "Surface water flood risk: water depth in a high risk scenario",
           "legend": {
             "title": "High risk scenario",
             "subTitle": "Flood depth (millimetres)",
@@ -95,7 +95,7 @@
         {
           "ref": "SurfaceWater_12-SWVH",
           "name": "High risk: velocity",
-          "title": "Surface water velocity - high chance of occuring",
+          "title": "Surface water flood risk: water velocity in a high risk scenario",
           "legend": {
             "title": "High risk scenario",
             "subTitle": "Flood velocity (metres/second)",
@@ -114,7 +114,7 @@
         {
           "ref": "SurfaceWater_8-SWDM",
           "name": "Medium risk: depth",
-          "title": "Surface water depth - medium chance of occuring",
+          "title": "Surface water flood risk: water depth in a medium risk scenario",
           "legend": {
             "title": "Medium risk scenario",
             "subTitle": "Flood depth (millimetres)",
@@ -133,7 +133,7 @@
         {
           "ref": "SurfaceWater_11-SWVM",
           "name": "Medium risk: velocity",
-          "title": "Surface water velocity - medium chance of occuring",
+          "title": "Surface water flood risk: water velocity in a medium risk scenario",
           "legend": {
             "title": "Medium risk scenario",
             "subTitle": "Flood velocity (metres/second)",
@@ -152,7 +152,7 @@
         {
           "ref": "SurfaceWater_7-SWDL",
           "name": "Low risk: depth",
-          "title": "Surface water depth - low chance of occuring",
+          "title": "Surface water flood risk: water depth in a low risk scenario",
           "legend": {
             "title": "Low risk scenario",
             "subTitle": "Flood depth (millimetres)",
@@ -171,7 +171,7 @@
         {
           "ref": "SurfaceWater_10-SWVL",
           "name": "Low risk: velocity",
-          "title": "Surface water velocity - low chance of occuring",
+          "title": "Surface water flood risk: water velocity in a low risk scenario",
           "legend": {
             "title": "Low risk scenario",
             "subTitle": "Flood velocity (metres/second)",
@@ -198,7 +198,7 @@
         {
           "ref": "Reservoirs_3-ROFR",
           "name": "Extent of flooding",
-          "title": "Flood risk from reservoirs",
+          "title": "Extent of flooding from rerservoirs",
           "legend": {
             "title": "Flood risk",
             "keys": [{
@@ -210,7 +210,7 @@
         {
           "ref": "Reservoirs_4-DOFR",
           "name": "Flood depth",
-          "title": "Depth of flooding from reservoirs",
+          "title": "Reservoir flood risk: flood water depth",
           "legend": {
             "title": "Flood depth (metres)",
             "keys": [{
@@ -228,7 +228,7 @@
         {
           "ref": "Reservoirs_5-SOFR",
           "name": "Flood speed",
-          "title": "Speed of flooding from reservoirs",
+          "title": "Reservoir flood risk: flood water speed",
           "legend": {
             "title": "Flood speed",
             "keys": [{
