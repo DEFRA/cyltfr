@@ -65,15 +65,6 @@ $(function () {
       setCurrent($(this).attr('id'))
     })
 
-    // Accessibility, allow tab and enter for map selection
-    $maps.keypress(function (e) {
-      var keycode = (e.keyCode ? e.keyCode : e.which)
-      if (keycode === 13) {
-        e.preventDefault()
-        setCurrent($(this).attr('id'))
-      }
-    })
-
     // Handle the mobile map selector change
     $selector.on('change', function (e) {
       e.preventDefault()
@@ -86,14 +77,6 @@ $(function () {
   $container.on('click', '.map-switch a', function (e) {
     e.preventDefault()
     $(e.delegateTarget).toggleClass('detailed')
-  })
-
-  $('.map-switch a').keypress(function (e) {
-    var keycode = (e.keyCode ? e.keyCode : e.which)
-    if (keycode === 13) {
-      e.preventDefault()
-      $container.toggleClass('detailed')
-    }
   })
 })
 

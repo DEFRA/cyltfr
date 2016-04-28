@@ -7,8 +7,8 @@
       </h2>
       <ul>
         {{#each maps}}
-          <li id="{{ref}}" title="{{title}}" tabindex="0">
-            <span>{{name}}</span>
+          <li id="{{ref}}">
+            <a href="#{{ref}}" title="{{title}}">{{name}}</a>
           </li>
         {{/each}}
       </ul>
