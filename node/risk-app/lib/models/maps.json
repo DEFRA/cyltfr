@@ -29,8 +29,8 @@
         },
         {
           "ref": "RiversOrSea_2-FWLRSF",
-          "name": "Depth and flow recorded at monitoring stations",
-          "title": "Depth and flow recorded at monitoring stations",
+          "name": "Depth and flow estimates at monitoring stations",
+          "title": "Depth and flow estimates at monitoring stations",
           "legend": {
             "title": "Select monitoring station",
             "keys": [{
