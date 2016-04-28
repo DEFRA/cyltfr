@@ -96,3 +96,7 @@ $(function () {
     }
   })
 })
+
+module.exports = {
+  testValues: loadMap.testValues
+}

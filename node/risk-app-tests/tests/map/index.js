@@ -5,101 +5,102 @@ module.exports = {
     // Force browser to pretendo-mobile
     // client.resizeWindow(300, 600)
   },
-  'vanilla-map': function (client) {
+  'native-functionality': function (client) {
     var mapPage = client.page.map()
+
+    // this is independent of mobile
+
     // load the map with no parameters
     mapTests.loadPageNoParams(mapPage)
 
-    // client.execute(function() {
-    //   alert('injected')
-    // })
+    mapTests.assertZoomIs(client, mapPage, 0)
 
-    // assert that the return to risk page with address link is hidden
-    mapTests.assertRiskAddressHidden(mapPage)
+    mapPage.zoomIn(client, 10)
 
-    mapPage.isMobile(function (isMobile) {
-      if (!isMobile) {
+    mapTests.assertZoomIs(client, mapPage, 10)
+
+    mapPage.zoomOut(client, 10)
+
+    mapTests.assertZoomIs(client, mapPage, 0)
+
+    mapPage.toggleFullscreen()
+
+    // TODO assert is full screen?
+
+    client.pause(2000)
+
+    mapPage.toggleFullscreen()
+
+    // try some panning
+    //
+    // rotation allowed etc?
+
+    client.end()
+  },
+  'layer-selection-desktop': function (client) {
+    var mapPage = client.page.map()
+
+    data.addresses.forEach(function (item) {
+      // load map with a type
+      mapTests.loadPageWithParams(mapPage, item.addressId, item.easting, item.northing)
+
+      // assert that the return to risk page with address link is hidden
+      mapTests.assertRiskAddressVisible(mapPage)
+
+      mapTests.assertZoomIs(client, mapPage, 9)
+
+      // assert centre point is correctly
+      mapTests.assertCentreIs(client, mapPage, [item.easting, item.northing])
+
+      mapTests.assertMapSelectedAndLoaded(client, mapPage, data.mapTypes[0].maps[0].ref)
+
+      mapPage.isMobile(function (isMobile) {
         // assert we have the correct map visible
-        mapTests.assertMapSelected(mapPage, data.mapTypes[0].ref)
-        mapTests.assertMapNotSelected(mapPage, data.mapTypes[1].ref)
-        mapTests.assertMapNotSelected(mapPage, data.mapTypes[2].ref)
+        mapTests.assertMapSelectedAndLoaded(client, mapPage, data.mapTypes[0].maps[0].ref)
+        mapTests.assertMapNotSelected(mapPage, data.mapTypes[1].maps[0].id, isMobile)
+        mapTests.assertMapNotSelected(mapPage, data.mapTypes[2].maps[0].id, isMobile)
 
         // select each map from basic view
         data.mapTypes.forEach(function (item) {
-          mapPage.selectMap(item.ref)
+          mapPage.selectMap(item.maps[0].id, isMobile)
 
-          // check selected TODO, this is flakey need to test map for visible layer
-          mapTests.assertMapSelected(mapPage, item.ref)
+          mapTests.assertMapSelectedAndLoaded(client, mapPage, item.maps[0].ref)
 
           // check others not selected
           data.mapTypes.forEach(function (i) {
             if (i !== item) {
-              mapTests.assertMapNotSelected(mapPage, i.ref)
+              mapTests.assertMapNotSelected(mapPage, i.maps[0].id, isMobile)
             }
           })
         })
 
-        // assert is basic view
-        mapTests.assertIsBasicView(mapPage)
-
-        // switch to advanced view
-        mapPage.toggleDetailed()
-
-        // assert detailed view visible
-        mapTests.assertIsDetailedView(mapPage)
+        if (!isMobile) {
+          // assert is basic view
+          mapTests.assertIsBasicView(mapPage)
+          // switch to advanced view
+          mapPage.toggleDetailed()
+          // assert detailed view visible
+          mapTests.assertIsDetailedView(mapPage)
+        }
 
         // select each map from advanced view
         data.mapTypes.forEach(function (item) {
           item.maps.forEach(function (i) {
             // click the map child
-            mapPage.selectMap(i.ref)
+            mapPage.selectMap(i.id, isMobile)
 
-            // assert child gets selected class TODO, this is flakey need to test map for visible layer
-            mapTests.assertMapSelected(mapPage, i.ref)
+            mapTests.assertMapSelectedAndLoaded(client, mapPage, i.ref)
           })
         })
 
-        // return to basic view
-        mapPage.toggleDetailed()
-        mapTests.assertIsBasicView(mapPage)
-      } else {
-        // do Mobile version of tests
-
-        // assert we have the correct map visible
-
-        data.mapTypes.forEach(function (item) {
-          item.maps.forEach(function (map) {
-            // select map from drop down
-            mapPage.selectMapMobile(map.ref)
-
-          // assert correct map selected
-          })
-        })
-      }
-    })
-    client.end()
-  },
-  'parameterised-map': function (client) {
-    data.addresses.forEach(function (item) {
-      var mapPage = client.page.map()
-
-      // load map with data parameters
-      mapTests.loadPageWithParams(mapPage, item.addressId, item.easting, item.northing)
-
-      // assert risk address link visible
-      mapTests.assertRiskAddressVisible(mapPage)
-
-      mapPage.isMobile(function (isMobile) {
         if (!isMobile) {
-          // assert we have the default map visible
-          mapTests.assertMapSelected(mapPage, data.mapTypes[0].ref)
-          mapTests.assertMapNotSelected(mapPage, data.mapTypes[1].ref)
-          mapTests.assertMapNotSelected(mapPage, data.mapTypes[2].ref)
+          // return to basic view
+          mapPage.toggleDetailed()
+          mapTests.assertIsBasicView(mapPage)
         }
       })
     })
 
-    // kill
     client.end()
   },
   'parameterised-map-with-type': function (client) {
@@ -112,20 +113,13 @@ module.exports = {
       // assert risk address link visible
       mapTests.assertRiskAddressVisible(mapPage)
 
-      mapPage.isMobile(function (isMobile) {
-        if (!isMobile) {
-          // assert we have the correct map visible
-          mapTests.assertMapSelected(mapPage, item.ref)
+      // assert localised zoom
+      mapTests.assertZoomIs(client, mapPage, 9)
 
-          data.mapTypes.forEach(function (i) {
-            if (i !== item) {
-              mapTests.assertMapNotSelected(mapPage, i.ref)
-            }
-          })
-        }
-      })
+      // assert we have the correct map visible
+      mapTests.assertMapSelectedAndLoaded(client, mapPage, item.maps[0].ref)
     })
-    // kill
+
     client.end()
   }
 }

@@ -1,3 +1,5 @@
+/* global LTFRI*/
+
 module.exports = {
   url: function () {
     return this.api.launchUrl + '/map'
@@ -9,6 +11,9 @@ module.exports = {
     'riskAddressLink': '#map-page a[data-id="risk-address"]',
     'mapSwitch': '#map-page .map-switch a',
     'mobileNav': '.visible-mobile select',
+    'zoomIn': 'button.ol-zoom-in',
+    'zoomOut': 'button.ol-zoom-out',
+    'fullscreen': 'div.ol-full-screen',
     'RiversOrSea': '#map-page li#RiversOrSea',
     'SurfaceWater': '#map-page li#SurfaceWater',
     'Reservoirs': '#map-page li#Reservoirs',
@@ -35,8 +40,12 @@ module.exports = {
       return this.waitForElementVisible('@mapSwitch', 2000).click('@mapSwitch')
     }
   }, {
-    selectMap: function (ref) {
-      return this.waitForElementVisible('@' + ref, 2000).click('@' + ref)
+    selectMap: function (ref, isMobile) {
+      if (isMobile) {
+        return this.waitForElementVisible('@mobileNav', 2000).click('select option[value="' + ref + '"]')
+      } else {
+        return this.waitForElementVisible('@' + ref, 2000).click('@' + ref)
+      }
     }
   }, {
     selectMapMobile: function (ref) {
@@ -44,10 +53,47 @@ module.exports = {
     }
   }, {
     isMobile: function (callback) {
-      this.waitForElementVisible('button.ol-zoom-in', 20000)
+      this.waitForElementVisible('@zoomIn', 10000)
         .isVisible('@mobileNav', function (result) {
           callback(result.value)
         })
+    }
+  }, {
+    zoomIn: function (client, n) {
+      var that = this
+      this.waitForElementVisible('@zoomIn', 10000, function () {
+        while (n > 0) {
+          that.click('@zoomIn')
+          client.pause(500)
+          n--
+        }
+      })
+    }
+  }, {
+    zoomOut: function (client, n) {
+      var that = this
+      this.waitForElementVisible('@zoomOut', 10000, function () {
+        while (n > 0) {
+          that.click('@zoomOut')
+          client.pause(500)
+          n--
+        }
+      })
+    }
+  }, {
+    toggleFullscreen: function () {
+      var that = this
+      this.waitForElementVisible('@fullscreen', 10000, function () {
+        that.click('@fullscreen')
+      })
+    }
+  }, {
+    getTestData: function (client, callback) {
+      client.execute(function () {
+        return LTFRI.MapPage.testValues()
+      }, function (result) {
+        callback(result.value)
+      })
     }
   }]
 }
