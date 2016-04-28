@@ -12,6 +12,7 @@ var isLoading = false
 var loading = 0
 var loaded = 0
 var loadError = 0
+var maxResolution = 1000
 
 function loadMap (point) {
   // add the projection to Window.proj4
@@ -100,11 +101,16 @@ function loadMap (point) {
         }
       })
 
+      if (wmsResult.Capability.Layer.Layer[i].Name.includes('SW')) {
+        maxResolution = 20
+      }
+
       layers.push(new ol.layer.Tile({
         ref: wmsResult.Capability.Layer.Layer[i].Name,
         source: WmsSource,
         opacity: 0.7,
-        visible: false
+        visible: false,
+        maxResolution: maxResolution
       }))
     }
 
