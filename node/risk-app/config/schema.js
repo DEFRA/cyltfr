@@ -25,6 +25,7 @@ module.exports = {
   service: serviceSchema,
   logging: Joi.object(),
   cacheViews: Joi.boolean().required(),
+  mockAddressService: Joi.boolean().required(),
   httpTimeoutMs: Joi.number().required().min(0).max(30000),
   analyticsAccount: Joi.string().required().allow(''),
   floodWarningsUrl: Joi.string().uri().required(),

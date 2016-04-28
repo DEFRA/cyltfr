@@ -35,6 +35,7 @@
   "httpTimeoutMs": 10000,
   "analyticsAccount": "",
   "cacheViews": false,
+  "mockAddressService": false,
   "floodWarningsUrl": "https://flood-warning-information.service.gov.uk/",
   "ordnanceSurvey": {
     "key": "",

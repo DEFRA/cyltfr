@@ -116,6 +116,11 @@ Glue.compose(manifest, options, function (err, server) {
       server.log(['error', 'info'], details)
       throw err
     } else {
+      if (config.mockAddressService) {
+        require('../mock/address')
+        server.log('info', 'Address service requests are being mocked')
+      }
+
       details.message = 'Started ' + details.name
       server.log('info', details)
     }
