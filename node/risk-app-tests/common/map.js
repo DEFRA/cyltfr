@@ -19,9 +19,9 @@ module.exports = {
   },
   assertMapSelectedAndLoaded: function (client, mapPage, mapType) {
     // I'm sure there are prettier ways to do this, but don't have the time, sync would be nice
-    // but just giving the browser 3 (250ms, 2000ms, 5000ms) chances to load the layer within the paused values, otherwise took to long
+    // but just giving the browser 3 (500ms, 2000ms, 5000ms) chances to load the layer within the paused values, otherwise took to long
 
-    client.pause(250) // give layer 250ms
+    client.pause(500) // give layer 500ms
 
     mapPage.getTestData(client, function (result) {
       if (result.isLoading) {
@@ -30,14 +30,14 @@ module.exports = {
           if (result.isLoading) {
             client.pause(5000)
             mapPage.getTestData(client, function (result) {
-              mapPage.assert.equal(result.layer.replace('risk:', ''), mapType, 'Assert map layer is loaded')
+              mapPage.assert.equal(result.layer.replace('risk:', ''), mapType, 'Assert map layer is loaded (7500ms check!!!)')
             })
           } else {
-            mapPage.assert.equal(result.layer.replace('risk:', ''), mapType, 'Assert map layer is loaded')
+            mapPage.assert.equal(result.layer.replace('risk:', ''), mapType, 'Assert map layer is loaded (2500ms check)')
           }
         })
       } else {
-        mapPage.assert.equal(result.layer.replace('risk:', ''), mapType, 'Assert map layer is loaded')
+        mapPage.assert.equal(result.layer.replace('risk:', ''), mapType, 'Assert map layer is loaded (500ms check)')
       }
     })
   },

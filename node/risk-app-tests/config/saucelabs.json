@@ -4,9 +4,14 @@
   ],
   "test_workers" : true,
   "output_folder": "tests",
+  "page_objects_path": "pages",
+  "output_folder": "reports",
+  "test_workers": true,
+  "live_output": false,
   "test_settings" : {
     "default" : {
-      "launch_url": "http://localhost:3000",
+      "filter": "tests/map/index.js",
+      "launch_url": "https://fr-tst.envage.co.uk",
       "selenium_host" : "ondemand.saucelabs.com",
       "selenium_port" : 80,
       "username" : "${SAUCE_USERNAME}",

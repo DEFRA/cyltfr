@@ -37,7 +37,7 @@ module.exports = {
 
     client.end()
   },
-  'layer-selection-desktop': function (client) {
+  'layer-selection-perf-test': function (client) {
     var mapPage = client.page.map()
 
     data.addresses.forEach(function (item) {
@@ -47,7 +47,9 @@ module.exports = {
       // assert that the return to risk page with address link is hidden
       mapTests.assertRiskAddressVisible(mapPage)
 
-      mapTests.assertZoomIs(client, mapPage, 9)
+      mapPage.zoomIn(client, 1)
+
+      mapTests.assertZoomIs(client, mapPage, 10)
 
       // assert centre point is correctly
       mapTests.assertCentreIs(client, mapPage, [item.easting, item.northing])
@@ -55,48 +57,52 @@ module.exports = {
       mapTests.assertMapSelectedAndLoaded(client, mapPage, data.mapTypes[0].maps[0].ref)
 
       mapPage.isMobile(function (isMobile) {
-        // assert we have the correct map visible
-        mapTests.assertMapSelectedAndLoaded(client, mapPage, data.mapTypes[0].maps[0].ref)
-        mapTests.assertMapNotSelected(mapPage, data.mapTypes[1].maps[0].id, isMobile)
-        mapTests.assertMapNotSelected(mapPage, data.mapTypes[2].maps[0].id, isMobile)
+        function layerTest () {
+          // select each map from basic view
+          data.mapTypes.forEach(function (item) {
+            mapPage.selectMap(item.maps[0].id, isMobile)
 
-        // select each map from basic view
-        data.mapTypes.forEach(function (item) {
-          mapPage.selectMap(item.maps[0].id, isMobile)
+            mapTests.assertMapSelectedAndLoaded(client, mapPage, item.maps[0].ref)
 
-          mapTests.assertMapSelectedAndLoaded(client, mapPage, item.maps[0].ref)
-
-          // check others not selected
-          data.mapTypes.forEach(function (i) {
-            if (i !== item) {
-              mapTests.assertMapNotSelected(mapPage, i.maps[0].id, isMobile)
-            }
+            // check others not selected
+            data.mapTypes.forEach(function (i) {
+              if (i !== item) {
+                mapTests.assertMapNotSelected(mapPage, i.maps[0].id, isMobile)
+              }
+            })
           })
-        })
 
-        if (!isMobile) {
-          // assert is basic view
-          mapTests.assertIsBasicView(mapPage)
-          // switch to advanced view
-          mapPage.toggleDetailed()
-          // assert detailed view visible
-          mapTests.assertIsDetailedView(mapPage)
+          if (!isMobile) {
+            // assert is basic view
+            mapTests.assertIsBasicView(mapPage)
+            // switch to advanced view
+            mapPage.toggleDetailed()
+            // assert detailed view visible
+            mapTests.assertIsDetailedView(mapPage)
+          }
+
+          // select each map from advanced view
+          data.mapTypes.forEach(function (item) {
+            item.maps.forEach(function (i) {
+              // click the map child
+              mapPage.selectMap(i.id, isMobile)
+
+              mapTests.assertMapSelectedAndLoaded(client, mapPage, i.ref)
+            })
+          })
+
+          if (!isMobile) {
+            // return to basic view
+            mapPage.toggleDetailed()
+            mapTests.assertIsBasicView(mapPage)
+          }
+
+          mapPage.zoomOut(client, 1)
         }
 
-        // select each map from advanced view
-        data.mapTypes.forEach(function (item) {
-          item.maps.forEach(function (i) {
-            // click the map child
-            mapPage.selectMap(i.id, isMobile)
-
-            mapTests.assertMapSelectedAndLoaded(client, mapPage, i.ref)
-          })
-        })
-
-        if (!isMobile) {
-          // return to basic view
-          mapPage.toggleDetailed()
-          mapTests.assertIsBasicView(mapPage)
+        // Run the tests on zoom 10, 9, 8, 7
+        for (var i = 0; i < 4; i++) {
+          layerTest()
         }
       })
     })

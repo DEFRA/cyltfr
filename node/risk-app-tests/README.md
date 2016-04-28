@@ -13,11 +13,9 @@ export SAUCE_ACCESS_KEY=`
 
 If you are wanting to test your localhost using sauce labs then a tunnel will need to be created for the remote to access your local.  This is done through Sauce Connect.  See https://wiki.saucelabs.com/display/DOCS/Setting+Up+Sauce+Connect
 
-Download from https://saucelabs.com/downloads/sc-4.3.13-linux.tar.gz
+In the terminal run:
 
-Extract the package and in the terminal in the extraction directory run:
-
-`./bin/sc -u ${SAUCE_USERNAME} -k ${SAUCE_ACCESS_KEY} -B all`
+`/bin/sc -u ${SAUCE_USERNAME} -k ${SAUCE_ACCESS_KEY} -B all`
 
 This will need to be left running whilst the remote tests are run:
 

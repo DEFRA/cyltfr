@@ -1,6 +1,6 @@
 // Get the launchUrl from the argv,
 // otherwise default to localhost:3001
-var url = 'http://localhost:3001'
+var url = 'https://fr-tst.envage.co.uk'
 var urlIdx = process.argv.indexOf('--url')
 
 if (urlIdx > 1) {
@@ -29,7 +29,7 @@ module.exports = {
   },
   test_settings: {
     'default': {
-    //  filter: 'tests/map/index.js',
+      // filter: 'tests/map/index.js',
       launch_url: url,
       selenium_host: '127.0.0.1',
       selenium_port: 4444,
