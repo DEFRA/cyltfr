@@ -63,13 +63,6 @@ module.exports = {
             mapPage.selectMap(item.maps[0].id, isMobile)
 
             mapTests.assertMapSelectedAndLoaded(client, mapPage, item.maps[0].ref)
-
-            // check others not selected
-            data.mapTypes.forEach(function (i) {
-              if (i !== item) {
-                mapTests.assertMapNotSelected(mapPage, i.maps[0].id, isMobile)
-              }
-            })
           })
 
           if (!isMobile) {

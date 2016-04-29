@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "standard",
     "test-e2e-local": "bin/test-e2e.js --env default -c config/nightwatch.conf.js",
-    "test-e2e-remote": "bin/test-e2e.js --env default -c config/saucelabs.json",
+    "test-e2e-remote": "bin/test-e2e.js --env default -c config/browserstack.json",
     "test": "npm run lint && npm run test-e2e-local"
   },
   "devDependencies": {
