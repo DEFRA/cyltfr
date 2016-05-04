@@ -81,9 +81,24 @@ function loadMap (point) {
         })
       })
 
+      var progress = new Progress(document.getElementById('progress'))
+
+      source.on('tileloadstart', function () {
+        progress.addLoading()
+      })
+
+      source.on('tileloadend', function () {
+        progress.addLoaded()
+      })
+
+      source.on('tileloaderror', function () {
+        progress.addLoaded()
+      })
+
       WmsSource.on('tileloadstart', function () {
         isLoading = true
         loading++
+        progress.addLoading()
       })
 
       WmsSource.on('tileloadend', function () {
@@ -91,6 +106,7 @@ function loadMap (point) {
         if (loading === loaded) {
           layerLoaded()
         }
+        progress.addLoaded()
       })
 
       WmsSource.on('tileloaderror', function () {
@@ -99,6 +115,7 @@ function loadMap (point) {
         if (loading === loaded) {
           layerLoaded()
         }
+        progress.addLoaded()
       })
 
       if (wmsResult.Capability.Layer.Layer[i].Name.includes('SW')) {
@@ -260,6 +277,52 @@ function layerLoaded () {
   loaded = 0
   loadError = 0
   isLoading = false
+}
+
+function Progress (el) {
+  this.el = el
+  this.tilesLoading = 0
+  this.tilesLoaded = 0
+}
+
+Progress.prototype.addLoading = function () {
+  if (this.tilesLoading === 0) {
+    this.show()
+  }
+  ++this.tilesLoading
+  this.update()
+}
+
+Progress.prototype.addLoaded = function () {
+  var this_ = this
+  setTimeout(function () {
+    ++this_.tilesLoaded
+    this_.update()
+  }, 100)
+}
+
+Progress.prototype.update = function () {
+  var width = (this.tilesLoaded / this.tilesLoading * 100).toFixed(1) + '%'
+  this.el.style.width = width
+  if (this.tilesLoading === this.tilesLoaded) {
+    this.tilesLoading = 0
+    this.tilesLoaded = 0
+    var this_ = this
+    setTimeout(function () {
+      this_.hide()
+    }, 500)
+  }
+}
+
+Progress.prototype.show = function () {
+  this.el.style.visibility = 'visible'
+}
+
+Progress.prototype.hide = function () {
+  if (this.tilesLoading === this.tilesLoaded) {
+    this.el.style.visibility = 'hidden'
+    this.el.style.width = 0
+  }
 }
 
 module.exports = {
