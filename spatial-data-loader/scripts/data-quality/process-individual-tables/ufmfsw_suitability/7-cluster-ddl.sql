@@ -1,0 +1,1 @@
+﻿CLUSTER u_ltfri.ufmfsw_suitability_bv_bng USING ufmfsw_suitability_bv_bng_wkb_geometry_geom_idx;
