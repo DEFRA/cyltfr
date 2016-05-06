@@ -24,8 +24,8 @@
     </gridSubset>
   </gridSubsets>
   <metaWidthHeight>
-    <int>4</int>
-    <int>4</int>
+    <int>1</int>
+    <int>1</int>
   </metaWidthHeight>
   <expireCache>0</expireCache>
   <expireClients>0</expireClients>

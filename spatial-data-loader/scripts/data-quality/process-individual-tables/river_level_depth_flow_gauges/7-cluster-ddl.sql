@@ -1,0 +1,1 @@
+﻿CLUSTER u_ltfri.river_level_depth_and_flow_gauges_bv_bng USING river_level_depth_and_flow_gauges_bv_bng_wkb_geometry_geom_idx;

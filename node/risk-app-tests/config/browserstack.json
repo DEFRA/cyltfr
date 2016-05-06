@@ -1,0 +1,36 @@
+{
+  "src_folders": [
+    "tests"
+  ],
+  "test_workers" : true,
+  "output_folder": "reports",
+  "page_objects_path": "pages",
+  "output_folder": "reports",
+  "test_workers": true,
+  "live_output": false,
+  "test_settings" : {
+    "default" : {
+      "launch_url": "https://fr-dev.envage.co.uk",
+      "selenium_host" : "hub.browserstack.com",
+      "selenium_port" : 80,
+      "use_ssl" : false,
+      "silent" : false,
+      "output" : true,
+      "screenshots" : {
+        "enabled" : true,
+        "on_failure" : true,
+        "path" : "reports/screenshots"
+      },
+      "desiredCapabilities": {
+        "browserstack.local" : "true",
+        "browserstack.user" : "${BS_USER}",
+        "browserstack.key" : "${BS_KEY}",
+        "browser" : "Chrome",
+        "browser_version" : "50.0",
+        "os" : "Windows",
+        "os_version" : "10",
+        "resolution" : "1920x1080"
+      }
+    }
+  }
+}
