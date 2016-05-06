@@ -135,6 +135,26 @@
               }
             }
 
+            li.crosshair {
+              margin-top: 20px;
+
+              &::before {
+                width: 30px;
+                height: 30px;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center bottom;
+                background-image: url('../../images/crosshair.png');
+
+                @include media(mobile) {
+                  line-height: 20px;
+                }
+                @include media(tablet) {
+                  line-height: 65px;
+                }
+              }
+            }
+
             @include media(tablet) {
               li {
                 margin-bottom: 10px;

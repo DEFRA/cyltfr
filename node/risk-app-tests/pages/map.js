@@ -13,7 +13,6 @@ module.exports = {
     'mobileNav': '.visible-mobile select',
     'zoomIn': 'button.ol-zoom-in',
     'zoomOut': 'button.ol-zoom-out',
-    'fullscreen': 'div.ol-full-screen',
     'RiversOrSea': '#map-page li#RiversOrSea',
     'SurfaceWater': '#map-page li#SurfaceWater',
     'Reservoirs': '#map-page li#Reservoirs',
@@ -78,13 +77,6 @@ module.exports = {
           client.pause(500)
           n--
         }
-      })
-    }
-  }, {
-    toggleFullscreen: function () {
-      var that = this
-      this.waitForElementVisible('@fullscreen', 10000, function () {
-        that.click('@fullscreen')
       })
     }
   }, {

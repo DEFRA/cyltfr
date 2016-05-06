@@ -73,7 +73,8 @@ function loadMap (point) {
         params: {
           LAYERS: wmsResult.Capability.Layer.Layer[i].Name,
           TILED: true,
-          VERSION: wmsResult.version},
+          VERSION: wmsResult.version
+        },
         tileGrid: new ol.tilegrid.TileGrid({
           extent: wmsResult.Capability.Layer.Layer[i].BoundingBox[0].extent,
           resolutions: source.tileGrid.getResolutions(),
@@ -137,8 +138,7 @@ function loadMap (point) {
         new ol.control.ScaleLine({
           units: 'imperial',
           minWidth: 128
-        }),
-        new ol.control.FullScreen()
+        })
       ]),
       layers: layers,
       target: 'map',
