@@ -173,7 +173,8 @@ function loadMap (point) {
       var currentLayerRef = currentLayer && currentLayer.getProperties().ref
 
       // The overlay is only for the FWLRSF
-      if (currentLayerRef !== 'risk:2-FWLRSF' || !bullseye(e.pixel)) {
+      // TODO:Should also call bullseye(e.pixel) but currently an Openlayers bug with Firefox
+      if (currentLayerRef !== 'risk:2-FWLRSF') {
         return
       }
 
