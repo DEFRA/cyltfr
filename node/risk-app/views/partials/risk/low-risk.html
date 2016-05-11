@@ -8,15 +8,15 @@
   </ul>
   <h3 class="heading-medium">Further information</h3>
   <p>
-    <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}">View maps showing the potential extent of flooding in this location</a>
+    <a href="{{{mountPath}}}map?easting={{easting}}&northing={{northing}}&address={{address}}">View maps showing the potential extent of flooding in this location</a>
   </p>
   <p>
-    <a href="/risk-detail?address={{address}}" data-id="risk-detail">View detailed flood risk information for this area</a>
+    <a href="{{{mountPath}}}risk-detail?address={{address}}" data-id="risk-detail">View detailed flood risk information for this area</a>
   </p>
   {{> common/floodline}}
   <br>
   <p>
-    <a href="/">View the flood risk information for another location</a>
+    <a href="{{{mountPath}}}">View the flood risk information for another location</a>
   </p>
   <datetime class="date" datetime="{{date}}">{{formatDate date 'DD MMMM YYYY'}}</datetime>
 </div>

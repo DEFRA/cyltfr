@@ -23,14 +23,14 @@
       </a>
     </div>
     <div class="visible-mobile">
-      {{> map/selector maps}}
+      {{> map/selector}}
     </div>
     <div class="clearfix">
       <div class="lhs">
-        {{> map/nav maps}}
+        {{> map/nav}}
       </div>
       <div class="rhs">
-        <div id="progress"></div>        
+        <div id="progress"></div>
         <div id="map" class="map"></div>
         <aside class="controls">
           <div class="legend"></div>
@@ -52,7 +52,7 @@
     <p><strong>You&#39;re missing out. A map should be visible here.</strong></p>
     <p><a href="https://www.gov.uk/help/browsers" rel="external">Upgrade your browser to see and use all the features of this service.</a></p>
   </div>
-  {{#if address}}<p><a href="/risk?address={{address}}" data-id="risk-address">View the flood risk information for the location you originally searched for</a></p>{{/if}}
+  {{#if address}}<p><a href="{{{mountPath}}}risk?address={{address}}" data-id="risk-address">View the flood risk information for the location you originally searched for</a></p>{{/if}}
   <p><a href="/">View the flood risk information for another location</a></p>
   <p><a href="{{{floodWarningsUrl}}}">Go to the national flood information service</a></p>
   {{> common/floodline}}

@@ -27,6 +27,7 @@ module.exports = {
   cacheViews: Joi.boolean().required(),
   mockAddressService: Joi.boolean().required(),
   httpTimeoutMs: Joi.number().required().min(0).max(30000),
+  mountPath: Joi.string().required().allow(''),
   analyticsAccount: Joi.string().required().allow(''),
   floodWarningsUrl: Joi.string().uri().required(),
   ordnanceSurvey: ordnanceSurveySchema

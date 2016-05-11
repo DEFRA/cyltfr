@@ -1,4 +1,12 @@
 var config = require('../config')
+var routeOptions = {}
+
+// Mount point
+if (config.mountPath) {
+  routeOptions.routes = {
+    prefix: '/' + config.mountPath
+  }
+}
 
 const manifest = {
   server: {
@@ -7,6 +15,9 @@ const manifest = {
         //  Sets common security headers
         //  http://hapijs.com/api#route-options
         security: true
+      },
+      router: {
+        stripTrailingSlash: true
       }
     }
   },
@@ -24,6 +35,11 @@ const manifest = {
     },
     {
       plugin: {
+        register: 'vision'
+      }
+    },
+    {
+      plugin: {
         register: 'lout'
       }
     },
@@ -34,14 +50,15 @@ const manifest = {
     },
     {
       plugin: {
-        register: 'vision'
+        register: 'good',
+        options: config.logging
       }
     },
     {
       plugin: {
-        register: 'good',
-        options: config.logging
-      }
+        register: './router'
+      },
+      options: routeOptions
     }
   ]
 }

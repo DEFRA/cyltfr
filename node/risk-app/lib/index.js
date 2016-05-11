@@ -1,12 +1,13 @@
 var Glue = require('glue')
 var handlebars = require('handlebars')
 var manifest = require('./manifest')
-var routes = require('./routes')
 var config = require('../config')
 var analyticsAccount = config.analyticsAccount
 var appVersion = require('../package.json').version
 var appName = require('../package.json').name
 var errors = require('./models/errors.json')
+var mountPath = config.mountPath ? '/' + config.mountPath + '/' : '/'
+var assetPath = mountPath + 'public/'
 
 var defaultContext = {
   globalHeaderText: 'GOV.UK',
@@ -15,7 +16,8 @@ var defaultContext = {
   homepageUrl: 'https://www.gov.uk/',
   logoLinkTitle: 'Go to the GOV.UK homepage',
   crownCopyrightMessage: '© Crown copyright',
-  assetPath: '/public/',
+  mountPath: mountPath,
+  assetPath: assetPath,
   htmlLang: 'en',
   headerClass: 'with-proposition',
   analyticsAccount: analyticsAccount,
@@ -31,8 +33,6 @@ Glue.compose(manifest, options, function (err, server) {
   if (err) {
     throw err
   }
-
-  server.route(routes)
 
   /*
    * Handle route errors
@@ -117,6 +117,7 @@ Glue.compose(manifest, options, function (err, server) {
       throw err
     } else {
       if (config.mockAddressService) {
+        // Mock Address service
         require('../mock/address')
         server.log('info', 'Address service requests are being mocked')
       }

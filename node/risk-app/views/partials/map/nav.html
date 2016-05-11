@@ -1,8 +1,8 @@
 <ul class="nav">
-  {{#each categories}}
+  {{#each maps.categories}}
     <li id="{{ref}}" title="{{title}}" class="category">
       <h2>
-        <img src="/public/images/icon-{{icon}}.png" class="icon">
+        <img src="{{{../assetPath}}}images/icon-{{icon}}.png" class="icon">
         <span>{{name}}</span>
       </h2>
       <ul>

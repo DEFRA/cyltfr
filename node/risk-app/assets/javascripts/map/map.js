@@ -5,7 +5,7 @@ var raf = require('raf')
 var ol = require('openlayers')
 var parser = new ol.format.WMTSCapabilities()
 var wmsparser = new ol.format.WMSCapabilities()
-var config = require('./map-config.json')
+var config = require('./map-config')
 var overlayTemplate = require('./overlay.hbs')
 var map, callback, currentLayer, $overlay, $overlayContent
 var isLoading = false
@@ -143,7 +143,7 @@ function loadMap (point) {
         }),
         style: new ol.style.Style({
           image: new ol.style.Icon({
-            src: '/public/images/crosshair.png'
+            src: (config.mountPath ? '/' + config.mountPath : '') + '/public/images/crosshair.png'
           })
         })
       })

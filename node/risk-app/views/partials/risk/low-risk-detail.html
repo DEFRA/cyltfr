@@ -34,7 +34,7 @@
 
       <h3 class="heading-small">How to use this information</h3>
       <p>
-        You can use this information to <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}&map=RiversOrSea">see which areas are more likely to flood first,
+        You can use this information to <a href="{{{mountPath}}}map?easting={{easting}}&northing={{northing}}&address={{address}}&map=RiversOrSea">see which areas are more likely to flood first,
          deepest, or most often.</a>
       </p>
 
@@ -79,7 +79,7 @@
 
       <h3 class="heading-small">How to use this information</h3>
       <p>
-        You can use this information to <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}&map=SurfaceWater">see the approximate areas that would flood,
+        You can use this information to <a href="{{{mountPath}}}map?easting={{easting}}&northing={{northing}}&address={{address}}&map=SurfaceWater">see the approximate areas that would flood,
          and which parts would be shallower or deeper.</a>
       </p>
 
@@ -111,7 +111,7 @@
 
         <h3 class="heading-small">How to use this information</h3>
         <p>
-          You can <a href="/map?easting={{easting}}&northing={{northing}}&address={{address}}&map=Reservoirs">see which areas and which properties would flood</a>,
+          You can <a href="{{{mountPath}}}map?easting={{easting}}&northing={{northing}}&address={{address}}&map=Reservoirs">see which areas and which properties would flood</a>,
           as well as how deep and fast the water would be.
         </p>
 
@@ -145,11 +145,11 @@
     </p>
 
     <p>
-      <a href="/">View the flood risk information for another location</a>
+      <a href="{{{mountPath}}}">View the flood risk information for another location</a>
     </p>
 
     <p>
-      <a href="/risk?address={{address}}">Back to flood risk summary</a>
+      <a href="{{{mountPath}}}risk?address={{address}}">Back to flood risk summary</a>
     </p>
     <datetime class="date" datetime="{{date}}">{{formatDate date 'DD MMMM YYYY'}}</datetime>
   </div>
