@@ -119,7 +119,7 @@ function loadMap (point) {
         progress.addLoaded()
       })
 
-      if (wmsResult.Capability.Layer.Layer[i].Name.includes('SW')) {
+      if (wmsResult.Capability.Layer.Layer[i].Name.indexOf('SW') > -1) {
         maxResolution = 20
       }
 
