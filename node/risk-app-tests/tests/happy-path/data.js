@@ -147,7 +147,7 @@ const data = [
   { postcode: 'BS20 6BQ', address: 24063776, outcome: RiskStatus.LowRisk,
   riverAndSeaRisk: RiskLevel.VeryLow, surfaceWaterRisk: RiskLevel.Low, reservoirRisk: false },
   { postcode: 'LE4 9BH', address: 2465119536, outcome: RiskStatus.LowRisk,
-  riverAndSeaRisk: RiskLevel.Low, surfaceWaterRisk: RiskLevel.Low, reservoirRisk: true },
+  riverAndSeaRisk: RiskLevel.Low, surfaceWaterRisk: RiskLevel.VeryLow, reservoirRisk: true },
   //  { postcode: 'POSTCODE', address: xx77079867, outcome: RiskStatus.LowRisk,
   //  riverAndSeaRisk: RiskLevel.Low, surfaceWaterRisk: RiskLevel.Low, reservoirRisk: false },
 

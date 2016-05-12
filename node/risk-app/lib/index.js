@@ -3,8 +3,9 @@ var handlebars = require('handlebars')
 var manifest = require('./manifest')
 var config = require('../config')
 var analyticsAccount = config.analyticsAccount
-var appVersion = require('../package.json').version
-var appName = require('../package.json').name
+var pkg = require('../package.json')
+var appVersion = pkg.version
+var appName = pkg.name
 var errors = require('./models/errors.json')
 var mountPath = config.mountPath ? '/' + config.mountPath + '/' : '/'
 var assetPath = mountPath + 'public/'
@@ -104,6 +105,9 @@ Glue.compose(manifest, options, function (err, server) {
     isCached: cacheViews
   })
 
+  /*
+   * Start the server
+   */
   server.start(function (err) {
     var details = {
       name: appName,
@@ -122,8 +126,10 @@ Glue.compose(manifest, options, function (err, server) {
         server.log('info', 'Address service requests are being mocked')
       }
 
+      details.config = config
       details.message = 'Started ' + details.name
       server.log('info', details)
+      console.info(details.message)
     }
   })
 })
