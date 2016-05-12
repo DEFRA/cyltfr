@@ -3,7 +3,7 @@ var floodWarningsUrl = config.floodWarningsUrl
 
 function BannerViewModel (postcode, warnings) {
   if (warnings && warnings.message) {
-    if (warnings.severity) {
+    if (warnings.severity && warnings.severity < 4) {
       var summary = warnings.summary[warnings.severity - 1]
       this.banner = {
         url: floodWarningsUrl + '/warnings?location=' + postcode,
