@@ -33,6 +33,7 @@
     }]
   },
   "httpTimeoutMs": 10000,
+  "mountPath": "",
   "analyticsAccount": "",
   "cacheViews": false,
   "mockAddressService": false,
