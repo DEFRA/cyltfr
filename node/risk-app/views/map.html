@@ -53,7 +53,7 @@
     <p><a href="https://www.gov.uk/help/browsers" rel="external">Upgrade your browser to see and use all the features of this service.</a></p>
   </div>
   {{#if address}}<p><a href="{{{mountPath}}}risk?address={{address}}" data-id="risk-address">View the flood risk information for the location you originally searched for</a></p>{{/if}}
-  <p><a href="/">View the flood risk information for another location</a></p>
+  <p><a href="{{{mountPath}}}">View the flood risk information for another location</a></p>
   <p><a href="{{{floodWarningsUrl}}}">Go to the national flood information service</a></p>
   {{> common/floodline}}
   <datetime class="date" datetime="{{date}}">{{formatDate date 'DD MMMM YYYY'}}</datetime>
