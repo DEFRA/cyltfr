@@ -25,15 +25,18 @@ module.exports = {
           }
 
           // FLO-1139 If query 1 to 9 errors then throw default error page
-          if (risk.inFloodWarningArea === 'Error' ||
-          risk.inFloodAlertArea === 'Error' ||
-          risk.riverAndSeaRisk === 'Error' ||
-          risk.surfaceWaterRisk === 'Error' ||
-          risk.reservoirRisk === 'Error' ||
-          risk.surfaceWaterSuitability === 'Error' ||
-          risk.leadLocalFloodAuthority === 'Error' ||
-          risk.extraInfo === 'Error') {
-            return reply(Boom.badRequest(errors.spatialQuery.message, { address: address, risk: risk }))
+          var errorMessage = 'Error'
+          if (risk.inFloodWarningArea === errorMessage ||
+          risk.inFloodAlertArea === errorMessage ||
+          risk.riverAndSeaRisk === errorMessage ||
+          risk.surfaceWaterRisk === errorMessage ||
+          risk.reservoirRisk === errorMessage ||
+          risk.surfaceWaterSuitability === errorMessage ||
+          risk.leadLocalFloodAuthority === errorMessage ||
+          risk.extraInfo === errorMessage) {
+            return reply(Boom.badRequest(errors.spatialQuery.message, {
+              address: address, risk: risk
+            }))
           }
 
           if (!risk.inEngland) {
