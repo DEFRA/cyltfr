@@ -1,13 +1,13 @@
 module.exports = [{
-  watch: { paths: 'assets/javascripts/core' },
-  tasks: [{ command: './bin/build-js-core' }]
+  paths: ['assets/javascripts/core'],
+  on: { all: ['./bin/build-js-core'] }
 }, {
-  watch: { paths: 'assets/javascripts/search' },
-  tasks: [{ command: './bin/build-js-search' }]
+  paths: ['assets/javascripts/search'],
+  on: { all: ['./bin/build-js-search'] }
 }, {
-  watch: { paths: 'assets/javascripts/map' },
-  tasks: [{ command: './bin/build-js-map' }]
+  paths: ['assets/javascripts/map'],
+  on: { all: ['./bin/build-js-map'] }
 }, {
-  watch: { paths: 'assets/sass' },
-  tasks: [{ command: 'npm', args: ['run', 'build:css'] }]
+  paths: ['assets/sass'],
+  on: { all: ['npm run build:css'] }
 }]
