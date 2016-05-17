@@ -251,15 +251,6 @@ function showMap (ref) {
   })
 }
 
-function bullseye (pixel) {
-  return map.forEachLayerAtPixel(pixel, function (layer) {
-    return true
-  }, null, function (layer) {
-    // filter function to only check current risk layer
-    return layer === currentLayer
-  })
-}
-
 function closeOverlay () {
   $overlay.hide()
 }
