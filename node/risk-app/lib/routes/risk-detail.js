@@ -18,7 +18,7 @@ module.exports = {
 
         var x = address.x
         var y = address.y
-        var radius = 10
+        var radius = 20
         riskService.getByCoordinates(x, y, radius, function (err, risk) {
           if (err) {
             return reply(Boom.badRequest(errors.riskProfile.message, err))
