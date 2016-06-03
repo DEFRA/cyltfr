@@ -63,7 +63,11 @@
       .controls {
         padding: 14px;
         overflow: hidden;
-        background-color: rgba(255, 255, 255, 0.9);
+        background-color: $white;
+
+        @include media(tablet) {
+          background-color: rgba(255, 255, 255, 0.9);
+        }
 
         .heading-small {
           font-size: medium;
@@ -164,6 +168,7 @@
             @include media(mobile) {
               li {
                 margin-right: 10px;
+                margin-bottom: 5px;
                 display: inline-block;
 
                 &::before {
@@ -197,7 +202,7 @@
           }
         }
       }
-
+      
       @include media(tablet) {
         .ol-full-screen, .ol-attribution {
           right: 135px;
@@ -224,6 +229,16 @@
       }
     }
 
+    .enter-fullscreen {
+      z-index: 100;
+      display: block;
+    }
+
+    .exit-fullscreen {
+      z-index: 100;
+      display: none;
+    }
+
     &.detailed {
       .map-switch {
         img.basic {
@@ -236,30 +251,40 @@
     }
   }
 
-  .map:-webkit-full-screen {
-    .ol-full-screen, .ol-attribution {
-      right: 0.25em;
+  &.fullscreen {
+    >:not(.map-container) {
+      display: none;
     }
-  }
+    
+    >.map-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 10;
+      margin: 0;
+    }
 
-  .map:-moz-full-screen {
-    height: 100%;
-    width: 100%;
-  }
+    @include media(mobile) {
+      .map-container {
+        padding: 10px;
+      }
+    }
 
-  .map:-webkit-full-screen {
-    height: 100%;
-    width: 100%;
-  }
-
-  .map:-ms-fullscreen {
-    height: 100%;
-    width: 100%;
-  }
-
-  .map:fullscreen {
-    height: 100%;
-    width: 100%;
+    // @include media(mobile) {
+    //   .ol-full-screen {
+    //     right: 1em;
+    //     top: 1em;
+    //   }
+    // }
+          
+    .enter-fullscreen {
+      display: none;
+    }
+    .exit-fullscreen {
+      display: block;
+    }
   }
 
   .ol-rotate {

@@ -1,5 +1,5 @@
 var $ = require('jquery')
-var loadMap = require('./map')
+var map = require('./map')
 var legendTemplate = require('./legend.hbs')
 var Maps = require('../../../lib/models/maps')
 var maps = new Maps()
@@ -7,7 +7,7 @@ var maps = new Maps()
 var easting = getParameterByName('easting')
 var northing = getParameterByName('northing')
 
-loadMap.loadMap(easting ? [easting, northing] : undefined)
+map.loadMap(easting && [easting, northing])
 
 function getParameterByName (name) {
   name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]')
@@ -18,11 +18,14 @@ function getParameterByName (name) {
 
 $(function () {
   var selected = 'selected'
+  var $page = $('main#map-page')
   var $container = $('.map-container')
   var $sidebar = $('ul.nav', $container)
   var $selector = $('select', $container)
   var $categories = $sidebar.children('li.category')
   var $maps = $categories.find('li')
+  var $map = $('#map')
+
   // Store a reference to the map legend element
   var $legend = $('.legend')
 
@@ -45,11 +48,11 @@ $(function () {
     $selector.val(currMap.ref)
 
     // Load the map
-    loadMap.showMap('risk:' + currMap.ref.substring(currMap.ref.indexOf('_') + 1))
+    map.showMap('risk:' + currMap.ref.substring(currMap.ref.indexOf('_') + 1))
   }
 
   // Default to the first category/map
-  loadMap.onReady(function () {
+  map.onReady(function () {
     // Handle the category header clicks
     $categories.on('click', 'h2', function (e) {
       e.preventDefault()
@@ -74,12 +77,26 @@ $(function () {
     setCurrent(getParameterByName('map'))
   })
 
-  $container.on('click', '.map-switch a', function (e) {
+  $container.on('click', '.map-switch a.toggle-view', function (e) {
     e.preventDefault()
     $(e.delegateTarget).toggleClass('detailed')
+  })
+
+  $container.on('click', '.enter-fullscreen', function (e) {
+    e.preventDefault()
+    $page.addClass('fullscreen')
+    $map.css('height', ($(window).height() - 100) + 'px')
+    map.updateSize()
+  })
+
+  $container.on('click', '.exit-fullscreen', function (e) {
+    e.preventDefault()
+    $page.removeClass('fullscreen')
+    $map.css('height', '')
+    map.updateSize()
   })
 })
 
 module.exports = {
-  testValues: loadMap.testValues
+  testValues: map.testValues
 }

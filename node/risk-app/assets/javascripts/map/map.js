@@ -251,6 +251,10 @@ function showMap (ref) {
   })
 }
 
+function updateSize () {
+  map.updateSize()
+}
+
 function closeOverlay () {
   $overlay.hide()
 }
@@ -320,6 +324,7 @@ Progress.prototype.hide = function () {
 module.exports = {
   loadMap: loadMap,
   showMap: showMap,
+  updateSize: updateSize,
   closeOverlay: closeOverlay,
   testValues: testValues,
   onReady: function (fn) {
