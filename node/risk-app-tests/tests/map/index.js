@@ -23,7 +23,13 @@ module.exports = {
 
     mapTests.assertZoomIs(client, mapPage, 0)
 
-    client.pause(2000)
+    mapPage.enterFullscreen()
+
+    mapTests.assertFullscreen(mapPage, true)
+
+    mapPage.exitFullscreen()
+
+    mapTests.assertFullscreen(mapPage, false)
 
     // try some panning
     //

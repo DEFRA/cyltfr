@@ -46,6 +46,13 @@ module.exports = {
       mapPage.assert.equal(result.zoom, val, 'Assert zoom')
     })
   },
+  assertFullscreen: function (mapPage, val) {
+    if (val) {
+      mapPage.assert.cssClassPresent('@main', 'fullscreen')
+    } else {
+      mapPage.assert.cssClassNotPresent('@main', 'fullscreen')
+    }
+  },
   assertCentreIs: function (client, mapPage, point) {
     mapPage.getTestData(client, function (result) {
       mapPage
