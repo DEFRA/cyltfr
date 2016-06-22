@@ -72,6 +72,13 @@ Glue.compose(manifest, options, function (err, server) {
             return reply.view('500').code(statusCode)
         }
       }
+    } else if (response.statusCode === 302 && config.mountPath) {
+      // If we are redirecting the reponse to a root relative and there's
+      // a mount path, prepend the mount path to the redirection location.
+      var location = response.headers.location
+      if (location.startsWith('/')) {
+        response.location('/' + config.mountPath + location.slice(1))
+      }
     }
     return reply.continue()
   })
