@@ -1,3 +1,6 @@
+var selenium = require('selenium-server-standalone-jar')
+var chromedriver = require('chromedriver')
+var phantomjs = require('phantomjs-prebuilt')
 // Get the launchUrl from the argv,
 // otherwise default to localhost:3001
 var url = 'http://localhost:3001'
@@ -19,12 +22,12 @@ module.exports = {
   test_workers: true,
   selenium: {
     start_process: true,
-    server_path: 'bin/selenium.jar',
+    server_path: selenium.path,
     log_path: '',
     host: '127.0.0.1',
     port: 4444,
     cli_args: {
-      'webdriver.chrome.driver': 'bin/chromedriver'
+      'webdriver.chrome.driver': chromedriver.path
     }
   },
   test_settings: {
@@ -50,6 +53,14 @@ module.exports = {
         browserName: 'chrome',
         javascriptEnabled: true,
         acceptSslCerts: true
+      }
+    },
+    phantomjs: {
+      desiredCapabilities: {
+        browserName: 'phantomjs',
+        javascriptEnabled: true,
+        acceptSslCerts: true,
+        'phantomjs.binary.path': phantomjs.path
       }
     }
   }

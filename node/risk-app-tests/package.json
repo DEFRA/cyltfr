@@ -5,13 +5,16 @@
   "main": "index.js",
   "scripts": {
     "lint": "standard",
-    "test-e2e-local": "bin/test-e2e.js --env default -c config/nightwatch.conf.js",
+    "test-e2e-local": "bin/test-e2e.js --env chrome -c config/nightwatch.conf.js",
     "test-e2e-remote": "bin/test-e2e.js --env default -c config/browserstack.json",
     "test": "npm run lint && npm run test-e2e-local"
   },
   "devDependencies": {
-    "nightwatch": "0.8.15",
-    "standard": "5.4.1"
+    "chromedriver": "2.21.2",
+    "nightwatch": "0.9.5",
+    "phantomjs-prebuilt": "2.1.7",
+    "selenium-server-standalone-jar": "^2.53.1",
+    "standard": "7.1.2"
   },
   "author": "",
   "license": "ISC"
