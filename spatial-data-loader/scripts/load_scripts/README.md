@@ -1,7 +1,5 @@
 # Instructions for loading long term flood risk spatial data subset.
 
-# TO DO - Review and refactor before publishing as open source.
-
 # Install gdal 1.11 to allow file geodatabases to be read.  Ubuntu 14.04 software repositories only
 # provide access to gdal 1.10 so gdal 1.11 has to be compiled from source.  For convenience,
 # the Amazon S3 ltfri bucket contains a gdal 1.11 debian package created by compiling gdal 1.11 from
@@ -13,17 +11,37 @@ ogrinfo --formats
 
 # Enable use of module specific environment variables
 # Add the following line to .profile
-source $HOME/ltfri/spatial-data-loader/etc/.profile
+source $HOME/ltfri/spatial-data-loader/scripts/load_scripts/ltfri/etc/.profile
 
 # Source ~/.profile or logout/login or reboot for .profile changes to take effect
 
-# Copy the long term flood risk subset layers to the location specified by
-# the environment variable LTFRI_GDB_ROOT in $HOME/ltfri/spatial-data-loader/etc/.profile
+# Copy the long term flood risk subset layers to the ltfri Amazon S3 bucket
 
-# for each dataset that you wish to load
+# For each dataset that you wish to load
 # cd into corresponding load_scripts folder
-# exceute the shell script, will often take several hours to run
+# execute the shell script, will often take several hours to run
 # will copy data from s3 bucket to local data folder and then load/clean in database
 
 ./load-data.sh
+
+# Ensure that the tile cache is regenerated. Log into Geoserver web admin site
+# Click on Tile Layers. Click on Seed/Truncate adjacent option adjacent to layer. 
+# Number of tasks to use: 8
+# Type of operation: Reseed - regenerate all tiles
+# Grid Set: EPSG:27700
+# Format: image/png
+# Zoom start: 00
+# Zoom stop: 07
+# Click Submit Button
+# Check Geoserver Logs for errors. Surface water data may error - if so create in batches e.g
+# Zoom level 00 - 02, 03 - 04 ... 6-7
+
+# If data needs to be exported from development database
+# Export using PGAdmin. Right click on table to export. 
+# Choose Backup, enter a filename, select data only and ignore tablespace. 
+
+
+
+
+
 
