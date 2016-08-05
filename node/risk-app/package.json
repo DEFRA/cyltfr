@@ -1,11 +1,8 @@
 {
   "name": "risk-app",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Long term flood risk information",
   "main": "index.js",
-  "engines": {
-    "node": "4.3.0"
-  },
   "scripts": {
     "start": "pm2 start config/pm2.json",
     "clean": "bin/clean-public",
