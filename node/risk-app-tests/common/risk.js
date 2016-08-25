@@ -1,4 +1,5 @@
 const RiskStatus = require('../risk-status')
+const RiskLevel = require('../risk-level')
 
 module.exports = {
   loadPage: function (riskPage, addressId) {
@@ -15,18 +16,28 @@ module.exports = {
 
       // Check the heading
       if (info.status === RiskStatus.AtRisk) {
-        riskPage.assert.containsText('@heading', 'This address is in a flood risk area')
+        if (info.surfaceWaterRisk !== RiskLevel.VeryLow) {
+          riskPage.assert.containsText('@heading', 'This address is in or near a flood risk area')
+          riskPage.assert.containsText('@lastItem', 'This address is in or near a flood risk area.')
+        } else {
+          riskPage.assert.containsText('@heading', 'This address is in a flood risk area')
+          riskPage.assert.containsText('@lastItem', 'This address is in a flood risk area.')
+        }
         riskPage.assert.containsText('@firstItem', 'This service is free. You can get warnings by phone, email or text message.')
-        riskPage.assert.containsText('@lastItem', 'This address is in a flood risk area.')
         riskPage.assert.containsText('@lastItem', 'The flood risk from rivers or the sea is ' + data.riverAndSeaRisk.toLowerCase())
         riskPage.assert.containsText('@lastItem', 'The flood risk from surface water is ' + data.surfaceWaterRisk.toLowerCase())
         if (info.reservoirRisk) {
           riskPage.assert.containsText('@lastItem', 'There\'s a risk of flooding in this area from reservoirs')
         }
       } else if (info.status === RiskStatus.AtRiskMonitor) {
-        riskPage.assert.containsText('@heading', 'This address is in a flood risk area')
+        if (info.surfaceWaterRisk !== RiskLevel.VeryLow) {
+          riskPage.assert.containsText('@heading', 'This address is in or near a flood risk area')
+          riskPage.assert.containsText('@lastItem', 'This address is in or near a flood risk area.')
+        } else {
+          riskPage.assert.containsText('@heading', 'This address is in a flood risk area')
+          riskPage.assert.containsText('@lastItem', 'This address is in a flood risk area.')
+        }
         riskPage.assert.containsText('@firstItem', 'Use radio, television and social media to keep up to date with flood events and weather conditions in your area')
-        riskPage.assert.containsText('@lastItem', 'This address is in a flood risk area.')
         riskPage.assert.containsText('@lastItem', 'The flood risk from rivers or the sea is ' + data.riverAndSeaRisk.toLowerCase())
         riskPage.assert.containsText('@lastItem', 'The flood risk from surface water is ' + data.surfaceWaterRisk.toLowerCase())
         if (info.reservoirRisk) {

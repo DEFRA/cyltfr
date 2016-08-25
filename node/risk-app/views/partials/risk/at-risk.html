@@ -5,11 +5,11 @@
     </div>
     <div class="column-three-quarters">
       <div class="panel panel-border-wide hidden-mobile">
-        <h1 class="heading-large">This address is in a flood risk area</h1>
+        <h1 class="heading-large">This address is in {{#unless surfaceWaterRiskIsVeryLow}}or near {{/unless}}a flood risk area</h1>
         <h2 class="heading-medium">Be prepared: things you should do</h2>
       </div>
       <div class="visible-mobile">
-        <h1 class="heading-large">This address is in a flood risk area</h1>
+        <h1 class="heading-large">This address is in {{#unless surfaceWaterRiskIsVeryLow}}or near {{/unless}}a flood risk area</h1>
         <h2 class="heading-medium">Be prepared: things you should do</h2>
       </div>
     </div>
@@ -46,7 +46,7 @@
           <div class="panel panel-border-wide">
             <h3 class="heading-small"><a href="https://www.gov.uk/prepare-for-a-flood/improve-your-propertys-flood-protection">Protect your property</a></h3>
             <p>Get organised now and improve your property's flood resilience.</p>
-            <p>Being at risk of flooding can affect your <a href="https://www.gov.uk/prepare-for-a-flood/get-insurance">insurance</a>. Check if your buildings and contents policies cover flood risk.</p>            
+            <p>Being at risk of flooding can affect your <a href="https://www.gov.uk/prepare-for-a-flood/get-insurance">insurance</a>. Check if your buildings and contents policies cover flood risk.</p>
           </div>
         </li>
         <li>
@@ -62,7 +62,7 @@
         <li>
           <div class="panel panel-border-wide">
             <p>
-              This address is in a flood risk area.<br>
+              This address is in {{#unless surfaceWaterRiskIsVeryLow}}or near {{/unless}} a flood risk area.<br>
             </p>
             <p>
               The flood risk from rivers or the sea is {{riverAndSeaRisk}} <a href="{{{mountPath}}}map?easting={{easting}}&northing={{northing}}&address={{address}}&map=RiversOrSea">See map</a>
