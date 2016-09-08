@@ -23,7 +23,9 @@ var defaultContext = {
   headerClass: 'with-proposition',
   analyticsAccount: analyticsAccount,
   appVersion: appVersion,
-  floodWarningsUrl: config.floodWarningsUrl
+  floodWarningsUrl: config.floodWarningsUrl,
+  phase: 'beta', // alpha or beta, blank is live and requires no phase banner
+  feedback: true
 }
 
 var options = {

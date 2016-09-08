@@ -4,7 +4,12 @@ module.exports = {
   config: {
     description: 'Get the feedback page',
     handler: {
-      view: 'feedback'
+      view: {
+        template: 'feedback',
+        context: {
+          feedback: false
+        }
+      }
     }
   }
 }
