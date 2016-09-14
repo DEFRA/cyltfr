@@ -3,13 +3,8 @@ module.exports = {
   path: '/feedback',
   config: {
     description: 'Get the feedback page',
-    handler: {
-      view: {
-        template: 'feedback',
-        context: {
-          feedback: false
-        }
-      }
+    handler: function (request, reply) {
+      reply.view('feedback', { ref: encodeURIComponent(request.info.referrer || request.info.host), feedback: false })
     }
   }
 }
