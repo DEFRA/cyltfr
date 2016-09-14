@@ -29,8 +29,8 @@
         },
         {
           "ref": "RiversOrSea_2-FWLRSF",
-          "name": "Depth and flow estimates at monitoring stations",
-          "title": "Estimated depth and flow of water at river and sea level monitoring stations",
+          "name": "Water level and flow estimates at monitoring stations",
+          "title": "Estimated water level and flow of water at river and sea level monitoring stations",
           "legend": {
             "title": "Select monitoring station",
             "keys": [{
