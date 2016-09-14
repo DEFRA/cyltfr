@@ -65,14 +65,20 @@
               This address is in {{#unless surfaceWaterRiskIsVeryLow}}or near {{/unless}} a flood risk area.<br>
             </p>
             <p>
-              The flood risk from rivers or the sea is {{riverAndSeaRisk}} <a href="{{{mountPath}}}map?easting={{easting}}&northing={{northing}}&address={{address}}&map=RiversOrSea">See map</a>
+              The flood risk from rivers or the sea is {{riverAndSeaRisk}}
+              <br>
+              <a href="{{{mountPath}}}map?easting={{easting}}&northing={{northing}}&address={{address}}&map=RiversOrSea">View map of river and sea flood risk</a>
             </p>
             <p>
-              The flood risk from surface water is {{surfaceWaterRisk}} <a href="{{{mountPath}}}map?easting={{easting}}&northing={{northing}}&address={{address}}&map=SurfaceWater">See map</a>
+              The flood risk from surface water is {{surfaceWaterRisk}}
+              <br>
+              <a href="{{{mountPath}}}map?easting={{easting}}&northing={{northing}}&address={{address}}&map=SurfaceWater">View map of surface water flood risk</a>
             </p>
             {{#if reservoirRisk}}
               <p>
-                There's a risk of flooding in this area from reservoirs <a href="{{{mountPath}}}map?easting={{easting}}&northing={{northing}}&address={{address}}&map=Reservoirs">See map</a>
+                There's a risk of flooding in this area from reservoirs
+                <br>
+                <a href="{{{mountPath}}}map?easting={{easting}}&northing={{northing}}&address={{address}}&map=Reservoirs">View map of reservoir flood risk</a>
               </p>
             {{/if}}
             <p>
