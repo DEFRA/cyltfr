@@ -4,7 +4,13 @@ module.exports = {
   config: {
     description: 'Get the feedback page',
     handler: function (request, reply) {
-      reply.view('feedback', { ref: encodeURIComponent(request.info.referrer || request.info.host), feedback: false })
+      var ref = ''
+      if (request.info.referrer && request.info.referrer.indexOf('/feedback') === -1) {
+        ref = request.info.referrer
+      } else {
+        ref = request.server.info.protocol + '://' + request.info.host
+      }
+      reply.view('feedback', { ref: encodeURIComponent(ref), feedback: false })
     }
   }
 }
