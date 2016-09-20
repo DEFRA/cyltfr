@@ -1,24 +1,24 @@
-<h3 class="heading-large">{{#if isRiverLevelStation}} Depth{{else}} Water level{{/if}} and flow estimates for the monitoring station at {{stationName}}</h3>
-<p>The Environment Agency uses 3 risk scenarios to estimate the {{#if isRiverLevelStation}} depth{{else}} level{{/if}} and flow of water that could occur at this location in any given year.</p>
+<h3 class="heading-large">{{#if isRiverLevelStation}}Depth{{else}}Water level{{/if}} and flow estimates for the monitoring station at {{stationName}}</h3>
+<p>The Environment Agency uses 3 risk scenarios to estimate the {{#if isRiverLevelStation}}depth{{else}}level{{/if}} and flow of water that could occur at this location in any given year.</p>
 
 <h4 class="heading-medium">
-  {{#if isRiverLevelStation}} Depth{{else}} Level{{/if}} estimates at this monitoring station
+  {{#if isRiverLevelStation}}Depth{{else}}Level{{/if}} estimates at this monitoring station
 </h4>
 
 <h5 class="heading-small">
   High chance scenario
 </h5>
-<p>There's a high chance (over 3.3%) that water {{#if isRiverLevelStation}}depth{{else}}level{{/if}} will reach {{depth30}}m</p>
+<p>There's a high chance (over 3.3%) that {{#if isRiverLevelStation}}water depth{{else}}the water level{{/if}} will reach {{depth30}}m</p>
 
 <h5 class="heading-small">
   Medium chance scenario
 </h5>
-<p>There's a medium chance (over 1%) that water {{#if isRiverLevelStation}}depth{{else}}level{{/if}} will reach {{depth100}}m</p>
+<p>There's a medium chance (over 1%) that {{#if isRiverLevelStation}}water depth{{else}}the water level{{/if}} will reach {{depth100}}m</p>
 
 <h5 class="heading-small">
   Low chance scenario
 </h5>
-<p>There's a low chance (under 1%) that water {{#if isRiverLevelStation}}depth{{else}}level{{/if}} will reach {{depth1000}}m</p>
+<p>There's a low chance (under 1%) that {{#if isRiverLevelStation}}water depth{{else}}the water level{{/if}} will reach {{depth1000}}m</p>
 
 {{#if isRiverLevelStation}}
   <h4 class="heading-medium">
