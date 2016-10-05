@@ -1,7 +1,0 @@
-\echo 'ROF Reservoir Depth - IsValid'
-
-\o c:/temp/dataMigrationReports/rof_reservoir_depth_final_check.txt
-
-SELECT reason(ST_IsValidDetail(wkb_geometry)) FROM u_ltfri.rof_reservoir_depth_bv_bng WHERE ST_IsValid(wkb_geometry) = false;
-
-\o
