@@ -1,6 +1,6 @@
 \echo 'ROF Reservoir Velocity - MakeValid'
 
-CREATE TABLE u_ltfri.rof_reservoir_velocity_bv_bng_valid WITH TABLESPACE postgis_tables AS WITH
+CREATE TABLE u_ltfri.rof_reservoir_velocity_bv_bng_valid TABLESPACE postgis_tables AS WITH
 	make_valid(velocity,shape_length,shape_area,wkb_geometry) AS
 		(SELECT velocity,shape_length,shape_area,
 			(ST_Dump(ST_MakeValid(wkb_geometry))).geom AS wkb_geometry FROM u_ltfri.rof_reservoir_velocity_bv_bng
