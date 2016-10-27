@@ -52,7 +52,7 @@ function loadMap (point) {
     // openlayers doesn't expose fulltileranges as a property, so when using minified ol have to set tilegrid.a to null, which is what fulltileranges
     // is mapped as, hopefully OS will fix their service, otherwise something more robust needs sorting out
     source.tileGrid.fullTileRanges_ = null
-    source.tileGrid.a = null
+    source.tileGrid.b = null
 
     var layer = new ol.layer.Tile({
       ref: config.OSLayer,
