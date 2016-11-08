@@ -157,7 +157,7 @@ function loadMap (point) {
           minWidth: 128
         })
       ]),
-      interations: ol.interaction.defaults({
+      interactions: ol.interaction.defaults({
         altShiftDragRotate: false,
         pinchRotate: false
       }),
