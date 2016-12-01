@@ -33,6 +33,7 @@
     "jquery": "2.2.1",
     "lout": "9.0.0",
     "moment": "2.11.2",
+    "node-hapi-airbrake": "0.0.6",
     "openlayers": "3.14.0",
     "proj4": "2.3.12",
     "raf": "3.2.0",
