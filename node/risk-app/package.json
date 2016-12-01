@@ -28,7 +28,6 @@
     "h2o2": "5.0.0",
     "handlebars": "4.0.5",
     "hapi": "13.0.0",
-    "http-proxy-agent": "^1.0.0",
     "inert": "3.2.0",
     "joi": "8.0.3",
     "jquery": "2.2.1",
@@ -38,6 +37,7 @@
     "openlayers": "3.14.0",
     "proj4": "2.3.12",
     "raf": "3.2.0",
+    "request": "2.79.0",
     "sprintf-js": "1.0.3",
     "vision": "4.0.1",
     "wreck": "7.0.0"

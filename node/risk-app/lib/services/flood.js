@@ -1,23 +1,18 @@
 var config = require('../../config')
 var floodWarningsUrl = config.floodWarningsUrl
-var agent = null
-if (process.env.http_proxy) {
-  var HTTPProxyAgent = require('http-proxy-agent')
-  var proxy = process.env.http_proxy
-  agent = new HTTPProxyAgent(proxy)
-}
-var wreck = require('wreck').defaults({
-  agent: agent,
-  timeout: config.httpTimeoutMs
+// Note wreck won't play with a proxy so need to use request
+var request = require('request').defaults({
+  'proxy': config.errbit.proxy,
+  'timeout': config.httpTimeoutMs
 })
 
 function findWarnings (location, callback) {
   var url = floodWarningsUrl + '/api/warnings?location=' + location
-  wreck.get(url, { json: true }, function (err, response, payload) {
+  request(url, function (err, response, body) {
     if (err || response.statusCode !== 200) {
-      return callback(err || payload || new Error('Unknown error'))
+      return callback(err || body || new Error('Unknown error'))
     }
-    callback(null, payload)
+    callback(null, JSON.parse(body))
   })
 }
 
