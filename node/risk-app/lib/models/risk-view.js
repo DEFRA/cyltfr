@@ -1,3 +1,4 @@
+var moment = require('moment')
 var util = require('../util')
 var suitability = require('./suitability')
 
@@ -90,6 +91,7 @@ function RiskViewModel (risk, address) {
   this.leadLocalFloodAuthority = risk.leadLocalFloodAuthority
   this.className = this.isRisk ? 'at-risk' : 'low-risk'
   this.date = Date.now()
+  this.year = moment(Date.now()).format('YYYY')
 
   this.testInfoJSON = JSON.stringify({
     status: this.status,
