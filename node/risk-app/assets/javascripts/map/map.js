@@ -40,11 +40,9 @@ function loadMap (point) {
       matrixSet: config.OSMatrixSet
     })
 
-    var attribution = config.OSAttribution.replace('{{year}}', new Date().getFullYear())
-
     options.attributions = [
       new ol.Attribution({
-        html: attribution
+        html: config.OSAttribution
       })
     ]
 
