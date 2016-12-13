@@ -19,14 +19,6 @@ var ordnanceSurveySchema = Joi.object().required().keys({
   urlGetCapabilities: Joi.string().uri().required()
 })
 
-var errbitSchema = Joi.object().required().keys({
-  postErrors: Joi.boolean().required(),
-  env: Joi.string().required(),
-  key: Joi.string().required(),
-  host: Joi.string().required(),
-  proxy: Joi.string().allow('')
-})
-
 module.exports = {
   server: serverSchema,
   geoserver: serviceSchema,
@@ -38,6 +30,5 @@ module.exports = {
   mountPath: Joi.string().required().allow(''),
   analyticsAccount: Joi.string().required().allow(''),
   floodWarningsUrl: Joi.string().uri().required(),
-  ordnanceSurvey: ordnanceSurveySchema,
-  errbit: errbitSchema
+  ordnanceSurvey: ordnanceSurveySchema
 }

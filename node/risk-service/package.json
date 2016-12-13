@@ -21,7 +21,6 @@
     "inert": "3.2.0",
     "joi": "8.0.3",
     "lout": "9.0.0",
-    "node-hapi-airbrake": "0.0.6",
     "vision": "4.0.1"
   },
   "devDependencies": {
