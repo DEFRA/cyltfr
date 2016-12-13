@@ -61,6 +61,10 @@ Glue.compose(manifest, options, function (err, server) {
         message: response.message
       })
 
+      if (server.methods.hasOwnProperty('notify')) {
+        server.methods.notify(response)
+      }
+
       // The return the `500` view
       if (useErrorPages) {
         switch (response.message) {

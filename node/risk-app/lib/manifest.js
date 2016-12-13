@@ -63,4 +63,14 @@ const manifest = {
   ]
 }
 
+if (config.errbit.postErrors) {
+  delete config.errbit.postErrors
+  manifest.registrations.push({
+    plugin: {
+      register: 'node-hapi-airbrake',
+      options: config.errbit
+    }
+  })
+}
+
 module.exports = manifest

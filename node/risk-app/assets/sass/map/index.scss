@@ -202,7 +202,7 @@
           }
         }
       }
-      
+
       @include media(tablet) {
         .ol-full-screen, .ol-attribution {
           right: 135px;
@@ -255,7 +255,7 @@
     >:not(.map-container) {
       display: none;
     }
-    
+
     >.map-container {
       position: absolute;
       top: 0;
@@ -271,7 +271,7 @@
         padding: 10px;
       }
     }
-          
+
     .enter-fullscreen {
       display: none;
     }
@@ -279,6 +279,22 @@
       display: block;
     }
   }
+
+  .ol-full-screen.ol-control.toggle-fullscreen {
+     button {
+       width: auto;
+       background-color: rgba(227, 228, 229, 0.7);
+       color: $link-colour;
+       padding: 3px;
+       font-weight: normal;
+       font-size: 14px;
+       cursor: pointer;
+       height: 25px;
+       span {
+         text-decoration: underline;
+       }
+     }
+    }
 
   .ol-rotate {
     top: 3em;

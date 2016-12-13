@@ -1,6 +1,6 @@
 {
   "name": "risk-service",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Flood Service",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,7 @@
     "inert": "3.2.0",
     "joi": "8.0.3",
     "lout": "9.0.0",
+    "node-hapi-airbrake": "0.0.6",
     "vision": "4.0.1"
   },
   "devDependencies": {

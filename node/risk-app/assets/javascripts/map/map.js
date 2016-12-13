@@ -40,9 +40,11 @@ function loadMap (point) {
       matrixSet: config.OSMatrixSet
     })
 
+    var attribution = config.OSAttribution.replace('{{year}}', new Date().getFullYear())
+
     options.attributions = [
       new ol.Attribution({
-        html: config.OSAttribution
+        html: attribution
       })
     ]
 
@@ -153,11 +155,16 @@ function loadMap (point) {
     map = new ol.Map({
       controls: ol.control.defaults().extend([
         new ol.control.ScaleLine({
-          units: 'imperial',
+          units: 'metric',
           minWidth: 128
         })
       ]),
+      interactions: ol.interaction.defaults({
+        altShiftDragRotate: false,
+        pinchRotate: false
+      }),
       layers: layers,
+      pixelRatio: 1,
       target: 'map',
       view: new ol.View({
         resolutions: source.tileGrid.getResolutions(),
