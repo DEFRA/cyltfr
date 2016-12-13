@@ -10,5 +10,6 @@ module.exports = [
   require('./robots'),
   require('./banner'),
   require('./os-get-capabilities'),
-  require('./404')
+  require('./404'),
+  require('./os-terms')
 ]
