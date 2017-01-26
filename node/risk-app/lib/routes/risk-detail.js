@@ -35,7 +35,8 @@ module.exports = {
           risk.leadLocalFloodAuthority === errorMessage ||
           risk.extraInfo === errorMessage) {
             return reply(Boom.badRequest(errors.spatialQuery.message, {
-              address: address, risk: risk
+              risk: risk,
+              address: address
             }))
           }
 
