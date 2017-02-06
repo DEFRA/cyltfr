@@ -92,6 +92,26 @@
   </div>
 </div>
 
+{{#if isGroundwaterArea}}
+  <div class="grid-row">
+    <div class="column-quarter">
+      <img src="{{{assetPath}}}images/icon-ground-water-inverse.png" alt="Groundwater icon">
+    </div>
+    <div class="column-three-quarters">
+      <div id="groundwater-panel" class="panel panel-border-wide">
+        <!-- Groundwater -->
+        <h2 class="heading-medium">High groundwater levels may cause flooding</h2>
+        <p>
+          Flooding and disruption is possible in the local area when groundwater levels are high.
+        </p>
+        <p>
+          <a href="https://www.gov.uk/find-local-council">Contact your local council</a>
+        </p>
+      </div>
+    </div>
+  </div>
+{{/if}}
+
 {{#if reservoirRisk}}
   <div class="grid-row">
     <div class="column-quarter">

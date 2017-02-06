@@ -30,7 +30,10 @@ module.exports = {
           risk.riverAndSeaRisk === 'Error' ||
           risk.surfaceWaterRisk === 'Error' ||
           risk.reservoirRisk === 'Error') {
-            return reply(Boom.badRequest(errors.spatialQuery.message, { address: address, risk: risk }))
+            return reply(Boom.badRequest(errors.spatialQuery.message, {
+              risk: risk,
+              address: address
+            }))
           }
 
           if (!risk.inEngland) {

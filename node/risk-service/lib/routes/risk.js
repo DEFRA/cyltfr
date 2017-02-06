@@ -26,8 +26,7 @@ module.exports = {
         var risk = result.rows[0].calculate_flood_risk
 
         if (!risk) {
-          request.log('error')
-          return reply(Boom.badRequest('Invalid result'), new Error('Missing calculate_flood_risk key'))
+          return reply(Boom.badRequest('Invalid result', new Error('Missing calculate_flood_risk key')))
         }
 
         /*
@@ -61,10 +60,23 @@ module.exports = {
           }
         }
 
+        var isGroundwaterArea = false
+        var floodAlertArea = Array.isArray(risk.flood_alert_area) ? risk.flood_alert_area : []
+        var floodWarningArea = Array.isArray(risk.flood_warning_area) ? risk.flood_warning_area : []
+
+        if (floodAlertArea.find((faa) => faa.charAt(5) === 'G')) {
+          isGroundwaterArea = true
+        } else if (floodWarningArea.find((fwa) => fwa.charAt(5) === 'G')) {
+          isGroundwaterArea = true
+        }
+
         var response = {
           inEngland: risk.in_england,
-          inFloodAlertArea: risk.in_flood_alert_area,
-          inFloodWarningArea: risk.in_flood_warning_area,
+          isGroundwaterArea: isGroundwaterArea,
+          floodAlertArea: floodAlertArea,
+          floodWarningArea: floodWarningArea,
+          inFloodAlertArea: risk.flood_alert_area === 'Error' ? 'Error' : floodAlertArea.length > 0,
+          inFloodWarningArea: risk.flood_warning_area === 'Error' ? 'Error' : floodWarningArea.length > 0,
           leadLocalFloodAuthority: risk.lead_local_flood_authority,
           reservoirRisk: reservoirRisk,
           riverAndSeaRisk: riverAndSeaRisk,
@@ -72,6 +84,7 @@ module.exports = {
           surfaceWaterSuitability: risk.surface_water_suitability,
           extraInfo: risk.extra_info
         }
+
         reply(response)
       })
     },

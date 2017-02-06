@@ -81,6 +81,9 @@ function RiskViewModel (risk, address) {
     this.surfaceWaterSuitability = suitability.surfaceWater[surfaceWaterSuitability.toLowerCase()]
   }
 
+  // Groundwater area
+  this.isGroundwaterArea = risk.isGroundwaterArea
+
   this.extraInfo = risk.extraInfo
   this.easting = address.x
   this.northing = address.y

@@ -74,6 +74,9 @@
               <br>
               <a href="{{{mountPath}}}map?easting={{easting}}&northing={{northing}}&address={{address}}&map=SurfaceWater">View map of surface water flood risk</a>
             </p>
+            {{#if isGroundwaterArea}}
+              <p>When groundwater levels are high there may be flooding and disruption in the local area.</p>
+            {{/if}}
             {{#if reservoirRisk}}
               <p>
                 There's a risk of flooding in this area from reservoirs
