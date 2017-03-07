@@ -102,3 +102,23 @@
     display: none;
   }
 }
+
+.print {
+  display: none;
+}
+
+@media print {
+  .print {
+    display: initial;
+  }
+
+  .no-print {
+    display: none!important;
+  }
+
+  a[href^="/"], a[href^="http://"], a[href^="https://"] {
+    &:after {
+      display: none;
+    }
+  }
+}

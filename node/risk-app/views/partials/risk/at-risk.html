@@ -1,4 +1,4 @@
-<div id="risk-summary">
+<div class="at-risk">
   <div class="grid-row">
     <div class="column-quarter">
       <img class="hidden-mobile" src="{{{assetPath}}}images/at-risk-icon.png" alt="At risk of flooding graphic">
@@ -85,18 +85,23 @@
                 <a href="{{{mountPath}}}map?easting={{easting}}&northing={{northing}}&address={{address}}&map=Reservoirs" data-journey-click="ltfri:summary:view-map-reservoir">View map of reservoir flood risk</a>
               </p>
             {{/if}}
-            <p>
+            <p class="no-print">
               <a href="{{{mountPath}}}risk-detail?address={{address}}" data-id="risk-detail" data-journey-click="ltfri:summary:detailed-report">View detailed flood risk information for this area</a>
             </p>
           </div>
-          <div data-journey-click="ltfri:summary:other-ways-to-get-this-info">
-            {{> common/floodline}}
+          <div class="no-print">
+            <div data-journey-click="ltfri:summary:other-ways-to-get-this-info">
+              {{> common/floodline}}
+            </div>
+            <br>
+            <p>
+              <a href="{{{mountPath}}}" data-journey-click="ltfri:summary:view-another-location">View the flood risk information for another location</a>
+            </p>
+            <datetime class="date" datetime="{{date}}">{{formatDate date 'DD MMMM YYYY'}}</datetime>
           </div>
-          <br>
-          <p>
-            <a href="{{{mountPath}}}" data-journey-click="ltfri:summary:view-another-location">View the flood risk information for another location</a>
-          </p>
-          <datetime class="date" datetime="{{date}}">{{formatDate date 'DD MMMM YYYY'}}</datetime>
+          <div class="print-link pull-right no-print nojs-hide">
+            <a rel="nofollow" href="javascript:window.print()">Print</a>
+          </div>
         </li>
       </ol>
     </div>
