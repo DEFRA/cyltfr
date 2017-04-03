@@ -8,6 +8,8 @@ FLO-1833: Provide groundwater additional information
 
 # Special notes
 
-The calculate_flood_risk.sql script needs to be run into database manually, as liquibase is on the tech debt backlog for LTFRI.
+The /database/ltfridev/u_ltfri/0.0.9/calculate_flood_risk.sql script needs to be run into database manually, as liquibase is on the tech debt backlog for LTFRI.
+
+The previous version (for rollback): /database/ltfridev/u_ltfri/0.0.4/calculate_flood_risk.sql
 
 The way log files are handled by the application has changed. The log rotation is no longer handled by the application. Please monitor the 'risk-app/logs/error.log' and 'risk-service/logs/error.log' files.
