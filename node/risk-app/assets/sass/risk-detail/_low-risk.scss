@@ -1,0 +1,17 @@
+.low-risk-detail {
+  .column-quarter {
+    img {
+      width: 90px;
+    }
+  }
+
+  @media print {
+    .column-quarter img {
+      width: 47px;
+      position: absolute;
+    }
+    .column-three-quarters {
+      margin-left: 50px;
+    }
+  }
+}
