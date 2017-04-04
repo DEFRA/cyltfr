@@ -7,7 +7,7 @@
       <form method="get" action="{{{mountPath}}}risk">
         <div class="form-group">
           <span class="form-label">Postcode</span>
-          <h4 class="heading-small postcode-display">{{postcode}}</h4><a href="{{{mountPath}}}">Change</a>
+          <h4 class="heading-small postcode-display">{{postcode}}</h4><a href="{{{mountPath}}}?postcode={{postcode}}">Change</a>
           <label class="form-label" for="address">Choose your address from this list</label>
           <select id="address" name="address" required>
             {{#if multipleAddressesFound}}

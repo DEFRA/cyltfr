@@ -15,7 +15,7 @@ module.exports = {
       var postcodeRegex = /[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}/gi
 
       if (!postcodeRegex.test(postcode)) {
-        return reply.redirect('/?err=postcode')
+        return reply.redirect('/?err=postcode&postcode=' + postcode)
       }
 
       addressService.findByPostcode(validPostcode, function (err, addresses) {
@@ -24,7 +24,7 @@ module.exports = {
         }
 
         if (!addresses || !addresses.length) {
-          return reply.redirect('/?err=postcode')
+          return reply.redirect('/?err=postcode&postcode=' + postcode)
         }
 
         reply.view('search', new SearchViewModel(postcode, addresses))

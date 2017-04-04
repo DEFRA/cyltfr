@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-/*eslint-disable no-multi-str */
+/* eslint-disable no-multi-str */
 var exec = require('child_process').exec
 var content = '\
 <div id="content" class="wrapper">\
@@ -9,6 +9,7 @@ var content = '\
 \r\t\t{{> afterContent }}\
 </div>'
 
+/* eslint-disable */
 var cmd = "sed -i \
 -e 's${{{ content }}}$" + content + "$g' \
 -e 's${{{ topOfPage }}}${{> topOfPage }}$g' \
@@ -23,6 +24,7 @@ var cmd = "sed -i \
 -e 's${{{ licenceMessage }}}${{> licenceMessage }}$g' \
 -e 's${{{ bodyEnd }}}${{> bodyEnd }}$g' \
 views/layout.html"
+/* eslint-enable */
 
 exec(cmd, function (err) {
   if (err) {

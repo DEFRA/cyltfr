@@ -1,5 +1,4 @@
 var Joi = require('joi')
-var maps = require('../models/maps.json')
 var MapsViewModel = require('../models/maps-view')
 
 module.exports = {
@@ -12,7 +11,7 @@ module.exports = {
       var northing = request.query.northing
       var address = request.query.address
 
-      reply.view('map', new MapsViewModel(maps, easting, northing, address))
+      reply.view('map', new MapsViewModel(easting, northing, address))
     },
     validate: {
       query: {

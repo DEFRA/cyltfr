@@ -10,6 +10,7 @@ module.exports = [
   require('./robots'),
   require('./banner'),
   require('./os-get-capabilities'),
+  require('./api/geocode'),
   require('./404'),
   require('./os-terms')
 ]

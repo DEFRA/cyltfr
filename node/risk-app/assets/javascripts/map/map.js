@@ -11,7 +11,7 @@ var map, callback, currentLayer, $overlay, $overlayContent
 var isLoading = false
 var loading = 0
 var loaded = 0
-var loadError = 0
+// var loadError = 0
 var maxResolution = 1000
 
 function loadMap (point) {
@@ -113,7 +113,7 @@ function loadMap (point) {
       })
 
       WmsSource.on('tileloaderror', function () {
-        loadError++
+        // loadError++
         loaded++
         if (loading === loaded) {
           layerLoaded()
@@ -262,6 +262,12 @@ function updateSize () {
   map.updateSize()
 }
 
+function panTo (point, zoom) {
+  var view = map.getView()
+  view.setCenter(point)
+  view.setZoom(zoom)
+}
+
 function closeOverlay () {
   $overlay.hide()
 }
@@ -278,7 +284,7 @@ function testValues () {
 function layerLoaded () {
   loading = 0
   loaded = 0
-  loadError = 0
+  // loadError = 0
   isLoading = false
 }
 
@@ -331,6 +337,7 @@ Progress.prototype.hide = function () {
 module.exports = {
   loadMap: loadMap,
   showMap: showMap,
+  panTo: panTo,
   updateSize: updateSize,
   closeOverlay: closeOverlay,
   testValues: testValues,

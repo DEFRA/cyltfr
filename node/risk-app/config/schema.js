@@ -16,7 +16,8 @@ var ordnanceSurveySchema = Joi.object().required().keys({
   key: Joi.string().required(),
   urlUprn: Joi.string().uri().required(),
   urlPostcode: Joi.string().uri().required(),
-  urlGetCapabilities: Joi.string().uri().required()
+  urlGetCapabilities: Joi.string().uri().required(),
+  urlNames: Joi.string().uri().required()
 })
 
 var errbitSchema = Joi.object().required().keys({

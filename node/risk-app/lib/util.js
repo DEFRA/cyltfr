@@ -20,6 +20,12 @@ function formatDate (value, format) {
   return moment(value).format(format)
 }
 
+function cleanseLocation (location) {
+  if (location) {
+    return location.replace(/[^a-zA-Z0-9',-.& ]/g, '')
+  }
+}
+
 function convertLocationToNGR (location) {
   var splitLocation = location.split(',')
   var east = splitLocation[0]
@@ -54,5 +60,6 @@ function convertLocationToNGR (location) {
 module.exports = {
   getJson: getJson,
   formatDate: formatDate,
+  cleanseLocation: cleanseLocation,
   convertLocationToNGR: convertLocationToNGR
 }

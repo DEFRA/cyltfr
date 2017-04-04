@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="{{{assetPath}}}stylesheets/ol.css">
 <link rel="stylesheet" type="text/css" href="{{{assetPath}}}stylesheets/map/index.css">
-<main id="map-page">
+<main id="map-page" class="{{#if local}}local{{/if}}">
   <h1 class="heading-xlarge">Learn more about this area's flood risk</h1>
   <div class="nojs-hide ie-hide">
     <p class="hidden-mobile">
@@ -14,13 +14,27 @@
     </p>
   </div>
   <div class="map-container nojs-hide ie-hide">
-    <div class="map-switch hidden-mobile">
-      <a href="#" class="toggle-view">
-      Basic view&nbsp;
-      <img src="{{{assetPath}}}images/icon-detailed-off.png" alt="basic" class="basic">
-      <img src="{{{assetPath}}}images/icon-detailed-on.png" alt="detailed" class="detailed">
-      &nbsp;Detailed view
-      </a>
+    <div class="map-controls clearfix">
+      <div class="map-switch hidden-mobile">
+        <a href="#" class="toggle-view">
+        Basic view&nbsp;
+        <img src="{{{assetPath}}}images/icon-detailed-off.png" alt="basic" class="basic">
+        <img src="{{{assetPath}}}images/icon-detailed-on.png" alt="detailed" class="detailed">
+        &nbsp;Detailed view
+        </a>
+      </div>
+      <div class="map-search">
+        <form class="clearfix">
+          <label class="form-label" for="txtSearch">Location</label>
+          <div class="map-search-input">
+            <input id="txtSearch" name="location" title="Enter a place or postcode in England" placeholder="Enter a place or postcode in England" type="text">
+          </div>
+          <button id="mapSearch" title="Search Location" class="button">
+            <i class="fa fa-search" title="Search Location"></i>
+          </button>
+        </form>
+        <div id="error-message"></div>
+      </div>
     </div>
     <div class="visible-mobile">
       {{> map/selector}}
@@ -34,10 +48,10 @@
 
         <div class="enter-fullscreen toggle-fullscreen ol-full-screen ol-control">
           <button class="ol-full-screen-false" type="button" title="Full screen"><span>Full screen</span> <i class="fa fa-expand"></i></button>
-          </div>
+        </div>
         <div class="exit-fullscreen toggle-fullscreen ol-full-screen ol-control">
           <button class="ol-full-screen-true" type="button" title="Exit full screen"><span>Exit full screen</span> <i class="fa fa-compress"></i></button>
-          </div>
+        </div>
         <div id="map" class="map"></div>
         <aside class="controls">
           <div class="legend"></div>
@@ -71,3 +85,10 @@
   </p>
 </main>
 <script src="{{{assetPath}}}javascripts/map.js"></script>
+<script>
+  $(function() {
+    new LTFRI.MapPage.mapPage({
+      mountPath: '{{mountPath}}'
+    })
+  })
+</script>

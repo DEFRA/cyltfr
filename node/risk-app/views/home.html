@@ -9,7 +9,7 @@
       <form method="get" action="{{{mountPath}}}search">
         <div class="form-group">
           <label class="form-label" for="postcode">Postcode</label>
-          <input class="form-control" name="postcode" id="postcode" type="text" placeholder="Enter a postcode" title="A valid postcode in England is required" autocomplete="off">
+          <input class="form-control" name="postcode" id="postcode" value="{{postcode}}" type="text" placeholder="Enter a postcode" title="A valid postcode in England is required" autocomplete="off">
           {{#if hasErrorMessage}}
             <div class="error-message">{{errorMessage}}</div>
           {{/if}}
@@ -24,7 +24,10 @@
   <details>
     <summary><span class="summary">I don't know the postcode</span></summary>
     <div class="panel panel-border-narrow">
-      You can look for postcodes using the <a href="http://www.royalmail.com/find-a-postcode" target="_blank">Royal Mail find a postcode service</a>
+      <p>
+        You can look for postcodes using the <a href="http://www.royalmail.com/find-a-postcode" target="_blank">Royal Mail find a postcode service</a>
+      </p>
+      <p><a href="{{{mountPath}}}map">View a map showing flood risk areas</a></p>
     </div>
   </details>
   <br>
