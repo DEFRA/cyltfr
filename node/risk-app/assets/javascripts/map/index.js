@@ -1,7 +1,7 @@
 var $ = require('jquery')
 var map = require('./map')
 var legendTemplate = require('./legend.hbs')
-var Maps = require('../../../lib/models/maps')
+var Maps = require('../../../server/models/maps')
 var maps = new Maps()
 
 var easting = getParameterByName('easting')
@@ -10,7 +10,7 @@ var northing = getParameterByName('northing')
 map.loadMap(easting && [easting, northing])
 
 function getParameterByName (name) {
-  name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]')
+  name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]')
   var regex = new RegExp('[\\?&]' + name + '=([^&#]*)')
   var results = regex.exec(window.location.search)
   return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))

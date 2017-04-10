@@ -6,12 +6,15 @@
   "scripts": {
     "start": "pm2 start config/pm2.json",
     "lint": "standard",
-    "test": "npm run lint"
+    "unit-test": "bin/unit-test",
+    "integration-test": "bin/integration-test",
+    "test": "npm run lint && npm run unit-test && npm run integration-test"
   },
   "author": "ea.gov.uk",
   "license": "ISC",
   "dependencies": {
     "boom": "4.2.0",
+    "code": "4.0.0",
     "glue": "4.1.0",
     "good": "7.1.0",
     "good-console": "6.2.0",
@@ -21,6 +24,7 @@
     "hapi-node-postgres": "4.1.0",
     "inert": "4.1.0",
     "joi": "10.2.0",
+    "lab": "13.0.1",
     "lout": "9.2.0",
     "node-hapi-airbrake": "0.0.6",
     "vision": "4.1.1"
