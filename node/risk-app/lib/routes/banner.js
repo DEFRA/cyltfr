@@ -13,7 +13,7 @@ module.exports = {
       var postcode = request.query.postcode
       floodService.findWarnings(postcode, function (err, warnings) {
         if (err) {
-          return reply(Boom.badRequest(error.message, err))
+          return reply()
         }
 
         var model = new BannerViewModel(postcode, warnings)

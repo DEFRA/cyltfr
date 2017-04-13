@@ -61,9 +61,19 @@ Glue.compose(manifest, options, function (err, server) {
         message: response.message
       })
 
-      if (server.methods.hasOwnProperty('notify')) {
-        server.methods.notify(response)
-      }
+       // Manually post the handled errors to errbit
+        if (server.methods.hasOwnProperty('notify')) {
+          if (!(response.data && response.data.isJoi) 
+          && !(response.data && response.data.error && response.data.error.message.indexOf('postcode must') > -1)) {
+            // Errbit doesn't separate deep nested objects, hence individual properties
+            response.request_headers = request.headers
+            response.request_info = request.info
+            response.request_path = request.path
+            response.request_params = request.params
+            response.request_query = request.query
+            server.methods.notify(response)
+          }
+        }
 
       // The return the `500` view
       if (useErrorPages) {
