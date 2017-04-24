@@ -147,7 +147,7 @@ lab.experiment('Unit', function () {
     var stub = mock.replace(floodService, 'findWarnings', mock.makeCallback('Mock Error'))
 
     server.inject(options, function (response) {
-      Code.expect(response.statusCode).to.equal(400)
+      Code.expect(response.statusCode).to.equal(200)
       stub.revert()
       done()
     })

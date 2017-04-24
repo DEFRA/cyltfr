@@ -5,7 +5,6 @@ var config = require('../config')
 var analyticsAccount = config.analyticsAccount
 var pkg = require('../package.json')
 var appVersion = pkg.version
-var appName = pkg.name
 var errors = require('./models/errors.json')
 var mountPath = config.mountPath ? '/' + config.mountPath + '/' : '/'
 var assetPath = mountPath + 'public/'
@@ -62,8 +61,18 @@ function composeServer (callback) {
           message: response.message
         })
 
+        // Manually post the handled errors to errbit
         if (server.methods.hasOwnProperty('notify')) {
-          server.methods.notify(response)
+          if (!(response.data && response.data.isJoi) &&
+            !(response.data && response.data.error && response.data.error.message.indexOf('postcode must') > -1)) {
+            // Errbit doesn't separate deep nested objects, hence individual properties
+            response.request_headers = request.headers
+            response.request_info = request.info
+            response.request_path = request.path
+            response.request_params = request.params
+            response.request_query = request.query
+            server.methods.notify(response)
+          }
         }
 
         // The return the `500` view
@@ -119,34 +128,7 @@ function composeServer (callback) {
       isCached: cacheViews
     })
 
-    /*
-    * Start the server
-    */
     callback(null, server)
-    // server.start(function (err) {
-    //   var details = {
-    //     name: appName,
-    //     uri: server.info.uri
-    //   }
-
-    //   if (err) {
-    //     details.error = err
-    //     details.message = 'Failed to start ' + details.name
-    //     server.log(['error', 'info'], details)
-    //     throw err
-    //   } else {
-    //     if (config.mockAddressService) {
-    //       // Mock Address service
-    //       require('../mock/address')
-    //       server.log('info', 'Address service requests are being mocked')
-    //     }
-
-    //     details.config = config
-    //     details.message = 'Started ' + details.name
-    //     server.log('info', details)
-    //     console.info(details.message)
-    //   }
-    // })
   })
 }
 
