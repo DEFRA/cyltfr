@@ -4,17 +4,8 @@
 
 #risk-detail-page {
   @import "../risk";
-
-  .risk {
-    article {
-      .column-quarter {
-        img {
-          width: 90px;
-          @include media(tablet) {
-            float: right;
-          }
-        }
-      }
-    }
-  }
+  @import "./at-risk";
+  @import "./low-risk";
+  @import "../risk/at-risk";
+  @import "../risk/low-risk";
 }
