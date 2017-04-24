@@ -1,8 +1,6 @@
 var Joi = require('joi')
-var Boom = require('boom')
 var floodService = require('../services/flood')
 var BannerViewModel = require('../models/banner-view')
-var error = require('../models/errors.json').warningsBanner
 
 module.exports = {
   method: 'GET',

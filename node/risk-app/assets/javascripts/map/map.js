@@ -11,7 +11,7 @@ var map, callback, currentLayer, $overlay, $overlayContent
 var isLoading = false
 var loading = 0
 var loaded = 0
-var loadError = 0
+// var loadError = 0
 var maxResolution = 1000
 
 function loadMap (point) {
@@ -113,7 +113,7 @@ function loadMap (point) {
       })
 
       WmsSource.on('tileloaderror', function () {
-        loadError++
+        // loadError++
         loaded++
         if (loading === loaded) {
           layerLoaded()
@@ -278,7 +278,7 @@ function testValues () {
 function layerLoaded () {
   loading = 0
   loaded = 0
-  loadError = 0
+  // loadError = 0
   isLoading = false
 }
 

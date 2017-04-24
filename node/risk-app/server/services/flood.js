@@ -3,7 +3,6 @@ var floodWarningsUrl = config.floodWarningsUrl
 // Note wreck won't play with a proxy so need to use request
 var request = require('request')
 
-
 function findWarnings (location, callback) {
   var url = floodWarningsUrl + '/api/warnings?location=' + location
   request(url, function (err, response, body) {
