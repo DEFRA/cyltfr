@@ -38,6 +38,10 @@ select {
   margin-top: 10px;
   font-size: medium;
   color: $secondary-text-colour;
+
+  span.print {
+    color: inherit;
+  }
 }
 
 details {

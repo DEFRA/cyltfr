@@ -1,4 +1,4 @@
-<div id="risk-summary">
+<div class="low-risk">
   <h1 class="heading-large">This address is in an area at {{#if isVeryLowRisk}}very{{/if}} low risk of flooding</h1>
   <p>Even if flooding doesn't threaten your location directly, it may still affect:</p>
   <ul class="list list-bullet">
@@ -6,17 +6,22 @@
     <li>power</li>
     <li>communications networks</li>
   </ul>
-  <h3 class="heading-medium">Further information</h3>
-  <p>
-    <a href="{{{mountPath}}}map?easting={{easting}}&northing={{northing}}&address={{address}}">View maps showing the potential extent of flooding in this location</a>
-  </p>
-  <p>
-    <a href="{{{mountPath}}}risk-detail?address={{address}}" data-id="risk-detail">View detailed flood risk information for this area</a>
-  </p>
-  {{> common/floodline}}
-  <br>
-  <p>
-    <a href="{{{mountPath}}}">View the flood risk information for another location</a>
-  </p>
-  <datetime class="date" datetime="{{date}}">{{formatDate date 'DD MMMM YYYY'}}</datetime>
+  <div class="no-print">
+    <h3 class="heading-medium">Further information</h3>
+    <p>
+      <a href="{{{mountPath}}}map?easting={{easting}}&northing={{northing}}&address={{address}}">View maps showing the potential extent of flooding in this location</a>
+    </p>
+    <p>
+      <a href="{{{mountPath}}}risk-detail?address={{address}}" data-id="risk-detail">View detailed flood risk information for this area</a>
+    </p>
+    {{> common/floodline}}
+    <br>
+    <p>
+      <a href="{{{mountPath}}}">View the flood risk information for another location</a>
+    </p>
+    <datetime class="date" datetime="{{date}}">{{formatDate date 'DD MMMM YYYY'}}</datetime>
+  </div>
+  <div class="print-link pull-right no-print nojs-hide">
+    <a rel="nofollow" href="javascript:window.print()">Print</a>
+  </div>
 </div>

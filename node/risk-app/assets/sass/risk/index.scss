@@ -4,54 +4,8 @@
 
 #risk-page {
   @import "../risk";
-
-  .risk {
-    header {
-      padding: 10px;
-
-      address {
-        font-style: normal;
-      }
-
-      img {
-        float: right;
-        height: 100px;
-        max-width: 50%;
-      }
-    }
-
-    article {
-      .column-quarter {
-        img {
-          max-width: 100%;
-          max-height: 140px;
-          vertical-align: middle;
-          float: right;
-        }
-      }
-
-      ol {
-        counter-reset: section;
-        list-style-type: none;
-        padding-left: 0;
-
-        @include media(mobile) {
-          padding-left: 50px;
-        }
-
-        >li {
-          position: relative;
-          &::before {
-            counter-increment: section;
-            content: counter(section);
-            font-size: 3em;
-            position: absolute;
-            left: -45px;
-            font-weight: bold;
-            top: -6px;
-          }
-        }
-      }
-    }
-  }
+  @import "./at-risk";
+  @import "./low-risk";
+  @import "../risk-detail/at-risk";
+  @import "../risk-detail/low-risk";
 }
