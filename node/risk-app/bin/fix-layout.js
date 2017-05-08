@@ -23,6 +23,7 @@ var cmd = "sed -i \
 -e 's${{{ footerSupportLinks }}}${{> footerSupportLinks }}$g' \
 -e 's${{{ licenceMessage }}}${{> licenceMessage }}$g' \
 -e 's${{{ bodyEnd }}}${{> bodyEnd }}$g' \
+-e 's$<meta property=\"og:image\" content=\"{{{ assetPath }}}$<meta property=\"og:image\" content=\"{{{ siteUrl }}}{{{ assetPath }}}$g' \
 views/layout.html"
 /* eslint-enable */
 

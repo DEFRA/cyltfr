@@ -37,7 +37,9 @@ module.exports = {
   httpTimeoutMs: Joi.number().required().min(0).max(30000),
   mountPath: Joi.string().required().allow(''),
   analyticsAccount: Joi.string().required().allow(''),
+  fbAppId: Joi.string().required().allow(''),
   floodWarningsUrl: Joi.string().uri().required(),
+  floodRiskUrl: Joi.string().uri().required(),
   ordnanceSurvey: ordnanceSurveySchema,
   errbit: errbitSchema
 }

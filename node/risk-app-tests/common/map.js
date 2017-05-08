@@ -1,7 +1,7 @@
 module.exports = {
   loadPageNoParams: function (mapPage, callback) {
     mapPage.navigate()
-      .assert.title('Long Term Flood Risk Information - GOV.UK')
+      .assert.title('Long term flood risk map for England - GOV.UK')
       .assert.containsText('@heading', 'Learn more about this area\'s flood risk')
       .waitForElementVisible('#map-page button.ol-zoom-in', 20000)
   },

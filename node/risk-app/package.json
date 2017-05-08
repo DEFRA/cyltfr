@@ -15,7 +15,7 @@
     "build": "npm run clean && npm run copy && npm run build:css && npm run build:js",
     "lint": "standard",
     "unit-test": "bin/unit-test",
-    "test": "npm run lint"
+    "test": "npm run lint && npm run unit-test"
   },
   "author": "ea.gov.uk",
   "license": "OGL",

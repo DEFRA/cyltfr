@@ -7,7 +7,6 @@ module.exports = [
   require('./feedback'),
   require('./statics'),
   require('./gwc-proxy'),
-  require('./robots'),
   require('./banner'),
   require('./os-get-capabilities'),
   require('./404'),

@@ -3,7 +3,7 @@ const RiskLevel = require('../risk-level')
 module.exports = {
   loadPage: function (riskDetailPage, addressId) {
     riskDetailPage.loadPageWithAddress(addressId)
-      .assert.title('Long Term Flood Risk Information - GOV.UK')
+      .assert.title('Long term flood risk assessment for locations in England - GOV.UK')
   },
   assertOutcome: function (riskDetailPage, data) {
     riskDetailPage.getInfo(function (info) {

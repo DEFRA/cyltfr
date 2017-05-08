@@ -11,7 +11,7 @@ var assetPath = mountPath + 'public/'
 
 var defaultContext = {
   globalHeaderText: 'GOV.UK',
-  pageTitle: 'Long Term Flood Risk Information - GOV.UK',
+  pageTitle: 'Long term flood risk assessment for locations in England - GOV.UK',
   skipLinkMessage: 'Skip to main content',
   homepageUrl: 'https://www.gov.uk/',
   logoLinkTitle: 'Go to the GOV.UK homepage',
@@ -24,7 +24,10 @@ var defaultContext = {
   appVersion: appVersion,
   floodWarningsUrl: config.floodWarningsUrl,
   phase: 'beta', // alpha or beta, blank is live and requires no phase banner
-  feedback: true
+  feedback: true,
+  siteUrl: config.floodRiskUrl + (config.mountPath ? '/' + config.mountPath : ''),
+  fbAppId: config.fbAppId,
+  ogDescription: 'Check your risk of flooding and use flood risk maps'
 }
 
 var options = {
@@ -97,6 +100,29 @@ function composeServer (callback) {
         }
       }
       return reply.continue()
+    })
+
+    /*
+     * Add full url to context of view for opengraph meta property
+     */
+    server.ext('onPostHandler', function (request, reply) {
+      if (request.response.variety === 'view') {
+        var fullUrl = defaultContext.siteUrl + (request.path !== '/' ? request.path : '')
+        if (request.query) {
+          Object.keys(request.query).forEach(function (key, index) {
+            fullUrl += (index === 0 ? '?' : '&') + key + '=' + request.query[key]
+          })
+        }
+
+        if (request.response.source.context) {
+          request.response.source.context.fullUrl = encodeURI(fullUrl)
+        } else {
+          request.response.source.context = {
+            fullUrl: encodeURI(fullUrl)
+          }
+        }
+      }
+      reply.continue()
     })
 
     /*

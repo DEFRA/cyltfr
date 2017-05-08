@@ -156,7 +156,7 @@ lab.experiment('Unit', function () {
   lab.test('/', function (done) {
     var options = {
       method: 'GET',
-      url: mountPath
+      url: mountPath || '/'
     }
 
     server.inject(options, function (response) {
@@ -168,7 +168,7 @@ lab.experiment('Unit', function () {
   lab.test('/ - With known error', function (done) {
     var options = {
       method: 'GET',
-      url: mountPath + '?err=postcode'
+      url: mountPath || '/' + '?err=postcode'
     }
 
     server.inject(options, function (response) {
@@ -180,7 +180,7 @@ lab.experiment('Unit', function () {
   lab.test('/ - With unknown error', function (done) {
     var options = {
       method: 'GET',
-      url: mountPath + '?err=postXcode'
+      url: mountPath || '/' + '?err=postXcode'
     }
 
     server.inject(options, function (response) {

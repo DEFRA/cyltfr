@@ -95,6 +95,7 @@ function RiskViewModel (risk, address) {
   this.className = this.isRisk ? 'at-risk' : 'low-risk'
   this.date = Date.now()
   this.year = moment(Date.now()).format('YYYY')
+  this.pageTitle = 'Your long term flood risk assessment - GOV.UK'
 
   this.testInfoJSON = JSON.stringify({
     status: this.status,

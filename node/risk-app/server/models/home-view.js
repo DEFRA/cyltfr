@@ -9,6 +9,7 @@ function HomeViewModel (errorCode) {
     : ''
   this.year = moment(Date.now()).format('YYYY')
   this.hasErrorMessage = !!errorCode
+  this.pageTitle = 'Long term flood risk assessment for locations in England - GOV.UK'
 }
 
 module.exports = HomeViewModel

@@ -1,7 +1,7 @@
 module.exports = {
   loadPage: function (homePage) {
     homePage.navigate()
-      .assert.title('Long Term Flood Risk Information - GOV.UK')
+      .assert.title('Long term flood risk assessment for locations in England - GOV.UK')
       .assert.visible('@postcodeText')
   },
   assertErrorMessage: function (homePage, errorMessage) {
