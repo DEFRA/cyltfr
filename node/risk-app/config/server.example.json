@@ -81,7 +81,8 @@
     "key": "",
     "urlUprn": "",
     "urlPostcode": "",
-    "urlGetCapabilities": ""
+    "urlGetCapabilities": "",
+    "urlNames": ""
   },
   "errbit": {
     "postErrors": false,
