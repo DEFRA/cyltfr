@@ -25,7 +25,7 @@ var defaultContext = {
   floodWarningsUrl: config.floodWarningsUrl,
   phase: 'beta', // alpha or beta, blank is live and requires no phase banner
   feedback: true,
-  siteUrl: config.floodRiskUrl + (config.mountPath ? '/' + config.mountPath : ''),
+  siteUrl: config.floodRiskUrl,
   fbAppId: config.fbAppId,
   ogDescription: 'Check your risk of flooding and use flood risk maps'
 }
