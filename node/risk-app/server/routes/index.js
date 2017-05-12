@@ -9,6 +9,7 @@ module.exports = [
   require('./gwc-proxy'),
   require('./banner'),
   require('./os-get-capabilities'),
+  require('./api/geocode'),
   require('./404'),
   require('./os-terms')
 ]

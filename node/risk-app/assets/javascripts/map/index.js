@@ -1,13 +1,11 @@
 var $ = require('jquery')
 var map = require('./map')
 var legendTemplate = require('./legend.hbs')
-var Maps = require('../../../server/models/maps')
+var Maps = require('./maps')
 var maps = new Maps()
 
 var easting = getParameterByName('easting')
 var northing = getParameterByName('northing')
-
-map.loadMap(easting && [easting, northing])
 
 function getParameterByName (name) {
   name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]')
@@ -16,12 +14,14 @@ function getParameterByName (name) {
   return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
 }
 
-$(function () {
+function mapPage (options) {
   var selected = 'selected'
   var $page = $('main#map-page')
   var $container = $('.map-container')
   var $sidebar = $('ul.nav', $container)
   var $selector = $('select', $container)
+  var $error = $('#error-message', $container)
+  var $query = $('input[name=location]', $container)
   var $categories = $sidebar.children('li.category')
   var $maps = $categories.find('li')
   var $map = $('#map')
@@ -77,6 +77,42 @@ $(function () {
     setCurrent(getParameterByName('map'))
   })
 
+  $container.on('submit', 'form', function (e) {
+    e.preventDefault()
+
+    var location = $query.val().replace(/[^a-zA-Z0-9',-.& ]/g, '')
+    var noResults = 'No results match this search term.'
+
+    if (location) {
+      var url = options.mountPath + 'api/geocode?location=' + location
+      $error.text('')
+
+      $.ajax({
+        url: url
+      }).done(function (data) {
+        if (data) {
+          if (data.isEngland) {
+            var point = [data.easting, data.northing]
+            map.panTo(point, 7)
+          } else {
+            $error.text(noResults)
+          }
+        } else {
+          $error.text(noResults)
+        }
+      })
+      .fail(function (jqxhr, textStatus, error) {
+        if (jqxhr.status === 400) {
+          $error.text(noResults)
+        } else {
+          $error.text('There is currently a delay in obtaining the results for this area. Normal service will be resumed as soon as possible. In the meantime please use the map below to find the latest information near you.')
+        }
+      })
+    } else {
+      $error.text(noResults)
+    }
+  })
+
   $container.on('click', '.map-switch a.toggle-view', function (e) {
     e.preventDefault()
     $(e.delegateTarget).toggleClass('detailed')
@@ -95,8 +131,11 @@ $(function () {
     $map.css('height', '')
     map.updateSize()
   })
-})
+
+  map.loadMap(easting && [easting, northing])
+}
 
 module.exports = {
+  mapPage: mapPage,
   testValues: map.testValues
 }

@@ -262,6 +262,12 @@ function updateSize () {
   map.updateSize()
 }
 
+function panTo (point, zoom) {
+  var view = map.getView()
+  view.setCenter(point)
+  view.setZoom(zoom)
+}
+
 function closeOverlay () {
   $overlay.hide()
 }
@@ -331,6 +337,7 @@ Progress.prototype.hide = function () {
 module.exports = {
   loadMap: loadMap,
   showMap: showMap,
+  panTo: panTo,
   updateSize: updateSize,
   closeOverlay: closeOverlay,
   testValues: testValues,

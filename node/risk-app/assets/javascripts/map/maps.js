@@ -1,10 +1,11 @@
-var maps = require('./maps.json')
+var maps = require('../../../server/models/maps.json')
 
 function Maps (ref) {
   this._data = maps
   this._categories = maps.categories
   this.setCurrent(ref)
 }
+
 /**
  * setCurrent
  * @param {string} ref The ref of either a category or map. If a category ref is passed, the first map in that category is used.

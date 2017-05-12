@@ -1,3 +1,4 @@
-module.exports = [
-  require('./risk')
-]
+module.exports = [].concat(
+  require('./risk'),
+  require('./is-england')
+)

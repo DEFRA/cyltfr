@@ -280,6 +280,16 @@
     }
   }
 
+  .local-show {
+    display: none;
+  }
+
+  &.local {
+    .local-show {
+      display: block;
+    }
+  }
+
   .ol-full-screen.ol-control.toggle-fullscreen {
      button {
        width: auto;
@@ -313,5 +323,114 @@
     width: 0;
     transition: width 250ms;
     z-index: 1;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+  .map-controls {
+    padding: 10px;
+    overflow: visible;
+    position: relative;
+    @include media(tablet) {
+      padding: 0 0 13px 0;
+    }
+  }
+
+  .map-switch {
+    float: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 0;
+    @include media(tablet) {
+      width:35%;
+    }
+  }
+
+  .map-search {
+    @include media(tablet) {
+      float: right;
+      width: 65%;
+      margin-top: -3px;
+    }
+  }
+
+  .map-controls form {
+    position: relative;
+    display: block;     
+    padding: 3px;
+  }
+
+  .map-controls .form-label {
+    display: none;
+    @include media(tablet) {
+      text-align: right;
+      float: left;
+      margin-top: 3px;
+      left: 0;
+      width: 30%;
+      display: block;
+      padding-top: 7px;
+    }
+  }
+
+  .map-controls .button {
+    float: left;
+    width: 40px;
+    height: 29px;
+    margin:0;
+    @include media(tablet) {
+      position: absolute;
+      margin-top: 3px;
+      right: 0;
+      width: 46px;
+      height: 34px;
+    }
+  }
+
+  .map-controls .button i {
+      width: 21px;
+      margin-left: -1px;
+      color: #fff;
+  }
+
+  .map-search .map-search-input {
+      @include media(tablet) {
+        position: absolute;
+        width: auto;
+        margin-top: 3px;
+        left: 32.5%;
+        right: 65px;
+      }
+  }
+
+  .map-controls input {
+    float: left;
+    width:70%;
+    padding: 4px 6px 2px 9px;
+    margin: auto;
+    @include media(tablet) {
+      width:100%;
+    }
+  }
+
+  #error-message {
+    clear: both;
+    display: block;
+    padding-left: 10px;
+    margin: 10px 15px 0 4px;
+    border-left: 3px solid #b10e1e;
+    color: #b10e1e;
+    @include media(tablet) {
+      margin-left: 32.5%;
+    }
   }
 }
