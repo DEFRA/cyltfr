@@ -1,3 +1,5 @@
+/* global GOVUK */
+
 var $ = require('jquery')
 // proj4 is accessed using global variable within openlayers library
 window.proj4 = require('proj4')
@@ -15,6 +17,7 @@ var loaded = 0
 var maxResolution = 1000
 
 function loadMap (point) {
+  var $body = $(document.body)
   // add the projection to Window.proj4
   window.proj4.defs(config.projection.ref, config.projection.proj4)
 
@@ -175,13 +178,49 @@ function loadMap (point) {
       })
     })
 
+    $('.legend').on('click', 'a[data-id]', function (e) {
+      e.preventDefault()
+      // Build a view model from the properties
+      var $link = $(this)
+      var id = $link.data('id')
+      var viewModel = {
+        isRiskDescription: true,
+        isRiversOrSeas: id.substr(0, 11) === 'rivers-seas',
+        isSurfaceWater: id.substr(0, 13) === 'surface-water',
+        id: id
+      }
+
+      // Get the overlay content html using the template
+      var html = overlayTemplate(viewModel)
+
+      // update the content
+      $overlayContent.html(html)
+
+      // Show the overlay
+      $overlay.show()
+
+      GOVUK.performance.sendGoogleAnalyticsEvent('ltfri', 'map', 'risk-type-legend-' + id)
+    })
+
     // Map interaction functions
+    map.on('pointermove', function (e) {
+      var currentLayerRef = currentLayer && currentLayer.getProperties().ref
+      if (e.dragging) {
+        return
+      }
+
+      var pixel = map.getEventPixel(e.originalEvent)
+      if ((currentLayerRef === 'risk:1-ROFRS' || currentLayerRef === 'risk:6-SW-Extent') || (bullseye(pixel) && !(currentLayerRef !== 'risk:1-ROFRS' && currentLayerRef !== 'risk:6-SW-Extent' && currentLayerRef !== 'risk:2-FWLRSF'))) {
+        $body.css('cursor', 'pointer')
+      } else {
+        $body.css('cursor', 'default')
+      }
+    })
+
     map.on('singleclick', function (e) {
       var currentLayerRef = currentLayer && currentLayer.getProperties().ref
 
-      // The overlay is only for the FWLRSF
-      // TODO:Should also call bullseye(e.pixel) but currently an Openlayers bug with Firefox
-      if (currentLayerRef !== 'risk:2-FWLRSF') {
+      if (currentLayerRef !== 'risk:1-ROFRS' && currentLayerRef !== 'risk:6-SW-Extent' && currentLayerRef !== 'risk:2-FWLRSF') {
         return
       }
 
@@ -198,23 +237,75 @@ function loadMap (point) {
       }
 
       $.get(url, function (data) {
-        if (!data || !data.features.length) {
+        if (!data || !data.features) {
           return
         }
 
-        // Get the feature and build a view model from the properties
-        var feature = data.features[0]
-        var properties = feature.properties
-        var isRiverLevelStation = feature.id.indexOf('river_level') === 0
-        var viewModel = {
-          flow30: isRiverLevelStation && toFixed(properties.flow_30),
-          flow100: isRiverLevelStation && toFixed(properties.flow_100),
-          flow1000: isRiverLevelStation && toFixed(properties.flow_1000),
-          depth30: toFixed(isRiverLevelStation ? properties.depth_30 : properties.lev_30),
-          depth100: toFixed(isRiverLevelStation ? properties.depth_100 : properties.lev_100),
-          depth1000: toFixed(isRiverLevelStation ? properties.depth_1000 : properties.lev_1000),
-          isRiverLevelStation: isRiverLevelStation,
-          stationName: properties.location || properties.site
+        var viewModel, properties, feature
+
+        if (currentLayerRef === 'risk:1-ROFRS') {
+          if (data.features.length) {
+            feature = data.features[0]
+            properties = feature.properties
+          }
+
+          viewModel = {
+            isRiskDescription: true,
+            isRiversOrSeas: true,
+            isSurfaceWater: false,
+            id: 'rivers-seas-' + (properties ? properties.prob_4band.toLowerCase() : 'very-low')
+          }
+        } else if (currentLayerRef === 'risk:6-SW-Extent') {
+          var levels = {}
+          var level = ''
+
+          data.features.forEach(function (item) {
+            if (item.id.indexOf('ufmfsw_extent_1_in_30_') > -1) {
+              levels['30'] = true
+            } else if (item.id.indexOf('ufmfsw_extent_1_in_100_') > -1) {
+              levels['100'] = true
+            } else if (item.id.indexOf('ufmfsw_extent_1_in_1000_') > -1) {
+              levels['1000'] = true
+            }
+          })
+
+          if (levels['30']) {
+            level = 'high'
+          } else if (levels['100']) {
+            level = 'medium'
+          } else if (levels['1000']) {
+            level = 'low'
+          } else {
+            level = 'very-low'
+          }
+
+          viewModel = {
+            isRiskDescription: true,
+            isRiversOrSeas: false,
+            isSurfaceWater: true,
+            id: 'surface-water-' + level
+          }
+        } else {
+          if (!data.features.length) {
+            return
+          }
+
+          feature = data.features[0]
+          properties = feature.properties
+
+          // Get the feature and build a view model from the properties
+          var isRiverLevelStation = feature.id.indexOf('river_level') === 0
+          viewModel = {
+            isMonitoringStation: true,
+            flow30: isRiverLevelStation && toFixed(properties.flow_30),
+            flow100: isRiverLevelStation && toFixed(properties.flow_100),
+            flow1000: isRiverLevelStation && toFixed(properties.flow_1000),
+            depth30: toFixed(isRiverLevelStation ? properties.depth_30 : properties.lev_30),
+            depth100: toFixed(isRiverLevelStation ? properties.depth_100 : properties.lev_100),
+            depth1000: toFixed(isRiverLevelStation ? properties.depth_1000 : properties.lev_1000),
+            isRiverLevelStation: isRiverLevelStation,
+            stationName: properties.location || properties.site
+          }
         }
 
         // Get the overlay content html using the template
@@ -225,6 +316,10 @@ function loadMap (point) {
 
         // Show the overlay
         $overlay.show()
+
+        if (viewModel.isRiskDescription) {
+          GOVUK.performance.sendGoogleAnalyticsEvent('ltfri', 'map', 'risk-type-map-' + viewModel.id)
+        }
       })
     })
 
@@ -270,6 +365,14 @@ function panTo (point, zoom) {
 
 function closeOverlay () {
   $overlay.hide()
+}
+
+function bullseye (pixel) {
+  return map.forEachLayerAtPixel(pixel, function (layer) {
+    return true
+  }, null, function (layer) {
+    return layer.get('ref') !== config.OSLayer // Ignore OS background map as causes CORs issue on query and covers whole map anyway so will always return true
+  })
 }
 
 function testValues () {

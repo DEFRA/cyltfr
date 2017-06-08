@@ -3,6 +3,7 @@ module.exports = [
   require('./search'),
   require('./risk'),
   require('./risk-detail'),
+  require('./risk-types'),
   require('./map'),
   require('./feedback'),
   require('./statics'),

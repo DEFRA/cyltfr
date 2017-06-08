@@ -39,6 +39,59 @@
       .heading-large {
         margin-top: 10px;
       }
+
+      // Overlay risk details
+      .high, .medium, .low, .very-low {
+        display: none;
+      }
+
+      .rivers-seas-high {
+        .high {
+          display: block;
+        }
+      }
+
+      .rivers-seas-medium {
+        .medium {
+          display: block;
+        }
+      }
+
+      .rivers-seas-low {
+        .low {
+          display: block;
+        }
+      }
+
+      .rivers-seas-very-low {
+        .very-low {
+          display: block;
+        }
+      }
+
+      .surface-water-high {
+        .high {
+          display: block;
+        }
+      }
+
+      .surface-water-medium {
+        .medium {
+          display: block;
+        }
+      }
+
+      .surface-water-low {
+        .low {
+          display: block;
+        }
+      }
+
+      .surface-water-very-low {
+        .very-low {
+          display: block;
+        }
+      }
     }
 
     .map-overlay-close {

@@ -14,16 +14,20 @@
             "title": "Flood risk",
             "keys": [{
               "text": "High",
-              "icon": "purple"
+              "icon": "purple",
+              "id": "rivers-seas-high"
             }, {
               "text": "Medium",
-              "icon": "dark-blue"
+              "icon": "dark-blue",
+              "id": "rivers-seas-medium"
             }, {
               "text": "Low",
-              "icon": "blue"
+              "icon": "blue",
+              "id": "rivers-seas-low"
             }, {
               "text": "Very low",
-              "icon": "light-blue"
+              "icon": "light-blue",
+              "id": "rivers-seas-very-low"
             }]
           }
         },
@@ -60,16 +64,20 @@
             "title": "Flood risk",
             "keys": [{
               "text": "High",
-              "icon": "purple"
+              "icon": "purple",
+              "id": "surface-water-high"
             }, {
               "text": "Medium",
-              "icon": "dark-blue"
+              "icon": "dark-blue",
+              "id": "surface-water-medium"
             }, {
               "text": "Low",
-              "icon": "blue"
+              "icon": "blue",
+              "id": "surface-water-low"
             }, {
               "text": "Very low",
-              "icon": "white"
+              "icon": "white",
+              "id": "surface-water-very-low"
             }]
           }
         },

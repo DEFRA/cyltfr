@@ -10,11 +10,21 @@
 
 <ul>
   {{#each keys}}
-    <li class="round {{icon}}">
-      <div>{{text}}</div>
+    <li>
+      {{#if id}}
+        <a class="legend-item round {{icon}}" href="risk-types#{{id}}" data-id="{{id}}">
+          <div>{{text}}</div>
+        </a>
+      {{else}}
+        <div class="legend-item round {{icon}}">
+          <div>{{text}}</div>
+        </div>
+      {{/if}}
     </li>
   {{/each}}
-  <li class="crosshair local-show">
-    <div>Location you selected</div>
+  <li>
+    <div class="legend-item crosshair local-show">
+      <div>Location you selected</div>
+    </div>
   </li>
 </ul>

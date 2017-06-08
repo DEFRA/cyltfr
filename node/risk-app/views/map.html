@@ -1,17 +1,27 @@
 <link rel="stylesheet" type="text/css" href="{{{assetPath}}}stylesheets/ol.css">
 <link rel="stylesheet" type="text/css" href="{{{assetPath}}}stylesheets/map/index.css">
 <main id="map-page" class="{{#if local}}local{{/if}}">
-  <h1 class="heading-xlarge">Learn more about this area's flood risk</h1>
-  <div class="nojs-hide ie-hide">
-    <p class="hidden-mobile">
-      From the list on the left, select the information you're interested in. The map view will then update.
-    </p>
-    <p>
-      'Detailed view' shows more options.
-    </p>
-    <p class="visible-mobile">
-      From the list below, select the information you're interested in. The map view will then update.
-    </p>
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <h1 class="heading-xlarge">
+        {{#if local}}Learn more about this area's flood risk{{else}}Learn more about flood risk{{/if}}
+      </h1>
+      <div class="nojs-hide ie-hide">
+        <p class="hidden-mobile">
+          Select the type of flood risk information you're interested in. The map will then update.
+        </p>
+        <p>
+          You can <a href="{{{mountPath}}}risk-types" data-journey-click="ltfri:map:risk-types">learn more about the ways we describe flood risk</a>. 
+          Alternatively select a legend item for an explanation of that flood risk.   
+        </p>
+        <p>
+          'Detailed view' shows more technical information.
+        </p>
+        <p class="visible-mobile">
+          From the list below, select the information you're interested in. The map view will then update.
+        </p>
+      </div>
+    </div>
   </div>
   <div class="map-container nojs-hide ie-hide">
     <div class="map-controls clearfix">
@@ -73,15 +83,30 @@
     <p><strong>You&#39;re missing out. A map should be visible here.</strong></p>
     <p><a href="https://www.gov.uk/help/browsers" rel="external">Upgrade your browser to see and use all the features of this service.</a></p>
   </div>
-  {{#if address}}<p><a href="{{{mountPath}}}risk?address={{address}}" data-id="risk-address">View the flood risk information for the location you originally searched for</a></p>{{/if}}
-  <p><a href="{{{mountPath}}}">View the flood risk information for another location</a></p>
-  <p><a href="{{{floodWarningsUrl}}}">Go to the national flood information service</a></p>
-  {{> common/floodline}}
-  <datetime class="date" datetime="{{date}}">{{formatDate date 'DD MMMM YYYY'}}</datetime>
-  <br>
-  <p class="eu-directive">
-    This information meets the requirements of the EU Floods Directive 2007/60/EC
-  </p>
+  <div class="grid-row"> 
+    <div class="column-two-thirds">
+      <details>
+        <summary aria-expanded="false" role="button">
+          <span class="summary">Accuracy of surface water flood risk information</span>
+        </summary>
+        <div class="panel panel-border-narrow" aria-hidden="true">
+          <p>Flooding from surface water is difficult to predict as rainfall location and volume are difficult to forecast. 
+            In addition, local features can greatly affect the chance and severity of flooding. 
+            Because of this, we report the highest risk within 20m of a specific location, such as an individual property. 
+            This means reports for neighbouring properties may show different levels of risk.</p>
+        </div>
+      </details>  
+      {{#if address}}<p><a href="{{{mountPath}}}risk?address={{address}}" data-id="risk-address">View the flood risk information for the location you originally searched for</a></p>{{/if}}
+      <p><a href="{{{mountPath}}}">View the flood risk information for another location</a></p>
+      <p><a href="{{{floodWarningsUrl}}}">Go to the national flood information service</a></p>
+      {{> common/floodline}}
+      <datetime class="date" datetime="{{date}}">{{formatDate date 'DD MMMM YYYY'}}</datetime>
+      <br>
+      <p class="eu-directive">
+        This information meets the requirements of the EU Floods Directive 2007/60/EC
+      </p>
+    </div>
+  </div>
 </main>
 <script src="{{{assetPath}}}javascripts/map.js"></script>
 <script>
