@@ -16,9 +16,12 @@
         // Setup custom callback until pull request
         // `https://github.com/alphagov/govuk_frontend_toolkit_npm/pull/35` is accepted,
         // we can then go back to using the simpler GOVUK.performance.stageprompt.setupForGoogleAnalytics().
-        GOVUK.performance.stageprompt.setup(function (category, event, label) {
+        function sendGoogleAnalyticsEvent (category, event, label) {
           ga('send', 'event', category, event, label)
-        })
+        }
+
+        GOVUK.performance.stageprompt.setup(sendGoogleAnalyticsEvent)
+        GOVUK.performance.sendGoogleAnalyticsEvent = sendGoogleAnalyticsEvent   
       })
     }
   </script>
