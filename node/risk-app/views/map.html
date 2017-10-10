@@ -12,7 +12,7 @@
         </p>
         <p>
           You can <a href="{{{mountPath}}}risk-types" data-journey-click="ltfri:map:risk-types">learn more about the ways we describe flood risk</a>. 
-          Alternatively select a legend item for an explanation of that flood risk.   
+          Alternatively select a legend item or feature from the map for an explanation of that flood risk. 
         </p>
         <p>
           'Detailed view' shows more technical information.
@@ -90,10 +90,12 @@
           <span class="summary">Accuracy of surface water flood risk information</span>
         </summary>
         <div class="panel panel-border-narrow" aria-hidden="true">
-          <p>Flooding from surface water is difficult to predict as rainfall location and volume are difficult to forecast. 
-            In addition, local features can greatly affect the chance and severity of flooding. 
-            Because of this, we report the highest risk within 20m of a specific location, such as an individual property. 
-            This means reports for neighbouring properties may show different levels of risk.</p>
+          <p>
+            Flooding from surface water is difficult to predict as rainfall location and volume are difficult to forecast.
+            In addition, local features can greatly affect the chance and severity of flooding.
+            Because of this, we report the highest risk within 20m of a specific location, such as an individual property.
+            This means reports for neighbouring properties may show different levels of risk.
+          </p>
         </div>
       </details>  
       {{#if address}}<p><a href="{{{mountPath}}}risk?address={{address}}" data-id="risk-address">View the flood risk information for the location you originally searched for</a></p>{{/if}}
