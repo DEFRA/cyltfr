@@ -10,7 +10,7 @@ module.exports = {
   },
   commands: [{
     selectAddress: function (id) {
-      return this.click('select#address option[value="' + id + '"]')
+      return this.click('input[name=uprn][value="' + id + '"]')
     },
     submit: function () {
       return this.waitForElementVisible('@submitBtn', 1000)

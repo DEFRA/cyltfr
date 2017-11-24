@@ -1,65 +1,50 @@
 <link rel="stylesheet" type="text/css" href="{{{assetPath}}}stylesheets/search/index.css">
 <main id="search-page">
-  <div id="banner"></div>
-  {{> common/mission}}
   <div class="grid-row">
     <div class="column-two-thirds">
-      <form method="get" action="{{{mountPath}}}risk">
-        <div class="form-group">
-          <span class="form-label">Postcode</span>
-          <h4 class="heading-small postcode-display">{{postcode}}</h4><a href="{{{mountPath}}}?postcode={{postcode}}">Change</a>
-          <label class="form-label" for="address">Choose your address from this list</label>
-          <select id="address" name="address" required>
-            {{#if multipleAddressesFound}}
-              <option value="">Please choose</option>
+      <div id="banner"></div>
+      <form method="post" autocomplete="off">
+        <h1 class="heading-large">{{#if singleAddress}}Confirm{{else}}Choose{{/if}} address</h1>
+        <input type="hidden" name="addresses" value="{{addressesJSON}}">
+        <div {{#if errors}}class="form-group form-group-error"{{/if}}>
+          {{#if errors}}
+            <span class="error-message error-message-group">{{errors.uprn}}</span>  
+          {{/if}}
+          <div class="form-group">
+            {{#if singleAddress}}
+              <div class="multiple-choice">
+                <input id="property" type="checkbox" name="uprn" value="{{singleAddress.uprn}}">
+                <label for="property">{{singleAddress.address}}, {{singleAddress.country}}</label>
+              </div>
+            {{else}}
+              <p class="bold-small">{{numAddressesFound}} addresses found for '{{premises}}' and '{{postcode}}'</p>
+              {{#each addresses}}
+                <div class="multiple-choice">
+                  <input id="property-{{uprn}}" type="radio" name="uprn" value="{{uprn}}">
+                  <label for="property-{{uprn}}">{{address}}, {{country}}</label>
+                </div>          
+              {{/each}}
             {{/if}}
-            {{#each addresses}}
-              <option value="{{this.uprn}}">{{this.address}}</option>
-            {{/each}}
-          </select>          
-          <div class="error-message">Select an address from the list to continue</div>
+          </div>
         </div>
         <div class="form-group">
           <button class="button" type="submit" title="Continue">Continue</button>
         </div>
       </form>
+      <details>
+        <summary aria-expanded="false" role="button"><span class="summary">The address is not listed</span></summary>
+        <div class="panel panel-border-narrow" aria-hidden="true">
+          <p>You can:</p>
+          <ul class="list list-bullet">
+            <li><a href="http://www.royalmail.com/find-a-postcode" target="_blank">check the postcode at Royal Mail</a></li>
+            <li><a href="{{{mountPath}}}map">see a map showing areas at risk of flooding</a></li>
+            <li><a href="{{{mountPath}}}">start your search again</a></li>
+          </ul>
+          <p>The address may not be listed if it’s part of a new development.</p>
+        </div>
+      </details>
     </div>
   </div>
-  <details>
-    <summary aria-expanded="false" role="button"><span class="summary">The address I want isn’t here</span></summary>
-    <div class="panel panel-border-narrow" aria-hidden="true">
-      The address you’re looking for may not be listed if it’s part of a newly-built development.
-      <br>
-      <br>
-      Choose another address nearby to see a flood risk map of the general area or <a href="{{{mountPath}}}">start your search again.</a>
-    </div>
-  </details>
-  <br>
-  {{> common/floodline}}
-  <br>
-  <br>
-  <section class="secondary-links">
-    <div class="grid-row">
-      <div class="column-third">
-        <a class="media" href="{{{floodWarningsUrl}}}">
-          <img class="img" src="{{{assetPath}}}images/ball-home.png" alt="National flood information service">
-          <span class="content">National flood information service</span>
-        </a>
-      </div>
-      <div class="column-third">
-        <a class="media" href="{{{floodWarningsUrl}}}/river-and-sea-levels">
-          <img class="img" src="{{{assetPath}}}images/ball-river-sea-level.png" alt="View the latest river and sea levels near you">
-          <span class="content">View the latest river and sea levels near you</span>
-        </a>
-      </div>
-      <div class="column-third">
-        <a class="media" href="{{{floodWarningsUrl}}}/map">
-          <img class="img" src="{{{assetPath}}}images/ball-map.png" alt="View the current national flood situation">
-          <span class="content">View the current national flood situation</span>
-        </a>
-      </div>
-    </div>
-  </section>
 </main>
 <script src="{{{assetPath}}}javascripts/search.js"></script>
 <script>

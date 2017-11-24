@@ -1,15 +1,20 @@
 module.exports = {
   url: function () {
+    console.log('2334534346', this.api.launchUrl)
     return this.api.launchUrl
   },
   elements: {
     'main': '#home-page',
     'form': '#home-page form',
+    'premisesText': '#premises',
     'postcodeText': '#postcode',
     'submitBtn': '#home-page form button[type=submit]',
-    'errorMessage': '#home-page form .error-message'
+    'errorMessage': '#home-page .error-summary'
   },
   commands: [{
+    setPremises: function (value) {
+      return this.setValue('@premisesText', value)
+    },
     setPostcode: function (value) {
       return this.setValue('@postcodeText', value)
     },
@@ -21,8 +26,11 @@ module.exports = {
       return this.waitForElementVisible('@submitBtn', 1000)
         .click('@submitBtn')
     },
-    setPostcodeAndSubmit: function (postcode) {
-      return this.setPostcode(postcode).submit()
+    setPremisesAndPostcodeAndSubmit: function (premises, postcode) {
+      return this
+        .setPremises(premises)
+        .setPostcode(postcode)
+        .submit()
     }
   }]
 }

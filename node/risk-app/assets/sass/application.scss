@@ -21,11 +21,25 @@ select {
   margin-bottom: 2px;
 }
 
-.error-message {
-  color: $red;
-  margin-top: 10px;
+.error-message-group {
+  margin-bottom: 15px;
+}
+
+.form-group {
+  float: none;
+}
+
+.form-group-error {
+  margin-right: 15px;
+  border-left: 4px solid #b10e1e;
   padding-left: 10px;
-  border-left: solid 3px $red;
+}
+
+@media (min-width: 641px) {
+  .form-group-error {
+    border-left: 5px solid #b10e1e;
+    padding-left: 15px;
+  }
 }
 
 .phone-number {
