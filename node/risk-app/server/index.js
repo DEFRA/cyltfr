@@ -81,7 +81,7 @@ function composeServer (callback) {
         // The return the `500` view
         if (useErrorPages) {
           switch (response.message) {
-            case errors.addressByPostcode.message:
+            case errors.addressByPremisesAndPostcode.message:
             case errors.addressById.message:
               return reply.view('500-address').code(statusCode)
             case errors.riskProfile.message:
@@ -96,7 +96,7 @@ function composeServer (callback) {
         // a mount path, prepend the mount path to the redirection location.
         var location = response.headers.location
         if (location.startsWith('/')) {
-          response.location('/' + config.mountPath + location.slice(1))
+          response.location('/' + config.mountPath + location)
         }
       }
       return reply.continue()

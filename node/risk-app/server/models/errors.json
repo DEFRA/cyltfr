@@ -1,6 +1,6 @@
 {
-  "addressByPostcode": {
-    "message" : "An error occurred finding the address by postcode"
+  "addressByPremisesAndPostcode": {
+    "message" : "An error occurred finding the address by premises & postcode"
   },
   "addressById": {
     "message" : "An error occurred finding the address by id"

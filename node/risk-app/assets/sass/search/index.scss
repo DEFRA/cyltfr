@@ -22,14 +22,4 @@
       width: 100%;
     }
   }
-
-  .error-message {
-    display: none;
-  }
-
-  form.invalid {
-    .error-message {
-      display: block;
-    }
-  }
 }

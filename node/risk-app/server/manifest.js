@@ -14,7 +14,12 @@ const manifest = {
       routes: {
         //  Sets common security headers
         //  http://hapijs.com/api#route-options
-        security: true
+        security: true,
+        validate: {
+          options: {
+            abortEarly: false
+          }
+        }
       },
       router: {
         stripTrailingSlash: true

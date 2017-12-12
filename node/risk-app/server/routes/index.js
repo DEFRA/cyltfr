@@ -1,4 +1,4 @@
-module.exports = [
+module.exports = [].concat(
   require('./home'),
   require('./search'),
   require('./risk'),
@@ -11,6 +11,7 @@ module.exports = [
   require('./banner'),
   require('./os-get-capabilities'),
   require('./api/geocode'),
+  require('./england-only'),
   require('./404'),
   require('./os-terms')
-]
+)

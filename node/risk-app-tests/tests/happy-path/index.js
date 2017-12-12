@@ -6,9 +6,10 @@ var riskDetailTests = require('../../common/risk-detail')
 
 module.exports = {
   'happy-path': function (client) {
-    // Loop over each postcode
+    // Loop over each test case
     data.forEach(function (item) {
       var address = item.address
+      var premises = item.premises
       var postcode = item.postcode
 
       /**
@@ -16,9 +17,9 @@ module.exports = {
        */
       var homePage = client.page.home()
 
-      // Navigate to the home page & submit postcode
+      // Navigate to the home page & submit premises & postcode
       homeTests.loadPage(homePage)
-      homePage.setPostcodeAndSubmit(postcode)
+      homePage.setPremisesAndPostcodeAndSubmit(premises, postcode)
 
       /**
        * Create search page object
@@ -26,7 +27,7 @@ module.exports = {
       var searchPage = client.page.search()
 
       // Assert the correct postcode
-      searchTests.assertPostcode(searchPage, postcode)
+      searchTests.assertPage(searchPage)
 
       // Select the first address and submit
       searchPage.selectAddress(address)

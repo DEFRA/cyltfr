@@ -1,65 +1,89 @@
 <link rel="stylesheet" type="text/css" href="{{{assetPath}}}stylesheets/home/index.css">
 <main id="home-page">
-  {{> common/mission}}
-  <p>
-    Enter an English postcode to see long term flood risk information for a specific location.
-  </p>
   <div class="grid-row">
-    <div class="column-half">
-      <form method="get" action="{{{mountPath}}}search">
-        <div class="form-group">
-          <label class="form-label" for="postcode">Postcode</label>
-          <input class="form-control" name="postcode" id="postcode" value="{{postcode}}" type="text" placeholder="Enter a postcode" title="A valid postcode in England is required" autocomplete="off">
-          {{#if hasErrorMessage}}
-            <div class="error-message">{{errorMessage}}</div>
-          {{/if}}
+    <div class="column-two-thirds">
+      {{#if errors}}
+        <div class="error-summary" role="alert" aria-labelledby="error-summary-heading" tabindex="-1">
+          <h2 class="heading-medium error-summary-heading" id="error-summary-heading">There was a problem</h2>
+          <ul class="error-summary-list">
+            {{#each errors}}
+              <li><a href="#{{@key}}">{{this}}</a></li>
+            {{/each}}
+          </ul>
         </div>
+      {{/if}}
+      {{> common/mission}}
+      <p>
+        Enter a house name or number and a postcode to see its long term flood risk information. This service covers England only.
+      </p>
+      <h3 class="heading-medium">Find the address</h3>
+      <form method="post" autocomplete="off" action="{{{mountPath}}}">
+        <fieldset>
+          <div id="address" {{#if errors.address}}class="form-group form-group-error"{{/if}}>
+            {{#if errors.address}}
+              <span class="error-message error-message-group">{{errors.address}}</span>  
+            {{/if}}
+            <div class="form-group {{#if errors.premises}}form-group-error{{/if}}">
+              <label for="premises" class="form-label">House number or name</label>
+              <span class="form-hint">for example, Flat 20A</span>
+              {{#if errors.premises}}<span class="error-message">{{errors.premises}}</span>{{/if}}
+              <input class="form-control {{#if errors.premises}}form-control-error{{/if}}" id="premises" name="premises" value="{{premises}}" type="text" maxlength="50">
+            </div>
+            <div class="form-group {{#if errors.postcode}}form-group-error{{/if}}">
+              <label for="postcode" class="form-label">Postcode</label>
+              <span class="form-hint">for example, WA4 1AB</span>
+              {{#if errors.postcode}}<span class="error-message">{{errors.postcode}}</span>{{/if}}
+              <input class="form-control {{#if errors.postcode}}form-control-error{{/if}}" id="postcode" name="postcode" type="text" value="{{postcode}}" maxlength="10">
+            </div>
+          </div>
+        </fieldset>
         <div class="form-group">
           <button class="button" type="submit" title="Find address">Find address</button>
         </div>
       </form>
+      <details>
+        <summary><span class="summary">Don't know the address details?</span></summary>
+        <div class="panel panel-border-narrow">
+          <p>You can:</p>
+          <ul class="list list-bullet">
+            <li><a href="http://www.royalmail.com/find-a-postcode" target="_blank">check the postcode at Royal Mail</a></li>
+            <li><a href="{{{mountPath}}}map">see a map showing areas at risk of flooding</a></li>
+          </ul>          
+        </div>
+      </details>
+      <br>
+      <details>
+        <summary><span class="summary">Flood information for Wales, Scotland and Northern Ireland</span></summary>
+        <div class="panel panel-border-narrow">
+          <a href="https://naturalresources.wales/splash?orig=/" rel="external">Natural Resources Wales</a><br>
+          <a href="http://www.sepa.org.uk/" rel="external">Scottish Environment Protection Agency</a><br>
+          <a href="http://www.nidirect.gov.uk/" rel="external">Northern Ireland Direct</a>
+        </div>
+      </details>
+      <br>
+      <br>
+      <section class="secondary-links">
+        <div class="grid-row">
+          <div class="column-third">
+            <a class="media" href="{{{floodWarningsUrl}}}">
+              <img class="img" src="{{{assetPath}}}images/ball-home.png" alt="National flood information service">
+              <span class="content">National flood information service</span>
+            </a>
+          </div>
+          <div class="column-third">
+            <a class="media" href="{{{floodWarningsUrl}}}/river-and-sea-levels">
+              <img class="img" src="{{{assetPath}}}images/ball-river-sea-level.png" alt="View the latest river and sea levels near you">
+              <span class="content">View the latest river and sea levels near you</span>
+            </a>
+          </div>
+          <div class="column-third">
+            <a class="media" href="{{{floodWarningsUrl}}}/map">
+              <img class="img" src="{{{assetPath}}}images/ball-map.png" alt="View the current national flood situation">
+              <span class="content">View the current national flood situation</span>
+            </a>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
-  <details>
-    <summary><span class="summary">I don't know the postcode</span></summary>
-    <div class="panel panel-border-narrow">
-      <p>
-        You can look for postcodes using the <a href="http://www.royalmail.com/find-a-postcode" target="_blank">Royal Mail find a postcode service</a>
-      </p>
-      <p><a href="{{{mountPath}}}map">View a map showing flood risk areas</a></p>
-    </div>
-  </details>
-  <br>
-  <details>
-    <summary><span class="summary">Flood information for Wales, Scotland and Northern Ireland</span></summary>
-    <div class="panel panel-border-narrow">
-      <a href="https://naturalresources.wales/splash?orig=/" rel="external">Natural Resources Wales</a><br>
-      <a href="http://www.sepa.org.uk/" rel="external">Scottish Environment Protection Agency</a><br>
-      <a href="http://www.nidirect.gov.uk/" rel="external">Northern Ireland Direct</a>
-    </div>
-  </details>
-  <br>
-  <br>
-  <section class="secondary-links">
-    <div class="grid-row">
-      <div class="column-third">
-        <a class="media" href="{{{floodWarningsUrl}}}">
-          <img class="img" src="{{{assetPath}}}images/ball-home.png" alt="National flood information service">
-          <span class="content">National flood information service</span>
-        </a>
-      </div>
-      <div class="column-third">
-        <a class="media" href="{{{floodWarningsUrl}}}/river-and-sea-levels">
-          <img class="img" src="{{{assetPath}}}images/ball-river-sea-level.png" alt="View the latest river and sea levels near you">
-          <span class="content">View the latest river and sea levels near you</span>
-        </a>
-      </div>
-      <div class="column-third">
-        <a class="media" href="{{{floodWarningsUrl}}}/map">
-          <img class="img" src="{{{assetPath}}}images/ball-map.png" alt="View the current national flood situation">
-          <span class="content">View the current national flood situation</span>
-        </a>
-      </div>
-    </div>
-  </section>
 </main>
