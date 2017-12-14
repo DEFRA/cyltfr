@@ -3,13 +3,9 @@ const serverConfig = config.server
 
 const manifest = {
   server: {
-  },
-  connections: [
-    {
-      port: serverConfig.port,
-      host: serverConfig.host
-    }
-  ]
+    port: serverConfig.port,
+    host: serverConfig.host
+  }
 }
 
 module.exports = manifest

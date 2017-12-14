@@ -1,10 +1,10 @@
-var config = require('../../config')
-var floodWarningsUrl = config.floodWarningsUrl
+const config = require('../../config')
+const floodWarningsUrl = config.floodWarningsUrl
 
 function BannerViewModel (postcode, warnings) {
   if (warnings && warnings.message) {
     if (warnings.severity && warnings.severity < 4) {
-      var summary = warnings.summary[warnings.severity - 1]
+      const summary = warnings.summary[warnings.severity - 1]
       this.banner = {
         url: floodWarningsUrl + '/warnings?location=' + postcode,
         message: warnings.message.replace('at this location', 'for this postcode'),

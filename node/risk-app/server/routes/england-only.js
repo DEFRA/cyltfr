@@ -1,20 +1,20 @@
-var Joi = require('joi')
-var helpers = require('../helpers')
-var postcodeRegex = helpers.postcodeRegex
+const Joi = require('joi')
+const helpers = require('../helpers')
+const postcodeRegex = helpers.postcodeRegex
 
 module.exports = {
   method: 'GET',
   path: '/england-only',
-  config: {
+  options: {
     description: 'Get the england only page',
-    handler: function (request, reply) {
-      var model = {
+    handler: (request, h) => {
+      const model = {
         isWales: request.query.region === 'wales',
         isScotland: request.query.region === 'scotland',
         isNorthernIreland: request.query.region === 'northern-ireland'
       }
 
-      reply.view('england-only', model)
+      return h.view('england-only', model)
     },
     validate: {
       query: {

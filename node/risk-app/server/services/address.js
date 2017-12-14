@@ -1,89 +1,87 @@
-var sprintf = require('sprintf-js')
-var util = require('../util')
-var custodianCodes = require('../models/custodian-codes')
-var config = require('../../config').ordnanceSurvey
-var findByIdUrl = config.urlUprn
-var findByPostcodeUrl = config.urlPostcode
-
-function findById (id, callback) {
-  var uri = sprintf.vsprintf(findByIdUrl, [id, config.key])
-
-  util.getJson(uri, function (err, payload) {
-    if (err) {
-      return callback(err)
-    }
-
-    if (!payload || !payload.results || payload.results.length !== 1) {
-      return callback(new Error('Invalid response'))
-    }
-
-    var result = payload.results[0].DPA
-    var address = {
-      uprn: result.UPRN,
-      postcode: result.POSTCODE,
-      x: result.X_COORDINATE,
-      y: result.Y_COORDINATE,
-      address: result.ADDRESS
-    }
-
-    callback(null, address)
-  })
+const Fuse = require('fuse.js')
+const sprintf = require('sprintf-js')
+const util = require('../util')
+const custodianCodes = require('../models/custodian-codes')
+const config = require('../../config').ordnanceSurvey
+const findByIdUrl = config.urlUprn
+const findByPostcodeUrl = config.urlPostcode
+const fuzzyOptions = {
+  shouldSort: true,
+  includeScore: true,
+  caseSensitive: false,
+  findAllMatches: true,
+  threshold: 0.5,
+  keys: [
+    'BUILDING_NAME',
+    'BUILDING_NUMBER',
+    'SUB_BUILDING_NAME',
+    'ORGANISATION_NAME'
+  ]
 }
 
-function find (premises, postcode, callback) {
-  var uri = sprintf.vsprintf(findByPostcodeUrl, [postcode, config.key])
+async function findById (id, callback) {
+  const uri = sprintf.vsprintf(findByIdUrl, [id, config.key])
 
-  util.getJson(uri, function (err, payload) {
-    if (err) {
-      return callback(err)
-    }
+  const payload = await util.getJson(uri)
 
-    if (!payload || !payload.results || !payload.results.length) {
-      return callback(null, [])
-    }
+  if (!payload || !payload.results || payload.results.length !== 1) {
+    throw new Error('Invalid response')
+  }
 
-    function filterExact (item) {
-      return (
-        (item.BUILDING_NAME && item.BUILDING_NAME.toLowerCase() === premises.toLowerCase()) ||
-        (item.ORGANISATION_NAME && item.ORGANISATION_NAME.toLowerCase() === premises.toLowerCase()) ||
-        (item.BUILDING_NUMBER && item.BUILDING_NUMBER === premises)
-      )
-    }
+  const result = payload.results[0].DPA
+  const address = {
+    uprn: result.UPRN,
+    postcode: result.POSTCODE,
+    x: result.X_COORDINATE,
+    y: result.Y_COORDINATE,
+    address: result.ADDRESS
+  }
 
-    function filterLike (item) {
-      return (
-        (!item.BUILDING_NAME && !item.BUILDING_NUMBER && !item.ORGANISATION_NAME) ||
-        (item.BUILDING_NAME && item.BUILDING_NAME.toLowerCase().includes(premises.toLowerCase())) ||
-        (item.ORGANISATION_NAME && item.ORGANISATION_NAME.toLowerCase().includes(premises.toLowerCase())) ||
-        (item.BUILDING_NUMBER && item.BUILDING_NUMBER === premises)
-      )
-    }
+  return address
+}
 
-    var results = payload
-      .results
-      .map(item => item.DPA)
+async function find (premises, postcode) {
+  const uri = sprintf.vsprintf(findByPostcodeUrl, [postcode, config.key])
 
-    // First try to find exact
-    // matches on premise name/number.
-    var exact = results
-      .filter(filterExact)
+  const payload = await util.getJson(uri)
 
-    // If we have exact matches use them,
-    // Otherwise try a more liberal filter.
-    var addresses = exact.length
-      ? exact
-      : addresses = results.filter(filterLike)
+  if (!payload || !payload.results || !payload.results.length) {
+    return []
+  }
 
-    callback(null, addresses
-      .map(item => {
-        return {
-          uprn: item.UPRN,
-          postcode: item.POSTCODE,
-          address: item.ADDRESS,
-          country: custodianCodes[item.LOCAL_CUSTODIAN_CODE]
-        }
-      }))
-  })
+  function filterFuzzy (results) {
+    const fuse = new Fuse(results, fuzzyOptions)
+    const res = fuse.search(premises)
+    const exact = res.filter(r => !r.score)
+
+    return (exact.length ? exact : res).map(r => r.item)
+  }
+
+  const results = payload.results.map(item => item.DPA)
+
+  // If we have exact matches use them,
+  // Otherwise try a more liberal filter.
+  let addresses = filterFuzzy(results)
+
+  if (!addresses.length) {
+    // We found no matches so return the
+    // first ~33% of the original results
+    addresses = results.slice(0, Math.round(results.length / 3))
+  } else if (addresses.length === results.length) {
+    // Ensure we don't return all possible
+    // results by returning only the top ~33%
+    addresses = addresses.slice(0, Math.round(addresses.length / 3))
+  }
+
+  return addresses
+    .map(item => {
+      return {
+        uprn: item.UPRN,
+        postcode: item.POSTCODE,
+        address: item.ADDRESS,
+        country: custodianCodes[item.LOCAL_CUSTODIAN_CODE]
+      }
+    })
 }
 
 module.exports = {

@@ -1,37 +1,33 @@
-var sprintf = require('sprintf-js')
-var util = require('../util')
-var config = require('../../config')
-var urlNamesApi = config.ordnanceSurvey.urlNames
-var isEngland = require('./is-england')
+const sprintf = require('sprintf-js')
+const util = require('../util')
+const config = require('../../config')
+const urlNamesApi = config.ordnanceSurvey.urlNames
+const isEngland = require('./is-england')
 
 module.exports = {
-  find: function findByPlace (place, callback) {
-    var uri = sprintf.vsprintf(urlNamesApi, [place])
-    util.getJson(uri, function (err, payload) {
-      if (err) {
-        return callback(err)
+  find: async function findByPlace (place) {
+    const uri = sprintf.vsprintf(urlNamesApi, [place])
+
+    const payload = await util.getJson(uri)
+
+    if (!payload || !payload.results || !payload.results.length) {
+      return []
+    }
+
+    const results = payload.results
+
+    // only interested in x and y at the moment
+    const gazetteerEntry = results.map(function (item) {
+      return {
+        easting: item.GAZETTEER_ENTRY.GEOMETRY_X,
+        northing: item.GAZETTEER_ENTRY.GEOMETRY_Y
       }
+    })[0]
 
-      if (!payload || !payload.results || !payload.results.length) {
-        return callback(null, [])
-      }
+    const result = await isEngland.getIsEngland(gazetteerEntry.easting, gazetteerEntry.northing)
 
-      var results = payload.results
-      // only interested in x and y at the moment
-      var gazetteerEntry = results.map(function (item) {
-        return {
-          easting: item.GAZETTEER_ENTRY.GEOMETRY_X,
-          northing: item.GAZETTEER_ENTRY.GEOMETRY_Y
-        }
-      })[0]
+    gazetteerEntry.isEngland = result.is_england
 
-      isEngland.getIsEngland(gazetteerEntry.easting, gazetteerEntry.northing, function (err, result) {
-        if (err) {
-          return callback(err)
-        }
-        gazetteerEntry.isEngland = result.is_england
-        callback(null, gazetteerEntry)
-      })
-    })
+    return gazetteerEntry
   }
 }

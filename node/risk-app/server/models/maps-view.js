@@ -1,5 +1,5 @@
-var moment = require('moment')
-var maps = require('./maps.json')
+const moment = require('moment')
+const maps = require('./maps.json')
 
 function MapsViewModel (easting, northing, address) {
   this.maps = maps

@@ -1,19 +1,17 @@
-var Boom = require('boom')
-var config = require('../../config')
-var wreck = require('wreck').defaults({
-  timeout: config.httpTimeoutMs
-})
-var error = require('../models/errors.json').oSGetCapabilities
+const Boom = require('boom')
+const util = require('../util')
+const config = require('../../config')
+const errors = require('../models/errors.json')
 
 module.exports = {
   method: 'GET',
   path: '/os-get-capabilities',
-  handler: function (request, reply) {
-    wreck.get(config.ordnanceSurvey.urlGetCapabilities, function (err, response, payload) {
-      if (err || response.statusCode !== 200) {
-        return reply(Boom.badRequest(error.message, err))
-      }
-      reply(payload).type('text/xml')
-    })
+  handler: async (request, h) => {
+    try {
+      const payload = await util.get(config.ordnanceSurvey.urlGetCapabilities)
+      return h.response(payload).type('text/xml')
+    } catch (err) {
+      return Boom.badRequest(errors.oSGetCapabilities.message, err)
+    }
   }
 }

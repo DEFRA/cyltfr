@@ -1,14 +1,14 @@
-/* Development:*/
+/* Development: */
 {
-  "name": "flood-service",
+  "name": "risk-service",
   "script": "index.js",
-  "node_args": "--debug",
-  "watch": ["index.js", "lib"]
+  "node_args": "--inspect",
+  "watch": ["index.js", "server"]
 }
 
 /* Production:
 {
-  "name": "flood-service",
+  "name": "risk-service",
   "script": "index.js",
   "instances": 0,
   "exec_mode": "cluster_mode"

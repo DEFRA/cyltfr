@@ -1,11 +1,12 @@
-var queries = require('./queries.json')
+const queries = require('./queries.json')
+const db = require('../db')
 
-var floodRiskService = {
-  calculateFloodRisk: function (db, x, y, radius, callback) {
-    return db.query(queries.calculateFloodRisk, [x, y, radius], callback)
+const floodRiskService = {
+  calculateFloodRisk: function (x, y, radius) {
+    return db.query(queries.calculateFloodRisk, [x, y, radius])
   },
-  isEngland: function (db, lng, lat, callback) {
-    return db.query(queries.isEngland, [lng, lat], callback)
+  isEngland: function (lng, lat) {
+    return db.query(queries.isEngland, [lng, lat])
   }
 }
 

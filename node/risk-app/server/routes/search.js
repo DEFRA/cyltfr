@@ -1,36 +1,34 @@
-var Joi = require('joi')
-var Boom = require('boom')
-var helpers = require('../helpers')
-var addressService = require('../services/address')
-var SearchViewModel = require('../models/search-view')
-var errors = require('../models/errors.json')
-var postcodeRegex = helpers.postcodeRegex
+const Joi = require('joi')
+const Boom = require('boom')
+const helpers = require('../helpers')
+const addressService = require('../services/address')
+const SearchViewModel = require('../models/search-view')
+const errors = require('../models/errors.json')
+const postcodeRegex = helpers.postcodeRegex
 
 module.exports = [{
   method: 'GET',
   path: '/search',
-  config: {
+  options: {
     description: 'Get postcode search results',
-    handler: function (request, reply) {
-      var query = request.query
-      var premises = query.premises
-      var postcode = query.postcode
+    handler: async (request, h) => {
+      const query = request.query
+      const premises = query.premises
+      const postcode = query.postcode
 
       // Our Address service doesn't support NI addresses
       // but all NI postcodes start with BT so exit to the
       // "not-england" page if that's the case.
       if (postcode.toUpperCase().startsWith('BT')) {
-        return reply.redirect(`/england-only?premises=${encodeURIComponent(premises)}&postcode=${encodeURIComponent(postcode)}&region=northern-ireland`)
+        return h.redirect(`/england-only?premises=${encodeURIComponent(premises)}&postcode=${encodeURIComponent(postcode)}&region=northern-ireland`)
       }
 
-      // Call the address service to find the matching addresses
-      addressService.find(premises, postcode, function (err, addresses) {
-        if (err) {
-          return reply(Boom.badRequest(errors.addressByPremisesAndPostcode.message, err))
-        }
+      try {
+        // Call the address service to find the matching addresses
+        const addresses = await addressService.find(premises, postcode)
 
         if (!addresses || !addresses.length) {
-          return reply.redirect(`/?err=notfound&premises=${encodeURIComponent(premises)}&postcode=${encodeURIComponent(postcode)}`)
+          return h.redirect(`/?err=notfound&premises=${encodeURIComponent(premises)}&postcode=${encodeURIComponent(postcode)}`)
         }
 
         // Filter the english addresses
@@ -38,19 +36,22 @@ module.exports = [{
 
         // If there are no english addresses, it must be in Scotland or Wales.
         if (!englishAddresses.length) {
-          var regionQueryString = ''
+          let regionQueryString = ''
+
           if (addresses[0].country === 'WALES') {
             regionQueryString = 'wales'
           } else if (addresses[0].country === 'SCOTLAND') {
             regionQueryString = 'scotland'
           }
 
-          return reply.redirect(`/england-only?premises=${encodeURIComponent(premises)}&postcode=${encodeURIComponent(postcode)}` +
+          return h.redirect(`/england-only?premises=${encodeURIComponent(premises)}&postcode=${encodeURIComponent(postcode)}` +
             (regionQueryString && `&region=${regionQueryString}`))
         }
 
-        reply.view('search', new SearchViewModel(premises, postcode, englishAddresses))
-      })
+        return h.view('search', new SearchViewModel(premises, postcode, englishAddresses))
+      } catch (err) {
+        return Boom.badRequest(errors.addressByPremisesAndPostcode.message, err)
+      }
     },
     validate: {
       query: {
@@ -64,11 +65,11 @@ module.exports = [{
   path: '/search',
   config: {
     description: 'Post search results',
-    handler: function (request, reply) {
-      var payload = request.payload
-      var uprn = payload.uprn
+    handler: (request, h) => {
+      const payload = request.payload
+      const uprn = payload.uprn
 
-      reply.redirect('/risk?address=' + uprn)
+      return h.redirect('/risk?address=' + uprn)
     },
     validate: {
       query: {
@@ -76,25 +77,30 @@ module.exports = [{
         postcode: Joi.string().trim().required().regex(postcodeRegex)
       },
       payload: {
-        uprn: Joi.string().required(),
-        addresses: Joi.array().required()
+        addresses: Joi.array().required().items(Joi.object().keys({
+          address: Joi.string().required(),
+          country: Joi.string().required(),
+          postcode: Joi.string().required(),
+          uprn: Joi.string().required()
+        })),
+        uprn: Joi.string().required()
       },
-      failAction: function (request, reply, source, error) {
+      failAction: function (request, h, error) {
         // Get the errors and prepare the model
-        var errors = error.data.details
-        var query = request.query || {}
-        var payload = request.payload || {}
-        var premises = query.premises
-        var postcode = query.postcode
+        const errors = error.details
+        const query = request.query || {}
+        const payload = request.payload || {}
+        const premises = query.premises
+        const postcode = query.postcode
 
         // Save a lookup to address service again by
         // using the smuggled original address results
-        var addresses = payload.addresses
+        const addresses = JSON.parse(payload.addresses)
+        const model = new SearchViewModel(premises, postcode, addresses, errors)
 
         // Respond with the view with errors
-        reply.view('search', new SearchViewModel(premises, postcode, addresses, errors))
+        return h.view('search', model).takeover()
       }
     }
   }
 }]
-

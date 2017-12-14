@@ -1,12 +1,8 @@
-var routes = require('./routes')
+const routes = require('./routes')
 
-var register = function (server, options, next) {
-  server.route(routes)
-  next()
+exports.plugin = {
+  register: (server, options) => {
+    server.route(routes)
+  },
+  pkg: require('../package.json')
 }
-
-register.attributes = {
-  name: 'router'
-}
-
-module.exports = register
