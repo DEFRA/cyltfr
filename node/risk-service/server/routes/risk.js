@@ -1,40 +1,37 @@
-var Joi = require('joi')
-var Boom = require('boom')
-var service = require('../services')
+const Joi = require('joi')
+const Boom = require('boom')
+const service = require('../services')
 
 module.exports = {
   method: 'GET',
   path: '/floodrisk/{x}/{y}/{radius}',
-  config: {
+  options: {
     description: 'Get the long term flood risk associated with a point. Surface water risk is calculated based on a radius (metres) buffered point in polygon search.',
-    handler: function (request, reply) {
-      var db = request.pg.client
-      var params = request.params
+    handler: async (request, h) => {
+      const params = request.params
 
-      service.calculateFloodRisk(db, params.x, params.y, params.radius, function (err, result) {
+      try {
+        const result = await service.calculateFloodRisk(params.x, params.y, params.radius)
+
         /*
          * Do some assertions around the result we get back from the database
          */
-        if (err) {
-          return reply(Boom.badRequest('Database call failed', err))
-        }
-
         if (!result || !Array.isArray(result.rows) || result.rows.length !== 1) {
-          return reply(Boom.badRequest('Invalid result'), new Error('Expected an Array'))
+          return Boom.badRequest('Invalid result', new Error('Expected an Array'))
         }
 
-        var risk = result.rows[0].calculate_flood_risk
+        const risk = result.rows[0].calculate_flood_risk
 
         if (!risk) {
-          return reply(Boom.badRequest('Invalid result', new Error('Missing calculate_flood_risk key')))
+          return Boom.badRequest('Invalid result', new Error('Missing calculate_flood_risk key'))
         }
 
         /*
          * If we get here we can be sure we have a valid result from
          * the database and we can start to prepare our return response
          */
-        var reservoirRisk = null
-        var riverAndSeaRisk = null
+        let reservoirRisk = null
+        let riverAndSeaRisk = null
 
         if (risk.reservoir_risk && risk.reservoir_risk !== 'Error') {
           reservoirRisk = risk.reservoir_risk.map(function (item) {
@@ -60,9 +57,9 @@ module.exports = {
           }
         }
 
-        var isGroundwaterArea = false
-        var floodAlertArea = Array.isArray(risk.flood_alert_area) ? risk.flood_alert_area : []
-        var floodWarningArea = Array.isArray(risk.flood_warning_area) ? risk.flood_warning_area : []
+        let isGroundwaterArea = false
+        const floodAlertArea = Array.isArray(risk.flood_alert_area) ? risk.flood_alert_area : []
+        const floodWarningArea = Array.isArray(risk.flood_warning_area) ? risk.flood_warning_area : []
 
         if (floodAlertArea.find((faa) => faa.charAt(5) === 'G')) {
           isGroundwaterArea = true
@@ -70,7 +67,7 @@ module.exports = {
           isGroundwaterArea = true
         }
 
-        var response = {
+        const response = {
           inEngland: risk.in_england,
           isGroundwaterArea: isGroundwaterArea,
           floodAlertArea: floodAlertArea,
@@ -85,8 +82,10 @@ module.exports = {
           extraInfo: risk.extra_info
         }
 
-        reply(response)
-      })
+        return response
+      } catch (err) {
+        return Boom.badRequest('Database call failed', err)
+      }
     },
     validate: {
       params: {

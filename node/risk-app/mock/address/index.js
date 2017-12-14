@@ -1,20 +1,20 @@
-var addressService = require('../../lib/services/address')
-var findById = require('./find-by-id')
-var findByPostcode = require('./find-by-postcode')
+const addressService = require('../../server/services/address')
+const findById = require('./find-by-id')
+const findByPostcode = require('./find')
 
 /**
  * Override the real functions with mock implementations
  */
-addressService.findById = function (id, callback) {
-  process.nextTick(function () {
-    var result = findById[id]
-    callback(result ? null : new Error(`findById mock not found for id [${id}]`), result)
-  })
+addressService.findById = function (id) {
+  const result = findById[id]
+  return result
+    ? Promise.resolve(result)
+    : Promise.reject(new Error(`findById mock not found for id [${id}]`))
 }
 
-addressService.findByPostcode = function (postcode, callback) {
-  process.nextTick(function () {
-    var result = findByPostcode[postcode.toUpperCase()]
-    callback(result ? null : new Error(`findByPostcode mock not found for postcode [${postcode}]`), result)
-  })
+addressService.find = function (premises, postcode) {
+  const result = findByPostcode[premises.toUpperCase() + '-' + postcode.toUpperCase()]
+  return result
+    ? Promise.resolve(result)
+    : Promise.reject(new Error(`findByPostcode mock not found for postcode [${postcode}]`))
 }

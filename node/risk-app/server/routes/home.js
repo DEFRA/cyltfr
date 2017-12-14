@@ -1,39 +1,39 @@
-var Joi = require('joi')
-var HomeViewModel = require('../models/home-view')
-var helpers = require('../helpers')
-var errorMessages = {
+const Joi = require('joi')
+const HomeViewModel = require('../models/home-view')
+const helpers = require('../helpers')
+const errorMessages = {
   notfound: 'We can\'t find this address'
 }
 
 module.exports = [{
   method: 'GET',
   path: '/',
-  config: {
+  options: {
     description: 'Get homepage',
-    handler: function (request, reply) {
-      var query = request.query
-      var premises = query.premises
-      var postcode = query.postcode
-      var errors = query.err && [{
+    handler: (request, h) => {
+      const query = request.query
+      const premises = query.premises
+      const postcode = query.postcode
+      const errors = query.err && [{
         path: 'address',
         type: query.err,
         message: errorMessages[query.err]
       }]
 
-      reply.view('home', new HomeViewModel(premises, postcode, errors))
+      return h.view('home', new HomeViewModel(premises, postcode, errors))
     }
   }
 }, {
   method: 'POST',
   path: '/',
-  config: {
+  options: {
     description: 'Post homepage',
-    handler: function (request, reply) {
-      var payload = request.payload
-      var premises = encodeURIComponent(payload.premises)
-      var postcode = encodeURIComponent(payload.postcode)
+    handler: (request, h) => {
+      const payload = request.payload
+      const premises = encodeURIComponent(payload.premises)
+      const postcode = encodeURIComponent(payload.postcode)
 
-      return reply.redirect(`/search?premises=${premises}&postcode=${postcode}`)
+      return h.redirect(`/search?premises=${premises}&postcode=${postcode}`)
     },
     validate: {
       payload: {
@@ -41,16 +41,16 @@ module.exports = [{
         premises: Joi.string().trim().required().max(100),
         postcode: Joi.string().trim().required().regex(helpers.postcodeRegex)
       },
-      failAction: function (request, reply, source, error) {
+      failAction: (request, h, error) => {
         // Get the errors and prepare the model
-        var errors = error.data.details
-        var payload = request.payload || {}
-        var premises = payload.premises
-        var postcode = payload.postcode
-        var model = new HomeViewModel(premises, postcode, errors)
+        const errors = error.details
+        const payload = request.payload || {}
+        const premises = payload.premises
+        const postcode = payload.postcode
+        const model = new HomeViewModel(premises, postcode, errors)
 
         // Respond with the view with errors
-        return reply.view('home', model)
+        return h.view('home', model).takeover()
       }
     }
   }

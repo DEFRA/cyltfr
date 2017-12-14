@@ -1,8 +1,4 @@
-var moment = require('moment')
-// var errorCodes = {
-
-//   postcode: 'Please enter a valid postcode in England'
-// }
+const moment = require('moment')
 
 function HomeViewModel (premises, postcode, errors) {
   this.premises = premises
@@ -13,19 +9,19 @@ function HomeViewModel (premises, postcode, errors) {
     this.errors = {}
 
     // Form level errors
-    var formErrors = errors.find(e => e.path === 'address')
+    const formErrors = errors.find(e => e.path.includes('address'))
     if (formErrors) {
       this.errors.address = formErrors.message
     }
 
     // Premises
-    var premisesErrors = errors.find(e => e.path === 'premises')
+    const premisesErrors = errors.find(e => e.path.includes('premises'))
     if (premisesErrors) {
       this.errors.premises = 'You need to give a house number or name'
     }
 
     // Postcode
-    var postcodeErrors = errors.find(e => e.path === 'postcode')
+    const postcodeErrors = errors.find(e => e.path.includes('postcode'))
     if (postcodeErrors) {
       this.errors.postcode = 'You need to give a full postcode'
     }

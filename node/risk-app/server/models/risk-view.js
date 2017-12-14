@@ -1,6 +1,6 @@
-var moment = require('moment')
-var util = require('../util')
-var suitability = require('./suitability')
+const moment = require('moment')
+const util = require('../util')
+const suitability = require('./suitability')
 
 const RiskStatus = {
   AtRisk: 1,
@@ -70,13 +70,13 @@ function RiskViewModel (risk, address) {
   }
 
   // River and Sea suitability
-  var riverAndSeaSuitability = risk.riverAndSeaRisk && risk.riverAndSeaRisk.suitability
+  const riverAndSeaSuitability = risk.riverAndSeaRisk && risk.riverAndSeaRisk.suitability
   if (riverAndSeaSuitability) {
     this.riverAndSeaSuitability = suitability.riverAndSea[riverAndSeaSuitability.toLowerCase()]
   }
 
   // Surface water suitability
-  var surfaceWaterSuitability = risk.surfaceWaterSuitability
+  const surfaceWaterSuitability = risk.surfaceWaterSuitability
   if (surfaceWaterSuitability) {
     this.surfaceWaterSuitability = suitability.surfaceWater[surfaceWaterSuitability.toLowerCase()]
   }

@@ -1,4 +1,4 @@
-var moment = require('moment')
+const moment = require('moment')
 
 function SearchViewModel (premises, postcode, addresses, errors) {
   this.premises = premises

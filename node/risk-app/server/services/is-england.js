@@ -1,13 +1,13 @@
-var config = require('../../config').service
-var util = require('../util')
-var protocol = config.protocol
-var host = config.host
-var port = config.port
-var urlBase = protocol + '://' + host + ':' + port
+const config = require('../../config').service
+const util = require('../util')
+const protocol = config.protocol
+const host = config.host
+const port = config.port
+const urlBase = protocol + '://' + host + ':' + port
 
 module.exports = {
-  getIsEngland: function (easting, northing, callback) {
-    var url = urlBase + '/is-england/' + easting + '/' + northing
-    return util.getJson(url, callback)
+  getIsEngland: function (easting, northing) {
+    const url = urlBase + '/is-england/' + easting + '/' + northing
+    return util.getJson(url)
   }
 }

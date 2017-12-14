@@ -1,24 +1,24 @@
-var Joi = require('joi')
-var floodService = require('../services/flood')
-var BannerViewModel = require('../models/banner-view')
+const Joi = require('joi')
+const floodService = require('../services/flood')
+const BannerViewModel = require('../models/banner-view')
 
 module.exports = {
   method: 'GET',
   path: '/banner',
-  config: {
+  options: {
     description: 'Get banner by postcode',
-    handler: function (request, reply) {
-      var postcode = request.query.postcode
-      floodService.findWarnings(postcode, function (err, warnings) {
-        if (err) {
-          return reply()
-        }
+    handler: async (request, h) => {
+      const postcode = request.query.postcode
 
-        var model = new BannerViewModel(postcode, warnings)
-        reply.view('partials/common/banner', model, {
+      try {
+        const warnings = await floodService.findWarnings(postcode)
+        const model = new BannerViewModel(postcode, warnings)
+        return h.view('partials/common/banner', model, {
           layout: false
         })
-      })
+      } catch (err) {
+        return null
+      }
     },
     app: {
       useErrorPages: false

@@ -4,7 +4,7 @@ module.exports = {
   handler: {
     view: 'risk-types'
   },
-  config: {
+  options: {
     description: 'Get flood risk types'
   }
 }

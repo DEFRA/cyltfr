@@ -1,23 +1,21 @@
-var Joi = require('joi')
-var Boom = require('boom')
-var service = require('../services')
+const Joi = require('joi')
+const Boom = require('boom')
+const service = require('../services')
 
 module.exports = {
   method: 'GET',
   path: '/is-england/{x}/{y}',
-  config: {
+  options: {
     description: 'Check if coordinates are in england',
-    handler: function (request, reply) {
-      var db = request.pg.client
-      var params = request.params
+    handler: async (request, h) => {
+      const params = request.params
 
-      service.isEngland(db, params.x, params.y, function (err, result) {
-        if (err) {
-          return reply(Boom.badRequest('Failed to get isEngland', err))
-        }
-
-        reply(result.rows[0])
-      })
+      try {
+        const result = await service.isEngland(params.x, params.y)
+        return result.rows[0]
+      } catch (err) {
+        return Boom.badRequest('Failed to get isEngland', err)
+      }
     },
     validate: {
       params: {

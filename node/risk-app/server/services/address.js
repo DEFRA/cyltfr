@@ -1,89 +1,81 @@
-var sprintf = require('sprintf-js')
-var util = require('../util')
-var custodianCodes = require('../models/custodian-codes')
-var config = require('../../config').ordnanceSurvey
-var findByIdUrl = config.urlUprn
-var findByPostcodeUrl = config.urlPostcode
+const sprintf = require('sprintf-js')
+const util = require('../util')
+const custodianCodes = require('../models/custodian-codes')
+const config = require('../../config').ordnanceSurvey
+const findByIdUrl = config.urlUprn
+const findByPostcodeUrl = config.urlPostcode
 
-function findById (id, callback) {
-  var uri = sprintf.vsprintf(findByIdUrl, [id, config.key])
+async function findById (id, callback) {
+  const uri = sprintf.vsprintf(findByIdUrl, [id, config.key])
 
-  util.getJson(uri, function (err, payload) {
-    if (err) {
-      return callback(err)
-    }
+  const payload = await util.getJson(uri)
 
-    if (!payload || !payload.results || payload.results.length !== 1) {
-      return callback(new Error('Invalid response'))
-    }
+  if (!payload || !payload.results || payload.results.length !== 1) {
+    throw new Error('Invalid response')
+  }
 
-    var result = payload.results[0].DPA
-    var address = {
-      uprn: result.UPRN,
-      postcode: result.POSTCODE,
-      x: result.X_COORDINATE,
-      y: result.Y_COORDINATE,
-      address: result.ADDRESS
-    }
+  const result = payload.results[0].DPA
+  const address = {
+    uprn: result.UPRN,
+    postcode: result.POSTCODE,
+    x: result.X_COORDINATE,
+    y: result.Y_COORDINATE,
+    address: result.ADDRESS
+  }
 
-    callback(null, address)
-  })
+  return address
 }
 
-function find (premises, postcode, callback) {
-  var uri = sprintf.vsprintf(findByPostcodeUrl, [postcode, config.key])
+async function find (premises, postcode) {
+  const uri = sprintf.vsprintf(findByPostcodeUrl, [postcode, config.key])
 
-  util.getJson(uri, function (err, payload) {
-    if (err) {
-      return callback(err)
-    }
+  const payload = await util.getJson(uri)
 
-    if (!payload || !payload.results || !payload.results.length) {
-      return callback(null, [])
-    }
+  if (!payload || !payload.results || !payload.results.length) {
+    return []
+  }
 
-    function filterExact (item) {
-      return (
-        (item.BUILDING_NAME && item.BUILDING_NAME.toLowerCase() === premises.toLowerCase()) ||
-        (item.ORGANISATION_NAME && item.ORGANISATION_NAME.toLowerCase() === premises.toLowerCase()) ||
-        (item.BUILDING_NUMBER && item.BUILDING_NUMBER === premises)
-      )
-    }
+  function filterExact (item) {
+    return (
+      (item.BUILDING_NAME && item.BUILDING_NAME.toLowerCase() === premises.toLowerCase()) ||
+      (item.ORGANISATION_NAME && item.ORGANISATION_NAME.toLowerCase() === premises.toLowerCase()) ||
+      (item.BUILDING_NUMBER && item.BUILDING_NUMBER === premises)
+    )
+  }
 
-    function filterLike (item) {
-      return (
-        (!item.BUILDING_NAME && !item.BUILDING_NUMBER && !item.ORGANISATION_NAME) ||
-        (item.BUILDING_NAME && item.BUILDING_NAME.toLowerCase().includes(premises.toLowerCase())) ||
-        (item.ORGANISATION_NAME && item.ORGANISATION_NAME.toLowerCase().includes(premises.toLowerCase())) ||
-        (item.BUILDING_NUMBER && item.BUILDING_NUMBER === premises)
-      )
-    }
+  function filterLike (item) {
+    return (
+      (!item.BUILDING_NAME && !item.BUILDING_NUMBER && !item.ORGANISATION_NAME) ||
+      (item.BUILDING_NAME && item.BUILDING_NAME.toLowerCase().includes(premises.toLowerCase())) ||
+      (item.ORGANISATION_NAME && item.ORGANISATION_NAME.toLowerCase().includes(premises.toLowerCase())) ||
+      (item.BUILDING_NUMBER && item.BUILDING_NUMBER === premises)
+    )
+  }
 
-    var results = payload
-      .results
-      .map(item => item.DPA)
+  const results = payload
+    .results
+    .map(item => item.DPA)
 
-    // First try to find exact
-    // matches on premise name/number.
-    var exact = results
-      .filter(filterExact)
+  // First try to find exact
+  // matches on premise name/number.
+  const exact = results
+    .filter(filterExact)
 
-    // If we have exact matches use them,
-    // Otherwise try a more liberal filter.
-    var addresses = exact.length
-      ? exact
-      : addresses = results.filter(filterLike)
+  // If we have exact matches use them,
+  // Otherwise try a more liberal filter.
+  const addresses = exact.length
+    ? exact
+    : results.filter(filterLike)
 
-    callback(null, addresses
-      .map(item => {
-        return {
-          uprn: item.UPRN,
-          postcode: item.POSTCODE,
-          address: item.ADDRESS,
-          country: custodianCodes[item.LOCAL_CUSTODIAN_CODE]
-        }
-      }))
-  })
+  return addresses
+    .map(item => {
+      return {
+        uprn: item.UPRN,
+        postcode: item.POSTCODE,
+        address: item.ADDRESS,
+        country: custodianCodes[item.LOCAL_CUSTODIAN_CODE]
+      }
+    })
 }
 
 module.exports = {
