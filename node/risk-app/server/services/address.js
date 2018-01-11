@@ -49,19 +49,12 @@ async function find (premises, postcode) {
     return []
   }
 
-  function filterFuzzy (results) {
-    const fuse = new Fuse(results, fuzzyOptions)
-    const res = fuse.search(premises)
-    const exact = res.filter(r => !r.score)
-
-    return (exact.length ? exact : res).map(r => r.item)
-  }
-
   const results = payload.results.map(item => item.DPA)
+  const fuse = new Fuse(results, fuzzyOptions)
+  const res = fuse.search(premises)
+  const exact = res.filter(r => !r.score)
 
-  // If we have exact matches use them,
-  // Otherwise try a more liberal filter.
-  let addresses = filterFuzzy(results)
+  let addresses = (exact.length ? exact : res).map(r => r.item)
 
   if (!addresses.length) {
     // We found no matches so return the
