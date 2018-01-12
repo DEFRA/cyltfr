@@ -58,12 +58,12 @@ async function find (premises, postcode) {
 
   if (!addresses.length) {
     // We found no matches so return the
-    // first ~33% of the original results
-    addresses = results.slice(0, Math.round(results.length / 3))
+    // top third of the original results
+    addresses = results.slice(0, Math.round(results.length / 3) + 1)
   } else if (addresses.length === results.length) {
     // Ensure we don't return all possible
-    // results by returning only the top ~33%
-    addresses = addresses.slice(0, Math.round(addresses.length / 3))
+    // results by returning only the top third
+    addresses = addresses.slice(0, Math.round(addresses.length / 3) + 1)
   }
 
   return addresses
