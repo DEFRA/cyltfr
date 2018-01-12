@@ -23,7 +23,7 @@ if (!module.parent) {
 
         if (config.mockAddressService) {
           require('./mock/address')
-          server.log('info', 'External requests are being mocked')
+          server.log('info', 'Address server is being mocked')
         }
 
         details.message = 'Started ' + details.name
