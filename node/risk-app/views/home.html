@@ -14,9 +14,9 @@
       {{/if}}
       {{> common/mission}}
       <p>
-        Enter a house name or number and a postcode to see its long term flood risk information. Or you can <a href="{{{mountPath}}}map">browse a map</a> for your location.
-        <br>This service covers England only.
+        Enter a house name or number and a postcode to see its long term flood risk information or <a href="{{{mountPath}}}map">see a map showing areas at risk of flooding</a>.
       </p>
+      <p>This service covers England only.</p>
       <h3 class="heading-medium">Find the address</h3>
       <form method="post" autocomplete="off" action="{{{mountPath}}}">
         <fieldset>
@@ -40,8 +40,6 @@
           <button class="button" type="submit" title="Find address">Find address</button>
         </div>
       </form>
-      <p>or <a href="{{{mountPath}}}map">browse a map</a> for your location.</p>
-      <br>
       <details>
         <summary><span class="summary">Don't know the address details?</span></summary>
         <div class="panel panel-border-narrow">
