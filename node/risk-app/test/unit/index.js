@@ -1,8 +1,9 @@
 const Lab = require('lab')
 const Code = require('code')
+const glupe = require('glupe')
 const lab = exports.lab = Lab.script()
 const mock = require('../mock')
-const composeServer = require('../../server')
+const { manifest, options } = require('../../server')
 const helpers = require('../../server/helpers')
 const riskService = require('../../server/services/risk')
 const floodService = require('../../server/services/flood')
@@ -12,13 +13,13 @@ const mountPath = config.mountPath
   ? ('/' + config.mountPath)
   : ''
 
-lab.experiment('Unit', function () {
+lab.experiment('Unit', () => {
   let server
 
   // Make a server before the tests
   lab.before(async () => {
     console.log('Creating server')
-    server = await composeServer()
+    server = await glupe.compose(manifest, options)
   })
 
   lab.after(async () => {

@@ -14,8 +14,6 @@ const manifest = {
     port: config.server.port,
     host: config.server.host,
     routes: {
-      //  Sets common security headers
-      //  http://hapijs.com/api#route-options
       security: true,
       validate: {
         options: {
@@ -44,12 +42,14 @@ const manifest = {
         options: config.logging
       },
       {
-        plugin: './router',
+        plugin: './plugins/router',
         options: routeOptions,
         routes: {
           prefix: config.mountPath && ('/' + config.mountPath)
         }
-      }
+      },
+      './plugins/full-url',
+      './plugins/log-errors'
     ]
   }
 }

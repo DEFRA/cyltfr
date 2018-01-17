@@ -1,8 +1,8 @@
-const routes = require('./routes')
+const routes = require('../routes')
 
 exports.plugin = {
+  name: 'router',
   register: (server, options) => {
     server.route(routes)
-  },
-  pkg: require('../package.json')
+  }
 }
