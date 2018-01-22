@@ -17,7 +17,7 @@ function HomeViewModel (premises, postcode, errors) {
     // Premises
     const premisesErrors = errors.find(e => e.path.includes('premises'))
     if (premisesErrors) {
-      this.errors.premises = 'You need to give a house number or name'
+      this.errors.premises = 'You need to give a property number or name'
     }
 
     // Postcode

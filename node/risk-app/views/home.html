@@ -14,7 +14,7 @@
       {{/if}}
       {{> common/mission}}
       <p>
-        Enter a house name or number and a postcode to see its long term flood risk information or <a href="{{{mountPath}}}map">see a map showing areas at risk of flooding</a>.
+        Enter a property number or name and a postcode to see its long term flood risk information or <a href="{{{mountPath}}}map">see a map showing areas at risk of flooding</a>.
       </p>
       <p>This service covers England only.</p>
       <h3 class="heading-medium">Find the address</h3>
@@ -25,7 +25,7 @@
               <span class="error-message error-message-group">{{errors.address}}</span>  
             {{/if}}
             <div class="form-group {{#if errors.premises}}form-group-error{{/if}}">
-              <label for="premises" class="form-label">House number or name</label>
+              <label for="premises" class="form-label">Property number or name</label>
               {{#if errors.premises}}<span class="error-message">{{errors.premises}}</span>{{/if}}
               <input class="form-control {{#if errors.premises}}form-control-error{{/if}}" id="premises" name="premises" value="{{premises}}" type="text" maxlength="50">
             </div>
