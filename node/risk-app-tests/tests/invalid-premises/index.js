@@ -18,7 +18,7 @@ module.exports = {
       homePage.setPremisesAndPostcodeAndSubmit(premises, postcode)
 
       // Asset we get the default error message
-      homeTests.assertErrorMessage(homePage, 'You need to give a house number or name')
+      homeTests.assertErrorMessage(homePage, 'You need to give a property number or name')
     })
 
     // Close the window
