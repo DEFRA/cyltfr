@@ -1,7 +1,7 @@
 module.exports = {
   replace: function replace (obj, name, fn) {
     // Store the original function
-    var original = obj[name]
+    const original = obj[name]
 
     // Override the function
     obj[name] = fn
@@ -13,14 +13,9 @@ module.exports = {
       }
     }
   },
-  makeCallback: function makeCallback () {
-    // Assumes error first, callback last semantics
-    var args = arguments
+  makePromise: function makePromise (...args) {
     return function () {
-      var callback = arguments[arguments.length - 1]
-      process.nextTick(function () {
-        callback.apply(this, args)
-      })
+      return args[0] ? Promise.reject(args[0]) : Promise.resolve(args[1])
     }
   }
 }

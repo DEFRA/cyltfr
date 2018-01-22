@@ -1,4 +1,4 @@
-var util = require('./util')
+const util = require('./util')
 
 function formatDate (value, format) {
   if (typeof format === 'string') {
@@ -8,6 +8,9 @@ function formatDate (value, format) {
   }
 }
 
+const postcodeRegex = /[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}/gi
+
 module.exports = {
-  formatDate: formatDate
+  formatDate: formatDate,
+  postcodeRegex: postcodeRegex
 }

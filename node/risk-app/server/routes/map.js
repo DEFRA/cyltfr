@@ -1,17 +1,17 @@
-var Joi = require('joi')
-var MapsViewModel = require('../models/maps-view')
+const Joi = require('joi')
+const MapsViewModel = require('../models/maps-view')
 
 module.exports = {
   method: 'GET',
   path: '/map',
-  config: {
+  options: {
     description: 'Get the map page',
-    handler: function (request, reply) {
-      var easting = request.query.easting
-      var northing = request.query.northing
-      var address = request.query.address
+    handler: (request, h) => {
+      const easting = request.query.easting
+      const northing = request.query.northing
+      const address = request.query.address
 
-      reply.view('map', new MapsViewModel(easting, northing, address))
+      return h.view('map', new MapsViewModel(easting, northing, address))
     },
     validate: {
       query: {

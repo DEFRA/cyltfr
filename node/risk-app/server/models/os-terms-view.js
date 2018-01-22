@@ -1,4 +1,4 @@
-var moment = require('moment')
+const moment = require('moment')
 
 function OsViewModel (errorCode) {
   this.year = moment(Date.now()).format('YYYY')

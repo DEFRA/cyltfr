@@ -5,3 +5,5 @@ geoserver/data/wms.xml
 prototype_area
 node/flood-gazetteer-import
 spatial-data-loader/scripts/log
+.vscode
+.DS_Store

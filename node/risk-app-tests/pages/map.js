@@ -1,4 +1,4 @@
-/* global LTFRI*/
+/* global LTFRI */
 
 module.exports = {
   url: function () {

@@ -5,10 +5,11 @@ var riskTests = require('../../common/risk')
 var riskDetailTests = require('../../common/risk-detail')
 
 module.exports = {
-  'happy-path': function (client) {
+  'groundwater': function (client) {
     // Loop over each postcode
     data.forEach(function (item) {
       var address = item.address
+      var premises = item.premises
       var postcode = item.postcode
 
       /**
@@ -18,7 +19,7 @@ module.exports = {
 
       // Navigate to the home page & submit postcode
       homeTests.loadPage(homePage)
-      homePage.setPostcodeAndSubmit(postcode)
+      homePage.setPremisesAndPostcodeAndSubmit(premises, postcode)
 
       /**
        * Create search page object
@@ -26,7 +27,7 @@ module.exports = {
       var searchPage = client.page.search()
 
       // Assert the correct postcode
-      searchTests.assertPostcode(searchPage, postcode)
+      searchTests.assertPage(searchPage)
 
       // Select the first address and submit
       searchPage.selectAddress(address)

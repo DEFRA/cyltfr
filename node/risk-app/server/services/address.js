@@ -1,59 +1,79 @@
-var sprintf = require('sprintf-js')
-var util = require('../util')
-var config = require('../../config').ordnanceSurvey
-var findByIdUrl = config.urlUprn
-var findByPostcodeUrl = config.urlPostcode
-
-function findById (id, callback) {
-  var uri = sprintf.vsprintf(findByIdUrl, [id, config.key])
-
-  util.getJson(uri, function (err, payload) {
-    if (err) {
-      return callback(err)
-    }
-
-    if (!payload || !payload.results || payload.results.length !== 1) {
-      return callback(new Error('Invalid response'))
-    }
-
-    var result = payload.results[0].DPA
-    var address = {
-      uprn: result.UPRN,
-      postcode: result.POSTCODE,
-      x: result.X_COORDINATE,
-      y: result.Y_COORDINATE,
-      address: result.ADDRESS
-    }
-
-    callback(null, address)
-  })
+const Fuse = require('fuse.js')
+const sprintf = require('sprintf-js')
+const util = require('../util')
+const custodianCodes = require('../models/custodian-codes')
+const config = require('../../config').ordnanceSurvey
+const findByIdUrl = config.urlUprn
+const findByPostcodeUrl = config.urlPostcode
+const fuzzyOptions = {
+  shouldSort: true,
+  includeScore: true,
+  caseSensitive: false,
+  findAllMatches: true,
+  threshold: 0.5,
+  keys: [
+    'BUILDING_NAME',
+    'BUILDING_NUMBER',
+    'SUB_BUILDING_NAME',
+    'ORGANISATION_NAME'
+  ]
 }
 
-function findByPostcode (postcode, callback) {
-  var uri = sprintf.vsprintf(findByPostcodeUrl, [postcode, config.key])
+async function findById (id, callback) {
+  const uri = sprintf.vsprintf(findByIdUrl, [id, config.key])
 
-  util.getJson(uri, function (err, payload) {
-    if (err) {
-      return callback(err)
-    }
+  const payload = await util.getJson(uri)
 
-    if (!payload || !payload.results || !payload.results.length) {
-      return callback(null, [])
-    }
+  if (!payload || !payload.results || payload.results.length !== 1) {
+    throw new Error('Invalid response')
+  }
 
-    var results = payload.results
-    var addresses = results.map(function (item) {
+  const result = payload.results[0].DPA
+  const address = {
+    uprn: result.UPRN,
+    postcode: result.POSTCODE,
+    x: result.X_COORDINATE,
+    y: result.Y_COORDINATE,
+    address: result.ADDRESS
+  }
+
+  return address
+}
+
+async function find (premises, postcode) {
+  const uri = sprintf.vsprintf(findByPostcodeUrl, [postcode, config.key])
+
+  const payload = await util.getJson(uri)
+
+  if (!payload || !payload.results || !payload.results.length) {
+    return []
+  }
+
+  const results = payload.results.map(item => item.DPA)
+  const fuse = new Fuse(results, fuzzyOptions)
+  const res = fuse.search(premises)
+  const exact = res.filter(r => !r.score)
+
+  let addresses = (exact.length ? exact : res).map(r => r.item)
+
+  if (!addresses.length) {
+    // We found no matches so return the
+    // top third of the original results
+    addresses = results.slice(0, Math.round(results.length / 3) + 1)
+  }
+
+  return addresses
+    .map(item => {
       return {
-        uprn: item.DPA.UPRN,
-        address: item.DPA.ADDRESS
+        uprn: item.UPRN,
+        postcode: item.POSTCODE,
+        address: item.ADDRESS,
+        country: custodianCodes[item.LOCAL_CUSTODIAN_CODE]
       }
     })
-
-    callback(null, addresses)
-  })
 }
 
 module.exports = {
-  findById: findById,
-  findByPostcode: findByPostcode
+  find: find,
+  findById: findById
 }

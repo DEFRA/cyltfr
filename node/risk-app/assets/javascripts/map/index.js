@@ -25,6 +25,7 @@ function mapPage (options) {
   var $categories = $sidebar.children('li.category')
   var $maps = $categories.find('li')
   var $map = $('#map')
+  var $body = $(document.body)
 
   // Store a reference to the map legend element
   var $legend = $('.legend')
@@ -130,6 +131,11 @@ function mapPage (options) {
     $page.removeClass('fullscreen')
     $map.css('height', '')
     map.updateSize()
+  })
+
+  // ensures mouse cursor returns to default if feature was at edge of map
+  $map.on('mouseleave', function (e) {
+    $body.css('cursor', 'default')
   })
 
   map.loadMap(easting && [easting, northing])

@@ -2,5 +2,5 @@
 cp node_modules/jquery/dist/jquery.min.js public/javascripts/jquery.min.js
 cp node_modules/jquery/dist/jquery.min.js public/javascripts/jquery.min.map
 cp node_modules/openlayers/css/ol.css public/stylesheets/ol.css
-cp assets/images public/images -r
-cp assets/fonts public/fonts -r
+cp -R assets/images public/images
+cp -R assets/fonts public/fonts

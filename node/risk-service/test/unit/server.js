@@ -1,41 +1,36 @@
-var Glue = require('glue')
-var manifest = require('./manifest')
-var routes = require('../../server/routes')
+const Glue = require('glue')
+const manifest = require('./manifest')
+const routes = require('../../server/routes')
 
-var options = {
+const options = {
   relativeTo: __dirname
 }
 
-function composeServer (callback) {
-  Glue.compose(manifest, options, function (err, server) {
-    if (err) {
-      throw err
+async function composeServer () {
+  const server = await Glue.compose(manifest, options)
+
+  /*
+  * Register routes
+  */
+  server.route(routes)
+
+  /*
+  * Mock pg client
+  */
+  server.ext('onPreHandler', (request, h) => {
+    request.pg = {
+      client: {
+        query: (var1, var2) => {
+          return Promise.reject(new Error('Database Error'))
+        }
+      },
+      kill: false
     }
 
-    /*
-    * Register routes
-    */
-    server.route(routes)
-
-    /*
-    * Mock pg client
-    */
-    server.ext('onPreHandler', function (request, reply) {
-      request.pg = {
-        client: {
-          query: (var1, var2, callback) => {
-            process.nextTick(() => {
-              callback(new Error('database error'), null)
-            })
-          }
-        },
-        kill: false
-      }
-      return reply.continue()
-    })
-
-    callback(null, server)
+    return h.continue
   })
+
+  return server
 }
 
 module.exports = composeServer

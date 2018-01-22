@@ -1,18 +1,18 @@
-var Joi = require('joi')
+const Joi = require('joi')
 
-var serverSchema = Joi.object().required().keys({
+const serverSchema = Joi.object().required().keys({
   protocol: Joi.string().required().allow(['http', 'https']),
   host: Joi.string().hostname().required(),
   port: Joi.number().required()
 })
 
-var serviceSchema = Joi.object().required().keys({
+const serviceSchema = Joi.object().required().keys({
   protocol: Joi.string().required().allow(['http', 'https']),
   host: Joi.string().hostname().required(),
   port: Joi.number().required()
 })
 
-var ordnanceSurveySchema = Joi.object().required().keys({
+const ordnanceSurveySchema = Joi.object().required().keys({
   key: Joi.string().required(),
   urlUprn: Joi.string().uri().required(),
   urlPostcode: Joi.string().uri().required(),
@@ -20,7 +20,7 @@ var ordnanceSurveySchema = Joi.object().required().keys({
   urlNames: Joi.string().uri().required()
 })
 
-var errbitSchema = Joi.object().required().keys({
+const errbitSchema = Joi.object().required().keys({
   postErrors: Joi.boolean().required(),
   env: Joi.string().required(),
   key: Joi.string().required(),

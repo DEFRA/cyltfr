@@ -82,47 +82,51 @@
             font-size: 14px;
             display: inline-block;
 
-            li::before {
+            .legend-item {
+              display: block;
+            }
+
+            .legend-item::before {
               width: 50px;
               height: 50px;
               content: '';
               display: inline-block;
             }
 
-            li.round::before {
+            .legend-item.round::before {
               border-radius: 50%;
             }
 
-            li.purple::before {
+            .legend-item.purple::before {
               background-color: #3D4489;
             }
 
-            li.dark-blue::before {
+            .legend-item.dark-blue::before {
               background-color: #6699CD;
             }
 
-            li.blue::before {
+            .legend-item.blue::before {
               background-color: #A2CFFF;
             }
 
-            li.light-blue::before {
+            .legend-item.light-blue::before {
               background-color: #C4E1FF;
             }
 
-            li.green::before {
+            .legend-item.green::before {
               background-color: #00FF21;
             }
 
-            li.red::before {
+            .legend-item.red::before {
               background-color: #CE0000;
             }
 
-            li.white::before {
+            .legend-item.white::before {
               background-color: #FFF;
               border: solid 2px #b9b9b9;
             }
 
-            li.arrow::before {
+            .legend-item.arrow::before {
               content: '\003C';
               font-size: x-large;
               -webkit-transform: rotate(30deg);
@@ -139,7 +143,7 @@
               }
             }
 
-            li.crosshair {
+            .legend-item.crosshair {
               margin-top: 20px;
 
               &::before {
@@ -160,13 +164,13 @@
             }
 
             @include media(tablet) {
-              li {
+              .legend-item {
                 margin-bottom: 10px;
               }
             }
 
             @include media(mobile) {
-              li {
+              .legend-item {
                 margin-right: 10px;
                 margin-bottom: 5px;
                 display: inline-block;
@@ -182,6 +186,13 @@
                   margin-left: 3px;
                   vertical-align: middle;
                 }
+              }
+            }
+
+            a.legend-item {
+              text-decoration: none;
+              div {
+                text-decoration: underline;
               }
             }
           }

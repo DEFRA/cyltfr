@@ -3,8 +3,9 @@ var homeTests = require('../../common/home')
 
 module.exports = {
   'invalid-postcode': function (client) {
-    // Loop over each postcode
+    // Loop over each item
     data.forEach(function (item) {
+      var premises = item.premises
       var postcode = item.postcode
 
       /**
@@ -12,12 +13,12 @@ module.exports = {
        */
       var homePage = client.page.home()
 
-      // Navigate to the home page & submit invalid postcode
+      // Navigate to the home page & submit invalid premise & postcode
       homeTests.loadPage(homePage)
-      homePage.setPostcodeAndSubmit(postcode)
+      homePage.setPremisesAndPostcodeAndSubmit(premises, postcode)
 
       // Asset we get the default error message
-      homeTests.assertErrorMessage(homePage)
+      homeTests.assertErrorMessage(homePage, 'You need to give a full postcode')
     })
 
     // Close the window

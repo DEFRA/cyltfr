@@ -1,44 +1,35 @@
-var Lab = require('lab')
-var Code = require('code')
-var lab = exports.lab = Lab.script()
-var composeServer = require('../../')
+const Lab = require('lab')
+const Code = require('code')
+const lab = exports.lab = Lab.script()
+const composeServer = require('../../')
 
-lab.experiment('Integration', function () {
-  var server
+lab.experiment('Integration', () => {
+  let server
 
   // Make a server before the tests
-  lab.before(done => {
+  lab.before(async () => {
     console.log('Creating server')
-    composeServer(function (err, result) {
-      if (err) {
-        return done(err)
-      }
-
-      server = result
-      server.initialize(done)
-    })
+    server = await composeServer()
   })
 
-  lab.after((done) => {
+  lab.after(async () => {
     console.log('Stopping server')
-    server.stop(done)
+    await server.stop()
   })
 
-  var urls = [
+  const urls = [
     '/floodrisk/391416/102196/20'
   ]
 
-  urls.forEach(function (url) {
-    lab.test(url, function (done) {
-      var options = {
+  urls.forEach((url) => {
+    lab.test(url, async () => {
+      const options = {
         method: 'GET',
         url: url
       }
 
-      server.inject(options, function (response) {
-        Code.expect(response.statusCode).to.equal(200)
-        done()
-      })
+      const response = await server.inject(options)
+      Code.expect(response.statusCode).to.equal(200)
     })
   })
 })

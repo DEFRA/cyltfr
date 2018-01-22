@@ -1,15 +1,19 @@
-var config = require('../../config')
-var floodWarningsUrl = config.floodWarningsUrl
+const config = require('../../config')
+const floodWarningsUrl = config.floodWarningsUrl
 // Note wreck won't play with a proxy so need to use request
-var request = require('request')
+const request = require('request')
 
-function findWarnings (location, callback) {
-  var url = floodWarningsUrl + '/api/warnings?location=' + location
-  request(url, function (err, response, body) {
-    if (err || response.statusCode !== 200) {
-      return callback(err || body || new Error('Unknown error'))
-    }
-    callback(null, JSON.parse(body))
+function findWarnings (location) {
+  const url = floodWarningsUrl + '/api/warnings?location=' + location
+
+  return new Promise((resolve, reject) => {
+    request(url, function (err, response, body) {
+      if (err || response.statusCode !== 200) {
+        return reject(err || body || new Error('Unknown error'))
+      }
+
+      resolve(JSON.parse(body))
+    })
   })
 }
 

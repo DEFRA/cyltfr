@@ -1,5 +1,6 @@
-var config = require('../config')
-var routeOptions = {}
+const viewsOptions = require('./views')
+const config = require('../config')
+const routeOptions = {}
 
 // Mount point
 if (config.mountPath) {
@@ -10,66 +11,54 @@ if (config.mountPath) {
 
 const manifest = {
   server: {
-    connections: {
-      routes: {
-        //  Sets common security headers
-        //  http://hapijs.com/api#route-options
-        security: true
-      },
-      router: {
-        stripTrailingSlash: true
+    port: config.server.port,
+    host: config.server.host,
+    routes: {
+      security: true,
+      validate: {
+        options: {
+          abortEarly: false
+        }
       }
+    },
+    router: {
+      stripTrailingSlash: true
     }
   },
-  connections: [
-    {
-      port: config.server.port,
-      host: config.server.host
-    }
-  ],
-  registrations: [
-    {
-      plugin: {
-        register: 'inert'
-      }
-    },
-    {
-      plugin: {
-        register: 'vision'
-      }
-    },
-    {
-      plugin: {
-        register: 'lout'
-      }
-    },
-    {
-      plugin: {
-        register: 'h2o2'
-      }
-    },
-    {
-      plugin: {
-        register: 'good',
-        options: config.logging
-      }
-    },
-    {
-      plugin: {
-        register: './router'
+  register: {
+    plugins: [
+      {
+        plugin: 'inert'
       },
-      options: routeOptions
-    }
-  ]
+      {
+        plugin: 'vision',
+        options: viewsOptions
+      },
+      {
+        plugin: 'h2o2'
+      },
+      {
+        plugin: 'good',
+        options: config.logging
+      },
+      {
+        plugin: './plugins/router',
+        options: routeOptions,
+        routes: {
+          prefix: config.mountPath && ('/' + config.mountPath)
+        }
+      },
+      './plugins/full-url',
+      './plugins/log-errors'
+    ]
+  }
 }
 
 if (config.errbit.postErrors) {
   delete config.errbit.postErrors
-  manifest.registrations.push({
-    plugin: {
-      register: 'node-hapi-airbrake',
-      options: config.errbit
-    }
+  manifest.register.plugins.push({
+    plugin: 'node-hapi-airbrake',
+    options: config.errbit
   })
 }
 
