@@ -1,7 +1,8 @@
 const Lab = require('lab')
 const Code = require('code')
+const glupe = require('glupe')
 const lab = exports.lab = Lab.script()
-const composeServer = require('../../')
+const { manifest, options } = require('../../server')
 
 lab.experiment('Integration', () => {
   let server
@@ -9,7 +10,7 @@ lab.experiment('Integration', () => {
   // Make a server before the tests
   lab.before(async () => {
     console.log('Creating server')
-    server = await composeServer()
+    server = await glupe.compose(manifest, options)
   })
 
   lab.after(async () => {

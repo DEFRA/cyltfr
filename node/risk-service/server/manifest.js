@@ -11,7 +11,9 @@ const manifest = {
       {
         plugin: 'good',
         options: config.logging
-      }
+      },
+      './plugins/log-errors',
+      './plugins/router'
     ]
   }
 }
