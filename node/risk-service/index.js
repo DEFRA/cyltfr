@@ -5,7 +5,7 @@ const { manifest, options } = require('./server')
   try {
     await glupe(manifest, options)
   } catch (err) {
-    process.exit(1)
     console.error(err)
+    process.exit(1)
   }
 })()

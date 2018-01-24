@@ -16,5 +16,6 @@ const { manifest, options } = require('./server')
     }
   } catch (err) {
     console.error(err)
+    process.exit(1)
   }
 })()
