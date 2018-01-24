@@ -540,12 +540,20 @@
             <a href="#server/db.js"><span class="dirname">server/</span><span class="basename">db.js</span></a>
         </li>
         <li class="">
-            <span class="cov high">87.50</span>
+            <span class="cov high">100</span>
             <a href="#server/index.js"><span class="dirname">server/</span><span class="basename">index.js</span></a>
         </li>
         <li class="">
-            <span class="cov high">85</span>
+            <span class="cov high">96.15</span>
             <a href="#server/manifest.js"><span class="dirname">server/</span><span class="basename">manifest.js</span></a>
+        </li>
+        <li class="">
+            <span class="cov high">82.35</span>
+            <a href="#server/plugins/log-errors.js"><span class="dirname">server/plugins/</span><span class="basename">log-errors.js</span></a>
+        </li>
+        <li class="">
+            <span class="cov high">100</span>
+            <a href="#server/plugins/router.js"><span class="dirname">server/plugins/</span><span class="basename">router.js</span></a>
         </li>
         <li class="">
             <span class="cov high">100</span>
@@ -571,7 +579,7 @@
           <div class="failures">0</div>
           <div class="skipped">0</div>
           <div class="test-count">1</div>
-          <div class="duration">317</div>
+          <div class="duration">560</div>
       </div>
       <div id="filters">
           <input type="checkbox" checked="" onchange="filter(this)" value="success" id="show-success">
@@ -596,7 +604,7 @@
               <td class="test-title">Integration /floodrisk/391416/102196/20
                   
               </td>
-              <td class="test-duration">275</td>
+              <td class="test-duration">278</td>
           </tr>
           </tbody>
       </table>
@@ -604,10 +612,10 @@
     </div>    <div id="coverage">
         <h1>Code Coverage Report</h1>
         <div class="stats high">
-            <div class="percentage">82.46%</div>
-            <div class="sloc">171</div>
-            <div class="hits">141</div>
-            <div class="misses">30</div>
+            <div class="percentage">84.78%</div>
+            <div class="sloc">184</div>
+            <div class="hits">156</div>
+            <div class="misses">28</div>
         </div>
         <div id="filters">
           <input type="checkbox" checked="" onchange="filter(this)" value="generated" id="show-generated">
@@ -699,10 +707,10 @@
             <div class="file ">
                 <h2 id="server/index.js">server/index.js </h2>
                 <div class="stats high">
-                    <div class="percentage">87.50%</div>
-                    <div class="sloc">24</div>
-                    <div class="hits">21</div>
-                    <div class="misses">3</div>
+                    <div class="percentage">100%</div>
+                    <div class="sloc">7</div>
+                    <div class="hits">7</div>
+                    <div class="misses">0</div>
                 </div>
                 <table>
                     <thead>
@@ -719,250 +727,52 @@
                           <td class="line" data-tooltip>1</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip>1</td>
-                          <td class="source">const Glue &#x3D; require(&#x27;glue&#x27;)</td>
+                          <td class="source">const manifest &#x3D; require(&#x27;./manifest&#x27;)</td>
                           
                         </tr>            <tr id="server/index.js__2" class="hit">
                           <td class="line" data-tooltip>2</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">const manifest &#x3D; require(&#x27;./manifest&#x27;)</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="server/index.js__3" class="hit">
                           <td class="line" data-tooltip>3</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip>1</td>
-                          <td class="source">const routes &#x3D; require(&#x27;./routes&#x27;)</td>
+                          <td class="source">module.exports &#x3D; {</td>
                           
                         </tr>            <tr id="server/index.js__4" class="hit">
                           <td class="line" data-tooltip>4</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">  options: {</td>
                           
                         </tr>            <tr id="server/index.js__5" class="hit">
                           <td class="line" data-tooltip>5</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">const options &#x3D; {</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">    relativeTo: __dirname</td>
                           
                         </tr>            <tr id="server/index.js__6" class="hit">
                           <td class="line" data-tooltip>6</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  relativeTo: __dirname</td>
+                          <td class="source">  },</td>
                           
                         </tr>            <tr id="server/index.js__7" class="hit">
                           <td class="line" data-tooltip>7</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">}</td>
+                          <td class="source">  manifest: manifest</td>
                           
                         </tr>            <tr id="server/index.js__8" class="hit">
                           <td class="line" data-tooltip>8</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">}</td>
                           
                         </tr>            <tr id="server/index.js__9" class="hit">
                           <td class="line" data-tooltip>9</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">async function composeServer (callback) {</td>
-                          
-                        </tr>            <tr id="server/index.js__10" class="hit">
-                          <td class="line" data-tooltip>10</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">  const server &#x3D; await Glue.compose(manifest, options)</td>
-                          
-                        </tr>            <tr id="server/index.js__11" class="hit">
-                          <td class="line" data-tooltip>11</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
-                          
-                        </tr>            <tr id="server/index.js__12" class="hit">
-                          <td class="line" data-tooltip>12</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">  /*</td>
-                          
-                        </tr>            <tr id="server/index.js__13" class="hit">
-                          <td class="line" data-tooltip>13</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">  * Register routes</td>
-                          
-                        </tr>            <tr id="server/index.js__14" class="hit">
-                          <td class="line" data-tooltip>14</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">  */</td>
-                          
-                        </tr>            <tr id="server/index.js__15" class="hit">
-                          <td class="line" data-tooltip>15</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">  server.route(routes)</td>
-                          
-                        </tr>            <tr id="server/index.js__16" class="hit">
-                          <td class="line" data-tooltip>16</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
-                          
-                        </tr>            <tr id="server/index.js__17" class="hit">
-                          <td class="line" data-tooltip>17</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">  /*</td>
-                          
-                        </tr>            <tr id="server/index.js__18" class="hit">
-                          <td class="line" data-tooltip>18</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">  * Handle route errors</td>
-                          
-                        </tr>            <tr id="server/index.js__19" class="hit">
-                          <td class="line" data-tooltip>19</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">  */</td>
-                          
-                        </tr>            <tr id="server/index.js__20" class="hit">
-                          <td class="line" data-tooltip>20</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">  server.ext(&#x27;onPreResponse&#x27;, (request, h) &#x3D;&gt; {</td>
-                          
-                        </tr>            <tr id="server/index.js__21" class="hit">
-                          <td class="line" data-tooltip>21</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">    const response &#x3D; request.response</td>
-                          
-                        </tr>            <tr id="server/index.js__22" class="hit">
-                          <td class="line" data-tooltip>22</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
-                          
-                        </tr>            <tr id="server/index.js__23" class="chunks">
-                          <td class="line" data-tooltip>23</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"><div>    if (</div><div class="miss false" data-tooltip>response.isBoom</div><div>) {</div></td>
-                          
-                        </tr>            <tr id="server/index.js__24" class="hit">
-                          <td class="line" data-tooltip>24</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">      // An error was raised during</td>
-                          
-                        </tr>            <tr id="server/index.js__25" class="hit">
-                          <td class="line" data-tooltip>25</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">      // processing the request</td>
-                          
-                        </tr>            <tr id="server/index.js__26" class="miss">
-                          <td class="line" data-tooltip>26</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>      const statusCode &#x3D; response.output.statusCode</td>
-                          
-                        </tr>            <tr id="server/index.js__27" class="hit">
-                          <td class="line" data-tooltip>27</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
-                          
-                        </tr>            <tr id="server/index.js__28" class="miss">
-                          <td class="line" data-tooltip>28</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>      request.log(&#x27;error&#x27;, {</td>
-                          
-                        </tr>            <tr id="server/index.js__29" class="hit">
-                          <td class="line" data-tooltip>29</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">        statusCode: statusCode,</td>
-                          
-                        </tr>            <tr id="server/index.js__30" class="hit">
-                          <td class="line" data-tooltip>30</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">        data: response.data,</td>
-                          
-                        </tr>            <tr id="server/index.js__31" class="hit">
-                          <td class="line" data-tooltip>31</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">        message: response.message</td>
-                          
-                        </tr>            <tr id="server/index.js__32" class="hit">
-                          <td class="line" data-tooltip>32</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">      })</td>
-                          
-                        </tr>            <tr id="server/index.js__33" class="hit">
-                          <td class="line" data-tooltip>33</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">    }</td>
-                          
-                        </tr>            <tr id="server/index.js__34" class="hit">
-                          <td class="line" data-tooltip>34</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
-                          
-                        </tr>            <tr id="server/index.js__35" class="hit">
-                          <td class="line" data-tooltip>35</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">    return h.continue</td>
-                          
-                        </tr>            <tr id="server/index.js__36" class="hit">
-                          <td class="line" data-tooltip>36</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">  })</td>
-                          
-                        </tr>            <tr id="server/index.js__37" class="hit">
-                          <td class="line" data-tooltip>37</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
-                          
-                        </tr>            <tr id="server/index.js__38" class="hit">
-                          <td class="line" data-tooltip>38</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">  return server</td>
-                          
-                        </tr>            <tr id="server/index.js__39" class="hit">
-                          <td class="line" data-tooltip>39</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">}</td>
-                          
-                        </tr>            <tr id="server/index.js__40" class="hit">
-                          <td class="line" data-tooltip>40</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
-                          
-                        </tr>            <tr id="server/index.js__41" class="hit">
-                          <td class="line" data-tooltip>41</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">module.exports &#x3D; composeServer</td>
-                          
-                        </tr>            <tr id="server/index.js__42" class="hit">
-                          <td class="line" data-tooltip>42</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
                           <td class="source"></td>
@@ -973,10 +783,10 @@
             <div class="file ">
                 <h2 id="server/manifest.js">server/manifest.js </h2>
                 <div class="stats high">
-                    <div class="percentage">85%</div>
-                    <div class="sloc">20</div>
-                    <div class="hits">17</div>
-                    <div class="misses">3</div>
+                    <div class="percentage">96.15%</div>
+                    <div class="sloc">26</div>
+                    <div class="hits">25</div>
+                    <div class="misses">1</div>
                 </div>
                 <table>
                     <thead>
@@ -1053,106 +863,372 @@
                           <td class="line" data-tooltip>11</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      // {</td>
+                          <td class="source">      {</td>
                           
                         </tr>            <tr id="server/manifest.js__12" class="hit">
                           <td class="line" data-tooltip>12</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      //   plugin: &#x27;good&#x27;,</td>
+                          <td class="source">        plugin: &#x27;good&#x27;,</td>
                           
                         </tr>            <tr id="server/manifest.js__13" class="hit">
                           <td class="line" data-tooltip>13</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      //   options: config.logging</td>
+                          <td class="source">        options: config.logging</td>
                           
                         </tr>            <tr id="server/manifest.js__14" class="hit">
                           <td class="line" data-tooltip>14</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      // }</td>
+                          <td class="source">      },</td>
                           
                         </tr>            <tr id="server/manifest.js__15" class="hit">
                           <td class="line" data-tooltip>15</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    ]</td>
+                          <td class="source">      &#x27;./plugins/log-errors&#x27;,</td>
                           
                         </tr>            <tr id="server/manifest.js__16" class="hit">
                           <td class="line" data-tooltip>16</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  }</td>
+                          <td class="source">      &#x27;./plugins/router&#x27;</td>
                           
                         </tr>            <tr id="server/manifest.js__17" class="hit">
                           <td class="line" data-tooltip>17</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">}</td>
+                          <td class="source">    ]</td>
                           
                         </tr>            <tr id="server/manifest.js__18" class="hit">
                           <td class="line" data-tooltip>18</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">  }</td>
                           
-                        </tr>            <tr id="server/manifest.js__19" class="chunks">
+                        </tr>            <tr id="server/manifest.js__19" class="hit">
                           <td class="line" data-tooltip>19</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"><div>if (</div><div class="miss false" data-tooltip>config.errbit.postErrors</div><div>) {</div></td>
+                          <td class="source">}</td>
                           
-                        </tr>            <tr id="server/manifest.js__20" class="miss">
+                        </tr>            <tr id="server/manifest.js__20" class="hit">
                           <td class="line" data-tooltip>20</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>  delete config.errbit.postErrors</td>
+                          <td class="source"></td>
                           
-                        </tr>            <tr id="server/manifest.js__21" class="miss">
+                        </tr>            <tr id="server/manifest.js__21" class="chunks">
                           <td class="line" data-tooltip>21</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>  manifest.register.plugins.push({</td>
+                          <td class="source"><div>if (</div><div class="miss true" data-tooltip>config.errbit.postErrors</div><div>) {</div></td>
                           
                         </tr>            <tr id="server/manifest.js__22" class="hit">
                           <td class="line" data-tooltip>22</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">    plugin: &#x27;node-hapi-airbrake&#x27;,</td>
+                          <td class="hits" data-tooltip>1</td>
+                          <td class="source">  delete config.errbit.postErrors</td>
                           
                         </tr>            <tr id="server/manifest.js__23" class="hit">
                           <td class="line" data-tooltip>23</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">    options: config.errbit</td>
+                          <td class="hits" data-tooltip>1</td>
+                          <td class="source">  manifest.register.plugins.push({</td>
                           
                         </tr>            <tr id="server/manifest.js__24" class="hit">
                           <td class="line" data-tooltip>24</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  })</td>
+                          <td class="source">    plugin: &#x27;node-hapi-airbrake&#x27;,</td>
                           
                         </tr>            <tr id="server/manifest.js__25" class="hit">
                           <td class="line" data-tooltip>25</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">}</td>
+                          <td class="source">    options: config.errbit</td>
                           
                         </tr>            <tr id="server/manifest.js__26" class="hit">
                           <td class="line" data-tooltip>26</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">  })</td>
                           
                         </tr>            <tr id="server/manifest.js__27" class="hit">
                           <td class="line" data-tooltip>27</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">module.exports &#x3D; manifest</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">}</td>
                           
                         </tr>            <tr id="server/manifest.js__28" class="hit">
                           <td class="line" data-tooltip>28</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
+                          
+                        </tr>            <tr id="server/manifest.js__29" class="hit">
+                          <td class="line" data-tooltip>29</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip>1</td>
+                          <td class="source">module.exports &#x3D; manifest</td>
+                          
+                        </tr>            <tr id="server/manifest.js__30" class="hit">
+                          <td class="line" data-tooltip>30</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
+                          
+                        </tr>        </tbody>
+                </table>
+            </div>
+            <div class="file ">
+                <h2 id="server/plugins/log-errors.js">server/plugins/log-errors.js </h2>
+                <div class="stats high">
+                    <div class="percentage">82.35%</div>
+                    <div class="sloc">17</div>
+                    <div class="hits">14</div>
+                    <div class="misses">3</div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Line</th>
+                            <th>Lint</th>
+                            <th>Hits</th>
+                            <th>Source</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="server/plugins/log-errors.js__1" class="hit">
+                          <td class="line" data-tooltip>1</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">/*</td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__2" class="hit">
+                          <td class="line" data-tooltip>2</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">* Add an &#x60;onPreResponse&#x60; listener to log request errors</td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__3" class="hit">
+                          <td class="line" data-tooltip>3</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">*/</td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__4" class="hit">
+                          <td class="line" data-tooltip>4</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip>1</td>
+                          <td class="source">exports.plugin &#x3D; {</td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__5" class="hit">
+                          <td class="line" data-tooltip>5</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">  name: &#x27;log-errors&#x27;,</td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__6" class="hit">
+                          <td class="line" data-tooltip>6</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">  register: (server, options) &#x3D;&gt; {</td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__7" class="hit">
+                          <td class="line" data-tooltip>7</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">    server.ext(&#x27;onPreResponse&#x27;, (request, h) &#x3D;&gt; {</td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__8" class="hit">
+                          <td class="line" data-tooltip>8</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">      const response &#x3D; request.response</td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__9" class="hit">
+                          <td class="line" data-tooltip>9</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__10" class="chunks">
+                          <td class="line" data-tooltip>10</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"><div>      if (</div><div class="miss false" data-tooltip>response.isBoom</div><div>) {</div></td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__11" class="hit">
+                          <td class="line" data-tooltip>11</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">        // An error was raised during</td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__12" class="hit">
+                          <td class="line" data-tooltip>12</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">        // processing the request</td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__13" class="miss">
+                          <td class="line" data-tooltip>13</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source" data-tooltip>        const statusCode &#x3D; response.output.statusCode</td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__14" class="hit">
+                          <td class="line" data-tooltip>14</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__15" class="miss">
+                          <td class="line" data-tooltip>15</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source" data-tooltip>        request.log(&#x27;error&#x27;, {</td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__16" class="hit">
+                          <td class="line" data-tooltip>16</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">          statusCode: statusCode,</td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__17" class="hit">
+                          <td class="line" data-tooltip>17</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">          data: response.data,</td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__18" class="hit">
+                          <td class="line" data-tooltip>18</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">          message: response.message</td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__19" class="hit">
+                          <td class="line" data-tooltip>19</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">        })</td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__20" class="hit">
+                          <td class="line" data-tooltip>20</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">      }</td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__21" class="hit">
+                          <td class="line" data-tooltip>21</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__22" class="hit">
+                          <td class="line" data-tooltip>22</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip>1</td>
+                          <td class="source">      return h.continue</td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__23" class="hit">
+                          <td class="line" data-tooltip>23</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">    })</td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__24" class="hit">
+                          <td class="line" data-tooltip>24</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">  }</td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__25" class="hit">
+                          <td class="line" data-tooltip>25</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">}</td>
+                          
+                        </tr>            <tr id="server/plugins/log-errors.js__26" class="hit">
+                          <td class="line" data-tooltip>26</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
+                          
+                        </tr>        </tbody>
+                </table>
+            </div>
+            <div class="file ">
+                <h2 id="server/plugins/router.js">server/plugins/router.js </h2>
+                <div class="stats high">
+                    <div class="percentage">100%</div>
+                    <div class="sloc">7</div>
+                    <div class="hits">7</div>
+                    <div class="misses">0</div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Line</th>
+                            <th>Lint</th>
+                            <th>Hits</th>
+                            <th>Source</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="server/plugins/router.js__1" class="hit">
+                          <td class="line" data-tooltip>1</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip>1</td>
+                          <td class="source">const routes &#x3D; require(&#x27;../routes&#x27;)</td>
+                          
+                        </tr>            <tr id="server/plugins/router.js__2" class="hit">
+                          <td class="line" data-tooltip>2</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
+                          
+                        </tr>            <tr id="server/plugins/router.js__3" class="hit">
+                          <td class="line" data-tooltip>3</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip>1</td>
+                          <td class="source">exports.plugin &#x3D; {</td>
+                          
+                        </tr>            <tr id="server/plugins/router.js__4" class="hit">
+                          <td class="line" data-tooltip>4</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">  name: &#x27;router&#x27;,</td>
+                          
+                        </tr>            <tr id="server/plugins/router.js__5" class="hit">
+                          <td class="line" data-tooltip>5</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">  register: (server, options) &#x3D;&gt; {</td>
+                          
+                        </tr>            <tr id="server/plugins/router.js__6" class="hit">
+                          <td class="line" data-tooltip>6</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">    server.route(routes)</td>
+                          
+                        </tr>            <tr id="server/plugins/router.js__7" class="hit">
+                          <td class="line" data-tooltip>7</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">  }</td>
+                          
+                        </tr>            <tr id="server/plugins/router.js__8" class="hit">
+                          <td class="line" data-tooltip>8</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">}</td>
+                          
+                        </tr>            <tr id="server/plugins/router.js__9" class="hit">
+                          <td class="line" data-tooltip>9</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
                           <td class="source"></td>
