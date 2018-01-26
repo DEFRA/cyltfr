@@ -4,8 +4,8 @@ var legendTemplate = require('./legend.hbs')
 var Maps = require('./maps')
 var maps = new Maps()
 
-var easting = getParameterByName('easting')
-var northing = getParameterByName('northing')
+var easting = parseInt(getParameterByName('easting'), 10)
+var northing = parseInt(getParameterByName('northing'), 10)
 
 function getParameterByName (name) {
   name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]')
