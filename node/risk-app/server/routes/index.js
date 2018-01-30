@@ -13,5 +13,6 @@ module.exports = [].concat(
   require('./api/geocode'),
   require('./england-only'),
   require('./404'),
-  require('./os-terms')
+  require('./os-terms'),
+  require('./error')
 )
