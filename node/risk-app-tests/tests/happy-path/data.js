@@ -176,7 +176,7 @@ const data = [
   { premises: 83,
     postcode: 'LE3 9RD',
     address: 2465041144,
-    outcome: RiskStatus.AtRiskMonitor,
+    outcome: RiskStatus.AtRisk, // Target area https://flood-warning-information.service.gov.uk/target-area/034WAF402 expanded February 2018
     riverAndSeaRisk: RiskLevel.Medium,
     surfaceWaterRisk: RiskLevel.High,
     reservoirRisk: true },
