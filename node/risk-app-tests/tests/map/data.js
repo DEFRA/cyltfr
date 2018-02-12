@@ -9,8 +9,8 @@ const data = {
     northing: '176272'
   }, {
     addressId: '100050453361',
-    easting: '479859.3',
-    northing: '483668.16'
+    easting: '479859',
+    northing: '483668'
   }, {
     addressId: '100070216076',
     easting: '420422',
