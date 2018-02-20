@@ -38,7 +38,8 @@ const defaultContext = {
   feedback: true,
   siteUrl: config.floodRiskUrl,
   fbAppId: config.fbAppId,
-  ogDescription: 'Check your risk of flooding and use flood risk maps'
+  ogDescription: 'Check your risk of flooding and use flood risk maps',
+  noIndex: true // stop robot crawl by default
 }
 
 const options = {

@@ -1,11 +1,13 @@
 const moment = require('moment')
 
 function HomeViewModel (premises, postcode, errors) {
+  this.noIndex = false
   this.premises = premises
   this.postcode = postcode
 
   // Validation messages
   if (errors) {
+    this.noIndex = true
     this.errors = {}
 
     // Form level errors
