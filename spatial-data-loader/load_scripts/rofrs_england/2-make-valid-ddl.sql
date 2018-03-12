@@ -7,7 +7,7 @@ CREATE TABLE u_ltfri.rofrs_england_bv_bng_valid TABLESPACE postgis_tables AS WIT
 		)
 SELECT * FROM make_valid WHERE ST_GeometryType(wkb_geometry) IN('ST_Polygon','ST_MultiPolygon');
 
-ALTER TABLE u_ltfri.rofrs_england_bv_bng_valid ALTER COLUMN wkb_geometry TYPE geometry(Multipolygon,27700) USING ST_Multi(wkb_geometry);
+ALTER TABLE u_ltfri.rofrs_england_bv_bng_valid ALTER COLUMN wkb_geometry TYPE geometry(Multipolygon,27700) USING ST_FORCE_2D(ST_Multi(wkb_geometry));
 
 ALTER TABLE u_ltfri.rofrs_england_bv_bng_valid ADD COLUMN ogc_fid SERIAL;
 UPDATE u_ltfri.rofrs_england_bv_bng_valid SET ogc_fid = DEFAULT;
