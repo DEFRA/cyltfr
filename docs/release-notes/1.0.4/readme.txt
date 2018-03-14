@@ -1,6 +1,6 @@
 ## LTFRI DATA Release
-## Version
-## Date
+## Version 1.0.4
+## Date 27/03/2018
 
 ##Webops instructions
 
