@@ -64,14 +64,14 @@ const data = [
     outcome: RiskStatus.AtRisk,
     riverAndSeaRisk: RiskLevel.High,
     surfaceWaterRisk: RiskLevel.Medium,
-    reservoirRisk: false },
-  { premises: '3',
-    postcode: 'CB8 0HL',
-    address: 100091369361,
-    outcome: RiskStatus.AtRisk,
-    riverAndSeaRisk: RiskLevel.High,
-    surfaceWaterRisk: RiskLevel.High,
     reservoirRisk: false }
+  // { premises: '3',
+  //   postcode: 'CB8 0HL',
+  //   address: 100091369361,
+  //   outcome: RiskStatus.AtRisk,
+  //   riverAndSeaRisk: RiskLevel.High,
+  //   surfaceWaterRisk: RiskLevel.High,
+  //   reservoirRisk: false }
 ]
 
 module.exports = data
