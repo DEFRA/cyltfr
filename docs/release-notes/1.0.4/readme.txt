@@ -13,4 +13,6 @@ Run Jenkins job: FR_EA_99_LOAD_ROFRS_ENGLAND
 aws s3 sync s3://flood-risk-dev//LayerGroupInfoImpl--1a2a398b:1510f867e96:-7fd9/ s3://flood-risk-prod//LayerGroupInfoImpl--1a2a398b:1510f867e96:-7fd9/ --delete
 ```
 
+Run full application build (please note there are no code changes involved, only the application version number)
 
+And confirm auto tests complete correctly.
