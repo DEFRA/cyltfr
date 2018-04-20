@@ -19,8 +19,9 @@ module.exports = {
     validate: {
       query: {
         region: Joi.string().allow('', 'wales', 'northern-ireland', 'scotland'),
-        premises: Joi.string().trim().required().max(100),
-        postcode: Joi.string().trim().required().regex(postcodeRegex)
+        premises: Joi.string().trim().max(100),
+        postcode: Joi.string().trim().regex(postcodeRegex),
+        uprn: Joi.string().allow('')
       }
     }
   }

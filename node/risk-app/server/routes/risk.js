@@ -33,7 +33,7 @@ module.exports = {
           }
 
           if (!risk.inEngland) {
-            return h.redirect('/?err=postcode')
+            return h.redirect(`/england-only?uprn=${encodeURIComponent(address.uprn)}`)
           } else {
             return h.view('risk', new RiskViewModel(risk, address))
           }

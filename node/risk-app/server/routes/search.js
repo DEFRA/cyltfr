@@ -32,7 +32,7 @@ module.exports = [{
         }
 
         // Filter the english addresses
-        const englishAddresses = addresses.filter(a => a.country === 'ENGLAND' || a.country === 'NATIONAL')
+        const englishAddresses = addresses.filter(a => (a.country !== 'WALES' && a.country !== 'SCOTLAND'))
 
         // If there are no english addresses, it must be in Scotland or Wales.
         if (!englishAddresses.length) {
