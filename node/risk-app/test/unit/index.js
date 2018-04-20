@@ -251,6 +251,7 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(302)
+    Code.expect(response.headers.location).to.include('/england-only')
     addressStub.revert()
     riskStub.revert()
   })
@@ -821,6 +822,53 @@ lab.experiment('Unit', () => {
     addressStub.revert()
   })
 
+  lab.test('/search - NATIONAL address to continue as normal', async () => {
+    const options = {
+      method: 'GET',
+      url: mountPath + '/search?premises=81&postcode=cw8 4bh'
+    }
+
+    const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, [
+      { uprn: '100041117437', address: '81, MOSS ROAD, NORTHWICH, CW8 4BH, NATIONAL', country: 'NATIONAL' }
+    ]))
+
+    const response = await server.inject(options)
+    Code.expect(response.statusCode).to.equal(200)
+    addressStub.revert()
+  })
+
+  lab.test('/search - SCOTTISH address to redirect to england-only', async () => {
+    const options = {
+      method: 'GET',
+      url: mountPath + '/search?premises=81&postcode=cw8 4bh'
+    }
+
+    const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, [
+      { uprn: '100041117437', address: '81, MOSS ROAD, NORTHWICH, CW8 4BH, SCOTLAND', country: 'SCOTLAND' }
+    ]))
+
+    const response = await server.inject(options)
+    Code.expect(response.statusCode).to.equal(302)
+    Code.expect(response.headers.location).to.include('/england-only')
+    addressStub.revert()
+  })
+
+  lab.test('/search - WELSH address to redirect to england-only', async () => {
+    const options = {
+      method: 'GET',
+      url: mountPath + '/search?premises=81&postcode=cw8 4bh'
+    }
+
+    const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, [
+      { uprn: '100041117437', address: '81, MOSS ROAD, NORTHWICH, CW8 4BH, WALES', country: 'WALES' }
+    ]))
+
+    const response = await server.inject(options)
+    Code.expect(response.statusCode).to.equal(302)
+    Code.expect(response.headers.location).to.include('/england-only')
+    addressStub.revert()
+  })
+
   lab.test('/risk-detail - Address service error', async () => {
     const options = {
       method: 'GET',
@@ -1148,6 +1196,7 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(302)
+    Code.expect(response.headers.location).to.include('/england-only')
     addressStub.revert()
     riskStub.revert()
   })
