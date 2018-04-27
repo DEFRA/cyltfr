@@ -4,3 +4,4 @@ reports
 selenium-debug.log
 .vscode
 tests/map
+config/nightwatch.conf.js
