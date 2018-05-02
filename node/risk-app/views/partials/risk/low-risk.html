@@ -1,11 +1,12 @@
 <div class="low-risk">
-  <h1 class="heading-large">This address is in an area at {{#if isVeryLowRisk}}very{{/if}} low risk of flooding</h1>
+  <h1 class="heading-large">This location is in an area at {{#if isVeryLowRisk}}very{{/if}} low risk of flooding</h1>
   <p>Even if flooding doesn't threaten your location directly, it may still affect:</p>
   <ul class="list list-bullet">
     <li>transport</li>
     <li>power</li>
     <li>communications networks</li>
   </ul>
+  {{> risk/general-indicator-message }}
   <div class="no-print">
     <h3 class="heading-medium">Further information</h3>
     <p>

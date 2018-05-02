@@ -65,19 +65,7 @@
         <!-- Surface water -->
         <h2 class="heading-medium">The flood risk from surface water is {{surfaceWaterRisk}}</h2>
         <h3 class="heading-small">What this means</h3>
-        <p>
-          {{#if surfaceWaterRiskIsHigh}}
-            High risk means that each year this area has a chance of flooding of greater than 3.3%.
-          {{else if surfaceWaterRiskIsMedium}}
-            Medium risk means that each year this area has a chance of flooding of between 1% and 3.3%.
-          {{else if surfaceWaterRiskIsLow}}
-            Low risk means that each year this area has a chance of flooding of between 0.1% and 1%.
-          {{else if surfaceWaterRiskIsVeryLow}}
-            Very low risk means that each year this area has a chance of flooding of less than 0.1%.
-          {{/if}}
-          Flooding from surface water is difficult to predict as rainfall location and volume are difficult to forecast.
-        </p>
-
+        {{> risk/surface-water-explanations . }}
         <h3 class="heading-small">How to use this information</h3>
         <p>
           You can use this information to <a href="{{{mountPath}}}map?easting={{easting}}&northing={{northing}}&address={{address}}&map=SurfaceWater">see the approximate areas that would flood,

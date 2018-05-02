@@ -5,12 +5,14 @@
     </div>
     <div class="column-three-quarters">
       <div class="panel panel-border-wide hidden-mobile">
-        <h1 class="heading-large">This address is in {{#unless surfaceWaterRiskIsVeryLow}}or near {{/unless}}a flood risk area</h1>
+        <h1 class="heading-large">This location is in {{#unless surfaceWaterRiskIsVeryLow}}or near {{/unless}}a flood risk area</h1>
+        {{> risk/general-indicator-message }}
         <h2 class="heading-medium">Be prepared: things you should do</h2>
       </div>
       <div class="visible-mobile">
-        <h1 class="heading-large">This address is in {{#unless surfaceWaterRiskIsVeryLow}}or near {{/unless}}a flood risk area</h1>
+        <h1 class="heading-large">This location is in {{#unless surfaceWaterRiskIsVeryLow}}or near {{/unless}}a flood risk area</h1>
         <h2 class="heading-medium">Be prepared: things you should do</h2>
+        {{> risk/general-indicator-message }}
       </div>
     </div>
   </div>
@@ -63,7 +65,7 @@
         <li>
           <div class="panel panel-border-wide">
             <p>
-              This address is in {{#unless surfaceWaterRiskIsVeryLow}}or near {{/unless}} a flood risk area.<br>
+              This location is in {{#unless surfaceWaterRiskIsVeryLow}}or near {{/unless}} a flood risk area.<br>
             </p>
             <p>
               The flood risk from rivers or the sea is {{riverAndSeaRisk}}
