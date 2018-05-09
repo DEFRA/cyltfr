@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "chromedriver": "2.38.2",
-    "nightwatch": "0.9.19",
+    "nightwatch": "^1.0.6",
     "phantomjs-prebuilt": "2.1.16",
     "selenium-server-standalone-jar": "3.8.1",
     "standard": "10.0.3"

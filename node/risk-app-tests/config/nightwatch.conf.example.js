@@ -3,7 +3,7 @@ var chromedriver = require('chromedriver')
 var phantomjs = require('phantomjs-prebuilt')
 // Get the launchUrl from the argv,
 // otherwise default to localhost:3000
-var url = 'http://localhost:3000/long-term-flood-risk'
+var url = 'https://flood-tst.envage.co.uk/long-term-flood-risk'
 var urlIdx = process.argv.indexOf('--url')
 
 if (urlIdx > 1) {
@@ -32,7 +32,7 @@ module.exports = {
   },
   test_settings: {
     'default': {
-      // filter: 'tests/happy-path/index.js',
+      filter: 'tests/happy-path/index.js',
       launch_url: url,
       selenium_host: '127.0.0.1',
       selenium_port: 4444,

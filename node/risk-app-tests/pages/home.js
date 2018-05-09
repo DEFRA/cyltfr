@@ -6,6 +6,13 @@ module.exports = {
   elements: {
     'main': '#home-page',
     'form': '#home-page form',
+    'h1': '.heading-xlarge',
+    'para1': '.mission > p:nth-child(2)',
+    'list': '.list',
+    'para2': '.column-two-thirds > p:nth-child(2)',
+    'para3': '.column-two-thirds > p:nth-child(3)',
+    'para4': '.column-two-thirds > p:nth-child(4)',
+    'h3': '.heading-medium',
     'premisesText': '#premises',
     'postcodeText': '#postcode',
     'submitBtn': '#home-page form button[type=submit]',
