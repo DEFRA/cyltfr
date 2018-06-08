@@ -556,6 +556,10 @@
             <a href="#server/plugins/router.js"><span class="dirname">server/plugins/</span><span class="basename">router.js</span></a>
         </li>
         <li class="">
+            <span class="cov high">90.91</span>
+            <a href="#server/routes/error.js"><span class="dirname">server/routes/</span><span class="basename">error.js</span></a>
+        </li>
+        <li class="">
             <span class="cov high">100</span>
             <a href="#server/routes/index.js"><span class="dirname">server/routes/</span><span class="basename">index.js</span></a>
         </li>
@@ -579,7 +583,7 @@
           <div class="failures">0</div>
           <div class="skipped">0</div>
           <div class="test-count">1</div>
-          <div class="duration">560</div>
+          <div class="duration">614</div>
       </div>
       <div id="filters">
           <input type="checkbox" checked="" onchange="filter(this)" value="success" id="show-success">
@@ -604,7 +608,7 @@
               <td class="test-title">Integration /floodrisk/391416/102196/20
                   
               </td>
-              <td class="test-duration">278</td>
+              <td class="test-duration">385</td>
           </tr>
           </tbody>
       </table>
@@ -612,10 +616,10 @@
     </div>    <div id="coverage">
         <h1>Code Coverage Report</h1>
         <div class="stats high">
-            <div class="percentage">84.78%</div>
-            <div class="sloc">184</div>
-            <div class="hits">156</div>
-            <div class="misses">28</div>
+            <div class="percentage">85.20%</div>
+            <div class="sloc">196</div>
+            <div class="hits">167</div>
+            <div class="misses">29</div>
         </div>
         <div id="filters">
           <input type="checkbox" checked="" onchange="filter(this)" value="generated" id="show-generated">
@@ -1237,11 +1241,111 @@
                 </table>
             </div>
             <div class="file ">
+                <h2 id="server/routes/error.js">server/routes/error.js </h2>
+                <div class="stats high">
+                    <div class="percentage">90.91%</div>
+                    <div class="sloc">11</div>
+                    <div class="hits">10</div>
+                    <div class="misses">1</div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Line</th>
+                            <th>Lint</th>
+                            <th>Hits</th>
+                            <th>Source</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="server/routes/error.js__1" class="hit">
+                          <td class="line" data-tooltip>1</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip>1</td>
+                          <td class="source">const Boom &#x3D; require(&#x27;boom&#x27;)</td>
+                          
+                        </tr>            <tr id="server/routes/error.js__2" class="hit">
+                          <td class="line" data-tooltip>2</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
+                          
+                        </tr>            <tr id="server/routes/error.js__3" class="hit">
+                          <td class="line" data-tooltip>3</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip>1</td>
+                          <td class="source">module.exports &#x3D; {</td>
+                          
+                        </tr>            <tr id="server/routes/error.js__4" class="hit">
+                          <td class="line" data-tooltip>4</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">  method: &#x27;GET&#x27;,</td>
+                          
+                        </tr>            <tr id="server/routes/error.js__5" class="hit">
+                          <td class="line" data-tooltip>5</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">  path: &#x27;/error&#x27;,</td>
+                          
+                        </tr>            <tr id="server/routes/error.js__6" class="hit">
+                          <td class="line" data-tooltip>6</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">  options: {</td>
+                          
+                        </tr>            <tr id="server/routes/error.js__7" class="hit">
+                          <td class="line" data-tooltip>7</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">    description: &#x27;Path to test error handling&#x27;,</td>
+                          
+                        </tr>            <tr id="server/routes/error.js__8" class="hit">
+                          <td class="line" data-tooltip>8</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">    handler: async (request, h) &#x3D;&gt; {</td>
+                          
+                        </tr>            <tr id="server/routes/error.js__9" class="chunks">
+                          <td class="line" data-tooltip>9</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"><div>      </div><div class="miss never" data-tooltip>return Boom.badImplementation(&#x27;/error test path&#x27;, new Error())</div></td>
+                          
+                        </tr>            <tr id="server/routes/error.js__10" class="hit">
+                          <td class="line" data-tooltip>10</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">    }</td>
+                          
+                        </tr>            <tr id="server/routes/error.js__11" class="hit">
+                          <td class="line" data-tooltip>11</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">  }</td>
+                          
+                        </tr>            <tr id="server/routes/error.js__12" class="hit">
+                          <td class="line" data-tooltip>12</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">}</td>
+                          
+                        </tr>            <tr id="server/routes/error.js__13" class="hit">
+                          <td class="line" data-tooltip>13</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
+                          
+                        </tr>        </tbody>
+                </table>
+            </div>
+            <div class="file ">
                 <h2 id="server/routes/index.js">server/routes/index.js </h2>
                 <div class="stats high">
                     <div class="percentage">100%</div>
-                    <div class="sloc">4</div>
-                    <div class="hits">4</div>
+                    <div class="sloc">5</div>
+                    <div class="hits">5</div>
                     <div class="misses">0</div>
                 </div>
                 <table>
@@ -1271,16 +1375,22 @@
                           <td class="line" data-tooltip>3</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  require(&#x27;./is-england&#x27;)</td>
+                          <td class="source">  require(&#x27;./is-england&#x27;),</td>
                           
                         </tr>            <tr id="server/routes/index.js__4" class="hit">
                           <td class="line" data-tooltip>4</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">)</td>
+                          <td class="source">  require(&#x27;./error&#x27;)</td>
                           
                         </tr>            <tr id="server/routes/index.js__5" class="hit">
                           <td class="line" data-tooltip>5</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">)</td>
+                          
+                        </tr>            <tr id="server/routes/index.js__6" class="hit">
+                          <td class="line" data-tooltip>6</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
                           <td class="source"></td>

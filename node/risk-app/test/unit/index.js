@@ -792,7 +792,7 @@ lab.experiment('Unit', () => {
     const addressStub = mock.replace(addressService, 'findByPostcode', mock.makePromise('Mock Address Error'))
 
     const response = await server.inject(options)
-    Code.expect(response.statusCode).to.equal(400)
+    Code.expect(response.statusCode).to.equal(404)
     addressStub.revert()
   })
 
@@ -1241,5 +1241,15 @@ lab.experiment('Unit', () => {
     Code.expect(formatted1).to.equal('1:00am Saturday 01 April 2017')
     const formatted2 = helpers.formatDate('2017-04-01T00:00:00Z', 'DD MMMM YYYY')
     Code.expect(formatted2).to.equal('01 April 2017')
+  })
+
+  lab.test('404 for unknown query parameter', async () => {
+    const options = {
+      method: 'GET',
+      url: mountPath + '/search?test=test'
+    }
+
+    const response = await server.inject(options)
+    Code.expect(response.statusCode).to.equal(404)
   })
 })

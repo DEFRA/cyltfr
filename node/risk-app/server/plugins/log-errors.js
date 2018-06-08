@@ -13,7 +13,7 @@ exports.plugin = {
       if (response.isBoom) {
         // An error was raised during
         // processing the request
-        const statusCode = response.output.statusCode
+        const statusCode = response.message === 'Invalid request query input' ? 404 : response.output.statusCode
         const useErrorPages = request.route.settings.app.useErrorPages !== false
 
         // In the event of 404
