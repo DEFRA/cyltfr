@@ -792,7 +792,7 @@ lab.experiment('Unit', () => {
     const addressStub = mock.replace(addressService, 'findByPostcode', mock.makePromise('Mock Address Error'))
 
     const response = await server.inject(options)
-    Code.expect(response.statusCode).to.equal(404)
+    Code.expect(response.statusCode).to.equal(400)
     addressStub.revert()
   })
 
@@ -1250,6 +1250,6 @@ lab.experiment('Unit', () => {
     }
 
     const response = await server.inject(options)
-    Code.expect(response.statusCode).to.equal(404)
+    Code.expect(response.statusCode).to.equal(400)
   })
 })

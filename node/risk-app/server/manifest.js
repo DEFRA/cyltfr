@@ -17,7 +17,8 @@ const manifest = {
       security: true,
       validate: {
         options: {
-          abortEarly: false
+          abortEarly: false,
+          stripUnknown: true
         }
       }
     },
