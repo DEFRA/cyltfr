@@ -1,11 +1,22 @@
 const moment = require('moment')
+const HttpProxyAgent = require('http-proxy-agent')
 const config = require('../config')
 const wreck = require('wreck').defaults({
   timeout: config.httpTimeoutMs
 })
+let wreckExt
 
-function get (url, options) {
-  return wreck.get(url, options)
+if (config.http_proxy) {
+  wreckExt = require('wreck').defaults({
+    timeout: config.httpTimeoutMs,
+    agent: new HttpProxyAgent(config.http_proxy)
+  })
+}
+
+function get (url, options, ext = false) {
+  const thisWreck = (ext && wreckExt) ? wreckExt : wreck
+
+  return thisWreck.get(url, options)
     .then(response => {
       if (response.res.statusCode !== 200) {
         throw new Error('Requested resource returned a non 200 status code')
@@ -14,8 +25,8 @@ function get (url, options) {
     })
 }
 
-function getJson (url) {
-  return get(url, { json: true })
+function getJson (url, ext = false) {
+  return get(url, { json: true }, ext)
 }
 
 function formatDate (value, format) {
@@ -57,8 +68,8 @@ function convertLocationToNGR (location) {
     nstr = '0' + nstr
   }
   const ngr = String.fromCharCode(tmp + 65) +
-            String.fromCharCode(eX + 65) +
-            estr + nstr
+    String.fromCharCode(eX + 65) +
+    estr + nstr
   return ngr
 }
 
