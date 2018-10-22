@@ -30,7 +30,7 @@
     "good-squeeze": "5.0.2",
     "h2o2": "8.0.0",
     "handlebars": "4.0.11",
-    "http-proxy-agent": "^2.1.0",
+    "https-proxy-agent": "^2.2.1",
     "inert": "5.1.0",
     "joi": "13.1.1",
     "jquery": "3.3.1",
