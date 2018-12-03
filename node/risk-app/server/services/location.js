@@ -8,7 +8,7 @@ module.exports = {
   find: async function findByPlace (place) {
     const uri = sprintf.vsprintf(urlNamesApi, [place])
 
-    const payload = await util.getJson(uri)
+    const payload = await util.getJson(uri, true)
 
     if (!payload || !payload.results || !payload.results.length) {
       return []

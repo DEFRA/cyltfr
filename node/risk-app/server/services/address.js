@@ -22,7 +22,7 @@ const fuzzyOptions = {
 async function findById (id, callback) {
   const uri = sprintf.vsprintf(findByIdUrl, [id, config.key])
 
-  const payload = await util.getJson(uri)
+  const payload = await util.getJson(uri, true)
 
   if (!payload || !payload.results || payload.results.length !== 1) {
     throw new Error('Invalid response')
@@ -43,7 +43,7 @@ async function findById (id, callback) {
 async function find (premises, postcode) {
   const uri = sprintf.vsprintf(findByPostcodeUrl, [postcode, config.key])
 
-  const payload = await util.getJson(uri)
+  const payload = await util.getJson(uri, true)
 
   if (!payload || !payload.results || !payload.results.length) {
     return []

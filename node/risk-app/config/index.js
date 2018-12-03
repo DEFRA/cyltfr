@@ -5,6 +5,9 @@ const config = require('./server.json')
 // Validate config
 const result = Joi.validate(config, schema, { abortEarly: false })
 
+// Environment variables
+result.value.http_proxy = process.env.http_proxy
+
 // Throw if config is invalid
 if (result.error) {
   throw new Error('The server config is invalid. ' + result.error.message)
