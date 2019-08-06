@@ -1,12 +1,12 @@
-const Joi = require('joi')
-const Boom = require('boom')
+const joi = require('@hapi/joi')
+const boom = require('@hapi/boom')
 const service = require('../services')
 
 module.exports = {
   method: 'GET',
   path: '/floodrisk/{x}/{y}/{radius}',
   options: {
-    description: 'Get the long term flood risk associated with a point. Surface water risk is calculated based on a radius (metres) buffered point in polygon search.',
+    description: 'Get the long term flood risk associated with a point',
     handler: async (request, h) => {
       const params = request.params
 
@@ -17,13 +17,13 @@ module.exports = {
          * Do some assertions around the result we get back from the database
          */
         if (!result || !Array.isArray(result.rows) || result.rows.length !== 1) {
-          return Boom.badRequest('Invalid result', new Error('Expected an Array'))
+          return boom.badRequest('Invalid result', new Error('Expected an Array'))
         }
 
         const risk = result.rows[0].calculate_flood_risk
 
         if (!risk) {
-          return Boom.badRequest('Invalid result', new Error('Missing calculate_flood_risk key'))
+          return boom.badRequest('Invalid result', new Error('Missing calculate_flood_risk key'))
         }
 
         /*
@@ -84,14 +84,14 @@ module.exports = {
 
         return response
       } catch (err) {
-        return Boom.badRequest('Database call failed', err)
+        return boom.badRequest('Database call failed', err)
       }
     },
     validate: {
       params: {
-        x: Joi.number().required(),
-        y: Joi.number().required(),
-        radius: Joi.number().required()
+        x: joi.number().required(),
+        y: joi.number().required(),
+        radius: joi.number().required()
       }
     }
   }
