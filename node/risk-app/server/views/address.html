@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% from "components/select/macro.njk" import govukSelect %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">
+      Enter a postcode to check the flood risk
+    </h1>
+
+    <form method="post">
+      <div class="govuk-form-group">
+        <span class="govuk-label">Postcode</span>
+        <p class="govuk-body"><strong>{{postcode}}</strong> <a href='/postcode'>Change</a></p>
+      </div>
+
+      {{ govukSelect(addressSelect) }}
+
+      <input type="hidden" name="addresses" value="{{addresses}}" />
+      <button type="submit"
+        class="govuk-button govuk-button--start govuk-!-margin-top-2 govuk-!-margin-bottom-8">Continue</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

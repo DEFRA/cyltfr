@@ -1,25 +1,11 @@
-const Fuse = require('fuse.js')
 const sprintf = require('sprintf-js')
 const util = require('../util')
 const custodianCodes = require('../models/custodian-codes')
-const config = require('../../config').ordnanceSurvey
+const config = require('../config').ordnanceSurvey
 const findByIdUrl = config.urlUprn
 const findByPostcodeUrl = config.urlPostcode
-const fuzzyOptions = {
-  shouldSort: true,
-  includeScore: true,
-  caseSensitive: false,
-  findAllMatches: true,
-  threshold: 0.5,
-  keys: [
-    'BUILDING_NAME',
-    'BUILDING_NUMBER',
-    'SUB_BUILDING_NAME',
-    'ORGANISATION_NAME'
-  ]
-}
 
-async function findById (id, callback) {
+async function findById (id) {
   const uri = sprintf.vsprintf(findByIdUrl, [id, config.key])
 
   const payload = await util.getJson(uri, true)
@@ -40,7 +26,7 @@ async function findById (id, callback) {
   return address
 }
 
-async function find (premises, postcode) {
+async function find (postcode) {
   const uri = sprintf.vsprintf(findByPostcodeUrl, [postcode, config.key])
 
   const payload = await util.getJson(uri, true)
@@ -50,19 +36,8 @@ async function find (premises, postcode) {
   }
 
   const results = payload.results.map(item => item.DPA)
-  const fuse = new Fuse(results, fuzzyOptions)
-  const res = fuse.search(premises)
-  const exact = res.filter(r => !r.score)
 
-  let addresses = (exact.length ? exact : res).map(r => r.item)
-
-  if (!addresses.length) {
-    // We found no matches so return the
-    // top third of the original results
-    addresses = results.slice(0, Math.round(results.length / 3) + 1)
-  }
-
-  return addresses
+  return results
     .map(item => {
       return {
         uprn: item.UPRN,
@@ -74,6 +49,6 @@ async function find (premises, postcode) {
 }
 
 module.exports = {
-  find: find,
-  findById: findById
+  find,
+  findById
 }

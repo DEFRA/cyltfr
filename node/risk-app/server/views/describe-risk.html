@@ -1,0 +1,89 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h2 class="govuk-heading-xl">
+      How we describe risk
+    </h2>
+
+    <p class="govuk-body">This is how we describe the risk of flooding from surface water, rivers and the sea.
+    </p>
+
+    <table class="govuk-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="col">Risk Level</th>
+          <th class="govuk-table__header" scope="col">Likelihood</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="row">High</th>
+          <td class="govuk-table__cell"> Greater than 1 in 30 </td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="row">Medium</th>
+          <td class="govuk-table__cell">Between 1 in 30 and 1 in 100 </td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="row">Low</th>
+          <td class="govuk-table__cell">Between 1 in 100 and 1 in 1000</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="row">Very Low</th>
+          <td class="govuk-table__cell"> Less than 1 in 1000
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="govuk-body">These figures may seem low, but an area categorised as high risk is located in one of the areas most likely to
+      flood in England.</p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>5.9 million properties are at risk of flooding - 1 in 6 homes </li>
+      <li>£28,000 - the average cost of a home flooding</li>
+    </ul>
+
+    <h3 class="govuk-heading-s">A property can still flood if it’s: </h3>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>on a hill</li>
+      <li>not near a body of water like a river or stream</li>
+    </ul>
+
+    <details class="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+          Read more about who is at risk of flooding and the impact
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+        <p>
+          <strong>Anybody can be affected by flooding - even people who live on top floor flats. It can affect people in ways
+          that might not seem obvious at first.</strong>
+        </p>
+        <span><strong>It can impact your:</strong></span>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>health - through disease or impact on mental health</li>
+          <li> access to clean water</li>
+          <li> gas and electricity supplies</li>
+          <li>drainage - sewage has nowhere to go</li>
+          <li>doctor’s surgery or hospital</li>
+          <li>school or place of work</li>
+          <li>community centre or place of worship</li>
+          <li>shops or supermarkets</li>
+        </ul>
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+        <i>Department for Environment, Food and Rural Affairs (DEFRA) figures for 2018</i>
+      </div>
+    </details>
+
+
+    <a href="/postcode" role="button"
+      class="govuk-button govuk-button--start govuk-!-margin-top-2 govuk-!-margin-bottom-8">Continue</a>
+  </div>
+</div>
+{% endblock %}

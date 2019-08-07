@@ -18,7 +18,9 @@ const RiskLevel = {
 
 function RiskViewModel (risk, address) {
   const inTargetArea = risk.inFloodWarningArea || risk.inFloodAlertArea
-  const riverAndSeaRisk = risk.riverAndSeaRisk ? risk.riverAndSeaRisk.probabilityForBand : RiskLevel.VeryLow
+  const riverAndSeaRisk = risk.riverAndSeaRisk
+    ? risk.riverAndSeaRisk.probabilityForBand
+    : RiskLevel.VeryLow
   const surfaceWaterRisk = risk.surfaceWaterRisk || RiskLevel.VeryLow
   const reservoirRisk = !!(risk.reservoirRisk && risk.reservoirRisk.length)
 
@@ -103,6 +105,8 @@ function RiskViewModel (risk, address) {
     surfaceWaterRisk: surfaceWaterRisk,
     reservoirRisk: reservoirRisk
   })
+
+  this.me = JSON.stringify(this, null, 2)
 }
 
 module.exports = RiskViewModel

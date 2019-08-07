@@ -1,7 +1,7 @@
 module.exports = {
   method: 'GET',
-  path: '/',
+  path: '/describe-risk',
   handler: {
-    view: 'home'
+    view: 'describe-risk'
   }
 }
