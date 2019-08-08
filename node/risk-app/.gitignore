@@ -3,4 +3,5 @@
 node_modules
 npm-debug.log
 server/public/build
+config/server.json
 lcov.info
