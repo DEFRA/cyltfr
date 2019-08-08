@@ -7,7 +7,7 @@ const wreck = require('@hapi/wreck').defaults({
 let wreckExt
 
 if (config.http_proxy) {
-  wreckExt = require('wreck').defaults({
+  wreckExt = require('@hapi/wreck').defaults({
     timeout: config.httpTimeoutMs,
     agent: new HttpProxyAgent(config.http_proxy)
   })
