@@ -35,9 +35,10 @@ module.exports = {
     isCached: !config.isDev,
     context: {
       appVersion: pkg.version,
-      assetPath: '/assets',
+      mountPath: config.mountPath,
+      assetPath: `/${config.mountPath}/assets`,
       serviceName: 'Long term flood risk information',
-      serviceUrl: '/',
+      serviceUrl: `/${config.mountPath}/`,
       homepageUrl: '/',
       pageTitle: 'Long term flood risk information - GOV.UK',
       analyticsAccount: analyticsAccount

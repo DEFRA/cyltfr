@@ -12,13 +12,24 @@ async function createServer () {
           abortEarly: false
         }
       }
+    },
+    router: {
+      stripTrailingSlash: true
     }
   })
 
   // Register the plugins
-  await server.register(require('@hapi/inert'))
+  await server.register(require('@hapi/inert'), {
+    routes: {
+      prefix: config.mountPath && ('/' + config.mountPath)
+    }
+  })
   await server.register(require('./plugins/views'))
-  await server.register(require('./plugins/router'))
+  await server.register(require('./plugins/router'), {
+    routes: {
+      prefix: config.mountPath && ('/' + config.mountPath)
+    }
+  })
   await server.register(require('./plugins/rate-limit'))
   await server.register(require('./plugins/error-pages'))
   await server.register(require('blipp'))

@@ -1,3 +1,5 @@
+const config = require('../config')
+
 /*
 * Add an `onPreResponse` listener to return error pages
 */
@@ -35,7 +37,15 @@ module.exports = {
 
           // The return the `500` view
           return h.view('500').code(statusCode)
+        } else if (response.statusCode === 302 && config.mountPath) {
+          // If we are redirecting the reponse to a root relative and there's
+          // a mount path, prepend the mount path to the redirection location.
+          const location = response.headers.location
+          if (location.startsWith('/')) {
+            response.location('/' + config.mountPath + location)
+          }
         }
+
         return h.continue
       })
     }
