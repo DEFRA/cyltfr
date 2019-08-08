@@ -5,14 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "pm2 start config/pm2.json",
-    "clean": "bin/clean-public",
-    "copy": "npm run copy:assets && npm run copy:gov",
-    "copy:gov": "bin/copy-gov && bin/fix-layout.js",
-    "copy:assets": "bin/copy-assets",
     "build:css": "bin/build-css",
-    "build:js": "bin/build-js",
     "watch": "bin/watch",
-    "build": "npm run clean && npm run copy && npm run build:css && npm run build:js",
+    "build": "bin/build",
     "lint": "standard",
     "unit-test": "bin/unit-test",
     "test": "npm run lint && npm run unit-test"
@@ -25,12 +20,12 @@
     "@hapi/inert": "5.2.1",
     "@hapi/joi": "15.1.0",
     "@hapi/vision": "5.5.2",
-    "@hapi/wreck": "^15.0.1",
+    "@hapi/wreck": "15.0.1",
     "blipp": "4.0.0",
     "govuk-frontend": "3.0.0",
-    "hapi-rate-limit": "^4.0.0",
-    "https-proxy-agent": "^2.2.2",
-    "moment-timezone": "^0.5.26",
+    "hapi-rate-limit": "4.0.0",
+    "https-proxy-agent": "2.2.2",
+    "moment-timezone": "0.5.26",
     "nunjucks": "3.2.0"
   },
   "devDependencies": {
