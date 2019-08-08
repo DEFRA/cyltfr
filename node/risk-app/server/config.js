@@ -48,8 +48,6 @@ const schema = {
   env: joi.string().valid('development', 'test', 'production').default('development')
 }
 
-config.env = process.env.NODE_ENV
-
 // Validate config
 const result = joi.validate(config, schema, {
   abortEarly: false
@@ -62,6 +60,9 @@ if (result.error) {
 
 // Use the joi validated value
 const value = result.value
+
+value.env = process.env.NODE_ENV
+value.http_proxy = process.env.http_proxy
 
 // Add some helper props
 value.isDev = value.env === 'development'
