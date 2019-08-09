@@ -1,15 +1,13 @@
-const moment = require('moment-timezone')
+const moment = require('moment')
 const HttpProxyAgent = require('https-proxy-agent')
 const config = require('./config')
-const wreck = require('@hapi/wreck').defaults({
+const wreck = require('wreck').defaults({
   timeout: config.httpTimeoutMs
 })
 let wreckExt
 
-// const http = require('../test/ralph')
-
 if (config.http_proxy) {
-  wreckExt = require('@hapi/wreck').defaults({
+  wreckExt = require('wreck').defaults({
     timeout: config.httpTimeoutMs,
     agent: new HttpProxyAgent(config.http_proxy)
   })
@@ -29,6 +27,13 @@ function get (url, options, ext = false) {
 
 function getJson (url, ext = false) {
   return get(url, { json: true }, ext)
+}
+
+function formatDate (value, format) {
+  if (typeof format === 'undefined') {
+    format = 'h:mma dddd DD MMMM YYYY'
+  }
+  return moment(value).format(format)
 }
 
 function cleanseLocation (location) {
@@ -68,14 +73,10 @@ function convertLocationToNGR (location) {
   return ngr
 }
 
-function formatUTCDate (str) {
-  return moment.utc(str).tz('Europe/London').format('DD/MM/YYYY h:mma')
-}
-
 module.exports = {
-  get,
-  getJson,
-  formatUTCDate,
-  cleanseLocation,
-  convertLocationToNGR
+  get: get,
+  getJson: getJson,
+  formatDate: formatDate,
+  cleanseLocation: cleanseLocation,
+  convertLocationToNGR: convertLocationToNGR
 }

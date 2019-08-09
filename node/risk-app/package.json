@@ -28,7 +28,8 @@
     "https-proxy-agent": "^2.2.2",
     "moment-timezone": "0.5.26",
     "nunjucks": "3.2.0",
-    "proxy-from-env": "^1.0.0"
+    "proxy-from-env": "^1.0.0",
+    "wreck": "^14.2.0"
   },
   "devDependencies": {
     "@hapi/code": "6.0.0",
