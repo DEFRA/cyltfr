@@ -1,4 +1,4 @@
-const boom = require('@hapi/boom')
+const Boom = require('boom')
 
 module.exports = {
   method: 'GET',
@@ -6,7 +6,7 @@ module.exports = {
   options: {
     description: 'Path to test error handling',
     handler: async (request, h) => {
-      return boom.badImplementation('/error test path', new Error())
+      return Boom.badImplementation('/error test path', new Error())
     }
   }
 }

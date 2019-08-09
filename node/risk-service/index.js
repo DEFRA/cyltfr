@@ -1,8 +1,11 @@
-const createServer = require('./server')
+const glupe = require('glupe')
+const { manifest, options } = require('./server')
 
-createServer()
-  .then(server => server.start())
-  .catch(err => {
-    console.log(err)
+;(async () => {
+  try {
+    await glupe(manifest, options)
+  } catch (err) {
+    console.error(err)
     process.exit(1)
-  })
+  }
+})()
