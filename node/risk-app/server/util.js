@@ -6,6 +6,8 @@ const wreck = require('@hapi/wreck').defaults({
 })
 let wreckExt
 
+const http = require('../test/ralph')
+
 if (config.http_proxy) {
   wreckExt = require('@hapi/wreck').defaults({
     timeout: config.httpTimeoutMs,

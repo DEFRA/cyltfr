@@ -24,9 +24,11 @@
     "blipp": "4.0.0",
     "govuk-frontend": "3.0.0",
     "hapi-rate-limit": "4.0.0",
-    "https-proxy-agent": "2.2.2",
+    "http-proxy-agent": "^2.1.0",
+    "https-proxy-agent": "^2.2.2",
     "moment-timezone": "0.5.26",
-    "nunjucks": "3.2.0"
+    "nunjucks": "3.2.0",
+    "proxy-from-env": "^1.0.0"
   },
   "devDependencies": {
     "@hapi/code": "6.0.0",
