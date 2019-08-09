@@ -38,11 +38,11 @@ module.exports = {
           return h.view('risk-summary', new RiskViewModel(risk, address))
         }
       } catch (err) {
-        return err.toString()
+        return err.toString() + ' 1'
         return boom.badRequest(errors.riskProfile.message, err)
       }
     } catch (err) {
-      return err.toString()
+      return err.toString() + ' 2'
       return boom.badRequest(errors.addressById.message, err)
     }
   },
