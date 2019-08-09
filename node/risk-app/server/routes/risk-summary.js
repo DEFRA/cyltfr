@@ -4,6 +4,7 @@ const riskService = require('../services/risk')
 const addressService = require('../services/address')
 const RiskViewModel = require('../models/risk-view')
 const errors = require('../models/errors.json')
+const config = require('../config')
 
 module.exports = {
   method: 'GET',
@@ -38,11 +39,11 @@ module.exports = {
           return h.view('risk-summary', new RiskViewModel(risk, address))
         }
       } catch (err) {
-        return err.toString() + ' 1'
+        return err.toString() + ' 1' + ' ' + JSON.stringify(config)
         return boom.badRequest(errors.riskProfile.message, err)
       }
     } catch (err) {
-      return err.toString() + ' 2'
+      return err.toString() + ' 2' + ' ' + JSON.stringify(config)
       return boom.badRequest(errors.addressById.message, err)
     }
   },
