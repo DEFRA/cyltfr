@@ -25,3 +25,19 @@ Within postgres session:
 ### Use service
 
 do http `GET` on `http://{host}:8050/floodrisk/{x}/{y}/radius`
+
+# Environment variables
+(Be sure to describe any environment variables here by maintaining a list like this)
+
+| name     | description      | required | default |            valid            | notes |
+|----------|------------------|:--------:|---------|:---------------------------:|-------|
+| NODE_ENV | Node environment |    no    |         | development,test,production |       |
+| PORT     | Port number      |    no    | 3000    |                             |       |
+
+# Prerequisites
+
+Node v8+
+
+# Running the application
+
+`$ node index.js`
