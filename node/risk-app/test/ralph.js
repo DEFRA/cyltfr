@@ -1,5 +1,3 @@
-// process.env.HTTP_PROXY = 'http://localhost:8090'
-
 const wreck = require('@hapi/wreck')
 const HttpProxyAgent = require('http-proxy-agent')
 const HttpsProxyAgent = require('https-proxy-agent')
@@ -32,17 +30,20 @@ http.events.on('preRequest', (uri, options) => {
   }
 })
 
+function get (url, options, ext = false) {
+  // const thisWreck = (ext && wreckExt) ? wreckExt : wreck
+
+  return http.get(url, options)
+    .then(response => {
+      if (response.res.statusCode !== 200) {
+        throw new Error('Requested resource returned a non 200 status code')
+      }
+      return response.payload
+    })
+}
+
+function getJson (url, ext = false) {
+  return get(url, { json: true }, ext)
+}
+
 module.exports = http
-
-// http.get('http://localhost:8050/floodrisk/364924/373250/20', { json: true, agent: false })
-//   .then(response => {
-//     if (response.res.statusCode !== 200) {
-//       throw new Error('Requested resource returned a non 200 status code')
-//     }
-
-//     console.log(response.payload)
-//     return response.payload
-//   })
-//   .catch(err => {
-//     console.log(err)
-//   })
