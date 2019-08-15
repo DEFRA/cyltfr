@@ -1,5 +1,5 @@
-const Joi = require('joi')
-const Boom = require('boom')
+const Joi = require('@hapi/joi')
+const Boom = require('@hapi/boom')
 const helpers = require('../helpers')
 const addressService = require('../services/address')
 const SearchViewModel = require('../models/search-view')

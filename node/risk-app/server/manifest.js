@@ -29,17 +29,17 @@ const manifest = {
   register: {
     plugins: [
       {
-        plugin: 'inert'
+        plugin: '@hapi/inert'
       },
       {
-        plugin: 'vision',
+        plugin: '@hapi/vision',
         options: viewsOptions
       },
       {
-        plugin: 'h2o2'
+        plugin: '@hapi/h2o2'
       },
       {
-        plugin: 'good',
+        plugin: '@hapi/good',
         options: config.logging
       },
       {

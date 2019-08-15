@@ -1,4 +1,4 @@
-const Joi = require('joi')
+const Joi = require('@hapi/joi')
 
 const serverSchema = Joi.object().required().keys({
   protocol: Joi.string().required().allow(['http', 'https']),

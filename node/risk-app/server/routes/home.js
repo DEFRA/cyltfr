@@ -1,4 +1,4 @@
-const Joi = require('joi')
+const Joi = require('@hapi/joi')
 const HomeViewModel = require('../models/home-view')
 const helpers = require('../helpers')
 const errorMessages = {
