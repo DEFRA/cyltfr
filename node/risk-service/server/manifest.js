@@ -9,7 +9,7 @@ const manifest = {
   register: {
     plugins: [
       {
-        plugin: 'good',
+        plugin: '@hapi/good',
         options: config.logging
       },
       './plugins/log-errors',
