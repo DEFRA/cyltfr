@@ -19,14 +19,15 @@
     "@hapi/good-console": "8.1.1",
     "@hapi/good-squeeze": "5.2.1",
     "@hapi/inert": "5.2.1",
-    "@hapi/joi": "15.1.0",
+    "@hapi/joi": "15.1.1",
     "@hapi/vision": "5.5.3",
+    "blipp": "4.0.0",
     "node-hapi-airbrake": "0.1.3",
-    "pg": "7.4.1"
+    "pg": "7.12.1"
   },
   "devDependencies": {
     "@hapi/code": "6.0.0",
-    "@hapi/lab": "20.0.0",
-    "standard": "10.0.3"
+    "@hapi/lab": "20.1.0",
+    "standard": "14.0.0"
   }
 }

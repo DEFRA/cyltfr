@@ -12,6 +12,9 @@ const manifest = {
         plugin: '@hapi/good',
         options: config.logging
       },
+      {
+        plugin: 'blipp'
+      },
       './plugins/log-errors',
       './plugins/router'
     ]

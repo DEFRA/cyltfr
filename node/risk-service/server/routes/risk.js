@@ -6,7 +6,7 @@ module.exports = {
   method: 'GET',
   path: '/floodrisk/{x}/{y}/{radius}',
   options: {
-    description: 'Get the long term flood risk associated with a point. Surface water risk is calculated based on a radius (metres) buffered point in polygon search.',
+    description: 'Get the long term flood risk associated with a point.',
     handler: async (request, h) => {
       const params = request.params
 

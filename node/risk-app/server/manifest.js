@@ -43,6 +43,9 @@ const manifest = {
         options: config.logging
       },
       {
+        plugin: 'blipp'
+      },
+      {
         plugin: './plugins/router',
         options: routeOptions,
         routes: {
