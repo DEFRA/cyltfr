@@ -24,7 +24,9 @@ const schema = {
   logging: joi.object(),
   database: databaseSchema,
   errbit: errbitSchema,
-  env: joi.string().valid('development', 'test', 'production').default('development')
+  env: joi.string()
+    .valid('development', 'test', 'production')
+    .default('development')
 }
 
 config.env = process.env.NODE_ENV
