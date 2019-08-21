@@ -32,7 +32,7 @@ module.exports = [{
         }
 
         // Filter the english addresses
-        const englishAddresses = addresses.filter(a => (a.country !== 'WALES' && a.country !== 'SCOTLAND'))
+        const englishAddresses = addresses // .filter(a => (a.country !== 'WALES' && a.country !== 'SCOTLAND'))
 
         // If there are no english addresses, it must be in Scotland or Wales.
         if (!englishAddresses.length) {
@@ -79,7 +79,7 @@ module.exports = [{
       payload: {
         addresses: Joi.array().required().items(Joi.object().keys({
           address: Joi.string().required(),
-          country: Joi.string().required(),
+          // country: Joi.string().required(),
           postcode: Joi.string().required(),
           uprn: Joi.string().required()
         })),
