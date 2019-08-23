@@ -16,6 +16,13 @@ const RiskLevel = {
   High: 'High'
 }
 
+const RiskDescriptions = {
+  'Very Low': 'This area has less than 0.1% chance of %s each year',
+  Low: 'This area has between 0.1% and 1% chance of %s each year',
+  Medium: 'This area has between 1% and 3.3% chance of %s each year',
+  High: 'This area has a greater than 3.3% chance of %s each year'
+}
+
 function RiskViewModel (risk, address) {
   const inTargetArea = risk.inFloodWarningArea || risk.inFloodAlertArea
   const riverAndSeaRisk = risk.riverAndSeaRisk
@@ -24,6 +31,7 @@ function RiskViewModel (risk, address) {
   const surfaceWaterRisk = risk.surfaceWaterRisk || RiskLevel.VeryLow
   const reservoirRisk = !!(risk.reservoirRisk && risk.reservoirRisk.length)
 
+  // Set status
   if (inTargetArea) {
     this.status = RiskStatus.AtRisk
   } else {
@@ -39,24 +47,24 @@ function RiskViewModel (risk, address) {
     }
   }
 
-  this.isAtRisk = this.status === RiskStatus.AtRisk
-  this.isAtRiskMonitor = this.status === RiskStatus.AtRiskMonitor
-  this.isLowRisk = this.status === RiskStatus.LowRisk
-  this.isVeryLowRisk = this.status === RiskStatus.VeryLowRisk
-  this.isRisk = this.isAtRisk || this.isAtRiskMonitor
+  // this.isAtRisk = this.status === RiskStatus.AtRisk
+  // this.isAtRiskMonitor = this.status === RiskStatus.AtRiskMonitor
+  // this.isLowRisk = this.status === RiskStatus.LowRisk
+  // this.isVeryLowRisk = this.status === RiskStatus.VeryLowRisk
+  // this.isRisk = this.isAtRisk || this.isAtRiskMonitor
 
-  this.riverAndSeaRisk = riverAndSeaRisk.toLowerCase()
-  this.surfaceWaterRisk = surfaceWaterRisk.toLowerCase()
+  this.riverAndSeaRisk = riverAndSeaRisk // .toLowerCase()
+  this.surfaceWaterRisk = surfaceWaterRisk // .toLowerCase()
   this.reservoirRisk = reservoirRisk
 
-  this.riverAndSeaRiskIsHigh = riverAndSeaRisk === RiskLevel.High
-  this.riverAndSeaRiskIsMedium = riverAndSeaRisk === RiskLevel.Medium
-  this.riverAndSeaRiskIsLow = riverAndSeaRisk === RiskLevel.Low
-  this.riverAndSeaRiskIsVeryLow = riverAndSeaRisk === RiskLevel.VeryLow
-  this.surfaceWaterRiskIsHigh = surfaceWaterRisk === RiskLevel.High
-  this.surfaceWaterRiskIsMedium = surfaceWaterRisk === RiskLevel.Medium
-  this.surfaceWaterRiskIsLow = surfaceWaterRisk === RiskLevel.Low
-  this.surfaceWaterRiskIsVeryLow = surfaceWaterRisk === RiskLevel.VeryLow
+  // this.riverAndSeaRiskIsHigh = riverAndSeaRisk === RiskLevel.High
+  // this.riverAndSeaRiskIsMedium = riverAndSeaRisk === RiskLevel.Medium
+  // this.riverAndSeaRiskIsLow = riverAndSeaRisk === RiskLevel.Low
+  // this.riverAndSeaRiskIsVeryLow = riverAndSeaRisk === RiskLevel.VeryLow
+  // this.surfaceWaterRiskIsHigh = surfaceWaterRisk === RiskLevel.High
+  // this.surfaceWaterRiskIsMedium = surfaceWaterRisk === RiskLevel.Medium
+  // this.surfaceWaterRiskIsLow = surfaceWaterRisk === RiskLevel.Low
+  // this.surfaceWaterRiskIsVeryLow = surfaceWaterRisk === RiskLevel.VeryLow
 
   if (reservoirRisk) {
     this.reservoirs = risk.reservoirRisk.map(function (item) {
@@ -105,6 +113,14 @@ function RiskViewModel (risk, address) {
     surfaceWaterRisk: surfaceWaterRisk,
     reservoirRisk: reservoirRisk
   })
+
+  //
+
+  this.riversAndSeaText = RiskDescriptions[riverAndSeaRisk]
+    .replace('%s', 'flash flooding (surface water)')
+
+  this.surfaceWaterText = RiskDescriptions[surfaceWaterRisk]
+    .replace('%s', 'flooding from rivers or the sea')
 
   this.me = JSON.stringify(this, null, 2)
 }

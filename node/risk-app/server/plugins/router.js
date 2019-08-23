@@ -4,8 +4,12 @@ const routes = [].concat(
   require('../routes/postcode'),
   require('../routes/address'),
   require('../routes/england-only'),
-  require('../routes/risk-summary'),
-  require('../routes/public')
+  require('../routes/risk'),
+  require('../routes/map'),
+  require('../routes/confirmation'),
+  require('../routes/public'),
+  require('../routes/gwc-proxy'),
+  require('../routes/os-get-capabilities')
 )
 
 module.exports = {

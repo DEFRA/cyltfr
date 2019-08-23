@@ -1,41 +1,9 @@
 const joi = require('@hapi/joi')
 const boom = require('@hapi/boom')
 const { postcodeRegex } = require('../helpers')
+const floodService = require('../services/flood')
 const addressService = require('../services/address')
-
-class AddressModel {
-  constructor (postcode, addresses = [], errorMessage) {
-    this.postcode = postcode
-
-    const defaultOption = {
-      text: addresses.length === 1
-        ? '1 address found'
-        : `${addresses.length} addresses found`
-    }
-
-    const items = [defaultOption].concat(addresses.map(addr => ({
-      text: addr.address,
-      value: addr.uprn
-    })))
-
-    this.addressSelect = {
-      id: 'address',
-      name: 'address',
-      label: {
-        text: 'Select an address'
-      },
-      items
-    }
-
-    if (errorMessage) {
-      this.addressSelect.errorMessage = {
-        text: errorMessage
-      }
-    }
-
-    this.addresses = JSON.stringify(addresses)
-  }
-}
+const AddressViewModel = require('../models/address-model')
 
 module.exports = [{
   method: 'GET',
@@ -61,7 +29,7 @@ module.exports = [{
         .map(addr => ({ uprn: addr.uprn, address: addr.address }))
 
       if (!addresses || !addresses.length) {
-        return h.view('address', new AddressModel(postcode))
+        return h.view('address', new AddressViewModel(postcode))
       }
 
       // If there are no english addresses then
@@ -81,7 +49,9 @@ module.exports = [{
           (regionQueryString && `&region=${regionQueryString}`))
       }
 
-      return h.view('address', new AddressModel(postcode, englishAddresses))
+      const warnings = await floodService.findWarnings(postcode)
+
+      return h.view('address', new AddressViewModel(postcode, englishAddresses, null, warnings))
     } catch (err) {
       return boom.badRequest('An error occurred finding the address')
     }
@@ -107,11 +77,11 @@ module.exports = [{
 
     if (!address) {
       const errorMessage = 'Select an address'
-      const model = new AddressModel(postcode, addresses, errorMessage)
+      const model = new AddressViewModel(postcode, addresses, errorMessage)
       return h.view('address', model)
     }
 
-    return h.redirect(`/risk-summary?address=${address}`)
+    return h.redirect(`/risk?address=${address}`)
   },
   options: {
     validate: {

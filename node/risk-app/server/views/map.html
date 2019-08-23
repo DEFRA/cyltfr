@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div id="map-page">
+  <h1 class="govuk-heading-xl">
+    Flood risk maps
+  </h1>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+      <div class='sidebar'>
+        <select class="govuk-select">
+          {% for category in maps.categories %}
+          <optgroup label="{{category.name}}">
+            {% for map in category.maps %}
+            <option value="{{map.ref}}" title="{{map.title}}">{{map.name}}</option>
+            {% endfor %}
+          </optgroup>
+          {% endfor %}
+          <select>
+            <div id="legend"></div>
+
+            <!-- {% for category in maps.categories %}
+              <div id="{{ category.ref }}" title="{{ category.title }}" class="category">
+                <h2 class="govuk-heading-s">
+                  {{ category.name }}
+                </h2>
+                <ul class="govuk-list">
+                  {% for map in category.maps %}
+                    <li id="{{ map.ref }}">
+                      <a href="#{{ map.ref }}" title="{{ map.title }}" class="govuk-link">{{ map.name }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endfor %} -->
+      </div>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+      <!-- <h1 class="govuk-heading-xl">Rate Limited</h1>
+          <p class="govuk-body">This service is rate limited and you have exceeded the rate.</p>
+          <p class="govuk-body">Try again later.</p> -->
+      <!-- <pre>{{me}}</pre> -->
+      <div class="map-container">
+        <div id="progress"></div>
+        <div id="map"></div>
+        <!-- <div class="rhs">
+              <div class="controls">
+              </div>
+            </div> -->
+        <div id="map-overlay">
+          <div class="map-overlay-container">
+            <a class="map-overlay-close"></a>
+            <div class="map-overlay-content"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css"
+    type="text/css">
+  <style>
+    #map {
+      height: 570px;
+      width: 100%;
+    }
+  </style>
+  <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.5.0/proj4-src.js"></script>
+  <script
+    src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script src="{{ assetPath }}/nunjucks-slim.js"></script>
+  <script src="{{ assetPath }}/js/map.js"></script>
+  <script src="{{ assetPath }}/js/templates.js"></script>
+
+  <script>
+    // window.point = {{ maps | dump | safe }}
+    window.mapCategories = {{ maps | dump | safe }}
+  </script>
+
+  <script src="{{ assetPath }}/js/map-page.js"></script>
+</div>
+{% endblock %}

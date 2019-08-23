@@ -23,7 +23,8 @@ module.exports = [{
         path: [
           'server/public/static',
           'server/public/build',
-          'node_modules/govuk-frontend/govuk/assets'
+          'node_modules/govuk-frontend/govuk/assets',
+          'node_modules/nunjucks/browser'
         ]
       }
     }

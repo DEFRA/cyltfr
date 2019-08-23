@@ -18,18 +18,17 @@ async function createServer () {
     }
   })
 
+  const routeOptions = {
+    routes: {
+      prefix: config.mountPath && ('/' + config.mountPath)
+    }
+  }
+
   // Register the plugins
-  await server.register(require('@hapi/inert'), {
-    routes: {
-      prefix: config.mountPath && ('/' + config.mountPath)
-    }
-  })
+  await server.register(require('@hapi/h2o2'))
+  await server.register(require('@hapi/inert'), routeOptions)
   await server.register(require('./plugins/views'))
-  await server.register(require('./plugins/router'), {
-    routes: {
-      prefix: config.mountPath && ('/' + config.mountPath)
-    }
-  })
+  await server.register(require('./plugins/router'), routeOptions)
   await server.register(require('./plugins/rate-limit'))
   await server.register(require('./plugins/error-pages'))
   await server.register(require('blipp'))

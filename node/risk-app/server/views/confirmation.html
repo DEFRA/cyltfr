@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div id="confirmation-page">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <div class="govuk-panel govuk-panel--confirmation">
+        <h1 class="govuk-panel__title">Check complete</h1>
+        <!-- <div class="govuk-panel__body">
+        <a href="#" class="govuk-link govuk-link--white">Save your report</a>
+      </div> -->
+      </div>
+
+      <h2 class="govuk-heading-l">What you can do next</h2>
+
+      <p class="govuk-body">Based on your results we recommend that you:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>
+          <a class="govuk-link" target="_blank" href="https://www.gov.uk/government/publications/personal-flood-plan">
+            Create a personal flood plan</a>
+          for a list of things you should do
+        </li>
+        <li>
+          <a class="govuk-link" target="_blank" href="https://www.gov.uk/sign-up-for-flood-warnings">
+            Sign up for flood warnings</a>
+          by phone, email or text message
+        </li>
+        <li>
+          <a class="govuk-link" target="_blank"
+            href="https://flood-warning-information.service.gov.uk/river-and-sea-levels?location=bury">
+            Monitor river and sea levels</a>
+          to understand your flood risk now and in the next few days
+        </li>
+        <li>
+          <a class="govuk-link" target="_blank" href="https://www.gov.uk/prepare-for-flooding">
+            Read about how to prepare for flooding</a>
+          to get advice on protecting yourself and your property
+        </li>
+      </ul>
+
+
+      <h3 class="govuk-heading-m">You can also:</h3>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>
+          <a class="govuk-link" target="_blank" href="https://www.bury.gov.uk/index.aspx?articleid=12167">
+            Contact your LLFA</a>
+          if you want more detailed information about your surface water flood risk
+        </li>
+        <li>
+          <a class="govuk-link" target="_blank" href="https://www.gov.uk/prepare-for-flooding/get-insurance">
+            Contact the Environment Agency</a>
+          if your insurer asks for evidence of your flood risk
+        </li>
+        <li>
+          <a class="govuk-link" target="_blank"
+            href="https://www.facebook.com/SpottedRadcliffe/posts/radcliffe-residents-flood-action-group-committee-update-please-share-with-anyone/1123349227728765/">
+            Join a flood action group</a>
+          - local volunteers who offer help and support to your community
+        </li>
+        <li>
+          Share your flood risk with your community on <a class="govuk-link"
+            href="https://www.facebook.com">Facebook</a>
+          or <a class="govuk-link" href="https://www.twitter.com">Twitter</a>
+        </li>
+      </ul>
+
+      <div class="govuk-!-margin-top-8">
+        <a href="/{{ mountPath }}/postcode" role="button" class="govuk-button govuk-!-margin-right-2">
+          Check another area</a>
+        <!-- <a href="#" class="govuk-button govuk-button--secondary">
+        Save as PDF
+      </a> -->
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

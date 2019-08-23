@@ -1,26 +1,48 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<div class="govuk-grid-row" id="england-only-page">
-  <div class="govuk-grid-column-two-thirds">
-    <nav class="nojs-hide">
-      <a href="javascript:window.history.go(-1)" class="govuk-back-link">Back</a>
-    </nav>
-    <h1 class="govuk-heading-xl">This service is for postcodes in England only</h1>
-    {% if isWales %}
+<div id="england-only-page">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <nav class="nojs-hide">
+        <a href="javascript:window.history.go(-1)" class="govuk-back-link">Back</a>
+      </nav>
+      <h1 class="govuk-heading-xl">This service is for postcodes in England only</h1>
+      {% if isWales %}
       <p class="govuk-body">The postcode you entered is in Wales.</p>
-      <p class="govuk-body">Find <a href="https://naturalresources.wales/evidence-and-data/maps/long-term-flood-risk/?lang=en">flood information for Wales.</a></p>
-    {% elseif isScotland %}
-      <p class="govuk-body">The postcode you entered is in Scotland.</p>
-      <p class="govuk-body">Find <a href="https://www.sepa.org.uk/environment/water/flooding/flood-maps/">flood information for Scotland.</a></p>
-    {% elseif isNorthernIreland %}
+      <p class="govuk-body">
+        Find <a class="govuk-link"
+          href="https://naturalresources.wales/evidence-and-data/maps/long-term-flood-risk/?lang=en">
+          flood information for Wales.</a>
+      </p>
+      {% elseif isScotland %}
+      <p class="govuk-body">
+        The postcode you entered is in Scotland.
+      </p>
+      <p class="govuk-body">
+        Find <a class="govuk-link" href="https://www.sepa.org.uk/environment/water/flooding/flood-maps/">flood
+          information
+          for Scotland.</a></p>
+      {% elseif isNorthernIreland %}
       <p class="govuk-body">The postcode you entered is in Northern Ireland.</p>
-      <p class="govuk-body">Find <a href="https://www.nidirect.gov.uk/articles/check-the-risk-of-flooding-in-your-area">flood information for  Northern Ireland.</a></p>
-    {% else %}
-      <p class="govuk-body">Find <a href="https://naturalresources.wales/evidence-and-data/maps/long-term-flood-risk/?lang=en">flood information for Wales.</a>
-      <p class="govuk-body">Find <a href="https://www.sepa.org.uk/environment/water/flooding/flood-maps/">flood information for Scotland.</a></p>
-      <p class="govuk-body">Find <a href="https://www.nidirect.gov.uk/articles/check-the-risk-of-flooding-in-your-area">flood information for Northern Ireland.</a></p>
-    {% endif %}
+      <p class="govuk-body">
+        Find <a class="govuk-link"
+          href="https://www.nidirect.gov.uk/articles/check-the-risk-of-flooding-in-your-area">flood information for
+          Northern Ireland.</a></p>
+      {% else %}
+      <p class="govuk-body">Find <a class="govuk-link"
+          href="https://naturalresources.wales/evidence-and-data/maps/long-term-flood-risk/?lang=en">flood information
+          for
+          Wales.</a>
+        <p class="govuk-body">
+          Find <a href="https://www.sepa.org.uk/environment/water/flooding/flood-maps/">flood information for
+            Scotland.</a></p>
+        <p class="govuk-body">
+          Find <a class="govuk-link"
+            href="https://www.nidirect.gov.uk/articles/check-the-risk-of-flooding-in-your-area">flood information for
+            Northern Ireland.</a></p>
+        {% endif %}
+    </div>
   </div>
 </div>
 {% endblock %}

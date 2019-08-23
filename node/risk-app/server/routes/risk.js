@@ -4,16 +4,14 @@ const riskService = require('../services/risk')
 const addressService = require('../services/address')
 const RiskViewModel = require('../models/risk-view')
 const errors = require('../models/errors.json')
-const config = require('../config')
 
 module.exports = {
   method: 'GET',
-  path: '/risk-summary',
+  path: '/risk',
   handler: async (request, h) => {
     try {
       const address = await addressService.findById(request.query.address)
-      const x = address.x
-      const y = address.y
+      const { x, y } = address
       const radius = 20
 
       try {
@@ -28,22 +26,20 @@ module.exports = {
 
         if (hasError) {
           return boom.badRequest(errors.spatialQuery.message, {
-            risk: risk,
-            address: address
+            risk,
+            address
           })
         }
 
         if (!risk.inEngland) {
           return h.redirect(`/england-only?uprn=${encodeURIComponent(address.uprn)}`)
         } else {
-          return h.view('risk-summary', new RiskViewModel(risk, address))
+          return h.view('risk', new RiskViewModel(risk, address))
         }
       } catch (err) {
-        return err.toString() + ' 1' + ' ' + JSON.stringify(config)
         return boom.badRequest(errors.riskProfile.message, err)
       }
     } catch (err) {
-      return err.toString() + ' 2' + ' ' + JSON.stringify(config)
       return boom.badRequest(errors.addressById.message, err)
     }
   },

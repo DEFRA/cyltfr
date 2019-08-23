@@ -1,0 +1,33 @@
+{% if title %}
+<h3 class="govuk-heading-m govuk-visually-hidden">{{ title }}</h3>
+{% endif %}
+<br>
+<h3 class="govuk-heading-s">Legend</h3>
+{% if subTitle %}
+<p class="govuk-body-s">{{ subTitle }}</p>
+{% endif %}
+
+<ul class="govuk-list">
+  {% for key in keys %}
+  <li>
+    {% if key.id %}
+    <div class="legend-item round {{ key.icon }}">
+      <a class="govuk-link" href="risk-types#{{ key.id }}" data-id="{{ key.id }}">
+        {{ key.text }}
+      </a>
+    </div>
+    {% else %}
+    <div class="legend-item round {{ key.icon }}">
+      <span>{{ key.text }}</span>
+    </div>
+    {% endif %}
+  </li>
+  {% endfor %}
+  {% if hasLocation %}
+  <li>
+    <div class="legend-item crosshair">
+      <span>Location you selected</span>
+    </div>
+  </li>
+  {% endif %}
+</ul>

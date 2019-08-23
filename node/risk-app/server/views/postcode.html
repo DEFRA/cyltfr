@@ -3,26 +3,38 @@
 {% from "components/input/macro.njk" import govukInput %}
 
 {% block content %}
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-    <h1 class="govuk-heading-xl">
-      Enter a postcode to check the flood risk
-    </h1>
+<div id="postcode-page">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">
+        Find an address to check the flood risk
+      </h1>
 
-    <form method="post">
-      {{ govukInput(postcodeInput) }}
-      <p><a href="#" class="govuk-link">Don't know the postcode</a></p>
-      <p><a href="#" class="govuk-link">Select area on map</a></p>
-      <div class="govuk-warning-text">
-        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-        <strong class="govuk-warning-text__text">
-          <span class="govuk-warning-text__assistive">Warning</span>
-          This service will tell you the flood risk of an area, not a specific property
-        </strong>
-      </div>
-      <button type="submit"
-        class="govuk-button govuk-button--start govuk-!-margin-top-2 govuk-!-margin-bottom-8">Find area</button>
-    </form>
+      <form method="post">
+        {{ govukInput(postcodeInput) }}
+        <!-- <p><a href="#" class="govuk-link">Select area on map</a></p> -->
+        <div class="govuk-warning-text">
+          <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+          <strong class="govuk-warning-text__text">
+            <span class="govuk-warning-text__assistive">Warning</span>
+            This service will tell you the flood risk of an area, not a specific property
+          </strong>
+        </div>
+        <button type="submit" class="govuk-button">Find address</button>
+      </form>
+
+      <details class="govuk-details" data-module="govuk-details">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">
+            Don't know the postcode?
+          </span>
+        </summary>
+        <div class="govuk-details__text">
+          You can <a href="http://www.royalmail.com/find-a-postcode" target="_blank">check the postcode at Royal
+            Mail</a>
+        </div>
+      </details>
+    </div>
   </div>
 </div>
 {% endblock %}

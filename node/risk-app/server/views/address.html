@@ -3,24 +3,39 @@
 {% from "components/select/macro.njk" import govukSelect %}
 
 {% block content %}
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-    <h1 class="govuk-heading-xl">
-      Enter a postcode to check the flood risk
-    </h1>
+<div id="address-page">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">
+        Find an address to check the flood risk
+      </h1>
 
-    <form method="post">
-      <div class="govuk-form-group">
-        <span class="govuk-label">Postcode</span>
-        <p class="govuk-body"><strong>{{postcode}}</strong> <a href='postcode'>Change</a></p>
-      </div>
+      <form method="post">
+        <div class="govuk-form-group">
+          <span class="govuk-label">Postcode</span>
+          <p class="govuk-body"><strong>{{ postcode }}</strong> <a href='/{{ mountPath }}/postcode'>Change</a></p>
+        </div>
 
-      {{ govukSelect(addressSelect) }}
+        {{ govukSelect(addressSelect) }}
 
-      <input type="hidden" name="addresses" value="{{addresses}}" />
-      <button type="submit"
-        class="govuk-button govuk-button--start govuk-!-margin-top-2 govuk-!-margin-bottom-8">Continue</button>
-    </form>
+        <input type="hidden" name="addresses" value="{{ addresses }}" />
+
+        {% if banner %}
+        <div class="govuk-warning-text">
+          <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+          <strong class="govuk-warning-text__text">
+            <span class="govuk-warning-text__assistive">Warning</span>
+            {{ banner.message }}
+            {% if banner.url %}
+            <a class="govuk-link" href="{{ banner.url }}" target="_blank">View details</a>
+            {% endif %}
+          </strong>
+        </div>
+        {% endif %}
+
+        <button type="submit" class="govuk-button">Continue</button>
+      </form>
+    </div>
   </div>
 </div>
 {% endblock %}
