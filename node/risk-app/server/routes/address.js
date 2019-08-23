@@ -4,6 +4,7 @@ const { postcodeRegex } = require('../helpers')
 const floodService = require('../services/flood')
 const addressService = require('../services/address')
 const AddressViewModel = require('../models/address-model')
+const errors = require('../models/errors.json')
 
 module.exports = [{
   method: 'GET',
@@ -53,7 +54,7 @@ module.exports = [{
 
       return h.view('address', new AddressViewModel(postcode, englishAddresses, null, warnings))
     } catch (err) {
-      return boom.badRequest('An error occurred finding the address')
+      return boom.badRequest(err.toString() + ' ' + errors.addressByPostcode)
     }
   },
   options: {
