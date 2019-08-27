@@ -14,29 +14,30 @@ module.exports = [{
     const proxyUrl2 = getProxyForUrl(findByIdUri)
     const proxyUrl1 = getProxyForUrl(findByPostcodeUri)
 
-    const wreck = config.http_proxy ? require('@hapi/wreck').defaults({
-      timeout: config.httpTimeoutMs,
-      agent: new HttpsProxyAgent(config.http_proxy)
-    }) : require('@hapi/wreck')
-
-    try {
-      const data = await wreck.get(findByPostcodeUri, { json: true })
-
-      return {
-        data: data.payload,
-        proxyUrl1,
-        proxyUrl2,
-        http_proxy: process.env.HTTP_PROXY,
-        https_proxy: process.env.HTTPS_PROXY
-      }
-    } catch (err) {
-      return {
-        err,
-        proxyUrl1,
-        proxyUrl2,
-        http_proxy: process.env.HTTP_PROXY,
-        https_proxy: process.env.HTTPS_PROXY
-      }
+    return {
+      proxyUrl1,
+      proxyUrl2,
+      http_proxy: process.env.HTTP_PROXY,
+      https_proxy: process.env.HTTPS_PROXY
     }
+
+    // const wreck = config.http_proxy ? require('@hapi/wreck').defaults({
+    //   timeout: config.httpTimeoutMs,
+    //   agent: new HttpsProxyAgent(config.http_proxy)
+    // }) : require('@hapi/wreck')
+
+    // try {
+    //   const data = await wreck.get(findByPostcodeUri, { json: true })
+
+    //   return {
+    //     data: data.payload,
+    //     proxyUrl1,
+    //     proxyUrl2,
+    //     http_proxy: process.env.HTTP_PROXY,
+    //     https_proxy: process.env.HTTPS_PROXY
+    //   }
+    // } catch (err) {
+      
+    // }
   }
 }]
