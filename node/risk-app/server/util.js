@@ -6,12 +6,12 @@ const wreck = require('@hapi/wreck').defaults({
 })
 let wreckExt
 
-const http = require('../test/ralph')
+// const http = require('../test/ralph')
 
-if ('http://devpxlb01.aws-int.defra.cloud:3128') {
+if (config.http_proxy) {
   wreckExt = require('@hapi/wreck').defaults({
     timeout: config.httpTimeoutMs,
-    agent: new HttpsProxyAgent('http://devpxlb01.aws-int.defra.cloud:3128')
+    agent: new HttpsProxyAgent(config.http_proxy)
   })
 }
 
