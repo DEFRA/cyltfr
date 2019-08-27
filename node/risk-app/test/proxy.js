@@ -1,4 +1,4 @@
-process.env.HTTP_PROXY = 'http://ip-10-64-66-34.eu-west-2.compute.internal:8090'
+// process.env.HTTP_PROXY = 'http://ip-10-64-66-34.eu-west-2.compute.internal:8090'
 
 const wreck = require('@hapi/wreck')
 const HttpProxyAgent = require('http-proxy-agent')

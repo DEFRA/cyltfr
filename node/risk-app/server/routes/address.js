@@ -54,7 +54,7 @@ module.exports = [{
 
       return h.view('address', new AddressViewModel(postcode, englishAddresses, null, warnings))
     } catch (err) {
-      return boom.badRequest(err.toString() + ' ' + errors.addressByPostcode)
+      return boom.badRequest(err.toString() + ' ' + errors.addressByPostcode.message)
     }
   },
   options: {
