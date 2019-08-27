@@ -62,7 +62,7 @@ if (result.error) {
 
 // Use the joi validated value
 const value = result.value
-value.http_proxy = process.env.HTTP_PROXY
+value.http_proxy = process.env.http_proxy
 
 // Add some helper props
 value.isDev = value.env === 'development'

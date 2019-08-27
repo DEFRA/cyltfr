@@ -17,8 +17,8 @@ module.exports = [{
     return {
       proxyUrl1,
       proxyUrl2,
-      http_proxy: process.env.HTTP_PROXY,
-      https_proxy: process.env.HTTPS_PROXY
+      http_proxy: process.env.http_proxy,
+      https_proxy: process.env.https_proxy
     }
 
     // const wreck = config.http_proxy ? require('@hapi/wreck').defaults({
