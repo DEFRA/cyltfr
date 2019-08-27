@@ -26,10 +26,11 @@ module.exports = [{
     const o = { proxyUrl1, proxyUrl2, config }
 
     try {
-      const wreck = require('@hapi/wreck').defaults({
-        timeout: config.httpTimeoutMs,
-        agent: new HttpsProxyAgent('http://devpxlb01.aws-int.defra.cloud:3128')
-      })
+      const wreck = require('@hapi/wreck')
+      // .defaults({
+      //   timeout: config.httpTimeoutMs,
+      //   agent: new HttpsProxyAgent('http://devpxlb01.aws-int.defra.cloud:3128')
+      // })
 
       const data = await wreck.get(bannerUrl, { json: true })
 
