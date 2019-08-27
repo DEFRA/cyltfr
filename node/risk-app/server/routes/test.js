@@ -5,6 +5,8 @@ const config = require('../config').ordnanceSurvey
 const findByIdUrl = config.urlUprn
 const findByPostcodeUrl = config.urlPostcode
 
+const bannerUrl = 'https://flood-dev.aws.defra.cloud/api/warnings?location=cw8%204aa'
+
 module.exports = [{
   method: 'GET',
   path: '/test',
@@ -29,7 +31,7 @@ module.exports = [{
         agent: new HttpsProxyAgent('http://devpxlb01.aws-int.defra.cloud:3128')
       })
 
-      const data = await wreck.get(findByPostcodeUri, { json: true })
+      const data = await wreck.get(bannerUrl, { json: true })
 
       return {
         o,
