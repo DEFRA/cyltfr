@@ -16,9 +16,9 @@ if (config.http_proxy) {
 }
 
 function get (url, options, ext = false) {
-  // const thisWreck = (ext && wreckExt) ? wreckExt : wreck
+  const thisWreck = (ext && wreckExt) ? wreckExt : wreck
 
-  return http.get(url, options)
+  return thisWreck.get(url, options)
     .then(response => {
       if (response.res.statusCode !== 200) {
         throw new Error('Requested resource returned a non 200 status code')
