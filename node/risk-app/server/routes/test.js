@@ -26,7 +26,7 @@ module.exports = [{
     try {
       const wreck = require('@hapi/wreck').defaults({
         timeout: config.httpTimeoutMs,
-        agent: new HttpsProxyAgent('https://devpxlb01.aws-int.defra.cloud:3128')
+        agent: new HttpsProxyAgent('http://devpxlb01.aws-int.defra.cloud:3128')
       })
 
       const data = await wreck.get(findByPostcodeUri, { json: true })

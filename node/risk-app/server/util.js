@@ -4,21 +4,21 @@ const config = require('./config')
 const wreck = require('@hapi/wreck').defaults({
   timeout: config.httpTimeoutMs
 })
-let wreckExt
+// let wreckExt
 
 const http = require('../test/ralph')
 
-if (config.http_proxy) {
-  wreckExt = require('@hapi/wreck').defaults({
-    timeout: config.httpTimeoutMs,
-    agent: new HttpProxyAgent(config.http_proxy)
-  })
-}
+// if (config.http_proxy) {
+//   wreckExt = require('@hapi/wreck').defaults({
+//     timeout: config.httpTimeoutMs,
+//     agent: new HttpProxyAgent(config.http_proxy)
+//   })
+// }
 
 function get (url, options, ext = false) {
-  const thisWreck = (ext && wreckExt) ? wreckExt : wreck
+  // const thisWreck = (ext && wreckExt) ? wreckExt : wreck
 
-  return thisWreck.get(url, options)
+  return http.get(url, options)
     .then(response => {
       if (response.res.statusCode !== 200) {
         throw new Error('Requested resource returned a non 200 status code')
