@@ -5,7 +5,7 @@ const floodWarningsUrl = config.floodWarningsUrl
 async function findWarnings (location) {
   const url = floodWarningsUrl + '/api/warnings?location=' + location
 
-  return util.getJson(url)
+  return util.getJson(url, true)
 }
 
 module.exports = {
