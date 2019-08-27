@@ -14,16 +14,16 @@ module.exports = [{
     const proxyUrl2 = getProxyForUrl(findByIdUri)
     const proxyUrl1 = getProxyForUrl(findByPostcodeUri)
 
-    const wreck = require('@hapi/wreck').defaults({
+    const wreck = config.http_proxy ? require('@hapi/wreck').defaults({
       timeout: config.httpTimeoutMs,
       agent: new HttpsProxyAgent(config.http_proxy)
-    })
+    }) : require('@hapi/wreck')
 
     try {
       const data = await wreck.get(findByPostcodeUri, { json: true })
 
       return {
-        data,
+        data: data.payload,
         proxyUrl1,
         proxyUrl2,
         http_proxy: process.env.HTTP_PROXY,
