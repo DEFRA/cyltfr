@@ -1,17 +1,17 @@
 const moment = require('moment-timezone')
-const HttpProxyAgent = require('https-proxy-agent')
+const HttpsProxyAgent = require('https-proxy-agent')
 const config = require('./config')
 const wreck = require('@hapi/wreck').defaults({
   timeout: config.httpTimeoutMs
 })
 let wreckExt
 
-// const http = require('../test/ralph')
+const http = require('../test/ralph')
 
-if (config.http_proxy) {
+if ('http://devpxlb01.aws-int.defra.cloud:3128') {
   wreckExt = require('@hapi/wreck').defaults({
     timeout: config.httpTimeoutMs,
-    agent: new HttpProxyAgent(config.http_proxy)
+    agent: new HttpsProxyAgent('http://devpxlb01.aws-int.defra.cloud:3128')
   })
 }
 
