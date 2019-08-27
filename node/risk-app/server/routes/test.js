@@ -13,7 +13,10 @@ module.exports = [{
     const findByPostcodeUri = sprintf.vsprintf(findByPostcodeUrl, ['CW8 4AA', config.key])
     const proxyUrl2 = getProxyForUrl(findByIdUri)
     const proxyUrl1 = getProxyForUrl(findByPostcodeUri)
-
+    const wreck = config.http_proxy ? require('@hapi/wreck').defaults({
+      timeout: config.httpTimeoutMs,
+      agent: new HttpsProxyAgent(config.http_proxy)
+    }) : require('@hapi/wreck')
     return {
       proxyUrl1,
       proxyUrl2,
