@@ -9,7 +9,8 @@ const routes = [].concat(
   require('../routes/confirmation'),
   require('../routes/public'),
   require('../routes/gwc-proxy'),
-  require('../routes/os-get-capabilities')
+  require('../routes/os-get-capabilities'),
+  require('../routes/feedback')
 )
 
 module.exports = {
