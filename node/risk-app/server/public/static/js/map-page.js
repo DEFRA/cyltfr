@@ -15,15 +15,15 @@
   function mapPage () {
     var mapRefs = [].concat.apply([], mapCategories.categories.map(c => c.maps))
 
-    var selected = 'selected'
+    // var selected = 'selected'
     var $page = $('main#map-page')
     var $container = $('.map-container')
     var $sidebar = $('.sidebar')
     var $selector = $('select', $sidebar)
     var $error = $('#error-message', $container)
     var $query = $('input[name=location]', $container)
-    var $categories = $sidebar.children('.category')
-    var $maps = $categories.find('li')
+    // var $categories = $sidebar.children('.category')
+    // var $maps = $categories.find('li')
     var $map = $('#map')
     var $body = $(document.body)
 

@@ -1,4 +1,3 @@
-const moment = require('moment')
 const maps = require('./maps.json')
 
 function MapViewModel (easting, northing, address) {
@@ -9,7 +8,7 @@ function MapViewModel (easting, northing, address) {
   this.local = !!easting
   this.noIndex = this.local
   this.date = Date.now()
-  this.year = moment(Date.now()).format('YYYY')
+  this.year = new Date().getFullYear()
   this.pageTitle = 'Long term flood risk map for England - GOV.UK'
 }
 

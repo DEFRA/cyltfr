@@ -22,7 +22,10 @@ module.exports = {
           risk.inFloodAlertArea === 'Error' ||
           risk.riverAndSeaRisk === 'Error' ||
           risk.surfaceWaterRisk === 'Error' ||
-          risk.reservoirRisk === 'Error'
+          risk.reservoirRisk === 'Error' ||
+          risk.surfaceWaterSuitability === 'Error' ||
+          risk.leadLocalFloodAuthority === 'Error' ||
+          risk.extraInfo === 'Error'
 
         if (hasError) {
           return boom.badRequest(errors.spatialQuery.message, {

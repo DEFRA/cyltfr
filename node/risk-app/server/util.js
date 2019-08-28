@@ -1,4 +1,3 @@
-const moment = require('moment-timezone')
 const HttpsProxyAgent = require('https-proxy-agent')
 const config = require('./config')
 const wreck = require('@hapi/wreck').defaults({
@@ -66,14 +65,9 @@ function convertLocationToNGR (location) {
   return ngr
 }
 
-function formatUTCDate (str) {
-  return moment.utc(str).tz('Europe/London').format('DD/MM/YYYY h:mma')
-}
-
 module.exports = {
   get,
   getJson,
-  formatUTCDate,
   cleanseLocation,
   convertLocationToNGR
 }

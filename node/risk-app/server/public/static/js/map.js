@@ -1,4 +1,4 @@
-/* global GOVUK */
+/* global */
 
 var $ = window.$
 // // proj4 is accessed using global variable within openlayers library

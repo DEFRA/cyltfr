@@ -29,7 +29,7 @@ async function createServer () {
   await server.register(require('@hapi/inert'), routeOptions)
   await server.register(require('./plugins/views'))
   await server.register(require('./plugins/router'), routeOptions)
-  await server.register(require('./plugins/rate-limit'))
+  // await server.register(require('./plugins/rate-limit'))
   await server.register(require('./plugins/error-pages'))
   await server.register(require('blipp'))
 

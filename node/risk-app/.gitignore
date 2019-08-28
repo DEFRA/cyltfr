@@ -5,3 +5,4 @@ npm-debug.log
 server/public/build
 config/server.json
 lcov.info
+test/output.html

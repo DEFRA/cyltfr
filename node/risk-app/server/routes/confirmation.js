@@ -4,14 +4,11 @@ module.exports = {
   method: 'GET',
   path: '/confirmation',
   handler: async (request, h) => {
-    const model = {
-      isWales: request.query.region === 'wales',
-      isScotland: request.query.region === 'scotland',
-      isNorthernIreland: request.query.region === 'northern-ireland'
-    }
+    const model = {}
 
     return h.view('confirmation', model)
-  },
+  }
+  // ,
   // options: {
   //   description: 'Get the england only page',
   //   validate: {

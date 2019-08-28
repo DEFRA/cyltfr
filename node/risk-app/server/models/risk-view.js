@@ -1,4 +1,3 @@
-const moment = require('moment')
 const util = require('../util')
 const suitability = require('./suitability')
 
@@ -104,7 +103,7 @@ function RiskViewModel (risk, address) {
   this.leadLocalFloodAuthority = risk.leadLocalFloodAuthority
   this.className = this.isRisk ? 'at-risk' : 'low-risk'
   this.date = Date.now()
-  this.year = moment(Date.now()).format('YYYY')
+  this.year = new Date().getFullYear()
   this.pageTitle = 'Your long term flood risk assessment - GOV.UK'
 
   this.testInfoJSON = JSON.stringify({
