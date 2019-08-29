@@ -60,7 +60,7 @@ module.exports = [{
           (regionQueryString && `&region=${regionQueryString}`))
       }
 
-      const warnings = await floodService.findWarnings(postcode) // await getWarnings(postcode, request)
+      const warnings = await getWarnings(postcode, request)
 
       return h.view('address', new AddressViewModel(postcode, englishAddresses, null, warnings))
     } catch (err) {
