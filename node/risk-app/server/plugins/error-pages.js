@@ -14,29 +14,29 @@ module.exports = {
         if (response.isBoom) {
           // An error was raised during
           // processing the request
-          // const statusCode = response.output.statusCode
+          const statusCode = response.output.statusCode
 
-          // // In the event of 404
-          // // return the `404` view
-          // if (statusCode === 404) {
-          //   return h.view('404').code(statusCode)
-          // }
+          // In the event of 404
+          // return the `404` view
+          if (statusCode === 404) {
+            return h.view('404').code(statusCode)
+          }
 
-          // // Log the error
-          // request.log('error', {
-          //   statusCode: statusCode,
-          //   data: response.data,
-          //   message: response.message
-          // })
+          // Log the error
+          request.log('error', {
+            statusCode: statusCode,
+            data: response.data,
+            message: response.message
+          })
 
-          // // In the event of 429
-          // // return the `429` view
-          // if (statusCode === 429) {
-          //   return h.view('429').code(statusCode)
-          // }
+          // In the event of 429
+          // return the `429` view
+          if (statusCode === 429) {
+            return h.view('429').code(statusCode)
+          }
 
-          // // The return the `500` view
-          // return h.view('500').code(statusCode)
+          // The return the `500` view
+          return h.view('500').code(statusCode)
         } else if (response.statusCode === 302 && config.mountPath) {
           // If we are redirecting the reponse to a root relative and there's
           // a mount path, prepend the mount path to the redirection location.

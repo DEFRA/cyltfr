@@ -1,13 +1,12 @@
 var data = require('./data')
 var postcodeTests = require('../../common/postcode')
-var addressTests = require('../../common/address')
+var englandOnlyTests = require('../../common/england-only')
 
 module.exports = {
-  'valid-search': function (client) {
-    // Loop over each test case
+  'scottish-postcode': function (client) {
+    // Loop over each postcode
     data.forEach(function (item) {
       var postcode = item.postcode
-      var expectedResultCount = item.expectedResultCount
 
       /**
        * Create postcode page object
@@ -19,12 +18,12 @@ module.exports = {
       postcodePage.setPostcodeAndSubmit(postcode)
 
       /**
-       * Create address page object
+       * Create search page object
        */
-      var addressPage = client.page.address()
+      var englandOnlyPage = client.page['england-only']()
 
-      // Assert the correct search page is displayed
-      addressTests.assertPage(addressPage, expectedResultCount)
+      // Assert we get the correct regional message
+      englandOnlyTests.assertMessage(englandOnlyPage, 'Scotland')
     })
 
     // Close the window

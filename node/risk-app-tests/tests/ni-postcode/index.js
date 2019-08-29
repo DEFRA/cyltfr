@@ -1,22 +1,21 @@
 var data = require('./data')
-var homeTests = require('../../common/home')
+var postcodeTests = require('../../common/postcode')
 var englandOnlyTests = require('../../common/england-only')
 
 module.exports = {
-  'scottish-address': function (client) {
+  'ni-postcode': function (client) {
     // Loop over each postcode
     data.forEach(function (item) {
-      var premises = item.premises
       var postcode = item.postcode
 
       /**
-       * Create home page object
+       * Create postcode page object
        */
-      var homePage = client.page.home()
+      var postcodePage = client.page.postcode()
 
-      // Navigate to the home page & submit premise & postcode
-      homeTests.loadPage(homePage)
-      homePage.setPremisesAndPostcodeAndSubmit(premises, postcode)
+      // Navigate to the postcode page & submit postcode
+      postcodeTests.loadPage(postcodePage)
+      postcodePage.setPostcodeAndSubmit(postcode)
 
       /**
        * Create search page object
@@ -24,7 +23,7 @@ module.exports = {
       var englandOnlyPage = client.page['england-only']()
 
       // Assert we get the correct regional message
-      englandOnlyTests.assertMessage(englandOnlyPage, 'scotland')
+      englandOnlyTests.assertMessage(englandOnlyPage, 'Northern Ireland')
     })
 
     // Close the window

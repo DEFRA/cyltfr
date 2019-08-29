@@ -1,11 +1,12 @@
 const data = [
-  { postcode: 'ABC', premises: 1 },
-  { postcode: 'XX3', premises: 1 },
-  { postcode: '$%*', premises: 1 },
-  { postcode: ':::JHDRNTY$W%', premises: 1 },
-  { postcode: 'ڀځڂڃڄڅ', premises: 1 },
-  { postcode: ')(*&^%$£"")', premises: 1 },
-  { postcode: 'https://flood-warning-information.service.gov.uk/', premises: 1 }
+  { postcode: '' },
+  { postcode: 'ABC' },
+  { postcode: 'XX3' },
+  { postcode: '$%*' },
+  { postcode: ':::JHDRNTY$W%' },
+  { postcode: 'ڀځڂڃڄڅ' },
+  { postcode: ')(*&^%$£"")' },
+  { postcode: 'https://flood-warning-information.service.gov.uk/' }
 ]
 
 module.exports = data

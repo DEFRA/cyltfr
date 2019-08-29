@@ -1,6 +1,8 @@
 var data = require('./data')
 var homeTests = require('../../common/home')
 var searchTests = require('../../common/search')
+var postcodeTests = require('../../common/postcode')
+var addressTests = require('../../common/address')
 var riskTests = require('../../common/risk')
 var riskDetailTests = require('../../common/risk-detail')
 
@@ -9,29 +11,28 @@ module.exports = {
     // Loop over each postcode
     data.forEach(function (item) {
       var address = item.address
-      var premises = item.premises
       var postcode = item.postcode
 
       /**
-       * Create home page object
+       * Create postcode page object
        */
-      var homePage = client.page.home()
+      var postcodePage = client.page.postcode()
 
-      // Navigate to the home page & submit postcode
-      homeTests.loadPage(homePage)
-      homePage.setPremisesAndPostcodeAndSubmit(premises, postcode)
+      // Navigate to the postcode page & submit postcode
+      postcodeTests.loadPage(postcodePage)
+      postcodePage.setPostcodeAndSubmit(postcode)
 
       /**
-       * Create search page object
+       * Create address page object
        */
-      var searchPage = client.page.search()
+      var addressPage = client.page.address()
 
-      // Assert the correct postcode
-      searchTests.assertPage(searchPage)
+      // // Assert the correct postcode
+      addressTests.assertPage(addressPage)
 
       // Select the first address and submit
-      searchPage.selectAddress(address)
-      searchPage.submit()
+      addressPage.setAddressAndSubmit(address)
+      // addressPage.submit()
 
       /**
        * Create risk page object
@@ -39,18 +40,19 @@ module.exports = {
       var riskPage = client.page.risk()
 
       // Check outcome
+      // TODO assertOutcome from old risk-detail pages (assertOutcomeGW) too
       riskTests.assertOutcomeGW(riskPage, item)
 
       // Navigate to detail pages
-      riskPage.gotoRiskDetail()
+      // riskPage.gotoRiskDetail()
 
-      /**
-       * Create risk detail page object
-       */
-      var riskDetailPage = client.page['risk-detail']()
+      // /**
+      //  * Create risk detail page object
+      //  */
+      // var riskDetailPage = client.page['risk-detail']()
 
-      // Check outcome
-      riskDetailTests.assertOutcomeGW(riskDetailPage, item)
+      // // Check outcome
+      // riskDetailTests.assertOutcomeGW(riskDetailPage, item)
     })
 
     // Close the window

@@ -4,6 +4,6 @@ module.exports = {
   },
   elements: {
     'main': '#england-only-page',
-    'heading': '.heading-xlarge'
+    'heading': '.govuk-heading-xl'
   }
 }

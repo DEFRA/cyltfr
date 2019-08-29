@@ -106,12 +106,12 @@ function RiskViewModel (risk, address) {
   this.year = new Date().getFullYear()
   this.pageTitle = 'Your long term flood risk assessment - GOV.UK'
 
-  this.testInfoJSON = JSON.stringify({
+  this.testInfo = {
     status: this.status,
     riverAndSeaRisk: riverAndSeaRisk,
     surfaceWaterRisk: surfaceWaterRisk,
     reservoirRisk: reservoirRisk
-  })
+  }
 
   //
 

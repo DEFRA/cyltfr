@@ -2,7 +2,7 @@ module.exports = {
   elements: {
     'main': '#risk-page',
     'section': '#risk-page .risk',
-    'heading': '#risk-page h1.heading-large',
+    'heading': '#risk-page h1.govuk-heading-l',
     'orderedList': '#risk-page ol.list-number',
     'firstItem': '#risk-page ol.list-number > li:first-child',
     'lastItem': '#risk-page ol.list-number > li:last-child',

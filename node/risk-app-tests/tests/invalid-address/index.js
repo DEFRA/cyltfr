@@ -1,45 +1,18 @@
-var data = require('./data')
-var riskTests = require('../../common/risk')
-var riskDetailTests = require('../../common/risk-detail')
-var errorTests = require('../../common/error')
+var addressTests = require('../../common/address')
 
 module.exports = {
-  'invalid-address-risk': function (client) {
-    // Loop over each postcode
-    data.forEach(function (item) {
-      var address = item.address
+  'no-selection': function (client) {
+    /**
+     * Create address page object
+     */
+    var addressPage = client.page.address()
 
-      /**
-       * Create home page object
-       */
-      var riskPage = client.page.risk()
+    // Navigate to the postcode page & submit postcode
+    addressPage.loadPageWithPostcode('WA14 1EP')
+    addressPage.submit()
 
-      // Navigate to the risk page with an invalid addressId
-      riskTests.loadPage(riskPage, address)
-
-      // Assert we're on the error page
-      errorTests.assertError(riskPage)
-    })
-
-    // Close the window
-    client.end()
-  },
-  'invalid-address-risk-detail': function (client) {
-    // Loop over each postcode
-    data.forEach(function (item) {
-      var address = item.address
-
-      /**
-       * Create home page object
-       */
-      var riskDetailPage = client.page['risk-detail']()
-
-      // Navigate to the risk page with an invalid addressId
-      riskDetailTests.loadPage(riskDetailPage, address)
-
-      // Assert we're on the error page
-      errorTests.assertError(riskDetailPage)
-    })
+    // Assert we get the default error message
+    addressTests.assertErrorMessage(addressPage)
 
     // Close the window
     client.end()
