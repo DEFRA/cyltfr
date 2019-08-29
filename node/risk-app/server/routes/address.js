@@ -9,11 +9,11 @@ const errors = require('../models/errors.json')
 async function getWarnings (postcode, request) {
   // Don't let an error raised during the call
   // to get the warnings cause the page to fail
-  // try {
-  return await floodService.findWarnings(postcode)
-  // } catch (err) {
-  //   request.log('error', err)
-  // }
+  try {
+    return await floodService.findWarnings(postcode)
+  } catch (err) {
+    request.log('error', err)
+  }
 }
 
 module.exports = [{
@@ -60,7 +60,7 @@ module.exports = [{
           (regionQueryString && `&region=${regionQueryString}`))
       }
 
-      const warnings = await getWarnings(postcode, request)
+      const warnings = await floodService.findWarnings(postcode) // await getWarnings(postcode, request)
 
       return h.view('address', new AddressViewModel(postcode, englishAddresses, null, warnings))
     } catch (err) {
