@@ -1,5 +1,5 @@
-const RiskStatus = require('../risk-status')
-const RiskLevel = require('../risk-level')
+// const RiskStatus = require('../risk-status')
+// const RiskLevel = require('../risk-level')
 
 module.exports = {
   loadPage: function (riskPage, addressId) {

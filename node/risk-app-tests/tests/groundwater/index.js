@@ -1,10 +1,7 @@
 var data = require('./data')
-var homeTests = require('../../common/home')
-var searchTests = require('../../common/search')
 var postcodeTests = require('../../common/postcode')
 var addressTests = require('../../common/address')
 var riskTests = require('../../common/risk')
-var riskDetailTests = require('../../common/risk-detail')
 
 module.exports = {
   'groundwater': function (client) {
