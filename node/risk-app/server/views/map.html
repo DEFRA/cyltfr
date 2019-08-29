@@ -3,7 +3,7 @@
 {% block content %}
 <div id="map-page">
   <h1 class="govuk-heading-xl">
-    Flood risk maps
+    {% if local %}Learn more about this area's flood risk{% else %}Learn more about flood risk{% endif %}
   </h1>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-third">
@@ -12,7 +12,7 @@
           {% for category in maps.categories %}
           <optgroup label="{{category.name}}">
             {% for map in category.maps %}
-            <option value="{{map.ref}}" title="{{map.title}}">{{map.name}}</option>
+            <option id="{{map.ref}}" value="{{map.ref}}" title="{{map.title}}">{{map.name}}</option>
             {% endfor %}
           </optgroup>
           {% endfor %}
@@ -55,6 +55,15 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div>
+    {% if address %}
+      <p>
+        <a class="govuk-link" href="{{ mountPath }}risk?address={{ address }}"
+          data-id="risk-address">View the flood risk information for the location you originally searched for</a>
+      </p>
+    {% endif %}
   </div>
 
   <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css"
