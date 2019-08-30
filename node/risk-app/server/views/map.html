@@ -5,6 +5,11 @@
   <h1 class="govuk-heading-xl">
     {% if local %}Learn more about this area's flood risk{% else %}Learn more about flood risk{% endif %}
   </h1>
+
+  <p class="govuk-body-s">
+    Select the type of flood risk information you're interested in. The map will then update.
+  </p>
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-third">
       <div class='sidebar'>
@@ -57,13 +62,19 @@
     </div>
   </div>
 
+  <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
   <div>
     {% if address %}
       <p>
-        <a class="govuk-link" href="{{ mountPath }}risk?address={{ address }}"
+        <a class="govuk-link" href="{{ mountPath }}/risk?address={{ address }}"
           data-id="risk-address">View the flood risk information for the location you originally searched for</a>
       </p>
     {% endif %}
+
+    <p class="govuk-body-s eu-directive">
+      This information meets the requirements of the EU Floods Directive 2007/60/EC
+    </p>
   </div>
 
   <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css"

@@ -49,3 +49,17 @@ $govuk-assets-path: '/long-term-flood-risk/assets/';
     border-left-color: black
   }
 }
+
+//  map page
+#map-page {
+  #progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: rgba(0, 94, 165, 0.9);
+    width: 0;
+    transition: width 250ms;
+    z-index: 1;
+  }
+}

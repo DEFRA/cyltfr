@@ -117,7 +117,7 @@ module.exports = {
       mapTests.assertZoomIs(client, mapPage, 9)
 
       // assert we have the correct map visible
-      // mapTests.assertMapSelectedAndLoaded(client, mapPage, item.maps[0].ref)
+      mapTests.assertMapSelectedAndLoaded(client, mapPage, item.maps[0].ref)
     })
 
     client.end()

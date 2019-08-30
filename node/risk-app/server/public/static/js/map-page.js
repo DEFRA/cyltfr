@@ -1,5 +1,48 @@
 /* global map mapCategories $ */
 
+function MapController (categories) {
+  // this._data = data
+  this._categories = categories
+  // this.setCurrent(ref)
+}
+
+/**
+ * setCurrent
+ * @param {string} ref The ref of either a category or map. If a category ref is passed, the first map in that category is used.
+ */
+MapController.prototype.setCurrent = function (ref) {
+  // Work out the current category and map
+  var category, map, defaultCategory, defaultMap
+  for (var i = 0; i < this._categories.length; i++) {
+    category = this._categories[i]
+    if (i === 0) {
+      defaultCategory = category
+    }
+
+    if (category.ref === ref) {
+      this.currMap = category.maps[0]
+      this.currCategory = category
+      return
+    }
+
+    for (var j = 0; j < category.maps.length; j++) {
+      map = category.maps[j]
+      if (i === 0 && j === 0) {
+        defaultMap = map
+      }
+
+      if (map.ref === ref) {
+        this.currMap = map
+        this.currCategory = category
+        return
+      }
+    }
+  }
+
+  this.currMap = defaultMap
+  this.currCategory = defaultCategory
+}
+
 ;(function () {
   function getParameterByName (name) {
     name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]')
@@ -14,6 +57,7 @@
 
   function mapPage () {
     var mapRefs = [].concat.apply([], mapCategories.categories.map(c => c.maps))
+    var mapController = new MapController(mapCategories.categories)
 
     // var selected = 'selected'
     var $page = $('main#map-page')
@@ -22,8 +66,6 @@
     var $selector = $('select', $sidebar)
     var $error = $('#error-message', $container)
     var $query = $('input[name=location]', $container)
-    // var $categories = $sidebar.children('.category')
-    // var $maps = $categories.find('li')
     var $map = $('#map')
     var $body = $(document.body)
 
@@ -31,9 +73,6 @@
     var northing = parseInt(getParameterByName('northing'), 10)
     var hasLocation = !!easting
     var maps = window.maps
-    // maps.onReady(function () {
-    //   maps.showMap('risk:1-ROFRS')
-    // })
 
     maps.loadMap(hasLocation && [easting, northing])
 
@@ -41,45 +80,22 @@
     var $legend = $('#legend')
 
     function setCurrent (ref) {
-      // maps.setCurrent(ref)
+      mapController.setCurrent(ref)
 
-      // var currMap = maps.currMap
-      // var currCategory = maps.currCategory
+      var currMap = mapController.currMap
 
-      // // Update the main nav
-      // $categories.removeClass(selected)
-      // $categories.filter('#' + currCategory.ref).addClass(selected)
-      // $maps.removeClass(selected)
-      // $maps.filter('#' + currMap.ref).addClass(selected)
-
-      // // Update the mobile nav
-      // $selector.val(currMap.ref)
-
-      var currMap = ref ? mapRefs.find(m => m.ref === ref) : mapRefs[0]
+      // Update the mobile nav
+      $selector.val(currMap.ref)
 
       // Update the legend
       $legend.html(legendTemplate(Object.assign({ hasLocation }, currMap.legend)))
+
       // Load the map
       maps.showMap('risk:' + currMap.ref.substring(currMap.ref.indexOf('_') + 1))
     }
 
     // Default to the first category/map
     maps.onReady(function () {
-      // Handle the category header clicks
-      // $categories.on('click', 'h2', function (e) {
-      //   e.preventDefault()
-      //   var $category = $(this).parent()
-      //   if (!$category.hasClass(selected)) {
-      //     setCurrent($category.attr('id'))
-      //   }
-      // })
-
-      // // Handle the map selector clicks
-      // $maps.on('click', function (e) {
-      //   e.preventDefault()
-      //   setCurrent($(this).attr('id'))
-      // })
-
       // Handle the mobile map selector change
       $selector.on('change', function (e) {
         e.preventDefault()
@@ -147,13 +163,7 @@
     $map.on('mouseleave', function (e) {
       $body.css('cursor', 'default')
     })
-
-    // map.loadMap(easting && [easting, northing])
   }
-  // var legend = mapCategories.categories[0].maps[0].legend
-  // var legendHtml = window.nunjucks.render('legend.html', legend)
-  // var legendElement = document.getElementById('legend')
-  // legendElement.innerHTML = legendHtml
 
   mapPage()
 })()
