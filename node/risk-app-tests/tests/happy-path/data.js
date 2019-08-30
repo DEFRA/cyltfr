@@ -296,8 +296,15 @@ const data = [
     surfaceWaterRisk: RiskLevel.Low,
     reservoirRisk: true
   },
-  //  { postcode: 'POSTCODE', address: xx77079867, outcome: RiskStatus.LowRisk,
-  //  riverAndSeaRisk: RiskLevel.Low, surfaceWaterRisk: RiskLevel.Low, reservoirRisk: false },
+  {
+    premises: 'Bishops Court',
+    postcode: 'DH1 2LY',
+    address: 200003214998,
+    outcome: RiskStatus.LowRisk,
+    riverAndSeaRisk: RiskLevel.Low,
+    surfaceWaterRisk: RiskLevel.Low,
+    reservoirRisk: false
+  },
 
   // Very low risk //
   {
