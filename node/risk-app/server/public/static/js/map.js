@@ -179,8 +179,7 @@ function loadMap (point) {
         new ol.control.ScaleLine({
           units: 'metric',
           minWidth: 128
-        }),
-        new ol.control.FullScreen()
+        })
       ]),
       interactions: ol.interaction.defaults({
         altShiftDragRotate: false,

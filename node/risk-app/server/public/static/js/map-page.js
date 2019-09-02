@@ -121,7 +121,7 @@ MapController.prototype.setCurrent = function (ref) {
           if (data) {
             if (data.isEngland) {
               var point = [data.easting, data.northing]
-              map.panTo(point, 7)
+              maps.panTo(point, 7)
             } else {
               $error.text(noResults)
             }
@@ -138,25 +138,6 @@ MapController.prototype.setCurrent = function (ref) {
       } else {
         $error.text(noResults)
       }
-    })
-
-    $container.on('click', '.map-switch a.toggle-view', function (e) {
-      e.preventDefault()
-      $(e.delegateTarget).toggleClass('detailed')
-    })
-
-    $container.on('click', '.enter-fullscreen', function (e) {
-      e.preventDefault()
-      $page.addClass('fullscreen')
-      $map.css('height', ($(window).height() - 100) + 'px')
-      map.updateSize()
-    })
-
-    $container.on('click', '.exit-fullscreen', function (e) {
-      e.preventDefault()
-      $page.removeClass('fullscreen')
-      $map.css('height', '')
-      map.updateSize()
     })
 
     // ensures mouse cursor returns to default if feature was at edge of map

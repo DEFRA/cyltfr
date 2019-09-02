@@ -11,7 +11,8 @@ const routes = [].concat(
   require('../routes/gwc-proxy'),
   require('../routes/os-get-capabilities'),
   require('../routes/feedback'),
-  require('../routes/os-terms')
+  require('../routes/os-terms'),
+  require('../routes/geocode')
 )
 
 module.exports = {

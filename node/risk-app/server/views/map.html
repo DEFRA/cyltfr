@@ -23,35 +23,19 @@
           {% endfor %}
           <select>
             <div id="legend"></div>
-
-            <!-- {% for category in maps.categories %}
-              <div id="{{ category.ref }}" title="{{ category.title }}" class="category">
-                <h2 class="govuk-heading-s">
-                  {{ category.name }}
-                </h2>
-                <ul class="govuk-list">
-                  {% for map in category.maps %}
-                    <li id="{{ map.ref }}">
-                      <a href="#{{ map.ref }}" title="{{ map.title }}" class="govuk-link">{{ map.name }}</a>
-                    </li>
-                  {% endfor %}
-                </ul>
-              </div>
-            {% endfor %} -->
       </div>
     </div>
     <div class="govuk-grid-column-two-thirds">
-      <!-- <h1 class="govuk-heading-xl">Rate Limited</h1>
-          <p class="govuk-body">This service is rate limited and you have exceeded the rate.</p>
-          <p class="govuk-body">Try again later.</p> -->
-      <!-- <pre>{{me}}</pre> -->
       <div class="map-container">
+        <form>
+          <div class="govuk-form-group" style="position: absolute; top: 10px; right: 10px; z-index: 10;">
+            <input class="govuk-input govuk-input--width-10" id="location"
+              name="location" type="text" placeholder="Find location"
+              style="background-color: rgba(255, 255, 255, 0.7)">
+          </div>
+        </form>
         <div id="progress"></div>
         <div id="map"></div>
-        <!-- <div class="rhs">
-              <div class="controls">
-              </div>
-            </div> -->
         <div id="map-overlay">
           <div class="map-overlay-container">
             <a class="map-overlay-close"></a>
@@ -67,10 +51,12 @@
   <div>
     {% if address %}
       <p>
-        <a class="govuk-link" href="{{ mountPath }}/risk?address={{ address }}"
+        <a class="govuk-link" href="/{{ mountPath }}/risk?address={{ address }}"
           data-id="risk-address">View the flood risk information for the location you originally searched for</a>
       </p>
     {% endif %}
+
+    <p><a href="/{{ mountPath }}" class="govuk-link">View the flood risk information for another location</a></p>
 
     <p class="govuk-body-s eu-directive">
       This information meets the requirements of the EU Floods Directive 2007/60/EC
