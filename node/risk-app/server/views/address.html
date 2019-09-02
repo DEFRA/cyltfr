@@ -2,13 +2,13 @@
 
 {% from "components/select/macro.njk" import govukSelect %}
 
+{% set pageTitle = "Find an address to check the flood risk" %}
+
 {% block content %}
 <div id="address-page">
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-xl">
-        Find an address to check the flood risk
-      </h1>
+      <h1 class="govuk-heading-xl">{{ pageTitle }}</h1>
 
       <form method="post">
         <div class="govuk-form-group">

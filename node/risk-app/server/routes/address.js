@@ -3,7 +3,7 @@ const boom = require('@hapi/boom')
 const { postcodeRegex } = require('../helpers')
 const floodService = require('../services/flood')
 const addressService = require('../services/address')
-const AddressViewModel = require('../models/address-model')
+const AddressViewModel = require('../models/address-view')
 const errors = require('../models/errors.json')
 
 async function getWarnings (postcode, request) {

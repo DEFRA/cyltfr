@@ -1,5 +1,7 @@
 {% extends 'layout.html' %}
 
+{% set pageTitle = "Your long term flood risk assessment" %}
+
 {% block content %}
 <div id="risk-page" data-test-info='{{ testInfo | dump | safe }}'>
   <div class="govuk-grid-row">
@@ -9,86 +11,102 @@
         {{ postcode }}
       </h1>
 
-      <!-- <h1 class="govuk-heading-xl">Flood risk for: {{ postcode }}</h1> -->
-
       <!-- Surface water -->
       <div class="govuk-inset-text {{ surfaceWaterRisk | lower }}">
-        <h3 class="govuk-!-margin-bottom-2">Surface water risk</h3>
-        <p class="govuk-!-margin-top-0"><strong>{{ surfaceWaterRisk }} risk</strong></p>
-        <p>{{ surfaceWaterText }}</p>
-        {% if surfaceWaterSuitability %}<small>{{ surfaceWaterSuitability }}</small>{% endif %}
+        <h3 class="govuk-!-margin-bottom-2">Surface water</h3>
+        <p class="govuk-!-margin-top-0"><strong>{{ surfaceWaterText }}</strong></p>
+
+        {% if leadLocalFloodAuthority %}
+        <p class="govuk-body">
+          <strong>{{leadLocalFloodAuthority}}</strong> are your Lead Local Flood Authority (LLFA).
+          They are responsible for managing the risk of flooding from surface water.
+        </p>
+        {% endif %}
+
+        <p>
+          <a class="govuk-link" href="/{{ mountPath }}/map?easting={{easting}}&northing={{northing}}&address={{address}}&map=SurfaceWater">View map of surface water risk</a>
+        </p>
+
+        {% if surfaceWaterSuitability %}
+        <details class="govuk-details" data-module="govuk-details">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">Accuracy of this information</span>
+          </summary>
+          <div class="govuk-details__text">
+            <small>{{ surfaceWaterSuitability }}</small><br><br>
+            <small><strong>Your LLFA may have more detailed information about the area's risk</strong></small>
+          </div>
+        </details>
+        {% endif %}
       </div>
       <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
       <!-- Rivers and sea -->
       <div class="govuk-inset-text {{ riverAndSeaRisk | lower }}">
-        <h3 class="govuk-!-margin-bottom-2">Rivers and sea risk</h3>
-        <p class="govuk-!-margin-top-0"><strong>{{ riverAndSeaRisk }} risk</strong></p>
-        <p>{{ riversAndSeaText }}</p>
-        {% if riverAndSeaSuitability %}<small>{{ riverAndSeaSuitability }}</small>{% endif %}
-      </div>
-      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-
-      <!-- Other flood risks -->
-      <h2 class="govuk-heading-l govuk-!-margin-top-6">Other flood risks</h2>
-      <div class="govuk-inset-text">
-        <!-- Groundwater -->
-        <h3 class="govuk-!-margin-bottom-2">Groundwater</h3>
+        <h3 class="govuk-!-margin-bottom-2">Rivers and the sea</h3>
+        <p class="govuk-!-margin-top-0"><strong>{{ riversAndSeaText }}</strong></p>
+        
         <p>
-          {% if isGroundwaterArea %}
-          High groundwater levels may cause flooding. Flooding and disruption is possible in the local area when
-          groundwater levels are high.
-          {% else %}
-          This area is unlikely to flood from groundwater
-          {% endif %}
+          <a class="govuk-link" href="/{{ mountPath }}/map?easting={{easting}}&northing={{northing}}&address={{address}}&map=RiversOrSea">View map of rivers and sea risk</a>
         </p>
 
-        <!-- Reservior -->
-        <h3>Reserviors</h3>
-        {% if reservoirRisk %}
-        <p>There's a risk of flooding in this area from reservoirs</p>
-        <details>
-          <summary>More information</summary>
-          <p>
-            While there is a risk in this area, flooding from reservoirs is extremely unlikely. There has been no loss
-            of life in the UK from reservoir flooding since 1925.
-          </p>
-          <p>
-            An area is considered at risk if peoples' lives could be threatened by an uncontrolled release of water
-            from a reservoir. You can <a
-              href="/{{ mountPath }}/map?easting={{ easting }}&northing={{ northing }}&address={{ address }}&map=Reservoirs">see
-              a map of the potential extent of flooding</a> if this happened.
-          </p>
-          <strong>Reservoirs that could affect this area</strong>
-          {% for reservoir in reservoirs %}
-          <p>
-            <strong>{{reservoir.name}}</strong> (grid reference {{reservoir.location}})<br>
-            Owner: {{reservoir.owner}}<br>
-            Lead Local Flood Authority: {{reservoir.authority}}<br>
-            Risk designation: {{reservoir.riskDesignation}}<br>
-            Comments: {{reservoir.comments}}<br>
-          </p>
-          {% endfor %}
+        {% if riverAndSeaSuitability %}
+        <details class="govuk-details" data-module="govuk-details">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">Accuracy of this information</span>
+          </summary>
+          <div class="govuk-details__text"><small>{{ riverAndSeaSuitability }}</small></div>
         </details>
-        {% else %}
-        This area is unlikely to flood from a reservoir
         {% endif %}
       </div>
 
-      {% if leadLocalFloodAuthority %}
-      <p class="govuk-body">
-        Lead Local Flood Authority <strong>{{leadLocalFloodAuthority}}</strong>
-      </p>
+      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+      {% if isGroundwaterArea or reservoirRisk %}
+      <!-- Other flood risks -->
+      <h2 class="govuk-heading-l govuk-!-margin-top-6">Other flood risks</h2>
+      <div class="govuk-inset-text">
+        <!-- Reservior -->
+        {% if reservoirRisk %}
+        <h3>Reserviors</h3>
+        <p>There is a risk of flooding in this area from reservoirs - it is extremely unlikely</p>
+
+        <p>
+          <a class="govuk-link" href="/{{ mountPath }}/map?easting={{easting}}&northing={{northing}}&address={{address}}&map=Reservoirs">View map of reservoir risk</a>
+        </p>
+        
+        <details class="govuk-details" data-module="govuk-details">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">Reservoirs that could affect this area</span>
+          </summary>
+          <div class="govuk-details__text">
+            {% for reservoir in reservoirs %}
+            <p>
+              <p><strong>{{reservoir.name}}</strong> (grid reference {{reservoir.location}})</p>
+              <p>Owner: {{reservoir.owner}}</p>
+              <p>Lead Local Flood Authority: {{reservoir.authority}}</p>
+              <!-- <p>Risk designation: {{reservoir.riskDesignation}}</p> -->
+              <p>Comments: {{reservoir.comments}}</p>
+            </p>
+            {% endfor %}
+          </div>
+        </details>
+        {% endif %}
+
+        <!-- Groundwater -->
+        {% if isGroundwaterArea %}
+        <h3 class="govuk-!-margin-bottom-2">Groundwater</h3>
+        <p>
+          High groundwater levels may cause flooding in this area
+        </p>
+        {% endif %}
+      </div>
       {% endif %}
 
       {% if extraInfo %}
       <p class="govuk-body">{{extraInfo}}</p>
       {% endif %}
 
-      <p>
-        <a class="govuk-link" href="/{{ mountPath }}/map?easting={{easting}}&northing={{northing}}&address={{address}}">View flood maps for this area</a>
-      </p>
-      <!-- <pre>{{me}}</pre> -->
       <br>
       <a href="/{{ mountPath }}/confirmation" role="button" class="govuk-button">Continue</a>
     </div>

@@ -1,5 +1,12 @@
 {% extends 'layout.html' %}
 
+
+{% block beforeContent %}
+  {% if address %}
+  <a href="/{{ mountPath }}/risk?address={{ address }}" class="govuk-back-link" data-id="risk-address">Back</a>
+  {% endif %}
+{% endblock %}
+
 {% block content %}
 <div id="map-page">
   <h1 class="govuk-heading-xl">

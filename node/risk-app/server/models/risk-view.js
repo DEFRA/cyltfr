@@ -16,10 +16,10 @@ const RiskLevel = {
 }
 
 const RiskDescriptions = {
-  'Very Low': 'This area has less than 0.1% chance of %s each year',
-  Low: 'This area has between 0.1% and 1% chance of %s each year',
-  Medium: 'This area has between 1% and 3.3% chance of %s each year',
-  High: 'This area has a greater than 3.3% chance of %s each year'
+  'Very Low': 'Very low risk - less than 0.1% chance each year',
+  Low: 'Low rosk - between 0.1% and 1% chance each year',
+  Medium: 'Medium risk - between 1.1% and 3.3% chance each year',
+  High: 'High risk - greater than 3.3% chance each year'
 }
 
 function RiskViewModel (risk, address) {
@@ -104,7 +104,6 @@ function RiskViewModel (risk, address) {
   this.className = this.isRisk ? 'at-risk' : 'low-risk'
   this.date = Date.now()
   this.year = new Date().getFullYear()
-  this.pageTitle = 'Your long term flood risk assessment - GOV.UK'
 
   this.testInfo = {
     status: this.status,
@@ -116,10 +115,7 @@ function RiskViewModel (risk, address) {
   //
 
   this.riversAndSeaText = RiskDescriptions[riverAndSeaRisk]
-    .replace('%s', 'flash flooding (surface water)')
-
   this.surfaceWaterText = RiskDescriptions[surfaceWaterRisk]
-    .replace('%s', 'flooding from rivers or the sea')
 
   this.me = JSON.stringify(this, null, 2)
 }
