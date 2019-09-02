@@ -10,19 +10,15 @@
         Find an address to check the flood risk
       </h1>
 
+      <div class="govuk-inset-text">
+        This service will tell you the flood risk of an area, not a specific property
+      </div>
+
       <form method="post">
         {{ govukInput(postcodeInput) }}
-        <!-- <p><a href="#" class="govuk-link">Select area on map</a></p> -->
-        <div class="govuk-warning-text">
-          <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-          <strong class="govuk-warning-text__text">
-            <span class="govuk-warning-text__assistive">Warning</span>
-            This service will tell you the flood risk of an area, not a specific property
-          </strong>
-        </div>
         <button type="submit" class="govuk-button">Find address</button>
       </form>
-
+      
       <details class="govuk-details" data-module="govuk-details">
         <summary class="govuk-details__summary">
           <span class="govuk-details__summary-text">
