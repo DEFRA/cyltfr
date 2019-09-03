@@ -41,7 +41,15 @@ module.exports = {
       serviceUrl: `/${config.mountPath}/`,
       homepageUrl: '/',
       pageTitle: 'Long term flood risk information - GOV.UK',
-      analyticsAccount: analyticsAccount
+      analyticsAccount: analyticsAccount,
+      appStage: config.errbit.env,
+      floodWarningsUrl: config.floodWarningsUrl,
+      phase: 'beta',
+      feedback: true,
+      siteUrl: config.floodRiskUrl,
+      fbAppId: config.fbAppId,
+      ogDescription: 'Check your risk of flooding and use flood risk maps',
+      noIndex: true // stop robot crawl by default
     }
   }
 }

@@ -1,5 +1,8 @@
 {% extends "template.njk" %}
 
+{% from "components/footer/macro.njk" import govukFooter %}
+{% from "components/phase-banner/macro.njk" import govukPhaseBanner %}
+
 {% block head %}
 <!--[if !IE 8]><!-->
 <link href="{{ assetPath }}/stylesheets/application.css" rel="stylesheet" />
@@ -25,6 +28,15 @@
     serviceUrl: serviceUrl
   }) 
 }}
+
+<div class="govuk-width-container">
+  {{ govukPhaseBanner({
+    tag: {
+      text: "beta"
+    },
+    html: 'This is a new service – your <a class="govuk-link" href="/' + mountPath + '/feedback">feedback</a> will help us to improve it.'
+  }) }}
+</div>
 {% endblock %}
 
 {% block pageTitle %}
@@ -33,6 +45,42 @@
 
 {% block content %}
 <h1 class="govuk-heading-xl">Default page template</h1>
+{% endblock %}
+
+{% block footer %}
+{{ govukFooter({
+  meta: {
+    items: [
+      {
+        href: "https://www.gov.uk/help",
+        text: "Help"
+      },
+      {
+        href: floodWarningsUrl + "/cookies",
+        text: "Cookies"
+      },
+      {
+        href: floodWarningsUrl + "/privacy-notice",
+        text: "Privacy notice"
+      },
+      {
+        href: floodWarningsUrl + "/terms-conditions",
+        text: "Terms and conditions"
+      },
+      {
+        href: "https://www.gov.uk/contact",
+        text: "Contact"
+      },
+      {
+        href: "https://www.gov.uk/cymraeg",
+        text: "Cymraeg"
+      }
+    ],
+    html: 'Built by the <a href="https://www.gov.uk/government/organisations/environment-agency" class="govuk-footer__link">Environment Agency</a>
+    <br><br><p class="govuk-body-s">© Crown copyright and database rights 2019 <a href="http://www.ordnancesurvey.co.uk" class="govuk-link">OS</a> 100024198.
+    <br>Use of the address and mapping data is subject to&nbsp;the <a href="/' + mountPath + '/os-terms" class="govuk-link">terms and conditions</a>.</p>'
+  }
+}) }}
 {% endblock %}
 
 {% block bodyEnd %}
