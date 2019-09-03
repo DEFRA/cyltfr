@@ -6,7 +6,7 @@ const routes = [].concat(
   require('../routes/england-only'),
   require('../routes/risk'),
   require('../routes/map'),
-  require('../routes/confirmation'),
+  require('../routes/things-you-can-do'),
   require('../routes/public'),
   require('../routes/gwc-proxy'),
   require('../routes/os-get-capabilities'),

@@ -2,11 +2,11 @@
 
 module.exports = {
   method: 'GET',
-  path: '/confirmation',
+  path: '/things-you-can-do',
   handler: async (request, h) => {
     const model = {}
 
-    return h.view('confirmation', model)
+    return h.view('things-you-can-do', model)
   }
   // ,
   // options: {
