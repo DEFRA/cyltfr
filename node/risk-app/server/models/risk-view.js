@@ -17,7 +17,7 @@ const RiskLevel = {
 
 const RiskDescriptions = {
   'Very Low': 'Very low risk - less than 0.1% chance each year',
-  Low: 'Low rosk - between 0.1% and 1% chance each year',
+  Low: 'Low risk - between 0.1% and 1% chance each year',
   Medium: 'Medium risk - between 1.1% and 3.3% chance each year',
   High: 'High risk - greater than 3.3% chance each year'
 }
