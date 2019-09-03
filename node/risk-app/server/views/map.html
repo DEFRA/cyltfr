@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
 
+{% set pageTitle = "Learn more about this area's flood risk" if local else "Learn more about flood risk" %}
 
 {% block beforeContent %}
   {% if address %}
@@ -10,7 +11,7 @@
 {% block content %}
 <div id="map-page">
   <h1 class="govuk-heading-xl">
-    {% if local %}Learn more about this area's flood risk{% else %}Learn more about flood risk{% endif %}
+    {{ pageTitle }}
   </h1>
 
   <p class="govuk-body-s">
@@ -35,9 +36,9 @@
     <div class="govuk-grid-column-two-thirds">
       <div class="map-container">
         <form>
-          <div class="govuk-form-group" style="position: absolute; top: 10px; right: 10px; z-index: 10;">
-            <input class="govuk-input govuk-input--width-10" id="location"
-              name="location" type="text" placeholder="Find location"
+          <div class="govuk-form-group" style="position: absolute; top: 10px; right: 10px; z-index: 10; width: 230px;">
+            <input class="govuk-input govuk-input--width-20" id="location"
+              name="location" type="text" placeholder="Enter a place or postcode"
               style="background-color: rgba(255, 255, 255, 0.7)">
           </div>
         </form>

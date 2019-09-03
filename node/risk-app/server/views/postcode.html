@@ -18,6 +18,10 @@
         {{ govukInput(postcodeInput) }}
         <button type="submit" class="govuk-button">Find address</button>
       </form>
+
+      <p class="govuk-body">or <a href="/{{ mountPath }}/map">
+        select area on a map</a>
+      </p>
       
       <details class="govuk-details" data-module="govuk-details">
         <summary class="govuk-details__summary">
