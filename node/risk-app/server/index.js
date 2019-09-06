@@ -31,6 +31,7 @@ async function createServer () {
   await server.register(require('./plugins/router'), routeOptions)
   // await server.register(require('./plugins/rate-limit'))
   await server.register(require('./plugins/error-pages'))
+  await server.register(require('./plugins/full-url'))
   await server.register(require('blipp'))
 
   if (config.isDev) {

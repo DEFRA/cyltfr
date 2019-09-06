@@ -1,7 +1,7 @@
 module.exports = {
   method: 'GET',
   path: '/',
-  handler: {
-    view: 'home'
+  handler: (request, h) => {
+    return h.view('home', { noIndex: false })
   }
 }
