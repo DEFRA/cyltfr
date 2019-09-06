@@ -52,18 +52,11 @@ function RiskViewModel (risk, address) {
   // this.isVeryLowRisk = this.status === RiskStatus.VeryLowRisk
   // this.isRisk = this.isAtRisk || this.isAtRiskMonitor
 
-  this.riverAndSeaRisk = riverAndSeaRisk // .toLowerCase()
-  this.surfaceWaterRisk = surfaceWaterRisk // .toLowerCase()
+  this.riverAndSeaRisk = riverAndSeaRisk
+  this.surfaceWaterRisk = surfaceWaterRisk
+  this.riverAndSeaClassName = riverAndSeaRisk.toLowerCase().replace(' ', '-')
+  this.surfaceWaterClassName = surfaceWaterRisk.toLowerCase().replace(' ', '-')
   this.reservoirRisk = reservoirRisk
-
-  // this.riverAndSeaRiskIsHigh = riverAndSeaRisk === RiskLevel.High
-  // this.riverAndSeaRiskIsMedium = riverAndSeaRisk === RiskLevel.Medium
-  // this.riverAndSeaRiskIsLow = riverAndSeaRisk === RiskLevel.Low
-  // this.riverAndSeaRiskIsVeryLow = riverAndSeaRisk === RiskLevel.VeryLow
-  // this.surfaceWaterRiskIsHigh = surfaceWaterRisk === RiskLevel.High
-  // this.surfaceWaterRiskIsMedium = surfaceWaterRisk === RiskLevel.Medium
-  // this.surfaceWaterRiskIsLow = surfaceWaterRisk === RiskLevel.Low
-  // this.surfaceWaterRiskIsVeryLow = surfaceWaterRisk === RiskLevel.VeryLow
 
   if (reservoirRisk) {
     this.reservoirs = risk.reservoirRisk.map(function (item) {
@@ -101,7 +94,6 @@ function RiskViewModel (risk, address) {
   this.address = address.uprn
   this.surfaceWaterManagement = risk.leadLocalFloodAuthority
   this.leadLocalFloodAuthority = risk.leadLocalFloodAuthority
-  this.className = this.isRisk ? 'at-risk' : 'low-risk'
   this.date = Date.now()
   this.year = new Date().getFullYear()
 
@@ -109,15 +101,12 @@ function RiskViewModel (risk, address) {
     status: this.status,
     riverAndSeaRisk: riverAndSeaRisk,
     surfaceWaterRisk: surfaceWaterRisk,
-    reservoirRisk: reservoirRisk
+    reservoirRisk: reservoirRisk,
+    isGroundwaterArea: risk.isGroundwaterArea
   }
-
-  //
 
   this.riversAndSeaText = RiskDescriptions[riverAndSeaRisk]
   this.surfaceWaterText = RiskDescriptions[surfaceWaterRisk]
-
-  this.me = JSON.stringify(this, null, 2)
 }
 
 module.exports = RiskViewModel
