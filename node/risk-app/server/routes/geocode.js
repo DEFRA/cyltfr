@@ -1,5 +1,4 @@
 const joi = require('@hapi/joi')
-const boom = require('@hapi/boom')
 const util = require('../util')
 const locationService = require('../services/location')
 

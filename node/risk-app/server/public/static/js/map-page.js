@@ -1,4 +1,4 @@
-/* global map mapCategories $ */
+/* global mapCategories $ */
 
 function MapController (categories) {
   // this._data = data
@@ -56,11 +56,9 @@ MapController.prototype.setCurrent = function (ref) {
   }
 
   function mapPage () {
-    var mapRefs = [].concat.apply([], mapCategories.categories.map(c => c.maps))
     var mapController = new MapController(mapCategories.categories)
 
     // var selected = 'selected'
-    var $page = $('main#map-page')
     var $container = $('.map-container')
     var $sidebar = $('.sidebar')
     var $selector = $('select', $sidebar)
