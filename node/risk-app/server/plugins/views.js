@@ -32,7 +32,7 @@ module.exports = {
     },
     path: '../views',
     relativeTo: __dirname,
-    isCached: !config.isDev,
+    isCached: config.cacheViews,
     context: {
       appVersion: pkg.version,
       mountPath: config.mountPath,

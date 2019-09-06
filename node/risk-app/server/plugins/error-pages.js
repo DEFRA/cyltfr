@@ -1,4 +1,5 @@
 const config = require('../config')
+const errors = require('../models/errors.json')
 
 /*
 * Add an `onPreResponse` listener to return error pages
@@ -31,14 +32,23 @@ module.exports = {
 
           // In the event of 429
           // return the `429` view
-          if (statusCode === 429) {
-            return h.view('429').code(statusCode)
-          }
+          // if (statusCode === 429) {
+          //   return h.view('429').code(statusCode)
+          // }
 
           // The return the `500` view
-          return h.view('500').code(statusCode)
+          switch (response.message) {
+            case errors.addressByPostcode.message:
+            case errors.addressById.message:
+              return h.view('500-address').code(statusCode)
+            case errors.riskProfile.message:
+            case errors.spatialQuery.message:
+              return h.view('500-risk').code(statusCode)
+            default:
+              return h.view('500').code(statusCode)
+          }
         } else if (response.statusCode === 302 && config.mountPath) {
-          // If we are redirecting the reponse to a root relative and there's
+          // If we are redirecting the response to a root relative and there's
           // a mount path, prepend the mount path to the redirection location.
           const location = response.headers.location
           if (location.startsWith('/')) {

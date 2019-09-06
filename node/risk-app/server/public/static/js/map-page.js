@@ -64,7 +64,7 @@ MapController.prototype.setCurrent = function (ref) {
     var $container = $('.map-container')
     var $sidebar = $('.sidebar')
     var $selector = $('select', $sidebar)
-    var $error = $('#error-message', $container)
+    var $error = $('#error-message')
     var $query = $('input[name=location]', $container)
     var $map = $('#map')
     var $body = $(document.body)
@@ -110,6 +110,7 @@ MapController.prototype.setCurrent = function (ref) {
 
       var location = $query.val().replace(/[^a-zA-Z0-9',-.& ]/g, '')
       var noResults = 'No results match this search term.'
+      var serviceUnavailable = 'There is currently a delay in obtaining the results for this area. Normal service will be resumed as soon as possible. In the meantime please use the map below to find the latest information near you.'
 
       if (location) {
         var url = '/long-term-flood-risk/api/geocode?location=' + location
@@ -119,7 +120,9 @@ MapController.prototype.setCurrent = function (ref) {
           url: url
         }).done(function (data) {
           if (data) {
-            if (data.isEngland) {
+            if (data.error) {
+              $error.text(serviceUnavailable)
+            } else if (data.isEngland) {
               var point = [data.easting, data.northing]
               maps.panTo(point, 7)
             } else {
@@ -132,7 +135,7 @@ MapController.prototype.setCurrent = function (ref) {
           if (jqxhr.status === 400) {
             $error.text(noResults)
           } else {
-            $error.text('There is currently a delay in obtaining the results for this area. Normal service will be resumed as soon as possible. In the meantime please use the map below to find the latest information near you.')
+            $error.text(serviceUnavailable)
           }
         })
       } else {

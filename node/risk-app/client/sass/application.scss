@@ -57,4 +57,9 @@ $govuk-assets-path: '/long-term-flood-risk/assets/';
     transition: width 250ms;
     z-index: 1;
   }
+
+  #error-message {
+    // display: none;
+    color: $govuk-error-colour;
+  }
 }

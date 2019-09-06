@@ -45,10 +45,12 @@ const schema = {
   floodRiskUrl: joi.string().uri().required(),
   ordnanceSurvey: ordnanceSurveySchema,
   errbit: errbitSchema,
-  env: joi.string().valid('development', 'test', 'production').default('development')
+  http_proxy: joi.string(),
+  env: joi.string().valid('development', 'test', 'production')
 }
 
 config.env = process.env.NODE_ENV
+config.http_proxy = process.env.http_proxy
 
 // Validate config
 const result = joi.validate(config, schema, {
@@ -62,7 +64,6 @@ if (result.error) {
 
 // Use the joi validated value
 const value = result.value
-value.http_proxy = process.env.http_proxy
 
 // Add some helper props
 value.isDev = value.env === 'development'

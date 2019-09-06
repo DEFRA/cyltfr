@@ -9,19 +9,15 @@ module.exports = {
   options: {
     description: 'API geocode',
     handler: async (request, h) => {
-      const location = util.cleanseLocation(request.query.location)
-
       try {
+        const location = util.cleanseLocation(request.query.location)
         const result = await locationService.find(location)
         return result || null
       } catch (err) {
-        // Send a 500 back - this is handled as a special
-        // case with a detailed error message used on the client
-        return boom.badImplementation('Geocode error', err)
+        // This is handled as a special case with a
+        // detailed error message used on the client
+        return { error: 'Geocode error' }
       }
-    },
-    app: {
-      useErrorPages: false
     },
     validate: {
       query: {
