@@ -46,6 +46,11 @@ async function createServer () {
     })
   }
 
+  if (config.mockAddressService) {
+    require('../mock/address')
+    server.log('info', 'Address server is being mocked')
+  }
+
   return server
 }
 
