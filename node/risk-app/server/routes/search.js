@@ -76,8 +76,8 @@ module.exports = [{
       payload: {
         addresses: Joi.array().required().items(Joi.object().keys({
           address: Joi.string().required(),
-          country: Joi.string().required(),
-          postcode: Joi.string().required(),
+          // country: Joi.string().required(),
+          // postcode: Joi.string().required(),
           uprn: Joi.string().required()
         })),
         uprn: Joi.string().required()
