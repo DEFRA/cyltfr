@@ -1,4 +1,4 @@
-class PostcodeViewModel {
+class HomeViewModel {
   constructor (postcode, errorMessage) {
     this.postcodeInput = {
       label: {
@@ -21,4 +21,4 @@ class PostcodeViewModel {
   }
 }
 
-module.exports = PostcodeViewModel
+module.exports = HomeViewModel

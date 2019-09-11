@@ -1,7 +1,7 @@
 const config = require('../config')
 const floodWarningsUrl = config.floodWarningsUrl
 
-class AddressViewModel {
+class SearchViewModel {
   constructor (postcode, addresses = [], errorMessage, warnings) {
     this.postcode = postcode
 
@@ -47,4 +47,4 @@ class AddressViewModel {
   }
 }
 
-module.exports = AddressViewModel
+module.exports = SearchViewModel

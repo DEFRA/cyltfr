@@ -2,7 +2,7 @@
 
 {% from "components/select/macro.njk" import govukSelect %}
 
-{% set pageTitle = "Find an address to check the flood risk" %}
+{% set pageTitle = "Select an address" %}
 
 {% block content %}
 <div id="address-page">
@@ -15,7 +15,7 @@
           <span class="govuk-label">Postcode</span>
           <p class="govuk-body">
             <strong style="text-transform: uppercase;">{{ postcode }}</strong>
-            <a href="/{{ mountPath }}/postcode" class="govuk-link">Change</a>
+            <a href="/{{ mountPath }}" class="govuk-link">Change</a>
           </p>
         </div>
 

@@ -62,13 +62,15 @@ function loadMap (point) {
       crossOrigin: 'anonymous'
     })
 
-    var attribution = config.OSAttribution.replace('{{year}}', new Date().getFullYear())
+    var attributionText = config.OSAttribution.replace('{{year}}', new Date().getFullYear())
 
-    options.attributions = [
-      new ol.control.Attribution({
-        html: attribution
-      })
-    ]
+    var attribution = new ol.control.Attribution({
+      label: attributionText
+    })
+
+    // options.attributions = [
+    //   attribution
+    // ]
 
     var source = new ol.source.WMTS(options)
 
@@ -175,11 +177,12 @@ function loadMap (point) {
     }
 
     map = new ol.Map({
-      controls: ol.control.defaults().extend([
+      controls: ol.control.defaults({ attributionOptions: { collapsible: true } }).extend([
         new ol.control.ScaleLine({
           units: 'metric',
           minWidth: 128
-        })
+        }),
+        new ol.control.Attribution()
       ]),
       interactions: ol.interaction.defaults({
         altShiftDragRotate: false,

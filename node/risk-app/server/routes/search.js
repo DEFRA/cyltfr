@@ -3,7 +3,7 @@ const boom = require('@hapi/boom')
 const { postcodeRegex } = require('../helpers')
 const floodService = require('../services/flood')
 const addressService = require('../services/address')
-const AddressViewModel = require('../models/address-view')
+const SearchViewModel = require('../models/search-view')
 const errors = require('../models/errors.json')
 
 async function getWarnings (postcode, request) {
@@ -18,7 +18,7 @@ async function getWarnings (postcode, request) {
 
 module.exports = [{
   method: 'GET',
-  path: '/address',
+  path: '/search',
   handler: async (request, h) => {
     const { postcode } = request.query
 
@@ -40,7 +40,7 @@ module.exports = [{
         .map(addr => ({ uprn: addr.uprn, address: addr.address }))
 
       if (!addresses || !addresses.length) {
-        return h.view('address', new AddressViewModel(postcode))
+        return h.view('search', new SearchViewModel(postcode))
       }
 
       // If there are no english addresses then
@@ -62,7 +62,7 @@ module.exports = [{
 
       const warnings = await getWarnings(postcode, request)
 
-      return h.view('address', new AddressViewModel(postcode, englishAddresses, null, warnings))
+      return h.view('search', new SearchViewModel(postcode, englishAddresses, null, warnings))
     } catch (err) {
       return boom.badRequest(errors.addressByPostcode.message)
     }
@@ -81,14 +81,14 @@ module.exports = [{
   }
 }, {
   method: 'POST',
-  path: '/address',
+  path: '/search',
   handler: async (request, h) => {
     const { postcode } = request.query
     const { address, addresses } = request.payload
 
     if (!address) {
       const errorMessage = 'Select an address'
-      const model = new AddressViewModel(postcode, addresses, errorMessage)
+      const model = new SearchViewModel(postcode, addresses, errorMessage)
       return h.view('address', model)
     }
 
