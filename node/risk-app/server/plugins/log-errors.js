@@ -31,7 +31,7 @@ exports.plugin = {
         // The return the `500` view
         if (useErrorPages) {
           switch (response.message) {
-            case errors.addressByPremisesAndPostcode.message:
+            case errors.addressByPostcode.message:
             case errors.addressById.message:
               return h.view('500-address').code(statusCode)
             case errors.riskProfile.message:

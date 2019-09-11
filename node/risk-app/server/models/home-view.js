@@ -1,8 +1,7 @@
 const moment = require('moment')
 
-function HomeViewModel (premises, postcode, errors) {
+function HomeViewModel (postcode, errors) {
   this.noIndex = false
-  this.premises = premises
   this.postcode = postcode
 
   // Validation messages
@@ -14,12 +13,6 @@ function HomeViewModel (premises, postcode, errors) {
     const formErrors = errors.find(e => e.path.includes('address'))
     if (formErrors) {
       this.errors.address = formErrors.message
-    }
-
-    // Premises
-    const premisesErrors = errors.find(e => e.path.includes('premises'))
-    if (premisesErrors) {
-      this.errors.premises = 'You need to give a property number or name'
     }
 
     // Postcode

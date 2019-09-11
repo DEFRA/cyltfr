@@ -4,27 +4,20 @@
     <div class="column-two-thirds">
       <div id="banner"></div>
       <form method="post" autocomplete="off">
-        <h1 class="heading-large">{{#if singleAddress}}Confirm{{else}}Choose{{/if}} address</h1>
+        <h1 class="heading-large">Choose address</h1>
         <input type="hidden" name="addresses" value="{{addressesJSON}}">
         <div {{#if errors}}class="form-group form-group-error"{{/if}}>
           {{#if errors}}
             <span class="error-message error-message-group">{{errors.uprn}}</span>  
           {{/if}}
           <div class="form-group">
-            {{#if singleAddress}}
+            <p class="bold-small">{{numAddressesFound}} addresses found for '{{postcode}}'</p>
+            {{#each addresses}}
               <div class="multiple-choice">
-                <input id="property" type="checkbox" name="uprn" value="{{singleAddress.uprn}}">
-                <label for="property">{{singleAddress.address}}, {{singleAddress.country}}</label>
-              </div>
-            {{else}}
-              <p class="bold-small">{{numAddressesFound}} addresses found for '{{premises}}' and '{{postcode}}'</p>
-              {{#each addresses}}
-                <div class="multiple-choice">
-                  <input id="property-{{uprn}}" type="radio" name="uprn" value="{{uprn}}">
-                  <label for="property-{{uprn}}">{{address}}, {{country}}</label>
-                </div>          
-              {{/each}}
-            {{/if}}
+                <input id="property-{{uprn}}" type="radio" name="uprn" value="{{uprn}}">
+                <label for="property-{{uprn}}">{{address}}, {{country}}</label>
+              </div>          
+            {{/each}}
           </div>
         </div>
         <div class="form-group">
