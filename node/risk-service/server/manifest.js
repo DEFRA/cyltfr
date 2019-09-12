@@ -9,8 +9,11 @@ const manifest = {
   register: {
     plugins: [
       {
-        plugin: 'good',
+        plugin: '@hapi/good',
         options: config.logging
+      },
+      {
+        plugin: 'blipp'
       },
       './plugins/log-errors',
       './plugins/router'

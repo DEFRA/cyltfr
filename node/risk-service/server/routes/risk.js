@@ -1,12 +1,12 @@
-const Joi = require('joi')
-const Boom = require('boom')
+const Joi = require('@hapi/joi')
+const Boom = require('@hapi/boom')
 const service = require('../services')
 
 module.exports = {
   method: 'GET',
   path: '/floodrisk/{x}/{y}/{radius}',
   options: {
-    description: 'Get the long term flood risk associated with a point. Surface water risk is calculated based on a radius (metres) buffered point in polygon search.',
+    description: 'Get the long term flood risk associated with a point.',
     handler: async (request, h) => {
       const params = request.params
 

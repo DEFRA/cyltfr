@@ -1,6 +1,6 @@
-const Lab = require('lab')
-const Code = require('code')
-const glupe = require('glupe')
+const Lab = require('@hapi/lab')
+const Code = require('@hapi/code')
+const glue = require('@hapi/glue')
 const lab = exports.lab = Lab.script()
 const mock = require('../mock')
 const { manifest, options } = require('../../server')
@@ -12,7 +12,7 @@ lab.experiment('Unit', () => {
   // Make a server before the tests
   lab.before(async () => {
     console.log('Creating server')
-    server = await glupe.compose(manifest, options)
+    server = await glue.compose(manifest, options)
   })
 
   lab.after(async () => {

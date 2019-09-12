@@ -1,4 +1,4 @@
-const Glue = require('glue')
+const Glue = require('@hapi/glue')
 const manifest = require('./manifest')
 const routes = require('../../server/routes')
 
