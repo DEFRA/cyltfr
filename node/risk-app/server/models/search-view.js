@@ -1,7 +1,6 @@
 const moment = require('moment')
 
-function SearchViewModel (premises, postcode, addresses, errors) {
-  this.premises = premises
+function SearchViewModel (postcode, addresses, errors) {
   this.postcode = postcode
   this.addresses = addresses
 
