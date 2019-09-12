@@ -1,4 +1,4 @@
-const Boom = require('boom')
+const Boom = require('@hapi/boom')
 const util = require('../util')
 const config = require('../../config')
 const errors = require('../models/errors.json')

@@ -1,5 +1,5 @@
-const Joi = require('joi')
-const Boom = require('boom')
+const Joi = require('@hapi/joi')
+const Boom = require('@hapi/boom')
 const helpers = require('../helpers')
 const addressService = require('../services/address')
 const SearchViewModel = require('../models/search-view')
@@ -13,22 +13,21 @@ module.exports = [{
     description: 'Get postcode search results',
     handler: async (request, h) => {
       const query = request.query
-      const premises = query.premises
       const postcode = query.postcode
 
       // Our Address service doesn't support NI addresses
       // but all NI postcodes start with BT so exit to the
       // "not-england" page if that's the case.
       if (postcode.toUpperCase().startsWith('BT')) {
-        return h.redirect(`/england-only?premises=${encodeURIComponent(premises)}&postcode=${encodeURIComponent(postcode)}&region=northern-ireland`)
+        return h.redirect(`/england-only?postcode=${encodeURIComponent(postcode)}&region=northern-ireland`)
       }
 
       try {
         // Call the address service to find the matching addresses
-        const addresses = await addressService.find(premises, postcode)
+        const addresses = await addressService.find(postcode)
 
         if (!addresses || !addresses.length) {
-          return h.redirect(`/?err=notfound&premises=${encodeURIComponent(premises)}&postcode=${encodeURIComponent(postcode)}`)
+          return h.redirect(`/?err=notfound&postcode=${encodeURIComponent(postcode)}`)
         }
 
         // Filter the english addresses
@@ -44,18 +43,17 @@ module.exports = [{
             regionQueryString = 'scotland'
           }
 
-          return h.redirect(`/england-only?premises=${encodeURIComponent(premises)}&postcode=${encodeURIComponent(postcode)}` +
+          return h.redirect(`/england-only?postcode=${encodeURIComponent(postcode)}` +
             (regionQueryString && `&region=${regionQueryString}`))
         }
 
-        return h.view('search', new SearchViewModel(premises, postcode, englishAddresses))
+        return h.view('search', new SearchViewModel(postcode, englishAddresses))
       } catch (err) {
-        return Boom.badRequest(errors.addressByPremisesAndPostcode.message, err)
+        return Boom.badRequest(errors.addressByPostcode.message, err)
       }
     },
     validate: {
       query: {
-        premises: Joi.string().trim().required().max(100),
         postcode: Joi.string().trim().required().regex(postcodeRegex)
       }
     }
@@ -73,14 +71,13 @@ module.exports = [{
     },
     validate: {
       query: {
-        premises: Joi.string().trim().required().max(100),
         postcode: Joi.string().trim().required().regex(postcodeRegex)
       },
       payload: {
         addresses: Joi.array().required().items(Joi.object().keys({
           address: Joi.string().required(),
-          country: Joi.string().required(),
-          postcode: Joi.string().required(),
+          // country: Joi.string().required(),
+          // postcode: Joi.string().required(),
           uprn: Joi.string().required()
         })),
         uprn: Joi.string().required()
@@ -90,13 +87,12 @@ module.exports = [{
         const errors = error.details
         const query = request.query || {}
         const payload = request.payload || {}
-        const premises = query.premises
         const postcode = query.postcode
 
         // Save a lookup to address service again by
         // using the smuggled original address results
         const addresses = JSON.parse(payload.addresses)
-        const model = new SearchViewModel(premises, postcode, addresses, errors)
+        const model = new SearchViewModel(postcode, addresses, errors)
 
         // Respond with the view with errors
         return h.view('search', model).takeover()

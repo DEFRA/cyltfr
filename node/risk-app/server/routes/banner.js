@@ -1,4 +1,4 @@
-const Joi = require('joi')
+const Joi = require('@hapi/joi')
 const floodService = require('../services/flood')
 const BannerViewModel = require('../models/banner-view')
 

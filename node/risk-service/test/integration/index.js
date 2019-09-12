@@ -1,6 +1,6 @@
-const Lab = require('lab')
-const Code = require('code')
-const glupe = require('glupe')
+const Lab = require('@hapi/lab')
+const Code = require('@hapi/code')
+const glupe = require('@hapi/glue')
 const lab = exports.lab = Lab.script()
 const { manifest, options } = require('../../server')
 

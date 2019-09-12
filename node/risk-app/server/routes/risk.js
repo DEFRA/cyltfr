@@ -1,5 +1,5 @@
-const Joi = require('joi')
-const Boom = require('boom')
+const Joi = require('@hapi/joi')
+const Boom = require('@hapi/boom')
 const riskService = require('../services/risk')
 const addressService = require('../services/address')
 const RiskViewModel = require('../models/risk-view')

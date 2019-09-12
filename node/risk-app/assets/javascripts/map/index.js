@@ -101,8 +101,7 @@ function mapPage (options) {
         } else {
           $error.text(noResults)
         }
-      })
-      .fail(function (jqxhr, textStatus, error) {
+      }).fail(function (jqxhr, textStatus, error) {
         if (jqxhr.status === 400) {
           $error.text(noResults)
         } else {

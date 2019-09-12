@@ -1,0 +1,12 @@
+# LTFRI 1.2.0 Tuesday 17th September 2019
+
+
+# Tickets
+FCRM-705 Remove premises field
+FCRM-704 Update project dependencies
+FCRM-703 Cross domain google analytics
+
+# Instructions
+Full LTFRI code build and functional test run required.
+
+No special instructions.

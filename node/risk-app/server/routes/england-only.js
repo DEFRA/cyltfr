@@ -1,4 +1,4 @@
-const Joi = require('joi')
+const Joi = require('@hapi/joi')
 const helpers = require('../helpers')
 const postcodeRegex = helpers.postcodeRegex
 
@@ -19,7 +19,6 @@ module.exports = {
     validate: {
       query: {
         region: Joi.string().allow('', 'wales', 'northern-ireland', 'scotland'),
-        premises: Joi.string().trim().max(100),
         postcode: Joi.string().trim().regex(postcodeRegex),
         uprn: Joi.string().allow('')
       }

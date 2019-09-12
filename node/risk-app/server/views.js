@@ -14,8 +14,8 @@ const assetPath = mountPath + 'public/'
 const engine = handlebars.create()
 
 const helpers = require('./helpers')
-for (let key in helpers) {
-  if (helpers.hasOwnProperty(key)) {
+for (const key in helpers) {
+  if (Object.prototype.hasOwnProperty.call(helpers, key)) {
     engine.registerHelper(key, helpers[key])
   }
 }

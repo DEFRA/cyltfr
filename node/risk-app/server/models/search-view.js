@@ -1,21 +1,16 @@
 const moment = require('moment')
 
-function SearchViewModel (premises, postcode, addresses, errors) {
-  this.premises = premises
+function SearchViewModel (postcode, addresses, errors) {
   this.postcode = postcode
   this.addresses = addresses
 
   if (addresses) {
-    if (addresses.length === 1) {
-      this.singleAddress = addresses[0]
-    } else {
-      this.numAddressesFound = addresses.length
-    }
+    this.numAddressesFound = addresses.length
   }
 
   if (errors) {
     this.errors = {
-      uprn: `You need to ${this.singleAddress ? 'confirm' : 'select'} the address`
+      uprn: 'You need to select the address'
     }
   }
 

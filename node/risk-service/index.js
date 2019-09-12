@@ -1,11 +1,12 @@
-const glupe = require('glupe')
+const glue = require('@hapi/glue')
 const { manifest, options } = require('./server')
 
 ;(async () => {
   try {
-    await glupe(manifest, options)
+    const server = await glue.compose(manifest, options)
+    await server.start()
   } catch (err) {
-    console.error(err)
+    console.error('Failed to start server', err)
     process.exit(1)
   }
 })()
