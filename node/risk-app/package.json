@@ -1,6 +1,6 @@
 {
   "name": "risk-app",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Long term flood risk information",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,6 @@
   "dependencies": {
     "boom": "7.1.1",
     "details-summary": "0.0.1",
-    "fuse.js": "3.2.0",
     "glupe": "1.0.3",
     "good": "8.0.0",
     "good-console": "7.0.0",
