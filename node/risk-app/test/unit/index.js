@@ -761,7 +761,7 @@ lab.experiment('Unit', () => {
   lab.test('/search', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?premises=81&postcode=cw8 4bh'
+      url: mountPath + '/search?postcode=cw8 4bh'
     }
 
     const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, [
@@ -776,7 +776,7 @@ lab.experiment('Unit', () => {
   lab.test('/search - Invalid postcode', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?premises=81&postcode=AB1 1AB'
+      url: mountPath + '/search?postcode=AB1 1AB'
     }
 
     const response = await server.inject(options)
@@ -786,7 +786,7 @@ lab.experiment('Unit', () => {
   lab.test('/search - Address service error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?postcode=cw8 4bh'
+      url: mountPath + '/search'
     }
 
     const addressStub = mock.replace(addressService, 'findByPostcode', mock.makePromise('Mock Address Error'))
@@ -799,7 +799,7 @@ lab.experiment('Unit', () => {
   lab.test('/search - Address service returns no addresses', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?premises=1&postcode=cw8 4bh'
+      url: mountPath + '/search?postcode=cw8 4bh'
     }
 
     const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, null))
@@ -812,7 +812,7 @@ lab.experiment('Unit', () => {
   lab.test('/search - Address service returns empty address array', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?premises=1&postcode=cw8 4bh'
+      url: mountPath + '/search?postcode=cw8 4bh'
     }
 
     const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, []))
@@ -825,7 +825,7 @@ lab.experiment('Unit', () => {
   lab.test('/search - NATIONAL address to continue as normal', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?premises=81&postcode=cw8 4bh'
+      url: mountPath + '/search?postcode=cw8 4bh'
     }
 
     const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, [
@@ -840,7 +840,7 @@ lab.experiment('Unit', () => {
   lab.test('/search - SCOTTISH address to redirect to england-only', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?premises=81&postcode=cw8 4bh'
+      url: mountPath + '/search?postcode=cw8 4bh'
     }
 
     const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, [
@@ -856,7 +856,7 @@ lab.experiment('Unit', () => {
   lab.test('/search - WELSH address to redirect to england-only', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?premises=81&postcode=cw8 4bh'
+      url: mountPath + '/search?postcode=cw8 4bh'
     }
 
     const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, [
