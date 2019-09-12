@@ -1,0 +1,11 @@
+# LTFRI 1.1.6 Tuesday 17th September 2019
+
+
+# Tickets
+FCRM-705 Remove premises field
+FCRM-703 Cross domain google analytics
+
+# Instructions
+Full LTFRI code build and functional test run required.
+
+No special instructions.

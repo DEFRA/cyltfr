@@ -17,7 +17,7 @@
                 <label for="property">{{singleAddress.address}}, {{singleAddress.country}}</label>
               </div>
             {{else}}
-              <p class="bold-small">{{numAddressesFound}} addresses found for '{{premises}}' and '{{postcode}}'</p>
+              <p class="bold-small">{{numAddressesFound}} addresses found for '{{postcode}}'</p>
               {{#each addresses}}
                 <div class="multiple-choice">
                   <input id="property-{{uprn}}" type="radio" name="uprn" value="{{uprn}}">
