@@ -18,18 +18,25 @@ const RiskLevel = {
 
 function RiskViewModel (risk, address) {
   const inTargetArea = risk.inFloodWarningArea || risk.inFloodAlertArea
-  const riverAndSeaRisk = risk.riverAndSeaRisk ? risk.riverAndSeaRisk.probabilityForBand : RiskLevel.VeryLow
+  const riverAndSeaRisk = risk.riverAndSeaRisk
+    ? risk.riverAndSeaRisk.probabilityForBand
+    : RiskLevel.VeryLow
+
   const surfaceWaterRisk = risk.surfaceWaterRisk || RiskLevel.VeryLow
   const reservoirRisk = !!(risk.reservoirRisk && risk.reservoirRisk.length)
+  const riverAndSeaAndSurfaceWaterAreVeryLow = riverAndSeaRisk === RiskLevel.VeryLow &&
+    surfaceWaterRisk === RiskLevel.VeryLow
 
-  if (inTargetArea) {
+  // LTFRI-62 Band change. If property is in TA but RS and SW are Very Low AND the TA
+  // is not GW, then rather than show AtRisk, we should show the Low Risk (teal) page.
+  if (inTargetArea && !(riverAndSeaAndSurfaceWaterAreVeryLow && !risk.isGroundwaterArea)) {
     this.status = RiskStatus.AtRisk
   } else {
     if ((riverAndSeaRisk === RiskLevel.High || riverAndSeaRisk === RiskLevel.Medium) ||
         (surfaceWaterRisk === RiskLevel.High || surfaceWaterRisk === RiskLevel.Medium)) {
       this.status = RiskStatus.AtRiskMonitor
     } else {
-      if (riverAndSeaRisk === RiskLevel.VeryLow && surfaceWaterRisk === RiskLevel.VeryLow) {
+      if (riverAndSeaAndSurfaceWaterAreVeryLow) {
         this.status = RiskStatus.VeryLowRisk
       } else {
         this.status = RiskStatus.LowRisk
