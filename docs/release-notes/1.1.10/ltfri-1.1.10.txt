@@ -1,7 +1,7 @@
-# LTFRI release 1.1.10 18th December 2019
+# LTFRI release 1.1.10 4th December 2019
 
 # tickets
 LTFRI-31 Upgrade Node.JS to v12
-LTFRI-XX Surface Water Data Update
 
 # Instructions
+No special instructions
