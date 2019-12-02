@@ -14,5 +14,6 @@ module.exports = [].concat(
   require('./england-only'),
   require('./404'),
   require('./os-terms'),
-  require('./error')
+  require('./error'),
+  require('./echo')
 )
