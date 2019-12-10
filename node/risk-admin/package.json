@@ -1,0 +1,47 @@
+{
+  "name": "risk-admin",
+  "version": "0.0.1",
+  "description": "LTFRI Admin Web App",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "bin/build-css",
+    "build": "bin/build",
+    "lint": "standard",
+    "unit-test": "lab -c -r console -o stdout -r lcov -o lcov.info",
+    "test": "npm run lint",
+    "postinstall": "npm run build",
+    "build:container": "docker build . -t ltfmgmt:v1",
+    "package:container": "docker save --output ltfmgmt.tar ltfmgmt:v1",
+    "start:container": "docker run -v ~/.aws/:/home/node/.aws:ro -p 3000:3000 --rm --env-file .env --name ltfmgmt ltfmgmt:v1"
+  },
+  "author": "defra.gov.uk",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/bell": "11.1.0",
+    "@hapi/boom": "8.0.1",
+    "@hapi/cookie": "10.1.2",
+    "@hapi/good": "8.2.4",
+    "@hapi/good-console": "8.1.2",
+    "@hapi/good-squeeze": "5.2.1",
+    "@hapi/hapi": "18.4.0",
+    "@hapi/inert": "5.2.2",
+    "@hapi/joi": "16.1.8",
+    "@hapi/vision": "5.5.4",
+    "@hapi/wreck": "16.0.1",
+    "aws-sdk": "2.586.0",
+    "blipp": "4.0.1",
+    "govuk-frontend": "3.4.0",
+    "https-proxy-agent": "3.0.1",
+    "moment-timezone": "0.5.27",
+    "node-sass": "4.13.0",
+    "nunjucks": "3.2.0",
+    "ogr2ogr": "^1.4.0",
+    "sinon": "7.5.0"
+  },
+  "devDependencies": {
+    "@hapi/code": "7.0.0",
+    "@hapi/lab": "21.0.0",
+    "codeclimate-test-reporter": "0.5.1",
+    "standard": "14.3.1"
+  }
+}
