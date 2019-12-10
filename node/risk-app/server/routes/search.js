@@ -1,106 +1,87 @@
-const Joi = require('joi')
-const Boom = require('boom')
-const helpers = require('../helpers')
+const joi = require('@hapi/joi')
+const boom = require('@hapi/boom')
+const { postcodeRegex, redirectToHomeCounty } = require('../helpers')
+const config = require('../config')
+const floodService = require('../services/flood')
 const addressService = require('../services/address')
 const SearchViewModel = require('../models/search-view')
 const errors = require('../models/errors.json')
-const postcodeRegex = helpers.postcodeRegex
+
+async function getWarnings (postcode, request) {
+  // Don't let an error raised during the call
+  // to get the warnings cause the page to fail
+  try {
+    return await floodService.findWarnings(postcode)
+  } catch (err) {
+    request.log('error', err)
+  }
+}
 
 module.exports = [{
   method: 'GET',
   path: '/search',
-  options: {
-    description: 'Get postcode search results',
-    handler: async (request, h) => {
-      const query = request.query
-      const premises = query.premises
-      const postcode = query.postcode
+  handler: async (request, h) => {
+    const { postcode } = request.query
 
-      // Our Address service doesn't support NI addresses
-      // but all NI postcodes start with BT so exit to the
-      // "not-england" page if that's the case.
-      if (postcode.toUpperCase().startsWith('BT')) {
-        return h.redirect(`/england-only?premises=${encodeURIComponent(premises)}&postcode=${encodeURIComponent(postcode)}&region=northern-ireland`)
+    // Our Address service doesn't support NI addresses
+    // but all NI postcodes start with BT so redirect to
+    // "england-only" page if that's the case.
+    if (postcode.toUpperCase().startsWith('BT')) {
+      return redirectToHomeCounty(h, postcode, 'northern-ireland')
+    }
+
+    try {
+      const addresses = await addressService.find(postcode)
+
+      if (!addresses || !addresses.length) {
+        return h.view('search', new SearchViewModel(postcode))
       }
 
-      try {
-        // Call the address service to find the matching addresses
-        const addresses = await addressService.find(premises, postcode)
+      const warnings = await getWarnings(postcode, request)
 
-        if (!addresses || !addresses.length) {
-          return h.redirect(`/?err=notfound&premises=${encodeURIComponent(premises)}&postcode=${encodeURIComponent(postcode)}`)
-        }
-
-        // Filter the english addresses
-        const englishAddresses = addresses.filter(a => (a.country !== 'WALES' && a.country !== 'SCOTLAND'))
-
-        // If there are no english addresses, it must be in Scotland or Wales.
-        if (!englishAddresses.length) {
-          let regionQueryString = ''
-
-          if (addresses[0].country === 'WALES') {
-            regionQueryString = 'wales'
-          } else if (addresses[0].country === 'SCOTLAND') {
-            regionQueryString = 'scotland'
-          }
-
-          return h.redirect(`/england-only?premises=${encodeURIComponent(premises)}&postcode=${encodeURIComponent(postcode)}` +
-            (regionQueryString && `&region=${regionQueryString}`))
-        }
-
-        return h.view('search', new SearchViewModel(premises, postcode, englishAddresses))
-      } catch (err) {
-        return Boom.badRequest(errors.addressByPremisesAndPostcode.message, err)
+      return h.view('search', new SearchViewModel(postcode, addresses, null, warnings))
+    } catch (err) {
+      return boom.badRequest(errors.addressByPostcode.message)
+    }
+  },
+  options: {
+    description: 'Get the search page',
+    plugins: {
+      'hapi-rate-limit': {
+        enabled: config.rateLimitEnabled
       }
     },
     validate: {
-      query: {
-        premises: Joi.string().trim().required().max(100),
-        postcode: Joi.string().trim().required().regex(postcodeRegex)
-      }
+      query: joi.object().keys({
+        postcode: joi.string().trim().regex(postcodeRegex).required()
+      }).required()
     }
   }
 }, {
   method: 'POST',
   path: '/search',
-  config: {
-    description: 'Post search results',
-    handler: (request, h) => {
-      const payload = request.payload
-      const uprn = payload.uprn
+  handler: async (request, h) => {
+    const { postcode } = request.query
+    const { address, addresses } = request.payload
 
-      return h.redirect('/risk?address=' + uprn)
-    },
+    if (!address) {
+      const errorMessage = 'Select an address'
+      const model = new SearchViewModel(postcode, JSON.parse(addresses), errorMessage)
+      return h.view('search', model)
+    }
+
+    return h.redirect(`/risk?address=${address}`)
+  },
+  options: {
+    description: 'Post to the search page',
     validate: {
-      query: {
-        premises: Joi.string().trim().required().max(100),
-        postcode: Joi.string().trim().required().regex(postcodeRegex)
-      },
-      payload: {
-        addresses: Joi.array().required().items(Joi.object().keys({
-          address: Joi.string().required(),
-          country: Joi.string().required(),
-          postcode: Joi.string().required(),
-          uprn: Joi.string().required()
-        })),
-        uprn: Joi.string().required()
-      },
-      failAction: function (request, h, error) {
-        // Get the errors and prepare the model
-        const errors = error.details
-        const query = request.query || {}
-        const payload = request.payload || {}
-        const premises = query.premises
-        const postcode = query.postcode
-
-        // Save a lookup to address service again by
-        // using the smuggled original address results
-        const addresses = JSON.parse(payload.addresses)
-        const model = new SearchViewModel(premises, postcode, addresses, errors)
-
-        // Respond with the view with errors
-        return h.view('search', model).takeover()
-      }
+      query: joi.object().keys({
+        postcode: joi.string().trim().regex(postcodeRegex).required()
+      }),
+      payload: joi.object().keys({
+        address: joi.string().allow('').required(),
+        addresses: joi.string().required()
+      })
     }
   }
 }]

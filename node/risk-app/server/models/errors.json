@@ -1,11 +1,11 @@
 {
-  "addressByPremisesAndPostcode": {
-    "message" : "An error occurred finding the address by premises & postcode"
+  "addressByPostcode": {
+    "message" : "An error occurred finding the addresses by postcode"
   },
   "addressById": {
     "message" : "An error occurred finding the address by id"
   },
-  "oSGetCapabilities": {
+  "osGetCapabilities": {
     "message" : "Ordnance survey getcapabilities failed"
   },
   "riskProfile": {

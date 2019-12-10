@@ -1,0 +1,35 @@
+$govuk-assets-path: '/long-term-flood-risk/assets/';
+
+@import "node_modules/govuk-frontend/govuk/all";
+@import "./legend";
+@import "./overlay";
+
+.nojs-hidden {
+  display: none;
+}
+
+.js-enabled .nojs-hidden {
+  display: block;
+}
+
+.noscript-iframe {
+  display: block;
+  margin-top: 30px;
+}
+
+.js-enabled .noscript-iframe {
+  display: none;
+}
+
+.govuk-link--white {
+  color: govuk-colour("white")!important;
+}
+
+.map-container {
+  margin: 10px 0;
+  position: relative;
+}
+
+.pull-right {
+  float: right;
+}

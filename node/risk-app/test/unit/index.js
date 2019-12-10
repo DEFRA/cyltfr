@@ -1,14 +1,12 @@
-const Lab = require('lab')
-const Code = require('code')
-const glupe = require('glupe')
+const Lab = require('@hapi/lab')
+const Code = require('@hapi/code')
+const createServer = require('../../server')
 const lab = exports.lab = Lab.script()
 const mock = require('../mock')
-const { manifest, options } = require('../../server')
-const helpers = require('../../server/helpers')
 const riskService = require('../../server/services/risk')
 const floodService = require('../../server/services/flood')
 const addressService = require('../../server/services/address')
-const config = require('../../config')
+const config = require('../../server/config')
 const mountPath = config.mountPath
   ? ('/' + config.mountPath)
   : ''
@@ -19,7 +17,8 @@ lab.experiment('Unit', () => {
   // Make a server before the tests
   lab.before(async () => {
     console.log('Creating server')
-    server = await glupe.compose(manifest, options)
+    server = await createServer()
+    await server.initialize()
   })
 
   lab.after(async () => {
@@ -48,23 +47,23 @@ lab.experiment('Unit', () => {
     Code.expect(response.statusCode).to.equal(200)
   })
 
-  lab.test('/banner', async () => {
+  lab.test('/search - banner ', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/banner?postcode=cw8 4bh'
+      url: mountPath + '/search?postcode=cw8 4bh'
     }
 
-    const stub = mock.replace(floodService, 'findWarnings', mock.makePromise(null, []))
+    // const stub = mock.replace(floodService, 'findWarnings', mock.makePromise(null, []))
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
-    stub.revert()
+    // stub.revert()
   })
 
-  lab.test('/banner - No warnings', async () => {
+  lab.test('/address - No banner warnings', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/banner?postcode=cw8 4bh'
+      url: mountPath + '/search?postcode=cw8 4bh'
     }
 
     const stub = mock.replace(floodService, 'findWarnings', mock.makePromise(null, null))
@@ -74,10 +73,10 @@ lab.experiment('Unit', () => {
     stub.revert()
   })
 
-  lab.test('/banner - No warning severity', async () => {
+  lab.test('/search - No warning banner severity', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/banner?postcode=cw8 4bh'
+      url: mountPath + '/search?postcode=cw8 4bh'
     }
 
     const stub = mock.replace(floodService, 'findWarnings', mock.makePromise(null, {
@@ -89,10 +88,10 @@ lab.experiment('Unit', () => {
     stub.revert()
   })
 
-  lab.test('/banner - With warnings', async () => {
+  lab.test('/search - With banner warnings', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/banner?postcode=cw8 4bh'
+      url: mountPath + '/search?postcode=cw8 4bh'
     }
 
     const data = require('../data/banner-1.json')
@@ -103,10 +102,10 @@ lab.experiment('Unit', () => {
     stub.revert()
   })
 
-  lab.test('/banner - With alerts', async () => {
+  lab.test('/search - With banner alerts', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/banner?postcode=cw8 4bh'
+      url: mountPath + '/search?postcode=cw8 4bh'
     }
 
     const data = require('../data/banner-2.json')
@@ -117,10 +116,10 @@ lab.experiment('Unit', () => {
     stub.revert()
   })
 
-  lab.test('/banner - Error', async () => {
+  lab.test('/search - Error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/banner?postcode=cw8 4bh'
+      url: mountPath + '/search?postcode=cw8 4bh'
     }
 
     const stub = mock.replace(floodService, 'findWarnings', mock.makePromise('Mock Error'))
@@ -140,25 +139,25 @@ lab.experiment('Unit', () => {
     Code.expect(response.statusCode).to.equal(200)
   })
 
-  lab.test('/ - With known error', async () => {
-    const options = {
-      method: 'GET',
-      url: mountPath || '/' + '?err=postcode'
-    }
+  // lab.test('/ - With known error', async () => {
+  //   const options = {
+  //     method: 'GET',
+  //     url: mountPath || '/' + '?err=postcode'
+  //   }
 
-    const response = await server.inject(options)
-    Code.expect(response.statusCode).to.equal(200)
-  })
+  //   const response = await server.inject(options)
+  //   Code.expect(response.statusCode).to.equal(200)
+  // })
 
-  lab.test('/ - With unknown error', async () => {
-    const options = {
-      method: 'GET',
-      url: mountPath || '/' + '?err=postXcode'
-    }
+  // lab.test('/ - With unknown error', async () => {
+  //   const options = {
+  //     method: 'GET',
+  //     url: mountPath || '/' + '?err=postXcode'
+  //   }
 
-    const response = await server.inject(options)
-    Code.expect(response.statusCode).to.equal(200)
-  })
+  //   const response = await server.inject(options)
+  //   Code.expect(response.statusCode).to.equal(200)
+  // })
 
   lab.test('/map', async () => {
     const options = {
@@ -761,11 +760,16 @@ lab.experiment('Unit', () => {
   lab.test('/search', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?premises=81&postcode=cw8 4bh'
+      url: mountPath + '/search?postcode=cw8 4bh'
     }
 
     const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, [
-      { uprn: '100041117437', address: '81, MOSS ROAD, NORTHWICH, CW8 4BH, ENGLAND', country: 'ENGLAND' }
+      {
+        uprn: '100041117437',
+        address: '81, MOSS ROAD, NORTHWICH, CW8 4BH, ENGLAND',
+        country: 'ENGLAND',
+        postcode: 'CW8 4BH'
+      }
     ]))
 
     const response = await server.inject(options)
@@ -776,11 +780,21 @@ lab.experiment('Unit', () => {
   lab.test('/search - Invalid postcode', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?premises=81&postcode=AB1 1AB'
+      url: mountPath + '/search?postcode=invalid'
     }
 
     const response = await server.inject(options)
-    Code.expect(response.statusCode).to.equal(302)
+    Code.expect(response.statusCode).to.equal(400)
+  })
+
+  lab.test('/search - Invalid query', async () => {
+    const options = {
+      method: 'GET',
+      url: mountPath + '/search?invalid=foo'
+    }
+
+    const response = await server.inject(options)
+    Code.expect(response.statusCode).to.equal(400)
   })
 
   lab.test('/search - Address service error', async () => {
@@ -789,43 +803,30 @@ lab.experiment('Unit', () => {
       url: mountPath + '/search?postcode=cw8 4bh'
     }
 
-    const addressStub = mock.replace(addressService, 'findByPostcode', mock.makePromise('Mock Address Error'))
+    const addressStub = mock.replace(addressService, 'find', mock.makePromise('Mock Address Error'))
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(400)
     addressStub.revert()
   })
 
-  lab.test('/search - Address service returns no addresses', async () => {
-    const options = {
-      method: 'GET',
-      url: mountPath + '/search?premises=1&postcode=cw8 4bh'
-    }
-
-    const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, null))
-
-    const response = await server.inject(options)
-    Code.expect(response.statusCode).to.equal(302)
-    addressStub.revert()
-  })
-
   lab.test('/search - Address service returns empty address array', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?premises=1&postcode=cw8 4bh'
+      url: mountPath + '/search?postcode=cw8 4bh'
     }
 
     const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, []))
 
     const response = await server.inject(options)
-    Code.expect(response.statusCode).to.equal(302)
+    Code.expect(response.statusCode).to.equal(200)
     addressStub.revert()
   })
 
   lab.test('/search - NATIONAL address to continue as normal', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?premises=81&postcode=cw8 4bh'
+      url: mountPath + '/search?postcode=cw8 4bh'
     }
 
     const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, [
@@ -837,42 +838,43 @@ lab.experiment('Unit', () => {
     addressStub.revert()
   })
 
-  lab.test('/search - SCOTTISH address to redirect to england-only', async () => {
+  lab.test('/search - NI address to redirect to england-only', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?premises=81&postcode=cw8 4bh'
+      url: mountPath + '/search?postcode=BT11BT'
     }
-
-    const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, [
-      { uprn: '100041117437', address: '81, MOSS ROAD, NORTHWICH, CW8 4BH, SCOTLAND', country: 'SCOTLAND' }
-    ]))
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(302)
     Code.expect(response.headers.location).to.include('/england-only')
-    addressStub.revert()
   })
 
-  lab.test('/search - WELSH address to redirect to england-only', async () => {
+  lab.test('/risk WELSH address to redirect to england-only', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?premises=81&postcode=cw8 4bh'
+      url: mountPath + '/risk?address=100100893634'
     }
-
-    const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, [
-      { uprn: '100041117437', address: '81, MOSS ROAD, NORTHWICH, CW8 4BH, WALES', country: 'WALES' }
-    ]))
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(302)
     Code.expect(response.headers.location).to.include('/england-only')
-    addressStub.revert()
   })
 
-  lab.test('/risk-detail - Address service error', async () => {
+  lab.test('/risk SCOTTISH address to redirect to england-only', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk-detail?address=100010192035'
+      url: mountPath + '/risk?address=906700326315'
+    }
+
+    const response = await server.inject(options)
+    Code.expect(response.statusCode).to.equal(302)
+    Code.expect(response.headers.location).to.include('/england-only')
+  })
+
+  lab.test('/risk - Address service error', async () => {
+    const options = {
+      method: 'GET',
+      url: mountPath + '/risk?address=100010192035'
     }
 
     const addressStub = mock.replace(addressService, 'findById', mock.makePromise('Mock Address Error'))
@@ -898,10 +900,10 @@ lab.experiment('Unit', () => {
     riskStub.revert()
   })
 
-  lab.test('/risk-detail - Risk service error', async () => {
+  lab.test('/risk - Risk service error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk-detail?address=100010192035'
+      url: mountPath + '/risk?address=100010192035'
     }
 
     const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
@@ -920,10 +922,10 @@ lab.experiment('Unit', () => {
     riskStub.revert()
   })
 
-  lab.test('/risk-detail inFloodWarningArea error', async () => {
+  lab.test('/risk inFloodWarningArea error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk-detail?address=100010192035'
+      url: mountPath + '/risk?address=100010192035'
     }
 
     const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
@@ -955,10 +957,10 @@ lab.experiment('Unit', () => {
     riskStub.revert()
   })
 
-  lab.test('/risk-detail inFloodAlertArea error', async () => {
+  lab.test('/risk inFloodAlertArea error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk-detail?address=100010192035'
+      url: mountPath + '/risk?address=100010192035'
     }
 
     const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
@@ -990,10 +992,10 @@ lab.experiment('Unit', () => {
     riskStub.revert()
   })
 
-  lab.test('/risk-detail riverAndSeaRisk error', async () => {
+  lab.test('/risk riverAndSeaRisk error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk-detail?address=100010192035'
+      url: mountPath + '/risk?address=100010192035'
     }
 
     const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
@@ -1025,10 +1027,10 @@ lab.experiment('Unit', () => {
     riskStub.revert()
   })
 
-  lab.test('/risk-detail surfaceWaterRisk error', async () => {
+  lab.test('/risk surfaceWaterRisk error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk-detail?address=100010192035'
+      url: mountPath + '/risk?address=100010192035'
     }
 
     const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
@@ -1060,10 +1062,10 @@ lab.experiment('Unit', () => {
     riskStub.revert()
   })
 
-  lab.test('/risk-detail reservoirRisk error', async () => {
+  lab.test('/risk reservoirRisk error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk-detail?address=100010192035'
+      url: mountPath + '/risk?address=100010192035'
     }
 
     const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
@@ -1095,10 +1097,10 @@ lab.experiment('Unit', () => {
     riskStub.revert()
   })
 
-  lab.test('/risk-detail surfaceWaterSuitability error', async () => {
+  lab.test('/risk surfaceWaterSuitability error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk-detail?address=100010192035'
+      url: mountPath + '/risk?address=100010192035'
     }
 
     const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
@@ -1130,10 +1132,10 @@ lab.experiment('Unit', () => {
     riskStub.revert()
   })
 
-  lab.test('/risk-detail surfaceWaterSuitability error', async () => {
+  lab.test('/risk surfaceWaterSuitability error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk-detail?address=100010192035'
+      url: mountPath + '/risk?address=100010192035'
     }
 
     const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
@@ -1165,10 +1167,10 @@ lab.experiment('Unit', () => {
     riskStub.revert()
   })
 
-  lab.test('/risk-detail inEngland false', async () => {
+  lab.test('/risk inEngland false', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk-detail?address=100010192035'
+      url: mountPath + '/risk?address=100010192035'
     }
 
     const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
@@ -1201,10 +1203,10 @@ lab.experiment('Unit', () => {
     riskStub.revert()
   })
 
-  lab.test('/risk-detail', async () => {
+  lab.test('/risk', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk-detail?address=100010192035'
+      url: mountPath + '/risk?address=100010192035'
     }
 
     const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
@@ -1236,14 +1238,7 @@ lab.experiment('Unit', () => {
     riskStub.revert()
   })
 
-  lab.test('helpers', () => {
-    const formatted1 = helpers.formatDate('2017-04-01T00:00:00Z')
-    Code.expect(formatted1).to.equal('1:00am Saturday 01 April 2017')
-    const formatted2 = helpers.formatDate('2017-04-01T00:00:00Z', 'DD MMMM YYYY')
-    Code.expect(formatted2).to.equal('01 April 2017')
-  })
-
-  lab.test('404 for unknown query parameter', async () => {
+  lab.test('400 for unknown query parameter', async () => {
     const options = {
       method: 'GET',
       url: mountPath + '/search?test=test'

@@ -1,13 +1,5 @@
-const moment = require('moment')
 const util = require('../util')
 const suitability = require('./suitability')
-
-const RiskStatus = {
-  AtRisk: 1,
-  AtRiskMonitor: 2,
-  LowRisk: 3,
-  VeryLowRisk: 4
-}
 
 const RiskLevel = {
   VeryLow: 'Very Low',
@@ -16,52 +8,32 @@ const RiskLevel = {
   High: 'High'
 }
 
+const RiskTitles = {
+  'Very Low': 'Very low risk',
+  Low: 'Low risk',
+  Medium: 'Medium risk',
+  High: 'High risk'
+}
+
+const RiskDescriptions = {
+  'Very Low': 'Very low risk means that each year this area has a chance of flooding of less than 0.1%',
+  Low: 'Low risk means that each year this area has a chance of flooding of between 0.1% and 1%',
+  Medium: 'Medium risk means that each year this area has a chance of flooding of between 1.1% and 3.3%',
+  High: 'High risk means that each year this area has a chance of flooding of greater than 3.3%'
+}
+
 function RiskViewModel (risk, address) {
-  const inTargetArea = risk.inFloodWarningArea || risk.inFloodAlertArea
   const riverAndSeaRisk = risk.riverAndSeaRisk
     ? risk.riverAndSeaRisk.probabilityForBand
     : RiskLevel.VeryLow
-
   const surfaceWaterRisk = risk.surfaceWaterRisk || RiskLevel.VeryLow
   const reservoirRisk = !!(risk.reservoirRisk && risk.reservoirRisk.length)
-  const riverAndSeaAndSurfaceWaterAreVeryLow = riverAndSeaRisk === RiskLevel.VeryLow &&
-    surfaceWaterRisk === RiskLevel.VeryLow
 
-  // LTFRI-62 Band change. If property is in TA but RS and SW are Very Low AND the TA
-  // is not GW, then rather than show AtRisk, we should show the Low Risk (teal) page.
-  if (inTargetArea && !(riverAndSeaAndSurfaceWaterAreVeryLow && !risk.isGroundwaterArea)) {
-    this.status = RiskStatus.AtRisk
-  } else {
-    if ((riverAndSeaRisk === RiskLevel.High || riverAndSeaRisk === RiskLevel.Medium) ||
-        (surfaceWaterRisk === RiskLevel.High || surfaceWaterRisk === RiskLevel.Medium)) {
-      this.status = RiskStatus.AtRiskMonitor
-    } else {
-      if (riverAndSeaAndSurfaceWaterAreVeryLow) {
-        this.status = RiskStatus.VeryLowRisk
-      } else {
-        this.status = RiskStatus.LowRisk
-      }
-    }
-  }
-
-  this.isAtRisk = this.status === RiskStatus.AtRisk
-  this.isAtRiskMonitor = this.status === RiskStatus.AtRiskMonitor
-  this.isLowRisk = this.status === RiskStatus.LowRisk
-  this.isVeryLowRisk = this.status === RiskStatus.VeryLowRisk
-  this.isRisk = this.isAtRisk || this.isAtRiskMonitor
-
-  this.riverAndSeaRisk = riverAndSeaRisk.toLowerCase()
-  this.surfaceWaterRisk = surfaceWaterRisk.toLowerCase()
+  this.riverAndSeaRisk = riverAndSeaRisk
+  this.surfaceWaterRisk = surfaceWaterRisk
+  this.riverAndSeaClassName = riverAndSeaRisk.toLowerCase().replace(' ', '-')
+  this.surfaceWaterClassName = surfaceWaterRisk.toLowerCase().replace(' ', '-')
   this.reservoirRisk = reservoirRisk
-
-  this.riverAndSeaRiskIsHigh = riverAndSeaRisk === RiskLevel.High
-  this.riverAndSeaRiskIsMedium = riverAndSeaRisk === RiskLevel.Medium
-  this.riverAndSeaRiskIsLow = riverAndSeaRisk === RiskLevel.Low
-  this.riverAndSeaRiskIsVeryLow = riverAndSeaRisk === RiskLevel.VeryLow
-  this.surfaceWaterRiskIsHigh = surfaceWaterRisk === RiskLevel.High
-  this.surfaceWaterRiskIsMedium = surfaceWaterRisk === RiskLevel.Medium
-  this.surfaceWaterRiskIsLow = surfaceWaterRisk === RiskLevel.Low
-  this.surfaceWaterRiskIsVeryLow = surfaceWaterRisk === RiskLevel.VeryLow
 
   if (reservoirRisk) {
     this.reservoirs = risk.reservoirRisk.map(function (item) {
@@ -76,39 +48,43 @@ function RiskViewModel (risk, address) {
     })
   }
 
-  // River and Sea suitability
+  // River and sea suitability
   const riverAndSeaSuitability = risk.riverAndSeaRisk && risk.riverAndSeaRisk.suitability
   if (riverAndSeaSuitability) {
     this.riverAndSeaSuitability = suitability.riverAndSea[riverAndSeaSuitability.toLowerCase()]
+    this.riverAndSeaSuitabilityName = `partials/${riverAndSeaSuitability.toLowerCase().replace(/ /g, '-')}.html`
   }
 
   // Surface water suitability
   const surfaceWaterSuitability = risk.surfaceWaterSuitability
   if (surfaceWaterSuitability) {
     this.surfaceWaterSuitability = suitability.surfaceWater[surfaceWaterSuitability.toLowerCase()]
+    this.surfaceWaterSuitabilityName = `partials/${surfaceWaterSuitability.toLowerCase().replace(/ /g, '-')}.html`
   }
 
   // Groundwater area
   this.isGroundwaterArea = risk.isGroundwaterArea
-
   this.extraInfo = risk.extraInfo
   this.easting = address.x
   this.northing = address.y
   this.postcode = address.postcode
   this.lines = address.address.split(', ')
-  this.address = address.uprn
+  this.address = address
   this.surfaceWaterManagement = risk.leadLocalFloodAuthority
   this.leadLocalFloodAuthority = risk.leadLocalFloodAuthority
-  this.className = this.isRisk ? 'at-risk' : 'low-risk'
   this.date = Date.now()
-  this.year = moment(Date.now()).format('YYYY')
-  this.pageTitle = 'Your long term flood risk assessment - GOV.UK'
+  this.year = new Date().getFullYear()
 
-  this.testInfoJSON = JSON.stringify({
-    status: this.status,
+  this.riversAndSeaTitle = RiskTitles[riverAndSeaRisk]
+  this.surfaceWaterTitle = RiskTitles[surfaceWaterRisk]
+  this.riversAndSeaText = RiskDescriptions[riverAndSeaRisk]
+  this.surfaceWaterText = RiskDescriptions[surfaceWaterRisk]
+
+  this.testInfo = JSON.stringify({
     riverAndSeaRisk: riverAndSeaRisk,
     surfaceWaterRisk: surfaceWaterRisk,
-    reservoirRisk: reservoirRisk
+    reservoirRisk: reservoirRisk,
+    isGroundwaterArea: risk.isGroundwaterArea
   })
 }
 

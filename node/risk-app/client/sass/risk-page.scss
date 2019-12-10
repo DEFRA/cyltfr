@@ -1,0 +1,41 @@
+#risk-page {
+  .govuk-inset-text {
+    h3 {
+      font-size: 1.5em;
+    }
+  }
+
+  .govuk-inset-text.high {
+    border-left-color: #E3000E
+  }
+  
+  .govuk-inset-text.medium {
+    border-left-color: #F18604
+  }
+
+  .print-summary {
+    display: none;
+  }
+
+  @media print {
+    .print-summary {
+      display: block;
+    }
+  }
+
+  .page-summary {
+    display: block;
+  }
+
+  @media print {
+    header.govuk-header, .govuk-phase-banner, .page-summary, .govuk-button {
+      display: none;
+    }
+  }
+}
+
+@media print {
+  header.govuk-header, footer.govuk-footer, .govuk-phase-banner {
+    display: none;
+  }
+}
