@@ -47,8 +47,6 @@
             }).catch(function (err) {
               window.alert('Error: ' + err)
             })
-          } else {
-            e.preventDefault()
           }
         }
       }
