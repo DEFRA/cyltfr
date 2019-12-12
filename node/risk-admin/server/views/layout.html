@@ -40,18 +40,20 @@
         </a>
       </div>
       <span class="login-section">
-        {% if auth.isAuthenticated %}
-        <span>
-          <b title="{{auth.credentials.profile.email}}">
-            {{auth.credentials.profile.displayName}}
-            {% if (auth.credentials.isApprover) %}(Approver){% endif %}
-          </b>
-          <span class="divider">|</span>
-          <a href="/logout">Logout</a>
-        </span>
-        <span></span>
-        {% else %}
-        <a href="/login">Login</a>
+        {% if auth %}
+          {% if auth.isAuthenticated %}
+          <span>
+            <b title="{{auth.credentials.profile.email}}">
+              {{auth.credentials.profile.displayName}}
+              {% if (auth.credentials.isApprover) %}(Approver){% endif %}
+            </b>
+            <span class="divider">|</span>
+            <a href="/logout">Logout</a>
+          </span>
+          <span></span>
+          {% else %}
+          <a href="/login">Login</a>
+          {% endif %}
         {% endif %}
       </span>
     </div>
@@ -62,7 +64,8 @@
 {% endblock %}
 
 {% block content %}
-  <h1 class="govuk-heading-l">LTFRI Management Console</h1>
+  <span class="govuk-caption-l">LTFRI Management Console</span>
+  <h1 class="govuk-heading-l">{{pageTitle}}</h1>
   {% block body %}{% endblock %}
   <div>For help and information please contact: <a href="mailto:XXsupport@enviroment-agency.gov.uk">XXsupport@enviroment-agency.gov.uk</a></div>
 {% endblock %}

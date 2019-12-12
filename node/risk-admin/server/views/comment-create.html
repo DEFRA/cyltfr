@@ -1,8 +1,9 @@
-{% extends 'layout.html' %}
+{% extends "layout.html" %}
 
 {% from "govuk/components/file-upload/macro.njk" import govukFileUpload %}
 
 {% set bodyClasses = "internal" %}
+{% set pageTitle = "Create comment" %}
 
 {% block body %}
   <div class="govuk-grid-row">
