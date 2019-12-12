@@ -1,4 +1,4 @@
-#map {
+#map:not(:empty) {
   height: 400px;
   margin-bottom: 20px;
 }

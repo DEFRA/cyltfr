@@ -42,17 +42,17 @@
     document.getElementById('root')
   )
 
-  commentMap(geometry, 'map')
+  geometry.features.forEach(function (feature, index) {
+    var geo = Object.assign({}, geometry, {
+      features: geometry.features.filter(function (f) {
+        return f === feature
+      })
+    })
+
+    commentMap(geo, 'root_features_' + index + '_properties_info_map')
+  })
 
   if (geometry.features.length > 1) {
-    geometry.features.forEach(function (feature, index) {
-      var geo = Object.assign({}, geometry, {
-        features: geometry.features.filter(function (f) {
-          return f === feature
-        })
-      })
-
-      commentMap(geo, 'root_features_' + index + '_properties_info_map')
-    })
+    commentMap(geometry, 'map')
   }
 })()

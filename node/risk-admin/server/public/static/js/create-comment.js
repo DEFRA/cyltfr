@@ -70,18 +70,18 @@
         document.getElementById('root')
       )
 
-      commentMap(response, 'map')
+      response.features.forEach(function (feature, index) {
+        var geo = Object.assign({}, response, {
+          features: response.features.filter(function (f) {
+            return f === feature
+          })
+        })
+
+        commentMap(geo, 'root_features_' + index + '_properties_info_map')
+      })
 
       if (response.features.length > 1) {
-        response.features.forEach(function (feature, index) {
-          var geo = Object.assign({}, response, {
-            features: response.features.filter(function (f) {
-              return f === feature
-            })
-          })
-
-          commentMap(geo, 'root_features_' + index + '_properties_info_map')
-        })
+        commentMap(response, 'map')
       }
     }).catch(function (err) {
       console.error(err)
