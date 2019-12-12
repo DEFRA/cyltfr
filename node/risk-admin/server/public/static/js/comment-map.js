@@ -1,5 +1,5 @@
 ;(function () {
-  function commentMap (geojson) {
+  function commentMap (geojson, target) {
     var ol = window.ol
     var proj4 = window.proj4
 
@@ -34,7 +34,7 @@
     proj27700.setExtent([0, 0, 700000, 1300000])
 
     var map = new ol.Map({
-      target: 'map',
+      target: target,
       view: new ol.View({
         projection: 'EPSG:3857',
         center: [0, 0],

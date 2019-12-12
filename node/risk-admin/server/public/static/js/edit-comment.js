@@ -5,9 +5,11 @@
   var ReactDOM = window.ReactDOM
   var fetch = window.fetch
   var comment = window.LTFMGMT.commentSchema
+  var geometry = window.LTFMGMT.geometry
+  var commentMap = window.LTFMGMT.commentMap
 
   var props = {
-    formData: window.LTFMGMT.geometry,
+    formData: geometry,
     schema: comment.schema,
     uiSchema: comment.uiSchema,
     onSubmit: function (e) {
@@ -39,4 +41,18 @@
     React.createElement(Form, props, submitButton),
     document.getElementById('root')
   )
+
+  commentMap(geometry, 'map')
+
+  if (geometry.features.length > 1) {
+    geometry.features.forEach(function (feature, index) {
+      var geo = Object.assign({}, geometry, {
+        features: geometry.features.filter(function (f) {
+          return f === feature
+        })
+      })
+
+      commentMap(geo, 'root_features_' + index + '_properties_info_map')
+    })
+  }
 })()

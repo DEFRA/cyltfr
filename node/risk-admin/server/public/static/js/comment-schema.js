@@ -11,7 +11,13 @@
       onChange: (event) => props.onChange(event.target.value)
     }
 
-    return React.createElement('textarea', p)
+    return React.createElement('div', null, [
+      React.createElement('textarea', p),
+      React.createElement('div', {
+        id: props.id + '_map',
+        className: 'comment-map'
+      })
+    ])
   }
 
   var inputWidget = (props) => {

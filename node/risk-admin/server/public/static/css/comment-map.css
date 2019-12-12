@@ -1,3 +1,8 @@
 #map {
   height: 400px;
+  margin-bottom: 20px;
+}
+
+.comment-map {
+  height: 240px;
 }

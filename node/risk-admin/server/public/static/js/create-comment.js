@@ -7,24 +7,32 @@
   var fetch = window.fetch
   var comment = window.LTFMGMT.commentSchema
   var commentMap = window.LTFMGMT.commentMap
-  var geometry = document.getElementById('geometry')
+  var fileInput = document.getElementById('geometry')
 
   // Handle file change event
-  geometry.addEventListener('change', function (e) {
+  fileInput.addEventListener('change', function (e) {
     var formData = new FormData()
 
-    if (!geometry.files || !geometry.files.length) {
+    if (!fileInput.files || !fileInput.files.length) {
       return
     }
 
-    formData.append('geometry', geometry.files[0])
+    formData.append('geometry', fileInput.files[0])
 
     fetch('/shp2json', {
       method: 'post',
       body: formData
     }).then(function (response) {
+      if (!response.ok) {
+        throw new Error(response.statusText)
+      }
+
+      return response
+    }).then(function (response) {
       return response.json()
     }).then(function (response) {
+      document.getElementById('file').remove()
+
       var props = {
         formData: response,
         schema: comment.schema,
@@ -45,7 +53,8 @@
                 throw new Error(response.statusText)
               }
             }).catch(function (err) {
-              window.alert('Error: ' + err)
+              console.error(err)
+              window.alert('Save failed')
             })
           }
         }
@@ -61,7 +70,19 @@
         document.getElementById('root')
       )
 
-      commentMap(response)
+      commentMap(response, 'map')
+
+      if (response.features.length > 1) {
+        response.features.forEach(function (feature, index) {
+          var geo = Object.assign({}, response, {
+            features: response.features.filter(function (f) {
+              return f === feature
+            })
+          })
+
+          commentMap(geo, 'root_features_' + index + '_properties_info_map')
+        })
+      }
     }).catch(function (err) {
       console.error(err)
       window.alert('Invalid shapefile')

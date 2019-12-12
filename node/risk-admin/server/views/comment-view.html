@@ -5,15 +5,17 @@
 
 {% block head %}
   {{ super() }}
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.0/css/ol.css" type="text/css">
-  <link rel="stylesheet" href="/assets/css/comment-map.css" type="text/css">
+  <style>
+    .comment-map {
+      width: 400px;
+    }
+  </style>
 {% endblock %}
 
 {% block body %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {{ govukTable(viewHeaderData) }}
-      {{ govukTable(viewCommentData) }}
 
       <a class="govuk-button" href="/comment/edit/{{comment.id}}">Edit</a>
       <div style="float: right;">
@@ -44,13 +46,12 @@
       <div id="map"></div>
     </div>
   </div>
+  {{ govukTable(viewCommentData) }}
 {% endblock %}
 
 {% block bodyEnd %}
-<script src="/assets/js/comment-map.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.0/build/ol.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.5.0/proj4.js"></script>
-<script>
-  window.LTFMGMT.commentMap({{ geometry | dump | safe }})
-</script>
+  <script>
+    window.LTFMGMT.geometry = {{ geometry | dump | safe }}
+  </script>
+  <script src="/assets/js/view-comment.js"></script>
 {% endblock %}

@@ -15,37 +15,47 @@
 {% endblock %}
 
 {% block head %}
-  <link href="{{ assetPath }}/stylesheets/unbranded.css" media="all" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="{{ assetPath }}/stylesheets/unbranded.css" media="all" type="text/css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.0/css/ol.css" type="text/css">
+  <link rel="stylesheet" href="/assets/css/comment-map.css" type="text/css">
+  <link rel="stylesheet" href="/assets/css/comment-schema.css" type="text/css">
+  <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.0/build/ol.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.5.0/proj4.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.10.2/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.10.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/react-jsonschema-form/dist/react-jsonschema-form.js"></script>
   <script>
     window.LTFMGMT = {}
   </script>
+  <script src="/assets/js/comment-map.js"></script>
+  <script src="/assets/js/comment-schema.js"></script>
 {% endblock %}
 
 {% block header %}
-<header class="govuk-header " role="banner" data-module="header">
-  <div class="govuk-header__container govuk-width-container">
-    <div class="govuk-header__logo">
-      <a href="/" class="govuk-header__link govuk-header__link--homepage">
-        <div class="ea-logo"></div>
-      </a>
-    </div>
-    <span class="login-section">
-      {% if auth.isAuthenticated %}
-      <span>
-        <b title="{{auth.credentials.profile.email}}">
-          {{auth.credentials.profile.displayName}}
-          {% if (auth.credentials.isApprover) %}(Approver){% endif %}
-        </b>
-        <span class="divider">|</span>
-        <a href="/logout">Logout</a>
+  <header class="govuk-header " role="banner" data-module="header">
+    <div class="govuk-header__container govuk-width-container">
+      <div class="govuk-header__logo">
+        <a href="/" class="govuk-header__link govuk-header__link--homepage">
+          <div class="ea-logo"></div>
+        </a>
+      </div>
+      <span class="login-section">
+        {% if auth.isAuthenticated %}
+        <span>
+          <b title="{{auth.credentials.profile.email}}">
+            {{auth.credentials.profile.displayName}}
+            {% if (auth.credentials.isApprover) %}(Approver){% endif %}
+          </b>
+          <span class="divider">|</span>
+          <a href="/logout">Logout</a>
+        </span>
+        <span></span>
+        {% else %}
+        <a href="/login">Login</a>
+        {% endif %}
       </span>
-      <span></span>
-      {% else %}
-      <a href="/login">Login</a>
-      {% endif %}
-    </span>
-  </div>
-</header>
+    </div>
+  </header>
 {% endblock %}
 
 {% block beforeContent %}
