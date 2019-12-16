@@ -13,6 +13,7 @@
     formData: geometry,
     schema: comment.schema,
     uiSchema: comment.uiSchema,
+    ArrayFieldTemplate: window.LTFMGMT.ArrayFieldTemplate,
     onSubmit: function (e) {
       fetch(window.location.href, {
         method: 'put',
