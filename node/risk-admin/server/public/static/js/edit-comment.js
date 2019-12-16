@@ -4,8 +4,9 @@
   var React = window.React
   var ReactDOM = window.ReactDOM
   var fetch = window.fetch
-  var comment = window.LTFMGMT.commentSchema
   var geometry = window.LTFMGMT.geometry
+  var type = window.LTFMGMT.comment.type
+  var comment = window.LTFMGMT[type + 'CommentSchema']
   var commentMap = window.LTFMGMT.commentMap
 
   var props = {
@@ -49,7 +50,7 @@
       })
     })
 
-    commentMap(geo, 'root_features_' + index + '_properties_info_map')
+    commentMap(geo, 'map_' + index)
   })
 
   if (geometry.features.length > 1) {

@@ -12,7 +12,7 @@
     "postinstall": "npm run build",
     "build:container": "docker build . -t ltfmgmt:v1",
     "package:container": "docker save --output ltfmgmt.tar ltfmgmt:v1",
-    "start:container": "docker run -v ~/.aws/:/home/node/.aws:ro -p 3000:3000 --rm --env-file .env --name ltfmgmt ltfmgmt:v1"
+    "start:container": "docker run -v ~/.aws/:/root/.aws:ro -p 3000:3000 --rm --env-file .env --name ltfmgmt ltfmgmt:v1"
   },
   "author": "defra.gov.uk",
   "license": "ISC",

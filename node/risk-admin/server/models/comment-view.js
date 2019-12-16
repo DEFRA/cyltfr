@@ -9,6 +9,7 @@ class CommentView {
       firstCellIsHeader: true,
       rows: [
         [{ text: 'Description' }, { text: comment.description }],
+        [{ text: 'Type' }, { text: comment.type === 'holding' ? 'Holding' : 'LLFA' }],
         [{ text: 'Created at' }, { text: moment(comment.createdAt).format('DD/MM/YYYY h:mma') }],
         [{ text: 'Created by' }, { text: comment.createdBy }],
         [{ text: 'Updated at' }, { text: moment(comment.updatedAt).format('DD/MM/YYYY h:mma') }],

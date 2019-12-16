@@ -9,9 +9,10 @@ const rename = util.promisify(fs.rename)
 
 module.exports = {
   method: 'POST',
-  path: '/shp2json',
+  path: '/shp2json/{type}',
   handler: async (request, h) => {
-    const { geometry } = request.payload
+    const { payload, params } = request
+    const { geometry } = payload
 
     try {
       const tmpfile = geometry.path
@@ -28,13 +29,14 @@ module.exports = {
         const props = f.properties
 
         f.properties = {
+          apply: params.type,
           start: props.Start_date
             ? moment(props.Start_date, 'YYYY/MM/DD').format('YYYY-MM-DD')
             : '',
           end: props.End_date
             ? moment(props.End_date, 'YYYY/MM/DD').format('YYYY-MM-DD')
             : '',
-          info: props.display2
+          info: props.display2 || props.Data_Type
         }
       })
 
@@ -51,6 +53,9 @@ module.exports = {
       allow: 'multipart/form-data'
     },
     validate: {
+      params: joi.object().keys({
+        type: joi.string().valid('holding', 'llfa').required()
+      }),
       payload: joi.object().keys({
         geometry: joi.object().keys({
           bytes: joi.number().greater(0).required(),

@@ -11,13 +11,7 @@
       onChange: (event) => props.onChange(event.target.value)
     }
 
-    return React.createElement('div', null, [
-      React.createElement('textarea', p),
-      React.createElement('div', {
-        id: props.id + '_map',
-        className: 'comment-map'
-      })
-    ])
+    return React.createElement('textarea', p)
   }
 
   var inputWidget = (props) => {
@@ -38,83 +32,123 @@
     return inputWidget(props)
   }
 
-  var commentSchema = {
-    schema: {
-      title: 'A geojson form',
-      type: 'object',
-      required: ['name', 'features'],
-      properties: {
-        name: {
-          type: 'string',
-          title: 'Description'
-        },
-        features: {
-          type: 'array',
-          required: [
-            'type',
-            'properties'
-          ],
-          items: {
-            type: 'object',
-            properties: {
+  function createSchema (isHoldingComment) {
+    var commentSchema = {
+      schema: {
+        title: 'A geojson form',
+        type: 'object',
+        required: ['name', 'features'],
+        properties: {
+          name: {
+            type: 'string',
+            title: 'Description'
+          },
+          features: {
+            type: 'array',
+            required: [
+              'type',
+              'properties'
+            ],
+            items: {
+              type: 'object',
               properties: {
-                type: 'object',
-                required: ['start', 'end', 'info'],
                 properties: {
-                  info: {
-                    type: 'string',
-                    title: 'Comment'
-                  },
-                  start: {
-                    type: 'string',
-                    format: 'date',
-                    title: 'Start date'
-                  },
-                  end: {
-                    type: 'string',
-                    format: 'date',
-                    title: 'End date'
+                  type: 'object',
+                  required: ['start', 'end', 'info'],
+                  properties: {
+                    apply: {
+                      type: 'string',
+                      title: 'Apply',
+                      const: isHoldingComment ? 'holding' : 'llfa',
+                      default: isHoldingComment ? 'holding' : 'llfa'
+                    },
+                    info: {
+                      type: 'string',
+                      title: isHoldingComment ? 'Comment' : 'Report',
+                      enum: isHoldingComment ? undefined : [
+                        'Section 19 Flood Report',
+                        'Non compliant mapping',
+                        'Proposed schemes',
+                        'Completed schemes',
+                        'Other (e.g. engineers reports)',
+                        'Flood Action Plan'
+                      ]
+                    },
+                    start: {
+                      type: 'string',
+                      format: 'date',
+                      title: 'Start date'
+                    },
+                    end: {
+                      type: 'string',
+                      format: 'date',
+                      title: 'End date'
+                    }
                   }
                 }
               }
             }
           }
         }
-      }
-    },
-    uiSchema: {
-      name: {
-        'ui:widget': inputWidget,
-        classNames: 'govuk-form-group info'
       },
-      features: {
-        'ui:options': {
-          orderable: false,
-          addable: false,
-          removable: false
+      uiSchema: {
+        name: {
+          'ui:widget': inputWidget,
+          classNames: 'govuk-form-group info'
         },
-        items: {
+        features: {
           'ui:options': {
-            label: false
+            orderable: false,
+            addable: false,
+            removable: false
           },
-          properties: {
-            info: {
-              'ui:widget': textareaWidget,
-              classNames: 'govuk-form-group info'
+          items: {
+            'ui:options': {
+              label: false
             },
-            start: {
-              'ui:widget': dateWidget,
-              classNames: 'govuk-form-group start'
-            },
-            end: {
-              'ui:widget': dateWidget,
-              classNames: 'govuk-form-group end'
+            properties: {
+              apply: {
+                'ui:widget': 'hidden'
+              },
+              info: {
+                'ui:widget': isHoldingComment ? textareaWidget : 'radio',
+                classNames: 'govuk-form-group info'
+              },
+              start: {
+                'ui:widget': dateWidget,
+                classNames: 'govuk-form-group start'
+              },
+              end: {
+                'ui:widget': dateWidget,
+                classNames: 'govuk-form-group end'
+              }
             }
           }
         }
       }
     }
+
+    return commentSchema
   }
 
-  window.LTFMGMT.commentSchema = commentSchema
+  function ArrayFieldTemplate (props) {
+    return React.createElement('div', null, props.items.map(el => {
+      var item = React.createElement('div', {
+        id: 'item_' + el.index,
+        className: 'array-item'
+      }, [
+        el.children,
+        React.createElement('div', {
+          id: 'map_' + el.index,
+          className: 'comment-map'
+        })
+      ])
+
+      return item
+    }))
+  }
+
+  window.LTFMGMT.holdingCommentSchema = createSchema(true)
+  window.LTFMGMT.llfaCommentSchema = createSchema(false)
+  window.LTFMGMT.ArrayFieldTemplate = ArrayFieldTemplate
 })()

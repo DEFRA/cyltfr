@@ -5,9 +5,14 @@
   var ReactDOM = window.ReactDOM
   var FormData = window.FormData
   var fetch = window.fetch
-  var comment = window.LTFMGMT.commentSchema
   var commentMap = window.LTFMGMT.commentMap
   var fileInput = document.getElementById('geometry')
+
+  var type = window.LTFMGMT.type
+  var isHoldingComment = type === 'holding'
+  var comment = isHoldingComment
+    ? window.LTFMGMT.holdingCommentSchema
+    : window.LTFMGMT.llfaCommentSchema
 
   // Handle file change event
   fileInput.addEventListener('change', function (e) {
@@ -19,7 +24,7 @@
 
     formData.append('geometry', fileInput.files[0])
 
-    fetch('/shp2json', {
+    fetch('/shp2json/' + type, {
       method: 'post',
       body: formData
     }).then(function (response) {
@@ -37,9 +42,10 @@
         formData: response,
         schema: comment.schema,
         uiSchema: comment.uiSchema,
+        ArrayFieldTemplate: window.LTFMGMT.ArrayFieldTemplate,
         onSubmit: function (e) {
           if (window.confirm('Are you sure you want to add the comment?')) {
-            fetch('/comment/create', {
+            fetch('/comment/create/' + type, {
               method: 'post',
               body: JSON.stringify(e.formData),
               headers: {
@@ -77,7 +83,7 @@
           })
         })
 
-        commentMap(geo, 'root_features_' + index + '_properties_info_map')
+        commentMap(geo, 'map_' + index)
       })
 
       if (response.features.length > 1) {

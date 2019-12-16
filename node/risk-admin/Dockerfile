@@ -1,21 +1,17 @@
-FROM node:10.16.0-alpine
+FROM osgeo/gdal:alpine-small-latest
 
 RUN set -xe \
     && apk update && apk upgrade \
-    && apk add \
-      --no-cache \
-      --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
-      --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
-      bash make gcc g++ python curl postgresql-client gdal \
+    && apk add bash make gcc g++ python curl postgresql-client npm \
     && bash --version && npm -v && node -v && psql --version && ogr2ogr --version \
     && npm install -g npm \
     && rm -rf /var/cache/apk/*
 
 WORKDIR /home/node/app
 
-RUN mkdir -p ./node_modules && chown -R node:node ./
+RUN mkdir -p ./node_modules
 
-USER node
+# USER node
 
 COPY ./package*.json ./
 
@@ -31,7 +27,7 @@ COPY ./server ./server
 
 COPY ./dbscripts ./dbscripts
 
-COPY --chown=node:node . .
+# COPY --chown=node:node . .
 
 EXPOSE 3000
 

@@ -20,9 +20,10 @@ function mapErrors (errors) {
 }
 
 class CommentCreate {
-  constructor (data, err) {
+  constructor (type, data, err) {
     // this.minStartDate = moment().add(1, 'days').format('YYYY-MM-DD')
     // this.minEndDate = moment().add(2, 'days').format('YYYY-MM-DD')
+    this.type = type
     this.data = data
 
     if (err) {

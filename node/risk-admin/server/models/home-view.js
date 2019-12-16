@@ -22,9 +22,16 @@ class HomeView {
           html: `<a href="/comment/view/${row.id}">${row.description}</a>`
         })
       },
+      {
+        name: 'type',
+        title: 'Type',
+        mapper: (field, row) => ({
+          text: row[field.name] === 'holding' ? 'Holding' : 'LLFA'
+        })
+      },
       { name: 'featureCount', title: 'Number of features' },
-      { name: 'createdBy', title: 'Created by' },
-      { name: 'createdAt', title: 'Created at', mapper: dateMapper },
+      // { name: 'createdBy', title: 'Created by' },
+      // { name: 'createdAt', title: 'Created at', mapper: dateMapper },
       { name: 'approvedBy', title: 'Approved by' },
       { name: 'approvedAt', title: 'Approved at', mapper: dateMapper },
       { name: 'loadedAt', title: 'Last loaded at', mapper: loadedAtMapper }
