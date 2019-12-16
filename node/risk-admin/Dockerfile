@@ -23,6 +23,8 @@ COPY ./index.js .
 
 RUN npm install --production
 
+RUN npm run build
+
 COPY ./server ./server
 
 COPY ./dbscripts ./dbscripts
