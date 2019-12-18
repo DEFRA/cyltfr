@@ -55,6 +55,10 @@
 
     var ext = vectorSource.getExtent()
     map.getView().fit(ext, map.getSize())
+
+    map.on('singleclick', function (evt) {
+      console.log(evt.coordinate.map(p => Math.round(p)))
+    })
   }
 
   window.LTFMGMT.commentMap = commentMap
