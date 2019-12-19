@@ -2,14 +2,14 @@ class PostcodeViewModel {
   constructor (postcode, errorMessage) {
     this.postcodeInput = {
       label: {
-        text: 'Postcode'
+        text: 'Enter a postcode'
       },
       id: 'postcode',
       value: postcode,
       name: 'postcode',
       classes: 'govuk-input--width-10',
       hint: {
-        text: 'Enter a full postcode in England'
+        text: 'for example, WA4 1AB'
       }
     }
 
