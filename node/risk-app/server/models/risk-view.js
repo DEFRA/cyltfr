@@ -65,6 +65,8 @@ function RiskViewModel (risk, address) {
   // Groundwater area
   this.isGroundwaterArea = risk.isGroundwaterArea
   this.extraInfo = risk.extraInfo
+  this.holdingComments = risk.extraInfo && risk.extraInfo.filter(info => info.apply === 'holding')
+  this.llfaComments = risk.extraInfo && risk.extraInfo.filter(info => info.apply === 'llfa')
   this.easting = address.x
   this.northing = address.y
   this.postcode = address.postcode

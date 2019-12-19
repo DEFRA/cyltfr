@@ -68,8 +68,18 @@
           <p class="govuk-body">
             Lead local flood authorities (LLFA) manage the risk from surface water flooding and may hold more detailed information.
     
+            <!-- LLFA -->
             {% if leadLocalFloodAuthority %}
-            <p class="govuk-body">Your LLFA is {{leadLocalFloodAuthority}}.</p>
+            <p class="govuk-body">Your LLFA is <strong>{{leadLocalFloodAuthority}}</strong>.</p>
+            {% endif %}
+
+            <!-- LLFA Comments -->
+            {% if llfaComments %}
+              <ul class="govuk-list">
+              {% for comment in llfaComments %}
+                <li>{{ comment.info }}</li>
+              {% endfor %}
+              </ul>
             {% endif %}
           </p>
     
@@ -138,8 +148,13 @@
         </div>
         {% endif %}
 
-        {% if extraInfo %}
-        <p class="govuk-body">{{extraInfo}}</p>
+        <!-- Holding Comments -->
+        {% if holdingComments %}
+          <ul class="govuk-list">
+          {% for comment in holdingComments %}
+            <li>{{ comment.info }}</li>
+          {% endfor %}
+          </ul>
         {% endif %}
 
         <br>

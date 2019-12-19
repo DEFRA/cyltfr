@@ -16,6 +16,7 @@ AS $BODY$
 -- Need file versions as liquibase not implemented on LTFRI yet
 -- File version		Ticket    	Author		Notes
 -- 1.0.1		FLO-2869	tjmason		Work to allow for data schema changes for alert and warning areas introduced in Feb 2018
+-- 2.0.0			        dstone		Return multiple extra_info records
 
 declare within_england_result record;
 declare flood_alert_area_result record;
@@ -97,7 +98,11 @@ begin
 
   begin
     -- Extra information point in polygon query.
-    select info as extra_info from u_ltfri.extra_info_bv_bng l where st_intersects(st_setsrid(st_makepoint(_x, _y), 27700), l.wkb_geometry) into extra_info_result;
+    create temp table extra_info_tbl on commit drop as
+    select info, apply from u_ltfri.extra_info_bv_bng l 
+    where st_intersects(st_setsrid(st_makepoint(_x, _y), 27700), l.wkb_geometry);
+
+    select array_to_json(array_agg(row_to_json(t))) as extra_info from (select * from extra_info_tbl) t into extra_info_result;
   exception when others then
     select 'Error'::text as extra_info into extra_info_result;
   end;
