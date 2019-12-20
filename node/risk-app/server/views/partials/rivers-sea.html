@@ -1,0 +1,28 @@
+<div class="rivers-sea">
+  <div class="govuk-inset-text {{ riverAndSeaClassName }}">
+    <h3 class="govuk-!-margin-bottom-2">Rivers and the sea</h3>
+    <p class="govuk-!-margin-top-0 risk"><strong>{{ riversAndSeaTitle }}</strong></p>
+  </div>
+
+  <details class="govuk-details">
+    <summary class="govuk-details__summary">
+      <span class="govuk-details__summary-text">What this information means</span>
+    </summary>
+    <div class="govuk-details__text">
+      <p class="govuk-body risk-description">
+        {{ riversAndSeaText }}
+      </p>
+      {% if riverAndSeaSuitabilityName %}
+      {% include riverAndSeaSuitabilityName %}
+      {% endif %}
+      <p>This service takes into account any flood defences.</p>
+    </div>
+  </details>
+
+  <p class="govuk-body">
+    <a class="govuk-link" href="/{{ mountPath }}/map?easting={{easting}}&northing={{northing}}&address={{address.uprn}}&map=RiversOrSea">
+      View a map of the risk of flooding from rivers and the sea
+    </a>
+  </p>
+</div>
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">

@@ -22,6 +22,8 @@ const RiskDescriptions = {
   High: 'High risk means that each year this area has a chance of flooding of greater than 3.3%'
 }
 
+const Levels = Object.keys(RiskLevel).map(l => RiskLevel[l])
+
 function RiskViewModel (risk, address) {
   const riverAndSeaRisk = risk.riverAndSeaRisk
     ? risk.riverAndSeaRisk.probabilityForBand
@@ -81,6 +83,18 @@ function RiskViewModel (risk, address) {
   this.surfaceWaterTitle = RiskTitles[surfaceWaterRisk]
   this.riversAndSeaText = RiskDescriptions[riverAndSeaRisk]
   this.surfaceWaterText = RiskDescriptions[surfaceWaterRisk]
+
+  const riversAndSeaLevel = Levels.indexOf(riverAndSeaRisk)
+  const surfaceWaterLevel = Levels.indexOf(surfaceWaterRisk)
+  const riversAndSeaIsFirst = riversAndSeaLevel >= surfaceWaterLevel
+
+  if (riversAndSeaIsFirst) {
+    this.firstSource = 'partials/rivers-sea.html'
+    this.secondSource = 'partials/surface-water.html'
+  } else {
+    this.firstSource = 'partials/surface-water.html'
+    this.secondSource = 'partials/rivers-sea.html'
+  }
 
   this.testInfo = JSON.stringify({
     riverAndSeaRisk: riverAndSeaRisk,
