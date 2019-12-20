@@ -28,14 +28,8 @@
   }
 
   @media print {
-    header.govuk-header, .govuk-phase-banner, .page-summary, .govuk-button {
+    .page-summary {
       display: none;
     }
-  }
-}
-
-@media print {
-  header.govuk-header, footer.govuk-footer, .govuk-phase-banner {
-    display: none;
   }
 }

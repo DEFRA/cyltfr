@@ -33,3 +33,9 @@ $govuk-assets-path: '/long-term-flood-risk/assets/';
 .pull-right {
   float: right;
 }
+
+@media print {
+  header.govuk-header, footer.govuk-footer, .govuk-phase-banner , .govuk-button {
+    display: none;
+  }
+}
