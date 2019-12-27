@@ -53,22 +53,29 @@ function RiskViewModel (risk, address) {
   // River and sea suitability
   const riverAndSeaSuitability = risk.riverAndSeaRisk && risk.riverAndSeaRisk.suitability
   if (riverAndSeaSuitability) {
-    this.riverAndSeaSuitability = suitability.riverAndSea[riverAndSeaSuitability.toLowerCase()]
-    this.riverAndSeaSuitabilityName = `partials/${riverAndSeaSuitability.toLowerCase().replace(/ /g, '-')}.html`
+    const name = riverAndSeaSuitability.toLowerCase()
+    this.riverAndSeaSuitability = suitability.riverAndSea[name]
+    this.riverAndSeaSuitabilityName = `partials/suitability/${name.replace(/ /g, '-')}.html`
   }
 
   // Surface water suitability
   const surfaceWaterSuitability = risk.surfaceWaterSuitability
   if (surfaceWaterSuitability) {
-    this.surfaceWaterSuitability = suitability.surfaceWater[surfaceWaterSuitability.toLowerCase()]
-    this.surfaceWaterSuitabilityName = `partials/${surfaceWaterSuitability.toLowerCase().replace(/ /g, '-')}.html`
+    const name = surfaceWaterSuitability.toLowerCase()
+    this.surfaceWaterSuitability = suitability.surfaceWater[name]
+    this.surfaceWaterSuitabilityName = `partials/suitability/${name.replace(/ /g, '-')}.html`
   }
 
   // Groundwater area
   this.isGroundwaterArea = risk.isGroundwaterArea
   this.extraInfo = risk.extraInfo
-  this.holdingComments = risk.extraInfo && risk.extraInfo.filter(info => info.apply === 'holding')
-  this.llfaComments = risk.extraInfo && risk.extraInfo.filter(info => info.apply === 'llfa')
+
+  if (risk.extraInfo) {
+    const maxComments = 3
+    this.holdingComments = risk.extraInfo.filter(info => info.apply === 'holding').slice(0, maxComments)
+    this.llfaComments = risk.extraInfo.filter(info => info.apply === 'llfa').slice(0, maxComments)
+  }
+
   this.easting = address.x
   this.northing = address.y
   this.postcode = address.postcode
