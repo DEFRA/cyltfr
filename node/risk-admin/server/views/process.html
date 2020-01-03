@@ -68,13 +68,16 @@
 {% block bodyEnd %}
   <script>
     var form = document.getElementById('form')
-    var submitButton = document.getElementById('submitButton')
 
-    form.addEventListener('submit', function (e) {
-      setTimeout(() => {
-        submitButton.setAttribute('disabled', 'disabled')
-      }, 10)
-      loader.style.display = 'inline-block'
-    }, false)
+    if (form) {
+      var submitButton = document.getElementById('submitButton')
+
+      form.addEventListener('submit', function (e) {
+        setTimeout(() => {
+          submitButton.setAttribute('disabled', 'disabled')
+        }, 10)
+        loader.style.display = 'inline-block'
+      }, false)
+    }
   </script>
 {% endblock %}
