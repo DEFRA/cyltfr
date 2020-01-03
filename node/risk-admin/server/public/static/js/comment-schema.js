@@ -66,12 +66,12 @@
                       type: 'string',
                       title: isHoldingComment ? 'Comment' : 'Report',
                       enum: isHoldingComment ? undefined : [
-                        'Section 19 Flood Report',
+                        'Flood report',
                         'Non compliant mapping',
                         'Proposed schemes',
                         'Completed schemes',
-                        'Other (e.g. engineers reports)',
-                        'Flood Action Plan'
+                        'Flood action plan',
+                        'Other info'
                       ]
                     },
                     start: {
