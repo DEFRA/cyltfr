@@ -70,10 +70,37 @@ function RiskViewModel (risk, address) {
   this.isGroundwaterArea = risk.isGroundwaterArea
   this.extraInfo = risk.extraInfo
 
-  if (risk.extraInfo) {
+  this.hasHoldingComments = false
+  this.hasLlfaComments = false
+
+  // Extra info
+  if (Array.isArray(risk.extraInfo) && risk.extraInfo.length) {
     const maxComments = 3
-    this.holdingComments = risk.extraInfo.filter(info => info.apply === 'holding').slice(0, maxComments)
-    this.llfaComments = risk.extraInfo.filter(info => info.apply === 'llfa').slice(0, maxComments)
+    const llfaDescriptions = {
+      'Flood report': 'Historical flooding reports',
+      'Non compliant mapping': 'LLFA flood maps',
+      'Proposed schemes': 'Proposed flood protection schemes',
+      'Completed schemes': 'Completed flood protection schemes',
+      'Flood action plan': 'A flood action plan',
+      'Other info': 'Other information, for example, engineer’s reports'
+    }
+
+    this.holdingComments = risk.extraInfo
+      .filter(comment => comment.apply === 'holding')
+      .map(comment => comment.info)
+      .filter(info => info)
+      .slice(0, maxComments)
+
+    this.llfaComments = risk.extraInfo
+      .filter(comment => comment.apply === 'llfa')
+      .map(comment => comment.info)
+      .filter(info => info)
+      .filter((info, idx, arr) => arr.indexOf(info) === idx)
+      .map(info => llfaDescriptions[info])
+      .filter(info => info)
+
+    this.hasHoldingComments = !!this.holdingComments.length
+    this.hasLlfaComments = !!this.llfaComments.length
   }
 
   this.easting = address.x

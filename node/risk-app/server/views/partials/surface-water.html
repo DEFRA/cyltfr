@@ -29,20 +29,24 @@
     <li>is more widespread in areas with harder surfaces like concrete</li>
   </ul>
   <p class="govuk-body">
-    Lead local flood authorities (LLFA) manage the risk from surface water flooding and may hold more detailed information.
+    Lead local flood authorities (LLFA) manage the risk from surface water flooding{% if not hasLlfaComments %} and may hold more detailed information{% endif %}.
 
     <!-- LLFA -->
     {% if leadLocalFloodAuthority %}
-    <p class="govuk-body">Your LLFA is <strong>{{leadLocalFloodAuthority}} council</strong>.</p>
-    {% endif %}
+    <p class="govuk-body">
+      Your LLFA is <strong>{{leadLocalFloodAuthority}} council</strong>.
 
-    <!-- LLFA Comments -->
-    {% if llfaComments %}
-      <ul class="govuk-list">
-      {% for comment in llfaComments %}
-        <li>{{ comment.info }}</li>
-      {% endfor %}
-      </ul>
+      <!-- LLFA Comments -->
+      {% if hasLlfaComments %}
+        They have the following information about surface water flooding:
+        <ul class="govuk-list govuk-list--bullet">
+        {% for comment in llfaComments %}
+          <li>{{ comment }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+      
+    </p>
     {% endif %}
   </p>
 

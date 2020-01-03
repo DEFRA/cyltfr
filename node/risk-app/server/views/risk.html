@@ -74,10 +74,10 @@
         {% endif %}
 
         <!-- Holding Comments -->
-        {% if holdingComments %}
+        {% if hasHoldingComments %}
           <ul class="govuk-list">
           {% for comment in holdingComments %}
-            <li>{{ comment.info }}</li>
+            <li>{{ comment }}</li>
           {% endfor %}
           </ul>
         {% endif %}

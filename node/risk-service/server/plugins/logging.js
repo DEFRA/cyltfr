@@ -2,7 +2,9 @@ const config = require('../config')
 
 const stringify = (data) => {
   try {
-    if (data.stack) {
+    if (!data) {
+      return 'Unknown error'
+    } else if (data.stack) {
       return JSON.stringify(data, Object.getOwnPropertyNames(data))
     } else if (typeof data === 'object') {
       return JSON.stringify(data)
