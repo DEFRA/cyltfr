@@ -66,7 +66,8 @@ module.exports = [{
 
     if (!address) {
       const errorMessage = 'Select an address'
-      const model = new SearchViewModel(postcode, JSON.parse(addresses), errorMessage)
+      const warnings = await getWarnings(postcode, request)
+      const model = new SearchViewModel(postcode, JSON.parse(addresses), errorMessage, warnings)
       return h.view('search', model)
     }
 
