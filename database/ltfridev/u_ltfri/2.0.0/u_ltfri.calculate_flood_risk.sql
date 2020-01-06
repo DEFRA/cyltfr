@@ -1,22 +1,15 @@
--- FUNCTION: u_ltfri.calculate_flood_risk(numeric, numeric, integer)
+-- Function: calculate_flood_risk(numeric, numeric, integer)
 
--- DROP FUNCTION u_ltfri.calculate_flood_risk(numeric, numeric, integer);
+-- DROP FUNCTION calculate_flood_risk(numeric, numeric, integer);
 
-CREATE OR REPLACE FUNCTION u_ltfri.calculate_flood_risk(
-	_x numeric,
-	_y numeric,
-	_radius integer)
-    RETURNS json
-    LANGUAGE 'plpgsql'
-
-    COST 100
-    VOLATILE 
-AS $BODY$
+CREATE OR REPLACE FUNCTION calculate_flood_risk(_x numeric, _y numeric, _radius integer)
+  RETURNS json AS
+$BODY$
 
 -- Need file versions as liquibase not implemented on LTFRI yet
 -- File version		Ticket    	Author		Notes
 -- 1.0.1		FLO-2869	tjmason		Work to allow for data schema changes for alert and warning areas introduced in Feb 2018
--- 2.0.0			        dstone		Return multiple extra_info records
+-- 2.0.0		LTFRI-3	  dstone		Return multiple extra_info records
 
 declare within_england_result record;
 declare flood_alert_area_result record;
@@ -47,12 +40,14 @@ begin
     select 'Error'::text as in_england into within_england_result;
   end;
 
+
   -- Flood alert area point in polygon query.
   begin
     select (select array_agg(faa.fws_tacode) as fwis_code from u_ltfri.flood_alert_area_bv_bng faa where st_intersects(st_setsrid(st_makepoint(_x, _y), 27700), faa.wkb_geometry)) as flood_alert_area into flood_alert_area_result;
   exception when others then
     select 'Error'::text as flood_alert_area into flood_alert_area_result;
   end;
+
 
   begin
     -- Flood warning area point in polygon query.
@@ -61,12 +56,14 @@ begin
     select 'Error'::text as flood_warning_area into flood_warning_area_result;
   end;
 
+
   begin
     -- Low surface water risk radial buffered point in polygon query.
     select distinct 1 as ufmfsw_risk from u_ltfri.ufmfsw_extent_1_in_1000_bv_bng u where st_intersects(st_buffer(st_setsrid(st_makepoint(_x, _y), 27700), _radius), u.wkb_geometry) into low_surface_water_result;
   exception when others then
     select -1 as ufmfsw_risk into low_surface_water_result;
   end;
+
 
   begin
     -- Medium surface water risk radial buffered point in polygon query.
@@ -75,12 +72,14 @@ begin
     select -1 as ufmfsw_risk into medium_surface_water_result;
   end;
 
+
   begin
     -- High surface water risk radial buffered point in polygon query.
     select distinct 3 as ufmfsw_risk from u_ltfri.ufmfsw_extent_1_in_30_bv_bng u where st_intersects(st_buffer(st_setsrid(st_makepoint(_x, _y), 27700), _radius), u.wkb_geometry) into high_surface_water_result;
   exception when others then
     select -1 as ufmfsw_risk into high_surface_water_result;
   end;
+
 
   begin
     -- Surface water risk results suitability point in polygon query.
@@ -89,6 +88,7 @@ begin
     select 'Error'::text as surface_water_suitability into surface_water_suitability_result;
   end;
 
+
   begin
     -- Lead local flood authority point in polygon query.
     select name as lead_local_flood_authority from u_ltfri.lead_local_flood_authority_bv_bng l where st_intersects(st_setsrid(st_makepoint(_x, _y), 27700), l.wkb_geometry) into lead_local_flood_authority_result;
@@ -96,17 +96,19 @@ begin
     select 'Error'::text as lead_local_flood_authority into lead_local_flood_authority_result;
   end;
 
+
   begin
     -- Extra information point in polygon query.
-    create temp table extra_info_tbl on commit drop as
+    create temp table extra_info_tmp_tbl on commit drop as
     select info, apply from u_ltfri.extra_info_bv_bng l 
     where st_intersects(st_setsrid(st_makepoint(_x, _y), 27700), l.wkb_geometry);
 
-    select array_to_json(array_agg(row_to_json(t))) as extra_info from (select * from extra_info_tbl) t into extra_info_result;
+    select array_to_json(array_agg(row_to_json(t))) as extra_info from (select * from extra_info_tmp_tbl) t into extra_info_result;
   exception when others then
     select 'Error'::text as extra_info into extra_info_result;
   end;
-raise notice 'Value: %', extra_info_result;
+
+
   begin
     -- Rivers and sea risk point in polygon query.
     select r.prob_4band, r.suitability, r.risk_for_insurance_sop from u_ltfri.rofrs_england_bv_bng r where st_intersects(st_setsrid(st_makepoint(_x, _y), 27700), r.wkb_geometry) into rofrs_result;
@@ -115,6 +117,7 @@ raise notice 'Value: %', extra_info_result;
     rofrs_error := true;
     select 'Error'::text as prob_4band, 'Error'::text as suitability, 'Error'::text as risk_for_insurance_sop into rofrs_result;
   end;
+
 
   begin
      -- Reservoirs risk point in polygon query.
@@ -126,6 +129,7 @@ raise notice 'Value: %', extra_info_result;
   exception when others then
     reservoir_error := true;
   end;
+
 
   -- Produce the long term risk of flooding from various sources.
   with data as (
@@ -165,7 +169,9 @@ raise notice 'Value: %', extra_info_result;
   
   return result;
 end;
-$BODY$;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION calculate_flood_risk(numeric, numeric, integer)
+  OWNER TO u_ltfri;
 
-ALTER FUNCTION u_ltfri.calculate_flood_risk(numeric, numeric, integer)
-    OWNER TO u_ltfri;
