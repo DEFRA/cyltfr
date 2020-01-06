@@ -3,6 +3,7 @@ const config = require('../config/server.json')
 
 // Define config schema
 const schema = joi.object().keys({
+  env: joi.string().valid('dev', 'test', 'prod'),
   host: joi.string().hostname().required(),
   port: joi.number().required(),
   geoserverUrl: joi.string().uri().required(),
@@ -25,11 +26,9 @@ const schema = joi.object().keys({
   rateLimitWhitelist: joi.array().items(joi.string().required()).default([]),
   redisCacheEnabled: joi.boolean().default(false),
   redisCacheHost: joi.string().hostname().when('redisCacheEnabled', { is: true, then: joi.required() }),
-  redisCachePort: joi.number().integer().when('redisCacheEnabled', { is: true, then: joi.required() }),
-  env: joi.string().valid('development', 'test', 'production').default('development')
+  redisCachePort: joi.number().integer().when('redisCacheEnabled', { is: true, then: joi.required() })
 })
 
-config.env = process.env.NODE_ENV
 config.http_proxy = process.env.http_proxy
 
 // Validate config
@@ -46,7 +45,10 @@ if (result.error) {
 const value = result.value
 
 // Add some helper props
-value.isDev = value.env === 'development'
-value.isProd = value.env === 'production'
+value.isDev = value.env === 'dev'
+value.isTest = value.env === 'test'
+value.isProd = value.env === 'prod'
+
+console.log('Server config', value)
 
 module.exports = value

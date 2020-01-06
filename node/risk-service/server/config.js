@@ -3,15 +3,11 @@ const config = require('../config/server.json')
 
 // Define config schema
 const schema = joi.object().keys({
+  env: joi.string().valid('dev', 'test', 'prod'),
   host: joi.string().hostname().required(),
   port: joi.number().integer().required(),
-  db: joi.string().required(),
-  env: joi.string()
-    .valid('development', 'test', 'production')
-    .default('development')
+  db: joi.string().required()
 })
-
-config.env = process.env.NODE_ENV
 
 // Validate config
 const result = schema.validate(config, {
@@ -27,7 +23,10 @@ if (result.error) {
 const value = result.value
 
 // Add some helper props
-value.isDev = value.env === 'development'
-value.isProd = value.env === 'production'
+value.isDev = value.env === 'dev'
+value.isTest = value.env === 'test'
+value.isProd = value.env === 'prod'
+
+console.log('Server config', value)
 
 module.exports = value
