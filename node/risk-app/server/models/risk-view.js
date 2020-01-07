@@ -1,5 +1,4 @@
 const util = require('../util')
-const suitability = require('./suitability')
 
 const RiskLevel = {
   VeryLow: 'Very Low',
@@ -54,7 +53,6 @@ function RiskViewModel (risk, address) {
   const riverAndSeaSuitability = risk.riverAndSeaRisk && risk.riverAndSeaRisk.suitability
   if (riverAndSeaSuitability) {
     const name = riverAndSeaSuitability.toLowerCase()
-    this.riverAndSeaSuitability = suitability.riverAndSea[name]
     this.riverAndSeaSuitabilityName = `partials/suitability/${name.replace(/ /g, '-')}.html`
   }
 
@@ -62,7 +60,6 @@ function RiskViewModel (risk, address) {
   const surfaceWaterSuitability = risk.surfaceWaterSuitability
   if (surfaceWaterSuitability) {
     const name = surfaceWaterSuitability.toLowerCase()
-    this.surfaceWaterSuitability = suitability.surfaceWater[name]
     this.surfaceWaterSuitabilityName = `partials/suitability/${name.replace(/ /g, '-')}.html`
   }
 
