@@ -105,7 +105,6 @@ function RiskViewModel (risk, address) {
   this.postcode = address.postcode
   this.lines = address.address.split(', ')
   this.address = address
-  this.surfaceWaterManagement = risk.leadLocalFloodAuthority
   this.leadLocalFloodAuthority = risk.leadLocalFloodAuthority
   this.date = Date.now()
   this.year = new Date().getFullYear()
