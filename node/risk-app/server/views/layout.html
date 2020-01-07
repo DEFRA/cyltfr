@@ -108,10 +108,19 @@
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
+    // Native tracking initialisation
     ga('create', analyticsAccount, 'auto', { allowLinker: true })
     ga('require', 'linker')
     ga('linker:autoLink', ['floodsdestroy.campaign.gov.uk'])
+
+    // Cross domain tracking initialisation
+    ga('create', 'UA-145652997-1', 'auto', 'govuk_shared', {'allowLinker': true})
+    ga('govuk_shared.require', 'linker')
+    ga('govuk_shared.linker.set', 'anonymizeIp', true)
+    ga('govuk_shared.linker:autoLink', ['www.gov.uk'])
+
     ga('send', 'pageview')
+    ga('govuk_shared.send', 'pageview')
 
     $(function() {
       GOVUK.performance.stageprompt.setupForGoogleAnalytics()
