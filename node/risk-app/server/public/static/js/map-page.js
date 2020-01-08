@@ -58,7 +58,6 @@ MapController.prototype.setCurrent = function (ref) {
   function mapPage () {
     var mapController = new MapController(mapCategories.categories)
 
-    // var selected = 'selected'
     var $container = $('.map-container')
     var $sidebar = $('.sidebar')
     var $selector = $('select', $sidebar)

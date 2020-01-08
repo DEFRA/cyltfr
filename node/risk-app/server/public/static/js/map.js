@@ -1,9 +1,6 @@
 /* global */
 
 var $ = window.$
-// // proj4 is accessed using global variable within openlayers library
-// window.proj4 = require('proj4')
-// var raf = require('raf')
 var ol = window.ol
 var parser = new ol.format.WMTSCapabilities()
 var wmsparser = new ol.format.WMSCapabilities()
@@ -25,7 +22,6 @@ var map, callback, currentLayer, $overlay, $overlayContent
 var isLoading = false
 var loading = 0
 var loaded = 0
-// var loadError = 0
 var maxResolution = 1000
 
 function overlayTemplate (data) {
@@ -38,9 +34,6 @@ function loadMap (point) {
   // add the projection to Window.proj4
   window.proj4.defs(config.projection.ref, config.projection.proj4)
   ol.proj.proj4.register(window.proj4)
-
-  // ie9 requires polyfill for window.requestAnimationFrame
-  // raf.polyfill()
 
   var projection = ol.proj.get(config.projection.ref)
 
@@ -133,7 +126,6 @@ function loadMap (point) {
       })
 
       WmsSource.on('tileloaderror', function () {
-        // loadError++
         loaded++
         if (loading === loaded) {
           layerLoaded()
@@ -406,7 +398,6 @@ function testValues () {
 function layerLoaded () {
   loading = 0
   loaded = 0
-  // loadError = 0
   isLoading = false
 }
 
