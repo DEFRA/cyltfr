@@ -15,10 +15,10 @@ const RiskTitles = {
 }
 
 const RiskDescriptions = {
-  'Very Low': 'Very low risk means that each year this area has a chance of flooding of less than 0.1%',
-  Low: 'Low risk means that each year this area has a chance of flooding of between 0.1% and 1%',
-  Medium: 'Medium risk means that each year this area has a chance of flooding of between 1.1% and 3.3%',
-  High: 'High risk means that each year this area has a chance of flooding of greater than 3.3%'
+  'Very Low': 'Very low risk means that each year this area has a chance of flooding of less than 0.1%.',
+  Low: 'Low risk means that each year this area has a chance of flooding of between 0.1% and 1%.',
+  Medium: 'Medium risk means that each year this area has a chance of flooding of between 1.1% and 3.3%.',
+  High: 'High risk means that each year this area has a chance of flooding of greater than 3.3%.'
 }
 
 const Levels = Object.keys(RiskLevel).map(l => RiskLevel[l])
