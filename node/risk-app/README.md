@@ -1,35 +1,28 @@
-# Long term flood risk information (risk)
+# Long term flood risk information (ltfri)
 
-## Web application component (risk-app)
+## Flood Risk App component (flood-risk-app)
 
-### Clone
-`git clone git@gitlab.envage.co.uk:flood/ltfri.git`
+### Build app
 
-### Cloud deployment only
-### Override module specific environment variables by copying the contents of
-### etc/.profile to .profile on the target machine and configuring for the
-### target environment accordingly.
-
-### Install dependencies
-`npm i`
-
-### Build
 `npm run build`
 
-### Test
-e2e tests can be found in the project risk-app-tests
+### Start app
 
-## Start
-Before starting, ensure `pm2` is installed globally `npm i -g pm2`
+`npm start`
 
-Ensure dependent services are running (risk-service and risk-gazetteer)
+### Test app
 
-### Start server
+`npm test`
 
-Ensure risk-app/config/pm2.json contains the correct options for production or development
+# Environment variables (TODO: These are currently loaded via the config/server.json file not env vars)
+| name     |      description      | required  |   default   |            valid            | notes |
+|----------|-----------------------|:---------:|-------------|:---------------------------:|-------|
+| NODE_ENV | Node environment      |    no     | development | development,test,production |       |
 
-`npm start` (Assumes `pm2` is installed globally)
+# Prerequisites
 
-Open `http://localhost:3001`
+Node v12+
 
-[The OGL License](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/)
+# Running the application locally
+
+`$ node index.js`

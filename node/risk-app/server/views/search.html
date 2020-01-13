@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% from "components/select/macro.njk" import govukSelect %}
+
+{% set pageTitle = "Select an address" %}
+
+{% block content %}
+<div id="address-page">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">{{ pageTitle }}</h1>
+
+      <form method="post">
+        <div class="govuk-form-group">
+          <span class="govuk-label">Postcode</span>
+          <p class="govuk-body">
+            <strong style="text-transform: uppercase;">{{ postcode }}</strong>
+            <a href="/{{ mountPath }}/postcode" class="govuk-link">Change</a>
+          </p>
+        </div>
+
+        {{ govukSelect(addressSelect) }}
+
+        <input type="hidden" name="addresses" value="{{ addresses }}" />
+
+        {% if banner %}
+        <div class="govuk-warning-text">
+          <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+          <strong class="govuk-warning-text__text">
+            <span class="govuk-warning-text__assistive">Warning</span>
+            {{ banner.message }}
+            {% if banner.url %}
+            &nbsp;<a class="govuk-link" href="{{ banner.url }}" target="_blank">View details</a>
+            {% endif %}
+          </strong>
+        </div>
+        {% endif %}
+
+        <button type="submit" class="govuk-button">Continue</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,6 +1,0 @@
-#!/bin/bash
-cp -R node_modules/govuk_frontend_toolkit/images/* public/images
-cp -R node_modules/govuk_frontend_toolkit/javascripts/* public/javascripts
-cp -R node_modules/govuk_template_mustache/assets/* public
-cp node_modules/govuk_template_mustache/views/layouts/govuk_template.html views &&
-mv views/govuk_template.html views/layout.html

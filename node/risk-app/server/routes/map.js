@@ -1,5 +1,5 @@
-const Joi = require('joi')
-const MapsViewModel = require('../models/maps-view')
+const joi = require('@hapi/joi')
+const MapViewModel = require('../models/map-view')
 
 module.exports = {
   method: 'GET',
@@ -7,19 +7,18 @@ module.exports = {
   options: {
     description: 'Get the map page',
     handler: (request, h) => {
-      const easting = request.query.easting
-      const northing = request.query.northing
-      const address = request.query.address
+      const { query } = request
+      const { easting, northing, address } = query
 
-      return h.view('map', new MapsViewModel(easting, northing, address))
+      return h.view('map', new MapViewModel(easting, northing, address))
     },
     validate: {
-      query: {
-        easting: Joi.number(),
-        northing: Joi.number(),
-        map: Joi.string(),
-        address: Joi.number()
-      }
+      query: joi.object().keys({
+        easting: joi.number(),
+        northing: joi.number(),
+        map: joi.string(),
+        address: joi.number()
+      }).required()
     }
   }
 }
