@@ -1,5 +1,5 @@
-const Joi = require('joi')
-const Boom = require('boom')
+const joi = require('@hapi/joi')
+const boom = require('@hapi/boom')
 const service = require('../services')
 
 module.exports = {
@@ -14,14 +14,14 @@ module.exports = {
         const result = await service.isEngland(params.x, params.y)
         return result.rows[0]
       } catch (err) {
-        return Boom.badRequest('Failed to get isEngland', err)
+        return boom.badRequest('Failed to get isEngland', err)
       }
     },
     validate: {
-      params: {
-        x: Joi.number().required(),
-        y: Joi.number().required()
-      }
+      params: joi.object().keys({
+        x: joi.number().required(),
+        y: joi.number().required()
+      }).required()
     }
   }
 }

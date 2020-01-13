@@ -1,2 +1,0 @@
-#!/bin/bash
-browserify assets/javascripts/search/index.js -d -s LTFRI.SearchPage | exorcist public/javascripts/search.js.map > public/javascripts/search.js

@@ -1,0 +1,33 @@
+.array-item {
+  margin-bottom: 27px;
+  border-bottom: solid 1px grey;
+}
+
+legend {
+  display: none;
+}
+
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.govuk-form-group {
+  float: left;
+}
+
+.govuk-form-group.info {
+  width: 79%;
+  margin-right: 1%;
+}
+
+.govuk-form-group.start {
+  width: 19%;
+  margin-right: 1%;
+}
+
+.govuk-form-group.end {
+  width: 19%;
+  margin-right: 1%;
+}

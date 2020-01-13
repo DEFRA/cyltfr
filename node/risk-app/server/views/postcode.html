@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% from "components/input/macro.njk" import govukInput %}
+
+{% set pageTitle = "Where do you want to check?" %}
+
+{% block content %}
+<div id="postcode-page">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">{{ pageTitle }}</h1>
+
+      <div class="govuk-inset-text">
+        <p>This service will tell you the flood risk of an area, not a specific property.</p>
+      </div>
+
+      <form method="post">
+        {{ govukInput(postcodeInput) }}
+        <button type="submit" class="govuk-button">Continue</button>
+      </form>
+
+      <p class="govuk-body">or <a href="/{{ mountPath }}/map" class="govuk-link">
+        view a map showing areas at risk of flooding</a>.
+      </p>
+      
+      <p class="govuk-body">
+        <a href="http://www.royalmail.com/find-a-postcode" class="govuk-link" target="_blank">
+          Use the Royal Mail postcode finder
+        </a>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}
