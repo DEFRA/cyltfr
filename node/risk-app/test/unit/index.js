@@ -33,7 +33,7 @@ lab.experiment('Unit', () => {
     }
 
     const response = await server.inject(options)
-    Code.expect(response.statusCode).to.equal(200)
+    Code.expect(response.statusCode).to.equal(302)
   })
 
   lab.test('/feedback - With referrer header', async () => {
@@ -44,7 +44,7 @@ lab.experiment('Unit', () => {
     }
 
     const response = await server.inject(options)
-    Code.expect(response.statusCode).to.equal(200)
+    Code.expect(response.statusCode).to.equal(302)
   })
 
   lab.test('/search - banner ', async () => {
