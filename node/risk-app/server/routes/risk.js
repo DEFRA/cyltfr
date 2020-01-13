@@ -1,5 +1,6 @@
-const Joi = require('joi')
-const Boom = require('boom')
+const joi = require('@hapi/joi')
+const boom = require('@hapi/boom')
+const config = require('../config')
 const riskService = require('../services/risk')
 const addressService = require('../services/address')
 const RiskViewModel = require('../models/risk-view')
@@ -8,45 +9,54 @@ const errors = require('../models/errors.json')
 module.exports = {
   method: 'GET',
   path: '/risk',
-  options: {
-    description: 'Get risk text page',
-    handler: async (request, h) => {
+  handler: async (request, h) => {
+    try {
+      const address = await addressService.findById(request.query.address)
+      const { x, y } = address
+      const radius = 20
+
       try {
-        const address = await addressService.findById(request.query.address)
-        const x = address.x
-        const y = address.y
-        const radius = 20
+        const risk = await riskService.getByCoordinates(x, y, radius)
 
-        try {
-          const risk = await riskService.getByCoordinates(x, y, radius)
-
-          // FLO-1139 If query 1 to 6 errors then throw default error page
-          if (risk.inFloodWarningArea === 'Error' ||
+        // FLO-1139 If query 1 to 6 errors then throw default error page
+        const hasError = risk.inFloodWarningArea === 'Error' ||
           risk.inFloodAlertArea === 'Error' ||
           risk.riverAndSeaRisk === 'Error' ||
           risk.surfaceWaterRisk === 'Error' ||
-          risk.reservoirRisk === 'Error') {
-            return Boom.badRequest(errors.spatialQuery.message, {
-              risk: risk,
-              address: address
-            })
-          }
+          risk.reservoirRisk === 'Error' ||
+          risk.surfaceWaterSuitability === 'Error' ||
+          risk.leadLocalFloodAuthority === 'Error' ||
+          risk.extraInfo === 'Error'
 
-          if (!risk.inEngland) {
-            return h.redirect(`/england-only?uprn=${encodeURIComponent(address.uprn)}`)
-          } else {
-            return h.view('risk', new RiskViewModel(risk, address))
-          }
-        } catch (err) {
-          return Boom.badRequest(errors.riskProfile.message, err)
+        if (hasError) {
+          return boom.badRequest(errors.spatialQuery.message, {
+            risk,
+            address
+          })
+        }
+
+        if (!risk.inEngland) {
+          return h.redirect(`/england-only?uprn=${encodeURIComponent(address.uprn)}`)
+        } else {
+          return h.view('risk', new RiskViewModel(risk, address))
         }
       } catch (err) {
-        return Boom.badRequest(errors.addressById.message, err)
+        return boom.badRequest(errors.riskProfile.message, err)
       }
-    },
+    } catch (err) {
+      return boom.badRequest(errors.addressById.message, err)
+    }
+  },
+  options: {
+    description: 'Get risk text page',
     validate: {
-      query: {
-        address: Joi.number().required()
+      query: joi.object().keys({
+        address: joi.number().required()
+      }).required()
+    },
+    plugins: {
+      'hapi-rate-limit': {
+        enabled: config.rateLimitEnabled
       }
     }
   }

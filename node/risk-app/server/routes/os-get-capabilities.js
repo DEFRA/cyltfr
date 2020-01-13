@@ -1,6 +1,6 @@
-const Boom = require('boom')
+const Boom = require('@hapi/boom')
 const util = require('../util')
-const config = require('../../config')
+const config = require('../config')
 const errors = require('../models/errors.json')
 
 module.exports = {
@@ -8,10 +8,13 @@ module.exports = {
   path: '/os-get-capabilities',
   handler: async (request, h) => {
     try {
-      const payload = await util.get(config.ordnanceSurvey.urlGetCapabilities, {}, true)
+      const payload = await util.get(config.osGetCapabilitiesUrl, {}, true)
       return h.response(payload).type('text/xml')
     } catch (err) {
-      return Boom.badRequest(errors.oSGetCapabilities.message, err)
+      return Boom.badRequest(errors.osGetCapabilities.message, err)
     }
+  },
+  options: {
+    description: 'Get map capabilities'
   }
 }

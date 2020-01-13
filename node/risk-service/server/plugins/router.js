@@ -1,8 +1,14 @@
-const routes = require('../routes')
+const routes = [].concat(
+  require('../routes/risk'),
+  require('../routes/is-england'),
+  require('../routes/error')
+)
 
-exports.plugin = {
-  name: 'router',
-  register: (server, options) => {
-    server.route(routes)
+module.exports = {
+  plugin: {
+    name: 'router',
+    register: (server, options) => {
+      server.route(routes)
+    }
   }
 }
