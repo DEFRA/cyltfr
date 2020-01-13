@@ -1,4 +1,4 @@
-const config = require('../../config')
+const config = require('../config')
 
 /*
  * Add full url to context of view for opengraph meta property

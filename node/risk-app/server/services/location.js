@@ -1,12 +1,11 @@
-const sprintf = require('sprintf-js')
 const util = require('../util')
-const config = require('../../config')
-const urlNamesApi = config.ordnanceSurvey.urlNames
+const config = require('../config')
+const osNamesUrl = config.osNamesUrl
 const isEngland = require('./is-england')
 
 module.exports = {
   find: async function findByPlace (place) {
-    const uri = sprintf.vsprintf(urlNamesApi, [place])
+    const uri = osNamesUrl + place
 
     const payload = await util.getJson(uri, true)
 

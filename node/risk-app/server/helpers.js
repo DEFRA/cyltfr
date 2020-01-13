@@ -1,16 +1,12 @@
-const util = require('./util')
+const postcodeRegex = /[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}/i
 
-function formatDate (value, format) {
-  if (typeof format === 'string') {
-    return util.formatDate(value, format)
-  } else {
-    return util.formatDate(value)
-  }
+const redirectToHomeCounty = (h, postcode, region) => {
+  const encodedPostcode = encodeURIComponent(postcode)
+  const url = `/england-only?postcode=${encodedPostcode}&region=${region}`
+  return h.redirect(url)
 }
 
-const postcodeRegex = /[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}/gi
-
 module.exports = {
-  formatDate: formatDate,
-  postcodeRegex: postcodeRegex
+  postcodeRegex,
+  redirectToHomeCounty
 }

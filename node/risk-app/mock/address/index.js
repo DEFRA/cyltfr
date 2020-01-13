@@ -12,8 +12,8 @@ addressService.findById = function (id) {
     : Promise.reject(new Error(`findById mock not found for id [${id}]`))
 }
 
-addressService.find = function (premises, postcode) {
-  const result = findByPostcode[premises.toUpperCase() + '-' + postcode.toUpperCase()]
+addressService.find = function (postcode) {
+  const result = findByPostcode[postcode.toUpperCase().replace(' ', '')]
   return result
     ? Promise.resolve(result)
     : Promise.reject(new Error(`findByPostcode mock not found for postcode [${postcode}]`))

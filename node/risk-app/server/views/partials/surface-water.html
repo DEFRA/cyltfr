@@ -1,0 +1,60 @@
+<div class="surface-water">
+  <div class="govuk-inset-text {{ surfaceWaterClassName }}">
+    <h3 class="govuk-!-margin-bottom-2">Surface water</h3>
+    <p class="govuk-!-margin-top-0 risk"><strong>{{ surfaceWaterTitle }}</strong></p>
+  </div>
+
+  <details class="govuk-details" data-module="govuk-details">
+    <summary class="govuk-details__summary">
+      <span class="govuk-details__summary-text">What this information means</span>
+    </summary>
+    <div class="govuk-details__text">
+      <p class="govuk-body risk-description">
+        {{ surfaceWaterText }}
+      </p>
+      {% if surfaceWaterSuitabilityName %}
+        {% include surfaceWaterSuitabilityName %}
+      {% endif %}
+    </div>
+  </details>
+    
+  <p class="govuk-body">
+    Surface water flooding, sometimes known as flash flooding:
+  </p>
+
+  <ul class="govuk-list govuk-list--bullet">
+    <li>happens when heavy rain cannot drain away</li>
+    <li>is difficult to predict as it depends on rainfall volume and location</li>
+    <li>can happen up hills and away from rivers and other bodies of water</li>
+    <li>is more widespread in areas with harder surfaces like concrete</li>
+  </ul>
+
+  <p class="govuk-body">
+    Lead local flood authorities (LLFA) are responsible for managing the flood risk from surface water{% if not hasLlfaComments %} and may hold more detailed information{% endif %}.
+
+    <!-- LLFA -->
+    {% if leadLocalFloodAuthority %}
+    <p class="govuk-body">
+      Your LLFA is <strong>{{leadLocalFloodAuthority}} council</strong>.
+
+      <!-- LLFA Comments -->
+      {% if hasLlfaComments %}
+        They have the following information about surface water flooding:
+        <ul class="govuk-list govuk-list--bullet">
+        {% for comment in llfaComments %}
+          <li>{{ comment }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+      
+    </p>
+    {% endif %}
+  </p>
+
+  <p class="govuk-body">
+    <a class="govuk-link" href="/{{ mountPath }}/map?easting={{easting}}&northing={{northing}}&address={{address.uprn}}&map=SurfaceWater">
+      View a map of the risk of flooding from surface water
+    </a>
+  </p>
+</div>
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
