@@ -1,8 +1,8 @@
-node_modules
-logs
-public
-npm-debug.log
-coverage.html
-config/server.json
-config/pm2.json
+.DS_Store
 .vscode
+node_modules
+npm-debug.log
+server/public/build
+lcov.info
+config/server.json
+test/output.html

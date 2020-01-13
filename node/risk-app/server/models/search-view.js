@@ -1,30 +1,50 @@
-const moment = require('moment')
+const config = require('../config')
+const floodWarningsUrl = config.floodWarningsUrl
 
-function SearchViewModel (premises, postcode, addresses, errors) {
-  this.premises = premises
-  this.postcode = postcode
-  this.addresses = addresses
+class SearchViewModel {
+  constructor (postcode, addresses = [], errorMessage, warnings) {
+    this.postcode = postcode
 
-  if (addresses) {
-    if (addresses.length === 1) {
-      this.singleAddress = addresses[0]
-    } else {
-      this.numAddressesFound = addresses.length
+    const defaultOption = {
+      text: addresses.length === 1
+        ? '1 address found'
+        : `${addresses.length} addresses found`
     }
-  }
 
-  if (errors) {
-    this.errors = {
-      uprn: `You need to ${this.singleAddress ? 'confirm' : 'select'} the address`
+    const items = [defaultOption].concat(addresses.map(addr => ({
+      text: addr.address,
+      value: addr.uprn
+    })))
+
+    this.addressSelect = {
+      id: 'address',
+      name: 'address',
+      label: {
+        text: 'Select an address'
+      },
+      items
     }
+
+    if (warnings && warnings.message) {
+      if (warnings.severity && warnings.severity < 4) {
+        const summary = warnings.summary[warnings.severity - 1]
+        this.banner = {
+          url: floodWarningsUrl + '/warnings?location=' + postcode,
+          message: warnings.message,
+          className: summary.severity === 3 ? 'alert' : 'warning',
+          icon: summary.hash
+        }
+      }
+    }
+
+    if (errorMessage) {
+      this.addressSelect.errorMessage = {
+        text: errorMessage
+      }
+    }
+
+    this.addresses = JSON.stringify(addresses)
   }
-
-  this.year = moment(Date.now()).format('YYYY')
-
-  // In the event of a validation error, save
-  // a lookup to address service again by smuggling
-  // the address results in a JSON encoded form field
-  this.addressesJSON = JSON.stringify(addresses)
 }
 
 module.exports = SearchViewModel
