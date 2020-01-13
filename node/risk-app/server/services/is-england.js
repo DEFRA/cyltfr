@@ -1,9 +1,6 @@
-const config = require('../../config').service
+const config = require('../config')
 const util = require('../util')
-const protocol = config.protocol
-const host = config.host
-const port = config.port
-const urlBase = protocol + '://' + host + ':' + port
+const urlBase = config.serviceUrl
 
 module.exports = {
   getIsEngland: function (easting, northing) {

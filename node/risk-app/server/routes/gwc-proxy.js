@@ -1,5 +1,5 @@
-const config = require('../../config').geoserver
-const uri = config.protocol + '://' + config.host + ':' + config.port + '/geoserver/gwc/service/wms'
+const config = require('../config')
+const uri = config.geoserverUrl + '/geoserver/gwc/service/wms'
 
 module.exports = {
   method: 'GET',
@@ -12,5 +12,8 @@ module.exports = {
       },
       passThrough: true
     }
+  },
+  options: {
+    description: 'Get GWC map proxy'
   }
 }
