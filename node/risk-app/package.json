@@ -40,7 +40,8 @@
   },
   "standard": {
     "ignore": [
-      "server/public/build/js"
+      "server/public/build/js",
+      "server/public/static/js/vendor"
     ]
   }
 }
