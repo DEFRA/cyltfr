@@ -49,11 +49,13 @@
             </summary>
             <div class="govuk-details__text">
               {% for reservoir in reservoirs %}
-              <p><strong>{{reservoir.name}}</strong> (grid reference {{reservoir.location}})</p>
-              <p>Owner: {{reservoir.owner}}</p>
-              <p>Lead Local Flood Authority: {{reservoir.authority}}</p>
-              <!-- <p>Risk designation: {{reservoir.riskDesignation}}</p> -->
-              <p>Comments: {{reservoir.comments}}</p>
+              <ul class="govuk-list">
+                <li><strong>{{reservoir.name}}</strong> (grid reference {{reservoir.location}})</li>
+                <li>Owner: {{reservoir.owner}}</li>
+                <li>Lead Local Flood Authority: {{reservoir.authority}}</li>
+                <!-- <li>Risk designation: {{reservoir.riskDesignation}}</li> -->
+                <li>Comments: {{reservoir.comments}}</li>
+              </ul>
               {% endfor %}
             </div>
           </details>
