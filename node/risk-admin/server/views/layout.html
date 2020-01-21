@@ -50,7 +50,6 @@
             <span class="divider">|</span>
             <a href="/logout">Logout</a>
           </span>
-          <span></span>
           {% else %}
           <a href="/login">Login</a>
           {% endif %}
@@ -64,6 +63,7 @@
 {% endblock %}
 
 {% block content %}
+  <a href="/comment-guidance" style="float: right;">Comment guidance</a>
   <span class="govuk-caption-l">LTFRI Management Console</span>
   <h1 class="govuk-heading-l">{{pageTitle}}</h1>
   {% block body %}{% endblock %}
