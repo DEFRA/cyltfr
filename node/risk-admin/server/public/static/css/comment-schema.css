@@ -17,6 +17,10 @@ fieldset {
   float: left;
 }
 
+.govuk-form-group.name {
+  float: none;
+}
+
 .govuk-form-group.info {
   width: 79%;
   margin-right: 1%;

@@ -1,33 +1,33 @@
 ;(function () {
   var React = window.React
 
-  var textareaWidget = (props) => {
+  var textareaWidget = function (props) {
     var p = {
       rows: 5,
       id: props.id,
       value: props.value,
       required: props.required,
       className: 'govuk-textarea',
-      onChange: (event) => props.onChange(event.target.value)
+      onChange: function (event) { props.onChange(event.target.value) }
     }
 
     return React.createElement('textarea', p)
   }
 
-  var inputWidget = (props) => {
+  var inputWidget = function (props) {
     var p = {
       type: props.type || 'text',
       id: props.id,
       className: 'govuk-input govuk-input--width-20',
       value: props.value,
       required: props.required,
-      onChange: (event) => props.onChange(event.target.value)
+      onChange: function (event) { props.onChange(event.target.value) }
     }
 
     return React.createElement('input', p)
   }
 
-  var dateWidget = (props) => {
+  var dateWidget = function (props) {
     props.type = 'date'
     return inputWidget(props)
   }
@@ -94,7 +94,7 @@
       uiSchema: {
         name: {
           'ui:widget': inputWidget,
-          classNames: 'govuk-form-group info'
+          classNames: 'govuk-form-group name'
         },
         features: {
           'ui:options': {
@@ -132,7 +132,7 @@
   }
 
   function ArrayFieldTemplate (props) {
-    return React.createElement('div', null, props.items.map(el => {
+    return React.createElement('div', null, props.items.map(function (el) {
       var item = React.createElement('div', {
         id: 'item_' + el.index,
         className: 'array-item'
