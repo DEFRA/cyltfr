@@ -81,7 +81,7 @@ async function createServer () {
     return h.continue
   })
 
-  schedule.scheduleJob('42 * * * *', async () => {
+  schedule.scheduleJob('0 * * * *', async () => {
     const output = []
 
     const result = await processManifest(server.provider, (...args) => {
