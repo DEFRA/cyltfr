@@ -13,7 +13,8 @@
       <p class="govuk-body">The postcode you entered is in Wales.</p>
       <p class="govuk-body">
         Find <a class="govuk-link"
-          href="https://naturalresources.wales/evidence-and-data/maps/long-term-flood-risk/?lang=en">
+          href="https://naturalresources.wales/evidence-and-data/maps/long-term-flood-risk/?lang=en"
+          data-journey-click="ltfri:other-areas:wales">
           flood information for Wales</a>.
       </p>
       {% elseif isScotland %}
@@ -21,27 +22,30 @@
         The postcode you entered is in Scotland.
       </p>
       <p class="govuk-body">
-        Find <a class="govuk-link" href="https://www.sepa.org.uk/environment/water/flooding/flood-maps/">flood
+        Find <a class="govuk-link" href="https://www.sepa.org.uk/environment/water/flooding/flood-maps/"
+          data-journey-click="ltfri:other-areas:scotland">flood
           information
           for Scotland</a>.</p>
       {% elseif isNorthernIreland %}
       <p class="govuk-body">The postcode you entered is in Northern Ireland.</p>
       <p class="govuk-body">
-        Find <a class="govuk-link"
-          href="https://www.nidirect.gov.uk/articles/check-the-risk-of-flooding-in-your-area">flood information for
+        Find <a class="govuk-link" href="https://www.nidirect.gov.uk/articles/check-the-risk-of-flooding-in-your-area"
+          data-journey-click="ltfri:other-areas:northern-ireland">flood information for
           Northern Ireland</a>.</p>
       {% else %}
       <p class="govuk-body">Find <a class="govuk-link"
-          href="https://naturalresources.wales/evidence-and-data/maps/long-term-flood-risk/?lang=en">flood information
+          href="https://naturalresources.wales/evidence-and-data/maps/long-term-flood-risk/?lang=en"
+          data-journey-click="ltfri:other-areas:wales">flood information
           for
           Wales</a>.
         <p class="govuk-body">
-          Find <a class="govuk-link" href="https://www.sepa.org.uk/environment/water/flooding/flood-maps/">flood
+          Find <a class="govuk-link" href="https://www.sepa.org.uk/environment/water/flooding/flood-maps/"
+            data-journey-click="ltfri:other-areas:scotland">flood
             information for
             Scotland</a>.</p>
         <p class="govuk-body">
-          Find <a class="govuk-link"
-            href="https://www.nidirect.gov.uk/articles/check-the-risk-of-flooding-in-your-area">flood information for
+          Find <a class="govuk-link" href="https://www.nidirect.gov.uk/articles/check-the-risk-of-flooding-in-your-area"
+            data-journey-click="ltfri:other-areas:northern-ireland">flood information for
             Northern Ireland</a>.</p>
         {% endif %}
     </div>
