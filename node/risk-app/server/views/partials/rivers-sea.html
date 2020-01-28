@@ -5,7 +5,7 @@
   </div>
 
   <details class="govuk-details" data-module="govuk-details">
-    <summary class="govuk-details__summary">
+    <summary class="govuk-details__summary" data-journey-click="ltfri:risk:rivers-and-sea-details">
       <span class="govuk-details__summary-text">What this information means</span>
     </summary>
     <div class="govuk-details__text">
@@ -24,7 +24,8 @@
   </p>
 
   <p class="govuk-body">
-    <a class="govuk-link" href="/{{ mountPath }}/map?easting={{easting}}&northing={{northing}}&address={{address.uprn}}&map=RiversOrSea">
+    <a class="govuk-link"
+      href="/{{ mountPath }}/map?easting={{easting}}&northing={{northing}}&address={{address.uprn}}&map=RiversOrSea">
       View a map of the risk of flooding from rivers and the sea
     </a>
   </p>
