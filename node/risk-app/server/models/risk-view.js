@@ -75,11 +75,11 @@ function RiskViewModel (risk, address) {
     const maxComments = 3
     const llfaDescriptions = {
       'Flood report': 'Historical flooding reports',
-      'Non compliant mapping': 'LLFA flood maps',
-      'Proposed schemes': 'Proposed flood protection schemes',
+      'Non compliant mapping': 'Additional local flood maps',
+      'Proposed schemes': 'Potential new flood protection schemes',
       'Completed schemes': 'Completed flood protection schemes',
       'Flood action plan': 'A flood action plan',
-      'Other info': 'Other information, for example, engineer’s reports'
+      'Other info': 'Other information, for example, engineer’s reports or land drainage consents'
     }
 
     this.holdingComments = risk.extraInfo
