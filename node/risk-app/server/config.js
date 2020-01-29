@@ -47,7 +47,7 @@ const value = result.value
 // Add some helper props
 value.isDev = value.env === 'dev'
 value.isTest = value.env === 'test'
-value.isProd = value.env.startsWith('prod')
+value.isProd = value.env.startsWith('prod-')
 
 console.log('Server config', value)
 
