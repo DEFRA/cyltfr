@@ -1,6 +1,12 @@
 .array-item {
   margin-bottom: 27px;
-  border-bottom: solid 1px grey;
+  /* border-bottom: solid 1px grey; */
+  /* border-top: solid 1px grey; */
+  border-left: 20px solid grey;
+  padding-left: 10px;
+  /* padding-top: 20px; */
+  display: list-item;
+  list-style: decimal;
 }
 
 legend {
@@ -22,16 +28,23 @@ fieldset {
 }
 
 .govuk-form-group.info {
-  width: 79%;
-  margin-right: 1%;
+  width: 100%;
+}
+
+.govuk-form-group.info .govuk-textarea {
+  margin-bottom: 0;
 }
 
 .govuk-form-group.start {
-  width: 19%;
+  /* width: 19%; */
   margin-right: 1%;
 }
 
 .govuk-form-group.end {
-  width: 19%;
+  /* width: 19%; */
   margin-right: 1%;
+}
+
+label.control-label {
+  font-weight: bold;
 }

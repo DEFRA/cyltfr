@@ -1,5 +1,5 @@
 ;(function () {
-  function commentMap (geojson, target) {
+  function commentMap (geojson, target, title) {
     var ol = window.ol
     var proj4 = window.proj4
 
@@ -61,6 +61,13 @@
         return Math.round(p)
       }))
     })
+
+    if (title) {
+      var titleEl = document.createElement('h3')
+      titleEl.textContent = title
+      var mapEl = map.getTargetElement()
+      mapEl.parentNode.insertBefore(titleEl, mapEl)
+    }
   }
 
   window.LTFMGMT.commentMap = commentMap

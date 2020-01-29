@@ -7,6 +7,7 @@
       id: props.id,
       value: props.value,
       required: props.required,
+      maxLength: props.schema.maxLength,
       className: 'govuk-textarea',
       onChange: function (event) { props.onChange(event.target.value) }
     }
@@ -21,6 +22,7 @@
       className: 'govuk-input govuk-input--width-20',
       value: props.value,
       required: props.required,
+      maxLength: props.schema.maxLength,
       onChange: function (event) { props.onChange(event.target.value) }
     }
 
@@ -41,7 +43,8 @@
         properties: {
           name: {
             type: 'string',
-            title: 'Description'
+            title: 'Description',
+            maxLength: 75
           },
           features: {
             type: 'array',
@@ -72,17 +75,18 @@
                         'Completed schemes',
                         'Flood action plan',
                         'Other info'
-                      ]
+                      ],
+                      maxLength: 150
                     },
                     start: {
                       type: 'string',
                       format: 'date',
-                      title: 'Start date'
+                      title: 'Valid from'
                     },
                     end: {
                       type: 'string',
                       format: 'date',
-                      title: 'End date'
+                      title: 'Valid to'
                     }
                   }
                 }
@@ -94,7 +98,8 @@
       uiSchema: {
         name: {
           'ui:widget': inputWidget,
-          classNames: 'govuk-form-group name'
+          classNames: 'govuk-form-group name',
+          'ui:description': 'A description for internal reference'
         },
         features: {
           'ui:options': {
@@ -112,15 +117,20 @@
               },
               info: {
                 'ui:widget': isHoldingComment ? textareaWidget : 'radio',
-                classNames: 'govuk-form-group info'
+                classNames: 'govuk-form-group info',
+                'ui:description': isHoldingComment
+                  ? 'The comment text will display to public users in this geometry. Ensure you have read the guidance statement. The maximum number of characters is 150.'
+                  : 'The report will display to public users in this geometry.'
               },
               start: {
                 'ui:widget': dateWidget,
-                classNames: 'govuk-form-group start'
+                classNames: 'govuk-form-group start',
+                'ui:description': 'For internal reference. This date is not displayed to public users or control the duration that the comment is displayed for. If a date picker is not avaliable, use the format YYYY-MM-DD'
               },
               end: {
                 'ui:widget': dateWidget,
-                classNames: 'govuk-form-group end'
+                classNames: 'govuk-form-group end',
+                'ui:description': 'This date is not displayed to public users or control the duration that the comment is displayed for. If a date picker is not avaliable, use the format YYYY-MM-DD'
               }
             }
           }
