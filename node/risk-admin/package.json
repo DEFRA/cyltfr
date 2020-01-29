@@ -41,5 +41,11 @@
     "@hapi/lab": "22.0.3",
     "codeclimate-test-reporter": "0.5.1",
     "standard": "14.3.1"
+  },
+  "standard": {
+    "ignore": [
+      "server/public/build/js",
+      "server/public/static/js/vendor"
+    ]
   }
 }
