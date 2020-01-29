@@ -17,10 +17,26 @@ const stringify = (data) => {
   }
 }
 
-const log = (event, tags) => {
+const getRequestInfo = (request) => {
+  const response = request.response
+  const payload = request.payload
+  const id = request.info && request.info.id
+  const method = request.method.toUpperCase()
+  const code = response && response.output && response.output.statusCode
+  const path = `${method} ${request.path}${request.url.search || ''} ${code}`
+  return { id, path, payload }
+}
+
+const log = (event, tags, request) => {
   if (tags.error) {
     const message = stringify(event.error || event.data)
-    console.error(`Server error: ${message}`, event.tags.join(', '))
+
+    if (request) {
+      const { id, path, payload } = getRequestInfo(request)
+      console.error(`Server request error: ${message}`, event.tags.join(', '), id, path, payload)
+    } else {
+      console.error(`Server error: ${message}`, event.tags.join(', '))
+    }
   } else {
     const message = stringify(event.data)
     console.log(`Server log: ${message}`, event.tags.join(', '))
@@ -40,17 +56,14 @@ module.exports = {
     server.events.on({
       name: 'request',
       channels: ['error', 'app']
-    }, (request, event, tags) => log(event, tags))
+    }, (request, event, tags) => log(event, tags, request))
 
     // Log all request responses in development mode
     if (config.isDev) {
       server.events.on('response', (request) => {
         if (request.response && !['file', 'stream'].includes(request.response.variety)) {
-          console.log(request.info.id)
-          console.log(`${request.method.toUpperCase()} ${request.path}${request.url.search || ''} ${request.response.statusCode}`)
-          if (request.payload) {
-            console.log(request.payload)
-          }
+          const { id, path, payload } = getRequestInfo(request)
+          console.log(id, path, payload)
         }
       })
     }
