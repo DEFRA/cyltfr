@@ -17,26 +17,52 @@ const stringify = (data) => {
   }
 }
 
-const log = (event, tags) => {
+const getRequestInfo = (request) => {
+  const response = request.response
+  const payload = request.payload
+  const id = request.info && request.info.id
+  const method = request.method.toUpperCase()
+  const code = response && response.output && response.output.statusCode
+  const path = `${method} ${request.path}${request.url.search || ''} ${code}`
+  return { id, path, payload }
+}
+
+const log = (event, tags, request) => {
   if (tags.error) {
     const message = stringify(event.error || event.data)
-    console.error(`Server error: ${message || 'unknown'}`, event.tags.join(', '))
+
+    if (request) {
+      const { id, path, payload } = getRequestInfo(request)
+      console.error(`Server request error: ${message}`, event.tags.join(', '), id, path, payload)
+    } else {
+      console.error(`Server error: ${message}`, event.tags.join(', '))
+    }
   } else {
     const message = stringify(event.data)
-    console.log(`Server log: ${message || 'unknown'}`, event.tags.join(', '))
+    console.log(`Server log: ${message}`, event.tags.join(', '))
   }
 }
 
 module.exports = {
   name: 'logging',
   register: (server, options) => {
-    server.events.on('log', log)
-    server.events.on('request', (request, event, tags) => log(event, tags))
+    // Write `server.log()` calls to the console
+    server.events.on({
+      name: 'log',
+      channels: ['app']
+    }, log)
 
+    // Write `request.log()` calls to the console
+    server.events.on({
+      name: 'request',
+      channels: ['error', 'app']
+    }, (request, event, tags) => log(event, tags, request))
+
+    // Log all request responses in development mode
     if (config.isDev) {
       server.events.on('response', (request) => {
-        // `Response sent for request: ${request.info.id}`, request.info.remoteAddress + ': ' +
-        console.log(request.method.toUpperCase() + ' ' + request.path + ' ' + request.response.statusCode)
+        const { id, path, payload } = getRequestInfo(request)
+        console.log(id, path, payload)
       })
     }
   }
