@@ -18,6 +18,19 @@
         </h1>
         <h2 class="govuk-heading-m">{{ address.address }}</h2>
 
+        <!-- Holding Comments -->
+        {% if hasHoldingComments %}
+        <div class="govuk-warning-text">
+          <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+          <strong class="govuk-warning-text__text">
+            <span class="govuk-warning-text__assistive">Warning</span>
+            {% for comment in holdingComments %}
+            <div class={{ "govuk-!-margin-bottom-4" if not loop.last }}>{{ comment }}</div>
+            {% endfor %}
+          </strong>
+        </div>
+        {% endif %}
+
         <!-- Rivers and sea and surface water -->
         {% include firstSource %}
         {% include secondSource %}
@@ -76,15 +89,6 @@
         {% endif %}
 
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-        {% endif %}
-
-        <!-- Holding Comments -->
-        {% if hasHoldingComments %}
-        <ul class="govuk-list">
-          {% for comment in holdingComments %}
-          <li>{{ comment }}</li>
-          {% endfor %}
-        </ul>
         {% endif %}
 
         <br>
