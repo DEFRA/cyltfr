@@ -40,8 +40,10 @@ module.exports = {
     relativeTo: __dirname,
     isCached: !config.isDev,
     context: {
+      appStage: config.env,
       appVersion: pkg.version,
       assetPath: '/assets',
+      serviceRef: 'LTF-Admin',
       serviceName: 'LTFRI Admin Console',
       pageTitle: 'LTFRI Admin Console - EA.GOV.UK',
       analyticsAccount: analyticsAccount

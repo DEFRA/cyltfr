@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
+
+{% set bodyClasses = "internal" %}
+{% set pageTitle = "Holding comment guidance" %}
+
+{% block body %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p class="govuk-body">The holding comment should:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>cover a specific geographic area</li>
+        <li>provide additional information that supersedes the mapping</li>
+        <li>be time-bound for a temporary period</li>
+      </ul>
+      <p class="govuk-body">
+        The information you provide is yours to own via your normal custodianship for local flood information.
+      </p>
+      {{ govukWarningText({
+        text: "Do not upload any personal data to the holding comment",
+        iconFallbackText: "Warning"
+      }) }}
+      <p class="govuk-body"><strong>Guidance for writing content on GOV.UK</strong></p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>Use plain English. Read words to <a class="govuk-link" target="_blank" href="https://www.gov.uk/guidance/style-guide/a-to-z-of-gov-uk-style#words-to-avoid">avoid</a></li>
+        <li>Write short clear sentences</li>
+        <li>You can use technical terms but you must explain them</li>
+        <li>Avoid abbreviations and acronyms</li>
+        <li>Do not write blocks of text in capitals</li>
+        <li>Write dates like this: 4 June 2017</li>
+        <li>Use ‘to’ in date ranges rather than -</li>
+        <li>Avoid negative contractions</li>
+        <li>Avoid ampersands, use ‘and’</li>
+        <li>Numbers: generally use numerals but there are <a class="govuk-link" target="_blank"
+          href="https://www.gov.uk/guidance/style-guide/a-to-z-of-gov-uk-style">exceptions</a></li>
+      </ul>
+      <p class="govuk-body">For further guidance read:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li><a class="govuk-link" target="_blank"
+          href="https://www.gov.uk/guidance/content-design/writing-for-gov-uk#contractions">Writing for GOV.UK</a></li>
+        <li><a class="govuk-link"  target="_blank"
+          href="https://www.gov.uk/guidance/style-guide/a-to-z-of-gov-uk-style">Government Digital Service style guide</a></li>
+      </ul>
+    </div>
+  </div>
+{% endblock %}
