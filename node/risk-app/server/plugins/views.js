@@ -37,6 +37,7 @@ module.exports = {
       appVersion: pkg.version,
       mountPath: config.mountPath,
       assetPath: `/${config.mountPath}/assets`,
+      serviceRef: 'LTF-App',
       serviceName: 'Long term flood risk information',
       serviceUrl: `/${config.mountPath}/`,
       homepageUrl: '/',
