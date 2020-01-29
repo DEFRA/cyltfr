@@ -1,33 +1,35 @@
 ;(function () {
   var React = window.React
 
-  var textareaWidget = (props) => {
+  var textareaWidget = function (props) {
     var p = {
       rows: 5,
       id: props.id,
       value: props.value,
       required: props.required,
+      maxLength: props.schema.maxLength,
       className: 'govuk-textarea',
-      onChange: (event) => props.onChange(event.target.value)
+      onChange: function (event) { props.onChange(event.target.value) }
     }
 
     return React.createElement('textarea', p)
   }
 
-  var inputWidget = (props) => {
+  var inputWidget = function (props) {
     var p = {
       type: props.type || 'text',
       id: props.id,
       className: 'govuk-input govuk-input--width-20',
       value: props.value,
       required: props.required,
-      onChange: (event) => props.onChange(event.target.value)
+      maxLength: props.schema.maxLength,
+      onChange: function (event) { props.onChange(event.target.value) }
     }
 
     return React.createElement('input', p)
   }
 
-  var dateWidget = (props) => {
+  var dateWidget = function (props) {
     props.type = 'date'
     return inputWidget(props)
   }
@@ -41,7 +43,8 @@
         properties: {
           name: {
             type: 'string',
-            title: 'Description'
+            title: 'Description',
+            maxLength: 75
           },
           features: {
             type: 'array',
@@ -72,17 +75,18 @@
                         'Completed schemes',
                         'Flood action plan',
                         'Other info'
-                      ]
+                      ],
+                      maxLength: 150
                     },
                     start: {
                       type: 'string',
                       format: 'date',
-                      title: 'Start date'
+                      title: 'Valid from'
                     },
                     end: {
                       type: 'string',
                       format: 'date',
-                      title: 'End date'
+                      title: 'Valid to'
                     }
                   }
                 }
@@ -94,7 +98,8 @@
       uiSchema: {
         name: {
           'ui:widget': inputWidget,
-          classNames: 'govuk-form-group info'
+          classNames: 'govuk-form-group name',
+          'ui:description': 'A description for internal reference'
         },
         features: {
           'ui:options': {
@@ -112,15 +117,20 @@
               },
               info: {
                 'ui:widget': isHoldingComment ? textareaWidget : 'radio',
-                classNames: 'govuk-form-group info'
+                classNames: 'govuk-form-group info',
+                'ui:description': isHoldingComment
+                  ? 'The comment text will display to public users in this geometry. Ensure you have read the guidance statement. The maximum number of characters is 150.'
+                  : 'The report will display to public users in this geometry.'
               },
               start: {
                 'ui:widget': dateWidget,
-                classNames: 'govuk-form-group start'
+                classNames: 'govuk-form-group start',
+                'ui:description': 'For internal reference. This date is not displayed to public users or control the duration that the comment is displayed for. If a date picker is not avaliable, use the format YYYY-MM-DD'
               },
               end: {
                 'ui:widget': dateWidget,
-                classNames: 'govuk-form-group end'
+                classNames: 'govuk-form-group end',
+                'ui:description': 'This date is not displayed to public users or control the duration that the comment is displayed for. If a date picker is not avaliable, use the format YYYY-MM-DD'
               }
             }
           }
@@ -132,7 +142,7 @@
   }
 
   function ArrayFieldTemplate (props) {
-    return React.createElement('div', null, props.items.map(el => {
+    return React.createElement('div', null, props.items.map(function (el) {
       var item = React.createElement('div', {
         id: 'item_' + el.index,
         className: 'array-item'

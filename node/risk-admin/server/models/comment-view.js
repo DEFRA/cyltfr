@@ -31,8 +31,8 @@ class CommentView {
     this.viewCommentData = {
       head: [
         { text: 'Comment' },
-        { text: 'Start' },
-        { text: 'End' },
+        { text: 'Valid from' },
+        { text: 'Valid to' },
         { text: '' }
       ],
       rows: geometry.features.map((f, i) => ([

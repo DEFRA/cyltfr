@@ -2,8 +2,8 @@ const joi = require('@hapi/joi')
 
 // Define config schema
 const schema = joi.object().keys({
+  env: joi.string().valid('dev', 'test', 'prod-green', 'prod-blue').default('dev'),
   port: joi.number().default(3000),
-  env: joi.string().valid('dev', 'tst', 'pre', 'prd').default('dev'),
   adClientId: joi.string().required(),
   adClientSecret: joi.string().required(),
   adTenant: joi.string().required(),
@@ -19,8 +19,8 @@ const schema = joi.object().keys({
 
 // Build config
 const config = {
-  port: process.env.PORT,
   env: process.env.NODE_ENV,
+  port: process.env.PORT,
   adClientId: process.env.AD_CLIENT_ID,
   adClientSecret: process.env.AD_CLIENT_SECRET,
   adTenant: process.env.AD_TENANT,
@@ -44,6 +44,7 @@ if (error) {
 
 // Add some helper props
 value.isDev = value.env === 'dev'
-value.isProd = value.env === 'prd'
+value.isTest = value.env === 'test'
+value.isProd = value.env.startsWith('prod-')
 
 module.exports = value
