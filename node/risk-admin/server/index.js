@@ -1,5 +1,7 @@
 const hapi = require('@hapi/hapi')
+const schedule = require('node-schedule')
 const config = require('./config')
+const { processManifest } = require('./services')
 
 async function createServer () {
   // Create the hapi server
@@ -55,11 +57,8 @@ async function createServer () {
       Provider: require('./providers/s3')
     }
   })
-
-  if (config.isDev) {
-    await server.register(require('blipp'))
-    await server.register(require('./plugins/logging'))
-  }
+  await server.register(require('blipp'))
+  await server.register(require('./plugins/logging'))
 
   server.ext('onPostHandler', (request, h) => {
     const response = request.response
@@ -80,6 +79,16 @@ async function createServer () {
       response.source.context = ctx
     }
     return h.continue
+  })
+
+  schedule.scheduleJob('0 * * * *', async () => {
+    const output = []
+
+    const result = await processManifest(server.provider, (...args) => {
+      output.push(args)
+    })
+
+    server.log(['load'], { result, output })
   })
 
   return server

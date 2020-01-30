@@ -1,6 +1,6 @@
 {
   "name": "risk-admin",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "LTFRI Admin Web App",
   "main": "index.js",
   "scripts": {
@@ -17,31 +17,31 @@
   "author": "defra.gov.uk",
   "license": "ISC",
   "dependencies": {
-    "@hapi/bell": "11.1.0",
-    "@hapi/boom": "8.0.1",
-    "@hapi/cookie": "10.1.2",
-    "@hapi/good": "8.2.4",
-    "@hapi/good-console": "8.1.2",
-    "@hapi/good-squeeze": "5.2.1",
-    "@hapi/hapi": "18.4.0",
-    "@hapi/inert": "5.2.2",
-    "@hapi/joi": "16.1.8",
-    "@hapi/vision": "5.5.4",
-    "@hapi/wreck": "16.0.1",
-    "aws-sdk": "2.586.0",
+    "@hapi/bell": "12.0.0",
+    "@hapi/boom": "9.0.0",
+    "@hapi/cookie": "11.0.0",
+    "@hapi/hapi": "19.0.5",
+    "@hapi/inert": "6.0.1",
+    "@hapi/joi": "17.1.0",
+    "@hapi/vision": "6.0.0",
+    "aws-sdk": "2.610.0",
     "blipp": "4.0.1",
-    "govuk-frontend": "3.4.0",
-    "https-proxy-agent": "3.0.1",
+    "govuk-frontend": "3.5.0",
     "moment-timezone": "0.5.27",
-    "node-sass": "4.13.0",
+    "node-sass": "4.13.1",
+    "node-schedule": "1.3.2",
     "nunjucks": "3.2.0",
-    "ogr2ogr": "^1.4.0",
-    "sinon": "7.5.0"
+    "ogr2ogr": "1.5.0"
   },
   "devDependencies": {
-    "@hapi/code": "7.0.0",
-    "@hapi/lab": "21.0.0",
-    "codeclimate-test-reporter": "0.5.1",
+    "@hapi/code": "8.0.1",
+    "@hapi/lab": "22.0.3",
     "standard": "14.3.1"
+  },
+  "standard": {
+    "ignore": [
+      "server/public/build/js",
+      "server/public/static/js/vendor"
+    ]
   }
 }

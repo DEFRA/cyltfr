@@ -9,7 +9,13 @@
   <div class="govuk-body">
     {{ govukTable(table) }}
     <!-- <pre>{{comments | dump(2) | safe}}</pre> -->
-    <a href="/comment/create/holding" class="govuk-button">Create holding comment</a>
-    <a href="/comment/create/llfa" class="govuk-button">Create LLFA comment</a>
+    <p>
+      <a href="/comment/create/holding" class="govuk-button">Create PSO comment</a>
+      For PSO users wanting to add local information
+    </p>
+    <p>
+      <a href="/comment/create/llfa" class="govuk-button">Create LLFA comment</a>
+      For national teams adding non-modelled surface water information
+    </p>
   </div>
 {% endblock %}
