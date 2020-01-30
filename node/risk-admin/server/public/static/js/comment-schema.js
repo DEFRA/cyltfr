@@ -99,7 +99,7 @@
         name: {
           'ui:widget': inputWidget,
           classNames: 'govuk-form-group name',
-          'ui:description': 'A description for internal reference'
+          'ui:description': 'For internal use, to describe the comments that you are uploading. This will not be displayed to public users.'
         },
         features: {
           'ui:options': {
@@ -119,18 +119,18 @@
                 'ui:widget': isHoldingComment ? textareaWidget : 'radio',
                 classNames: 'govuk-form-group info',
                 'ui:description': isHoldingComment
-                  ? 'The comment text will display to public users in this geometry. Ensure you have read the guidance statement. The maximum number of characters is 150.'
-                  : 'The report will display to public users in this geometry.'
+                  ? 'The comment text will display to public users in this geometry. Read ‘comment guidance’ before writing or pasting anything. The maximum number of characters is 150.'
+                  : 'The report text will display to public users in this geometry.'
               },
               start: {
                 'ui:widget': dateWidget,
                 classNames: 'govuk-form-group start',
-                'ui:description': 'For internal reference. This date is not displayed to public users or control the duration that the comment is displayed for. If a date picker is not avaliable, use the format YYYY-MM-DD'
+                'ui:description': 'For internal use and will not be displayed to public users. If a date picker is not available, use YYYY-MM-DD.'
               },
               end: {
                 'ui:widget': dateWidget,
                 classNames: 'govuk-form-group end',
-                'ui:description': 'This date is not displayed to public users or control the duration that the comment is displayed for. If a date picker is not avaliable, use the format YYYY-MM-DD'
+                'ui:description': 'For your reference and will not be displayed to public users. The comments will not be removed automatically. It is your responsibility to remove them on the ‘valid to’ date. If a date picker is not available, use YYYY-MM-DD.'
               }
             }
           }
