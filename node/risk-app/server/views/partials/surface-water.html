@@ -5,19 +5,22 @@
   </div>
 
   <details class="govuk-details" data-module="govuk-details">
-    <summary class="govuk-details__summary">
+    <summary class="govuk-details__summary" data-journey-click="ltfri:risk:surface-water-details">
       <span class="govuk-details__summary-text">What this information means</span>
     </summary>
     <div class="govuk-details__text">
+      <p class="govuk-body">
+        This flood risk summary reports the highest risk from surface water within a 20m radius of this property.
+      </p>
       <p class="govuk-body risk-description">
         {{ surfaceWaterText }}
       </p>
       {% if surfaceWaterSuitabilityName %}
-        {% include surfaceWaterSuitabilityName %}
+      {% include surfaceWaterSuitabilityName %}
       {% endif %}
     </div>
   </details>
-    
+
   <p class="govuk-body">
     Surface water flooding, sometimes known as flash flooding:
   </p>
@@ -30,7 +33,8 @@
   </ul>
 
   <p class="govuk-body">
-    Lead local flood authorities (LLFA) are responsible for managing the flood risk from surface water{% if not hasLlfaComments %} and may hold more detailed information{% endif %}.
+    Lead local flood authorities (LLFA) are responsible for managing the flood risk from surface
+    water{% if not hasLlfaComments %} and may hold more detailed information{% endif %}.
 
     <!-- LLFA -->
     {% if leadLocalFloodAuthority %}
@@ -39,20 +43,21 @@
 
       <!-- LLFA Comments -->
       {% if hasLlfaComments %}
-        They have the following information about surface water flooding:
-        <ul class="govuk-list govuk-list--bullet">
+      They have the following information about surface water flooding:
+      <ul class="govuk-list govuk-list--bullet">
         {% for comment in llfaComments %}
-          <li>{{ comment }}</li>
+        <li>{{ comment }}</li>
         {% endfor %}
-        </ul>
+      </ul>
       {% endif %}
-      
+
     </p>
     {% endif %}
   </p>
 
   <p class="govuk-body">
-    <a class="govuk-link" href="/{{ mountPath }}/map?easting={{easting}}&northing={{northing}}&address={{address.uprn}}&map=SurfaceWater">
+    <a class="govuk-link"
+      href="/{{ mountPath }}/map?easting={{easting}}&northing={{northing}}&address={{address.uprn}}&map=SurfaceWater">
       View a map of the risk of flooding from surface water
     </a>
   </p>

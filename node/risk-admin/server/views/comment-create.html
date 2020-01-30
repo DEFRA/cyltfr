@@ -13,13 +13,14 @@
           id: "geometry",
           name: "geometry",
           label: {
-            text: "Choose a shapefile"
+            text: "Choose a shapefile (.ZIP)"
           },
           attributes: {
             accept: "application/zip",
             required: "required"
           }
         }) }}
+        <img id="spinner" class="loader" alt="loading" src="/assets/images/loading.gif" style="display: none;" />
       </div>
       <div id="map"></div>
       <div id="root"></div>
