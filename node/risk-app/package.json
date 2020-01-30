@@ -1,6 +1,6 @@
 {
   "name": "risk-app",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Long term flood risk information",
   "main": "index.js",
   "scripts": {
@@ -19,23 +19,21 @@
     "@hapi/boom": "9.0.0",
     "@hapi/catbox-redis": "5.0.5",
     "@hapi/h2o2": "9.0.1",
-    "@hapi/hapi": "19.0.3",
+    "@hapi/hapi": "19.0.5",
     "@hapi/inert": "6.0.1",
-    "@hapi/joi": "17.0.2",
+    "@hapi/joi": "17.1.0",
     "@hapi/vision": "6.0.0",
     "@hapi/wreck": "17.0.0",
     "blipp": "4.0.1",
-    "govuk-frontend": "3.4.0",
+    "govuk-frontend": "3.5.0",
     "hapi-rate-limit": "4.1.0",
-    "http-proxy-agent": "3.0.0",
     "https-proxy-agent": "4.0.0",
     "nunjucks": "3.2.0"
   },
   "devDependencies": {
     "@hapi/code": "8.0.1",
     "@hapi/lab": "22.0.3",
-    "codeclimate-test-reporter": "0.5.1",
-    "node-sass": "4.13.0",
+    "node-sass": "4.13.1",
     "standard": "14.3.1"
   },
   "standard": {
