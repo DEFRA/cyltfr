@@ -1,0 +1,15 @@
+This is a code and database script release.
+
+Webops Instructions
+-------------------
+
+Database Instructions
+...
+
+
+A full code build needs to be performed as normal.
+
+This release sees the introduction of the new LTF-ADMIN application
+which will also need to be deploying to the production environment.
+
+
