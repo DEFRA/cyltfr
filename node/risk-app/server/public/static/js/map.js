@@ -203,13 +203,13 @@ function loadMap (point) {
       // Get the overlay content html using the template
       var html = overlayTemplate(viewModel)
 
-      // update the content
+      // Update the content
       $overlayContent.html(html)
 
       // Show the overlay
       $overlay.show()
 
-      // GOVUK.performance.sendGoogleAnalyticsEvent('ltfri', 'map', 'risk-type-legend-' + id)
+      window.GOVUK.performance.sendGoogleAnalyticsEvent('ltfri', 'map', 'risk-type-legend-' + id)
     })
 
     // Map interaction functions
@@ -328,7 +328,7 @@ function loadMap (point) {
         $overlay.show()
 
         if (viewModel.isRiskDescription) {
-          // GOVUK.performance.sendGoogleAnalyticsEvent('ltfri', 'map', 'risk-type-map-' + viewModel.id)
+          window.GOVUK.performance.sendGoogleAnalyticsEvent('ltfri', 'map', 'risk-type-map-' + viewModel.id)
         }
       })
     })

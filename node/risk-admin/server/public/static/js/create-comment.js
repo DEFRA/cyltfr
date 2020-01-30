@@ -6,6 +6,7 @@
   var FormData = window.FormData
   var fetch = window.fetch
   var commentMap = window.LTFMGMT.commentMap
+  var spinner = document.getElementById('spinner')
   var fileInput = document.getElementById('geometry')
 
   var type = window.LTFMGMT.type
@@ -24,10 +25,15 @@
 
     formData.append('geometry', fileInput.files[0])
 
+    fileInput.style.display = 'none'
+    spinner.style.display = 'inline'
+
     fetch('/shp2json/' + type, {
       method: 'post',
       body: formData
     }).then(function (response) {
+      spinner.style.display = 'none'
+
       if (!response.ok) {
         throw new Error(response.statusText)
       }
@@ -87,7 +93,7 @@
       })
 
       if (response.features.length > 1) {
-        commentMap(response, 'map')
+        commentMap(response, 'map', 'The map below shows all geometries contained within the shapefile')
       }
     }).catch(function (err) {
       console.error(err)

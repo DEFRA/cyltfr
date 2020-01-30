@@ -3,7 +3,7 @@ const config = require('../config/server.json')
 
 // Define config schema
 const schema = joi.object().keys({
-  env: joi.string().valid('dev', 'test', 'prod'),
+  env: joi.string().valid('dev', 'test', 'prod-green', 'prod-blue'),
   host: joi.string().hostname().required(),
   port: joi.number().required(),
   geoserverUrl: joi.string().uri().required(),
@@ -47,7 +47,7 @@ const value = result.value
 // Add some helper props
 value.isDev = value.env === 'dev'
 value.isTest = value.env === 'test'
-value.isProd = value.env === 'prod'
+value.isProd = value.env.startsWith('prod-')
 
 console.log('Server config', value)
 

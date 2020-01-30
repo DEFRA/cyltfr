@@ -55,6 +55,6 @@
   })
 
   if (geometry.features.length > 1) {
-    commentMap(geometry, 'map')
+    commentMap(geometry, 'map', 'The map below shows all geometries contained within the shapefile')
   }
 })()

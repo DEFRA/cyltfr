@@ -50,7 +50,8 @@ module.exports = {
       maxBytes: 209715200,
       output: 'file',
       parse: true,
-      allow: 'multipart/form-data'
+      allow: 'multipart/form-data',
+      multipart: true
     },
     validate: {
       params: joi.object().keys({

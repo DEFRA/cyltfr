@@ -1,6 +1,6 @@
 {
   "name": "risk-service",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Flood Service",
   "main": "index.js",
   "scripts": {
@@ -14,15 +14,14 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/boom": "9.0.0",
-    "@hapi/hapi": "19.0.3",
-    "@hapi/joi": "17.0.2",
+    "@hapi/hapi": "19.0.5",
+    "@hapi/joi": "17.1.0",
     "pg": "7.17.1"
   },
   "devDependencies": {
     "@hapi/code": "8.0.1",
     "@hapi/lab": "22.0.3",
     "blipp": "4.0.1",
-    "codeclimate-test-reporter": "0.5.1",
     "standard": "14.3.1"
   }
 }
