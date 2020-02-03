@@ -57,8 +57,8 @@ async function createServer () {
       Provider: require('./providers/s3')
     }
   })
-  await server.register(require('blipp'))
   await server.register(require('./plugins/logging'))
+  await server.register(require('blipp'))
 
   server.ext('onPostHandler', (request, h) => {
     const response = request.response

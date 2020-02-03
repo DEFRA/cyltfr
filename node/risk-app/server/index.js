@@ -34,19 +34,7 @@ async function createServer () {
   await server.register(require('./plugins/rate-limit'))
   await server.register(require('./plugins/error-pages'))
   await server.register(require('./plugins/full-url'))
-  // await server.register(require('./plugins/logging'))
-  await server.register({
-    plugin: require('hapi-pino'),
-    options: {
-      prettyPrint: config.isDev,
-      level: config.isDev ? 'debug' : 'warn',
-      redact: {
-        paths: ['req.headers', 'res.headers'],
-        remove: true
-      }
-    }
-  })
-
+  await server.register(require('./plugins/logging'))
   await server.register(require('blipp'))
 
   if (config.mockAddressService) {
