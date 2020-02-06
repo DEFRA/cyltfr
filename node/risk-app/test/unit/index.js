@@ -1238,7 +1238,7 @@ lab.experiment('Unit', () => {
     riskStub.revert()
   })
 
-  lab.test('400 for unknown query parameter', async () => {
+  lab.test('400 for missing expected query parameter', async () => {
     const options = {
       method: 'GET',
       url: mountPath + '/search?test=test'
@@ -1246,5 +1246,15 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(400)
+  })
+
+  lab.test('Accept & strip unknown query parameters', async () => {
+    const options = {
+      method: 'GET',
+      url: mountPath + '/search?postcode=CW8%204BH&a=b'
+    }
+
+    const response = await server.inject(options)
+    Code.expect(response.statusCode).to.equal(200)
   })
 })

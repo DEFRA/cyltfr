@@ -42,7 +42,7 @@ module.exports = {
 
       return geojson
     } catch (err) {
-      return boom.badRequest(err.message)
+      return boom.badRequest(err.message, err)
     }
   },
   options: {
