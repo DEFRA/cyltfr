@@ -552,7 +552,7 @@
             <a href="#server/plugins/log-errors.js"><span class="dirname">server/plugins/</span><span class="basename">log-errors.js</span></a>
         </li>
         <li class="">
-            <span class="cov medium">57.63</span>
+            <span class="cov high">88.89</span>
             <a href="#server/plugins/logging.js"><span class="dirname">server/plugins/</span><span class="basename">logging.js</span></a>
         </li>
         <li class="">
@@ -583,7 +583,7 @@
           <div class="failures">0</div>
           <div class="skipped">0</div>
           <div class="test-count">1</div>
-          <div class="duration">470</div>
+          <div class="duration">812</div>
       </div>
       <div id="filters">
           <input type="checkbox" checked="" onchange="filter(this)" value="success" id="show-success">
@@ -608,7 +608,7 @@
               <td class="test-title">Integration /floodrisk/391416/102196/20
                   
               </td>
-              <td class="test-duration">277</td>
+              <td class="test-duration">498</td>
           </tr>
           </tbody>
       </table>
@@ -616,10 +616,10 @@
     </div>    <div id="coverage">
         <h1>Code Coverage Report</h1>
         <div class="stats high">
-            <div class="percentage">79.32%</div>
-            <div class="sloc">266</div>
-            <div class="hits">211</div>
-            <div class="misses">55</div>
+            <div class="percentage">85.65%</div>
+            <div class="sloc">216</div>
+            <div class="hits">185</div>
+            <div class="misses">31</div>
         </div>
         <div id="filters">
           <input type="checkbox" checked="" onchange="filter(this)" value="generated" id="show-generated">
@@ -1322,11 +1322,11 @@
             </div>
             <div class="file ">
                 <h2 id="server/plugins/logging.js">server/plugins/logging.js </h2>
-                <div class="stats medium">
-                    <div class="percentage">57.63%</div>
-                    <div class="sloc">59</div>
-                    <div class="hits">34</div>
-                    <div class="misses">25</div>
+                <div class="stats high">
+                    <div class="percentage">88.89%</div>
+                    <div class="sloc">9</div>
+                    <div class="hits">8</div>
+                    <div class="misses">1</div>
                 </div>
                 <table>
                     <thead>
@@ -1355,406 +1355,52 @@
                           <td class="line" data-tooltip>3</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip>1</td>
-                          <td class="source">const stringify &#x3D; (data) &#x3D;&gt; {</td>
+                          <td class="source">module.exports &#x3D; {</td>
                           
-                        </tr>            <tr id="server/plugins/logging.js__4" class="chunks">
+                        </tr>            <tr id="server/plugins/logging.js__4" class="hit">
                           <td class="line" data-tooltip>4</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"><div>  </div><div class="miss never" data-tooltip>try {</div></td>
+                          <td class="source">  plugin: require(&#x27;hapi-pino&#x27;),</td>
                           
-                        </tr>            <tr id="server/plugins/logging.js__5" class="miss">
+                        </tr>            <tr id="server/plugins/logging.js__5" class="hit">
                           <td class="line" data-tooltip>5</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>    if (!data) {</td>
+                          <td class="source">  options: {</td>
                           
-                        </tr>            <tr id="server/plugins/logging.js__6" class="miss">
+                        </tr>            <tr id="server/plugins/logging.js__6" class="hit">
                           <td class="line" data-tooltip>6</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>      return &#x27;Unknown error&#x27;</td>
+                          <td class="source">    logPayload: true,</td>
                           
-                        </tr>            <tr id="server/plugins/logging.js__7" class="miss">
+                        </tr>            <tr id="server/plugins/logging.js__7" class="hit">
                           <td class="line" data-tooltip>7</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>    } else if (data.stack) {</td>
+                          <td class="source">    prettyPrint: config.isDev,</td>
                           
-                        </tr>            <tr id="server/plugins/logging.js__8" class="miss">
+                        </tr>            <tr id="server/plugins/logging.js__8" class="chunks">
                           <td class="line" data-tooltip>8</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>      return JSON.stringify(data, Object.getOwnPropertyNames(data))</td>
+                          <td class="source"><div>    level: </div><div class="miss true" data-tooltip>config.isDev</div><div> ? &#x27;debug&#x27; : </div><div class="miss never" data-tooltip>&#x27;warn&#x27;</div></td>
                           
-                        </tr>            <tr id="server/plugins/logging.js__9" class="miss">
+                        </tr>            <tr id="server/plugins/logging.js__9" class="hit">
                           <td class="line" data-tooltip>9</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>    } else if (typeof data &#x3D;&#x3D;&#x3D; &#x27;object&#x27;) {</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__10" class="miss">
-                          <td class="line" data-tooltip>10</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>      return JSON.stringify(data)</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__11" class="hit">
-                          <td class="line" data-tooltip>11</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">    } else {</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__12" class="miss">
-                          <td class="line" data-tooltip>12</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>      return data.toString ? data.toString() : &#x27;&#x27;</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__13" class="hit">
-                          <td class="line" data-tooltip>13</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">    }</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__14" class="hit">
-                          <td class="line" data-tooltip>14</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">  } catch (err) {</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__15" class="miss">
-                          <td class="line" data-tooltip>15</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>    console.error(&#x27;Failed to stringify&#x27;, err)</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__16" class="miss">
-                          <td class="line" data-tooltip>16</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>    return data.toString ? data.toString() : &#x27;&#x27;</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__17" class="chunks">
-                          <td class="line" data-tooltip>17</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"><div class="miss never" data-tooltip>  }</div></td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__18" class="hit">
-                          <td class="line" data-tooltip>18</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">}</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__19" class="hit">
-                          <td class="line" data-tooltip>19</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__20" class="hit">
-                          <td class="line" data-tooltip>20</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">const getRequestInfo &#x3D; (request) &#x3D;&gt; {</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__21" class="hit">
-                          <td class="line" data-tooltip>21</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">  const response &#x3D; request.response</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__22" class="hit">
-                          <td class="line" data-tooltip>22</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">  const payload &#x3D; request.payload</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__23" class="chunks">
-                          <td class="line" data-tooltip>23</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"><div>  const id &#x3D; </div><div class="miss true" data-tooltip>request.info</div><div> &amp;&amp; request.info.id</div></td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__24" class="hit">
-                          <td class="line" data-tooltip>24</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">  const method &#x3D; request.method.toUpperCase()</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__25" class="chunks">
-                          <td class="line" data-tooltip>25</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"><div>  const code &#x3D; </div><div class="miss true" data-tooltip>response</div><div> &amp;&amp; </div><div class="miss false" data-tooltip>response.output</div><div> &amp;&amp; </div><div class="miss never" data-tooltip>response.output.statusCode</div></td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__26" class="chunks">
-                          <td class="line" data-tooltip>26</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"><div>  const path &#x3D; &#x60;${method} ${request.path}${</div><div class="miss false" data-tooltip>request.url.search</div><div> || &#x27;&#x27;} ${code}&#x60;</div></td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__27" class="hit">
-                          <td class="line" data-tooltip>27</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">  return { id, path, payload }</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__28" class="hit">
-                          <td class="line" data-tooltip>28</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">}</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__29" class="hit">
-                          <td class="line" data-tooltip>29</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__30" class="hit">
-                          <td class="line" data-tooltip>30</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">const log &#x3D; (event, tags, request) &#x3D;&gt; {</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__31" class="chunks">
-                          <td class="line" data-tooltip>31</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"><div>  </div><div class="miss never" data-tooltip>if (tags.error) {</div></td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__32" class="miss">
-                          <td class="line" data-tooltip>32</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>    const message &#x3D; stringify(event.error || event.data)</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__33" class="hit">
-                          <td class="line" data-tooltip>33</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__34" class="miss">
-                          <td class="line" data-tooltip>34</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>    if (request) {</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__35" class="miss">
-                          <td class="line" data-tooltip>35</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>      const { id, path, payload } &#x3D; getRequestInfo(request)</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__36" class="miss">
-                          <td class="line" data-tooltip>36</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>      console.error(&#x60;Server request error: ${message}&#x60;, event.tags.join(&#x27;, &#x27;), id, path, payload)</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__37" class="hit">
-                          <td class="line" data-tooltip>37</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">    } else {</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__38" class="miss">
-                          <td class="line" data-tooltip>38</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>      console.error(&#x60;Server error: ${message}&#x60;, event.tags.join(&#x27;, &#x27;))</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__39" class="hit">
-                          <td class="line" data-tooltip>39</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">    }</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__40" class="hit">
-                          <td class="line" data-tooltip>40</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">  } else {</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__41" class="miss">
-                          <td class="line" data-tooltip>41</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>    const message &#x3D; stringify(event.data)</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__42" class="miss">
-                          <td class="line" data-tooltip>42</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>    console.log(&#x60;Server log: ${message}&#x60;, event.tags.join(&#x27;, &#x27;))</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__43" class="chunks">
-                          <td class="line" data-tooltip>43</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"><div class="miss never" data-tooltip>  }</div></td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__44" class="hit">
-                          <td class="line" data-tooltip>44</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">}</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__45" class="hit">
-                          <td class="line" data-tooltip>45</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__46" class="hit">
-                          <td class="line" data-tooltip>46</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">module.exports &#x3D; {</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__47" class="hit">
-                          <td class="line" data-tooltip>47</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">  name: &#x27;logging&#x27;,</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__48" class="hit">
-                          <td class="line" data-tooltip>48</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">  register: (server, options) &#x3D;&gt; {</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__49" class="hit">
-                          <td class="line" data-tooltip>49</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">    // Write &#x60;server.log()&#x60; calls to the console</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__50" class="hit">
-                          <td class="line" data-tooltip>50</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">    server.events.on({</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__51" class="hit">
-                          <td class="line" data-tooltip>51</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">      name: &#x27;log&#x27;,</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__52" class="hit">
-                          <td class="line" data-tooltip>52</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">      channels: [&#x27;app&#x27;]</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__53" class="hit">
-                          <td class="line" data-tooltip>53</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">    }, log)</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__54" class="hit">
-                          <td class="line" data-tooltip>54</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__55" class="hit">
-                          <td class="line" data-tooltip>55</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">    // Write &#x60;request.log()&#x60; calls to the console</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__56" class="hit">
-                          <td class="line" data-tooltip>56</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">    server.events.on({</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__57" class="hit">
-                          <td class="line" data-tooltip>57</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">      name: &#x27;request&#x27;,</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__58" class="hit">
-                          <td class="line" data-tooltip>58</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">      channels: [&#x27;error&#x27;, &#x27;app&#x27;]</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__59" class="chunks">
-                          <td class="line" data-tooltip>59</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"><div>    }, (request, event, tags) &#x3D;&gt; </div><div class="miss never" data-tooltip>log(event, tags, request)</div><div>)</div></td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__60" class="hit">
-                          <td class="line" data-tooltip>60</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__61" class="hit">
-                          <td class="line" data-tooltip>61</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">    // Log all request responses in development mode</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__62" class="chunks">
-                          <td class="line" data-tooltip>62</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"><div>    if (</div><div class="miss true" data-tooltip>config.isDev</div><div>) {</div></td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__63" class="hit">
-                          <td class="line" data-tooltip>63</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">      server.events.on(&#x27;response&#x27;, (request) &#x3D;&gt; {</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__64" class="hit">
-                          <td class="line" data-tooltip>64</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">        const { id, path, payload } &#x3D; getRequestInfo(request)</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__65" class="hit">
-                          <td class="line" data-tooltip>65</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">        console.log(id, path, payload)</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__66" class="hit">
-                          <td class="line" data-tooltip>66</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">      })</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__67" class="hit">
-                          <td class="line" data-tooltip>67</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">    }</td>
-                          
-                        </tr>            <tr id="server/plugins/logging.js__68" class="hit">
-                          <td class="line" data-tooltip>68</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
                           <td class="source">  }</td>
                           
-                        </tr>            <tr id="server/plugins/logging.js__69" class="hit">
-                          <td class="line" data-tooltip>69</td>
+                        </tr>            <tr id="server/plugins/logging.js__10" class="hit">
+                          <td class="line" data-tooltip>10</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
                           <td class="source">}</td>
                           
-                        </tr>            <tr id="server/plugins/logging.js__70" class="hit">
-                          <td class="line" data-tooltip>70</td>
+                        </tr>            <tr id="server/plugins/logging.js__11" class="hit">
+                          <td class="line" data-tooltip>11</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
                           <td class="source"></td>
