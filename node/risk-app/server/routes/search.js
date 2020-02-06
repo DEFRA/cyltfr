@@ -41,7 +41,7 @@ module.exports = [{
 
       return h.view('search', new SearchViewModel(postcode, addresses, null, warnings))
     } catch (err) {
-      return boom.badRequest(errors.addressByPostcode.message)
+      return boom.badRequest(errors.addressByPostcode.message, err)
     }
   },
   options: {
