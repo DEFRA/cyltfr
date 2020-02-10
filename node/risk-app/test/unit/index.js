@@ -1257,4 +1257,15 @@ lab.experiment('Unit', () => {
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
   })
+
+  lab.test('Ignore unknown cookies', async () => {
+    const options = {
+      method: 'GET',
+      url: mountPath + '/',
+      headers: { Cookie: 'some-token=<token>; HttpOnly; SameSite=Strict' }
+    }
+
+    const response = await server.inject(options)
+    Code.expect(response.statusCode).to.equal(200)
+  })
 })
