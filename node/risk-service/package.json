@@ -16,7 +16,7 @@
     "@hapi/boom": "9.0.0",
     "@hapi/hapi": "19.1.0",
     "@hapi/joi": "17.1.0",
-    "hapi-pino": "6.4.0",
+    "hapi-pino": "6.5.0",
     "pg": "7.18.1"
   },
   "devDependencies": {
