@@ -14,7 +14,10 @@ async function createServer () {
           stripUnknown: true
         }
       },
-      security: true
+      security: true,
+      state: {
+        parse: false
+      }
     },
     router: {
       stripTrailingSlash: true
