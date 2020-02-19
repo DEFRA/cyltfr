@@ -206,7 +206,7 @@
         {
           "ref": "Reservoirs_3-ROFR",
           "name": "Extent of flooding",
-          "title": "Extent of flooding from rerservoirs",
+          "title": "Extent of flooding from reservoirs",
           "legend": {
             "title": "Flood risk",
             "keys": [{
