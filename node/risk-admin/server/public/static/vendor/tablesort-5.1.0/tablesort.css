@@ -4,7 +4,8 @@ th[role=columnheader]:not(.no-sort) {
 
 th[role=columnheader]:not(.no-sort):after {
 	content: '';
-	float: right;
+	position: absolute;
+	margin-left: 3px;
 	margin-top: 7px;
 	border-width: 0 4px 4px;
 	border-style: solid;
