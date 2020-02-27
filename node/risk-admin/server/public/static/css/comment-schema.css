@@ -23,7 +23,7 @@ fieldset {
   float: left;
 }
 
-.govuk-form-group.name {
+.govuk-form-group.name, .govuk-form-group.boundary {
   float: none;
 }
 

@@ -9,9 +9,30 @@ class HomeView {
     })
 
     const loadedAtMapper = (field, row) => {
-      return row.lastError
-        ? { html: '<span class="error-text">Error</span>' }
-        : dateMapper(field, row)
+      if (row.lastError) {
+        return { html: '<span class="error-text">Error</span>' }
+      }
+
+      const { loadedAt } = row
+      if (loadedAt) {
+        return {
+          html: `<span title="Last loaded at ${formatDate(loadedAt, 'D/M/YYYY h:mma')}">✅</span>`,
+          attributes: { style: 'text-align: center;' }
+        }
+      }
+    }
+
+    const approvedMapper = (field, row) => {
+      const { approvedAt, approvedBy } = row
+
+      if (!approvedAt) {
+        return
+      }
+
+      return {
+        html: `<span title="Approved by ${approvedBy} at ${formatDate(approvedAt, 'D/M/YYYY h:mma')}">✅</span>`,
+        attributes: { style: 'text-align: center;' }
+      }
     }
 
     const fields = [
@@ -32,9 +53,10 @@ class HomeView {
       { name: 'featureCount', title: 'Number of features' },
       // { name: 'createdBy', title: 'Created by' },
       // { name: 'createdAt', title: 'Created at', mapper: dateMapper },
-      { name: 'approvedBy', title: 'Approved by' },
-      { name: 'approvedAt', title: 'Approved at', mapper: dateMapper },
-      { name: 'loadedAt', title: 'Last loaded at', mapper: loadedAtMapper }
+      { name: 'boundary', title: 'Boundary' },
+      // { name: 'approvedBy', title: 'Approved by' },
+      { name: 'approvedAt', title: 'Approved', mapper: approvedMapper },
+      { name: 'loadedAt', title: 'Loaded', mapper: loadedAtMapper }
     ]
 
     const head = fields.map(f => ({

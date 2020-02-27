@@ -73,6 +73,7 @@ module.exports = [
       // Update the comment
       Object.assign(comment, {
         description: payload.name,
+        boundary: payload.boundary,
         updatedAt: new Date(),
         updatedBy: auth.credentials.profile.email
       })
