@@ -7,6 +7,7 @@ const routes = [].concat(
   require('../routes/process'),
   require('../routes/shp2json'),
   require('../routes/comment-guidance'),
+  require('../routes/comments-csv'),
   require('../routes/status'),
   require('../routes/public')
 )

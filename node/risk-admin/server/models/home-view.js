@@ -2,10 +2,8 @@ const { formatDate } = require('../helpers')
 
 class HomeView {
   constructor (comments, provider) {
-    const dateMapper = (field, row) => ({
-      text: row[field.name]
-        ? formatDate(row[field.name], 'D/M/YYYY h:mma')
-        : ''
+    const defaultMapper = (field, row) => ({
+      text: row[field.name] || ''
     })
 
     const loadedAtMapper = (field, row) => {
@@ -17,7 +15,7 @@ class HomeView {
       if (loadedAt) {
         return {
           html: `<span title="Last loaded at ${formatDate(loadedAt, 'D/M/YYYY h:mma')}">✅</span>`,
-          attributes: { style: 'text-align: center;' }
+          attributes: { style: 'text-align: center;', 'data-sort': loadedAt }
         }
       }
     }
@@ -31,7 +29,7 @@ class HomeView {
 
       return {
         html: `<span title="Approved by ${approvedBy} at ${formatDate(approvedAt, 'D/M/YYYY h:mma')}">✅</span>`,
-        attributes: { style: 'text-align: center;' }
+        attributes: { style: 'text-align: center;', 'data-sort': approvedAt }
       }
     }
 
@@ -50,11 +48,8 @@ class HomeView {
           text: row[field.name] === 'holding' ? 'Holding' : 'LLFA'
         })
       },
-      { name: 'featureCount', title: 'Number of features' },
-      // { name: 'createdBy', title: 'Created by' },
-      // { name: 'createdAt', title: 'Created at', mapper: dateMapper },
+      { name: 'featureCount', title: 'Features' },
       { name: 'boundary', title: 'Boundary' },
-      // { name: 'approvedBy', title: 'Approved by' },
       { name: 'approvedAt', title: 'Approved', mapper: approvedMapper },
       { name: 'loadedAt', title: 'Loaded', mapper: loadedAtMapper }
     ]
@@ -64,9 +59,7 @@ class HomeView {
     }))
 
     const rows = comments.map(r => {
-      return fields.map(f => f.mapper ? f.mapper(f, r) : ({
-        text: r[f.name] || ''
-      }))
+      return fields.map(f => f.mapper ? f.mapper(f, r) : defaultMapper(f, r))
     })
 
     this.table = {
