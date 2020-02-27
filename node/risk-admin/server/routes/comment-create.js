@@ -33,6 +33,7 @@ module.exports = [
       await provider.addComment({
         type,
         description: payload.name,
+        boundary: payload.boundary,
         featureCount: payload.features.length,
         createdAt: now,
         createdBy: request.auth.credentials.profile.email,

@@ -1,6 +1,200 @@
 ;(function () {
   var React = window.React
 
+  var holdingCommentBoundaries = [
+    'Cumbria and Lancashire (CLA)',
+    'Devon, Cornwall and the Isles of Scilly (DCS)',
+    'East Anglia (EAN)',
+    'East Midlands (EMD)',
+    'Greater Manchester, Merseyside and Cheshire (GMC)',
+    'Hertfordshire and North London (HNL)',
+    'Kent, South London and East Sussex (KSL)',
+    'Lincolnshire and Northamptonshire (LNA)',
+    'North East (NEA)',
+    'Solent and South Downs (SSD)',
+    'Thames (THM)',
+    'Wessex (WSX)',
+    'West Midlands (WMD)',
+    'Yorkshire (YOR)'
+  ]
+
+  var llfaBoundaries = [
+    'Barking and Dagenham',
+    'Barnet',
+    'Barnsley',
+    'Bath and North East Somerset',
+    'Bedford',
+    'Bexley',
+    'Birmingham',
+    'Blackburn with Darwen',
+    'Blackpool',
+    'Blaenau Gwent',
+    'Bolton',
+    'Bournemouth',
+    'Bracknell Forest',
+    'Bradford',
+    'Brent',
+    'Bridgend',
+    'Brighton and Hove',
+    'Bristol, City of',
+    'Bromley',
+    'Buckinghamshire',
+    'Bury',
+    'Caerphilly',
+    'Calderdale',
+    'Cambridgeshire',
+    'Camden',
+    'Cardiff',
+    'Carmarthenshire',
+    'Central Bedfordshire',
+    'Ceredigion',
+    'Cheshire East',
+    'Cheshire West and Chester',
+    'City of London',
+    'Conwy',
+    'Cornwall',
+    'County Durham',
+    'Coventry',
+    'Croydon',
+    'Cumbria',
+    'Darlington',
+    'Denbighshire',
+    'Derby',
+    'Derbyshire',
+    'Devon',
+    'Doncaster',
+    'Dorset',
+    'Dudley',
+    'Ealing',
+    'East Riding of Yorkshire',
+    'East Sussex',
+    'Enfield',
+    'Essex',
+    'Flintshire',
+    'Gateshead',
+    'Gloucestershire',
+    'Greenwich',
+    'Gwynedd',
+    'Hackney',
+    'Halton',
+    'Hammersmith and Fulham',
+    'Hampshire',
+    'Haringey',
+    'Harrow',
+    'Hartlepool',
+    'Havering',
+    'Herefordshire, County of',
+    'Hertfordshire',
+    'Hillingdon',
+    'Hounslow',
+    'Isle of Anglesey',
+    'Isle of Wight',
+    'Isles of Scilly',
+    'Islington',
+    'Kensington and Chelsea',
+    'Kent',
+    'Kingston upon Hull, City of',
+    'Kingston upon Thames',
+    'Kirklees',
+    'Knowsley',
+    'Lambeth',
+    'Lancashire',
+    'Leeds',
+    'Leicester',
+    'Leicestershire',
+    'Lewisham',
+    'Lincolnshire',
+    'Liverpool',
+    'Luton',
+    'Manchester',
+    'Medway',
+    'Merthyr Tydfil',
+    'Merton',
+    'Middlesbrough',
+    'Milton Keynes',
+    'Monmouthshire',
+    'Neath Port Talbot',
+    'Newcastle upon Tyne',
+    'Newham',
+    'Newport',
+    'Norfolk',
+    'Northamptonshire',
+    'North East Lincolnshire',
+    'North Lincolnshire',
+    'North Somerset',
+    'North Tyneside',
+    'Northumberland',
+    'North Yorkshire',
+    'Nottingham',
+    'Nottinghamshire',
+    'Oldham',
+    'Oxfordshire',
+    'Pembrokeshire',
+    'Peterborough',
+    'Plymouth',
+    'Poole',
+    'Portsmouth',
+    'Powys',
+    'Reading',
+    'Redbridge',
+    'Redcar and Cleveland',
+    'Rhondda, Cynon, Taff',
+    'Richmond upon Thames',
+    'Rochdale',
+    'Rotherham',
+    'Rutland',
+    'Salford',
+    'Sandwell',
+    'Sefton',
+    'Sheffield',
+    'Shropshire',
+    'Slough',
+    'Solihull',
+    'Somerset',
+    'Southampton',
+    'Southend-on-Sea',
+    'South Gloucestershire',
+    'South Tyneside',
+    'Southwark',
+    'Staffordshire',
+    'St. Helens',
+    'Stockport',
+    'Stockton-on-Tees',
+    'Stoke-on-Trent',
+    'Suffolk',
+    'Sunderland',
+    'Surrey',
+    'Sutton',
+    'Swansea',
+    'Swindon',
+    'Tameside',
+    'Telford and Wrekin',
+    'The Vale of Glamorgan',
+    'Thurrock',
+    'Torbay',
+    'Torfaen',
+    'Tower Hamlets',
+    'Trafford',
+    'Wakefield',
+    'Walsall',
+    'Waltham Forest',
+    'Wandsworth',
+    'Warrington',
+    'Warwickshire',
+    'West Berkshire',
+    'Westminster',
+    'West Sussex',
+    'Wigan',
+    'Wiltshire',
+    'Windsor and Maidenhead',
+    'Wirral',
+    'Wokingham',
+    'Wolverhampton',
+    'Worcestershire',
+    'Wrexham',
+    'York'
+  ]
+
   var textareaWidget = function (props) {
     var p = {
       rows: 5,
@@ -21,6 +215,7 @@
       id: props.id,
       className: 'govuk-input govuk-input--width-20',
       value: props.value,
+      autoComplete: 'off',
       required: props.required,
       maxLength: props.schema.maxLength,
       onChange: function (event) { props.onChange(event.target.value) }
@@ -34,17 +229,44 @@
     return inputWidget(props)
   }
 
+  var selectWidget = function (props) {
+    var p = {
+      rows: 5,
+      id: props.id,
+      value: props.value,
+      required: props.required,
+      autoComplete: 'off',
+      maxLength: props.schema.maxLength,
+      list: 'options',
+      className: 'govuk-input',
+      onChange: function (event) { props.onChange(event.target.value) }
+    }
+
+    const options = props.schema.enum
+    return React.createElement(React.Fragment, null, [
+      React.createElement('input', p),
+      React.createElement('datalist', { id: 'options' }, options.map(function (option) {
+        return React.createElement('option', {}, option)
+      }))
+    ])
+  }
+
   function createSchema (isHoldingComment) {
     var commentSchema = {
       schema: {
         title: 'A geojson form',
         type: 'object',
-        required: ['name', 'features'],
+        required: ['name', 'features', 'boundary'],
         properties: {
           name: {
             type: 'string',
             title: 'Description',
             maxLength: 75
+          },
+          boundary: {
+            type: 'string',
+            title: 'Boundary',
+            enum: isHoldingComment ? holdingCommentBoundaries : llfaBoundaries
           },
           features: {
             type: 'array',
@@ -67,7 +289,7 @@
                     },
                     info: {
                       type: 'string',
-                      title: isHoldingComment ? 'Comment' : 'Report',
+                      title: isHoldingComment ? 'Info' : 'Report',
                       enum: isHoldingComment ? undefined : [
                         'Flood report',
                         'Non compliant mapping',
@@ -101,6 +323,11 @@
           classNames: 'govuk-form-group name',
           'ui:description': 'For internal use, to describe the comments that you are uploading. This will not be displayed to public users.'
         },
+        boundary: {
+          'ui:widget': selectWidget,
+          classNames: 'govuk-form-group boundary',
+          'ui:description': 'For internal use, choose the boundary to which this comment applies. This will not be displayed to public users.'
+        },
         features: {
           'ui:options': {
             orderable: false,
@@ -119,7 +346,7 @@
                 'ui:widget': isHoldingComment ? textareaWidget : 'radio',
                 classNames: 'govuk-form-group info',
                 'ui:description': isHoldingComment
-                  ? 'The comment text will display to public users in this geometry. Read ‘comment guidance’ before writing or pasting anything. The maximum number of characters is 150.'
+                  ? 'The info text will display to public users in this geometry. Read ‘comment guidance’ before writing or pasting anything. The maximum number of characters is 150.'
                   : 'The report text will display to public users in this geometry.'
               },
               start: {
