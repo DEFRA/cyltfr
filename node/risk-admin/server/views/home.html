@@ -5,9 +5,18 @@
 {% set bodyClasses = "internal" %}
 {% set pageTitle = "Comments" %}
 
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ assetPath }}/vendor/tablesort-5.1.0/tablesort.css" type="text/css">
+  <script src="{{ assetPath }}/vendor/tablesort-5.1.0/tablesort.min.js"></script>
+  <script src="{{ assetPath }}/vendor/tablesort-5.1.0/sorts/tablesort.number.min.js"></script>
+  <script src="{{ assetPath }}/vendor/tablesort-5.1.0/sorts/tablesort.date.min.js"></script>
+{% endblock %}
+
 {% block body %}
   <div class="govuk-body">
     {{ govukTable(table) }}
+    <a style="float: right" href="/comments.csv" download>Download all comments</a>
     <!-- <pre>{{comments | dump(2) | safe}}</pre> -->
     <p>
       <a href="/comment/create/holding" class="govuk-button">Create PSO comment</a>
@@ -18,4 +27,8 @@
       For national teams adding non-modelled surface water information
     </p>
   </div>
+
+  <script>
+    new Tablesort(document.querySelector('.govuk-table'))
+  </script>
 {% endblock %}
