@@ -8,6 +8,7 @@
   var type = window.LTFMGMT.comment.type
   var comment = window.LTFMGMT[type + 'CommentSchema']
   var commentMap = window.LTFMGMT.commentMap
+  var capabilities = window.LTFMGMT.capabilities
 
   var props = {
     formData: geometry,
@@ -51,10 +52,10 @@
       })
     })
 
-    commentMap(geo, 'map_' + index)
+    commentMap(geo, 'map_' + index, capabilities)
   })
 
   if (geometry.features.length > 1) {
-    commentMap(geometry, 'map', 'The map below shows all geometries contained within the shapefile')
+    commentMap(geometry, 'map', capabilities, 'The map below shows all geometries contained within the shapefile')
   }
 })()

@@ -3,6 +3,7 @@ const boom = require('@hapi/boom')
 const config = require('../config')
 const CommentView = require('../models/comment-view')
 const CommentEdit = require('../models/comment-edit')
+const capabilities = require('../models/capabilities')
 
 module.exports = [
   {
@@ -18,7 +19,7 @@ module.exports = [
       const geometryFile = await provider.getFile(key)
       const geometry = JSON.parse(geometryFile.Body)
 
-      return h.view('comment-view', new CommentView(comment, geometry, request.auth))
+      return h.view('comment-view', new CommentView(comment, geometry, request.auth, capabilities))
     },
     options: {
       validate: {
@@ -41,7 +42,7 @@ module.exports = [
       const geometryFile = await provider.getFile(key)
       const geometry = JSON.parse(geometryFile.Body)
 
-      return h.view('comment-edit', new CommentEdit(comment, geometry, request.auth))
+      return h.view('comment-edit', new CommentEdit(comment, geometry, request.auth, capabilities))
     },
     options: {
       validate: {
