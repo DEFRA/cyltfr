@@ -1,6 +1,7 @@
 const joi = require('@hapi/joi')
 const Model = require('../models/comment-create')
 const { shortId } = require('../helpers')
+const capabilities = require('../models/capabilities')
 
 module.exports = [
   {
@@ -8,7 +9,7 @@ module.exports = [
     path: '/comment/create/{type}',
     handler: async (request, h) => {
       const type = request.params.type
-      return h.view('comment-create', new Model(type))
+      return h.view('comment-create', new Model(type, capabilities))
     },
     options: {
       validate: {
