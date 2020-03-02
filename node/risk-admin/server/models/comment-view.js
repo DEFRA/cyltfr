@@ -1,9 +1,10 @@
 const moment = require('moment-timezone')
 
 class CommentView {
-  constructor (comment, geometry, auth) {
+  constructor (comment, geometry, auth, capabilities) {
     this.comment = comment
     this.geometry = geometry
+    this.capabilities = capabilities
 
     this.viewHeaderData = {
       firstCellIsHeader: true,
@@ -31,7 +32,7 @@ class CommentView {
 
     this.viewCommentData = {
       head: [
-        { text: 'Comment' },
+        { text: comment.type === 'holding' ? 'Info' : 'Report' },
         { text: 'Valid from' },
         { text: 'Valid to' },
         { text: '' }

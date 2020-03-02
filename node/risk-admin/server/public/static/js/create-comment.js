@@ -6,6 +6,8 @@
   var FormData = window.FormData
   var fetch = window.fetch
   var commentMap = window.LTFMGMT.commentMap
+  var capabilities = window.LTFMGMT.capabilities
+
   var spinner = document.getElementById('spinner')
   var fileInput = document.getElementById('geometry')
 
@@ -89,11 +91,11 @@
           })
         })
 
-        commentMap(geo, 'map_' + index)
+        commentMap(geo, 'map_' + index, capabilities)
       })
 
       if (response.features.length > 1) {
-        commentMap(response, 'map', 'The map below shows all geometries contained within the shapefile')
+        commentMap(response, 'map', capabilities, 'The map below shows all geometries contained within the shapefile')
       }
     }).catch(function (err) {
       console.error(err)

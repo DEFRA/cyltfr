@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <Capabilities xmlns="http://www.opengis.net/wmts/1.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gml="http://www.opengis.net/gml" xsi:schemaLocation="http://www.opengis.net/wmts/1.0 http://geowebcache.org/schema/opengis/wmts/1.0.0/wmtsGetCapabilities_response.xsd" version="1.0.0">
+    <ows:ServiceIdentification>
+      <ows:Title>Ordnance Survey Web Map Tile Service</ows:Title>
+      <ows:ServiceType>OGC WMTS</ows:ServiceType>
+      <ows:ServiceTypeVersion>1.0.0</ows:ServiceTypeVersion>
+    </ows:ServiceIdentification>
+    <ows:ServiceProvider>
+      <ows:ProviderName>Ordnance Survey</ows:ProviderName>
+      <ows:ProviderSite xlink:href="http://www.ordnancesurvey.co.uk"/>
+      <ows:ServiceContact>
+        <ows:IndividualName>Customer Support</ows:IndividualName>
+      </ows:ServiceContact>
+    </ows:ServiceProvider>
+    <ows:OperationsMetadata>
+      <ows:Operation name="GetCapabilities">
+        <ows:DCP>
+          <ows:HTTP>
+            <ows:Get xlink:href="http://tiles.ordnancesurvey.co.uk/osmapapi/wmtsgc/segab6nu/GetCapabilities?">
+              <ows:Constraint name="GetEncoding">
+                <ows:AllowedValues>
+                  <ows:Value>KVP</ows:Value>
+                </ows:AllowedValues>
+              </ows:Constraint>
+            </ows:Get>
+          </ows:HTTP>
+        </ows:DCP>
+      </ows:Operation>
+      <ows:Operation name="GetTile">
+        <ows:DCP>
+          <ows:HTTP>
+            <ows:Get xlink:href="http://tiles.ordnancesurvey.co.uk/osmapapi/wmts/segab6nu/ts?">
+              <ows:Constraint name="GetEncoding">
+                <ows:AllowedValues>
+                  <ows:Value>KVP</ows:Value>
+                </ows:AllowedValues>
+              </ows:Constraint>
+            </ows:Get>
+          </ows:HTTP>
+        </ows:DCP>
+      </ows:Operation>
+    </ows:OperationsMetadata>
+    <Contents>
+      <Layer>
+        <ows:Title>osgb</ows:Title>
+        <ows:WGS84BoundingBox>
+          <ows:LowerCorner>-18.614796709518433 48.33135481047483</ows:LowerCorner>
+          <ows:UpperCorner>10.881688394895756 63</ows:UpperCorner>
+        </ows:WGS84BoundingBox>
+        <ows:Identifier>osgb</ows:Identifier>
+        <Style isDefault="true">
+          <ows:Identifier>default</ows:Identifier>
+        </Style>
+        <Format>image/png</Format>
+        <TileMatrixSetLink>
+          <TileMatrixSet>ZoomMap</TileMatrixSet>
+        </TileMatrixSetLink>
+      </Layer>
+      <Layer>
+        <ows:Title>ZoomMap</ows:Title>
+        <ows:WGS84BoundingBox>
+          <ows:LowerCorner>-18.614796709518433 48.33135481047483</ows:LowerCorner>
+          <ows:UpperCorner>10.881688394895756 63</ows:UpperCorner>
+        </ows:WGS84BoundingBox>
+        <ows:Identifier>ZoomMap</ows:Identifier>
+        <Style isDefault="true">
+          <ows:Identifier>default</ows:Identifier>
+        </Style>
+        <Format>image/png</Format>
+        <TileMatrixSetLink>
+          <TileMatrixSet>ZoomMap</TileMatrixSet>
+        </TileMatrixSetLink>
+      </Layer>
+      <Layer>
+        <ows:Title>OS OpenData</ows:Title>
+        <ows:WGS84BoundingBox>
+          <ows:LowerCorner>-18.614796709518433 48.33135481047483</ows:LowerCorner>
+          <ows:UpperCorner>10.881688394895756 63</ows:UpperCorner>
+        </ows:WGS84BoundingBox>
+        <ows:Identifier>OS OpenData</ows:Identifier>
+        <Style isDefault="true">
+          <ows:Identifier>default</ows:Identifier>
+        </Style>
+        <Format>image/png</Format>
+        <TileMatrixSetLink>
+          <TileMatrixSet>OS OpenData</TileMatrixSet>
+        </TileMatrixSetLink>
+      </Layer>
+      <Layer>
+        <ows:Title>GB Overview</ows:Title>
+        <ows:WGS84BoundingBox>
+          <ows:LowerCorner>-18.614796709518433 48.33135481047483</ows:LowerCorner>
+          <ows:UpperCorner>10.881688394895756 63</ows:UpperCorner>
+        </ows:WGS84BoundingBox>
+        <ows:Identifier>GB Overview</ows:Identifier>
+        <Style isDefault="true">
+          <ows:Identifier>default</ows:Identifier>
+        </Style>
+        <Format>image/png</Format>
+        <TileMatrixSetLink>
+          <TileMatrixSet>GB Overview</TileMatrixSet>
+        </TileMatrixSetLink>
+      </Layer>
+      <Layer>
+        <ows:Title>MiniScale</ows:Title>
+        <ows:WGS84BoundingBox>
+          <ows:LowerCorner>-18.614796709518433 48.33135481047483</ows:LowerCorner>
+          <ows:UpperCorner>10.881688394895756 63</ows:UpperCorner>
+        </ows:WGS84BoundingBox>
+        <ows:Identifier>MiniScale</ows:Identifier>
+        <Style isDefault="true">
+          <ows:Identifier>default</ows:Identifier>
+        </Style>
+        <Format>image/png</Format>
+        <TileMatrixSetLink>
+          <TileMatrixSet>MiniScale</TileMatrixSet>
+        </TileMatrixSetLink>
+      </Layer>
+      <Layer>
+        <ows:Title>OS VectorMap Local</ows:Title>
+        <ows:WGS84BoundingBox>
+          <ows:LowerCorner>-18.614796709518433 48.33135481047483</ows:LowerCorner>
+          <ows:UpperCorner>10.881688394895756 63</ows:UpperCorner>
+        </ows:WGS84BoundingBox>
+        <ows:Identifier>OS VectorMap Local</ows:Identifier>
+        <Style isDefault="true">
+          <ows:Identifier>default</ows:Identifier>
+        </Style>
+        <Format>image/png</Format>
+        <TileMatrixSetLink>
+          <TileMatrixSet>OS VectorMap Local</TileMatrixSet>
+        </TileMatrixSetLink>
+      </Layer>
+      <Layer>
+        <ows:Title>OS VectorMap District</ows:Title>
+        <ows:WGS84BoundingBox>
+          <ows:LowerCorner>-18.614796709518433 48.33135481047483</ows:LowerCorner>
+          <ows:UpperCorner>10.881688394895756 63</ows:UpperCorner>
+        </ows:WGS84BoundingBox>
+        <ows:Identifier>OS VectorMap District</ows:Identifier>
+        <Style isDefault="true">
+          <ows:Identifier>default</ows:Identifier>
+        </Style>
+        <Format>image/png</Format>
+        <TileMatrixSetLink>
+          <TileMatrixSet>OS VectorMap District</TileMatrixSet>
+        </TileMatrixSetLink>
+      </Layer>
+      <Layer>
+        <ows:Title>1:25 000 Scale Colour Raster (2.5 and 4 metres per pixel)</ows:Title>
+        <ows:WGS84BoundingBox>
+          <ows:LowerCorner>-18.614796709518433 48.33135481047483</ows:LowerCorner>
+          <ows:UpperCorner>10.881688394895756 63</ows:UpperCorner>
+        </ows:WGS84BoundingBox>
+        <ows:Identifier>1:25 000 Scale Colour Raster (2.5 and 4 metres per pixel)</ows:Identifier>
+        <Style isDefault="true">
+          <ows:Identifier>default</ows:Identifier>
+        </Style>
+        <Format>image/png</Format>
+        <TileMatrixSetLink>
+          <TileMatrixSet>1:25 000 Scale Colour Raster (2.5 and 4 metres per pixel)</TileMatrixSet>
+        </TileMatrixSetLink>
+      </Layer>
+      <Layer>
+        <ows:Title>1:50 000 Scale Colour Raster (5 and 10 metres per pixel)</ows:Title>
+        <ows:WGS84BoundingBox>
+          <ows:LowerCorner>-18.614796709518433 48.33135481047483</ows:LowerCorner>
+          <ows:UpperCorner>10.881688394895756 63</ows:UpperCorner>
+        </ows:WGS84BoundingBox>
+        <ows:Identifier>1:50 000 Scale Colour Raster (5 and 10 metres per pixel)</ows:Identifier>
+        <Style isDefault="true">
+          <ows:Identifier>default</ows:Identifier>
+        </Style>
+        <Format>image/png</Format>
+        <TileMatrixSetLink>
+          <TileMatrixSet>1:50 000 Scale Colour Raster (5 and 10 metres per pixel)</TileMatrixSet>
+        </TileMatrixSetLink>
+      </Layer>
+      <Layer>
+        <ows:Title>1:250 000 Scale Colour Raster</ows:Title>
+        <ows:WGS84BoundingBox>
+          <ows:LowerCorner>-18.614796709518433 48.33135481047483</ows:LowerCorner>
+          <ows:UpperCorner>10.881688394895756 63</ows:UpperCorner>
+        </ows:WGS84BoundingBox>
+        <ows:Identifier>1:250 000 Scale Colour Raster</ows:Identifier>
+        <Style isDefault="true">
+          <ows:Identifier>default</ows:Identifier>
+        </Style>
+        <Format>image/png</Format>
+        <TileMatrixSetLink>
+          <TileMatrixSet>1:250 000 Scale Colour Raster</TileMatrixSet>
+        </TileMatrixSetLink>
+      </Layer>
+      <Layer>
+        <ows:Title>OS Street View</ows:Title>
+        <ows:WGS84BoundingBox>
+          <ows:LowerCorner>-18.614796709518433 48.33135481047483</ows:LowerCorner>
+          <ows:UpperCorner>10.881688394895756 63</ows:UpperCorner>
+        </ows:WGS84BoundingBox>
+        <ows:Identifier>OS Street View</ows:Identifier>
+        <Style isDefault="true">
+          <ows:Identifier>default</ows:Identifier>
+        </Style>
+        <Format>image/png</Format>
+        <TileMatrixSetLink>
+          <TileMatrixSet>OS Street View</TileMatrixSet>
+        </TileMatrixSetLink>
+      </Layer>
+      <Layer>
+        <ows:Title>1:50 000 Scale Colour Raster (7 and 14 metres per pixel)</ows:Title>
+        <ows:WGS84BoundingBox>
+          <ows:LowerCorner>-18.614796709518433 48.33135481047483</ows:LowerCorner>
+          <ows:UpperCorner>10.881688394895756 63</ows:UpperCorner>
+        </ows:WGS84BoundingBox>
+        <ows:Identifier>1:50 000 Scale Colour Raster (7 and 14 metres per pixel)</ows:Identifier>
+        <Style isDefault="true">
+          <ows:Identifier>default</ows:Identifier>
+        </Style>
+        <Format>image/png</Format>
+        <TileMatrixSetLink>
+          <TileMatrixSet>1:50 000 Scale Colour Raster (7 and 14 metres per pixel)</TileMatrixSet>
+        </TileMatrixSetLink>
+      </Layer>
+      <Layer>
+        <ows:Title>1:25 000 Scale Colour Raster (1.75 and 3.5 metres per pixel)</ows:Title>
+        <ows:WGS84BoundingBox>
+          <ows:LowerCorner>-18.614796709518433 48.33135481047483</ows:LowerCorner>
+          <ows:UpperCorner>10.881688394895756 63</ows:UpperCorner>
+        </ows:WGS84BoundingBox>
+        <ows:Identifier>1:25 000 Scale Colour Raster (1.75 and 3.5 metres per pixel)</ows:Identifier>
+        <Style isDefault="true">
+          <ows:Identifier>default</ows:Identifier>
+        </Style>
+        <Format>image/png</Format>
+        <TileMatrixSetLink>
+          <TileMatrixSet>1:25 000 Scale Colour Raster (1.75 and 3.5 metres per pixel)</TileMatrixSet>
+        </TileMatrixSetLink>
+      </Layer>
+      <TileMatrixSet>
+        <ows:Identifier>ZoomMap</ows:Identifier>
+        <ows:SupportedCRS>urn:ogc:def:crs:EPSG::27700</ows:SupportedCRS>
+        <TileMatrix>
+          <ows:Identifier>00</ows:Identifier>
+          <ScaleDenominator>3200000.0000000005</ScaleDenominator>
+          <TopLeftCorner>0 1344000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>4.0</MatrixWidth>
+          <MatrixHeight>6.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>01</ows:Identifier>
+          <ScaleDenominator>1600000.0000000002</ScaleDenominator>
+          <TopLeftCorner>0 1344000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>7.0</MatrixWidth>
+          <MatrixHeight>12.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>02</ows:Identifier>
+          <ScaleDenominator>800000.0000000001</ScaleDenominator>
+          <TopLeftCorner>0 1344000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>13.0</MatrixWidth>
+          <MatrixHeight>24.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>03</ows:Identifier>
+          <ScaleDenominator>400000.00000000006</ScaleDenominator>
+          <TopLeftCorner>0 1344000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>25.0</MatrixWidth>
+          <MatrixHeight>48.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>04</ows:Identifier>
+          <ScaleDenominator>200000.00000000003</ScaleDenominator>
+          <TopLeftCorner>0 1344000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>50.0</MatrixWidth>
+          <MatrixHeight>96.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>05</ows:Identifier>
+          <ScaleDenominator>100000.00000000001</ScaleDenominator>
+          <TopLeftCorner>0 1344000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>100.0</MatrixWidth>
+          <MatrixHeight>192.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>06</ows:Identifier>
+          <ScaleDenominator>50000.00000000001</ScaleDenominator>
+          <TopLeftCorner>0 1344000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>200.0</MatrixWidth>
+          <MatrixHeight>384.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>07</ows:Identifier>
+          <ScaleDenominator>25000.000000000004</ScaleDenominator>
+          <TopLeftCorner>0 1344000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>400.0</MatrixWidth>
+          <MatrixHeight>768.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>08</ows:Identifier>
+          <ScaleDenominator>12500.000000000002</ScaleDenominator>
+          <TopLeftCorner>0 1344000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>800.0</MatrixWidth>
+          <MatrixHeight>1536.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>09</ows:Identifier>
+          <ScaleDenominator>6250.000000000001</ScaleDenominator>
+          <TopLeftCorner>0 1344000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>1600.0</MatrixWidth>
+          <MatrixHeight>3072.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>10</ows:Identifier>
+          <ScaleDenominator>3125.0000000000005</ScaleDenominator>
+          <TopLeftCorner>0 1344000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>3200.0</MatrixWidth>
+          <MatrixHeight>6144.0</MatrixHeight>
+        </TileMatrix>
+      </TileMatrixSet>
+      <TileMatrixSet>
+        <ows:Identifier>OS OpenData</ows:Identifier>
+        <ows:SupportedCRS>urn:ogc:def:crs:EPSG::27700</ows:SupportedCRS>
+        <TileMatrix>
+          <ows:Identifier>OV0</ows:Identifier>
+          <ScaleDenominator>8928571.42857143</ScaleDenominator>
+          <TopLeftCorner>0 1500000</TopLeftCorner>
+          <TileWidth>200</TileWidth>
+          <TileHeight>200</TileHeight>
+          <MatrixWidth>2.0</MatrixWidth>
+          <MatrixHeight>3.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>OV1</ows:Identifier>
+          <ScaleDenominator>3571428.571428572</ScaleDenominator>
+          <TopLeftCorner>0 1400000</TopLeftCorner>
+          <TileWidth>200</TileWidth>
+          <TileHeight>200</TileHeight>
+          <MatrixWidth>4.0</MatrixWidth>
+          <MatrixHeight>7.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>OV2</ows:Identifier>
+          <ScaleDenominator>1785714.285714286</ScaleDenominator>
+          <TopLeftCorner>0 1300000</TopLeftCorner>
+          <TileWidth>200</TileWidth>
+          <TileHeight>200</TileHeight>
+          <MatrixWidth>7.0</MatrixWidth>
+          <MatrixHeight>13.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>MSR</ows:Identifier>
+          <ScaleDenominator>714285.7142857143</ScaleDenominator>
+          <TopLeftCorner>0 1320000</TopLeftCorner>
+          <TileWidth>200</TileWidth>
+          <TileHeight>200</TileHeight>
+          <MatrixWidth>18.0</MatrixWidth>
+          <MatrixHeight>33.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>MS</ows:Identifier>
+          <ScaleDenominator>357142.85714285716</ScaleDenominator>
+          <TopLeftCorner>0 1320000</TopLeftCorner>
+          <TileWidth>200</TileWidth>
+          <TileHeight>200</TileHeight>
+          <MatrixWidth>35.0</MatrixWidth>
+          <MatrixHeight>66.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>250KR</ows:Identifier>
+          <ScaleDenominator>178571.42857142858</ScaleDenominator>
+          <TopLeftCorner>0 1300000</TopLeftCorner>
+          <TileWidth>200</TileWidth>
+          <TileHeight>200</TileHeight>
+          <MatrixWidth>70.0</MatrixWidth>
+          <MatrixHeight>130.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>250K</ows:Identifier>
+          <ScaleDenominator>89285.71428571429</ScaleDenominator>
+          <TopLeftCorner>0 1300000</TopLeftCorner>
+          <TileWidth>200</TileWidth>
+          <TileHeight>200</TileHeight>
+          <MatrixWidth>140.0</MatrixWidth>
+          <MatrixHeight>260.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>VMDR</ows:Identifier>
+          <ScaleDenominator>14285.714285714286</ScaleDenominator>
+          <TopLeftCorner>0 1300000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>700.0</MatrixWidth>
+          <MatrixHeight>1300.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>VMD</ows:Identifier>
+          <ScaleDenominator>8928.57142857143</ScaleDenominator>
+          <TopLeftCorner>0 1300000</TopLeftCorner>
+          <TileWidth>200</TileWidth>
+          <TileHeight>200</TileHeight>
+          <MatrixWidth>1400.0</MatrixWidth>
+          <MatrixHeight>2600.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>SVR</ows:Identifier>
+          <ScaleDenominator>7142.857142857143</ScaleDenominator>
+          <TopLeftCorner>0 1300000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>1400.0</MatrixWidth>
+          <MatrixHeight>2600.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>SV</ows:Identifier>
+          <ScaleDenominator>3571.4285714285716</ScaleDenominator>
+          <TopLeftCorner>0 1300000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>2800.0</MatrixWidth>
+          <MatrixHeight>5200.0</MatrixHeight>
+        </TileMatrix>
+      </TileMatrixSet>
+      <TileMatrixSet>
+        <ows:Identifier>GB Overview</ows:Identifier>
+        <ows:SupportedCRS>urn:ogc:def:crs:EPSG::27700</ows:SupportedCRS>
+        <TileMatrix>
+          <ows:Identifier>OV0</ows:Identifier>
+          <ScaleDenominator>8928571.42857143</ScaleDenominator>
+          <TopLeftCorner>0 1500000</TopLeftCorner>
+          <TileWidth>200</TileWidth>
+          <TileHeight>200</TileHeight>
+          <MatrixWidth>2.0</MatrixWidth>
+          <MatrixHeight>3.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>OV1</ows:Identifier>
+          <ScaleDenominator>3571428.571428572</ScaleDenominator>
+          <TopLeftCorner>0 1400000</TopLeftCorner>
+          <TileWidth>200</TileWidth>
+          <TileHeight>200</TileHeight>
+          <MatrixWidth>4.0</MatrixWidth>
+          <MatrixHeight>7.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>OV2</ows:Identifier>
+          <ScaleDenominator>1785714.285714286</ScaleDenominator>
+          <TopLeftCorner>0 1300000</TopLeftCorner>
+          <TileWidth>200</TileWidth>
+          <TileHeight>200</TileHeight>
+          <MatrixWidth>7.0</MatrixWidth>
+          <MatrixHeight>13.0</MatrixHeight>
+        </TileMatrix>
+      </TileMatrixSet>
+      <TileMatrixSet>
+        <ows:Identifier>MiniScale</ows:Identifier>
+        <ows:SupportedCRS>urn:ogc:def:crs:EPSG::27700</ows:SupportedCRS>
+        <TileMatrix>
+          <ows:Identifier>MSR</ows:Identifier>
+          <ScaleDenominator>714285.7142857143</ScaleDenominator>
+          <TopLeftCorner>0 1320000</TopLeftCorner>
+          <TileWidth>200</TileWidth>
+          <TileHeight>200</TileHeight>
+          <MatrixWidth>18.0</MatrixWidth>
+          <MatrixHeight>33.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>MS</ows:Identifier>
+          <ScaleDenominator>357142.85714285716</ScaleDenominator>
+          <TopLeftCorner>0 1320000</TopLeftCorner>
+          <TileWidth>200</TileWidth>
+          <TileHeight>200</TileHeight>
+          <MatrixWidth>35.0</MatrixWidth>
+          <MatrixHeight>66.0</MatrixHeight>
+        </TileMatrix>
+      </TileMatrixSet>
+      <TileMatrixSet>
+        <ows:Identifier>OS VectorMap Local</ows:Identifier>
+        <ows:SupportedCRS>urn:ogc:def:crs:EPSG::27700</ows:SupportedCRS>
+        <TileMatrix>
+          <ows:Identifier>VMLR</ows:Identifier>
+          <ScaleDenominator>7142.857142857143</ScaleDenominator>
+          <TopLeftCorner>0 1300000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>1400.0</MatrixWidth>
+          <MatrixHeight>2600.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>VML</ows:Identifier>
+          <ScaleDenominator>3571.4285714285716</ScaleDenominator>
+          <TopLeftCorner>0 1300000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>2800.0</MatrixWidth>
+          <MatrixHeight>5200.0</MatrixHeight>
+        </TileMatrix>
+      </TileMatrixSet>
+      <TileMatrixSet>
+        <ows:Identifier>OS VectorMap District</ows:Identifier>
+        <ows:SupportedCRS>urn:ogc:def:crs:EPSG::27700</ows:SupportedCRS>
+        <TileMatrix>
+          <ows:Identifier>VMDR</ows:Identifier>
+          <ScaleDenominator>14285.714285714286</ScaleDenominator>
+          <TopLeftCorner>0 1300000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>700.0</MatrixWidth>
+          <MatrixHeight>1300.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>VMD</ows:Identifier>
+          <ScaleDenominator>8928.57142857143</ScaleDenominator>
+          <TopLeftCorner>0 1300000</TopLeftCorner>
+          <TileWidth>200</TileWidth>
+          <TileHeight>200</TileHeight>
+          <MatrixWidth>1400.0</MatrixWidth>
+          <MatrixHeight>2600.0</MatrixHeight>
+        </TileMatrix>
+      </TileMatrixSet>
+      <TileMatrixSet>
+        <ows:Identifier>1:25 000 Scale Colour Raster (2.5 and 4 metres per pixel)</ows:Identifier>
+        <ows:SupportedCRS>urn:ogc:def:crs:EPSG::27700</ows:SupportedCRS>
+        <TileMatrix>
+          <ows:Identifier>25KR</ows:Identifier>
+          <ScaleDenominator>14285.714285714286</ScaleDenominator>
+          <TopLeftCorner>0 1300000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>700.0</MatrixWidth>
+          <MatrixHeight>1300.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>25K</ows:Identifier>
+          <ScaleDenominator>8928.57142857143</ScaleDenominator>
+          <TopLeftCorner>0 1300000</TopLeftCorner>
+          <TileWidth>200</TileWidth>
+          <TileHeight>200</TileHeight>
+          <MatrixWidth>1400.0</MatrixWidth>
+          <MatrixHeight>2600.0</MatrixHeight>
+        </TileMatrix>
+      </TileMatrixSet>
+      <TileMatrixSet>
+        <ows:Identifier>1:50 000 Scale Colour Raster (5 and 10 metres per pixel)</ows:Identifier>
+        <ows:SupportedCRS>urn:ogc:def:crs:EPSG::27700</ows:SupportedCRS>
+        <TileMatrix>
+          <ows:Identifier>50KR</ows:Identifier>
+          <ScaleDenominator>35714.28571428572</ScaleDenominator>
+          <TopLeftCorner>0 1300000</TopLeftCorner>
+          <TileWidth>200</TileWidth>
+          <TileHeight>200</TileHeight>
+          <MatrixWidth>350.0</MatrixWidth>
+          <MatrixHeight>650.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>50K</ows:Identifier>
+          <ScaleDenominator>17857.14285714286</ScaleDenominator>
+          <TopLeftCorner>0 1300000</TopLeftCorner>
+          <TileWidth>200</TileWidth>
+          <TileHeight>200</TileHeight>
+          <MatrixWidth>700.0</MatrixWidth>
+          <MatrixHeight>1300.0</MatrixHeight>
+        </TileMatrix>
+      </TileMatrixSet>
+      <TileMatrixSet>
+        <ows:Identifier>1:250 000 Scale Colour Raster</ows:Identifier>
+        <ows:SupportedCRS>urn:ogc:def:crs:EPSG::27700</ows:SupportedCRS>
+        <TileMatrix>
+          <ows:Identifier>250KR</ows:Identifier>
+          <ScaleDenominator>178571.42857142858</ScaleDenominator>
+          <TopLeftCorner>0 1300000</TopLeftCorner>
+          <TileWidth>200</TileWidth>
+          <TileHeight>200</TileHeight>
+          <MatrixWidth>70.0</MatrixWidth>
+          <MatrixHeight>130.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>250K</ows:Identifier>
+          <ScaleDenominator>89285.71428571429</ScaleDenominator>
+          <TopLeftCorner>0 1300000</TopLeftCorner>
+          <TileWidth>200</TileWidth>
+          <TileHeight>200</TileHeight>
+          <MatrixWidth>140.0</MatrixWidth>
+          <MatrixHeight>260.0</MatrixHeight>
+        </TileMatrix>
+      </TileMatrixSet>
+      <TileMatrixSet>
+        <ows:Identifier>OS Street View</ows:Identifier>
+        <ows:SupportedCRS>urn:ogc:def:crs:EPSG::27700</ows:SupportedCRS>
+        <TileMatrix>
+          <ows:Identifier>SVR</ows:Identifier>
+          <ScaleDenominator>7142.857142857143</ScaleDenominator>
+          <TopLeftCorner>0 1300000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>1400.0</MatrixWidth>
+          <MatrixHeight>2600.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>SV</ows:Identifier>
+          <ScaleDenominator>3571.4285714285716</ScaleDenominator>
+          <TopLeftCorner>0 1300000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>2800.0</MatrixWidth>
+          <MatrixHeight>5200.0</MatrixHeight>
+        </TileMatrix>
+      </TileMatrixSet>
+      <TileMatrixSet>
+        <ows:Identifier>1:50 000 Scale Colour Raster (7 and 14 metres per pixel)</ows:Identifier>
+        <ows:SupportedCRS>urn:ogc:def:crs:EPSG::27700</ows:SupportedCRS>
+        <TileMatrix>
+          <ows:Identifier>06</ows:Identifier>
+          <ScaleDenominator>50000.00000000001</ScaleDenominator>
+          <TopLeftCorner>0 1344000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>200.0</MatrixWidth>
+          <MatrixHeight>384.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>07</ows:Identifier>
+          <ScaleDenominator>25000.000000000004</ScaleDenominator>
+          <TopLeftCorner>0 1344000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>400.0</MatrixWidth>
+          <MatrixHeight>768.0</MatrixHeight>
+        </TileMatrix>
+      </TileMatrixSet>
+      <TileMatrixSet>
+        <ows:Identifier>1:25 000 Scale Colour Raster (1.75 and 3.5 metres per pixel)</ows:Identifier>
+        <ows:SupportedCRS>urn:ogc:def:crs:EPSG::27700</ows:SupportedCRS>
+        <TileMatrix>
+          <ows:Identifier>08</ows:Identifier>
+          <ScaleDenominator>12500.000000000002</ScaleDenominator>
+          <TopLeftCorner>0 1344000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>800.0</MatrixWidth>
+          <MatrixHeight>1536.0</MatrixHeight>
+        </TileMatrix>
+        <TileMatrix>
+          <ows:Identifier>09</ows:Identifier>
+          <ScaleDenominator>6250.000000000001</ScaleDenominator>
+          <TopLeftCorner>0 1344000</TopLeftCorner>
+          <TileWidth>250</TileWidth>
+          <TileHeight>250</TileHeight>
+          <MatrixWidth>1600.0</MatrixWidth>
+          <MatrixHeight>3072.0</MatrixHeight>
+        </TileMatrix>
+      </TileMatrixSet>
+    </Contents>
+    <ServiceMetadataURL xlink:href="http://tiles.ordnancesurvey.co.uk/osmapapi/wmtsgc/segab6nu/GetCapabilities?REQUEST=GetCapabilities&amp;amp;VERSION=1.0.0&amp;amp;SERVICE=WMTS"/>
+  </Capabilities>

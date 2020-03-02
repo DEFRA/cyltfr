@@ -1,5 +1,5 @@
 ;(function () {
-  function commentMap (geojson, target, title) {
+  function commentMap (geojson, target, capabilities, title) {
     var ol = window.ol
     var proj4 = window.proj4
 
@@ -33,6 +33,27 @@
     var proj27700 = ol.proj.get('EPSG:27700')
     proj27700.setExtent([0, 0, 700000, 1300000])
 
+    var parser = new ol.format.WMTSCapabilities()
+    var result = parser.read(capabilities)
+    var options = ol.source.WMTS.optionsFromCapabilities(result, {
+      layer: 'osgb',
+      matrixSet: 'ZoomMap',
+      crossOrigin: 'anonymous'
+    })
+
+    var source = new ol.source.WMTS(options)
+
+    // array of ol.tileRange can't find any reference to this object in ol3 documentation, but is set to NaN and stops the map from functioning
+    // openlayers doesn't expose fulltileranges as a property, so when using minified ol have to set tilegrid.a to null, which is what fulltileranges
+    // is mapped as, hopefully OS will fix their service, otherwise something more robust needs sorting out
+    source.tileGrid.fullTileRanges_ = null
+    source.tileGrid.a = null
+
+    var layer = new ol.layer.Tile({
+      ref: 'osgb',
+      source: source
+    })
+
     var map = new ol.Map({
       target: target,
       view: new ol.View({
@@ -41,9 +62,7 @@
         zoom: 2
       }),
       layers: [
-        new ol.layer.Tile({
-          source: new ol.source.OSM()
-        }),
+        layer,
         vectorLayer
       ],
       controls: ol.control.defaults({ attribution: false })
