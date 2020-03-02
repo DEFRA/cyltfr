@@ -20,11 +20,10 @@ function mapErrors (errors) {
 }
 
 class CommentCreate {
-  constructor (type, data, err) {
-    // this.minStartDate = moment().add(1, 'days').format('YYYY-MM-DD')
-    // this.minEndDate = moment().add(2, 'days').format('YYYY-MM-DD')
+  constructor (type, capabilities, data, err) {
     this.type = type
     this.data = data
+    this.capabilities = capabilities
 
     if (err) {
       this.errors = mapErrors(err.details)

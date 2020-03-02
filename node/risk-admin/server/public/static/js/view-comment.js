@@ -1,6 +1,7 @@
 
 ;(function () {
   var geometry = window.LTFMGMT.geometry
+  var capabilities = window.LTFMGMT.capabilities
 
   geometry.features.forEach(function (feature, index) {
     var geo = Object.assign({}, geometry, {
@@ -9,10 +10,10 @@
       })
     })
 
-    window.LTFMGMT.commentMap(geo, 'map_' + index)
+    window.LTFMGMT.commentMap(geo, 'map_' + index, capabilities)
   })
 
   if (geometry.features.length > 1) {
-    window.LTFMGMT.commentMap(geometry, 'map')
+    window.LTFMGMT.commentMap(geometry, 'map', capabilities)
   }
 })()
