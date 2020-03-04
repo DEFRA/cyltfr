@@ -35,6 +35,9 @@
 
     var parser = new ol.format.WMTSCapabilities()
     var result = parser.read(capabilities)
+
+    result.OperationsMetadata.GetTile.DCP.HTTP.Get[0].href = result.OperationsMetadata.GetTile.DCP.HTTP.Get[0].href.replace('http://', 'https://')
+
     var options = ol.source.WMTS.optionsFromCapabilities(result, {
       layer: 'osgb',
       matrixSet: 'ZoomMap',
