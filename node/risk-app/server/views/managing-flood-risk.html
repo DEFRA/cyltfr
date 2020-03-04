@@ -1,5 +1,10 @@
 {% extends 'layout.html' %}
 
+{% block head %}
+{{ super() }}
+<link href="{{ assetPath }}/fonts/style.css" rel="stylesheet" />
+{% endblock %}
+
 {% block content %}
 <div id="managing-flood-risk-page">
   <div class="govuk-grid-row">
@@ -192,6 +197,29 @@
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
       </div>
 
+      <div>
+        <div class="icons-buttons">
+          {% set subject = "Check your long term flood risk" | urlencode %}
+          {% set body = "I’ve just checked my long term flood risk. Check yours here: " | urlencode %}
+          {% set url = "https://flood-warning-information.service.gov.uk/long-term-flood-risk" | urlencode %}
+
+          <h2 class="govuk-heading-m">Share this service</h2>
+          <ul>
+            <li>
+              <a class="govuk-link twitter" target="_blank" data-journey-click="ltfri:manage:twitter" href="https://twitter.com/intent/tweet?text={{ body }}&url={{ url }}">Twitter</a>
+            </li>
+            <li>
+              <a class="govuk-link facebook" target="_blank" data-journey-click="ltfri:manage:facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ url }}&quote={{ body }}">Facebook</a>
+            </li>
+            <li>
+              <a class="govuk-link email" data-journey-click="ltfri:manage:email" href="mailto:?subject={{ subject }}&body={{ body }}{{ url }}">Email</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div>
+      </div>
       <div class="govuk-!-margin-top-8">
         <!-- <a rel="nofollow" href="javascript:window.print()" class="govuk-link pull-right nojs-hidden">Print</a> -->
         <a href="/{{ mountPath }}/postcode" role="button" class="govuk-button govuk-!-margin-right-2">
