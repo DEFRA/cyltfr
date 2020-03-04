@@ -3,6 +3,7 @@ $govuk-assets-path: '/long-term-flood-risk/assets/';
 @import "node_modules/govuk-frontend/govuk/all";
 @import "./legend";
 @import "./overlay";
+@import "./social";
 
 .nojs-hidden {
   display: none;
