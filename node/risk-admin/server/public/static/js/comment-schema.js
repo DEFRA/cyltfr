@@ -1,5 +1,6 @@
 ;(function () {
   var React = window.React
+  var useState = window.React.useState
 
   var holdingCommentBoundaries = [
     'Cumbria and Lancashire (CLA)',
@@ -196,6 +197,7 @@
   ]
 
   var textareaWidget = function (props) {
+    var [charsLeft, setCharsLeft] = useState(Math.max(0, props.schema.maxLength - props.value.length))
     var p = {
       rows: 5,
       id: props.id,
@@ -203,10 +205,19 @@
       required: props.required,
       maxLength: props.schema.maxLength,
       className: 'govuk-textarea',
-      onChange: function (event) { props.onChange(event.target.value) }
+      onChange: function (event) {
+        var value = event.target.value
+        setCharsLeft(props.schema.maxLength - value.length)
+        props.onChange(value)
+      }
     }
 
-    return React.createElement('textarea', p)
+    return React.createElement('div', null, [
+      React.createElement('textarea', p),
+      React.createElement('p', {
+        className: 'govuk-hint govuk-character-count__message'
+      }, ['You have ', charsLeft, ' characters remaining'])
+    ])
   }
 
   var inputWidget = function (props) {
@@ -346,18 +357,18 @@
                 'ui:widget': isHoldingComment ? textareaWidget : 'radio',
                 classNames: 'govuk-form-group info',
                 'ui:description': isHoldingComment
-                  ? 'The info text will display to public users in this geometry. Read ‘comment guidance’ before writing or pasting anything. The maximum number of characters is 150.'
+                  ? React.createElement('p', null, ['The info text will display to public users in this geometry. Read ', React.createElement('a', { href: '/comment-guidance', target: '_blank' }, ['comment guidance']), ' before writing or pasting anything. The maximum number of characters is 150.'])
                   : 'The report text will display to public users in this geometry.'
               },
               start: {
                 'ui:widget': dateWidget,
                 classNames: 'govuk-form-group start',
-                'ui:description': 'For internal use and will not be displayed to public users. If a date picker is not available, use YYYY-MM-DD.'
+                'ui:description': 'For your reference and will not be displayed to public users. Your comments will not be uploaded automatically on this date. Your comments will go live once they’re approved. If a date picker is not available, use YYYY-MM-DD.'
               },
               end: {
                 'ui:widget': dateWidget,
                 classNames: 'govuk-form-group end',
-                'ui:description': 'For your reference and will not be displayed to public users. The comments will not be removed automatically. It is your responsibility to remove them on the ‘valid to’ date. If a date picker is not available, use YYYY-MM-DD.'
+                'ui:description': 'For your reference and will not be displayed to public users. Your comments will not be removed automatically. It is your responsibility to remove them on the ‘valid to’ date. If a date picker is not available, use YYYY-MM-DD.'
               }
             }
           }
