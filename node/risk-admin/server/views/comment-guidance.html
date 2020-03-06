@@ -8,15 +8,14 @@
 {% block body %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <p class="govuk-body">We recommend that you use the Chrome browser for uploading holding comments. </p
-      class="govuk-body">
-    <p class="govuk-body">The holding comment should:</p>
+    <p class="govuk-body">We recommend that you use the Chrome browser for uploading holding comments.</p>
+    <p class="govuk-body">The holding comment functionality should:</p>
     <ul class="govuk-list govuk-list--bullet">
-      <li>not include any personal information</li>
-      <li>cover a specific geographic area</li>
-      <li>provide additional information that supersedes the mapping</li>
-      <li>not include any hyperlinks - they will not work</li>
-      <li>be time-bound for a temporary period</li>
+      <li>Not include any personal information</li>
+      <li>Include a shapefile that covers a specific geographic area</li>
+      <li>Provide additional information not yet included in the mapping</li>
+      <li>Not include any hyperlinks within the text - they will not work</li>
+      <li>Be temporary - and removed when they are no longer valid</li>
     </ul>
     {{ govukWarningText({
         text: "It is your responsibility to remove the holding comment when it is no longer valid. You will not be prompted to do this - set a reminder for the expiry date.",
