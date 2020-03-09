@@ -31,6 +31,7 @@
 {% block bodyEnd %}
 <script>
   window.LTFMGMT.type = '{{ type }}'
+  window.LTFMGMT.capabilities = {{ capabilities | dump | safe }}
 </script>
 <script src="/assets/js/create-comment.js"></script>
 {% endblock %}
