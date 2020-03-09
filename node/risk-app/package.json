@@ -25,7 +25,7 @@
     "@hapi/vision": "6.0.0",
     "@hapi/wreck": "17.0.0",
     "blipp": "4.0.1",
-    "govuk-frontend": "3.5.0",
+    "govuk-frontend": "3.6.0",
     "hapi-pino": "6.5.0",
     "hapi-rate-limit": "4.1.0",
     "https-proxy-agent": "5.0.0",
