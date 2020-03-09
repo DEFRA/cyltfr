@@ -17,7 +17,7 @@
     "@hapi/hapi": "19.1.1",
     "@hapi/joi": "17.1.0",
     "hapi-pino": "6.5.0",
-    "pg": "7.18.1"
+    "pg": "7.18.2"
   },
   "devDependencies": {
     "@hapi/code": "8.0.1",
