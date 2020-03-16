@@ -58,11 +58,10 @@ MapController.prototype.setCurrent = function (ref) {
   function mapPage () {
     var mapController = new MapController(mapCategories.categories)
 
-    var $container = $('.map-container')
-    var $sidebar = $('.sidebar')
-    var $selector = $('select', $sidebar)
+    var $header = $('.map-header')
+    var $selector = $('select', $header)
     var $error = $('#error-message')
-    var $query = $('input[name=location]', $container)
+    var $query = $('input[name=location]', $header)
     var $map = $('#map')
     var $body = $(document.body)
 
@@ -102,7 +101,7 @@ MapController.prototype.setCurrent = function (ref) {
       setCurrent(getParameterByName('map'))
     })
 
-    $container.on('submit', 'form', function (e) {
+    $header.on('submit', 'form', function (e) {
       e.preventDefault()
 
       var location = $query.val().replace(/[^a-zA-Z0-9',-.& ]/g, '')
