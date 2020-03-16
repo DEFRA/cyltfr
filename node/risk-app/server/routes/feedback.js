@@ -15,7 +15,7 @@ module.exports = {
       return h.view('feedback', {
         ref: encodeURIComponent(ref),
         feedback: false,
-        pageTitle: 'Provide feedback about this service - GOV.UK',
+        pageTitle: 'Provide feedback about this service',
         userAgent: encodeURIComponent(agent)
       })
     }
