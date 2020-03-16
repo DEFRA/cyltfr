@@ -6,7 +6,6 @@ function MapViewModel (easting, northing, address) {
   this.northing = northing
   this.address = address
   this.local = !!easting
-  this.noIndex = this.local
   this.date = Date.now()
   this.year = new Date().getFullYear()
 }
