@@ -164,14 +164,20 @@ function loadMap (point) {
       layers.push(centreLayer)
     }
 
-    map = new ol.Map({
-      controls: ol.control.defaults({ attributionOptions: { collapsible: true } }).extend([
+    var controls = ol.control.defaults({ attributionOptions: { collapsible: true } })
+      .extend([
         new ol.control.ScaleLine({
           units: 'metric',
           minWidth: 128
-        }),
-        new ol.control.Attribution()
-      ]),
+        })
+      ])
+
+    if (document.body.requestFullscreen) {
+      controls = controls.extend([new ol.control.FullScreen()])
+    }
+
+    map = new ol.Map({
+      controls: controls,
       interactions: ol.interaction.defaults({
         altShiftDragRotate: false,
         pinchRotate: false
@@ -187,6 +193,13 @@ function loadMap (point) {
         extent: config.projection.extent
       })
     })
+
+    function isFullscreen () {
+      return document.fullscreenElement ||
+        document.mozFullScreenElement ||
+        document.webkitFullscreenElement ||
+        document.msFullscreenElement
+    }
 
     $('#legend').on('click', 'a[data-id]', function (e) {
       e.preventDefault()
@@ -229,6 +242,10 @@ function loadMap (point) {
 
     map.on('singleclick', function (e) {
       var currentLayerRef = currentLayer && currentLayer.getProperties().ref
+
+      if (isFullscreen()) {
+        return
+      }
 
       if (currentLayerRef !== 'risk:1-ROFRS' && currentLayerRef !== 'risk:6-SW-Extent' && currentLayerRef !== 'risk:2-FWLRSF') {
         return
