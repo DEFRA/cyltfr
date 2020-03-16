@@ -4,7 +4,10 @@ module.exports = {
   method: 'GET',
   path: '/managing-flood-risk',
   handler: {
-    view: 'managing-flood-risk'
+    view: {
+      template: 'managing-flood-risk',
+      context: { noIndex: false }
+    }
   },
   options: {
     description: 'Get the managing flood risk page'

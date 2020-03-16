@@ -3,7 +3,10 @@ module.exports = [
     method: 'GET',
     path: '/',
     handler: {
-      view: 'home'
+      view: {
+        template: 'home',
+        context: { noIndex: false }
+      }
     },
     options: {
       description: 'Get the home page'
