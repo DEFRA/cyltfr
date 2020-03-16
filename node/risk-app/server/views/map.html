@@ -23,26 +23,29 @@
     Select the type of flood risk information you're interested in. The map will then update.
   </p>
 
-  <div class="sidebar">
-    <select class="govuk-select">
-      {% for category in maps.categories %}
-      <optgroup label="{{category.name}}">
-        {% for map in category.maps %}
-        <option id="{{map.ref}}" value="{{map.ref}}" title="{{map.title}}">{{map.name}}</option>
-        {% endfor %}
-      </optgroup>
-      {% endfor %}
-    </select>
+  <div class="map-header">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <select class="govuk-select">
+          {% for category in maps.categories %}
+          <optgroup label="{{category.name}}">
+            {% for map in category.maps %}
+            <option id="{{map.ref}}" value="{{map.ref}}" title="{{map.title}}">{{map.name}}</option>
+            {% endfor %}
+          </optgroup>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="govuk-grid-column-one-third">
+        <form>
+          <input class="govuk-input govuk-input--width-full" id="location"
+            name="location" type="text" placeholder="Enter a place or postcode">
+        </form>
+      </div>
+    </div>
   </div>
   <div id="error-message" class="govuk-body-s govuk-!-margin-bottom-0 govuk-!-margin-top-1"></div>
   <div class="map-container">
-    <form>
-      <div class="govuk-form-group" style="position: absolute; top: 10px; right: 10px; z-index: 10; width: 230px;">
-        <input class="govuk-input govuk-input--width-20" id="location"
-          name="location" type="text" placeholder="Enter a place or postcode"
-          style="background-color: rgba(255, 255, 255, 0.7)">
-      </div>
-    </form>
     <div id="progress"></div>
     <div id="map"></div>
     <div id="map-overlay">
