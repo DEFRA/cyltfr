@@ -1,6 +1,6 @@
 {
   "name": "risk-app",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Long term flood risk information",
   "main": "index.js",
   "scripts": {
@@ -16,12 +16,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@hapi/boom": "9.0.0",
+    "@hapi/boom": "9.1.0",
     "@hapi/catbox-redis": "5.0.5",
     "@hapi/h2o2": "9.0.1",
     "@hapi/hapi": "19.1.1",
     "@hapi/inert": "6.0.1",
-    "@hapi/joi": "17.1.0",
+    "@hapi/joi": "17.1.1",
     "@hapi/vision": "6.0.0",
     "@hapi/wreck": "17.0.0",
     "blipp": "4.0.1",
@@ -29,13 +29,13 @@
     "hapi-pino": "6.5.0",
     "hapi-rate-limit": "4.1.0",
     "https-proxy-agent": "5.0.0",
-    "nunjucks": "3.2.0"
+    "nunjucks": "3.2.1"
   },
   "devDependencies": {
     "@hapi/code": "8.0.1",
-    "@hapi/lab": "22.0.3",
+    "@hapi/lab": "22.0.4",
     "node-sass": "4.13.1",
-    "standard": "14.3.1"
+    "standard": "14.3.3"
   },
   "standard": {
     "ignore": [
