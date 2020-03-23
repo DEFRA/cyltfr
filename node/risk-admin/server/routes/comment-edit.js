@@ -65,7 +65,7 @@ module.exports = [
 
       // Only approvers or comment authors can update
       const allowUpdate = auth.credentials.isApprover ||
-      comment.createdBy === auth.credentials.profile.email
+        comment.createdBy === auth.credentials.profile.email
 
       if (!allowUpdate) {
         return boom.badRequest('You cannot update this comment')
@@ -76,6 +76,8 @@ module.exports = [
         description: payload.name,
         boundary: payload.boundary,
         updatedAt: new Date(),
+        approvedAt: null,
+        approvedBy: null,
         updatedBy: auth.credentials.profile.email
       })
 
@@ -139,7 +141,7 @@ module.exports = [
       const comments = await provider.load()
       const comment = comments.find(c => c.id === id)
 
-      // Approve
+      // Undo approve
       comment.approvedAt = null
       comment.approvedBy = null
 

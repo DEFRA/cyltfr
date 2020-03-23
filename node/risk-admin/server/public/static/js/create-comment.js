@@ -13,7 +13,7 @@
 
   var type = window.LTFMGMT.type
   var isHoldingComment = type === 'holding'
-  var comment = isHoldingComment
+  var commentSchema = isHoldingComment
     ? window.LTFMGMT.holdingCommentSchema
     : window.LTFMGMT.llfaCommentSchema
 
@@ -48,8 +48,8 @@
 
       var props = {
         formData: response,
-        schema: comment.schema,
-        uiSchema: comment.uiSchema,
+        schema: commentSchema.schema,
+        uiSchema: commentSchema.uiSchema,
         ArrayFieldTemplate: window.LTFMGMT.ArrayFieldTemplate,
         onSubmit: function (e) {
           if (window.confirm('Are you sure you want to add the comment?')) {
