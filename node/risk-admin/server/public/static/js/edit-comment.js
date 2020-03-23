@@ -5,17 +5,30 @@
   var ReactDOM = window.ReactDOM
   var fetch = window.fetch
   var geometry = window.LTFMGMT.geometry
-  var type = window.LTFMGMT.comment.type
-  var comment = window.LTFMGMT[type + 'CommentSchema']
+  var comment = window.LTFMGMT.comment
+  var type = comment.type
+  var isHoldingComment = type === 'holding'
+  var commentSchema = isHoldingComment
+    ? window.LTFMGMT.holdingCommentSchema
+    : window.LTFMGMT.llfaCommentSchema
   var commentMap = window.LTFMGMT.commentMap
   var capabilities = window.LTFMGMT.capabilities
 
   var props = {
     formData: geometry,
-    schema: comment.schema,
-    uiSchema: comment.uiSchema,
+    schema: commentSchema.schema,
+    uiSchema: commentSchema.uiSchema,
     ArrayFieldTemplate: window.LTFMGMT.ArrayFieldTemplate,
     onSubmit: function (e) {
+      if (comment.approvedAt) {
+        // Comment is already approved.
+        // The edit will cause it to be unapproved.
+        // Warn the user they will need to get it re-approved.
+        if (!window.confirm('The comment will need re-approving. Continue?')) {
+          return
+        }
+      }
+
       fetch(window.location.href, {
         method: 'put',
         body: JSON.stringify(e.formData),
