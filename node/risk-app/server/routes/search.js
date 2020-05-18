@@ -17,72 +17,75 @@ async function getWarnings (postcode, request) {
   }
 }
 
-module.exports = [{
-  method: 'GET',
-  path: '/search',
-  handler: async (request, h) => {
-    const { postcode } = request.query
+module.exports = [
+  {
+    method: 'GET',
+    path: '/search',
+    handler: async (request, h) => {
+      const { postcode } = request.query
 
-    // Our Address service doesn't support NI addresses
-    // but all NI postcodes start with BT so redirect to
-    // "england-only" page if that's the case.
-    if (postcode.toUpperCase().startsWith('BT')) {
-      return redirectToHomeCounty(h, postcode, 'northern-ireland')
-    }
-
-    try {
-      const addresses = await addressService.find(postcode)
-
-      if (!addresses || !addresses.length) {
-        return h.view('search', new SearchViewModel(postcode))
+      // Our Address service doesn't support NI addresses
+      // but all NI postcodes start with BT so redirect to
+      // "england-only" page if that's the case.
+      if (postcode.toUpperCase().startsWith('BT')) {
+        return redirectToHomeCounty(h, postcode, 'northern-ireland')
       }
 
-      const warnings = await getWarnings(postcode, request)
+      try {
+        const addresses = await addressService.find(postcode)
 
-      return h.view('search', new SearchViewModel(postcode, addresses, null, warnings))
-    } catch (err) {
-      return boom.badRequest(errors.addressByPostcode.message, err)
-    }
-  },
-  options: {
-    description: 'Get the search page',
-    plugins: {
-      'hapi-rate-limit': {
-        enabled: config.rateLimitEnabled
+        if (!addresses || !addresses.length) {
+          return h.view('search', new SearchViewModel(postcode))
+        }
+
+        const warnings = await getWarnings(postcode, request)
+
+        return h.view('search', new SearchViewModel(postcode, addresses, null, warnings))
+      } catch (err) {
+        return boom.badRequest(errors.addressByPostcode.message, err)
       }
     },
-    validate: {
-      query: joi.object().keys({
-        postcode: joi.string().trim().regex(postcodeRegex).required()
-      }).required()
+    options: {
+      description: 'Get the search page',
+      plugins: {
+        'hapi-rate-limit': {
+          enabled: config.rateLimitEnabled
+        }
+      },
+      validate: {
+        query: joi.object().keys({
+          postcode: joi.string().trim().regex(postcodeRegex).required()
+        }).required()
+      }
     }
-  }
-}, {
-  method: 'POST',
-  path: '/search',
-  handler: async (request, h) => {
-    const { postcode } = request.query
-    const { address, addresses } = request.payload
-
-    if (!address) {
-      const errorMessage = 'Select an address'
-      const warnings = await getWarnings(postcode, request)
-      const model = new SearchViewModel(postcode, JSON.parse(addresses), errorMessage, warnings)
-      return h.view('search', model)
-    }
-
-    return h.redirect(`/risk?address=${address}`)
   },
-  options: {
-    description: 'Post to the search page',
-    validate: {
-      query: joi.object().keys({
-        postcode: joi.string().trim().regex(postcodeRegex).required()
-      }),
-      payload: joi.object().keys({
-        address: joi.string().allow('').required(),
-        addresses: joi.string().required()
-      })
+  {
+    method: 'POST',
+    path: '/search',
+    handler: async (request, h) => {
+      const { postcode } = request.query
+      const { address, addresses } = request.payload
+
+      if (!address) {
+        const errorMessage = 'Select an address'
+        const warnings = await getWarnings(postcode, request)
+        const model = new SearchViewModel(postcode, JSON.parse(addresses), errorMessage, warnings)
+        return h.view('search', model)
+      }
+
+      return h.redirect(`/risk?address=${address}`)
+    },
+    options: {
+      description: 'Post to the search page',
+      validate: {
+        query: joi.object().keys({
+          postcode: joi.string().trim().regex(postcodeRegex).required()
+        }),
+        payload: joi.object().keys({
+          address: joi.string().allow('').required(),
+          addresses: joi.string().required()
+        })
+      }
     }
   }
-}]
+]
