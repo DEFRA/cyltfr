@@ -26,16 +26,16 @@
     "@hapi/wreck": "17.0.0",
     "blipp": "4.0.1",
     "govuk-frontend": "3.6.0",
-    "hapi-pino": "6.5.0",
-    "hapi-rate-limit": "4.1.0",
+    "hapi-pino": "8.0.1",
+    "hapi-rate-limit": "5.0.0",
     "https-proxy-agent": "5.0.0",
     "nunjucks": "3.2.1"
   },
   "devDependencies": {
     "@hapi/code": "8.0.1",
     "@hapi/lab": "22.0.4",
-    "node-sass": "4.13.1",
-    "standard": "14.3.3"
+    "node-sass": "4.14.1",
+    "standard": "14.3.4"
   },
   "standard": {
     "ignore": [

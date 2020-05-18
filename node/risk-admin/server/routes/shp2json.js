@@ -36,7 +36,7 @@ module.exports = {
           end: props.End_date
             ? moment(props.End_date, 'YYYY/MM/DD').format('YYYY-MM-DD')
             : '',
-          info: props.display2 || props.Data_Type
+          info: props.display2 || props.Data_Type || ''
         }
       })
 
