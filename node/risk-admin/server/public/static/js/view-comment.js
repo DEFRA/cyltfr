@@ -1,4 +1,3 @@
-
 ;(function () {
   var geometry = window.LTFMGMT.geometry
   var capabilities = window.LTFMGMT.capabilities
