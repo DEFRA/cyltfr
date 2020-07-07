@@ -11,9 +11,9 @@ class SearchViewModel {
         : `${addresses.length} addresses found`
     }
 
-    const items = [defaultOption].concat(addresses.map(addr => ({
+    const items = [defaultOption].concat(addresses.map((addr, index) => ({
       text: addr.address,
-      value: addr.uprn
+      value: index
     })))
 
     this.addressSelect = {

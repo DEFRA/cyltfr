@@ -12,13 +12,48 @@ const mountPath = config.mountPath
   : ''
 
 lab.experiment('Unit', () => {
-  let server
+  let server, cookie
 
   // Make a server before the tests
   lab.before(async () => {
     console.log('Creating server')
     server = await createServer()
     await server.initialize()
+
+    const options = {
+      method: 'GET',
+      url: mountPath + '/search?postcode=cw8 4bh'
+    }
+
+    const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, [
+      {
+        uprn: '100041117437',
+        address: '81, MOSS ROAD, NORTHWICH, CW8 4BH, ENGLAND',
+        country: 'ENGLAND',
+        postcode: 'CW8 4BH'
+      }
+    ]))
+
+    const response = await server.inject(options)
+    Code.expect(response.statusCode).to.equal(200)
+    addressStub.revert()
+
+    cookie = response.headers['set-cookie'][0].split(';')[0]
+
+    const options2 = {
+      method: 'POST',
+      url: mountPath + '/search?postcode=cw8 4bh',
+      headers: {
+        cookie
+      },
+      payload: {
+        address: '0'
+      }
+    }
+
+    const response2 = await server.inject(options2)
+    Code.expect(response2.statusCode).to.equal(302)
+    cookie = response.headers['set-cookie'][0].split(';')[0]
   })
 
   lab.after(async () => {
@@ -139,30 +174,10 @@ lab.experiment('Unit', () => {
     Code.expect(response.statusCode).to.equal(200)
   })
 
-  // lab.test('/ - With known error', async () => {
-  //   const options = {
-  //     method: 'GET',
-  //     url: mountPath || '/' + '?err=postcode'
-  //   }
-
-  //   const response = await server.inject(options)
-  //   Code.expect(response.statusCode).to.equal(200)
-  // })
-
-  // lab.test('/ - With unknown error', async () => {
-  //   const options = {
-  //     method: 'GET',
-  //     url: mountPath || '/' + '?err=postXcode'
-  //   }
-
-  //   const response = await server.inject(options)
-  //   Code.expect(response.statusCode).to.equal(200)
-  // })
-
   lab.test('/map', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/map?easting=1&northing=1&address=1'
+      url: mountPath + '/map?easting=1&northing=1'
     }
 
     const response = await server.inject(options)
@@ -179,58 +194,31 @@ lab.experiment('Unit', () => {
     Code.expect(response.statusCode).to.equal(200)
   })
 
-  lab.test('/risk - Address service error', async () => {
-    const options = {
-      method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
-    }
-
-    const addressStub = mock.replace(addressService, 'findById',
-      mock.makePromise('Mock Address Error'))
-
-    const response = await server.inject(options)
-    Code.expect(response.statusCode).to.equal(400)
-    addressStub.revert()
-  })
-
   lab.test('/risk - Risk service error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById',
-      mock.makePromise(null, {
-        uprn: '100010192035',
-        postcode: 'CW8 4BH',
-        x: 364853,
-        y: 373782,
-        address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-      }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates',
       mock.makePromise('Mock Risk Error'))
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(400)
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk - Not inEngland', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById',
-      mock.makePromise(null, {
-        uprn: '100010192035',
-        postcode: 'CW8 4BH',
-        x: 364853,
-        y: 373782,
-        address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-      }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates',
       mock.makePromise(null, {
@@ -251,23 +239,17 @@ lab.experiment('Unit', () => {
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(302)
     Code.expect(response.headers.location).to.include('/england-only')
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk - inFloodWarningArea error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -286,23 +268,17 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(400)
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk - inFloodAlertArea error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -321,23 +297,17 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(400)
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk - riverAndSeaRisk error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -356,23 +326,17 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(400)
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk - surfaceWaterRisk error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -391,7 +355,6 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(400)
-    addressStub.revert()
     riskStub.revert()
   })
 
@@ -402,16 +365,11 @@ lab.experiment('Unit', () => {
   lab.test('/risk 1', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -430,23 +388,17 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk 2', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -465,23 +417,17 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk 3', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -500,23 +446,17 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk 4', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -535,23 +475,17 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk 5', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -578,23 +512,17 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk 6', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -613,23 +541,17 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk 7', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -648,23 +570,17 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk 8', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -683,23 +599,17 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk 9', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -718,23 +628,17 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk 10', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -753,7 +657,6 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
-    addressStub.revert()
     riskStub.revert()
   })
 
@@ -852,89 +755,65 @@ lab.experiment('Unit', () => {
   lab.test('/risk WELSH address to redirect to england-only', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100100893634'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
+
+    const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
+      inEngland: false
+    }))
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(302)
     Code.expect(response.headers.location).to.include('/england-only')
+    riskStub.revert()
   })
 
   lab.test('/risk SCOTTISH address to redirect to england-only', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=906700326315'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
+
+    const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
+      inEngland: false
+    }))
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(302)
     Code.expect(response.headers.location).to.include('/england-only')
-  })
-
-  lab.test('/risk - Address service error', async () => {
-    const options = {
-      method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
-    }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise('Mock Address Error'))
-
-    const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
-      inEngland: true,
-      isGroundwaterArea: false,
-      floodAlertArea: [],
-      floodWarningArea: [],
-      inFloodAlertArea: false,
-      inFloodWarningArea: false,
-      leadLocalFloodAuthority: 'Cheshire West and Chester',
-      reservoirRisk: null,
-      riverAndSeaRisk: { probabilityForBand: 'Low', suitability: 'County to Town' },
-      surfaceWaterRisk: null,
-      surfaceWaterSuitability: null,
-      extraInfo: null
-    }))
-
-    const response = await server.inject(options)
-    Code.expect(response.statusCode).to.equal(400)
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk - Risk service error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise('Mock Risk Error'))
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(400)
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk inFloodWarningArea error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -953,23 +832,17 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(400)
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk inFloodAlertArea error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -988,23 +861,17 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(400)
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk riverAndSeaRisk error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -1023,23 +890,17 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(400)
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk surfaceWaterRisk error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -1058,23 +919,17 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(400)
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk reservoirRisk error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -1093,23 +948,17 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(400)
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk surfaceWaterSuitability error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -1128,23 +977,17 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(400)
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk surfaceWaterSuitability error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -1163,23 +1006,17 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(400)
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk inEngland false', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: false,
@@ -1199,23 +1036,17 @@ lab.experiment('Unit', () => {
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(302)
     Code.expect(response.headers.location).to.include('/england-only')
-    addressStub.revert()
     riskStub.revert()
   })
 
   lab.test('/risk', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk?address=100010192035'
+      url: mountPath + '/risk',
+      headers: {
+        cookie
+      }
     }
-
-    const addressStub = mock.replace(addressService, 'findById', mock.makePromise(null, {
-      uprn: '100010192035',
-      postcode: 'CW8 4BH',
-      x: 364853,
-      y: 373782,
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH'
-    }))
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -1234,7 +1065,6 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
-    addressStub.revert()
     riskStub.revert()
   })
 
@@ -1262,7 +1092,9 @@ lab.experiment('Unit', () => {
     const options = {
       method: 'GET',
       url: mountPath + '/',
-      headers: { Cookie: 'some-token=<token>; HttpOnly; SameSite=Strict' }
+      headers: {
+        cookie: 'some-token=<token>'
+      }
     }
 
     const response = await server.inject(options)

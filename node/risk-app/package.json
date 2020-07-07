@@ -1,6 +1,6 @@
 {
   "name": "risk-app",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "Long term flood risk information",
   "main": "index.js",
   "scripts": {
@@ -24,8 +24,9 @@
     "@hapi/joi": "17.1.1",
     "@hapi/vision": "6.0.0",
     "@hapi/wreck": "17.0.0",
+    "@hapi/yar": "^10.1.0",
     "blipp": "4.0.1",
-    "govuk-frontend": "3.6.0",
+    "govuk-frontend": "3.7.0",
     "hapi-pino": "8.0.1",
     "hapi-rate-limit": "5.0.0",
     "https-proxy-agent": "5.0.0",

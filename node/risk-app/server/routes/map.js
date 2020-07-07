@@ -8,7 +8,8 @@ module.exports = {
     description: 'Get the map page',
     handler: (request, h) => {
       const { query } = request
-      const { easting, northing, address } = query
+      const { easting, northing } = query
+      const address = request.yar.get('address')
 
       return h.view('map', new MapViewModel(easting, northing, address))
     },
@@ -16,8 +17,7 @@ module.exports = {
       query: joi.object().keys({
         easting: joi.number(),
         northing: joi.number(),
-        map: joi.string(),
-        address: joi.number()
+        map: joi.string()
       }).required()
     }
   }
