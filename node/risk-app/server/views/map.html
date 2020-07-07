@@ -9,7 +9,7 @@
 
 {% block beforeContent %}
   {% if address %}
-  <a href="/{{ mountPath }}/risk?address={{ address }}" class="govuk-back-link" data-id="risk-address">Back</a>
+  <a href="/{{ mountPath }}/risk" class="govuk-back-link" data-id="risk-address">Back</a>
   {% endif %}
 {% endblock %}
 
@@ -62,7 +62,7 @@
   <div>
     {% if address %}
       <p>
-        <a class="govuk-link" href="/{{ mountPath }}/risk?address={{ address }}"
+        <a class="govuk-link" href="/{{ mountPath }}/risk"
           data-id="risk-address">View the flood risk information for the location you originally searched for</a>
       </p>
     {% endif %}

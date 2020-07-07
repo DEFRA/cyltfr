@@ -1,8 +1,5 @@
-const joi = require('@hapi/joi')
 const boom = require('@hapi/boom')
-const config = require('../config')
 const riskService = require('../services/risk')
-const addressService = require('../services/address')
 const RiskViewModel = require('../models/risk-view')
 const errors = require('../models/errors.json')
 
@@ -11,7 +8,12 @@ module.exports = {
   path: '/risk',
   handler: async (request, h) => {
     try {
-      const address = await addressService.findById(request.query.address)
+      const address = request.yar.get('address')
+
+      if (!address) {
+        return h.redirect('/postcode')
+      }
+
       const { x, y } = address
       const radius = 20
 
@@ -36,7 +38,7 @@ module.exports = {
         }
 
         if (!risk.inEngland) {
-          return h.redirect(`/england-only?uprn=${encodeURIComponent(address.uprn)}`)
+          return h.redirect('/england-only')
         } else {
           return h.view('risk', new RiskViewModel(risk, address))
         }
@@ -48,16 +50,6 @@ module.exports = {
     }
   },
   options: {
-    description: 'Get risk text page',
-    validate: {
-      query: joi.object().keys({
-        address: joi.number().required()
-      }).required()
-    },
-    plugins: {
-      'hapi-rate-limit': {
-        enabled: config.rateLimitEnabled
-      }
-    }
+    description: 'Get risk text page'
   }
 }
