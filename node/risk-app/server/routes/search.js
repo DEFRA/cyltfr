@@ -40,6 +40,11 @@ module.exports = [
 
         const warnings = await getWarnings(postcode, request)
 
+        // Set addresses to session
+        request.yar.set({
+          addresses
+        })
+
         return h.view('search', new SearchViewModel(postcode, addresses, null, warnings))
       } catch (err) {
         return boom.badRequest(errors.addressByPostcode.message, err)
@@ -64,16 +69,27 @@ module.exports = [
     path: '/search',
     handler: async (request, h) => {
       const { postcode } = request.query
-      const { address, addresses } = request.payload
+      const { address } = request.payload
+      const addresses = request.yar.get('addresses')
+
+      if (!Array.isArray(addresses)) {
+        return h.redirect('/postcode')
+      }
 
       if (!address) {
         const errorMessage = 'Select an address'
         const warnings = await getWarnings(postcode, request)
-        const model = new SearchViewModel(postcode, JSON.parse(addresses), errorMessage, warnings)
+        const model = new SearchViewModel(postcode, addresses, errorMessage, warnings)
+
         return h.view('search', model)
       }
 
-      return h.redirect(`/risk?address=${address}`)
+      // Set addresses to session
+      request.yar.set({
+        address: addresses[Number(address)]
+      })
+
+      return h.redirect('/risk')
     },
     options: {
       description: 'Post to the search page',
@@ -82,8 +98,7 @@ module.exports = [
           postcode: joi.string().trim().regex(postcodeRegex).required()
         }),
         payload: joi.object().keys({
-          address: joi.string().allow('').required(),
-          addresses: joi.string().required()
+          address: joi.string().allow('').required()
         })
       }
     }

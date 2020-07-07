@@ -38,7 +38,9 @@ async function find (postcode) {
       return {
         uprn: item.UPRN,
         postcode: item.POSTCODE,
-        address: item.ADDRESS
+        address: item.ADDRESS,
+        x: item.X_COORDINATE,
+        y: item.Y_COORDINATE
       }
     })
 }

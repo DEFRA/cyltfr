@@ -18,8 +18,7 @@ module.exports = {
       query: joi.object().keys({
         region: joi.string().allow('', 'wales', 'northern-ireland', 'scotland'),
         premises: joi.string().allow(''),
-        postcode: joi.string().allow(''),
-        uprn: joi.string().allow('')
+        postcode: joi.string().allow('')
       }).required()
     }
   }
