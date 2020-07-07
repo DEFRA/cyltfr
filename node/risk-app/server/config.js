@@ -26,7 +26,8 @@ const schema = joi.object().keys({
   rateLimitWhitelist: joi.array().items(joi.string().required()).default([]),
   redisCacheEnabled: joi.boolean().default(false),
   redisCacheHost: joi.string().hostname().when('redisCacheEnabled', { is: true, then: joi.required() }),
-  redisCachePort: joi.number().integer().when('redisCacheEnabled', { is: true, then: joi.required() })
+  redisCachePort: joi.number().integer().when('redisCacheEnabled', { is: true, then: joi.required() }),
+  cookiePassword: joi.string().min(32).required()
 })
 
 config.http_proxy = process.env.http_proxy
