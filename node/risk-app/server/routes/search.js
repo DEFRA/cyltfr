@@ -76,7 +76,7 @@ module.exports = [
         return h.redirect('/postcode')
       }
 
-      if (!address) {
+      if (address < 0) {
         const errorMessage = 'Select an address'
         const warnings = await getWarnings(postcode, request)
         const model = new SearchViewModel(postcode, addresses, errorMessage, warnings)
@@ -86,7 +86,7 @@ module.exports = [
 
       // Set addresses to session
       request.yar.set({
-        address: addresses[Number(address)]
+        address: addresses[address]
       })
 
       return h.redirect('/risk')
@@ -98,7 +98,7 @@ module.exports = [
           postcode: joi.string().trim().regex(postcodeRegex).required()
         }),
         payload: joi.object().keys({
-          address: joi.string().allow('').required()
+          address: joi.number().required()
         })
       }
     }
