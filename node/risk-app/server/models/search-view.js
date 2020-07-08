@@ -8,7 +8,8 @@ class SearchViewModel {
     const defaultOption = {
       text: addresses.length === 1
         ? '1 address found'
-        : `${addresses.length} addresses found`
+        : `${addresses.length} addresses found`,
+      value: -1
     }
 
     const items = [defaultOption].concat(addresses.map((addr, index) => ({
