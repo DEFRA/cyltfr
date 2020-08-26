@@ -1,6 +1,6 @@
 {
   "name": "risk-service",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "description": "Flood Service",
   "main": "index.js",
   "scripts": {
