@@ -28,12 +28,9 @@ class SearchViewModel {
 
     if (warnings && warnings.message) {
       if (warnings.severity && warnings.severity < 4) {
-        const summary = warnings.summary[warnings.severity - 1]
         this.banner = {
           url: floodWarningsUrl + '/warnings?location=' + postcode,
-          message: warnings.message,
-          className: summary.severity === 3 ? 'alert' : 'warning',
-          icon: summary.hash
+          message: warnings.message
         }
       }
     }
