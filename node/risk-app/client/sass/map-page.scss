@@ -1,4 +1,5 @@
-@import "node_modules/govuk-frontend/govuk/settings/colours-applied";
+@import "node_modules/govuk-frontend/govuk/settings/all";
+@import "node_modules/govuk-frontend/govuk/helpers/all";
 
 #map-page {
   #progress {
@@ -18,6 +19,12 @@
 
   .ol-attribution li {
     font-family: "GDS Transport", Arial, sans-serif;
-    font-size: 10px;
+    font-size: 10px
+  }
+
+  label[for=location] {
+    @include govuk-media-query ($until: tablet) {
+      margin-top: 10px;
+    }
   }
 }
