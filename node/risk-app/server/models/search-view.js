@@ -1,5 +1,5 @@
-const config = require('../config')
-const floodWarningsUrl = config.floodWarningsUrl
+const { floodWarningsUrl } = require('../config')
+const { errorSummaryTitle } = require('../helpers')
 
 class SearchViewModel {
   constructor (postcode, addresses = [], errorMessage, warnings) {
@@ -38,6 +38,16 @@ class SearchViewModel {
     if (errorMessage) {
       this.addressSelect.errorMessage = {
         text: errorMessage
+      }
+
+      this.errorSummary = {
+        titleText: errorSummaryTitle,
+        errorList: [
+          {
+            text: errorMessage,
+            href: '#address'
+          }
+        ]
       }
     }
 

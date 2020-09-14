@@ -1,3 +1,5 @@
+const { errorSummaryTitle } = require('../helpers')
+
 class PostcodeViewModel {
   constructor (postcode, errorMessage) {
     this.postcodeInput = {
@@ -16,6 +18,16 @@ class PostcodeViewModel {
     if (errorMessage) {
       this.postcodeInput.errorMessage = {
         text: errorMessage
+      }
+
+      this.errorSummary = {
+        titleText: errorSummaryTitle,
+        errorList: [
+          {
+            text: errorMessage,
+            href: '#postcode'
+          }
+        ]
       }
     }
   }
