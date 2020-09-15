@@ -23,6 +23,13 @@ const RiskDescriptions = {
 
 const Levels = Object.keys(RiskLevel).map(l => RiskLevel[l])
 
+const suitabilities = [
+  'county to town',
+  'national to county',
+  'street to parcels of land',
+  'town to street'
+]
+
 function RiskViewModel (risk, address) {
   const riverAndSeaRisk = risk.riverAndSeaRisk
     ? risk.riverAndSeaRisk.probabilityForBand
@@ -53,14 +60,18 @@ function RiskViewModel (risk, address) {
   const riverAndSeaSuitability = risk.riverAndSeaRisk && risk.riverAndSeaRisk.suitability
   if (riverAndSeaSuitability) {
     const name = riverAndSeaSuitability.toLowerCase()
-    this.riverAndSeaSuitabilityName = `partials/suitability/${name.replace(/ /g, '-')}.html`
+    if (suitabilities.includes(name)) {
+      this.riverAndSeaSuitabilityName = `partials/suitability/${name.replace(/ /g, '-')}.html`
+    }
   }
 
   // Surface water suitability
   const surfaceWaterSuitability = risk.surfaceWaterSuitability
   if (surfaceWaterSuitability) {
     const name = surfaceWaterSuitability.toLowerCase()
-    this.surfaceWaterSuitabilityName = `partials/suitability/${name.replace(/ /g, '-')}.html`
+    if (suitabilities.includes(name)) {
+      this.surfaceWaterSuitabilityName = `partials/suitability/${name.replace(/ /g, '-')}.html`
+    }
   }
 
   // Groundwater area
