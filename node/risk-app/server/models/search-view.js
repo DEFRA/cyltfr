@@ -1,5 +1,5 @@
-const config = require('../config')
-const floodWarningsUrl = config.floodWarningsUrl
+const { floodWarningsUrl } = require('../config')
+const { errorSummaryTitle } = require('../helpers')
 
 class SearchViewModel {
   constructor (postcode, addresses = [], errorMessage, warnings) {
@@ -28,12 +28,9 @@ class SearchViewModel {
 
     if (warnings && warnings.message) {
       if (warnings.severity && warnings.severity < 4) {
-        const summary = warnings.summary[warnings.severity - 1]
         this.banner = {
           url: floodWarningsUrl + '/warnings?location=' + postcode,
-          message: warnings.message,
-          className: summary.severity === 3 ? 'alert' : 'warning',
-          icon: summary.hash
+          message: warnings.message
         }
       }
     }
@@ -41,6 +38,16 @@ class SearchViewModel {
     if (errorMessage) {
       this.addressSelect.errorMessage = {
         text: errorMessage
+      }
+
+      this.errorSummary = {
+        titleText: errorSummaryTitle,
+        errorList: [
+          {
+            text: errorMessage,
+            href: '#address'
+          }
+        ]
       }
     }
 
