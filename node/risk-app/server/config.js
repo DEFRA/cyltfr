@@ -27,7 +27,11 @@ const schema = joi.object().keys({
   redisCacheEnabled: joi.boolean().default(false),
   redisCacheHost: joi.string().hostname().when('redisCacheEnabled', { is: true, then: joi.required() }),
   redisCachePort: joi.number().integer().when('redisCacheEnabled', { is: true, then: joi.required() }),
-  cookiePassword: joi.string().min(32).required()
+  cookiePassword: joi.string().min(32).required(),
+  captchaEnabled: joi.boolean().default(false),
+  captchaUrl: joi.string().uri().when('captchaEnabled', { is: true, then: joi.required() }),
+  captchaSiteKey: joi.string().when('captchaEnabled', { is: true, then: joi.required() }),
+  captchaSecretKey: joi.string().when('captchaEnabled', { is: true, then: joi.required() })
 })
 
 config.http_proxy = process.env.http_proxy

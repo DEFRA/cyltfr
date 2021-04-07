@@ -24,8 +24,24 @@ function get (url, options, ext = false) {
     })
 }
 
+function post (url, options, ext = false) {
+  const thisWreck = (ext && wreckExt) ? wreckExt : wreck
+
+  return thisWreck.post(url, options)
+    .then(response => {
+      if (response.res.statusCode !== 200) {
+        throw new Error('Requested resource returned a non 200 status code')
+      }
+      return response.payload
+    })
+}
+
 function getJson (url, ext = false) {
   return get(url, { json: true }, ext)
+}
+
+function postJson (url, ext = false) {
+  return post(url, { json: true }, ext)
 }
 
 function cleanseLocation (location) {
@@ -68,6 +84,8 @@ function convertLocationToNGR (location) {
 module.exports = {
   get,
   getJson,
+  post,
+  postJson,
   cleanseLocation,
   convertLocationToNGR
 }

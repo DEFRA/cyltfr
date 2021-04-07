@@ -1,3 +1,4 @@
+const config = require('../config')
 const joi = require('@hapi/joi')
 const { postcodeRegex, redirectToHomeCounty } = require('../helpers')
 const PostcodeViewModel = require('../models/postcode-view')
@@ -18,6 +19,7 @@ module.exports = [
     path: '/postcode',
     handler: async (request, h) => {
       const { postcode } = request.payload
+      const recaptcha = request.payload['g-recaptcha-response']
 
       if (!postcode || !postcode.match(postcodeRegex)) {
         const errorMessage = 'Enter a full postcode in England'
@@ -31,15 +33,21 @@ module.exports = [
       if (postcode.toUpperCase().startsWith('BT')) {
         return redirectToHomeCounty(h, postcode, 'northern-ireland')
       }
+      let url
+      if (config.captchaEnabled) {
+        url = `/search?postcode=${encodeURIComponent(postcode)}&token=${encodeURIComponent(recaptcha)}`
+      } else {
+        url = `/search?postcode=${encodeURIComponent(postcode)}`
+      }
 
-      const url = `/search?postcode=${encodeURIComponent(postcode)}`
       return h.redirect(url)
     },
     options: {
       description: 'Post to the postcode page',
       validate: {
         payload: joi.object().keys({
-          postcode: joi.string().trim().required().allow('')
+          postcode: joi.string().trim().required().allow(''),
+          'g-recaptcha-response': joi.string()
         }).required()
       }
     }

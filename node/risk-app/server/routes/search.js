@@ -2,10 +2,12 @@ const joi = require('@hapi/joi')
 const boom = require('@hapi/boom')
 const { postcodeRegex, redirectToHomeCounty } = require('../helpers')
 const config = require('../config')
+const { captchaEnabled, captchaUrl, captchaSecretKey } = config
 const floodService = require('../services/flood')
 const addressService = require('../services/address')
 const SearchViewModel = require('../models/search-view')
 const errors = require('../models/errors.json')
+const util = require('../util')
 
 async function getWarnings (postcode, request) {
   // Don't let an error raised during the call
@@ -23,6 +25,30 @@ module.exports = [
     path: '/search',
     handler: async (request, h) => {
       const { postcode } = request.query
+      const url = '/postcode'
+
+      if (captchaEnabled) {
+        const { token } = request.query
+
+        if (token === 'undefined') {
+          return boom.badRequest(errors.javascriptError.message)
+        }
+
+        if (!token) {
+          return h.redirect(url)
+        }
+
+        // Check that Recaptcha v3 token is valid and has not been used before
+        const uri = `${captchaUrl}${captchaSecretKey}&response=${token}`
+        const payload = await util.postJson(uri, true)
+        if (!payload || !payload.success || payload.score <= 0.5) {
+          if (!payload.success) {
+            return h.redirect(url)
+          } else {
+            return boom.badRequest(errors.captchaError.message)
+          }
+        }
+      }
 
       // Our Address service doesn't support NI addresses
       // but all NI postcodes start with BT so redirect to
@@ -59,7 +85,8 @@ module.exports = [
       },
       validate: {
         query: joi.object().keys({
-          postcode: joi.string().trim().regex(postcodeRegex).required()
+          postcode: joi.string().trim().regex(postcodeRegex).required(),
+          token: joi.string().optional()
         }).required()
       }
     }

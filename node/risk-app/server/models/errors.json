@@ -5,6 +5,12 @@
   "addressById": {
     "message" : "An error occurred finding the address by id"
   },
+  "captchaError": {
+    "message" : "An error occurred validating user"
+  }, 
+  "javascriptError": {
+    "message" : "JavaScript is not enabled"
+  }, 
   "osGetCapabilities": {
     "message" : "Ordnance survey getcapabilities failed"
   },
