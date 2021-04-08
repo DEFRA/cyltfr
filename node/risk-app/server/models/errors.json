@@ -14,6 +14,9 @@
   "osGetCapabilities": {
     "message" : "Ordnance survey getcapabilities failed"
   },
+  "osMapsProxy": {
+    "message" : "Ordnance survey maps proxy call failed"
+  },
   "riskProfile": {
     "message": "An error occurred finding the risk profile"
   },

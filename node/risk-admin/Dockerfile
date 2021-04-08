@@ -2,7 +2,7 @@ FROM osgeo/gdal:alpine-small-latest
 
 RUN set -xe \
     && apk update && apk upgrade \
-    && apk add bash make gcc g++ python curl postgresql-client npm \
+    && apk add bash make gcc g++ py-pip curl postgresql-client npm \
     && bash --version && npm -v && node -v && psql --version && ogr2ogr --version \
     && npm install -g npm \
     && rm -rf /var/cache/apk/*
