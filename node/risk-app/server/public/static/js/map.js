@@ -52,12 +52,6 @@ function loadMap (point) {
       crossOrigin: 'anonymous'
     })
 
-    var attributionText = config.OSAttribution.replace('{{year}}', new Date().getFullYear())
-
-    options.attributions = [
-      attributionText
-    ]
-
     var source = new ol.source.WMTS(options)
     source.setUrl(config.OSWMTS)
 
