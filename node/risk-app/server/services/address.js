@@ -1,9 +1,9 @@
 const util = require('../util')
 const config = require('../config')
-const { osUprnUrl, osPostcodeUrl } = config
+const { osUprnUrl, osPostcodeUrl, osSearchKey } = config
 
 async function findById (id) {
-  const uri = osUprnUrl + id
+  const uri = `${osUprnUrl}${id}&key=${osSearchKey}`
   const payload = await util.getJson(uri, true)
 
   if (!payload || !payload.results || payload.results.length !== 1) {
@@ -24,7 +24,7 @@ async function findById (id) {
 }
 
 async function find (postcode) {
-  const uri = osPostcodeUrl + postcode
+  const uri = `${osPostcodeUrl}${postcode}&key=${osSearchKey}`
   const payload = await util.getJson(uri, true)
 
   if (!payload || !payload.results || !payload.results.length) {

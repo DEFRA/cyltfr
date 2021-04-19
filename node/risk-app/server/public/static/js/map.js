@@ -11,9 +11,10 @@ var config = {
     extent: [0, 0, 800000, 1400000]
   },
   OSGetCapabilities: 'os-get-capabilities',
+  OSWMTS: 'os-maps-proxy',
   OSAttribution: "&#169; Crown copyright and database rights {{year}} <a class='govuk-link' href='http://www.ordnancesurvey.co.uk'>OS</a> 100024198. Use of this mapping data is subject to terms and conditions",
-  OSLayer: 'osgb',
-  OSMatrixSet: 'ZoomMap',
+  OSLayer: 'Road_27700',
+  OSMatrixSet: 'EPSG:27700',
   GSWMSGetCapabilities: 'gwc-proxy?SERVICE=WMS&VERSION=1.1.1&REQUEST=getcapabilities&TILED=true',
   GSWMS: 'gwc-proxy?'
 }
@@ -44,10 +45,6 @@ function loadMap (point) {
     // therefore sizes is set to undefined array, which sets fullTileRanges_
     // to an array of undefineds thus breaking the map      return
     var result = parser.read(OS[0])
-    // TODO
-    // need to set tiles to https
-    // follow up with OS
-    result.OperationsMetadata.GetTile.DCP.HTTP.Get[0].href = result.OperationsMetadata.GetTile.DCP.HTTP.Get[0].href.replace('http://', 'https://')
 
     var options = ol.source.WMTS.optionsFromCapabilities(result, {
       layer: config.OSLayer,
@@ -55,19 +52,8 @@ function loadMap (point) {
       crossOrigin: 'anonymous'
     })
 
-    var attributionText = config.OSAttribution.replace('{{year}}', new Date().getFullYear())
-
-    options.attributions = [
-      attributionText
-    ]
-
     var source = new ol.source.WMTS(options)
-
-    // array of ol.tileRange can't find any reference to this object in ol3 documentation, but is set to NaN and stops the map from functioning
-    // openlayers doesn't expose fulltileranges as a property, so when using minified ol have to set tilegrid.a to null, which is what fulltileranges
-    // is mapped as, hopefully OS will fix their service, otherwise something more robust needs sorting out
-    source.tileGrid.fullTileRanges_ = null
-    source.tileGrid.a = null
+    source.setUrl(config.OSWMTS)
 
     var layer = new ol.layer.Tile({
       ref: config.OSLayer,
@@ -176,6 +162,9 @@ function loadMap (point) {
       controls = controls.extend([new ol.control.FullScreen()])
     }
 
+    // Prevent map from zooming in too far
+    const resolutions = source.tileGrid.getResolutions().slice(0, 11)
+
     map = new ol.Map({
       controls: controls,
       interactions: ol.interaction.defaults({
@@ -186,7 +175,7 @@ function loadMap (point) {
       pixelRatio: 1,
       target: 'map',
       view: new ol.View({
-        resolutions: source.tileGrid.getResolutions(),
+        resolutions: resolutions,
         projection: projection,
         center: point || [440000, 310000],
         zoom: point ? 9 : 0,

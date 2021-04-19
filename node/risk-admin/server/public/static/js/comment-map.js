@@ -36,21 +36,13 @@
     var parser = new ol.format.WMTSCapabilities()
     var result = parser.read(capabilities)
 
-    result.OperationsMetadata.GetTile.DCP.HTTP.Get[0].href = result.OperationsMetadata.GetTile.DCP.HTTP.Get[0].href.replace('http://', 'https://')
-
     var options = ol.source.WMTS.optionsFromCapabilities(result, {
-      layer: 'osgb',
-      matrixSet: 'ZoomMap',
+      layer: 'Road_27700',
+      matrixSet: 'EPSG:27700',
       crossOrigin: 'anonymous'
     })
 
     var source = new ol.source.WMTS(options)
-
-    // array of ol.tileRange can't find any reference to this object in ol3 documentation, but is set to NaN and stops the map from functioning
-    // openlayers doesn't expose fulltileranges as a property, so when using minified ol have to set tilegrid.a to null, which is what fulltileranges
-    // is mapped as, hopefully OS will fix their service, otherwise something more robust needs sorting out
-    source.tileGrid.fullTileRanges_ = null
-    source.tileGrid.a = null
 
     var layer = new ol.layer.Tile({
       ref: 'osgb',

@@ -1,11 +1,11 @@
 const util = require('../util')
 const config = require('../config')
-const osNamesUrl = config.osNamesUrl
+const { osNamesUrl, osSearchKey } = config
 const isEngland = require('./is-england')
 
 module.exports = {
   find: async function findByPlace (place) {
-    const uri = osNamesUrl + place
+    const uri = `${osNamesUrl}${place}&key=${osSearchKey}`
 
     const payload = await util.getJson(uri, true)
 
