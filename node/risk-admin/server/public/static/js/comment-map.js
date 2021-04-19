@@ -37,7 +37,7 @@
     var result = parser.read(capabilities)
 
     var options = ol.source.WMTS.optionsFromCapabilities(result, {
-      layer: 'Outdoor_27700',
+      layer: 'Road_27700',
       matrixSet: 'EPSG:27700',
       crossOrigin: 'anonymous'
     })
