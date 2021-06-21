@@ -52,6 +52,12 @@
 {{ pageTitle + " - GOV.UK" }}
 {% endblock %}
 
+{% block bodyStart %}
+  {% if not cookiesPolicy %}
+    {% include "./partials/cookie-banner.html" %}
+  {% endif %}
+{% endblock %}
+
 {% block content %}
 <h1 class="govuk-heading-xl">Default page template</h1>
 {% endblock %}
@@ -65,7 +71,7 @@
         text: "Help"
       },
       {
-        href: floodWarningsUrl + "/cookies",
+        href: "/" + mountPath + "/cookies",
         text: "Cookies"
       },
       {
@@ -101,7 +107,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="{{ assetPath }}/all.js"></script>
 <script>window.GOVUKFrontend.initAll()</script>
-{% if analyticsAccount %}
+{% if analyticsAccount and cookiesPolicy.analytics %}
 <script src="{{ assetPath }}/js/vendor/stageprompt.js"></script>
 <script type="text/javascript">
   var analyticsAccount = '{{ analyticsAccount }}'
