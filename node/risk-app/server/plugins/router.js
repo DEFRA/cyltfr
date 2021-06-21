@@ -13,7 +13,8 @@ const routes = [].concat(
   require('../routes/feedback'),
   require('../routes/os-terms'),
   require('../routes/geocode'),
-  require('../routes/accessibility-statement')
+  require('../routes/accessibility-statement'),
+  require('../routes/cookies')
 )
 
 module.exports = {
