@@ -1,10 +1,10 @@
-var acceptButton = document.querySelector('.js-cookies-button-accept')
-var rejectButton = document.querySelector('.js-cookies-button-reject')
-var acceptedBanner = document.querySelector('.js-cookies-accepted')
-var rejectedBanner = document.querySelector('.js-cookies-rejected')
-var questionBanner = document.querySelector('.js-question-banner')
-var cookieBanner = document.querySelector('.js-cookies-banner')
-var cookieContainer = document.querySelector('.js-cookies-container')
+const acceptButton = document.querySelector('.js-cookies-button-accept')
+const rejectButton = document.querySelector('.js-cookies-button-reject')
+const acceptedBanner = document.querySelector('.js-cookies-accepted')
+const rejectedBanner = document.querySelector('.js-cookies-rejected')
+const questionBanner = document.querySelector('.js-question-banner')
+const cookieBanner = document.querySelector('.js-cookies-banner')
+const cookieContainer = document.querySelector('.js-cookies-container')
 
 cookieContainer.style.display = 'block'
 
