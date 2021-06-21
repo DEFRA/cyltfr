@@ -1,10 +1,10 @@
 /* global */
 
-var $ = window.$
-var ol = window.ol
-var parser = new ol.format.WMTSCapabilities()
-var wmsparser = new ol.format.WMSCapabilities()
-var config = {
+const $ = window.$
+const ol = window.ol
+const parser = new ol.format.WMTSCapabilities()
+const wmsparser = new ol.format.WMSCapabilities()
+const config = {
   projection: {
     ref: 'EPSG:27700',
     proj4: '+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.06,0.15,0.247,0.842,-20.489 +units=m +no_defs',
@@ -19,24 +19,24 @@ var config = {
   GSWMS: 'gwc-proxy?'
 }
 // var overlayTemplate = require('./overlay.hbs')
-var map, callback, currentLayer, $overlay, $overlayContent
-var isLoading = false
-var loading = 0
-var loaded = 0
-var maxResolution = 1000
+let map, callback, currentLayer, $overlay, $overlayContent
+let isLoading = false
+let loading = 0
+let loaded = 0
+let maxResolution = 1000
 
 function overlayTemplate (data) {
   return window.nunjucks.render('overlay.html', data)
 }
 
 function loadMap (point) {
-  var $body = $(document.body)
+  const $body = $(document.body)
 
   // add the projection to Window.proj4
   window.proj4.defs(config.projection.ref, config.projection.proj4)
   ol.proj.proj4.register(window.proj4)
 
-  var projection = ol.proj.get(config.projection.ref)
+  const projection = ol.proj.get(config.projection.ref)
 
   projection.setExtent(config.projection.extent)
 
@@ -44,32 +44,32 @@ function loadMap (point) {
     // bug: parser is not getting the matrixwidth and matrixheight values when parsing,
     // therefore sizes is set to undefined array, which sets fullTileRanges_
     // to an array of undefineds thus breaking the map      return
-    var result = parser.read(OS[0])
+    const result = parser.read(OS[0])
 
-    var options = ol.source.WMTS.optionsFromCapabilities(result, {
+    const options = ol.source.WMTS.optionsFromCapabilities(result, {
       layer: config.OSLayer,
       matrixSet: config.OSMatrixSet,
       crossOrigin: 'anonymous'
     })
 
-    var source = new ol.source.WMTS(options)
+    const source = new ol.source.WMTS(options)
     source.setUrl(config.OSWMTS)
 
-    var layer = new ol.layer.Tile({
+    const layer = new ol.layer.Tile({
       ref: config.OSLayer,
       source: source
     })
-    var layers = []
+    const layers = []
     // add the base map layer
     layers.push(layer)
 
-    var wmsResult = wmsparser.read(WMS[0])
+    const wmsResult = wmsparser.read(WMS[0])
 
     // I can't find a better way of doing this for a tileWMS source, WMTS souce has
     // optionsFromCapabilities function which does some of the work for you, but it looks
     // like that function just does this anyway, although i think the WMTS version does a lot more with setting up matrixSet and things
-    for (var i = 0; i < wmsResult.Capability.Layer.Layer.length; i++) {
-      var WmsSource = new ol.source.TileWMS({
+    for (let i = 0; i < wmsResult.Capability.Layer.Layer.length; i++) {
+      const WmsSource = new ol.source.TileWMS({
         url: config.GSWMS,
         params: {
           LAYERS: wmsResult.Capability.Layer.Layer[i].Name,
@@ -83,7 +83,7 @@ function loadMap (point) {
         })
       })
 
-      var progress = new Progress(document.getElementById('progress'))
+      const progress = new Progress(document.getElementById('progress'))
 
       source.on('tileloadstart', function () {
         progress.addLoading()
@@ -133,7 +133,7 @@ function loadMap (point) {
     }
 
     if (point) {
-      var centreLayer = new ol.layer.Vector({
+      const centreLayer = new ol.layer.Vector({
         ref: 'crosshair',
         visible: true,
         source: new ol.source.Vector({
@@ -150,7 +150,7 @@ function loadMap (point) {
       layers.push(centreLayer)
     }
 
-    var controls = ol.control.defaults({ attributionOptions: { collapsible: true } })
+    let controls = ol.control.defaults({ attributionOptions: { collapsible: true } })
       .extend([
         new ol.control.ScaleLine({
           units: 'metric',
@@ -193,9 +193,9 @@ function loadMap (point) {
     $('#legend').on('click', 'a[data-id]', function (e) {
       e.preventDefault()
       // Build a view model from the properties
-      var $link = $(this)
-      var id = $link.data('id')
-      var viewModel = {
+      const $link = $(this)
+      const id = $link.data('id')
+      const viewModel = {
         isRiskDescription: true,
         isRiversOrSeas: id.substr(0, 11) === 'rivers-seas',
         isSurfaceWater: id.substr(0, 13) === 'surface-water',
@@ -203,7 +203,7 @@ function loadMap (point) {
       }
 
       // Get the overlay content html using the template
-      var html = overlayTemplate(viewModel)
+      const html = overlayTemplate(viewModel)
 
       // Update the content
       $overlayContent.html(html)
@@ -216,12 +216,12 @@ function loadMap (point) {
 
     // Map interaction functions
     map.on('pointermove', function (e) {
-      var currentLayerRef = currentLayer && currentLayer.getProperties().ref
+      const currentLayerRef = currentLayer && currentLayer.getProperties().ref
       if (e.dragging) {
         return
       }
 
-      var pixel = map.getEventPixel(e.originalEvent)
+      const pixel = map.getEventPixel(e.originalEvent)
       if ((currentLayerRef === 'risk:1-ROFRS' || currentLayerRef === 'risk:6-SW-Extent') || (bullseye(pixel) && !(currentLayerRef !== 'risk:1-ROFRS' && currentLayerRef !== 'risk:6-SW-Extent' && currentLayerRef !== 'risk:2-FWLRSF'))) {
         $body.css('cursor', 'pointer')
       } else {
@@ -230,7 +230,7 @@ function loadMap (point) {
     })
 
     map.on('singleclick', function (e) {
-      var currentLayerRef = currentLayer && currentLayer.getProperties().ref
+      const currentLayerRef = currentLayer && currentLayer.getProperties().ref
 
       if (isFullscreen()) {
         return
@@ -240,8 +240,8 @@ function loadMap (point) {
         return
       }
 
-      var resolution = map.getView().getResolution()
-      var url = currentLayer.getSource().getGetFeatureInfoUrl(e.coordinate, resolution, config.projection.ref, {
+      const resolution = map.getView().getResolution()
+      const url = currentLayer.getSource().getGetFeatureInfoUrl(e.coordinate, resolution, config.projection.ref, {
         INFO_FORMAT: 'application/json',
         FEATURE_COUNT: 10
       })
@@ -257,7 +257,7 @@ function loadMap (point) {
           return
         }
 
-        var viewModel, properties, feature
+        let viewModel, properties, feature
 
         if (currentLayerRef === 'risk:1-ROFRS') {
           if (data.features.length) {
@@ -272,8 +272,8 @@ function loadMap (point) {
             id: 'rivers-seas-' + (properties ? properties.prob_4band.toLowerCase() : 'very-low')
           }
         } else if (currentLayerRef === 'risk:6-SW-Extent') {
-          var levels = {}
-          var level = ''
+          const levels = {}
+          let level = ''
 
           data.features.forEach(function (item) {
             if (item.id.indexOf('ufmfsw_extent_1_in_30_') > -1) {
@@ -310,7 +310,7 @@ function loadMap (point) {
           properties = feature.properties
 
           // Get the feature and build a view model from the properties
-          var isRiverLevelStation = feature.id.indexOf('river_level') === 0
+          const isRiverLevelStation = feature.id.indexOf('river_level') === 0
           viewModel = {
             isMonitoringStation: true,
             flow30: isRiverLevelStation && toFixed(properties.flow_30),
@@ -325,7 +325,7 @@ function loadMap (point) {
         }
 
         // Get the overlay content html using the template
-        var html = overlayTemplate(viewModel)
+        const html = overlayTemplate(viewModel)
 
         // update the content
         $overlayContent.html(html)
@@ -362,7 +362,7 @@ function loadMap (point) {
 function showMap (ref) {
   closeOverlay()
   map.getLayers().forEach(function (layer) {
-    var name = layer.getProperties().ref
+    const name = layer.getProperties().ref
     if (name !== config.OSLayer && name !== 'crosshair') {
       currentLayer = name === ref ? layer : currentLayer
       layer.setVisible(name === ref)
@@ -375,7 +375,7 @@ function updateSize () {
 }
 
 function panTo (point, zoom) {
-  var view = map.getView()
+  const view = map.getView()
   view.setCenter(point)
   view.setZoom(zoom)
 }
@@ -422,7 +422,7 @@ Progress.prototype.addLoading = function () {
 }
 
 Progress.prototype.addLoaded = function () {
-  var this_ = this
+  const this_ = this
   setTimeout(function () {
     ++this_.tilesLoaded
     this_.update()
@@ -430,12 +430,12 @@ Progress.prototype.addLoaded = function () {
 }
 
 Progress.prototype.update = function () {
-  var width = (this.tilesLoaded / this.tilesLoading * 100).toFixed(1) + '%'
+  const width = (this.tilesLoaded / this.tilesLoading * 100).toFixed(1) + '%'
   this.el.style.width = width
   if (this.tilesLoading === this.tilesLoaded) {
     this.tilesLoading = 0
     this.tilesLoaded = 0
-    var this_ = this
+    const this_ = this
     setTimeout(function () {
       this_.hide()
     }, 500)

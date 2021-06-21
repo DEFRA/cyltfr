@@ -6,9 +6,10 @@ module.exports = {
   options: {
     cache: cache
       ? {
-        cache: cache.name,
-        segment: 'session'
-      } : undefined,
+          cache: cache.name,
+          segment: 'session'
+        }
+      : undefined,
     maxCookieSize: 0,
     storeBlank: false,
     cookieOptions: {

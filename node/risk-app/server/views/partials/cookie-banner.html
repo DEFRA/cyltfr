@@ -1,0 +1,58 @@
+{% from "components/cookie-banner/macro.njk" import govukCookieBanner %}
+
+<div class="js-cookies-container" style="display: none">
+  {{ govukCookieBanner({
+    ariaLabel: "Cookies on " + serviceName,
+    "classes": "js-cookies-banner",
+    "messages": [
+      {
+        "headingText": "Cookies on " + serviceName,
+        "text": "We use analytics cookies to help understand how users use our service.",
+        "actions": [
+          {
+            "text": "Accept analytics cookies",
+            "type": "button",
+            "classes": "js-cookies-button-accept"
+          },
+          {
+            "text": "Reject analytics cookies",
+            "type": "button",
+            "classes": "js-cookies-button-reject"
+          },
+          {
+            "text": "View cookie preferences",
+            "href": "/" + mountPath + "/cookies"
+          }
+        ],
+        "classes": "js-question-banner"
+      },
+      {
+        "text": "Your cookie preferences have been saved. You have accepted cookies.",
+        "role": "alert",
+        "actions": [
+          {
+            "text": "Hide this message",
+            "type": "button",
+            "classes": "js-hide"
+          }
+        ],
+        "classes": "js-cookies-accepted",
+        "hidden": true
+      },
+      {
+        "text": "Your cookie preferences have been saved. You have rejected cookies.",
+        "role": "alert",
+        "actions": [
+          {
+            "text": "Hide this message",
+            "type": "button",
+            "classes": "js-hide"
+          }
+        ],
+        "classes": "js-cookies-rejected",
+        "hidden": true
+      }
+    ]
+  }) }}
+</div>
+<script src="{{ assetPath }}/js/cookies.js"></script>

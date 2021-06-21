@@ -12,8 +12,8 @@ function MapController (categories) {
  */
 MapController.prototype.setCurrent = function (ref) {
   // Work out the current category and map
-  var category, map, defaultCategory, defaultMap
-  for (var i = 0; i < this._categories.length; i++) {
+  let category, map, defaultCategory, defaultMap
+  for (let i = 0; i < this._categories.length; i++) {
     category = this._categories[i]
     if (i === 0) {
       defaultCategory = category
@@ -25,7 +25,7 @@ MapController.prototype.setCurrent = function (ref) {
       return
     }
 
-    for (var j = 0; j < category.maps.length; j++) {
+    for (let j = 0; j < category.maps.length; j++) {
       map = category.maps[j]
       if (i === 0 && j === 0) {
         defaultMap = map
@@ -46,8 +46,8 @@ MapController.prototype.setCurrent = function (ref) {
 ;(function () {
   function getParameterByName (name) {
     name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]')
-    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)')
-    var results = regex.exec(window.location.search)
+    const regex = new RegExp('[\\?&]' + name + '=([^&#]*)')
+    const results = regex.exec(window.location.search)
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
   }
 
@@ -56,29 +56,29 @@ MapController.prototype.setCurrent = function (ref) {
   }
 
   function mapPage () {
-    var mapController = new MapController(mapCategories.categories)
+    const mapController = new MapController(mapCategories.categories)
 
-    var $header = $('.map-header')
-    var $selector = $('select', $header)
-    var $error = $('#error-message')
-    var $query = $('input[name=location]', $header)
-    var $map = $('#map')
-    var $body = $(document.body)
+    const $header = $('.map-header')
+    const $selector = $('select', $header)
+    const $error = $('#error-message')
+    const $query = $('input[name=location]', $header)
+    const $map = $('#map')
+    const $body = $(document.body)
 
-    var easting = parseInt(getParameterByName('easting'), 10)
-    var northing = parseInt(getParameterByName('northing'), 10)
-    var hasLocation = !!easting
-    var maps = window.maps
+    const easting = parseInt(getParameterByName('easting'), 10)
+    const northing = parseInt(getParameterByName('northing'), 10)
+    const hasLocation = !!easting
+    const maps = window.maps
 
     maps.loadMap(hasLocation && [easting, northing])
 
     // Store a reference to the map legend element
-    var $legend = $('#legend')
+    const $legend = $('#legend')
 
     function setCurrent (ref) {
       mapController.setCurrent(ref)
 
-      var currMap = mapController.currMap
+      const currMap = mapController.currMap
 
       // Update the mobile nav
       $selector.val(currMap.ref)
@@ -104,12 +104,12 @@ MapController.prototype.setCurrent = function (ref) {
     $header.on('submit', 'form', function (e) {
       e.preventDefault()
 
-      var location = $query.val().replace(/[^a-zA-Z0-9',-.& ]/g, '')
-      var noResults = 'No results match this search term.'
-      var serviceUnavailable = 'There is currently a delay in obtaining the results for this area. Normal service will be resumed as soon as possible. In the meantime please use the map below to find the latest information near you.'
+      const location = $query.val().replace(/[^a-zA-Z0-9',-.& ]/g, '')
+      const noResults = 'No results match this search term.'
+      const serviceUnavailable = 'There is currently a delay in obtaining the results for this area. Normal service will be resumed as soon as possible. In the meantime please use the map below to find the latest information near you.'
 
       if (location) {
-        var url = '/long-term-flood-risk/api/geocode?location=' + location
+        const url = '/long-term-flood-risk/api/geocode?location=' + location
         $error.text('')
 
         $.ajax({
@@ -119,7 +119,7 @@ MapController.prototype.setCurrent = function (ref) {
             if (data.error) {
               $error.text(serviceUnavailable)
             } else if (data.isEngland) {
-              var point = [data.easting, data.northing]
+              const point = [data.easting, data.northing]
               maps.panTo(point, 7)
             } else {
               $error.text(noResults)
