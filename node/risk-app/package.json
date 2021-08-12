@@ -16,17 +16,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@hapi/boom": "9.1.2",
+    "@hapi/boom": "9.1.3",
     "@hapi/catbox-redis": "6.0.2",
     "@hapi/h2o2": "9.1.0",
-    "@hapi/hapi": "20.1.4",
+    "@hapi/hapi": "20.1.5",
     "@hapi/inert": "6.0.3",
     "@hapi/joi": "17.1.1",
     "@hapi/vision": "6.1.0",
     "@hapi/wreck": "17.1.0",
     "@hapi/yar": "10.1.1",
     "blipp": "4.0.2",
-    "govuk-frontend": "3.12.0",
+    "govuk-frontend": "3.13.0",
     "hapi-pino": "8.3.0",
     "hapi-rate-limit": "5.0.0",
     "https-proxy-agent": "5.0.0",
@@ -34,8 +34,8 @@
   },
   "devDependencies": {
     "@hapi/code": "8.0.3",
-    "@hapi/lab": "24.2.1",
-    "node-sass": "6.0.0",
+    "@hapi/lab": "24.3.2",
+    "node-sass": "6.0.1",
     "standard": "16.0.3"
   },
   "standard": {
