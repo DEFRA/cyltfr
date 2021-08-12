@@ -41,7 +41,7 @@ rejectedBanner.querySelector('.js-hide').addEventListener('click', function () {
 })
 
 function submitPreference (accepted) {
-  window.$.post('/long-term-flood-risk/cookies', {
+  window.$.post('/cookies', {
     analytics: accepted,
     async: true
   }, function (data) {
