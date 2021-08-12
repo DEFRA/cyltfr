@@ -1,4 +1,3 @@
-const config = require('../config')
 const errors = require('../models/errors.json')
 
 /*
@@ -45,13 +44,6 @@ module.exports = {
               return h.view('500-risk').code(statusCode)
             default:
               return h.view('500').code(statusCode)
-          }
-        } else if (response.statusCode === 302 && config.mountPath) {
-          // If we are redirecting the response to a root relative and there's
-          // a mount path, prepend the mount path to the redirection location.
-          const location = response.headers.location
-          if (location.startsWith('/')) {
-            response.location('/' + config.mountPath + location)
           }
         }
 
