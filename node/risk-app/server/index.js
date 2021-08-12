@@ -22,17 +22,11 @@ async function createServer () {
     cache
   })
 
-  const routeOptions = {
-    routes: {
-      prefix: config.mountPath && ('/' + config.mountPath)
-    }
-  }
-
   // Register the plugins
   await server.register(require('@hapi/h2o2'))
-  await server.register(require('@hapi/inert'), routeOptions)
+  await server.register(require('@hapi/inert'))
   await server.register(require('./plugins/views'))
-  await server.register(require('./plugins/router'), routeOptions)
+  await server.register(require('./plugins/router'))
   await server.register(require('./plugins/rate-limit'))
   await server.register(require('./plugins/error-pages'))
   await server.register(require('./plugins/full-url'))
