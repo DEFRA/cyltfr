@@ -11,7 +11,7 @@ module.exports = {
     try {
       const url = `${osMapsUrl}${request.url.search}&key=${osMapsKey}`
       const payload = await util.get(url, {}, true)
-      return h.response(payload).type('application/octet-stream')
+      return h.response(payload).type('image/png')
     } catch (err) {
       return Boom.badRequest(errors.osMapsProxy.message, err)
     }

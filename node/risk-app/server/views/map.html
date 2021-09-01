@@ -49,7 +49,10 @@
   <div id="error-message" class="govuk-body-s govuk-!-margin-bottom-0 govuk-!-margin-top-1"></div>
   <div class="map-container">
     <div id="progress"></div>
-    <div id="map"></div>
+    <div id="map">
+      <div class="os-api-branding logo"></div>
+      <div class="os-api-branding copyright">Contains OS data &#169; Crown copyright and database rights {{year}}</div>
+    </div>
     <div id="map-overlay">
       <div class="map-overlay-container">
         <a class="map-overlay-close"></a>
@@ -94,8 +97,6 @@
 <script src="{{ assetPath }}/nunjucks-slim.js"></script>
 <script src="{{ assetPath }}/js/map.js"></script>
 <script src="{{ assetPath }}/js/templates.js"></script>
-<link rel="stylesheet" href="https://labs.os.uk/public/os-api-branding/v0.2.0/os-api-branding.css" />
-<script src="https://labs.os.uk/public/os-api-branding/v0.2.0/os-api-branding.js"></script>
 
 <script>
   window.mapCategories = {{ maps | dump | safe }}
