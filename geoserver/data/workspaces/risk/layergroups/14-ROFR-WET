@@ -1,0 +1,26 @@
+<layerGroup>
+  <id>LayerGroupInfoImpl--1a2a398b:1510f867e96:-7fe2</id>
+  <name>14-ROFR-WET</name>
+  <mode>SINGLE</mode>
+  <title>Map 14: Risk of flooding from Reservoirs (Wet)</title>
+  <workspace>
+    <id>WorkspaceInfoImpl-500e64e7:150fcd642d7:-7fe6</id>
+  </workspace>
+  <publishables>
+    <published type="layer">
+      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8ff4</id>
+    </published>
+  </publishables>
+  <styles>
+    <style>
+      <id>StyleInfoImpl-7929d142:151009880af:-7ff2</id>
+    </style>
+  </styles>
+  <bounds>
+    <minx>0.0</minx>
+    <maxx>700000.0</maxx>
+    <miny>0.0</miny>
+    <maxy>800000.0</maxy>
+    <crs class="projected">EPSG:27700</crs>
+  </bounds>
+</layerGroup>
