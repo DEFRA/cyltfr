@@ -250,6 +250,30 @@
               "icon": "blue"
             }]
           }
+        },
+        {
+          "ref": "Reservoirs_13-ROFR-DRY",
+          "name": "Reservoirs dry",
+          "title": "Reservoir flood risk: dry",
+          "legend": {
+            "title": "Reservoirs dry",
+            "keys": [{
+              "text": "Maximum extent of flooding",
+              "icon": "blue"
+            }]
+          }
+        },
+        {
+          "ref": "Reservoirs_14-ROFR-WET",
+          "name": "Reservoirs wet",
+          "title": "Reservoir flood risk: wet",
+          "legend": {
+            "title": "Reservoirs wet",
+            "keys": [{
+              "text": "Maximum extent of flooding",
+              "icon": "blue"
+            }]
+          }
         }
       ]
     }
