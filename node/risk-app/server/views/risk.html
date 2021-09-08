@@ -77,6 +77,91 @@
         </div>
         {% endif %}
 
+
+
+
+
+
+        <!-- Reservoir Dry -->
+        {% if reservoirDryRisk %}
+        <div class="reservoirs">
+          <div class="govuk-inset-text">
+            <h3 class="govuk-!-margin-bottom-2">Reservoirs (dry)</h3>
+            <p class="govuk-!-margin-top-0 risk">There is a risk of flooding from reservoirs in this area</p>
+          </div>
+          <p class="govuk-body">
+            Flooding from reservoirs is extremely unlikely.
+            An area is considered at risk if peoples’ lives could be threatened by an uncontrolled release of water from
+            a reservoir.
+          </p>
+
+          <p class="govuk-body">
+            <a class="govuk-link"
+              href="/map?easting={{easting}}&northing={{northing}}&map=Reservoirs">
+              View a map of the risk of flooding from reservoirs
+            </a>
+          </p>
+
+          <details class="govuk-details" data-module="govuk-details">
+            <summary class="govuk-details__summary" data-journey-click="ltfri:risk:reservoir-details">
+              <span class="govuk-details__summary-text">Reservoirs that could affect this area on a dry day</span>
+            </summary>
+            <div class="govuk-details__text">
+              {% for reservoir in reservoirsDry %}
+              <ul class="govuk-list">
+                <li><strong>{{reservoir.name}}</strong> (grid reference {{reservoir.location}})</li>
+                <li>Owner: {{reservoir.owner}}</li>
+                <li>Lead Local Flood Authority: {{reservoir.authority}}</li>
+                <li>Comments: {{reservoir.comments}}</li>
+              </ul>
+              {% endfor %}
+            </div>
+          </details>
+        </div>
+        {% endif %}
+
+        <!-- Reservoir Wet -->
+        {% if reservoirWetRisk %}
+        <div class="reservoirs">
+          <div class="govuk-inset-text">
+            <h3 class="govuk-!-margin-bottom-2">Reservoirs (wet)</h3>
+            <p class="govuk-!-margin-top-0 risk">There is a risk of flooding from reservoirs in this area</p>
+          </div>
+          <p class="govuk-body">
+            Flooding from reservoirs is extremely unlikely.
+            An area is considered at risk if peoples’ lives could be threatened by an uncontrolled release of water from
+            a reservoir.
+          </p>
+
+          <p class="govuk-body">
+            <a class="govuk-link"
+              href="/map?easting={{easting}}&northing={{northing}}&map=Reservoirs">
+              View a map of the risk of flooding from reservoirs
+            </a>
+          </p>
+
+          <details class="govuk-details" data-module="govuk-details">
+            <summary class="govuk-details__summary" data-journey-click="ltfri:risk:reservoir-details">
+              <span class="govuk-details__summary-text">Reservoirs that could affect this area on a wet day</span>
+            </summary>
+            <div class="govuk-details__text">
+              {% for reservoir in reservoirsWet %}
+              <ul class="govuk-list">
+                <li><strong>{{reservoir.name}}</strong> (grid reference {{reservoir.location}})</li>
+                <li>Owner: {{reservoir.owner}}</li>
+                <li>Lead Local Flood Authority: {{reservoir.authority}}</li>
+                <li>Comments: {{reservoir.comments}}</li>
+              </ul>
+              {% endfor %}
+            </div>
+          </details>
+        </div>
+        {% endif %}
+
+
+
+
+
         <!-- Groundwater -->
         {% if isGroundwaterArea %}
         <div class="groundwater">

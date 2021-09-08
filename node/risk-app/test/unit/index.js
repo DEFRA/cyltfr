@@ -495,7 +495,7 @@ lab.experiment('Unit', () => {
         reservoirName: 'Draycote Water',
         location: '445110, 270060',
         riskDesignation: 'High Risk',
-        isUtilityCompany: 'Severn Trent Water Authority',
+        undertaker: 'Severn Trent Water Authority',
         leadLocalFloodAuthority: 'Warwickshire',
         environmentAgencyArea: 'Environment Agency - Staffordshire, Warwickshire and West Midlands',
         comments: 'If you have questions about local emergency plans for this reservoir you should contact the named Local Authority'

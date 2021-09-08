@@ -31,6 +31,8 @@ module.exports = {
          * the database and we can start to prepare our return response
          */
         let reservoirRisk = null
+        let reservoirDryRisk = null
+        let reservoirWetRisk = null
         let riverAndSeaRisk = null
 
         if (risk.reservoir_risk && risk.reservoir_risk !== 'Error') {
@@ -39,7 +41,7 @@ module.exports = {
               reservoirName: item.resname,
               location: item.location,
               riskDesignation: item.risk_desig,
-              isUtilityCompany: item.ut_company,
+              undertaker: item.ut_company,
               leadLocalFloodAuthority: item.llfa_name,
               environmentAgencyArea: item.ea_area,
               comments: item.comments
@@ -48,6 +50,44 @@ module.exports = {
         } else {
           reservoirRisk = risk.reservoir_risk
         }
+
+
+
+
+
+        if (risk.dry_reservoir_risk && risk.dry_reservoir_risk !== 'Error') {
+          reservoirDryRisk = risk.dry_reservoir_risk.map(function (item) {
+            return {
+              reservoirName: item.reservoir,
+              location: item.ngr,
+              riskDesignation: item.risk_designation,
+              undertaker: item.undertaker,
+              leadLocalFloodAuthority: item.llfa_name,
+              comments: item.comments
+            }
+          })
+        } else {
+          reservoirDryRisk = risk.dry_reservoir_risk
+        }
+
+        if (risk.wet_reservoir_risk && risk.wet_reservoir_risk !== 'Error') {
+          reservoirWetRisk = risk.wet_reservoir_risk.map(function (item) {
+            return {
+              reservoirName: item.reservoir,
+              location: item.ngr,
+              riskDesignation: item.risk_designation,
+              undertaker: item.undertaker,
+              leadLocalFloodAuthority: item.llfa_name,
+              comments: item.comments
+            }
+          })
+        } else {
+          reservoirWetRisk = risk.wet_reservoir_risk
+        }
+
+
+
+
 
         if (risk.rofrs_risk) {
           riverAndSeaRisk = {
@@ -76,6 +116,8 @@ module.exports = {
           inFloodWarningArea: risk.flood_warning_area === 'Error' ? 'Error' : floodWarningArea.length > 0,
           leadLocalFloodAuthority: risk.lead_local_flood_authority,
           reservoirRisk: reservoirRisk,
+          reservoirDryRisk: reservoirDryRisk,
+          reservoirWetRisk: reservoirWetRisk,
           riverAndSeaRisk: riverAndSeaRisk,
           surfaceWaterRisk: risk.surface_water_risk,
           surfaceWaterSuitability: risk.surface_water_suitability,

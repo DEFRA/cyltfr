@@ -36,6 +36,8 @@ function RiskViewModel (risk, address) {
     : RiskLevel.VeryLow
   const surfaceWaterRisk = risk.surfaceWaterRisk || RiskLevel.VeryLow
   const reservoirRisk = !!(risk.reservoirRisk && risk.reservoirRisk.length)
+  const reservoirDryRisk = !!(risk.reservoirDryRisk && risk.reservoirDryRisk.length)
+  const reservoirWetRisk = !!(risk.reservoirWetRisk && risk.reservoirWetRisk.length)
 
   this.riverAndSeaRisk = riverAndSeaRisk
   this.surfaceWaterRisk = surfaceWaterRisk
@@ -47,7 +49,7 @@ function RiskViewModel (risk, address) {
     this.reservoirs = risk.reservoirRisk.map(function (item) {
       return {
         name: item.reservoirName,
-        owner: item.isUtilityCompany,
+        owner: item.undertaker,
         authority: item.leadLocalFloodAuthority,
         location: util.convertLocationToNGR(item.location),
         riskDesignation: item.riskDesignation,
@@ -55,6 +57,45 @@ function RiskViewModel (risk, address) {
       }
     })
   }
+
+
+
+
+
+
+  this.reservoirDryRisk = reservoirDryRisk
+
+  if (reservoirDryRisk) {
+    this.reservoirsDry = risk.reservoirDryRisk.map(function (item) {
+      return {
+        name: item.reservoirName,
+        owner: item.undertaker,
+        authority: item.leadLocalFloodAuthority,
+        location: item.location,
+        riskDesignation: item.riskDesignation,
+        comments: item.comments
+      }
+    })
+  }
+
+  this.reservoirWetRisk = reservoirWetRisk
+
+  if (reservoirWetRisk) {
+    this.reservoirsWet = risk.reservoirWetRisk.map(function (item) {
+      return {
+        name: item.reservoirName,
+        owner: item.undertaker,
+        authority: item.leadLocalFloodAuthority,
+        location: item.location,
+        riskDesignation: item.riskDesignation,
+        comments: item.comments
+      }
+    })
+  }
+
+
+
+
 
   // River and sea suitability
   const riverAndSeaSuitability = risk.riverAndSeaRisk && risk.riverAndSeaRisk.suitability
