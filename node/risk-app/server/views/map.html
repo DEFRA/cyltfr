@@ -9,7 +9,7 @@
 
 {% block beforeContent %}
   {% if address %}
-  <a href="/{{ mountPath }}/risk" class="govuk-back-link" data-id="risk-address">Back</a>
+  <a href="/risk" class="govuk-back-link" data-id="risk-address">Back</a>
   {% endif %}
 {% endblock %}
 
@@ -67,12 +67,12 @@
   <div>
     {% if address %}
       <p>
-        <a class="govuk-link" href="/{{ mountPath }}/risk"
+        <a class="govuk-link" href="/risk"
           data-id="risk-address">View the flood risk information for the location you originally searched for</a>
       </p>
     {% endif %}
 
-    <p><a href="/{{ mountPath }}/postcode" class="govuk-link">View the flood risk information for another location</a></p>
+    <p><a href="/postcode" class="govuk-link">View the flood risk information for another location</a></p>
 
     <p class="govuk-body-s eu-directive">
       This information meets the requirements of the EU Floods Directive 2007/60/EC
