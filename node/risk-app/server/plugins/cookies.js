@@ -14,7 +14,7 @@ module.exports = {
       server.ext('onPreResponse', (request, h) => {
         if (request.response.variety === 'view') {
           const { state } = request
-          const cookiesPolicy = state?.cookies_policy
+          const cookiesPolicy = (state || {}).cookies_policy
           const response = request.response
           const context = response.source.context || {}
 
