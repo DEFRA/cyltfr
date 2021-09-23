@@ -43,7 +43,7 @@
     tag: {
       text: "beta"
     },
-    html: 'This is a new service – your <a class="govuk-link" href="/' + mountPath + '/feedback">feedback</a> will help us to improve it.'
+    html: 'This is a new service – your <a class="govuk-link" href="/feedback">feedback</a> will help us to improve it.'
   }) }}
 </div>
 {% endblock %}
@@ -71,7 +71,7 @@
         text: "Help"
       },
       {
-        href: "/" + mountPath + "/cookies",
+        href: "/cookies",
         text: "Cookies"
       },
       {
@@ -91,13 +91,13 @@
         text: "Cymraeg"
       },
       {
-        href: "/" + mountPath + "/accessibility-statement",
+        href: "/accessibility-statement",
         text: "Accessibility statement"
       }
     ],
     html: 'Built by the <a href="https://www.gov.uk/government/organisations/environment-agency" class="govuk-footer__link">Environment Agency</a>
     <br><br><p class="govuk-body-s">© Crown copyright and database rights 2019 <a href="http://www.ordnancesurvey.co.uk" class="govuk-footer__link">OS</a> 100024198.
-    <br>Use of the address and mapping data is subject to&nbsp;the <a href="/' + mountPath + '/os-terms" class="govuk-footer__link">terms and conditions</a>.</p>'
+    <br>Use of the address and mapping data is subject to&nbsp;the <a href="/os-terms" class="govuk-footer__link">terms and conditions</a>.</p>'
   }
 }) }}
 {% endblock %}

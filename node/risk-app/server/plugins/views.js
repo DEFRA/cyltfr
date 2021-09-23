@@ -35,11 +35,10 @@ module.exports = {
     isCached: !config.isDev,
     context: {
       appVersion: pkg.version,
-      mountPath: config.mountPath,
-      assetPath: `/${config.mountPath}/assets`,
+      assetPath: '/assets',
       serviceRef: 'LTF-App',
       serviceName: 'Check your long term flood risk',
-      serviceUrl: `/${config.mountPath}/`,
+      serviceUrl: '/',
       homepageUrl: '/',
       pageTitle: 'Check your long term flood risk',
       analyticsAccount: analyticsAccount,

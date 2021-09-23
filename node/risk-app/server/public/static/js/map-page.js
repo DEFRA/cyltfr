@@ -109,7 +109,7 @@ MapController.prototype.setCurrent = function (ref) {
       const serviceUnavailable = 'There is currently a delay in obtaining the results for this area. Normal service will be resumed as soon as possible. In the meantime please use the map below to find the latest information near you.'
 
       if (location) {
-        const url = '/long-term-flood-risk/api/geocode?location=' + location
+        const url = '/api/geocode?location=' + location
         $error.text('')
 
         $.ajax({

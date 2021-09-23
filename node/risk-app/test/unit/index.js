@@ -6,10 +6,6 @@ const mock = require('../mock')
 const riskService = require('../../server/services/risk')
 const floodService = require('../../server/services/flood')
 const addressService = require('../../server/services/address')
-const config = require('../../server/config')
-const mountPath = config.mountPath
-  ? ('/' + config.mountPath)
-  : ''
 
 lab.experiment('Unit', () => {
   let server, cookie
@@ -22,7 +18,7 @@ lab.experiment('Unit', () => {
 
     const options = {
       method: 'GET',
-      url: mountPath + '/search?postcode=cw8 4bh'
+      url: '/search?postcode=cw8 4bh'
     }
 
     const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, [
@@ -42,7 +38,7 @@ lab.experiment('Unit', () => {
 
     const options2 = {
       method: 'POST',
-      url: mountPath + '/search?postcode=cw8 4bh',
+      url: '/search?postcode=cw8 4bh',
       headers: {
         cookie
       },
@@ -64,7 +60,7 @@ lab.experiment('Unit', () => {
   lab.test('/feedback', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/feedback'
+      url: '/feedback'
     }
 
     const response = await server.inject(options)
@@ -74,7 +70,7 @@ lab.experiment('Unit', () => {
   lab.test('/feedback - With referrer header', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/feedback',
+      url: '/feedback',
       headers: { referer: 'http://en.wikipedia.org/wiki/Main_Page' }
     }
 
@@ -85,7 +81,7 @@ lab.experiment('Unit', () => {
   lab.test('/search - banner ', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?postcode=cw8 4bh'
+      url: '/search?postcode=cw8 4bh'
     }
 
     // const stub = mock.replace(floodService, 'findWarnings', mock.makePromise(null, []))
@@ -98,7 +94,7 @@ lab.experiment('Unit', () => {
   lab.test('/address - No banner warnings', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?postcode=cw8 4bh'
+      url: '/search?postcode=cw8 4bh'
     }
 
     const stub = mock.replace(floodService, 'findWarnings', mock.makePromise(null, null))
@@ -111,7 +107,7 @@ lab.experiment('Unit', () => {
   lab.test('/search - No warning banner severity', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?postcode=cw8 4bh'
+      url: '/search?postcode=cw8 4bh'
     }
 
     const stub = mock.replace(floodService, 'findWarnings', mock.makePromise(null, {
@@ -126,7 +122,7 @@ lab.experiment('Unit', () => {
   lab.test('/search - With banner warnings', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?postcode=cw8 4bh'
+      url: '/search?postcode=cw8 4bh'
     }
 
     const data = require('../data/banner-1.json')
@@ -140,7 +136,7 @@ lab.experiment('Unit', () => {
   lab.test('/search - With banner alerts', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?postcode=cw8 4bh'
+      url: '/search?postcode=cw8 4bh'
     }
 
     const data = require('../data/banner-2.json')
@@ -154,7 +150,7 @@ lab.experiment('Unit', () => {
   lab.test('/search - Error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?postcode=cw8 4bh'
+      url: '/search?postcode=cw8 4bh'
     }
 
     const stub = mock.replace(floodService, 'findWarnings', mock.makePromise('Mock Error'))
@@ -167,7 +163,7 @@ lab.experiment('Unit', () => {
   lab.test('/', async () => {
     const options = {
       method: 'GET',
-      url: mountPath || '/'
+      url: '/'
     }
 
     const response = await server.inject(options)
@@ -177,7 +173,7 @@ lab.experiment('Unit', () => {
   lab.test('/map', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/map?easting=1&northing=1'
+      url: '/map?easting=1&northing=1'
     }
 
     const response = await server.inject(options)
@@ -187,7 +183,7 @@ lab.experiment('Unit', () => {
   lab.test('/os-terms', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/os-terms'
+      url: '/os-terms'
     }
 
     const response = await server.inject(options)
@@ -197,7 +193,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk - Risk service error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -214,7 +210,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk - Not inEngland', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -245,7 +241,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk - inFloodWarningArea error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -274,7 +270,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk - inFloodAlertArea error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -303,7 +299,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk - riverAndSeaRisk error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -332,7 +328,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk - surfaceWaterRisk error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -365,7 +361,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk 1', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -394,7 +390,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk 2', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -423,7 +419,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk 3', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -452,7 +448,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk 4', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -481,7 +477,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk 5', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -518,7 +514,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk 6', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -547,7 +543,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk 7', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -576,7 +572,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk 8', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -605,7 +601,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk 9', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -634,7 +630,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk 10', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -663,7 +659,7 @@ lab.experiment('Unit', () => {
   lab.test('/search', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?postcode=cw8 4bh'
+      url: '/search?postcode=cw8 4bh'
     }
 
     const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, [
@@ -683,7 +679,7 @@ lab.experiment('Unit', () => {
   lab.test('/search - Invalid postcode', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?postcode=invalid'
+      url: '/search?postcode=invalid'
     }
 
     const response = await server.inject(options)
@@ -693,7 +689,7 @@ lab.experiment('Unit', () => {
   lab.test('/search - Invalid query', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?invalid=foo'
+      url: '/search?invalid=foo'
     }
 
     const response = await server.inject(options)
@@ -703,7 +699,7 @@ lab.experiment('Unit', () => {
   lab.test('/search - Address service error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?postcode=cw8 4bh'
+      url: '/search?postcode=cw8 4bh'
     }
 
     const addressStub = mock.replace(addressService, 'find', mock.makePromise('Mock Address Error'))
@@ -716,7 +712,7 @@ lab.experiment('Unit', () => {
   lab.test('/search - Address service returns empty address array', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?postcode=cw8 4bh'
+      url: '/search?postcode=cw8 4bh'
     }
 
     const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, []))
@@ -729,7 +725,7 @@ lab.experiment('Unit', () => {
   lab.test('/search - NATIONAL address to continue as normal', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?postcode=cw8 4bh'
+      url: '/search?postcode=cw8 4bh'
     }
 
     const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, [
@@ -744,7 +740,7 @@ lab.experiment('Unit', () => {
   lab.test('/search - NI address to redirect to england-only', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?postcode=BT11BT'
+      url: '/search?postcode=BT11BT'
     }
 
     const response = await server.inject(options)
@@ -755,7 +751,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk WELSH address to redirect to england-only', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -774,7 +770,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk SCOTTISH address to redirect to england-only', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -793,7 +789,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk - Risk service error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -809,7 +805,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk inFloodWarningArea error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -838,7 +834,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk inFloodAlertArea error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -867,7 +863,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk riverAndSeaRisk error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -896,7 +892,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk surfaceWaterRisk error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -925,7 +921,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk reservoirRisk error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -954,7 +950,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk surfaceWaterSuitability error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -983,7 +979,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk surfaceWaterSuitability error', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -1012,7 +1008,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk inEngland false', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -1042,7 +1038,7 @@ lab.experiment('Unit', () => {
   lab.test('/risk', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/risk',
+      url: '/risk',
       headers: {
         cookie
       }
@@ -1071,7 +1067,7 @@ lab.experiment('Unit', () => {
   lab.test('400 for missing expected query parameter', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?test=test'
+      url: '/search?test=test'
     }
 
     const response = await server.inject(options)
@@ -1081,7 +1077,7 @@ lab.experiment('Unit', () => {
   lab.test('Accept & strip unknown query parameters', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/search?postcode=CW8%204BH&a=b'
+      url: '/search?postcode=CW8%204BH&a=b'
     }
 
     const response = await server.inject(options)
@@ -1091,7 +1087,7 @@ lab.experiment('Unit', () => {
   lab.test('Ignore unknown cookies', async () => {
     const options = {
       method: 'GET',
-      url: mountPath + '/',
+      url: '/',
       headers: {
         cookie: 'some-token=<token>'
       }

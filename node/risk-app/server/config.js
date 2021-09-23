@@ -10,7 +10,6 @@ const schema = joi.object().keys({
   serviceUrl: joi.string().uri().required(),
   mockAddressService: joi.boolean().required(),
   httpTimeoutMs: joi.number().required().min(0).max(30000),
-  mountPath: joi.string().required().allow(''),
   analyticsAccount: joi.string().required().allow(''),
   fbAppId: joi.string().required().allow(''),
   floodWarningsUrl: joi.string().uri().required(),
