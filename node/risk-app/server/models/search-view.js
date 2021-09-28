@@ -29,7 +29,7 @@ class SearchViewModel {
     if (warnings && warnings.message) {
       if (warnings.severity && warnings.severity < 4) {
         this.banner = {
-          url: floodWarningsUrl + '/warnings?location=' + postcode,
+          url: floodWarningsUrl + '/location?q=' + encodeURIComponent(postcode),
           message: warnings.message
         }
       }
