@@ -167,7 +167,7 @@ lab.experiment('Unit', () => {
     }
 
     const response = await server.inject(options)
-    Code.expect(response.statusCode).to.equal(200)
+    Code.expect(response.statusCode).to.equal(404)
   })
 
   lab.test('/map', async () => {
@@ -1087,7 +1087,7 @@ lab.experiment('Unit', () => {
   lab.test('Ignore unknown cookies', async () => {
     const options = {
       method: 'GET',
-      url: '/',
+      url: '/managing-flood-risk',
       headers: {
         cookie: 'some-token=<token>'
       }
