@@ -14,7 +14,8 @@ const routes = [].concat(
   require('../routes/os-terms'),
   require('../routes/geocode'),
   require('../routes/accessibility-statement'),
-  require('../routes/cookies')
+  require('../routes/cookies'),
+  require('../routes/healthcheck')
 )
 
 module.exports = {
