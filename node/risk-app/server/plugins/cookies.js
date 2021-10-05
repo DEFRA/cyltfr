@@ -2,7 +2,8 @@ const cookiePolicyOptions = {
   ttl: 1000 * 60 * 60 * 24 * 365,
   isSecure: false,
   encoding: 'base64json',
-  clearInvalid: false
+  clearInvalid: false,
+  isSameSite: 'Lax'
 }
 
 module.exports = {
