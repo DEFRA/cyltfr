@@ -167,7 +167,7 @@ lab.experiment('Unit', () => {
     }
 
     const response = await server.inject(options)
-    Code.expect(response.statusCode).to.equal(404)
+    Code.expect(response.statusCode).to.equal(301)
   })
 
   lab.test('/map', async () => {
