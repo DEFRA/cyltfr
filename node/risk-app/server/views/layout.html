@@ -4,12 +4,10 @@
 {% from "components/phase-banner/macro.njk" import govukPhaseBanner %}
 
 {% block head %}
-<meta property="fb:app_id" content="{{ fbAppId }}" />
 <meta property="og:url" content="{{ fullUrl | safe }}" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="{{ pageTitle }}" />
 <meta property="og:description" content="{{ ogDescription }}" />
-<meta name="google-site-verification" content="HjuKUejT64a0rBdUxxtbnIKNB4_cZ3X3hlXOxk4_OX8" />
 {% if noIndex %}<meta name="robots" content="noindex" />{% endif %}
 <!--[if !IE 8]><!-->
 <link href="{{ assetPath }}/stylesheets/application.css" rel="stylesheet" />
