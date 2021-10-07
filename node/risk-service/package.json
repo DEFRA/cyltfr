@@ -13,16 +13,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@hapi/boom": "9.1.0",
-    "@hapi/hapi": "20.0.0",
+    "@hapi/boom": "9.1.4",
+    "@hapi/hapi": "20.2.0",
     "@hapi/joi": "17.1.1",
-    "hapi-pino": "8.3.0",
-    "pg": "8.3.3"
+    "hapi-pino": "8.4.0",
+    "pg": "8.7.1"
   },
   "devDependencies": {
-    "@hapi/code": "8.0.2",
-    "@hapi/lab": "23.0.0",
-    "blipp": "4.0.1",
-    "standard": "14.3.4"
+    "@hapi/code": "8.0.3",
+    "@hapi/lab": "24.3.2",
+    "blipp": "4.0.2",
+    "standard": "16.0.4"
   }
 }
