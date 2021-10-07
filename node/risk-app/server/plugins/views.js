@@ -46,7 +46,6 @@ module.exports = {
       phase: 'beta',
       feedback: true,
       siteUrl: config.floodRiskUrl,
-      fbAppId: config.fbAppId,
       ogDescription: 'Check your risk of flooding and use flood risk maps',
       noIndex: true, // stop robot crawl by default
       captchaEnabled: config.captchaEnabled,
