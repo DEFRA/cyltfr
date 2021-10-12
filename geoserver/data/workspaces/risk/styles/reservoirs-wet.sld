@@ -13,6 +13,11 @@
         <se:Rule>
           <se:Name>Single symbol</se:Name>
           <se:PolygonSymbolizer>
+            <se:Stroke>
+              <se:SvgParameter name="stroke">#ff3232</se:SvgParameter>
+              <se:SvgParameter name="stroke-width">1</se:SvgParameter>
+              <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
+            </se:Stroke>
             <se:Fill>
               <se:GraphicFill>
                 <se:Graphic>
@@ -25,11 +30,6 @@
                 </se:Graphic>
               </se:GraphicFill>
             </se:Fill>
-            <se:Stroke>
-              <se:SvgParameter name="stroke">#ff3232</se:SvgParameter>
-              <se:SvgParameter name="stroke-width">1</se:SvgParameter>
-              <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
-            </se:Stroke>
           </se:PolygonSymbolizer>
         </se:Rule>
       </se:FeatureTypeStyle>
