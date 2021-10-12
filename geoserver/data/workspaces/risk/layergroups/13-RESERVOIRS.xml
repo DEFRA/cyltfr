@@ -8,18 +8,18 @@
   </workspace>
   <publishables>
     <published type="layer">
-      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8ff2</id>
+      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8ff4</id>
     </published>
     <published type="layer">
-      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8ff4</id>
+      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8ff2</id>
     </published>
   </publishables>
   <styles>
     <style>
-      <id>StyleInfoImpl-7929d142:151009880af:-7ff4</id>
+      <id>StyleInfoImpl-7929d142:151009880af:-7ff5</id>
     </style>
     <style>
-      <id>StyleInfoImpl-7929d142:151009880af:-7ff5</id>
+      <id>StyleInfoImpl-7929d142:151009880af:-7ff4</id>
     </style>
   </styles>
   <bounds>
