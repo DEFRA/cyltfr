@@ -204,74 +204,17 @@
       "title": "Flood risk from reservoirs",
       "maps": [
         {
-          "ref": "Reservoirs_3-ROFR",
+          "ref": "Reservoirs_13-RESERVOIRS",
           "name": "Extent of flooding",
-          "title": "Extent of flooding from reservoirs",
+          "title": "Maximum extent of flooding from reservoirs:",
           "legend": {
-            "title": "Flood risk",
+            "title": "Reservoirs",
             "keys": [{
-              "text": "Maximum extent of flooding",
+              "text": "when river levels are normal",
               "icon": "blue"
-            }]
-          }
-        },
-        {
-          "ref": "Reservoirs_4-DOFR",
-          "name": "Flood depth",
-          "title": "Reservoir flood risk: flood water depth",
-          "legend": {
-            "title": "Flood depth (metres)",
-            "keys": [{
-              "text": "Over 2m",
-              "icon": "purple"
             }, {
-              "text": "Between 0.3 and 2m",
-              "icon": "dark-blue"
-            }, {
-              "text": "Below 0.3m",
-              "icon": "blue"
-            }]
-          }
-        },
-        {
-          "ref": "Reservoirs_5-SOFR",
-          "name": "Flood speed",
-          "title": "Reservoir flood risk: flood water speed",
-          "legend": {
-            "title": "Flood speed",
-            "keys": [{
-              "text": "Over 2m/s",
-              "icon": "purple"
-            }, {
-              "text": "Between 0.5 and 2m/s",
-              "icon": "dark-blue"
-            }, {
-              "text": "Below 0.5m/s",
-              "icon": "blue"
-            }]
-          }
-        },
-        {
-          "ref": "Reservoirs_13-ROFR-DRY",
-          "name": "Reservoirs dry",
-          "title": "Reservoir flood risk: dry",
-          "legend": {
-            "title": "Reservoirs dry",
-            "keys": [{
-              "text": "Maximum extent of flooding",
-              "icon": "blue"
-            }]
-          }
-        },
-        {
-          "ref": "Reservoirs_14-ROFR-WET",
-          "name": "Reservoirs wet",
-          "title": "Reservoir flood risk: wet",
-          "legend": {
-            "title": "Reservoirs wet",
-            "keys": [{
-              "text": "Maximum extent of flooding",
-              "icon": "blue"
+              "text": "when there is also flooding from rivers",
+              "icon": "redhatch"
             }]
           }
         }
