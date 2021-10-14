@@ -35,9 +35,9 @@ function RiskViewModel (risk, address) {
     ? risk.riverAndSeaRisk.probabilityForBand
     : RiskLevel.VeryLow
   const surfaceWaterRisk = risk.surfaceWaterRisk || RiskLevel.VeryLow
-  const reservoirRisk = !!(risk.reservoirRisk && risk.reservoirRisk.length)
   const reservoirDryRisk = !!(risk.reservoirDryRisk && risk.reservoirDryRisk.length)
   const reservoirWetRisk = !!(risk.reservoirWetRisk && risk.reservoirWetRisk.length)
+  const reservoirRisk = reservoirDryRisk || reservoirWetRisk
 
   this.riverAndSeaRisk = riverAndSeaRisk
   this.surfaceWaterRisk = surfaceWaterRisk
@@ -46,56 +46,35 @@ function RiskViewModel (risk, address) {
   this.reservoirRisk = reservoirRisk
 
   if (reservoirRisk) {
-    this.reservoirs = risk.reservoirRisk.map(function (item) {
-      return {
-        name: item.reservoirName,
-        owner: item.undertaker,
-        authority: item.leadLocalFloodAuthority,
-        location: util.convertLocationToNGR(item.location),
-        riskDesignation: item.riskDesignation,
-        comments: item.comments
-      }
-    })
-  }
+    const reservoirs = []
 
-
-
-
-
-
-  this.reservoirDryRisk = reservoirDryRisk
-
-  if (reservoirDryRisk) {
-    this.reservoirsDry = risk.reservoirDryRisk.map(function (item) {
-      return {
+    const add = function (item) {
+      reservoirs.push({
         name: item.reservoirName,
         owner: item.undertaker,
         authority: item.leadLocalFloodAuthority,
         location: item.location,
         riskDesignation: item.riskDesignation,
         comments: item.comments
-      }
-    })
+      })
+    }
+
+    if (reservoirDryRisk) {
+      risk.reservoirDryRisk.forEach(add)
+    }
+
+    if (reservoirWetRisk) {
+      risk.reservoirWetRisk.forEach(function (item) {
+        const exists = !!reservoirs.find(r => r.location === item.location)
+
+        if (!exists) {
+          add(item)
+        }
+      })
+    }
+
+    this.reservoirs = reservoirs
   }
-
-  this.reservoirWetRisk = reservoirWetRisk
-
-  if (reservoirWetRisk) {
-    this.reservoirsWet = risk.reservoirWetRisk.map(function (item) {
-      return {
-        name: item.reservoirName,
-        owner: item.undertaker,
-        authority: item.leadLocalFloodAuthority,
-        location: item.location,
-        riskDesignation: item.riskDesignation,
-        comments: item.comments
-      }
-    })
-  }
-
-
-
-
 
   // River and sea suitability
   const riverAndSeaSuitability = risk.riverAndSeaRisk && risk.riverAndSeaRisk.suitability
