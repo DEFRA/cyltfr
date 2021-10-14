@@ -12,23 +12,28 @@
           "title": "Extent of flooding from rivers or the sea",
           "legend": {
             "title": "Flood risk",
-            "keys": [{
-              "text": "High",
-              "icon": "purple",
-              "id": "rivers-seas-high"
-            }, {
-              "text": "Medium",
-              "icon": "dark-blue",
-              "id": "rivers-seas-medium"
-            }, {
-              "text": "Low",
-              "icon": "blue",
-              "id": "rivers-seas-low"
-            }, {
-              "text": "Very low",
-              "icon": "light-blue",
-              "id": "rivers-seas-very-low"
-            }]
+            "keys": [
+              {
+                "text": "High",
+                "icon": "purple",
+                "id": "rivers-seas-high"
+              },
+              {
+                "text": "Medium",
+                "icon": "dark-blue",
+                "id": "rivers-seas-medium"
+              },
+              {
+                "text": "Low",
+                "icon": "blue",
+                "id": "rivers-seas-low"
+              },
+              {
+                "text": "Very low",
+                "icon": "light-blue",
+                "id": "rivers-seas-very-low"
+              }
+            ]
           }
         },
         {
@@ -37,15 +42,18 @@
           "title": "Estimated depth and flow of water at river and sea level monitoring stations",
           "legend": {
             "title": "Select monitoring station",
-            "keys": [{
-              "text": "River level monitoring station",
-              "icon": "green",
-              "shape": "round"
-            }, {
-              "text": "Sea level monitoring station",
-              "icon": "red",
-              "shape": "round"
-            }]
+            "keys": [
+              {
+                "text": "River level monitoring station",
+                "icon": "green",
+                "shape": "round"
+              },
+              {
+                "text": "Sea level monitoring station",
+                "icon": "red",
+                "shape": "round"
+              }
+            ]
           }
         }
       ]
@@ -62,23 +70,28 @@
           "title": "Extent of flooding from surface water",
           "legend": {
             "title": "Flood risk",
-            "keys": [{
-              "text": "High",
-              "icon": "purple",
-              "id": "surface-water-high"
-            }, {
-              "text": "Medium",
-              "icon": "dark-blue",
-              "id": "surface-water-medium"
-            }, {
-              "text": "Low",
-              "icon": "blue",
-              "id": "surface-water-low"
-            }, {
-              "text": "Very low",
-              "icon": "white",
-              "id": "surface-water-very-low"
-            }]
+            "keys": [
+              {
+                "text": "High",
+                "icon": "purple",
+                "id": "surface-water-high"
+              },
+              {
+                "text": "Medium",
+                "icon": "dark-blue",
+                "id": "surface-water-medium"
+              },
+              {
+                "text": "Low",
+                "icon": "blue",
+                "id": "surface-water-low"
+              },
+              {
+                "text": "Very low",
+                "icon": "white",
+                "id": "surface-water-very-low"
+              }
+            ]
           }
         },
         {
@@ -88,16 +101,20 @@
           "legend": {
             "title": "High risk scenario",
             "subTitle": "Flood depth (millimetres)",
-            "keys": [{
-              "text": "Over 900mm",
-              "icon": "purple"
-            }, {
-              "text": "300 to 900mm",
-              "icon": "dark-blue"
-            }, {
-              "text": "Below 300mm",
-              "icon": "blue"
-            }]
+            "keys": [
+              {
+                "text": "Over 900mm",
+                "icon": "purple"
+              },
+              {
+                "text": "300 to 900mm",
+                "icon": "dark-blue"
+              },
+              {
+                "text": "Below 300mm",
+                "icon": "blue"
+              }
+            ]
           }
         },
         {
@@ -107,16 +124,20 @@
           "legend": {
             "title": "High risk scenario",
             "subTitle": "Flood velocity (metres/second)",
-            "keys": [{
-              "text": "Over 0.25 m/s",
-              "icon": "purple"
-            }, {
-              "text": "Less than 0.25 m/s",
-              "icon": "blue"
-            }, {
-              "text": "Direction of water flow",
-              "icon": "arrow"
-            }]
+            "keys": [
+              {
+                "text": "Over 0.25 m/s",
+                "icon": "purple"
+              },
+              {
+                "text": "Less than 0.25 m/s",
+                "icon": "blue"
+              },
+              {
+                "text": "Direction of water flow",
+                "icon": "arrow"
+              }
+            ]
           }
         },
         {
@@ -126,16 +147,20 @@
           "legend": {
             "title": "Medium risk scenario",
             "subTitle": "Flood depth (millimetres)",
-            "keys": [{
-              "text": "Over 900mm",
-              "icon": "purple"
-            }, {
-              "text": "300 to 900mm",
-              "icon": "dark-blue"
-            }, {
-              "text": "Below 300mm",
-              "icon": "blue"
-            }]
+            "keys": [
+              {
+                "text": "Over 900mm",
+                "icon": "purple"
+              },
+              {
+                "text": "300 to 900mm",
+                "icon": "dark-blue"
+              },
+              {
+                "text": "Below 300mm",
+                "icon": "blue"
+              }
+            ]
           }
         },
         {
@@ -145,16 +170,20 @@
           "legend": {
             "title": "Medium risk scenario",
             "subTitle": "Flood velocity (metres/second)",
-            "keys": [{
-              "text": "Over 0.25 m/s",
-              "icon": "purple"
-            }, {
-              "text": "Less than 0.25 m/s",
-              "icon": "blue"
-            }, {
-              "text": "Direction of water flow",
-              "icon": "arrow"
-            }]
+            "keys": [
+              {
+                "text": "Over 0.25 m/s",
+                "icon": "purple"
+              },
+              {
+                "text": "Less than 0.25 m/s",
+                "icon": "blue"
+              },
+              {
+                "text": "Direction of water flow",
+                "icon": "arrow"
+              }
+            ]
           }
         },
         {
@@ -164,16 +193,20 @@
           "legend": {
             "title": "Low risk scenario",
             "subTitle": "Flood depth (millimetres)",
-            "keys": [{
-              "text": "Over 900mm",
-              "icon": "purple"
-            }, {
-              "text": "300 to 900mm",
-              "icon": "dark-blue"
-            }, {
-              "text": "Below 300mm",
-              "icon": "blue"
-            }]
+            "keys": [
+              {
+                "text": "Over 900mm",
+                "icon": "purple"
+              },
+              {
+                "text": "300 to 900mm",
+                "icon": "dark-blue"
+              },
+              {
+                "text": "Below 300mm",
+                "icon": "blue"
+              }
+            ]
           }
         },
         {
@@ -183,16 +216,20 @@
           "legend": {
             "title": "Low risk scenario",
             "subTitle": "Flood velocity (metres/second)",
-            "keys": [{
-              "text": "Over 0.25 m/s",
-              "icon": "purple"
-            }, {
-              "text": "Less than 0.25 m/s",
-              "icon": "blue"
-            }, {
-              "text": "Direction of water flow",
-              "icon": "arrow"
-            }]
+            "keys": [
+              {
+                "text": "Over 0.25 m/s",
+                "icon": "purple"
+              },
+              {
+                "text": "Less than 0.25 m/s",
+                "icon": "blue"
+              },
+              {
+                "text": "Direction of water flow",
+                "icon": "arrow"
+              }
+            ]
           }
         }
       ]
@@ -209,13 +246,16 @@
           "title": "Maximum extent of flooding from reservoirs:",
           "legend": {
             "title": "Reservoirs",
-            "keys": [{
-              "text": "when river levels are normal",
-              "icon": "blue"
-            }, {
-              "text": "when there is also flooding from rivers",
-              "icon": "redhatch"
-            }]
+            "keys": [
+              {
+                "text": "when river levels are normal",
+                "icon": "blue"
+              },
+              {
+                "text": "when there is also flooding from rivers",
+                "icon": "redhatch"
+              }
+            ]
           }
         }
       ]

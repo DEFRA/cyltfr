@@ -1,21 +1,21 @@
 {
   "addressByPostcode": {
-    "message" : "An error occurred finding the addresses by postcode"
+    "message": "An error occurred finding the addresses by postcode"
   },
   "addressById": {
-    "message" : "An error occurred finding the address by id"
+    "message": "An error occurred finding the address by id"
   },
   "captchaError": {
-    "message" : "An error occurred validating user"
-  }, 
+    "message": "An error occurred validating user"
+  },
   "javascriptError": {
-    "message" : "JavaScript is not enabled"
-  }, 
+    "message": "JavaScript is not enabled"
+  },
   "osGetCapabilities": {
-    "message" : "Ordnance survey getcapabilities failed"
+    "message": "Ordnance survey getcapabilities failed"
   },
   "osMapsProxy": {
-    "message" : "Ordnance survey maps proxy call failed"
+    "message": "Ordnance survey maps proxy call failed"
   },
   "riskProfile": {
     "message": "An error occurred finding the risk profile"
