@@ -1,5 +1,3 @@
-const util = require('../util')
-
 const RiskLevel = {
   VeryLow: 'Very Low',
   Low: 'Low',

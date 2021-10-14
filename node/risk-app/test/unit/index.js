@@ -918,7 +918,7 @@ lab.experiment('Unit', () => {
     riskStub.revert()
   })
 
-  lab.test('/risk reservoirRisk error', async () => {
+  lab.test('/risk reservoirDryRisk error', async () => {
     const options = {
       method: 'GET',
       url: '/risk',
@@ -935,7 +935,36 @@ lab.experiment('Unit', () => {
       inFloodAlertArea: false,
       inFloodWarningArea: false,
       leadLocalFloodAuthority: 'Cheshire West and Chester',
-      reservoirRisk: 'Error',
+      reservoirDryRisk: 'Error',
+      riverAndSeaRisk: { probabilityForBand: 'Low', suitability: 'County to Town' },
+      surfaceWaterRisk: null,
+      surfaceWaterSuitability: null,
+      extraInfo: null
+    }))
+
+    const response = await server.inject(options)
+    Code.expect(response.statusCode).to.equal(400)
+    riskStub.revert()
+  })
+
+  lab.test('/risk reservoirWetRisk error', async () => {
+    const options = {
+      method: 'GET',
+      url: '/risk',
+      headers: {
+        cookie
+      }
+    }
+
+    const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
+      inEngland: true,
+      isGroundwaterArea: false,
+      floodAlertArea: [],
+      floodWarningArea: [],
+      inFloodAlertArea: false,
+      inFloodWarningArea: false,
+      leadLocalFloodAuthority: 'Cheshire West and Chester',
+      reservoirWetRisk: 'Error',
       riverAndSeaRisk: { probabilityForBand: 'Low', suitability: 'County to Town' },
       surfaceWaterRisk: null,
       surfaceWaterSuitability: null,

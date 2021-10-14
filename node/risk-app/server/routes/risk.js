@@ -25,7 +25,8 @@ module.exports = {
           risk.inFloodAlertArea === 'Error' ||
           risk.riverAndSeaRisk === 'Error' ||
           risk.surfaceWaterRisk === 'Error' ||
-          risk.reservoirRisk === 'Error' ||
+          risk.reservoirDryRisk === 'Error' ||
+          risk.reservoirWetRisk === 'Error' ||
           risk.surfaceWaterSuitability === 'Error' ||
           risk.leadLocalFloodAuthority === 'Error' ||
           risk.extraInfo === 'Error'

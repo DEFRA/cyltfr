@@ -10,6 +10,7 @@ $BODY$
 -- File version		Ticket    	Author		Notes
 -- 1.0.1		FLO-2869	tjmason		Work to allow for data schema changes for alert and warning areas introduced in Feb 2018
 -- 2.0.0		LTFRI-3	  dstone		Return multiple extra_info records
+-- 2.1.2		LTFRI-194 dstone    Wet/Dry Reservoirs
 
 declare within_england_result record;
 declare flood_alert_area_result record;
@@ -18,19 +19,16 @@ declare rofrs_result record;
 declare high_surface_water_result record;
 declare medium_surface_water_result record;
 declare low_surface_water_result record;
-declare reservoir_result json;
 declare dry_reservoir_result json;
 declare wet_reservoir_result json;
 declare surface_water_suitability_result record;
 declare lead_local_flood_authority_result record;
 declare extra_info_result record;
 declare result json;
-declare in_reservoir_risk_area boolean;
 declare in_dry_reservoir_risk_area boolean;
 declare in_wet_reservoir_risk_area boolean;
 declare in_rofrs_risk_area boolean;
 declare rofrs_error boolean;	
-declare reservoir_error boolean;
 declare dry_reservoir_error boolean;
 declare wet_reservoir_error boolean;
 
@@ -126,21 +124,6 @@ begin
 
 
   begin
-     -- Reservoirs risk point in polygon query.
-     select array_to_json(array_agg(row_to_json(t))) as reservoir
-        from (
-	   select r.resname, r.risk_desig, r.location, r.utcompany as ut_company, r.ea_area,r.llfa_name, r.comments from u_ltfri.rof_reservoir_extent_bv_bng r where st_intersects(st_setsrid(st_makepoint(_x, _y), 27700), r.wkb_geometry)
-	) t into reservoir_result;
-     in_reservoir_risk_area := found;
-  exception when others then
-    reservoir_error := true;
-  end;
-
-
-
-
-
-  begin
      -- Dry reservoirs risk point in polygon query.
      select array_to_json(array_agg(row_to_json(t))) as dry_reservoir
         from (
@@ -164,9 +147,6 @@ begin
   end;
 
 
-
-
-
   -- Produce the long term risk of flooding from various sources.
   with data as (
     select
@@ -186,16 +166,7 @@ begin
         when 2 then 'Medium'
         when 3 then 'High'
       end as surface_water_risk,
-      -- Only return details associated with risk of reservoir flooding if the spatial query returned results.
-      case in_reservoir_risk_area
-        when true then
-          reservoir_result
-        else to_json('Error'::text)
-      end as reservoir_risk,
-
-
-
-
+      -- Only return details associated with risks of reservoir flooding if the spatial query returned results.
       case in_dry_reservoir_risk_area
         when true then
           dry_reservoir_result
@@ -207,11 +178,6 @@ begin
           wet_reservoir_result
         else to_json('Error'::text)
       end as wet_reservoir_risk,
-
-
-
-
-
       -- Default to Unknown if the spatial query return no results.
       coalesce(surface_water_suitability_result.surface_water_suitability, 'Unknown') as surface_water_suitability,
       -- Default to Unknown when the spatial query return no results.
