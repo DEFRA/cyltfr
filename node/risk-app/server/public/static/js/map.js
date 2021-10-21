@@ -247,7 +247,7 @@ function loadMap (point) {
       })
 
       function toFixed (number) {
-        if (typeof number !== 'undefined') {
+        if (number !== null && typeof number !== 'undefined') {
           return number.toFixed(2)
         }
       }
