@@ -1,0 +1,16 @@
+# LTFRI 2.1.2 Tuesday 9th November 2021
+
+# Instructions
+
+Database
+--------
+The following database script needs to be executed against the database:
+
+/ltfri/database/ltfridev/u_ltfri/2.1.2/u_ltfri.calculate_flood_risk.sql
+
+
+Applications
+------------
+A full code build needs to be performed to update the RISK-APP and RISK-SERVICE.
+
+No data changes.

@@ -53,6 +53,11 @@
       background-color: #ce0000;
     }
 
+    .legend-item.redhatch::before {
+      border: solid 1px red;
+      background-image: repeating-linear-gradient(-45deg, transparent, transparent 2px, red 2px, red 3px);
+    }
+
     .legend-item.white::before {
       background-color: #fff;
       border: solid 2px #b9b9b9;
