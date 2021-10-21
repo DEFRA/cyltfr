@@ -32,6 +32,7 @@
                       <WellKnownName>shape://slash</WellKnownName>
                       <Stroke>
                         <CssParameter name="stroke">#ff3232</CssParameter>
+                        <CssParameter name="stroke-width">2</CssParameter>
                       </Stroke>
                     </Mark>
                     <Size>16</Size>
@@ -40,7 +41,7 @@
               </Fill>
               <Stroke>
                 <CssParameter name="stroke">#ff3232</CssParameter>
-                <CssParameter name="stroke-width">1</CssParameter>
+                <CssParameter name="stroke-width">0.4</CssParameter>
                 <CssParameter name="stroke-linejoin">bevel</CssParameter>
               </Stroke>
           </PolygonSymbolizer>
