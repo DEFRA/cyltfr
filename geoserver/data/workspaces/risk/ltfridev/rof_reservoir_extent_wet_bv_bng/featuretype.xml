@@ -1,14 +1,14 @@
 <featureType>
-  <id>FeatureTypeInfoImpl--1a2a398b:1510f867e96:-7ff6</id>
-  <name>rof_reservoir_depth_bv_bng</name>
-  <nativeName>rof_reservoir_depth_bv_bng</nativeName>
+  <id>FeatureTypeInfoImpl--1a2a398b:1510f867e96:-8ff3</id>
+  <name>rof_reservoir_extent_wet_bv_bng</name>
+  <nativeName>rof_reservoir_extent_wet_bv_bng</nativeName>
   <namespace>
     <id>NamespaceInfoImpl-500e64e7:150fcd642d7:-7fe5</id>
   </namespace>
-  <title>rof_reservoir_depth_bv_bng</title>
+  <title>rof_reservoir_extent_wet_bv_bng</title>
   <keywords>
     <string>features</string>
-    <string>rof_reservoir_depth_bv_bng</string>
+    <string>rof_reservoir_extent_wet_bv_bng</string>
   </keywords>
   <srs>EPSG:27700</srs>
   <nativeBoundingBox>

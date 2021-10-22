@@ -1,7 +1,7 @@
 <GeoServerTileLayer>
-  <id>LayerGroupInfoImpl--1a2a398b:1510f867e96:-7fd0</id>
+  <id>LayerGroupInfoImpl--1a2a398b:1510f867e96:-7fe3</id>
   <enabled>true</enabled>
-  <name>risk:4-DOFR</name>
+  <name>risk:13-RESERVOIRS</name>
   <blobStoreId>ltfri</blobStoreId>
   <mimeFormats>
     <string>image/png</string>

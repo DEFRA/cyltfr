@@ -163,7 +163,7 @@ function loadMap (point) {
     }
 
     // Prevent map from zooming in too far
-    const resolutions = source.tileGrid.getResolutions().slice(0, 11)
+    const resolutions = source.tileGrid.getResolutions().slice(0, 10)
 
     map = new ol.Map({
       controls: controls,
@@ -247,7 +247,7 @@ function loadMap (point) {
       })
 
       function toFixed (number) {
-        if (typeof number !== 'undefined') {
+        if (number !== null && typeof number !== 'undefined') {
           return number.toFixed(2)
         }
       }
