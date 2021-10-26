@@ -36,7 +36,7 @@ Name the new project LTF_<environment>_MISC_JOBS/LTF_<environment>_99_UPDATE_DRY
 
     rm -rf *
 
-- Modify the LTF_<environment>_99_COPY_CACHE project. Add a parameter:
+- Modify the LTF_<environment>_99_COPY_CACHE project. Add a boolean parameter:
 
     Name: RES
     Description: Risk from dry and wet reservoirs
@@ -46,7 +46,7 @@ Name the new project LTF_<environment>_MISC_JOBS/LTF_<environment>_99_UPDATE_DRY
     if [ $RES = true ]
     then
 	    echo 'Syncing RESERVOIRS: Risk of flooding from reservoirs'
-      aws s3 sync s3://$S3_SOURCE//LayerGroupInfoImpl--1a2a398b:1510f867e96:-7fe3/ s3://$S3_DESTINATION//LayerGroupInfoImpl--1a2a398b:1510f867e96:-7fe3/ --delete
+        aws s3 sync s3://$S3_SOURCE/LayerGroupInfoImpl--1a2a398b:1510f867e96:-7fe3/ s3://$S3_DESTINATION/LayerGroupInfoImpl--1a2a398b:1510f867e96:-7fe3/ --delete
     fi
 
 - Build LTF_<environment>_99_UPDATE_DRY_WET_RESERVOIRS project with default parameters.
