@@ -14,14 +14,14 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/boom": "9.1.4",
-    "@hapi/hapi": "20.2.0",
+    "@hapi/hapi": "20.2.1",
     "@hapi/joi": "17.1.1",
-    "hapi-pino": "8.4.0",
+    "hapi-pino": "9.1.0",
     "pg": "8.7.1"
   },
   "devDependencies": {
-    "@hapi/code": "8.0.3",
-    "@hapi/lab": "24.3.2",
+    "@hapi/code": "8.0.5",
+    "@hapi/lab": "24.5.0",
     "blipp": "4.0.2",
     "standard": "16.0.4"
   }
