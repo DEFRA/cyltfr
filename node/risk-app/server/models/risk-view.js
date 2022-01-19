@@ -108,7 +108,7 @@ function RiskViewModel (risk, address) {
       'Proposed schemes': 'Potential new flood protection schemes',
       'Completed schemes': 'Completed flood protection schemes',
       'Flood action plan': 'A flood action plan',
-      'Other info': 'Other information, for example, engineer’s reports or land drainage consents'
+      'Other info': 'Other information, for example, engineer\'s reports or land drainage consents'
     }
 
     this.holdingComments = risk.extraInfo
