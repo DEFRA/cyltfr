@@ -23,10 +23,12 @@
         {{ govukInput(postcodeInput) }}
         {% if captchaEnabled %}
           <button class="govuk-button g-recaptcha" 
-          type="submit"
-          data-sitekey={{ captchaSiteKey }}
-          data-callback='onSubmit' 
-          data-action='submit'>Continue</button>
+            type="submit"
+            data-sitekey={{ captchaSiteKey }}
+            data-callback="onSubmit"
+            data-action="submit">
+            Continue
+          </button>
         {% else %}
           <button type="submit" class="govuk-button">Continue</button>
         {% endif %}
@@ -47,12 +49,11 @@
   </div>
 </div>
 {% if captchaEnabled %}
-  <script src="https://www.google.com/recaptcha/api.js?render={{ captchaSiteKey}}"></script>
+  <script src="https://www.google.com/recaptcha/api.js?render={{ captchaSiteKey }}"></script>
   <script>
-    function onSubmit(token) {
-      document.getElementById("postcode-form").submit();
+    function onSubmit (token) {
+      document.getElementById('postcode-form').submit()
     }
   </script>
 {% endif %}
-
 {% endblock %}
