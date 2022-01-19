@@ -15,6 +15,8 @@ const routes = [].concat(
   require('../routes/geocode'),
   require('../routes/accessibility-statement'),
   require('../routes/cookies'),
+  require('../routes/privacy-notice'),
+  require('../routes/terms-and-conditions'),
   require('../routes/healthcheck')
 )
 
