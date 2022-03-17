@@ -211,7 +211,7 @@ function loadMap (point) {
       // Show the overlay
       $overlay.show()
 
-      window.GOVUK.performance.sendGoogleAnalyticsEvent('ltfri', 'map', 'risk-type-legend-' + id)
+      sendGoogleAnalyticsEvent('ltfri', 'map', 'risk-type-legend-' + id)
     })
 
     // Map interaction functions
@@ -265,11 +265,15 @@ function loadMap (point) {
             properties = feature.properties
           }
 
+          const prob4band = properties && properties.prob_4band
+            ? properties.prob_4band.replace(/\s+/g, '-').toLowerCase()
+            : 'very-low'
+
           viewModel = {
             isRiskDescription: true,
             isRiversOrSeas: true,
             isSurfaceWater: false,
-            id: 'rivers-seas-' + (properties ? properties.prob_4band.toLowerCase() : 'very-low')
+            id: 'rivers-seas-' + prob4band
           }
         } else if (currentLayerRef === 'risk:6-SW-Extent') {
           const levels = {}
@@ -334,7 +338,7 @@ function loadMap (point) {
         $overlay.show()
 
         if (viewModel.isRiskDescription) {
-          window.GOVUK.performance.sendGoogleAnalyticsEvent('ltfri', 'map', 'risk-type-map-' + viewModel.id)
+          sendGoogleAnalyticsEvent('ltfri', 'map', 'risk-type-map-' + viewModel.id)
         }
       })
     })
@@ -357,6 +361,12 @@ function loadMap (point) {
       callback()
     }
   })
+}
+
+function sendGoogleAnalyticsEvent (category, event, label) {
+  if (window.GOVUK && window.GOVUK.performance) {
+    window.GOVUK.performance.sendGoogleAnalyticsEvent(category, event, label)
+  }
 }
 
 function showMap (ref) {
