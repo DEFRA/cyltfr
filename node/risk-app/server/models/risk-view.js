@@ -12,13 +12,6 @@ const RiskTitles = {
   High: 'High risk'
 }
 
-const RiskDescriptions = {
-  'Very Low': 'Very low risk means that each year this area has a chance of flooding of less than 0.1%.',
-  Low: 'Low risk means that each year this area has a chance of flooding of between 0.1% and 1%.',
-  Medium: 'Medium risk means that each year this area has a chance of flooding of between 1% and 3.3%.',
-  High: 'High risk means that each year this area has a chance of flooding of greater than 3.3%.'
-}
-
 const Levels = Object.keys(RiskLevel).map(l => RiskLevel[l])
 
 const suitabilities = [
@@ -140,8 +133,15 @@ function RiskViewModel (risk, address) {
 
   this.riversAndSeaTitle = RiskTitles[riverAndSeaRisk]
   this.surfaceWaterTitle = RiskTitles[surfaceWaterRisk]
-  this.riversAndSeaText = RiskDescriptions[riverAndSeaRisk]
-  this.surfaceWaterText = RiskDescriptions[surfaceWaterRisk]
+  if (riverAndSeaRisk) {
+    const name = riverAndSeaRisk.toLowerCase()
+    this.riversAndSeaTextName = `partials/riskdescriptions/${name.replace(/ /g, '-')}.html`
+  }
+
+  if (surfaceWaterRisk) {
+    const name = surfaceWaterRisk.toLowerCase()
+    this.surfaceWaterTextName = `partials/riskdescriptions/${name.replace(/ /g, '-')}.html`
+  }
 
   const riversAndSeaLevel = Levels.indexOf(riverAndSeaRisk)
   const surfaceWaterLevel = Levels.indexOf(surfaceWaterRisk)
