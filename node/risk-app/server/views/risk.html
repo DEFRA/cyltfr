@@ -102,13 +102,19 @@
           <tbody class="govuk-table__body">
             <tr class="govuk-table__row">
               <th scope="row" class="govuk-table__header">Rivers and sea risk</th>
-              <td class="govuk-table__cell"><b>{{ riversAndSeaTitle }}</b><br>{{ riversAndSeaText }}</td>
+              <td class="govuk-table__cell"><b>{{ riversAndSeaTitle }}</b><br>
+                {% if riversAndSeaTextName %}
+                {% include riversAndSeaTextName %}
+                {% endif %}</td>
             </tr>
             <tr class="govuk-table__row">
               <th scope="row" class="govuk-table__header">Surface water risk</th>
               <td class="govuk-table__cell">
                 <p>
-                  <b>{{ surfaceWaterTitle }}</b><br>{{ surfaceWaterText }}
+                  <b>{{ surfaceWaterTitle }}</b><br>
+                  {% if surfaceWaterTextName %}
+                  {% include surfaceWaterTextName %}
+                  {% endif %}
                 </p>
                 <p class="govuk-body">
                   Lead local flood authorities (LLFA) manage the risk from surface water flooding and may hold more
