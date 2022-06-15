@@ -13,7 +13,9 @@
         This flood risk summary reports the highest risk from surface water within a 20m radius of this property.
       </p>
       <p class="govuk-body risk-description">
-        {{ surfaceWaterText }}
+        {% if surfaceWaterTextName %}
+        {% include surfaceWaterTextName %}
+        {% endif %}
       </p>
       {% if surfaceWaterSuitabilityName %}
       {% include surfaceWaterSuitabilityName %}

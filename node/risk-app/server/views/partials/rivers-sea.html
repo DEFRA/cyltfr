@@ -13,7 +13,9 @@
         This flood risk summary is not property specific.
       </p>
       <p class="govuk-body risk-description">
-        {{ riversAndSeaText }}
+        {% if riversAndSeaTextName %}
+        {% include riversAndSeaTextName %}
+        {% endif %}
       </p>
       {% if riverAndSeaSuitabilityName %}
       {% include riverAndSeaSuitabilityName %}
