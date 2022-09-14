@@ -15,7 +15,7 @@ module.exports = {
       }
 
       const { x, y } = address
-      const radius = 20
+      const radius = 15
 
       try {
         const risk = await riskService.getByCoordinates(x, y, radius)
