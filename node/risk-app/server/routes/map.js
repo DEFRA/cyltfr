@@ -1,4 +1,4 @@
-const joi = require('@hapi/joi')
+const joi = require('joi')
 const MapViewModel = require('../models/map-view')
 
 module.exports = {
