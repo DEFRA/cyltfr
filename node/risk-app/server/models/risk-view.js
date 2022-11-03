@@ -156,9 +156,9 @@ function RiskViewModel (risk, address) {
   }
 
   this.testInfo = JSON.stringify({
-    riverAndSeaRisk: riverAndSeaRisk,
-    surfaceWaterRisk: surfaceWaterRisk,
-    reservoirRisk: reservoirRisk,
+    riverAndSeaRisk,
+    surfaceWaterRisk,
+    reservoirRisk,
     isGroundwaterArea: risk.isGroundwaterArea
   })
 }

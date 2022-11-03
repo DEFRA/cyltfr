@@ -84,7 +84,7 @@ MapController.prototype.setCurrent = function (ref) {
       $selector.val(currMap.ref)
 
       // Update the legend
-      $legend.html(legendTemplate(Object.assign({ hasLocation: hasLocation }, currMap)))
+      $legend.html(legendTemplate(Object.assign({ hasLocation }, currMap)))
 
       // Load the map
       maps.showMap('risk:' + currMap.ref.substring(currMap.ref.indexOf('_') + 1))
@@ -113,7 +113,7 @@ MapController.prototype.setCurrent = function (ref) {
         $error.text('')
 
         $.ajax({
-          url: url
+          url
         }).done(function (data) {
           if (data) {
             if (data.error) {
