@@ -10,5 +10,5 @@ function getByCoordinates (x, y, radius) {
 }
 
 module.exports = {
-  getByCoordinates: getByCoordinates
+  getByCoordinates
 }
