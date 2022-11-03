@@ -674,6 +674,7 @@ lab.experiment('Unit', () => {
     const options = mockOptions('invalid')
 
     const response = await server.inject(options)
+    console.log('Response =>', response.statusCode)
     Code.expect(response.statusCode).to.equal(400)
   })
 
