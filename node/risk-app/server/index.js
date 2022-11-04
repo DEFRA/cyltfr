@@ -39,6 +39,7 @@ async function createServer () {
     require('../mock/address')
     server.log('info', 'Address server is being mocked')
   }
+  console.log(process.versions)
 
   return server
 }
