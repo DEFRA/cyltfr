@@ -40,7 +40,7 @@ module.exports = {
       serviceName: 'Check your long term flood risk',
       serviceUrl: config.isProd ? 'https://www.gov.uk/check-long-term-flood-risk' : '/postcode',
       pageTitle: 'Check your long term flood risk',
-      analyticsAccount: analyticsAccount,
+      analyticsAccount,
       appStage: config.env,
       floodWarningsUrl: config.floodWarningsUrl,
       phase: 'beta',

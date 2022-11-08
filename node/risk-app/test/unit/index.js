@@ -31,6 +31,7 @@ lab.experiment('Unit', () => {
     ]))
 
     const response = await server.inject(options)
+    console.log('response => ', response.statusCode)
     Code.expect(response.statusCode).to.equal(200)
     addressStub.revert()
 
