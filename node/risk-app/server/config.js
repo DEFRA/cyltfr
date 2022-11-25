@@ -32,7 +32,12 @@ const schema = joi.object().keys({
   captchaEnabled: joi.boolean().default(false),
   captchaUrl: joi.string().uri().when('captchaEnabled', { is: true, then: joi.required() }),
   captchaSiteKey: joi.string().when('captchaEnabled', { is: true, then: joi.required() }),
-  captchaSecretKey: joi.string().when('captchaEnabled', { is: true, then: joi.required() })
+  captchaSecretKey: joi.string().when('captchaEnabled', { is: true, then: joi.required() }),
+  friendlyCaptchaSiteKey: joi.string().when('captchaEnabled', { is: true, then: joi.required() }),
+  friendlyCaptchaSecretKey: joi.string().when('captchaEnabled', { is: true, then: joi.required() }),
+  friendlyCaptchaUrl: joi.string().when('captchaEnabled', { is: true, then: joi.required() })
+
+
 })
 
 config.http_proxy = process.env.http_proxy

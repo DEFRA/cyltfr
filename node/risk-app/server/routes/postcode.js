@@ -18,8 +18,15 @@ module.exports = [
     method: 'POST',
     path: '/postcode',
     handler: async (request, h) => {
+      console.log('service payload => ', request.orig.payload['frc-captcha-solution'])
       const { postcode } = request.payload
-      const recaptcha = request.payload['g-recaptcha-response']
+      // const recaptcha = request.payload['g-recaptcha-response']
+      const recaptcha = request.orig.payload['frc-captcha-solution']
+      if(!recaptcha || recaptcha === 'undefined' || recaptcha === '.FETCHING' || recaptcha === '.UNSTARTED' || recaptcha === '.UNFINISHED'){
+        const captchaErrorMessage = 'You cannot continue until Friendly Captcha has checked that you\'re not a robot'
+        const model = new PostcodeViewModel(postcode, captchaErrorMessage)
+        return h.view('postcode', model)
+      }
 
       if (!postcode || !postcode.match(postcodeRegex)) {
         const errorMessage = 'Enter a full postcode in England'
@@ -41,13 +48,14 @@ module.exports = [
       }
 
       return h.redirect(url)
+      // return h.view('postcode', new PostcodeViewModel())
     },
     options: {
       description: 'Post to the postcode page',
       validate: {
         payload: joi.object().keys({
-          postcode: joi.string().trim().required().allow(''),
-          'g-recaptcha-response': joi.string()
+          postcode: joi.string().trim().required().allow('')
+          // 'g-recaptcha-response': joi.string()
         }).required()
       }
     }

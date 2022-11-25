@@ -2,7 +2,7 @@ const joi = require('joi')
 const boom = require('@hapi/boom')
 const { postcodeRegex, redirectToHomeCounty } = require('../helpers')
 const config = require('../config')
-const { captchaEnabled, captchaUrl, captchaSecretKey } = config
+const { captchaEnabled, captchaUrl, captchaSecretKey,friendlyCaptchaSecretKey,friendlyCaptchaUrl } = config
 const floodService = require('../services/flood')
 const addressService = require('../services/address')
 const SearchViewModel = require('../models/search-view')
@@ -39,14 +39,35 @@ module.exports = [
         }
 
         // Check that Recaptcha v3 token is valid and has not been used before
-        const uri = `${captchaUrl}${captchaSecretKey}&response=${token}`
-        const payload = await util.postJson(uri, true)
-        if (!payload || !payload.success || payload.score <= 0.5) {
-          if (!payload.success) {
-            return h.redirect(url)
-          } else {
-            return boom.badRequest(errors.captchaError.message)
-          }
+        // const uri = `${captchaUrl}${captchaSecretKey}&response=${token}`
+        // const payload = await util.postJson(uri, true)
+        // if (!payload || !payload.success || payload.score <= 0.5) {
+        //   if (!payload.success) {
+        //     return h.redirect(url)
+        //   } else {
+        //     return boom.badRequest(errors.captchaError.message)
+        //   }
+        // }
+        const uri = `${friendlyCaptchaUrl}`
+        const reqData = {
+          solution: token,
+          secret: friendlyCaptchaSecretKey
+        }
+        const options = {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          json: true,
+          payload: reqData
+        }
+        const apiResponse = await util.post(uri,options,true)
+        if(!apiResponse.success apiResponse.errors['solution_invalid']){
+          console.log('The solution you provided was invalid (perhaps the user tried to tamper with the puzzle).')
+          return boom.badImplementation('solution_invalid')
+        }
+        if(!apiResponse.success && apiResponse.errors['solution_timeout_or_duplicate']){
+          return boom.badRequest(errors.friendlyCaptchaError.message)
         }
       }
 

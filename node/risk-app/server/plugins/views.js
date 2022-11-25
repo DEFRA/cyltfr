@@ -49,7 +49,8 @@ module.exports = {
       ogDescription: 'Check your risk of flooding and use flood risk maps',
       noIndex: true, // stop robot crawl by default
       captchaEnabled: config.captchaEnabled,
-      captchaSiteKey: config.captchaSiteKey
+      captchaSiteKey: config.captchaSiteKey,
+      friendlyCaptchaSiteKey: config.friendlyCaptchaSiteKey
     }
   }
 }

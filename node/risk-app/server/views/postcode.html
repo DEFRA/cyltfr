@@ -21,14 +21,22 @@
 
       <form id="postcode-form" method="post">
         {{ govukInput(postcodeInput) }}
+        <input name="captchaErrorMessage" value="" hidden/>
         {% if captchaEnabled %}
-          <button class="govuk-button g-recaptcha" 
-            type="submit"
-            data-sitekey={{ captchaSiteKey }}
-            data-callback="onSubmit"
-            data-action="submit">
-            Continue
-          </button>
+          <div style="margin-bottom: 20px;" class="frc-captcha" data-sitekey={{friendlyCaptchaSiteKey}}></div>
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+              <p class="govuk-body" style="color: grey;">
+                Friendly Captcha checks that you aren't a robot. Find out how to use it in our <a href="/privacy-notice" 
+                class="govuk-link">privacy notice</a>
+              </p>
+            </div>
+          </div>
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+              <button type="submit" id="post-code-button" class="govuk-button">Continue</button>
+            </div>
+          </div>
         {% else %}
           <button type="submit" class="govuk-button">Continue</button>
         {% endif %}
@@ -38,7 +46,6 @@
           data-journey-click="ltfri:postcode:map">
           view a map showing areas at risk of flooding</a>.
       </p>
-
       <p class="govuk-body">
         <a href="http://www.royalmail.com/find-a-postcode" class="govuk-link" target="_blank"
           data-journey-click="ltfri:postcode:royal-mail">
@@ -49,11 +56,40 @@
   </div>
 </div>
 {% if captchaEnabled %}
-  <script src="https://www.google.com/recaptcha/api.js?render={{ captchaSiteKey }}"></script>
-  <script>
-    function onSubmit (token) {
-      document.getElementById('postcode-form').submit()
-    }
-  </script>
+<noscript>
+  <style type="text/css">
+    #postcode-page {display:none;}
+</style>
+<div>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">You need Javascript to use this service</h1>
+      <p class="govuk-body">
+        Please turn on javascript in your browser to use this service
+      </p>
+      <p class="govuk-body">
+        You can try again by <a href="/postcode">starting a new search</a>
+      </p>
+      <p class="govuk-body">
+        You can call Floodline for advice about flooding to check your long term risk:
+      </p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>Telephone: 0345 988 1188</li>
+        <li>Textphone: 0345 603 6340</li>
+      </ul>
+      <p class="govuk-body">
+        24 hour service.
+      </p>
+      <p class="govuk-body">
+        <a href="https://www.gov.uk/call-charges">Find out about call charges</a>
+      </p>
+    </div>
+  </div>
+</div>
+ </noscript>
+  <script type="module" src="https://unpkg.com/friendly-challenge@0.9.8/widget.module.min.js" async defer></script>
+  <script nomodule src="https://unpkg.com/friendly-challenge@0.9.8/widget.polyfilled.min.js" async defer></script>
+
+  
 {% endif %}
 {% endblock %}
