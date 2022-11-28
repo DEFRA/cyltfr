@@ -31,6 +31,9 @@ module.exports = [
         if (token === 'undefined') {
           return boom.badRequest(errors.javascriptError.message)
         }
+        if (token === '.EXPIRED') {
+          return boom.badRequest(errors.friendlyCaptchaError.message)
+        }
         if (!token) {
           return h.redirect(url)
         }
@@ -63,11 +66,11 @@ module.exports = [
           payload: requestData
         }
         const apiResponse = await util.post(uri, options, true)
-        if (!apiResponse.success && apiResponse.errors.solution_invalid) {
+        if (!apiResponse.success && apiResponse.errors[0] === 'solution_invalid') {
           console.log('The solution you provided was invalid (perhaps the user tried to tamper with the puzzle).')
           return boom.badImplementation('solution_invalid')
         }
-        if (!apiResponse.success && apiResponse.errors.solution_timeout_or_duplicate) {
+        if (!apiResponse.success && apiResponse.errors[0] === 'solution_timeout_or_duplicate') {
           return boom.badRequest(errors.friendlyCaptchaError.message)
         }
       }
