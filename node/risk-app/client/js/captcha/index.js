@@ -1,8 +1,8 @@
 
-async function myCallback (solution) {
+async function myCallback (solution, captchaUrl, captchaSiteKey) {
   console.log('Captcha finished with solution ' + solution)
-  const url = 'https://api.friendlycaptcha.com/api/v1/siteverify'
-  const siteKey = 'A1VQS1FKTITJCDEKGEGL0F1IGGHE51PN5ETPQ8F2JLFG0RTV193U5NE6MB'
+  const url = `${captchaUrl}`
+  const siteKey = `${captchaSiteKey}`
   // do a post call
   const responseObj = {}
   const payload = {

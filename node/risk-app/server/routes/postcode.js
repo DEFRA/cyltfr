@@ -20,12 +20,23 @@ module.exports = [
     handler: async (request, h) => {
       console.log('service payload => ', request.orig.payload['frc-captcha-solution'])
       const { postcode } = request.payload
-      // const recaptcha = request.payload['g-recaptcha-response']
-      const recaptcha = request.orig.payload['frc-captcha-solution']
-      if (!recaptcha || recaptcha === 'undefined' || recaptcha === '.FETCHING' || recaptcha === '.UNSTARTED' || recaptcha === '.UNFINISHED') {
-        const captchaErrorMessage = 'You cannot continue until Friendly Captcha has checked that you\'re not a robot'
-        const model = new PostcodeViewModel(postcode, captchaErrorMessage)
-        return h.view('postcode', model)
+      let url
+      let friendlyRecaptcha
+      if (config.captchaEnabled) {
+        const recaptcha = request.payload['g-recaptcha-response']
+        url = `/search?postcode=${encodeURIComponent(postcode)}&token=${encodeURIComponent(recaptcha)}`
+      } else if (config.friendlyCaptchaEnabled) {
+        friendlyRecaptcha = request.orig.payload['frc-captcha-solution']
+
+        if (!friendlyRecaptcha || friendlyRecaptcha === 'undefined' || friendlyRecaptcha === '.FETCHING' ||
+        friendlyRecaptcha === '.UNSTARTED' || friendlyRecaptcha === '.UNFINISHED') {
+          const captchaErrorMessage = 'You cannot continue until Friendly Captcha has checked that you\'re not a robot'
+          const model = new PostcodeViewModel(postcode, captchaErrorMessage)
+          return h.view('postcode', model)
+        }
+        url = `/search?postcode=${encodeURIComponent(postcode)}&token=${encodeURIComponent(friendlyRecaptcha)}`
+      } else {
+        url = `/search?postcode=${encodeURIComponent(postcode)}`
       }
 
       if (!postcode || !postcode.match(postcodeRegex)) {
@@ -39,12 +50,6 @@ module.exports = [
       // "england-only" page if that's the case.
       if (postcode.toUpperCase().startsWith('BT')) {
         return redirectToHomeCounty(h, postcode, 'northern-ireland')
-      }
-      let url
-      if (config.captchaEnabled) {
-        url = `/search?postcode=${encodeURIComponent(postcode)}&token=${encodeURIComponent(recaptcha)}`
-      } else {
-        url = `/search?postcode=${encodeURIComponent(postcode)}`
       }
 
       return h.redirect(url)

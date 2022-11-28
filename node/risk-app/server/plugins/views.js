@@ -50,6 +50,7 @@ module.exports = {
       noIndex: true, // stop robot crawl by default
       captchaEnabled: config.captchaEnabled,
       captchaSiteKey: config.captchaSiteKey,
+      friendlyCaptchaEnabled: config.friendlyCaptchaEnabled,
       friendlyCaptchaSiteKey: config.friendlyCaptchaSiteKey
     }
   }
