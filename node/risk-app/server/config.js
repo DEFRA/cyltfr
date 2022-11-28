@@ -37,7 +37,6 @@ const schema = joi.object().keys({
   friendlyCaptchaSecretKey: joi.string().when('captchaEnabled', { is: true, then: joi.required() }),
   friendlyCaptchaUrl: joi.string().when('captchaEnabled', { is: true, then: joi.required() })
 
-
 })
 
 config.http_proxy = process.env.http_proxy
@@ -62,6 +61,5 @@ value.isProd = value.env.startsWith('prod-')
 
 console.log('Server config', value)
 console.log('Version', process.versions)
-
 
 module.exports = value

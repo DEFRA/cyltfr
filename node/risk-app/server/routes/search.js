@@ -2,7 +2,7 @@ const joi = require('joi')
 const boom = require('@hapi/boom')
 const { postcodeRegex, redirectToHomeCounty } = require('../helpers')
 const config = require('../config')
-const { captchaEnabled, captchaUrl, captchaSecretKey,friendlyCaptchaSecretKey,friendlyCaptchaUrl } = config
+const { captchaEnabled, friendlyCaptchaSecretKey, friendlyCaptchaUrl } = config
 const floodService = require('../services/flood')
 const addressService = require('../services/address')
 const SearchViewModel = require('../models/search-view')
@@ -56,17 +56,17 @@ module.exports = [
         const options = {
           headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json',
+            Accept: 'application/json'
           },
           json: true,
           payload: reqData
         }
-        const apiResponse = await util.post(uri,options,true)
-        if(!apiResponse.success apiResponse.errors['solution_invalid']){
+        const apiResponse = await util.post(uri, options, true)
+        if (!apiResponse.success && apiResponse.errors.solution_invalid) {
           console.log('The solution you provided was invalid (perhaps the user tried to tamper with the puzzle).')
           return boom.badImplementation('solution_invalid')
         }
-        if(!apiResponse.success && apiResponse.errors['solution_timeout_or_duplicate']){
+        if (!apiResponse.success && apiResponse.errors.solution_timeout_or_duplicate) {
           return boom.badRequest(errors.friendlyCaptchaError.message)
         }
       }

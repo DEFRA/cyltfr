@@ -22,7 +22,7 @@ module.exports = [
       const { postcode } = request.payload
       // const recaptcha = request.payload['g-recaptcha-response']
       const recaptcha = request.orig.payload['frc-captcha-solution']
-      if(!recaptcha || recaptcha === 'undefined' || recaptcha === '.FETCHING' || recaptcha === '.UNSTARTED' || recaptcha === '.UNFINISHED'){
+      if (!recaptcha || recaptcha === 'undefined' || recaptcha === '.FETCHING' || recaptcha === '.UNSTARTED' || recaptcha === '.UNFINISHED') {
         const captchaErrorMessage = 'You cannot continue until Friendly Captcha has checked that you\'re not a robot'
         const model = new PostcodeViewModel(postcode, captchaErrorMessage)
         return h.view('postcode', model)
