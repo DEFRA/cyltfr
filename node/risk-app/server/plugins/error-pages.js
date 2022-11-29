@@ -29,7 +29,7 @@ module.exports = {
           if (statusCode === 429) {
             return h.view('429').code(statusCode)
           }
-          console.log('Response message ==> ', response.message)
+
           // Then return the `500` view
           switch (response.message) {
             case errors.addressByPostcode.message:

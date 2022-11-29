@@ -24,9 +24,8 @@ module.exports = [
     method: 'GET',
     path: '/search',
     handler: async (request, h) => {
-      const { postcode } = request.query
+      const { postcode, token } = request.query
       const url = '/postcode'
-      const { token } = request.query
       if (captchaEnabled || friendlyCaptchaEnabled) {
         if (token === 'undefined') {
           return boom.badRequest(errors.javascriptError.message)
