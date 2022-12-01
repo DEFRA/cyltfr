@@ -18,13 +18,12 @@ module.exports = [
     method: 'POST',
     path: '/postcode',
     handler: async (request, h) => {
-      console.log('service payload => ', request.orig.payload['frc-captcha-solution'])
       const { postcode } = request.payload
       let url
       let friendlyRecaptcha
       if (config.captchaEnabled) {
-        const recaptcha = request.payload['g-recaptcha-response']
-        url = `/search?postcode=${encodeURIComponent(postcode)}&token=${encodeURIComponent(recaptcha)}`
+        const captcha = request.payload['g-recaptcha-response']
+        url = `/search?postcode=${encodeURIComponent(postcode)}&token=${encodeURIComponent(captcha)}`
       } else if (config.friendlyCaptchaEnabled) {
         friendlyRecaptcha = request.orig.payload['frc-captcha-solution']
 
