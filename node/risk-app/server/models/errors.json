@@ -8,6 +8,9 @@
   "captchaError": {
     "message": "An error occurred validating user"
   },
+  "friendlyCaptchaError": {
+    "message": "puzzle expired"
+  },
   "javascriptError": {
     "message": "JavaScript is not enabled"
   },
