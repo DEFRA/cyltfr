@@ -30,9 +30,14 @@ const schema = joi.object().keys({
   redisCachePort: joi.number().integer().when('redisCacheEnabled', { is: true, then: joi.required() }),
   cookiePassword: joi.string().min(32).required(),
   captchaEnabled: joi.boolean().default(false),
+  friendlyCaptchaEnabled: joi.boolean().default(false),
   captchaUrl: joi.string().uri().when('captchaEnabled', { is: true, then: joi.required() }),
   captchaSiteKey: joi.string().when('captchaEnabled', { is: true, then: joi.required() }),
-  captchaSecretKey: joi.string().when('captchaEnabled', { is: true, then: joi.required() })
+  captchaSecretKey: joi.string().when('captchaEnabled', { is: true, then: joi.required() }),
+  friendlyCaptchaSiteKey: joi.string().when('captchaEnabled', { is: true, then: joi.required() }),
+  friendlyCaptchaSecretKey: joi.string().when('captchaEnabled', { is: true, then: joi.required() }),
+  friendlyCaptchaUrl: joi.string().when('captchaEnabled', { is: true, then: joi.required() })
+
 })
 
 config.http_proxy = process.env.http_proxy
@@ -54,9 +59,5 @@ const value = result.value
 value.isDev = value.env === 'dev'
 value.isTest = value.env === 'test'
 value.isProd = value.env.startsWith('prod-')
-
-console.log('Server config', value)
-console.log('Version', process.versions)
-
 
 module.exports = value
