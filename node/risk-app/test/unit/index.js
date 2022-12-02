@@ -2,10 +2,12 @@ const Lab = require('@hapi/lab')
 const Code = require('@hapi/code')
 const createServer = require('../../server')
 const lab = exports.lab = Lab.script()
-const mock = require('../mock')
+const { mock, mockOptions, mockCaptchaResponse } = require('../mock')
+const config = require('../../server/config')
 const riskService = require('../../server/services/risk')
 const floodService = require('../../server/services/flood')
 const addressService = require('../../server/services/address')
+const utils = require('../../server/util')
 
 lab.experiment('Unit', () => {
   let server, cookie
@@ -16,10 +18,8 @@ lab.experiment('Unit', () => {
     server = await createServer()
     await server.initialize()
 
-    const options = {
-      method: 'GET',
-      url: '/search?postcode=cw8 4bh'
-    }
+    const options = mockOptions('cw8 4bh')
+    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(true, null)))
 
     const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, [
       {
@@ -33,6 +33,7 @@ lab.experiment('Unit', () => {
     const response = await server.inject(options)
     console.log('response => ', response.statusCode)
     Code.expect(response.statusCode).to.equal(200)
+    captchastub.revert()
     addressStub.revert()
 
     cookie = response.headers['set-cookie'][0].split(';')[0]
@@ -80,84 +81,76 @@ lab.experiment('Unit', () => {
   })
 
   lab.test('/search - banner ', async () => {
-    const options = {
-      method: 'GET',
-      url: '/search?postcode=cw8 4bh'
-    }
+    const options = mockOptions('cw8 4bh')
 
     // const stub = mock.replace(floodService, 'findWarnings', mock.makePromise(null, []))
-
+    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(true, null)))
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
-    // stub.revert()
+    captchastub.revert()
   })
 
   lab.test('/address - No banner warnings', async () => {
-    const options = {
-      method: 'GET',
-      url: '/search?postcode=cw8 4bh'
-    }
+    const options = mockOptions('cw8 4bh')
 
+    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(true, null)))
     const stub = mock.replace(floodService, 'findWarnings', mock.makePromise(null, null))
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
+    captchastub.revert()
     stub.revert()
   })
 
   lab.test('/search - No warning banner severity', async () => {
-    const options = {
-      method: 'GET',
-      url: '/search?postcode=cw8 4bh'
-    }
+    const options = mockOptions('cw8 4bh')
 
+    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(true, null)))
     const stub = mock.replace(floodService, 'findWarnings', mock.makePromise(null, {
       message: 'There is currently one flood alert in force at this location.'
     }))
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
+    captchastub.revert()
     stub.revert()
   })
 
   lab.test('/search - With banner warnings', async () => {
-    const options = {
-      method: 'GET',
-      url: '/search?postcode=cw8 4bh'
-    }
+    const options = mockOptions('cw8 4bh')
 
     const data = require('../data/banner-1.json')
+    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(true, null)))
     const stub = mock.replace(floodService, 'findWarnings', mock.makePromise(null, data))
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
+    captchastub.revert()
     stub.revert()
   })
 
   lab.test('/search - With banner alerts', async () => {
-    const options = {
-      method: 'GET',
-      url: '/search?postcode=cw8 4bh'
-    }
+    const options = mockOptions('cw8 4bh')
 
     const data = require('../data/banner-2.json')
     const stub = mock.replace(floodService, 'findWarnings', mock.makePromise(null, data))
+    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(true, null)))
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
+    captchastub.revert()
     stub.revert()
   })
 
   lab.test('/search - Error', async () => {
-    const options = {
-      method: 'GET',
-      url: '/search?postcode=cw8 4bh'
-    }
+    const options = mockOptions('cw8 4bh')
 
     const stub = mock.replace(floodService, 'findWarnings', mock.makePromise('Mock Error'))
+    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(true, null)))
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
+    captchastub.revert()
     stub.revert()
   })
 
@@ -658,11 +651,9 @@ lab.experiment('Unit', () => {
   })
 
   lab.test('/search', async () => {
-    const options = {
-      method: 'GET',
-      url: '/search?postcode=cw8 4bh'
-    }
+    const options = mockOptions('cw8 4bh')
 
+    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(true, null)))
     const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, [
       {
         uprn: '100041117437',
@@ -674,79 +665,85 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
+    captchastub.revert()
     addressStub.revert()
   })
 
   lab.test('/search - Invalid postcode', async () => {
-    const options = {
-      method: 'GET',
-      url: '/search?postcode=invalid'
-    }
+    const options = mockOptions('invalid')
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(400)
   })
 
   lab.test('/search - Invalid query', async () => {
-    const options = {
-      method: 'GET',
-      url: '/search?invalid=foo'
+    let options
+    const postcode = 'foo'
+    if (config.friendlyCaptchaEnabled) {
+      options = {
+        method: 'GET',
+        url: `/search?invalid=${encodeURIComponent(postcode)}&token=${encodeURIComponent('sample token')}`
+      }
+    } else {
+      options = {
+        method: 'GET',
+        url: '/search?invalid=foo'
+      }
     }
+    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(true, null)))
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(400)
+    captchastub.revert()
   })
 
   lab.test('/search - Address service error', async () => {
-    const options = {
-      method: 'GET',
-      url: '/search?postcode=cw8 4bh'
-    }
+    const options = mockOptions('cw8 4bh')
 
     const addressStub = mock.replace(addressService, 'find', mock.makePromise('Mock Address Error'))
+    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(true, null)))
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(400)
+    captchastub.revert()
     addressStub.revert()
   })
 
   lab.test('/search - Address service returns empty address array', async () => {
-    const options = {
-      method: 'GET',
-      url: '/search?postcode=cw8 4bh'
-    }
+    const options = mockOptions('cw8 4bh')
 
+    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(true, null)))
     const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, []))
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
+    captchastub.revert()
     addressStub.revert()
   })
 
   lab.test('/search - NATIONAL address to continue as normal', async () => {
-    const options = {
-      method: 'GET',
-      url: '/search?postcode=cw8 4bh'
-    }
+    const options = mockOptions('cw8 4bh')
 
+    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(true, null)))
     const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, [
       { uprn: '100041117437', address: '81, MOSS ROAD, NORTHWICH, CW8 4BH, NATIONAL', country: 'NATIONAL' }
     ]))
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
+    captchastub.revert()
     addressStub.revert()
   })
 
   lab.test('/search - NI address to redirect to england-only', async () => {
-    const options = {
-      method: 'GET',
-      url: '/search?postcode=BT11BT'
-    }
+    const options = mockOptions('BT11BT')
+
+    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(true, null)))
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(302)
     Code.expect(response.headers.location).to.include('/england-only')
+    captchastub.revert()
   })
 
   lab.test('/risk WELSH address to redirect to england-only', async () => {
@@ -1105,13 +1102,23 @@ lab.experiment('Unit', () => {
   })
 
   lab.test('Accept & strip unknown query parameters', async () => {
-    const options = {
-      method: 'GET',
-      url: '/search?postcode=CW8%204BH&a=b'
+    let options
+    if (config.friendlyCaptchaEnabled) {
+      options = {
+        method: 'GET',
+        url: `/search?postcode=CW8%204BH&a=b&token=${encodeURIComponent('sampletoken')}`
+      }
+    } else {
+      options = {
+        method: 'GET',
+        url: '/search?postcode=CW8%204BH&a=b'
+      }
     }
+    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(true, null)))
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
+    captchastub.revert()
   })
 
   lab.test('Ignore unknown cookies', async () => {

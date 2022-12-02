@@ -19,7 +19,24 @@ module.exports = [
     path: '/postcode',
     handler: async (request, h) => {
       const { postcode } = request.payload
-      const recaptcha = request.payload['g-recaptcha-response']
+      let url
+      let friendlyRecaptcha
+      if (config.captchaEnabled) {
+        const captcha = request.payload['g-recaptcha-response']
+        url = `/search?postcode=${encodeURIComponent(postcode)}&token=${encodeURIComponent(captcha)}`
+      } else if (config.friendlyCaptchaEnabled) {
+        friendlyRecaptcha = request.orig.payload['frc-captcha-solution']
+
+        if (!friendlyRecaptcha || friendlyRecaptcha === 'undefined' || friendlyRecaptcha === '.FETCHING' ||
+        friendlyRecaptcha === '.UNSTARTED' || friendlyRecaptcha === '.UNFINISHED') {
+          const captchaErrorMessage = 'You cannot continue until Friendly Captcha has checked that you\'re not a robot'
+          const model = new PostcodeViewModel(postcode, captchaErrorMessage)
+          return h.view('postcode', model)
+        }
+        url = `/search?postcode=${encodeURIComponent(postcode)}&token=${encodeURIComponent(friendlyRecaptcha)}`
+      } else {
+        url = `/search?postcode=${encodeURIComponent(postcode)}`
+      }
 
       if (!postcode || !postcode.match(postcodeRegex)) {
         const errorMessage = 'Enter a full postcode in England'
@@ -33,21 +50,16 @@ module.exports = [
       if (postcode.toUpperCase().startsWith('BT')) {
         return redirectToHomeCounty(h, postcode, 'northern-ireland')
       }
-      let url
-      if (config.captchaEnabled) {
-        url = `/search?postcode=${encodeURIComponent(postcode)}&token=${encodeURIComponent(recaptcha)}`
-      } else {
-        url = `/search?postcode=${encodeURIComponent(postcode)}`
-      }
 
       return h.redirect(url)
+      // return h.view('postcode', new PostcodeViewModel())
     },
     options: {
       description: 'Post to the postcode page',
       validate: {
         payload: joi.object().keys({
-          postcode: joi.string().trim().required().allow(''),
-          'g-recaptcha-response': joi.string()
+          postcode: joi.string().trim().required().allow('')
+          // 'g-recaptcha-response': joi.string()
         }).required()
       }
     }
