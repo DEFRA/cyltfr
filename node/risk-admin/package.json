@@ -3,9 +3,12 @@
   "version": "1.1.1",
   "description": "LTFRI Admin Web App",
   "main": "index.js",
+  "engines": {
+    "node": ">16.14.0"
+  },
   "scripts": {
     "build:css": "bin/build-css",
-    "build": "bin/build",
+    "build": " bin/build ",
     "lint": "standard",
     "unit-test": "lab -c -r console -o stdout -r lcov -o lcov.info",
     "test": "npm run lint",
@@ -22,15 +25,15 @@
     "@hapi/cookie": "11.0.2",
     "@hapi/hapi": "20.2.1",
     "@hapi/inert": "6.0.5",
-    "@hapi/joi": "17.1.1",
+    "joi": "^17.6.0",
     "@hapi/vision": "6.1.0",
     "aws-sdk": "2.1074.0",
     "blipp": "4.0.2",
     "govuk-frontend": "4.0.1",
     "hapi-pino": "9.1.2",
     "jsonexport": "3.2.0",
-    "moment-timezone": "0.5.34",
-    "node-sass": "7.0.1",
+    "moment-timezone": "0.5.40",
+    "node-sass": "7.0.3",
     "node-schedule": "2.1.0",
     "nunjucks": "3.2.3",
     "ogr2ogr": "3.1.1"

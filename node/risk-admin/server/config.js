@@ -1,4 +1,5 @@
-const joi = require('@hapi/joi')
+const joi = require('joi')
+const config = require('../config/server.json')
 
 // Define config schema
 const schema = joi.object().keys({
@@ -18,24 +19,23 @@ const schema = joi.object().keys({
 })
 
 // Build config
-const config = {
-  env: process.env.NODE_ENV,
-  port: process.env.PORT,
-  adClientId: process.env.AD_CLIENT_ID,
-  adClientSecret: process.env.AD_CLIENT_SECRET,
-  adTenant: process.env.AD_TENANT,
-  cookiePassword: process.env.AD_COOKIE_PASSWORD,
-  isSecure: process.env.IS_SECURE,
-  forceHttps: process.env.FORCE_HTTPS,
-  homePage: process.env.HOME_PAGE,
-  awsBucketRegion: process.env.AWS_BUCKET_REGION,
-  awsBucketName: process.env.AWS_BUCKET_NAME,
-  holdingCommentsPrefix: process.env.HOLDING_COMMENTS_PREFIX,
-  manifestFilename: process.env.MANIFEST_FILENAME
-}
-
+// const config = {
+//   env: process.env.NODE_ENV,
+//   port: process.env.PORT,
+//   adClientId: process.env.AD_CLIENT_ID,
+//   adClientSecret: process.env.AD_CLIENT_SECRET,
+//   adTenant: process.env.AD_TENANT,
+//   cookiePassword: process.env.AD_COOKIE_PASSWORD,
+//   isSecure: process.env.IS_SECURE,
+//   forceHttps: process.env.FORCE_HTTPS,
+//   homePage: process.env.HOME_PAGE,
+//   awsBucketRegion: process.env.AWS_BUCKET_REGION,
+//   awsBucketName: process.env.AWS_BUCKET_NAME,
+//   holdingCommentsPrefix: process.env.HOLDING_COMMENTS_PREFIX,
+//   manifestFilename: process.env.MANIFEST_FILENAME
+// }
 // Validate config
-const { error, value } = schema.validate(config)
+const { error, value } = schema.validate(config, { abortEarly: false })
 
 // Throw if config is invalid
 if (error) {
