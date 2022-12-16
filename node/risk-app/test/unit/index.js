@@ -8,6 +8,7 @@ const riskService = require('../../server/services/risk')
 const floodService = require('../../server/services/flood')
 const addressService = require('../../server/services/address')
 const utils = require('../../server/util')
+const { payloadMatchTest } = require('../utils')
 
 lab.experiment('Unit', () => {
   let server, cookie
@@ -1132,5 +1133,43 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
+  })
+
+  lab.test('Redirect view  when session is active', async () => {
+    // const friendlyRecaptcha = 'some captcha'
+    const options = {
+      method: 'POST',
+      url: '/postcode',
+      headers: {
+        cookie: 'activity=eyJzZXNzaW9uIjoiYWN0aXZlIn0='
+      },
+      payload: {
+        postcode: 'cw8 4bh',
+        'frc-captcha-solution': 'some captcha'
+      }
+    }
+
+    const response = await server.inject(options)
+    Code.expect(response.statusCode).to.equal(302)
+  })
+
+  lab.test('Throw an error  when session times out', async () => {
+    // const friendlyRecaptcha = 'some captcha'
+    const options = {
+      method: 'POST',
+      url: '/postcode',
+      headers: {
+        cookie: ''
+      },
+      payload: {
+        postcode: 'cw8 4bh',
+        'frc-captcha-solution': 'some captcha'
+      }
+    }
+
+    const response = await server.inject(options)
+    const { payload } = response
+    Code.expect(response.statusCode).to.equal(400)
+    await payloadMatchTest(payload, /<h1 class="govuk-heading-xl">Session timed out<\/h1>/g)
   })
 })
