@@ -1,4 +1,4 @@
-const joi = require('@hapi/joi')
+const joi = require('joi')
 const Model = require('../models/comment-create')
 const { shortId } = require('../helpers')
 const capabilities = require('../models/capabilities')

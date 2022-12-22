@@ -1,7 +1,7 @@
 
 const fs = require('fs')
 const util = require('util')
-const joi = require('@hapi/joi')
+const joi = require('joi')
 const boom = require('@hapi/boom')
 const ogr2ogr = require('ogr2ogr').default
 const moment = require('moment-timezone')
