@@ -1,13 +1,13 @@
 ;(function () {
   function commentMap (geojson, target, capabilities, title) {
-    var ol = window.ol
-    var proj4 = window.proj4
+    const ol = window.ol
+    const proj4 = window.proj4
 
-    var vectorSource = new ol.source.Vector({
+    const vectorSource = new ol.source.Vector({
       features: (new ol.format.GeoJSON()).readFeatures(geojson)
     })
 
-    var styleFunction = function (feature) {
+    const styleFunction = function (feature) {
       return new ol.style.Style({
         stroke: new ol.style.Stroke({
           color: 'blue',
@@ -20,7 +20,7 @@
       })
     }
 
-    var vectorLayer = new ol.layer.Vector({
+    const vectorLayer = new ol.layer.Vector({
       source: vectorSource,
       style: styleFunction
     })
@@ -30,26 +30,26 @@
         '+towgs84=446.448,-125.157,542.06,0.15,0.247,0.842,-20.489 ' +
         '+units=m +no_defs')
     ol.proj.proj4.register(proj4)
-    var proj27700 = ol.proj.get('EPSG:27700')
+    const proj27700 = ol.proj.get('EPSG:27700')
     proj27700.setExtent([0, 0, 700000, 1300000])
 
-    var parser = new ol.format.WMTSCapabilities()
-    var result = parser.read(capabilities)
+    const parser = new ol.format.WMTSCapabilities()
+    const result = parser.read(capabilities)
 
-    var options = ol.source.WMTS.optionsFromCapabilities(result, {
+    const options = ol.source.WMTS.optionsFromCapabilities(result, {
       layer: 'Road_27700',
       matrixSet: 'EPSG:27700',
       crossOrigin: 'anonymous'
     })
 
-    var source = new ol.source.WMTS(options)
+    const source = new ol.source.WMTS(options)
 
-    var layer = new ol.layer.Tile({
+    const layer = new ol.layer.Tile({
       ref: 'osgb',
       source: source
     })
 
-    var map = new ol.Map({
+    const map = new ol.Map({
       target: target,
       view: new ol.View({
         projection: proj27700,
@@ -67,7 +67,7 @@
       projection: 'EPSG:27700'
     }))
 
-    var ext = vectorSource.getExtent()
+    const ext = vectorSource.getExtent()
     map.getView().fit(ext, map.getSize())
 
     map.on('singleclick', function (evt) {
@@ -77,9 +77,9 @@
     })
 
     if (title) {
-      var titleEl = document.createElement('h3')
+      const titleEl = document.createElement('h3')
       titleEl.textContent = title
-      var mapEl = map.getTargetElement()
+      const mapEl = map.getTargetElement()
       mapEl.parentNode.insertBefore(titleEl, mapEl)
     }
   }
