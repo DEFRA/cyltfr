@@ -8,6 +8,7 @@ const riskService = require('../../server/services/risk')
 const floodService = require('../../server/services/flood')
 const addressService = require('../../server/services/address')
 const utils = require('../../server/util')
+const { payloadMatchTest } = require('../utils')
 
 lab.experiment('Unit', () => {
   let server, cookie
