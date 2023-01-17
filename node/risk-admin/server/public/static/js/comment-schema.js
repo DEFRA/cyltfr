@@ -298,6 +298,18 @@
                       const: isHoldingComment ? 'holding' : 'llfa',
                       default: isHoldingComment ? 'holding' : 'llfa'
                     },
+                    riskOverride: {
+                      type: 'string',
+                      title: 'Override surface water risk',
+                      enum: [
+                        'Do not override',
+                        'Very low',
+                        'Low',
+                        'Medium',
+                        'High'
+                      ],
+                      default: 'Do not override'
+                    }
                     info: {
                       type: 'string',
                       title: isHoldingComment ? 'Info' : 'Report',
@@ -360,6 +372,11 @@
                   ? React.createElement('p', null, ['The info text will display to public users in this geometry. Read ', React.createElement('a', { href: '/comment-guidance', target: '_blank' }, ['comment guidance']), ' before writing or pasting anything. The maximum number of characters is 150.'])
                   : 'The report text will display to public users in this geometry.'
               },
+              riskOverride: {
+                'ui:widget':  'radio',
+                classNames: 'govuk-form-group riskOverride',
+                'ui:description': 'Choose if the risk for surface water flooding should be overriden for points inside this area'
+              }
               start: {
                 'ui:widget': dateWidget,
                 classNames: 'govuk-form-group start',
