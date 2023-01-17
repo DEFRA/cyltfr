@@ -39,6 +39,7 @@ class CommentView {
       ],
       rows: geometry.features.map((f, i) => ([
         { text: f.properties.info },
+        { text: f.properties.riskOverride },
         { text: moment(f.properties.start).format('DD/MM/YYYY') },
         { text: moment(f.properties.end).format('DD/MM/YYYY') },
         { html: `<div id='map_${i}' class='comment-map'></div>` }
