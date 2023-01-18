@@ -309,7 +309,7 @@
                         'High'
                       ],
                       default: 'Do not override'
-                    }
+                    },
                     info: {
                       type: 'string',
                       title: isHoldingComment ? 'Info' : 'Report',
@@ -376,7 +376,7 @@
                 'ui:widget':  'radio',
                 classNames: 'govuk-form-group riskOverride',
                 'ui:description': 'Choose if the risk for surface water flooding should be overriden for points inside this area'
-              }
+              },
               start: {
                 'ui:widget': dateWidget,
                 classNames: 'govuk-form-group start',
