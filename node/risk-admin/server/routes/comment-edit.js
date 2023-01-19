@@ -41,6 +41,9 @@ module.exports = [
       const key = `${config.holdingCommentsPrefix}/${comment.keyname}`
       const geometryFile = await provider.getFile(key)
       const geometry = JSON.parse(geometryFile.Body)
+      if (comment.riskOverride == null) {
+        comment.riskOverride = 'Do not override' // don't think this is the way to do it
+      }
 
       return h.view('comment-edit', new CommentEdit(comment, geometry, request.auth, capabilities))
     },
