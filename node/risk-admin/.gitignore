@@ -6,3 +6,4 @@ server/public/build
 lcov.info
 ltfmgmt.tar
 .env
+server.json
