@@ -1308,4 +1308,22 @@ lab.experiment('Unit', () => {
     await payloadMatchTest(payload, /<span class="govuk-details__summary-text">What you can do<\/span>/g, 1)
     riskStub.revert()
   })
+
+  lab.test('Assert Privacy page', async () => {
+    const options = {
+      method: 'GET',
+      url: '/privacy-notice',
+      headers: {
+
+      }
+    }
+    const response = await server.inject(options)
+    const { payload } = response
+    Code.expect(response.statusCode).to.equal(200)
+    await payloadMatchTest(payload, /<h1 class="govuk-heading-l">Privacy notice<\/h1>/g)
+    await payloadMatchTest(payload, /<h1 class="govuk-heading-m">Who we are<\/h1>/g)
+    await payloadMatchTest(payload, /<h2 class="govuk-heading-m">What personal data we collect<\/h2>/g)
+    await payloadMatchTest(payload, /<h3 class="govuk-heading-s">Cookies<\/h3>/g)
+    await payloadMatchTest(payload, /<h3 class="govuk-heading-s">Friendly Captcha<\/h3>/g)
+  })
 })
