@@ -33,6 +33,7 @@ class CommentView {
     this.viewCommentData = {
       head: [
         { text: comment.type === 'holding' ? 'Info' : 'Report' },
+        { text: 'Risk Override' },
         { text: 'Valid from' },
         { text: 'Valid to' },
         { text: '' }
