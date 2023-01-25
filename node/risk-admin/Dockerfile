@@ -39,4 +39,4 @@ COPY ./dbscripts ./dbscripts
 
 EXPOSE 3000
 
-ENTRYPOINT [ "node", "index.js" ]
+CMD [ "node", "index.js" ]
