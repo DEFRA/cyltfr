@@ -14,7 +14,24 @@
       {% if errorSummary %}
         {{ govukErrorSummary(errorSummary) }}
       {% endif %}
-
+      {% if friendlyCaptchaEnabled %}
+      <div id="session-alert" style="display: none;">
+        <div class="govuk-warning-text">
+          <span class="govuk-warning-text__icon" aria-hidden="true" style="margin: 0;
+          position: absolute;
+          top: 40%;
+          transform: translateY(-50%);">!</span>
+          <strong class="govuk-warning-text__text" style="line-height: 0.6;">
+            <span class="govuk-warning-text__assistive">Warning</span>
+            Your session will end in a few minutes<p style="margin-bottom: 20px;
+            font-weight: normal;
+            text-align: justify;">If you do not respond by then, you‘ll need to <a href="/postcode" >start a new search</a></p>
+          </strong>
+        </div>
+      </div>
+      <div id="timeout" data-timeout="{{timeout}}">
+      </div>
+      {% endif %}
       <div class="govuk-inset-text">
         <p>This service will tell you the flood risk of an area, not a specific property.</p>
       </div>
@@ -102,6 +119,17 @@
   </div>
 </div>
  </noscript>
+ <script>
+   const sessionDiv = document.getElementById('session-alert')
+   const sessionTimeout = document.getElementById('timeout').getAttribute('data-timeout')
+   const time = (sessionTimeout - 2) * 60 * 1000
+   sessionDiv.style.display = 'none'
+    const timeout = setTimeout(showSessionAlert,time)
+    function showSessionAlert() {
+        sessionDiv.style.display = 'block'
+    }
+  
+ </script>
   <script type="module" src="https://unpkg.com/friendly-challenge@0.9.8/widget.module.min.js" async defer></script>
   <script nomodule src="https://unpkg.com/friendly-challenge@0.9.8/widget.polyfilled.min.js" async defer></script>
 {% endif %}
