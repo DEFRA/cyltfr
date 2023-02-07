@@ -1,4 +1,4 @@
-const joi = require('@hapi/joi')
+const joi = require('joi')
 const config = require('../config/server.json')
 
 // Define config schema
@@ -56,5 +56,7 @@ value.isTest = value.env === 'test'
 value.isProd = value.env.startsWith('prod-')
 
 console.log('Server config', value)
+console.log('Version', process.versions)
+
 
 module.exports = value
