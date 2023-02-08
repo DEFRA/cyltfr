@@ -57,7 +57,7 @@ function loadMap (point) {
 
     const layer = new ol.layer.Tile({
       ref: config.OSLayer,
-      source: source
+      source
     })
     const layers = []
     // add the base map layer
@@ -128,7 +128,7 @@ function loadMap (point) {
         source: WmsSource,
         opacity: 0.7,
         visible: false,
-        maxResolution: maxResolution
+        maxResolution
       }))
     }
 
@@ -166,17 +166,17 @@ function loadMap (point) {
     const resolutions = source.tileGrid.getResolutions().slice(0, 10)
 
     map = new ol.Map({
-      controls: controls,
+      controls,
       interactions: ol.interaction.defaults({
         altShiftDragRotate: false,
         pinchRotate: false
       }),
-      layers: layers,
+      layers,
       pixelRatio: 1,
       target: 'map',
       view: new ol.View({
-        resolutions: resolutions,
-        projection: projection,
+        resolutions,
+        projection,
         center: point || [440000, 310000],
         zoom: point ? 9 : 0,
         extent: config.projection.extent
@@ -199,7 +199,7 @@ function loadMap (point) {
         isRiskDescription: true,
         isRiversOrSeas: id.substr(0, 11) === 'rivers-seas',
         isSurfaceWater: id.substr(0, 13) === 'surface-water',
-        id: id
+        id
       }
 
       // Get the overlay content html using the template
@@ -323,7 +323,7 @@ function loadMap (point) {
             depth30: toFixed(isRiverLevelStation ? properties.depth_30 : properties.lev_30),
             depth100: toFixed(isRiverLevelStation ? properties.depth_100 : properties.lev_100),
             depth1000: toFixed(isRiverLevelStation ? properties.depth_1000 : properties.lev_1000),
-            isRiverLevelStation: isRiverLevelStation,
+            isRiverLevelStation,
             stationName: properties.location || properties.site
           }
         }
@@ -407,7 +407,7 @@ function testValues () {
     zoom: map.getView().getZoom(),
     point: map.getView().getCenter(),
     layer: currentLayer && currentLayer.getProperties().ref,
-    isLoading: isLoading
+    isLoading
   }
 }
 
@@ -464,12 +464,12 @@ Progress.prototype.hide = function () {
 }
 
 window.maps = {
-  loadMap: loadMap,
-  showMap: showMap,
-  panTo: panTo,
-  updateSize: updateSize,
-  closeOverlay: closeOverlay,
-  testValues: testValues,
+  loadMap,
+  showMap,
+  panTo,
+  updateSize,
+  closeOverlay,
+  testValues,
   onReady: function (fn) {
     callback = fn
   }

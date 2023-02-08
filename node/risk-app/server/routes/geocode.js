@@ -1,4 +1,4 @@
-const joi = require('@hapi/joi')
+const joi = require('joi')
 const util = require('../util')
 const config = require('../config')
 const locationService = require('../services/location')
