@@ -1,5 +1,5 @@
 const config = require('../config')
-const joi = require('@hapi/joi')
+const joi = require('joi')
 const { postcodeRegex, redirectToHomeCounty } = require('../helpers')
 const PostcodeViewModel = require('../models/postcode-view')
 

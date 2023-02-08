@@ -1,4 +1,4 @@
-const joi = require('@hapi/joi')
+const joi = require('joi')
 const boom = require('@hapi/boom')
 const { postcodeRegex, redirectToHomeCounty } = require('../helpers')
 const config = require('../config')

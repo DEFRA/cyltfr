@@ -27,7 +27,20 @@
   <p class="govuk-body">
     The Environment Agency is responsible for managing the flood risk from rivers and the sea.
   </p>
-
+  {% if (riversAndSeaTitle !== 'Very low risk') %}
+  <details class="govuk-details" data-module="govuk-details">
+    <summary class="govuk-details__summary" data-journey-click="ltfri:risk:managing-rivers-and-sea-details">
+      <span class="govuk-details__summary-text">What you can do</span>
+    </summary>
+    <div class="govuk-details__text">
+      <ul class="govuk-list  govuk-list--bullet">
+        <li>This area is covered by the flood warning service<a href="https://www.gov.uk/sign-up-for-flood-warnings" class="govuk-link"> Sign up to receive warnings by phone,text or email</a></li>
+        <li>What you can do to <a href="/managing-flood-risk" class="govuk-link" data-journey-click="ltfri:risk:managing-flood-risk">protect your property from flooding</a></li>
+        <li>Make a <a href="https://www.gov.uk/government/publications/personal-flood-plan" class="govuk-link">personal flood plan</a></li>
+      </ul>
+    </div>
+  </details>
+  {% endif %}
   <p class="govuk-body">
     <a class="govuk-link"
       href="/map?easting={{easting}}&northing={{northing}}&map=RiversOrSea">
