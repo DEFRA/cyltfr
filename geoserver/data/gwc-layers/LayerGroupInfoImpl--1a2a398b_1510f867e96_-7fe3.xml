@@ -11,8 +11,8 @@
       <gridSetName>EPSG:27700</gridSetName>
       <extent>
         <coords>
-          <double>1393.0196</double>
-          <double>13494.9764</double>
+          <double>0.0</double>
+          <double>0.0</double>
           <double>673393.0196</double>
           <double>800000.0</double>
         </coords>
