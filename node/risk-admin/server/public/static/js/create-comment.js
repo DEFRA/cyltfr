@@ -1,25 +1,25 @@
 
 ;(function () {
-  var Form = window.JSONSchemaForm.default
-  var React = window.React
-  var ReactDOM = window.ReactDOM
-  var FormData = window.FormData
-  var fetch = window.fetch
-  var commentMap = window.LTFMGMT.commentMap
-  var capabilities = window.LTFMGMT.capabilities
+  const Form = window.JSONSchemaForm.default
+  const React = window.React
+  const ReactDOM = window.ReactDOM
+  const FormData = window.FormData
+  const fetch = window.fetch
+  const commentMap = window.LTFMGMT.commentMap
+  const capabilities = window.LTFMGMT.capabilities
 
-  var spinner = document.getElementById('spinner')
-  var fileInput = document.getElementById('geometry')
+  const spinner = document.getElementById('spinner')
+  const fileInput = document.getElementById('geometry')
 
-  var type = window.LTFMGMT.type
-  var isHoldingComment = type === 'holding'
-  var commentSchema = isHoldingComment
+  const type = window.LTFMGMT.type
+  const isHoldingComment = type === 'holding'
+  const commentSchema = isHoldingComment
     ? window.LTFMGMT.holdingCommentSchema
     : window.LTFMGMT.llfaCommentSchema
 
   // Handle file change event
   fileInput.addEventListener('change', function (e) {
-    var formData = new FormData()
+    const formData = new FormData()
 
     if (!fileInput.files || !fileInput.files.length) {
       return
@@ -46,7 +46,7 @@
     }).then(function (response) {
       document.getElementById('file').remove()
 
-      var props = {
+      const props = {
         formData: response,
         schema: commentSchema.schema,
         uiSchema: commentSchema.uiSchema,
@@ -85,7 +85,7 @@
       )
 
       response.features.forEach(function (feature, index) {
-        var geo = Object.assign({}, response, {
+        const geo = Object.assign({}, response, {
           features: response.features.filter(function (f) {
             return f === feature
           })
