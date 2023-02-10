@@ -290,7 +290,7 @@
               properties: {
                 properties: {
                   type: 'object',
-                  required: ['start', 'end', 'info'],
+                  required: ['start', 'end'],
                   properties: {
                     apply: {
                       type: 'string',
