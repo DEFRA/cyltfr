@@ -33,6 +33,11 @@ Node v8+
 
 # Running the application
 
+Get the environment from https://gitlab-dev.aws-int.defra.cloud/flood/ltfri-mgmt-tool-config/
+The build a .env file using 
+
+`jq '.containerDefinitions[0].environment' < ltfri-mgmt-tool-task-definition.json | jq -r '.[] | "\(.name)=\(.value)"' > .env`
+
 First build the application using:
 
 `$ npm run build`
@@ -65,3 +70,6 @@ Notes
 
 If you want to debug locally and not run the docker container but don't have `ogr2ogr` installed
 change the shp2json file to return the mock geojson on line 24.
+
+To assume a role that can access the s3 bucket, run `bin/assume-role`
+The output of that can also be copied into the .env file
