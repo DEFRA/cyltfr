@@ -14,6 +14,8 @@ module.exports = [
       const { activity = {} } = state
       activity.session = 'active'
       h.state('activity', activity)
+      if( config.friendlyCaptchaEnabled )
+        return h.view('postcode', new PostcodeViewModel(null,null,config.sessionTimeout))
       return h.view('postcode', new PostcodeViewModel())
     },
     options: {
