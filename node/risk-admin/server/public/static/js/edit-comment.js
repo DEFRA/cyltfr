@@ -1,20 +1,20 @@
 
 ;(function () {
-  var Form = window.JSONSchemaForm.default
-  var React = window.React
-  var ReactDOM = window.ReactDOM
-  var fetch = window.fetch
-  var geometry = window.LTFMGMT.geometry
-  var comment = window.LTFMGMT.comment
-  var type = comment.type
-  var isHoldingComment = type === 'holding'
-  var commentSchema = isHoldingComment
+  const Form = window.JSONSchemaForm.default
+  const React = window.React
+  const ReactDOM = window.ReactDOM
+  const fetch = window.fetch
+  const geometry = window.LTFMGMT.geometry
+  const comment = window.LTFMGMT.comment
+  const type = comment.type
+  const isHoldingComment = type === 'holding'
+  const commentSchema = isHoldingComment
     ? window.LTFMGMT.holdingCommentSchema
     : window.LTFMGMT.llfaCommentSchema
-  var commentMap = window.LTFMGMT.commentMap
-  var capabilities = window.LTFMGMT.capabilities
+  const commentMap = window.LTFMGMT.commentMap
+  const capabilities = window.LTFMGMT.capabilities
 
-  var props = {
+  const props = {
     formData: geometry,
     schema: commentSchema.schema,
     uiSchema: commentSchema.uiSchema,
@@ -59,7 +59,7 @@
   )
 
   geometry.features.forEach(function (feature, index) {
-    var geo = Object.assign({}, geometry, {
+    const geo = Object.assign({}, geometry, {
       features: geometry.features.filter(function (f) {
         return f === feature
       })

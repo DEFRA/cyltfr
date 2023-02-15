@@ -1,8 +1,8 @@
 ;(function () {
-  var React = window.React
-  var useState = window.React.useState
+  const React = window.React
+  const useState = window.React.useState
 
-  var holdingCommentBoundaries = [
+  const holdingCommentBoundaries = [
     'Cumbria and Lancashire (CLA)',
     'Devon, Cornwall and the Isles of Scilly (DCS)',
     'East Anglia (EAN)',
@@ -19,7 +19,7 @@
     'Yorkshire (YOR)'
   ]
 
-  var llfaBoundaries = [
+  const llfaBoundaries = [
     'Barking and Dagenham',
     'Barnet',
     'Barnsley',
@@ -196,9 +196,9 @@
     'York'
   ]
 
-  var textareaWidget = function (props) {
-    var [charsLeft, setCharsLeft] = useState(Math.max(0, props.schema.maxLength - props.value.length))
-    var p = {
+  const textareaWidget = function (props) {
+    const [charsLeft, setCharsLeft] = useState(Math.max(0, props.schema.maxLength - props.value.length))
+    const p = {
       rows: 5,
       id: props.id,
       value: props.value,
@@ -206,7 +206,7 @@
       maxLength: props.schema.maxLength,
       className: 'govuk-textarea',
       onChange: function (event) {
-        var value = event.target.value
+        const value = event.target.value
         setCharsLeft(props.schema.maxLength - value.length)
         props.onChange(value)
       }
@@ -220,8 +220,8 @@
     ])
   }
 
-  var inputWidget = function (props) {
-    var p = {
+  const inputWidget = function (props) {
+    const p = {
       type: props.type || 'text',
       id: props.id,
       className: 'govuk-input govuk-input--width-20',
@@ -235,13 +235,13 @@
     return React.createElement('input', p)
   }
 
-  var dateWidget = function (props) {
+  const dateWidget = function (props) {
     props.type = 'date'
     return inputWidget(props)
   }
 
-  var selectWidget = function (props) {
-    var p = {
+  const selectWidget = function (props) {
+    const p = {
       rows: 5,
       id: props.id,
       value: props.value,
@@ -263,7 +263,7 @@
   }
 
   function createSchema (isHoldingComment) {
-    var commentSchema = {
+    const commentSchema = {
       schema: {
         title: 'A geojson form',
         type: 'object',
@@ -290,13 +290,25 @@
               properties: {
                 properties: {
                   type: 'object',
-                  required: ['start', 'end', 'info'],
+                  required: ['start', 'end'],
                   properties: {
                     apply: {
                       type: 'string',
                       title: 'Apply',
                       const: isHoldingComment ? 'holding' : 'llfa',
                       default: isHoldingComment ? 'holding' : 'llfa'
+                    },
+                    riskOverride: {
+                      type: 'string',
+                      title: 'Override surface water risk',
+                      enum: [
+                        'Do not override',
+                        'Very low',
+                        'Low',
+                        'Medium',
+                        'High'
+                      ],
+                      default: 'Do not override'
                     },
                     info: {
                       type: 'string',
@@ -360,6 +372,11 @@
                   ? React.createElement('p', null, ['The info text will display to public users in this geometry. Read ', React.createElement('a', { href: '/comment-guidance', target: '_blank' }, ['comment guidance']), ' before writing or pasting anything. The maximum number of characters is 150.'])
                   : 'The report text will display to public users in this geometry.'
               },
+              riskOverride: {
+                'ui:widget':  'radio',
+                classNames: 'govuk-form-group riskOverride',
+                'ui:description': 'Choose if the risk for surface water flooding should be overriden for points inside this area'
+              },
               start: {
                 'ui:widget': dateWidget,
                 classNames: 'govuk-form-group start',
@@ -381,7 +398,7 @@
 
   function ArrayFieldTemplate (props) {
     return React.createElement('div', null, props.items.map(function (el) {
-      var item = React.createElement('div', {
+      const item = React.createElement('div', {
         id: 'item_' + el.index,
         className: 'array-item'
       }, [
