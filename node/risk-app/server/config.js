@@ -34,10 +34,10 @@ const schema = joi.object().keys({
   captchaUrl: joi.string().uri().when('captchaEnabled', { is: true, then: joi.required() }),
   captchaSiteKey: joi.string().when('captchaEnabled', { is: true, then: joi.required() }),
   captchaSecretKey: joi.string().when('captchaEnabled', { is: true, then: joi.required() }),
-  friendlyCaptchaSiteKey: joi.string().when('captchaEnabled', { is: true, then: joi.required() }),
-  friendlyCaptchaSecretKey: joi.string().when('captchaEnabled', { is: true, then: joi.required() }),
-  friendlyCaptchaUrl: joi.string().when('captchaEnabled', { is: true, then: joi.required() }),
-  sessionTimeout: joi.number().required().default(10)
+  friendlyCaptchaSiteKey: joi.string().when('friendlyCaptchaEnabled', { is: true, then: joi.required() }),
+  friendlyCaptchaSecretKey: joi.string().when('friendlyCaptchaEnabled', { is: true, then: joi.required() }),
+  friendlyCaptchaUrl: joi.string().when('friendlyCaptchaEnabled', { is: true, then: joi.required() }),
+  sessionTimeout: joi.number().default(10)
 })
 
 config.http_proxy = process.env.http_proxy
