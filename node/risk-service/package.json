@@ -1,6 +1,6 @@
 {
   "name": "risk-service",
-  "version": "2.1.13",
+  "version": "2.4.0",
   "description": "Flood Service",
   "main": "index.js",
   "engines": {
@@ -11,7 +11,8 @@
     "lint": "standard",
     "unit-test": "bin/unit-test",
     "integration-test": "bin/integration-test",
-    "test": "npm run lint && npm run unit-test && npm run integration-test"
+    "test": "npm run lint && npm run unit-test && npm run integration-test",
+    "debug": "node --inspect-brk=0.0.0.0:9229 index.js"
   },
   "author": "",
   "license": "ISC",

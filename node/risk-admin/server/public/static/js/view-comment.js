@@ -1,9 +1,9 @@
 ;(function () {
-  var geometry = window.LTFMGMT.geometry
-  var capabilities = window.LTFMGMT.capabilities
+  const geometry = window.LTFMGMT.geometry
+  const capabilities = window.LTFMGMT.capabilities
 
   geometry.features.forEach(function (feature, index) {
-    var geo = Object.assign({}, geometry, {
+    const geo = Object.assign({}, geometry, {
       features: geometry.features.filter(function (f) {
         return f === feature
       })

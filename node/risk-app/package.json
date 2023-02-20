@@ -1,6 +1,6 @@
 {
   "name": "risk-app",
-  "version": "2.1.14",
+  "version": "2.4.0",
   "description": "Long term flood risk information",
   "main": "index.js",
   "engines": {
@@ -14,7 +14,8 @@
     "build": "bin/build",
     "lint": "standard",
     "unit-test": "bin/unit-test",
-    "test": "npm run lint && npm run unit-test"
+    "test": "npm run lint && npm run unit-test",
+    "debug": "node --inspect-brk=0.0.0.0:9229 index.js"
   },
   "author": "",
   "license": "ISC",
