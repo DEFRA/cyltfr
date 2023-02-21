@@ -34,16 +34,20 @@ module.exports = {
           switch (response.message) {
             case errors.addressByPostcode.message:
             case errors.addressById.message:
-              return h.view('500-address').code(statusCode)
+              return h.view('500-error').code(statusCode)
             case errors.captchaError.message:
               return h.view('500-captcha').code(statusCode)
+            case errors.friendlyCaptchaError.message:
+              return h.view('500-friendly-captcha').code(statusCode)
+            case errors.sessionTimeoutError.message:
+              return h.view('500-session-timeout').code(statusCode)
             case errors.javascriptError.message:
               return h.view('500-javascript').code(statusCode)
             case errors.riskProfile.message:
             case errors.spatialQuery.message:
-              return h.view('500-risk').code(statusCode)
+              return h.view('500-error').code(statusCode)
             default:
-              return h.view('500').code(statusCode)
+              return h.view('500-error').code(statusCode)
           }
         }
 
