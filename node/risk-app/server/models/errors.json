@@ -8,6 +8,12 @@
   "captchaError": {
     "message": "An error occurred validating user"
   },
+  "friendlyCaptchaError": {
+    "message": "puzzle expired"
+  },
+  "sessionTimeoutError": {
+    "message": "Session timed out"
+  },
   "javascriptError": {
     "message": "JavaScript is not enabled"
   },
