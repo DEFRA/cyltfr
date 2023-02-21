@@ -1186,4 +1186,126 @@ lab.experiment('Unit', () => {
     Code.expect(response.statusCode).to.equal(200)
     await payloadMatchTest(payload, /<p class="govuk-body">\n\s\s\s\s\s\s\s\sThe website has the following content which is out of scope of the accessibility regulations:\n\s\s\s\s\s\s<\/p>\n\s\s\s\s\s\s<ul class="govuk-list govuk-list--bullet">\n\s\s\s\s\s\s\s\s<li>maps<\/li>\n\s\s\s\s\s\s\s\s<li>third party content which is out of our control, for example a corporate logo on the map the website uses\n\s\s\s\s\s\s\s\s<\/li>\n\s\s\s\s\s\s\s\s<li>PDF content that was published before 23 September 2018<\/li>\n\s\s\s\s\s\s<\/ul>/g)
   })
+
+  lab.test('Checking for Managing Risk link in risk result page', async () => {
+    const options = {
+      method: 'GET',
+      url: '/risk',
+      headers: {
+        cookie
+      }
+    }
+    const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
+      inEngland: true,
+      isGroundwaterArea: true,
+      floodAlertArea: ['AnyArea'],
+      floodWarningArea: [],
+      inFloodAlertArea: true,
+      inFloodWarningArea: false,
+      leadLocalFloodAuthority: 'Croydon',
+      reservoirRisk: null,
+      riverAndSeaRisk: { probabilityForBand: 'Very Low', suitability: 'County to Town' },
+      surfaceWaterRisk: 'Very Low',
+      surfaceWaterSuitability: 'National to County',
+      extraInfo: null
+    }))
+    const response = await server.inject(options)
+    const { payload } = response
+    Code.expect(response.statusCode).to.equal(200)
+    await payloadMatchTest(payload, /<h3 class="govuk-heading-m">Manage your flood risk<\/h3>/g, 1)
+    riskStub.revert()
+  })
+
+  lab.test('Implementing Rivers and Sea managing flood risk changes for very low risk areas', async () => {
+    const options = {
+      method: 'GET',
+      url: '/risk',
+      headers: {
+        cookie
+      }
+    }
+
+    const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
+      inEngland: true,
+      isGroundwaterArea: true,
+      floodAlertArea: ['064FAG99SElondon'],
+      floodWarningArea: [],
+      inFloodAlertArea: true,
+      inFloodWarningArea: false,
+      leadLocalFloodAuthority: 'Croydon',
+      reservoirRisk: null,
+      riverAndSeaRisk: { probabilityForBand: 'Very Low', suitability: 'County to Town' },
+      surfaceWaterRisk: 'Very Low',
+      surfaceWaterSuitability: 'National to County',
+      extraInfo: null
+    }))
+
+    const response = await server.inject(options)
+    const { payload } = response
+    Code.expect(response.statusCode).to.equal(200)
+    await payloadMatchTest(payload, /<span class="govuk-details__summary-text">What you can do<\/span>/g, 0)
+    riskStub.revert()
+  })
+
+  lab.test('Implementing Rivers and Sea managing flood risk changes for both surface water and rivers&sea in low risk areas', async () => {
+    const options = {
+      method: 'GET',
+      url: '/risk',
+      headers: {
+        cookie
+      }
+    }
+
+    const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
+      inEngland: true,
+      isGroundwaterArea: true,
+      floodAlertArea: ['064FAG99SElondon'],
+      floodWarningArea: [],
+      inFloodAlertArea: true,
+      inFloodWarningArea: false,
+      leadLocalFloodAuthority: 'Suffolk',
+      reservoirRisk: null,
+      riverAndSeaRisk: { probabilityForBand: 'Low', suitability: 'County to Town' },
+      surfaceWaterRisk: 'Low',
+      surfaceWaterSuitability: 'National to County',
+      extraInfo: null
+    }))
+
+    const response = await server.inject(options)
+    const { payload } = response
+    Code.expect(response.statusCode).to.equal(200)
+    await payloadMatchTest(payload, /<span class="govuk-details__summary-text">What you can do<\/span>/g, 2)
+    riskStub.revert()
+  })
+
+  lab.test('Implementing Rivers and Sea managing flood risk changes for only surface water in low risk areas', async () => {
+    const options = {
+      method: 'GET',
+      url: '/risk',
+      headers: {
+        cookie
+      }
+    }
+
+    const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
+      inEngland: true,
+      isGroundwaterArea: true,
+      floodAlertArea: ['064FAG99SElondon'],
+      floodWarningArea: [],
+      inFloodAlertArea: true,
+      inFloodWarningArea: false,
+      leadLocalFloodAuthority: 'Hertfordshire',
+      reservoirRisk: null,
+      riverAndSeaRisk: { probabilityForBand: 'Very Low', suitability: 'County to Town' },
+      surfaceWaterRisk: 'Low',
+      surfaceWaterSuitability: 'National to County',
+      extraInfo: null
+    }))
+
+    const response = await server.inject(options)
+    const { payload } = response
+    Code.expect(response.statusCode).to.equal(200)
+    await payloadMatchTest(payload, /<span class="govuk-details__summary-text">What you can do<\/span>/g, 1)
+    riskStub.revert()
+  })
 })
