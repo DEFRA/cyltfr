@@ -10,4 +10,13 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 				<sqlFile path="./2.4.0/calculate_flood_risk_rollback.sql" splitStatements="false"/>
 		</rollback>
 	</changeSet>
+<<<<<<< HEAD
+=======
+	<changeSet author="mcollins" id="2.4.0.2">
+		<sqlFile path="./2.4.0/add_risk_override.sql" splitStatements="false"/>
+		<rollback>
+				<sqlFile path="./2.4.0/add_risk_override_rollback.sql" splitStatements="false"/>
+		</rollback>
+	</changeSet>
+>>>>>>> faa7f854fd7a8bf392b41d6bf15957747645d55b
 </databaseChangeLog>
