@@ -62,9 +62,5 @@ value.isProd = value.env.startsWith('prod-')
 
 console.log('Server config', value)
 console.log('Version', process.versions)
-<<<<<<< HEAD
-
-=======
->>>>>>> faa7f854fd7a8bf392b41d6bf15957747645d55b
 
 module.exports = value
