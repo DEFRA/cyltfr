@@ -14,8 +14,9 @@ module.exports = [
       const { activity = {} } = state
       activity.session = 'active'
       h.state('activity', activity)
-      if( config.friendlyCaptchaEnabled )
+      if( config.friendlyCaptchaEnabled ){
         return h.view('postcode', new PostcodeViewModel(null,null,config.sessionTimeout))
+      }
       return h.view('postcode', new PostcodeViewModel())
     },
     options: {
@@ -45,7 +46,20 @@ module.exports = [
           const model = new PostcodeViewModel(postcode, captchaErrorMessage)
           return h.view('postcode', model)
         }
+        request.yar.set({
+          newToken: friendlyRecaptcha
+        })
         url = `/search?postcode=${encodeURIComponent(postcode)}&token=${encodeURIComponent(friendlyRecaptcha)}`
+        if(request.yar.get('token') === request.yar.get('newToken') ){
+          request.yar.set({
+            token: friendlyRecaptcha
+          })
+        }else{
+          request.yar.set({
+            token: undefined
+          })
+        }
+        
       } else {
         url = `/search?postcode=${encodeURIComponent(postcode)}`
       }

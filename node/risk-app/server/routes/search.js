@@ -50,7 +50,7 @@ module.exports = [
           }
         }
       }
-      if (friendlyCaptchaEnabled) {
+      if (friendlyCaptchaEnabled && (request.yar.get('token') === undefined || request.yar.get('token') === null)) {
         const uri = `${friendlyCaptchaUrl}`
         const requestData = {
           solution: token,
@@ -119,7 +119,7 @@ module.exports = [
     method: 'POST',
     path: '/search',
     handler: async (request, h) => {
-      const { postcode } = request.query
+      const { postcode, token } = request.query
       const { address } = request.payload
       const addresses = request.yar.get('addresses')
 
@@ -134,10 +134,10 @@ module.exports = [
 
         return h.view('search', model)
       }
-
       // Set addresses to session
       request.yar.set({
-        address: addresses[address]
+        address: addresses[address],
+        token: friendlyCaptchaEnabled ? token : undefined
       })
 
       return h.redirect('/risk')
@@ -146,7 +146,8 @@ module.exports = [
       description: 'Post to the search page',
       validate: {
         query: joi.object().keys({
-          postcode: joi.string().trim().regex(postcodeRegex).required()
+          postcode: joi.string().trim().regex(postcodeRegex).required(),
+          token: joi.string().optional()
         }),
         payload: joi.object().keys({
           address: joi.number().required()
