@@ -41,8 +41,9 @@ module.exports = [
 
         if (!friendlyRecaptcha || friendlyRecaptcha === 'undefined' || friendlyRecaptcha === '.FETCHING' ||
         friendlyRecaptcha === '.UNSTARTED' || friendlyRecaptcha === '.UNFINISHED') {
-          const captchaErrorMessage = 'You cannot continue until Friendly Captcha has checked that you\'re not a robot'
-          const model = new PostcodeViewModel(postcode, captchaErrorMessage)
+          const captchaErrorMessage = 'You cannot continue until Friendly Captcha'+ 
+          ' has checked that you\'re not a robot'
+          const model = new PostcodeViewModel(postcode, captchaErrorMessage,config.sessionTimeout)
           return h.view('postcode', model)
         }
         url = `/search?postcode=${encodeURIComponent(postcode)}&token=${encodeURIComponent(friendlyRecaptcha)}`
@@ -52,7 +53,7 @@ module.exports = [
 
       if (!postcode || !postcode.match(postcodeRegex)) {
         const errorMessage = 'Enter a full postcode in England'
-        const model = new PostcodeViewModel(postcode, errorMessage)
+        const model = new PostcodeViewModel(postcode, errorMessage,config.sessionTimeout)
         return h.view('postcode', model)
       }
 
