@@ -1,4 +1,5 @@
 
+console.log("Loading...")
 async function myCallback (solution, captchaUrl, captchaSiteKey) {
   console.log('Captcha finished with solution ' + solution)
   const url = `${captchaUrl}`
