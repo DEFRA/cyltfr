@@ -14,8 +14,9 @@ module.exports = [
       const { activity = {} } = state
       activity.session = 'active'
       h.state('activity', activity)
-      if( config.friendlyCaptchaEnabled )
+      if( config.friendlyCaptchaEnabled ){
         return h.view('postcode', new PostcodeViewModel(null,null,config.sessionTimeout))
+      }
       return h.view('postcode', new PostcodeViewModel())
     },
     options: {
@@ -41,18 +42,32 @@ module.exports = [
 
         if (!friendlyRecaptcha || friendlyRecaptcha === 'undefined' || friendlyRecaptcha === '.FETCHING' ||
         friendlyRecaptcha === '.UNSTARTED' || friendlyRecaptcha === '.UNFINISHED') {
-          const captchaErrorMessage = 'You cannot continue until Friendly Captcha has checked that you\'re not a robot'
-          const model = new PostcodeViewModel(postcode, captchaErrorMessage)
+          const captchaErrorMessage = 'You cannot continue until Friendly Captcha'+ 
+          ' has checked that you\'re not a robot'
+          const model = new PostcodeViewModel(postcode, captchaErrorMessage,config.sessionTimeout)
           return h.view('postcode', model)
         }
+        request.yar.set({
+          newToken: friendlyRecaptcha
+        })
         url = `/search?postcode=${encodeURIComponent(postcode)}&token=${encodeURIComponent(friendlyRecaptcha)}`
+        if(request.yar.get('token') === request.yar.get('newToken') ){
+          request.yar.set({
+            token: friendlyRecaptcha
+          })
+        }else{
+          request.yar.set({
+            token: undefined
+          })
+        }
+        
       } else {
         url = `/search?postcode=${encodeURIComponent(postcode)}`
       }
 
       if (!postcode || !postcode.match(postcodeRegex)) {
         const errorMessage = 'Enter a full postcode in England'
-        const model = new PostcodeViewModel(postcode, errorMessage)
+        const model = new PostcodeViewModel(postcode, errorMessage,config.sessionTimeout)
         return h.view('postcode', model)
       }
 
