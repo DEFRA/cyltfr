@@ -1,4 +1,3 @@
-
 async function myCallback (solution, captchaUrl, captchaSiteKey) {
   const url = `${captchaUrl}`
   const siteKey = `${captchaSiteKey}`
