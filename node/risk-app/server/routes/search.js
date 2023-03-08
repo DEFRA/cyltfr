@@ -70,7 +70,7 @@ module.exports = [
           return boom.badImplementation('solution_invalid')
         }
         if (!apiResponse.success && apiResponse.errors[0] === 'solution_timeout_or_duplicate') {
-          return boom.badRequest(errors.friendlyCaptchaError.message)
+          return boom.badRequest(errors.sessionTimeoutError.message)
         }
       }
 
