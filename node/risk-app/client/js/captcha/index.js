@@ -1,6 +1,5 @@
 
 async function myCallback (solution, captchaUrl, captchaSiteKey) {
-  console.log('Captcha finished with solution ' + solution)
   const url = `${captchaUrl}`
   const siteKey = `${captchaSiteKey}`
   // do a post call
@@ -11,7 +10,6 @@ async function myCallback (solution, captchaUrl, captchaSiteKey) {
   }
 
   try {
-    console.log('...Making http call')
     await fetch(url, {
       method: 'POST',
       mode: 'cors',
@@ -24,20 +22,16 @@ async function myCallback (solution, captchaUrl, captchaSiteKey) {
       referrerPolicy: 'no-referrer',
       body: JSON.stringify(payload)
     }).then((response) => {
-      console.log('Response => ', response)
       return response.json()
     })
       .then((data) => {
         if (data.success) {
-          console.log('Data', data)
           responseObj.success = data.success
           responseObj.details = data.details
         } else {
-          console.log('Data after success false', data)
           responseObj.success = data.success
           responseObj.details = data.details
         }
-        console.log('Response object =>  ', responseObj)
         return responseObj
       }).catch((err) => {
         console.log('eer: ', err)
