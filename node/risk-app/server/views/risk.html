@@ -74,6 +74,29 @@
             </div>
           </details>
         </div>
+        {% else %}
+        <div class="govuk-inset-text very-low">
+          <h3 class="no-margin">Reservoirs</h3>
+          <p class="govuk-body">
+            <strong>Flooding from reservoirs is unlikely in this area</strong>
+         </p>
+        </div>
+         <details class="govuk-details" data-module="govuk-details">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">What a reservoir is and how we check an area’s risk</span>
+          </summary>
+          <div class="govuk-details__text">
+            <p class="govuk-body">
+              A reservoir is a large natural or artifcial lake that is designed to collect and store water.
+            </p>
+            <p class="govuk-body">
+              We use predicted scenarios to understand the risk of flooding from reservoirs.
+            </p>
+            <p class="govuk-body">
+              Flooding from reservoirs is extremely unlikely. An area is considered at risk if people’s lives could be threatened in the event of a dam or reservoir failure.
+          </p>
+          </div>
+         </details>
         {% endif %}
 
         <!-- Groundwater -->
