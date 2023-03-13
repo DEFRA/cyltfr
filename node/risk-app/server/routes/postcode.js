@@ -47,15 +47,9 @@ module.exports = [
           const model = new PostcodeViewModel(postcode, captchaErrorMessage,config.sessionTimeout)
           return h.view('postcode', model)
         }
-        request.yar.set({
-          newToken: friendlyRecaptcha
-        })
+        
         url = `/search?postcode=${encodeURIComponent(postcode)}&token=${encodeURIComponent(friendlyRecaptcha)}`
-        if(request.yar.get('token') === request.yar.get('newToken') ){
-          request.yar.set({
-            token: friendlyRecaptcha
-          })
-        }else{
+        if(request.yar.get('token') !== friendlyRecaptcha ){
           request.yar.set({
             token: undefined
           })
