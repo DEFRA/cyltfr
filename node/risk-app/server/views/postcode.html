@@ -48,6 +48,9 @@
           </button>
         {% elif friendlyCaptchaEnabled %}
           <div style="margin-bottom: 20px;" class="frc-captcha govuk-body" data-sitekey={{friendlyCaptchaSiteKey}} data-start="auto"></div>
+          <div class="govuk-grid-column-two-thirds" style="display: none;" id="nc-browser">
+            <p class="govuk-body">The anti-robot check works better and faster in modern browsers such as Edge, Firefox, or Chrome. Please consider updating your browser</p>
+          </div>
           <div class="govuk-grid-row">
             <div class="govuk-grid-column-two-thirds">
               <p class="govuk-body" style="color: grey;">
@@ -129,7 +132,10 @@
        sessionDiv.style.display = 'block'
    }
   </script>
-  <script type="module" src="https://unpkg.com/friendly-challenge@0.9.8/widget.module.min.js" async defer></script>
-  <script nomodule src="https://unpkg.com/friendly-challenge@0.9.8/widget.polyfilled.min.js" async defer></script>
+  <script type="module" src="https://unpkg.com/friendly-challenge@0.9.11/widget.module.min.js" async defer>
+  </script>
+  <script nomodule src="https://unpkg.com/friendly-challenge@0.9.11/widget.polyfilled.min.js" async defer>
+  </script>
+  <script src="{{ assetPath }}/js/captcha-refresh.js"></script>
 {% endif %}
 {% endblock %}
