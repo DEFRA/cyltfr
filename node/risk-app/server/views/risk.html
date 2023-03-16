@@ -74,7 +74,15 @@
             </div>
           </details>
         </div>
-        {% else %}
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+        {% endif %}
+
+        {% if isGroundwaterArea %}
+        {% include 'partials/groundwater.html' %}
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+        {% endif %}
+        
+        {% if not reservoirRisk %}
         <div class="govuk-inset-text very-low">
           <h3 class="no-margin">Reservoirs</h3>
           <p class="govuk-body">
@@ -97,41 +105,13 @@
           </p>
           </div>
          </details>
-        {% endif %}
+         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+         {% endif %}
 
-        <!-- Groundwater -->
-        {% if isGroundwaterArea %}
-        <div class="groundwater">
-          <div class="govuk-inset-text high">
-            <h3 class="govuk-!-margin-bottom-2">Groundwater</h3>
-            <p class="govuk-!-margin-top-0 risk"><strong>Flooding is possible in the local area when groundwater levels are high</strong>
-            </p>
-          </div>
-        </div>
-        {% else %}
-        <div class="govuk-inset-text very-low">
-          <h3 class="no-margin">Groundwater</h3>
-          <p class="govuk-body">
-            <strong>Flooding from groundwater is unlikely in this area </strong>
-          </p>
-        </div>
-        {% endif %}
-         <details class="govuk-details" data-module="govuk-details">
-          <summary class="govuk-details__summary">
-            <span class="govuk-details__summary-text">What groundwater flooding is and how we can check an area’s risk</span>
-          </summary>
-          <div class="govuk-details__text">
-            <p class="govuk-body">
-              Flooding caused by groundwater happens when water underground that is usually held in the rocks and soil (known as the water table) gets so high that it flows above the surface.
-            </p>
-            <p class="govuk-body">
-              We use flood alert data to check the risk of flooding from groundwater.
-            </p>
-          </div>
-         </details>
-        
-
+        {% if not isGroundwaterArea %}
+        {% include 'partials/groundwater.html' %}
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+        {% endif %}
 
         <p class="govuk-body">
             <h3 class="govuk-heading-m">Manage your flood risk</h3>
