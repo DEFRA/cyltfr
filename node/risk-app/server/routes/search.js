@@ -137,9 +137,7 @@ module.exports = [
         const errorMessage = 'Select an address'
         const warnings = await getWarnings(postcode, request)
         const model = new SearchViewModel(postcode, addresses, errorMessage, warnings)
-        // request.yar.set({
-        //   token: friendlyCaptchaEnabled
-        // })
+        
         return h.view('search', model)
       }
 
