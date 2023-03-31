@@ -127,18 +127,21 @@ module.exports = [
         return h.redirect('/postcode')
       }
 
-      if (address < 0) {
-        const errorMessage = 'Select an address'
-        const warnings = await getWarnings(postcode, request)
-        const model = new SearchViewModel(postcode, addresses, errorMessage, warnings)
-
-        return h.view('search', model)
-      }
       // Set addresses to session
       request.yar.set({
         address: addresses[address],
         token: friendlyCaptchaEnabled ? token : undefined
       })
+
+      if (address < 0) {
+        const errorMessage = 'Select an address'
+        const warnings = await getWarnings(postcode, request)
+        const model = new SearchViewModel(postcode, addresses, errorMessage, warnings)
+        // request.yar.set({
+        //   token: friendlyCaptchaEnabled
+        // })
+        return h.view('search', model)
+      }
 
       return h.redirect('/risk')
     },
