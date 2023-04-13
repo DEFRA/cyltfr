@@ -168,8 +168,8 @@
               <th scope="row" class="govuk-table__header">Reservoir risk</th>
               <td class="govuk-table__cell">
                 {% if reservoirRisk %}
-                Reservoir flooding is highly unlikely however, reservoirs that could affect this area are
-
+                <!-- Reservoir flooding is highly unlikely however, reservoirs that could affect this area are -->
+                There is a risk of flooding from reservoirs in this area, reservoirs that can affect this area are:
                 <ul class="govuk-list govuk-list--bullet">
                   {% for reservoir in reservoirs %}
                   <li>{{reservoir.name}}</li>
