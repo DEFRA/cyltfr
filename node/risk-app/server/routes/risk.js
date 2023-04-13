@@ -19,6 +19,7 @@ module.exports = {
 
       try {
         const risk = await riskService.getByCoordinates(x, y, radius)
+        console.log('Risk => ', risk)
 
         // FLO-1139 If query 1 to 6 errors then throw default error page
         const hasError = risk.inFloodWarningArea === 'Error' ||
