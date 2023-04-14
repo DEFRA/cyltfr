@@ -92,10 +92,7 @@ module.exports = [
         if (!addresses || !addresses.length) {
           return h.view('search', new SearchViewModel(postcode))
         }
-        console.log('got here after DDRESS IS EMPTY')
         const warnings = await getWarnings(postcode, request)
-
-        
 
         return h.view('search', new SearchViewModel(postcode, addresses, null, warnings))
       } catch (err) {
