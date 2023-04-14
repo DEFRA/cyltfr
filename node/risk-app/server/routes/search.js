@@ -84,16 +84,18 @@ module.exports = [
       try {
         const addresses = await addressService.find(postcode)
 
-        if (!addresses || !addresses.length) {
-          return h.view('search', new SearchViewModel(postcode))
-        }
-
-        const warnings = await getWarnings(postcode, request)
-
         // Set addresses to session
         request.yar.set({
           addresses
         })
+        
+        if (!addresses || !addresses.length) {
+          return h.view('search', new SearchViewModel(postcode))
+        }
+        console.log('got here after DDRESS IS EMPTY')
+        const warnings = await getWarnings(postcode, request)
+
+        
 
         return h.view('search', new SearchViewModel(postcode, addresses, null, warnings))
       } catch (err) {
@@ -126,9 +128,16 @@ module.exports = [
       if (!Array.isArray(addresses)) {
         return h.redirect('/postcode')
       }
-
+      // Set friendly captchaa token to session
+      request.yar.set({
+        token: friendlyCaptchaEnabled ? token : undefined
+      })
+      let errorMessage;
       if (address < 0) {
-        const errorMessage = 'Select an address'
+        errorMessage = 'Select an address'
+        if(addresses.length <= 0){
+          errorMessage = 'No address for postcode, Do enter another postcode'
+        }
         const warnings = await getWarnings(postcode, request)
         const model = new SearchViewModel(postcode, addresses, errorMessage, warnings)
 
@@ -136,8 +145,7 @@ module.exports = [
       }
       // Set addresses to session
       request.yar.set({
-        address: addresses[address],
-        token: friendlyCaptchaEnabled ? token : undefined
+        address: addresses[address]
       })
 
       return h.redirect('/risk')
