@@ -23,7 +23,7 @@
 
 ;(function (global) {
   'use strict'
-
+console.log('start here')
   var $ = global.jQuery
   var GOVUK = global.GOVUK || {}
 
@@ -47,6 +47,8 @@
       }
 
       journeyHelpers.on('click', function (event) {
+        console.log('I am being clicked')
+        console.log('Split Action => ', splitAction($(this).data('journey-click')))
         analyticsCallback.apply(null, splitAction($(this).data('journey-click')))
       })
     }
@@ -62,11 +64,21 @@
   }())
 
   GOVUK.performance.sendGoogleAnalyticsEvent = function (category, event, label) {
+    console.log('category', category)
+    console.log('event', event)
+    console.log('label', label)
     if (global.ga && typeof global.ga === 'function') {
       global.ga('send', 'event', category, event, label, {
         nonInteraction: true
       })
-    } else {
+      if(global.gtag && typeof global.gtag === 'function'){
+        global.gtag('event',event,{
+          'send_to': global.G4AnalticsAccount,
+          'event_category': category,
+          'event_label': label
+        })
+      }
+    }else {
       global._gaq.push(['_trackEvent', category, event, label, undefined, true])
     }
   }
