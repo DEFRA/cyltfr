@@ -30,7 +30,7 @@ class PostcodeViewModel {
         ]
       }
     }
-    if(timeout) {
+    if (timeout) {
       this.timeout = timeout
     }
   }
