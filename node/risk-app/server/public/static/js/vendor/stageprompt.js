@@ -23,7 +23,6 @@
 
 ;(function (global) {
   'use strict'
-
   var $ = global.jQuery
   var GOVUK = global.GOVUK || {}
 
@@ -66,7 +65,14 @@
       global.ga('send', 'event', category, event, label, {
         nonInteraction: true
       })
-    } else {
+      if(global.gtag && typeof global.gtag === 'function'){
+        global.gtag('event',event,{
+          'send_to': global.G4AnalyticsAccount,
+          'event_category': category,
+          'event_label': label
+        })
+      }
+    }else {
       global._gaq.push(['_trackEvent', category, event, label, undefined, true])
     }
   }
