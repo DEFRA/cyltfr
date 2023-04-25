@@ -67,7 +67,7 @@
       })
       if(global.gtag && typeof global.gtag === 'function'){
         global.gtag('event',event,{
-          'send_to': global.G4AnalticsAccount,
+          'send_to': global.G4AnalyticsAccount,
           'event_category': category,
           'event_label': label
         })

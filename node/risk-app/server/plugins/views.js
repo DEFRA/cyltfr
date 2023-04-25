@@ -3,7 +3,7 @@ const nunjucks = require('nunjucks')
 const config = require('../config')
 const pkg = require('../../package.json')
 const analyticsAccount = config.analyticsAccount
-const G4AnalticsAccount = config.G4AnalticsAccount
+const G4AnalyticsAccount = config.G4AnalyticsAccount
 
 module.exports = {
   plugin: require('@hapi/vision'),
@@ -42,7 +42,7 @@ module.exports = {
       serviceUrl: config.isProd ? 'https://www.gov.uk/check-long-term-flood-risk' : '/postcode',
       pageTitle: 'Check your long term flood risk',
       analyticsAccount,
-      G4AnalticsAccount,
+      G4AnalyticsAccount,
       appStage: config.env,
       floodWarningsUrl: config.floodWarningsUrl,
       phase: 'beta',
