@@ -1,14 +1,14 @@
 
-window.addEventListener( "pageshow", function ( event ) {
-  var historyTraversal = event.persisted || 
-                         ( typeof window.performance != "undefined" && 
-                              window.performance.navigation.type === 2 );
-  if ( historyTraversal ) {
+window.addEventListener('pageshow', function (event) {
+  const historyTraversal = event.persisted ||
+                         (typeof window.performance !== 'undefined' &&
+                              window.performance.navigation.type === 2)
+  if (historyTraversal) {
     // Handle page restore.
-    window.location.reload();
+    window.location.reload()
   }
-});
-if (!!document.documentMode) {
+})
+if (document.documentMode) {
   // Only true in Internet Explorer
   // Array.prototype.slice.call(document.querySelectorAll(".frc-captcha")).forEach(function (element) {
   //   var messageElement = document.createElement("p");
@@ -18,5 +18,4 @@ if (!!document.documentMode) {
   // });
   const ieBrowser = document.getElementById('nc-browser')
   ieBrowser.style.display = 'block'
-
 }
