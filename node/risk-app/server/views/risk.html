@@ -107,7 +107,7 @@
           </summary>
           <div class="govuk-details__text">
             <p class="govuk-body">
-              A reservoir is a large natural or artifcial lake that is designed to collect and store water.
+              A reservoir is a large natural or artificial lake that is designed to collect and store water.
             </p>
             <p class="govuk-body">
               We use predicted scenarios to understand the risk of flooding from reservoirs.
@@ -168,8 +168,7 @@
               <th scope="row" class="govuk-table__header">Reservoir risk</th>
               <td class="govuk-table__cell">
                 {% if reservoirRisk %}
-                Reservoir flooding is highly unlikely however, reservoirs that could affect this area are
-
+                There is a risk of flooding from reservoirs in this area, reservoirs that can affect this area are:
                 <ul class="govuk-list govuk-list--bullet">
                   {% for reservoir in reservoirs %}
                   <li>{{reservoir.name}}</li>
