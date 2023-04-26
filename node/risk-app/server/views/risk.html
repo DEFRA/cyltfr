@@ -175,14 +175,14 @@
                   {% endfor %}
                 </ul>
                 {% else %}
-                There is no risk of reservoir flooding
+                Flooding from reservoirs is unlikely in this area
                 {% endif %}
               </td>
             </tr>
             <tr class="govuk-table__row">
               <th scope="row" class="govuk-table__header">Groundwater risk</th>
               <td class="govuk-table__cell">
-                {{ "Flooding is possible in the local area when groundwater levels are high" if isGroundwaterArea else "No risk of groundwater flooding" }}
+                {{ "Flooding is possible in the local area when groundwater levels are high" if isGroundwaterArea else "Flooding from groundwater is unlikely in this area" }}
               </td>
             </tr>
           </tbody>
