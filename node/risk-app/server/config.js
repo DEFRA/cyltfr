@@ -10,7 +10,8 @@ const schema = joi.object().keys({
   serviceUrl: joi.string().uri().required(),
   mockAddressService: joi.boolean().required(),
   httpTimeoutMs: joi.number().required().min(0).max(30000),
-  analyticsAccount: joi.string().required().allow(''),
+  analyticsAccount: joi.string().default(''),
+  G4AnalyticsAccount: joi.string().default(''),
   floodWarningsUrl: joi.string().uri().required(),
   floodRiskUrl: joi.string().uri().required(),
   osUprnUrl: joi.string().uri().required(),
@@ -60,7 +61,6 @@ value.isDev = value.env === 'dev'
 value.isTest = value.env === 'test'
 value.isProd = value.env.startsWith('prod-')
 
-console.log('Server config', value)
 console.log('Version', process.versions)
 
 module.exports = value
