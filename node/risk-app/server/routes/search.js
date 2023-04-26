@@ -133,7 +133,7 @@ module.exports = [
       if (address < 0) {
         errorMessage = 'Select an address'
         if(addresses.length <= 0){
-          errorMessage = 'No address for postcode, Do enter another postcode'
+          errorMessage = 'Enter a valid postcode'
         }
         const warnings = await getWarnings(postcode, request)
         const model = new SearchViewModel(postcode, addresses, errorMessage, warnings)
