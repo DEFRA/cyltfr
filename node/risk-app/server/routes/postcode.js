@@ -15,6 +15,12 @@ module.exports = [
       activity.session = 'active'
       h.state('activity', activity)
       if (config.friendlyCaptchaEnabled) {
+        if (Object.prototype.hasOwnProperty.call(request.query, 'captchabypass')) {
+          // if value passed doesn't equal config value, clear out the session setting.
+          request.yar.set('captchabypass', (request.query.captchabypass === config.friendlyCaptchaBypass))
+          console.log('Captcha Bypass set to : %s', request.yar.get('captchabypass'))
+          // if it does equal config value then set the captchabypass session setting.
+        }
         return h.view('postcode', new PostcodeViewModel(null, null, config.sessionTimeout))
       }
       return h.view('postcode', new PostcodeViewModel())
