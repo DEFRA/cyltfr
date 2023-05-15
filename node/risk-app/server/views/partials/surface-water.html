@@ -57,12 +57,12 @@
   </p>
   {% if (surfaceWaterTitle !== 'Very low risk') %}
   <details class="govuk-details" data-module="govuk-details">
-    <summary class="govuk-details__summary">
+    <summary class="govuk-details__summary" data-journey-click="ltfri:risk:managing-surface-water-details">
       <span class="govuk-details__summary-text">What you can do</span>
     </summary>
     <div class="govuk-details__text">
       <ul class="govuk-list  govuk-list--bullet">
-        <li><a href="https://www.metoffice.gov.uk" class="govuk-link">Check UK weather updates from the Met Office</a> (flood alerts and warnings for surface water are not provided as they are unpredictable)</li>
+        <li><a href="https://www.metoffice.gov.uk" class="govuk-link" data-journey-click="ltfri:manage:check-uk-weather-updates"></a>>Check UK weather updates from the Met Office</a> (flood alerts and warnings for surface water are not provided as they are unpredictable)</li>
         <li>What you can do to <a href="/managing-flood-risk" class="govuk-link" data-journey-click="ltfri:risk:managing-flood-risk">protect your property from flooding</a></li>
         {% if leadLocalFloodAuthority %}
         <li>Contact {{leadLocalFloodAuthority}} council for advice on managing surface water flood risk</li>
