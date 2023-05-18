@@ -45,15 +45,15 @@ module.exports = [
         if (!request.state.activity) {
           return boom.badRequest(errors.sessionTimeoutError.message)
         }
-
-        if (!friendlyRecaptcha || friendlyRecaptcha === 'undefined' || friendlyRecaptcha === '.FETCHING' ||
-        friendlyRecaptcha === '.UNSTARTED' || friendlyRecaptcha === '.UNFINISHED') {
-          const captchaErrorMessage = 'You cannot continue until Friendly Captcha' +
+        if (!request.yar.get('captchabypass')) {
+          if (!friendlyRecaptcha || friendlyRecaptcha === 'undefined' || friendlyRecaptcha === '.FETCHING' ||
+              friendlyRecaptcha === '.UNSTARTED' || friendlyRecaptcha === '.UNFINISHED') {
+            const captchaErrorMessage = 'You cannot continue until Friendly Captcha' +
           ' has checked that you\'re not a robot'
-          const model = new PostcodeViewModel(postcode, captchaErrorMessage, config.sessionTimeout)
-          return h.view('postcode', model)
+            const model = new PostcodeViewModel(postcode, captchaErrorMessage, config.sessionTimeout)
+            return h.view('postcode', model)
+          }
         }
-
         url = `/search?postcode=${encodeURIComponent(postcode)}&token=${encodeURIComponent(friendlyRecaptcha)}`
         if (request.yar.get('token') !== friendlyRecaptcha) {
           request.yar.set({
