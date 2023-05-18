@@ -38,6 +38,7 @@ const schema = joi.object().keys({
   friendlyCaptchaSiteKey: joi.string().when('friendlyCaptchaEnabled', { is: true, then: joi.required() }),
   friendlyCaptchaSecretKey: joi.string().when('friendlyCaptchaEnabled', { is: true, then: joi.required() }),
   friendlyCaptchaUrl: joi.string().when('friendlyCaptchaEnabled', { is: true, then: joi.required() }),
+  friendlyCaptchaBypass: joi.string().default(''),
   sessionTimeout: joi.number().default(10)
 })
 
