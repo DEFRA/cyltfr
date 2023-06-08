@@ -33,7 +33,6 @@ const floodRiskService = {
           risk.extra_info.forEach(item => {
             if (!(item.riskoverride == null)) {
               if (item.apply === 'holding') {
-                console.log(item)
                 const riskOverride = RiskOverrideLevels.indexOf(item.riskoverride.toLowerCase())
                 if (riskOverride >= 0) {
                   risk.surface_water_risk = RiskLevels[riskOverride]
