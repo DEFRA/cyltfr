@@ -1,4 +1,5 @@
 const joi = require('joi')
+require('dotenv/config')
 
 // Define config schema
 const schema = joi.object().keys({

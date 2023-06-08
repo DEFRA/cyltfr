@@ -31,10 +31,12 @@ const floodRiskService = {
       if (risk.extra_info !== 'Error') {
         if (Array.isArray(risk.extra_info) && risk.extra_info.length) {
           risk.extra_info.forEach(item => {
-            if (item.riskoverride !== undefined) {
-              const riskOverride = RiskOverrideLevels.indexOf(item.riskoverride.toLowerCase())
-              if (riskOverride >= 0) {
-                risk.surface_water_risk = RiskLevels[riskOverride]
+            if (!(item.riskoverride == null)) {
+              if (item.apply === 'holding') {
+                const riskOverride = RiskOverrideLevels.indexOf(item.riskoverride.toLowerCase())
+                if (riskOverride >= 0) {
+                  risk.surface_water_risk = RiskLevels[riskOverride]
+                }
               }
             }
           })
