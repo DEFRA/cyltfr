@@ -298,7 +298,7 @@
                       const: isHoldingComment ? 'holding' : 'llfa',
                       default: isHoldingComment ? 'holding' : 'llfa'
                     },
-                    riskOverride: {
+                    riskOverride: isHoldingComment ? {
                       type: 'string',
                       title: 'Override surface water risk',
                       enum: [
@@ -309,7 +309,7 @@
                         'High'
                       ],
                       default: 'Do not override'
-                    },
+                    } : undefined,
                     info: {
                       type: 'string',
                       title: isHoldingComment ? 'Info' : 'Report',
