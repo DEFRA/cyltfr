@@ -373,7 +373,7 @@
                   : 'The report text will display to public users in this geometry.'
               },
               riskOverride: {
-                'ui:widget':  'radio',
+                'ui:widget':  isHoldingComment ? 'radio': 'hidden',
                 classNames: 'govuk-form-group riskOverride',
                 'ui:description': 'Choose if the risk for surface water flooding should be overriden for points inside this area'
               },
