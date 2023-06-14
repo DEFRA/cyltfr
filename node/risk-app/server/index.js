@@ -40,7 +40,12 @@ async function createServer () {
     require('../mock/address')
     server.log('info', 'Address server is being mocked')
   }
-
+  if (config.errbit.postErrors) {
+    await server.register({
+      plugin: require('node-hapi-airbrake'),
+      options: config.errbit.options
+    })
+  }
   return server
 }
 
