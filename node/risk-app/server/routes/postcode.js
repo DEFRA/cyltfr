@@ -55,7 +55,7 @@ module.exports = [
           }
         }
         url = `/search?postcode=${encodeURIComponent(postcode)}&token=${encodeURIComponent(friendlyRecaptcha)}`
-        if (request.yar.get('token') !== friendlyRecaptcha) {
+        if (request.yar.get('token') !== postcode + friendlyRecaptcha) {
           request.yar.set({
             token: undefined
           })
