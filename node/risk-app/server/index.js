@@ -42,7 +42,7 @@ async function createServer () {
   }
   if (config.errbit.postErrors) {
     await server.register({
-      plugin: require('node-hapi-airbrake'),
+      plugin: require('./plugins/airbrake'),
       options: config.errbit.options
     })
   }
