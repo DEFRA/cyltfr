@@ -35,7 +35,7 @@ $govuk-assets-path: '/assets/';
   float: right;
 }
 
-#postcode-remove-indent {
+#postcode-remove-indent > dd {
   margin-inline-start: 0;
 }
 
