@@ -2,7 +2,7 @@ const joi = require('joi')
 const boom = require('@hapi/boom')
 const { postcodeRegex, redirectToHomeCounty } = require('../helpers')
 const config = require('../config')
-const { captchaEnabled, friendlyCaptchaSecretKey, friendlyCaptchaUrl, friendlyCaptchaEnabled } = config
+const { friendlyCaptchaSecretKey, friendlyCaptchaUrl, friendlyCaptchaEnabled } = config
 const floodService = require('../services/flood')
 const addressService = require('../services/address')
 const SearchViewModel = require('../models/search-view')
@@ -26,7 +26,7 @@ module.exports = [
     handler: async (request, h) => {
       const { postcode, token } = request.query
       const url = '/postcode'
-      if (captchaEnabled || friendlyCaptchaEnabled) {
+      if (friendlyCaptchaEnabled) {
         if (!request.yar.get('captchabypass')) {
           if (token === 'undefined') {
             return boom.badRequest(errors.javascriptError.message)

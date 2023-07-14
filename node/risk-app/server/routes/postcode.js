@@ -35,16 +35,8 @@ module.exports = [
     handler: async (request, h) => {
       const { postcode } = request.payload
       let url
-      let friendlyRecaptcha
-      if (config.captchaEnabled) {
-        const captcha = request.payload['g-recaptcha-response']
-        url = `/search?postcode=${encodeURIComponent(postcode)}&token=${encodeURIComponent(captcha)}`
-      } else if (config.friendlyCaptchaEnabled) {
-        friendlyRecaptcha = request.payload['frc-captcha-solution']
-        // throw error for user inactivity
-        if (!request.state.activity) {
-          return boom.badRequest(errors.sessionTimeoutError.message)
-        }
+      if (config.friendlyCaptchaEnabled) {
+        const friendlyRecaptcha = request.payload['frc-captcha-solution']
         if (!request.yar.get('captchabypass')) {
           if (!friendlyRecaptcha || friendlyRecaptcha === 'undefined' || friendlyRecaptcha === '.FETCHING' ||
               friendlyRecaptcha === '.UNSTARTED' || friendlyRecaptcha === '.UNFINISHED') {
