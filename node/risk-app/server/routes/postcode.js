@@ -45,7 +45,9 @@ module.exports = [
 
       const captchaCheckResults = await captchaCheck(request.payload['frc-captcha-solution'], postcode, request.yar, request.server)
       if (captchaCheckResults.tokenvalid) {
-        return h.redirect(`/search?postcode=${encodeURIComponent(postcode)}`)
+        // Include a # in the redirected URL, or the browser will jump to any previous url fragment (like #main-content)
+        // See https://www.rfc-editor.org/rfc/rfc9110.html#field.location
+        return h.redirect(`/search?postcode=${encodeURIComponent(postcode)}#`)
       } else {
         // check what error was returned
         const model = new PostcodeViewModel(postcode, captchaCheckResults.errormessage, config.sessionTimeout)
