@@ -40,6 +40,15 @@ function clearStoredValues (yar) {
   })
 }
 
+function storeResults (results, yar) {
+  yar.set({
+    token: results.token,
+    tokenpostcode: results.tokenpostcode,
+    tokenset: results.tokenset,
+    tokenvalid: results.tokenvalid
+  })
+}
+
 function tokenExpired (yar) {
   const lastTokenSet = yar.get('tokenset')
   if (Number.isInteger(lastTokenSet)) {
@@ -58,71 +67,58 @@ async function captchaCheck (token, postcode, yar, server) {
     tokenvalid: false,
     errormessage: ''
   }
-  if (friendlyCaptchaEnabled) {
-    if (!yar.get('captchabypass')) {
-      const storedtoken = yar.get('token')
-      if (token) {
-        // we've been passed a token
-        if (token === 'undefined' || token === '.FETCHING' ||
-            token === '.UNSTARTED' || token === '.UNFINISHED') {
-          clearStoredValues(yar)
-          results.errormessage = 'You cannot continue until Friendly Captcha' +
-          ' has checked that you\'re not a robot'
-          return results
-        }
-        if (token === storedtoken) {
-          if (postcode === yar.get('tokenpostcode')) {
-            if (tokenExpired(yar)) {
-              clearStoredValues(yar)
-              results.errormessage = errors.sessionTimeoutError
-              return results
-            }
-            results.tokenvalid = yar.get('tokenvalid')
-            results.tokenset = yar.get('tokenset')
-            return results
-          } else {
-            clearStoredValues(yar)
-            results.errormessage = errors.sessionTimeoutError
-            return results
-          }
-        } else {
-          // call out and check token
-          clearStoredValues(yar)
-          if (await validateCaptcha(token, server)) {
-            results.tokenvalid = true
-          } else {
-            results.errormessage = errors.sessionTimeoutError
-          }
-        }
-      } else {
-        if (storedtoken) {
-          if (postcode === yar.get('tokenpostcode')) {
-            if (tokenExpired(yar)) {
-              clearStoredValues(yar)
-              results.errormessage = errors.sessionTimeoutError
-              return results
-            }
-            results.tokenvalid = yar.get('tokenvalid')
-            results.tokenset = yar.get('tokenvalid')
-            return results
-          }
-        }
-        results.errormessage = errors.sessionTimeoutError
+  if (!friendlyCaptchaEnabled) {
+    results.tokenvalid = true
+    return results
+  }
+
+  if (yar.get('captchabypass')) {
+    results.tokenvalid = true
+    storeResults(results, yar)
+    return results
+  }
+
+  if (token && (token === 'undefined' || token === '.FETCHING' ||
+  token === '.UNSTARTED' || token === '.UNFINISHED')) {
+    clearStoredValues(yar)
+    results.errormessage = 'You cannot continue until Friendly Captcha' +
+      ' has checked that you\'re not a robot'
+    return results
+  }
+
+  const storedtoken = yar.get('token')
+
+  if (((token) && (token === storedtoken)) || (storedtoken)) {
+    if (postcode === yar.get('tokenpostcode')) {
+      if (tokenExpired(yar)) {
         clearStoredValues(yar)
+        results.errormessage = errors.sessionTimeoutError
         return results
       }
+      results.tokenvalid = yar.get('tokenvalid')
+      results.tokenset = yar.get('tokenvalid')
+      return results
     } else {
-      results.tokenvalid = true
+      clearStoredValues(yar)
+      results.errormessage = errors.sessionTimeoutError
+      return results
     }
-    yar.set({
-      token: results.token,
-      tokenpostcode: results.tokenpostcode,
-      tokenset: results.tokenset,
-      tokenvalid: results.tokenvalid
-    })
-  } else {
-    results.tokenvalid = true
   }
+
+  if (token) {
+    // call out and check token
+    clearStoredValues(yar)
+    if (await validateCaptcha(token, server)) {
+      results.tokenvalid = true
+    } else {
+      results.errormessage = errors.sessionTimeoutError
+    }
+  } else {
+    results.errormessage = errors.sessionTimeoutError
+    clearStoredValues(yar)
+    return results
+  }
+  storeResults(results, yar)
   return results
 }
 
