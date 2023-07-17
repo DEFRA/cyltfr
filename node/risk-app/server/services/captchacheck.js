@@ -1,6 +1,7 @@
 const { sessionTimeout, friendlyCaptchaSecretKey, friendlyCaptchaUrl, friendlyCaptchaEnabled } = require('../config')
 const errors = require('../models/errors.json')
 const util = require('../util')
+const sessionTimeoutInMs = sessionTimeout * 60 * 1000
 
 async function validateCaptcha (token, server) {
   // If we need to verify the token, do this here.
@@ -42,7 +43,7 @@ function clearStoredValues (yar) {
 function tokenExpired (yar) {
   const lastTokenSet = yar.get('tokenset')
   if (Number.isInteger(lastTokenSet)) {
-    if (((sessionTimeout * 60 * 1000) + lastTokenSet) > Date.now()) {
+    if ((sessionTimeoutInMs + lastTokenSet) > Date.now()) {
       return false
     }
   }
@@ -110,12 +111,6 @@ async function captchaCheck (token, postcode, yar, server) {
         clearStoredValues(yar)
         return results
       }
-      // check if passed token is valid
-      // we need to revalidate if
-      // passed token contains a value, and token and storedtoken are different
-      // passed token = storedtoken, but postcode is different
-      // passed token doesn't contain a value, but postcode is different
-      // passed token doesn't contain a value, but time has expired
     } else {
       results.tokenvalid = true
     }

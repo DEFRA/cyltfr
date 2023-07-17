@@ -53,7 +53,6 @@ module.exports = [
         const model = new PostcodeViewModel(postcode, captchaCheckResults.errormessage, config.sessionTimeout)
         return h.view('postcode', model)
       }
-      // return h.view('postcode', new PostcodeViewModel())
     },
     options: {
       description: 'Post to the postcode page',
