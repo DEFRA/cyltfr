@@ -97,6 +97,7 @@
     .map-overlay-close {
       cursor: pointer;
       position: absolute;
+      border: none;
       width: 45px;
       height: 45px;
       background-size: contain;
@@ -109,6 +110,11 @@
       @include govuk-media-query($from: mobile) {
         width: 25px;
         height: 25px;
+      }
+
+      // below should show when CSS is disabled for screen readers
+      .map-overlay-close-text {
+        display: none;
       }
     }
   }
