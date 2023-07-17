@@ -96,7 +96,7 @@ async function captchaCheck (token, postcode, yar, server) {
         return results
       }
       results.tokenvalid = yar.get('tokenvalid')
-      results.tokenset = yar.get('tokenvalid')
+      results.tokenset = yar.get('tokenset')
       return results
     } else {
       clearStoredValues(yar)
