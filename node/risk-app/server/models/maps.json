@@ -15,21 +15,25 @@
             "keys": [
               {
                 "text": "High",
+                "desc": "Click link for explanation of high risk",
                 "icon": "purple",
                 "id": "rivers-seas-high"
               },
               {
                 "text": "Medium",
+                "desc": "Click link for explanation of medium risk",
                 "icon": "dark-blue",
                 "id": "rivers-seas-medium"
               },
               {
                 "text": "Low",
+                "desc": "Click link for explanation of low risk",
                 "icon": "blue",
                 "id": "rivers-seas-low"
               },
               {
                 "text": "Very low",
+                "desc": "Click link for explanation of vary low risk",
                 "icon": "light-blue",
                 "id": "rivers-seas-very-low"
               }
