@@ -88,7 +88,7 @@ async function captchaCheck (token, postcode, yar, server) {
 
   const storedToken = yar.get('token')
 
-  if (((token) && (token === storedToken)) || (storedToken)) {
+  if ((token && (token === storedToken)) || (storedToken && (!token))) {
     if (postcode === yar.get('tokenPostcode')) {
       if (tokenExpired(yar)) {
         clearStoredValues(yar)

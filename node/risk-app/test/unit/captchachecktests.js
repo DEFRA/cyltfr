@@ -247,6 +247,54 @@ lab.experiment('CaptchaCheck', () => {
     Code.expect(called).to.equal(true)
   })
 
+  lab.test('makes a call for a new token when new token passed (same postcode)', async () => {
+    const configoptions = getConfigOptions({})
+    const yar = new YarMock()
+    let called = false
+    const utilStub = {
+      post: function (uri, options, flag) {
+        called = true
+        return Promise.resolve({ success: true })
+      }
+    }
+    yar.set('token', 'thisisatoken')
+    yar.set('tokenPostcode', '1111111')
+    yar.set('tokenSet', Date.now())
+    yar.set('tokenValid', true)
+    const captchacheck = proxyquire('../../server/services/captchacheck', {
+      '../config': configoptions,
+      '../util': utilStub
+    })
+    const results = await captchacheck.captchaCheck('newtoken', '1111111', yar, null)
+
+    Code.expect(results.tokenValid).to.equal(true)
+    Code.expect(called).to.equal(true)
+  })
+
+  lab.test('makes a call for a new token when new token passed (different postcode)', async () => {
+    const configoptions = getConfigOptions({})
+    const yar = new YarMock()
+    let called = false
+    const utilStub = {
+      post: function (uri, options, flag) {
+        called = true
+        return Promise.resolve({ success: true })
+      }
+    }
+    yar.set('token', 'thisisatoken')
+    yar.set('tokenPostcode', '1111111')
+    yar.set('tokenSet', Date.now())
+    yar.set('tokenValid', true)
+    const captchacheck = proxyquire('../../server/services/captchacheck', {
+      '../config': configoptions,
+      '../util': utilStub
+    })
+    const results = await captchacheck.captchaCheck('newtoken', '11111112', yar, null)
+
+    Code.expect(results.tokenValid).to.equal(true)
+    Code.expect(called).to.equal(true)
+  })
+
   lab.test('makes a call for a new token and handle rejection with notify', async () => {
     const configoptions = getConfigOptions({})
     const yar = new YarMock()
