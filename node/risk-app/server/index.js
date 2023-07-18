@@ -34,7 +34,6 @@ async function createServer () {
   await server.register(require('./plugins/session'))
   await server.register(require('./plugins/cookies'))
   await server.register(require('blipp'))
-  await server.register(require('./plugins/activity-session'))
 
   if (config.mockAddressService) {
     require('../mock/address')
