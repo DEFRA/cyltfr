@@ -50,7 +50,7 @@ module.exports = [
         return h.redirect(`/search?postcode=${encodeURIComponent(postcode)}#`)
       } else {
         // check what error was returned
-        const model = new PostcodeViewModel(postcode, captchaCheckResults.errormessage, config.sessionTimeout)
+        const model = new PostcodeViewModel(postcode, captchaCheckResults.errorMessage, config.sessionTimeout)
         return h.view('postcode', model)
       }
     },
