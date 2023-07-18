@@ -79,7 +79,7 @@ module.exports = [
       const addresses = request.yar.get('addresses')
 
       if (!Array.isArray(addresses)) {
-        return h.redirect('/postcode')
+        return h.redirect('/postcode#')
       }
       let errorMessage
       if (address < 0) {
@@ -97,7 +97,7 @@ module.exports = [
         address: addresses[address]
       })
 
-      return h.redirect('/risk')
+      return h.redirect('/risk#')
     },
     options: {
       description: 'Post to the search page',
