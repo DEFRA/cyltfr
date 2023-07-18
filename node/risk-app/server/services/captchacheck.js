@@ -34,23 +34,23 @@ async function validateCaptcha (token, server) {
 function clearStoredValues (yar) {
   yar.set({
     token: undefined,
-    tokenpostcode: undefined,
-    tokenset: undefined,
-    tokenvalid: false
+    tokenPostcode: undefined,
+    tokenSet: undefined,
+    tokenValid: false
   })
 }
 
 function storeResults (results, yar) {
   yar.set({
     token: results.token,
-    tokenpostcode: results.tokenpostcode,
-    tokenset: results.tokenset,
-    tokenvalid: results.tokenvalid
+    tokenPostcode: results.tokenPostcode,
+    tokenSet: results.tokenSet,
+    tokenValid: results.tokenValid
   })
 }
 
 function tokenExpired (yar) {
-  const lastTokenSet = yar.get('tokenset')
+  const lastTokenSet = yar.get('tokenSet')
   if (Number.isInteger(lastTokenSet)) {
     if ((sessionTimeoutInMs + lastTokenSet) > Date.now()) {
       return false
@@ -62,18 +62,18 @@ function tokenExpired (yar) {
 async function captchaCheck (token, postcode, yar, server) {
   const results = {
     token,
-    tokenpostcode: postcode,
-    tokenset: Date.now(),
-    tokenvalid: false,
-    errormessage: ''
+    tokenPostcode: postcode,
+    tokenSet: Date.now(),
+    tokenValid: false,
+    errorMessage: ''
   }
   if (!friendlyCaptchaEnabled) {
-    results.tokenvalid = true
+    results.tokenValid = true
     return results
   }
 
   if (yar.get('captchabypass')) {
-    results.tokenvalid = true
+    results.tokenValid = true
     storeResults(results, yar)
     return results
   }
@@ -81,26 +81,26 @@ async function captchaCheck (token, postcode, yar, server) {
   if (token && (token === 'undefined' || token === '.FETCHING' ||
   token === '.UNSTARTED' || token === '.UNFINISHED')) {
     clearStoredValues(yar)
-    results.errormessage = 'You cannot continue until Friendly Captcha' +
+    results.errorMessage = 'You cannot continue until Friendly Captcha' +
       ' has checked that you\'re not a robot'
     return results
   }
 
-  const storedtoken = yar.get('token')
+  const storedToken = yar.get('token')
 
-  if (((token) && (token === storedtoken)) || (storedtoken)) {
-    if (postcode === yar.get('tokenpostcode')) {
+  if (((token) && (token === storedToken)) || (storedToken)) {
+    if (postcode === yar.get('tokenPostcode')) {
       if (tokenExpired(yar)) {
         clearStoredValues(yar)
-        results.errormessage = errors.sessionTimeoutError
+        results.errorMessage = errors.sessionTimeoutError
         return results
       }
-      results.tokenvalid = yar.get('tokenvalid')
-      results.tokenset = yar.get('tokenset')
+      results.tokenValid = yar.get('tokenValid')
+      results.tokenSet = yar.get('tokenSet')
       return results
     } else {
       clearStoredValues(yar)
-      results.errormessage = errors.sessionTimeoutError
+      results.errorMessage = errors.sessionTimeoutError
       return results
     }
   }
@@ -109,12 +109,12 @@ async function captchaCheck (token, postcode, yar, server) {
     // call out and check token
     clearStoredValues(yar)
     if (await validateCaptcha(token, server)) {
-      results.tokenvalid = true
+      results.tokenValid = true
     } else {
-      results.errormessage = errors.sessionTimeoutError
+      results.errorMessage = errors.sessionTimeoutError
     }
   } else {
-    results.errormessage = errors.sessionTimeoutError
+    results.errorMessage = errors.sessionTimeoutError
     clearStoredValues(yar)
     return results
   }

@@ -35,7 +35,7 @@ module.exports = [
       try {
         const captchaCheckResults = await captchaCheck('', postcode, request.yar)
 
-        if (!captchaCheckResults.tokenvalid) {
+        if (!captchaCheckResults.tokenValid) {
           return boom.badRequest(errors.sessionTimeoutError.message)
         }
 
