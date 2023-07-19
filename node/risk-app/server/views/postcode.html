@@ -116,13 +116,13 @@
 
     function afterLoad() {
       document.getElementById('session-alert').style.display = 'none'
-          const captchaElement = document.getElementById('FriendlyCaptcha')
-          captchaElement.classList.add('frc-captcha')
-          friendlyChallenge.autoWidget = new friendlyChallenge.WidgetInstance(captchaElement,{
-            startedCallback: onCaptchaStart,
-            readyCallback:  fixupFriendlyCaptcha,
-          })
-          friendlyChallenge.autoWidget.start()
+      const captchaElement = document.getElementById('FriendlyCaptcha')
+      captchaElement.classList.add('frc-captcha')
+      friendlyChallenge.autoWidget = new friendlyChallenge.WidgetInstance(captchaElement,{
+        startedCallback: onCaptchaStart,
+        readyCallback:  fixupFriendlyCaptcha,
+      })
+      friendlyChallenge.autoWidget.start()
     }
 
     function onCaptchaStart() {
