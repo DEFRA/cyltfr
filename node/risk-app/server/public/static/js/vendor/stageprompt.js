@@ -65,15 +65,16 @@
       global.ga('send', 'event', category, event, label, {
         nonInteraction: true
       })
-      if(global.gtag && typeof global.gtag === 'function'){
-        global.gtag('event',event,{
-          'send_to': global.G4AnalyticsAccount,
-          'event_category': category,
-          'event_label': label
-        })
-      }
+      
     }else {
       global._gaq.push(['_trackEvent', category, event, label, undefined, true])
+    }
+    if(global.gtag && typeof global.gtag === 'function'){
+      global.gtag('event',event,{
+        'send_to': global.G4AnalyticsAccount,
+        'event_category': category,
+        'event_label': label
+      })
     }
   }
 
