@@ -50,8 +50,6 @@ module.exports = {
       siteUrl: config.floodRiskUrl,
       ogDescription: 'Check your risk of flooding and use flood risk maps',
       noIndex: true, // stop robot crawl by default
-      captchaEnabled: config.captchaEnabled,
-      captchaSiteKey: config.captchaSiteKey,
       friendlyCaptchaEnabled: config.friendlyCaptchaEnabled,
       friendlyCaptchaSiteKey: config.friendlyCaptchaSiteKey
     }

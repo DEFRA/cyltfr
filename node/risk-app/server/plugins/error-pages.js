@@ -35,8 +35,6 @@ module.exports = {
             case errors.addressByPostcode.message:
             case errors.addressById.message:
               return h.view('500-error').code(statusCode)
-            case errors.captchaError.message:
-              return h.view('500-captcha').code(statusCode)
             case errors.friendlyCaptchaError.message:
               return h.view('500-friendly-captcha').code(statusCode)
             case errors.sessionTimeoutError.message:
