@@ -21,24 +21,46 @@ const mock = {
   }
 }
 
-const mockOptions = (postcode) => {
+const mockOptions = () => {
   let options
-  const token = 'sample token value'
-  if (config.friendlyCaptchaEnabled) {
+  if (config.friendlyCaptchaEnabled && config.friendlyCaptchaBypass) {
     options = {
       method: 'GET',
-      url: `/search?postcode=${encodeURIComponent(postcode)}&token=${encodeURIComponent(token)}`
+      url: `/postcode?captchabypass=${encodeURIComponent(config.friendlyCaptchaBypass)}`
     }
   } else {
     options = {
       method: 'GET',
-      url: `/search?postcode=${encodeURIComponent(postcode)}`
+      url: '/postcode'
     }
   }
   return options
 }
 
+const mockSearchOptions = (postcode, cookie) => {
+  const postPostcode = postcode.replace(' ', '+')
+  const postOptions = {
+    method: 'POST',
+    url: '/postcode',
+    payload: `postcode=${postPostcode}`,
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded'
+    }
+  }
+  const getOptions = {
+    method: 'GET',
+    url: `/search?postcode=${encodeURIComponent(postcode)}`
+  }
+  if (cookie) {
+    postOptions.headers.cookie = cookie
+    getOptions.headers = {
+      cookie
+    }
+  }
+  return { postOptions, getOptions }
+}
+
 const mockCaptchaResponse = (responseType, errorType) => {
   if (responseType === false && errorType === 'solution timeout') { return { success: false, errors: ['solution_timeout_or_duplicate'] } } else if (responseType === false && errorType === 'invalid solution') { return { success: false, errors: ['solution_invalid'] } } else { return { success: true } }
 }
-module.exports = { mock, mockOptions, mockCaptchaResponse }
+module.exports = { mock, mockOptions, mockSearchOptions, mockCaptchaResponse }
