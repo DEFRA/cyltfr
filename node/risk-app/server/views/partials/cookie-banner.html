@@ -1,58 +1,77 @@
 {% from "components/cookie-banner/macro.njk" import govukCookieBanner %}
 
-<div class="js-cookies-container" style="display: none">
-  {{ govukCookieBanner({
-    ariaLabel: "Cookies on " + serviceName,
-    "classes": "js-cookies-banner",
-    "messages": [
-      {
-        "headingText": "Cookies on " + serviceName,
-        "text": "We use analytics cookies to help understand how users use our service.",
-        "actions": [
-          {
-            "text": "Accept analytics cookies",
-            "type": "button",
-            "classes": "js-cookies-button-accept"
-          },
-          {
-            "text": "Reject analytics cookies",
-            "type": "button",
-            "classes": "js-cookies-button-reject"
-          },
-          {
-            "text": "View cookie preferences",
-            "href": "/cookies"
-          }
-        ],
-        "classes": "js-question-banner"
-      },
-      {
-        "text": "Your cookie preferences have been saved. You have accepted cookies.",
-        "role": "alert",
-        "actions": [
-          {
-            "text": "Hide this message",
-            "type": "button",
-            "classes": "js-hide"
-          }
-        ],
-        "classes": "js-cookies-accepted",
-        "hidden": true
-      },
-      {
-        "text": "Your cookie preferences have been saved. You have rejected cookies.",
-        "role": "alert",
-        "actions": [
-          {
-            "text": "Hide this message",
-            "type": "button",
-            "classes": "js-hide"
-          }
-        ],
-        "classes": "js-cookies-rejected",
-        "hidden": true
-      }
-    ]
-  }) }}
+<div class="js-cookies-container">
+<form method="POST" action="/cookies">
+  {% set html %}
+  <p class="govuk-body">We use some essential cookies to make this service work.</p>
+  <p class="govuk-body">We'd also like to use analytics cookies so we can understand how you use the service and make improvements.</p>
+{% endset %}
+
+{% set acceptHtml %}
+  <p class="govuk-body">You’ve accepted analytics cookies. You can <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.</p>
+{% endset %}
+
+{% set rejectedHtml %}
+  <p class="govuk-body">You’ve rejected analytics cookies. You can <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.</p>
+{% endset %}
+
+{{ govukCookieBanner({
+  ariaLabel: "Cookies on " + serviceName,
+  "classes": "js-cookies-banner",
+  messages: [
+    {
+      "headingText": "Cookies on " + serviceName,
+      html: html,
+      actions: [
+        {
+          text: "Accept analytics cookies",
+          type: "submit",
+          name: "analytics",
+          value: "true",
+          classes: "js-cookies-button-accept"
+        },
+        {
+          text: "Reject analytics cookies",
+          type: "submit",
+          name: "analytics",
+          value: "false",
+          classes: "js-cookies-button-reject"
+        },
+        {
+          text: "View cookies",
+          href: "/cookies"
+        }
+      ],
+      "classes": "js-question-banner"
+    },
+    {
+      html: acceptHtml,
+      actions: [
+        {
+          text: "Hide cookie message",
+          href: "#",
+          type: "button",
+          "classes": "js-hide"
+        }
+      ],
+      hidden: true,
+      "classes": "js-cookies-accepted"
+    },
+    {
+      html: rejectedHtml,
+      actions: [
+        {
+          text: "Hide cookie message",
+          href: "#",
+          type: "button",
+          "classes": "js-hide"
+        }
+      ],
+      "classes": "js-cookies-rejected",
+      hidden: true
+    }
+  ]
+}) }}
+</form>
 </div>
 <script src="{{ assetPath }}/js/cookies.js"></script>
