@@ -126,7 +126,6 @@
     }
 
     function onCaptchaStart() {
-      document.getElementById('post-code-button').disabled = true
       document.getElementById('session-alert').style.display = 'none'
       fixupFriendlyCaptcha()
     }
@@ -152,13 +151,11 @@
       if (link) link.innerHTML = '<b>Friendly</b>Captcha'
     }
     function captchaDone(solutionPayload) {
-      document.getElementById('post-code-button').disabled = false
       document.getElementById('session-alert').style.display = 'none'
       enableTimeout(friendlyChallenge.autoWidget.puzzle.expiry)
       fixupFriendlyCaptcha()
     }
     function captchaError() {
-      document.getElementById('post-code-button').disabled = false
       enableTimeout(0)
     }
   </script>
