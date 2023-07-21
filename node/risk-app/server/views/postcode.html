@@ -35,7 +35,7 @@
       <form id="postcode-form" method="post">
         {{ govukInput(postcodeInput) }}
         {% if friendlyCaptchaEnabled %}
-          <div style="margin-bottom: 20px;" id="FriendlyCaptcha" class="govuk-body" data-sitekey={{friendlyCaptchaSiteKey}} data-start="manual" data-callback="captchaDone" data-callback-error="captchaError"></div>
+          <div style="margin-bottom: 20px;" id="FriendlyCaptcha" class="govuk-body" data-sitekey={{friendlyCaptchaSiteKey}} data-start="manual" data-callback="captchaDone" data-callback-error="captchaError" role="status"></div>
           <div class="govuk-grid-column-two-thirds" style="display: none;" id="nc-browser">
             <p class="govuk-body">The anti-robot check works better and faster in modern browsers such as Edge, Firefox, or Chrome. Please consider updating your browser</p>
           </div>
@@ -147,8 +147,20 @@
       fixupFriendlyCaptcha()
     }
     function fixupFriendlyCaptcha() {
+      // Accessibility edits to the FriendlyCaptcha widget.
+      // Remove the Unicode character that causes screen readers to say ‘northeast double arrow’
+      // Stop the FriendlyCaptcha link opening in a new window
+      // Change the "I am Human" text to announce that the Check is complete
       const link = document.querySelector("span.frc-banner > a")
-      if (link) link.innerHTML = '<b>Friendly</b>Captcha'
+      if (link) {
+        link.innerHTML = '<b>Friendly</b>Captcha'
+        link.target = ''
+        link.className += ' govuk-link'
+      }
+      const success = document.querySelectorAll(".frc-container > div > span.frc-text")
+      if (success.length > 0) {
+        success.forEach((el) => {if (el.textContent === 'I am human') el.textContent = 'Check complete. I am human'})
+      }
     }
     function captchaDone(solutionPayload) {
       document.getElementById('session-alert').style.display = 'none'
