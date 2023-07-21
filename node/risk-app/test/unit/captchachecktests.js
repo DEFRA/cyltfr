@@ -213,6 +213,20 @@ lab.experiment('CaptchaCheck', () => {
     Code.expect(results.tokenValid).to.equal(false)
   })
 
+  lab.test('fails with error token', async () => {
+    const yar = new YarMock()
+    const captchacheck = proxyquire('../../server/services/captchacheck', { '../config': getConfigOptions({}) })
+
+    yar.set('token', 'thisisatoken')
+    yar.set('tokenPostcode', '1111111')
+    yar.set('tokenSet', (Date.now() - 1) - (10 * 60 * 1000))
+    yar.set('tokenValid', true)
+
+    const results = await captchacheck.captchaCheck('.ERROR', '1111111', yar, null)
+
+    Code.expect(results.tokenValid).to.equal(false)
+  })
+
   lab.test('fails with blank token and mis-matching postcode', async () => {
     const yar = new YarMock()
     const captchacheck = proxyquire('../../server/services/captchacheck', { '../config': getConfigOptions({}) })

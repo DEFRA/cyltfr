@@ -55,4 +55,18 @@ lab.experiment('Cookie page test', () => {
     Code.expect(response.statusCode).to.equal(200)
     await payloadMatchTest(response.payload, /ok/g)
   })
+
+  lab.test('post invalid cookie update', async () => {
+    const options = {
+      method: 'POST',
+      url: '/cookies',
+      headers: {
+        'Content-type': 'application/x-www-form-urlencoded'
+      },
+      payload: 'blah=blah'
+    }
+
+    const response = await server.inject(options)
+    Code.expect(response.statusCode).to.equal(200)
+  })
 })

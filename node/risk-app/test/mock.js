@@ -60,7 +60,21 @@ const mockSearchOptions = (postcode, cookie) => {
   return { postOptions, getOptions }
 }
 
-const mockCaptchaResponse = (responseType, errorType) => {
-  if (responseType === false && errorType === 'solution timeout') { return { success: false, errors: ['solution_timeout_or_duplicate'] } } else if (responseType === false && errorType === 'invalid solution') { return { success: false, errors: ['solution_invalid'] } } else { return { success: true } }
+const mockCaptchaCheck = (postcode) => {
+  return {
+    token: '',
+    tokenPostcode: postcode,
+    tokenSet: Date.now(),
+    tokenValid: true,
+    errorMessage: ''
+  }
 }
-module.exports = { mock, mockOptions, mockSearchOptions, mockCaptchaResponse }
+
+const mockCaptchaResponse = (responseType, errorType) => {
+  if (responseType === false && errorType === 'solution timeout') {
+    return { success: false, errors: ['solution_timeout_or_duplicate'] }
+  } else if (responseType === false && errorType === 'invalid solution') {
+    return { success: false, errors: ['solution_invalid'] }
+  } else { return { success: true } }
+}
+module.exports = { mock, mockOptions, mockSearchOptions, mockCaptchaResponse, mockCaptchaCheck }
