@@ -3,10 +3,21 @@ const Code = require('@hapi/code')
 const createServer = require('../../server')
 const lab = exports.lab = Lab.script()
 const riskService = require('../../server/services/risk')
+const floodService = require('../../server/services/flood')
 const addressService = require('../../server/services/address')
-const { mock, mockOptions, mockCaptchaResponse } = require('../mock')
-const utils = require('../../server/util')
+const { mock, mockOptions } = require('../mock')
 const { payloadMatchTest } = require('../utils')
+const createAddressStub = () => {
+  return mock.replace(addressService, 'find', mock.makePromise(null, [
+    {
+      uprn: '100041117437',
+      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH, ENGLAND',
+      country: 'ENGLAND',
+      postcode: 'CW8 4BH'
+    }
+  ]))
+}
+const createWarningStub = () => mock.replace(floodService, 'findWarnings', mock.makePromise(null, null))
 
 lab.experiment('Risk page test', () => {
   let server, cookie
@@ -16,16 +27,9 @@ lab.experiment('Risk page test', () => {
     await server.initialize()
 
     const initial = mockOptions()
-    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(true, null)))
 
-    const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, [
-      {
-        uprn: '100041117437',
-        address: '81, MOSS ROAD, NORTHWICH, CW8 4BH, ENGLAND',
-        country: 'ENGLAND',
-        postcode: 'CW8 4BH'
-      }
-    ]))
+    const addressStub = createAddressStub()
+    const warningStub = createWarningStub()
 
     const homepageresponse = await server.inject(initial)
     Code.expect(homepageresponse.statusCode).to.equal(200)
@@ -50,12 +54,10 @@ lab.experiment('Risk page test', () => {
       }
     })
     Code.expect(addressresponse.statusCode).to.equal(200)
-    captchastub.revert()
-    addressStub.revert()
 
     const options2 = {
       method: 'POST',
-      url: '/search?postcode=cw8%204bh',
+      url: `/search?postcode=${encodeURIComponent('cw8 4bh')}`,
       headers: {
         'Content-type': 'application/x-www-form-urlencoded',
         cookie
@@ -64,6 +66,8 @@ lab.experiment('Risk page test', () => {
     }
 
     const response2 = await server.inject(options2)
+    addressStub.revert()
+    warningStub.revert()
     Code.expect(response2.statusCode).to.equal(302)
   })
 
