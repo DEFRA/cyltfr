@@ -35,6 +35,10 @@ $govuk-assets-path: '/assets/';
   float: right;
 }
 
+#postcode > dd {
+  margin-inline-start: 0;
+}
+
 @media print {
   header.govuk-header, footer.govuk-footer, .govuk-phase-banner , .govuk-button {
     display: none;

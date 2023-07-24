@@ -24,20 +24,24 @@ acceptButton.addEventListener('click', function (event) {
   showBanner(acceptedBanner)
   event.preventDefault()
   submitPreference(true)
+  return false
 })
 
 rejectButton.addEventListener('click', function (event) {
   showBanner(rejectedBanner)
   event.preventDefault()
   submitPreference(false)
+  return false
 })
 
 acceptedBanner.querySelector('.js-hide').addEventListener('click', function () {
   cookieBanner.setAttribute('hidden', 'hidden')
+  return false
 })
 
 rejectedBanner.querySelector('.js-hide').addEventListener('click', function () {
   cookieBanner.setAttribute('hidden', 'hidden')
+  return false
 })
 
 function submitPreference (accepted) {

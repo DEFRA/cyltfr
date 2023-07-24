@@ -5,9 +5,6 @@
   "addressById": {
     "message": "An error occurred finding the address by id"
   },
-  "captchaError": {
-    "message": "An error occurred validating user"
-  },
   "friendlyCaptchaError": {
     "message": "puzzle expired"
   },
