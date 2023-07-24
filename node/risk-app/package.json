@@ -1,6 +1,6 @@
 {
   "name": "risk-app",
-  "version": "3.4.0",
+  "version": "3.5.0",
   "description": "Long term flood risk information",
   "main": "index.js",
   "engines": {
