@@ -2,18 +2,13 @@ const config = require('../config')
 const joi = require('joi')
 const { postcodeRegex, redirectToHomeCounty } = require('../helpers')
 const PostcodeViewModel = require('../models/postcode-view')
-const errors = require('../models/errors.json')
-const boom = require('@hapi/boom')
+const { captchaCheck } = require('../services/captchacheck')
 
 module.exports = [
   {
     method: 'GET',
     path: '/postcode',
     handler: (request, h) => {
-      const { state = {} } = request
-      const { activity = {} } = state
-      activity.session = 'active'
-      h.state('activity', activity)
       if (config.friendlyCaptchaEnabled) {
         if (Object.prototype.hasOwnProperty.call(request.query, 'captchabypass')) {
           // if value passed doesn't equal config value, clear out the session setting.
@@ -34,35 +29,6 @@ module.exports = [
     path: '/postcode',
     handler: async (request, h) => {
       const { postcode } = request.payload
-      let url
-      let friendlyRecaptcha
-      if (config.captchaEnabled) {
-        const captcha = request.payload['g-recaptcha-response']
-        url = `/search?postcode=${encodeURIComponent(postcode)}&token=${encodeURIComponent(captcha)}`
-      } else if (config.friendlyCaptchaEnabled) {
-        friendlyRecaptcha = request.payload['frc-captcha-solution']
-        // throw error for user inactivity
-        if (!request.state.activity) {
-          return boom.badRequest(errors.sessionTimeoutError.message)
-        }
-        if (!request.yar.get('captchabypass')) {
-          if (!friendlyRecaptcha || friendlyRecaptcha === 'undefined' || friendlyRecaptcha === '.FETCHING' ||
-              friendlyRecaptcha === '.UNSTARTED' || friendlyRecaptcha === '.UNFINISHED') {
-            const captchaErrorMessage = 'You cannot continue until Friendly Captcha' +
-          ' has checked that you\'re not a robot'
-            const model = new PostcodeViewModel(postcode, captchaErrorMessage, config.sessionTimeout)
-            return h.view('postcode', model)
-          }
-        }
-        url = `/search?postcode=${encodeURIComponent(postcode)}&token=${encodeURIComponent(friendlyRecaptcha)}`
-        if (request.yar.get('token') !== postcode + friendlyRecaptcha) {
-          request.yar.set({
-            token: undefined
-          })
-        }
-      } else {
-        url = `/search?postcode=${encodeURIComponent(postcode)}`
-      }
 
       if (!postcode || !postcode.match(postcodeRegex)) {
         const errorMessage = 'Enter a full postcode in England'
@@ -77,15 +43,22 @@ module.exports = [
         return redirectToHomeCounty(h, postcode, 'northern-ireland')
       }
 
-      return h.redirect(url)
-      // return h.view('postcode', new PostcodeViewModel())
+      const captchaCheckResults = await captchaCheck(request.payload['frc-captcha-solution'], postcode, request.yar, request.server)
+      if (captchaCheckResults.tokenValid) {
+        // Include a # in the redirected URL, or the browser will jump to any previous url fragment (like #main-content)
+        // See https://www.rfc-editor.org/rfc/rfc9110.html#field.location
+        return h.redirect(`/search?postcode=${encodeURIComponent(postcode)}#`)
+      } else {
+        // check what error was returned
+        const model = new PostcodeViewModel(postcode, captchaCheckResults.errorMessage, config.sessionTimeout)
+        return h.view('postcode', model)
+      }
     },
     options: {
       description: 'Post to the postcode page',
       validate: {
         payload: joi.object().keys({
           postcode: joi.string().trim().required().allow(''),
-          'g-recaptcha-response': joi.string(),
           'frc-captcha-solution': joi.string()
         }).required()
       }

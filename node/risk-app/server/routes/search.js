@@ -2,12 +2,11 @@ const joi = require('joi')
 const boom = require('@hapi/boom')
 const { postcodeRegex, redirectToHomeCounty } = require('../helpers')
 const config = require('../config')
-const { captchaEnabled, friendlyCaptchaSecretKey, friendlyCaptchaUrl, friendlyCaptchaEnabled } = config
 const floodService = require('../services/flood')
 const addressService = require('../services/address')
 const SearchViewModel = require('../models/search-view')
 const errors = require('../models/errors.json')
-const util = require('../util')
+const { captchaCheck } = require('../services/captchacheck')
 
 async function getWarnings (postcode, request) {
   // Don't let an error raised during the call
@@ -24,59 +23,7 @@ module.exports = [
     method: 'GET',
     path: '/search',
     handler: async (request, h) => {
-      const { postcode, token } = request.query
-      const url = '/postcode'
-      if (captchaEnabled || friendlyCaptchaEnabled) {
-        if (!request.yar.get('captchabypass')) {
-          if (token === 'undefined') {
-            return boom.badRequest(errors.javascriptError.message)
-          }
-          if (token === '.EXPIRED') {
-            return boom.badRequest(errors.friendlyCaptchaError.message)
-          }
-          if (!token) {
-            return h.redirect(url)
-          }
-          if (captchaEnabled) {
-            // Check that Recaptcha v3 token is valid and has not been used before
-            const uri = `${config.captchaUrl}${config.captchaSecretKey}&response=${token}`
-            const payload = await util.postJson(uri, true)
-            if (!payload || !payload.success || payload.score <= 0.5) {
-              if (!payload.success) {
-                return h.redirect(url)
-              } else {
-                return boom.badRequest(errors.captchaError.message)
-              }
-            }
-          }
-          if (friendlyCaptchaEnabled && (request.yar.get('token') === undefined || request.yar.get('token') === null)) {
-            console.log('Verifying FriendlyCaptcha')
-            const uri = `${friendlyCaptchaUrl}`
-            const requestData = {
-              solution: token,
-              secret: friendlyCaptchaSecretKey
-            }
-            const options = {
-              headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json'
-              },
-              json: true,
-              payload: requestData
-            }
-            const apiResponse = await util.post(uri, options, true)
-            if (!apiResponse.success && apiResponse.errors[0] === 'solution_invalid') {
-              console.log('The solution you provided was invalid (perhaps the user tried to tamper with the puzzle).')
-              return boom.badImplementation('solution_invalid')
-            }
-            if (!apiResponse.success && apiResponse.errors[0] === 'solution_timeout_or_duplicate') {
-              return boom.badRequest(errors.sessionTimeoutError.message)
-            }
-          }
-        } else {
-          console.log('Captcha bypass enabled')
-        }
-      }
+      const { postcode } = request.query
 
       // Our Address service doesn't support NI addresses
       // but all NI postcodes start with BT so redirect to
@@ -86,6 +33,12 @@ module.exports = [
       }
 
       try {
+        const captchaCheckResults = await captchaCheck('', postcode, request.yar)
+
+        if (!captchaCheckResults.tokenValid) {
+          return boom.badRequest(errors.sessionTimeoutError.message)
+        }
+
         const addresses = await addressService.find(postcode)
 
         // Set addresses to session
@@ -112,8 +65,7 @@ module.exports = [
       },
       validate: {
         query: joi.object().keys({
-          postcode: joi.string().trim().regex(postcodeRegex).required(),
-          token: joi.string().optional()
+          postcode: joi.string().trim().regex(postcodeRegex).required()
         }).required()
       }
     }
@@ -122,17 +74,13 @@ module.exports = [
     method: 'POST',
     path: '/search',
     handler: async (request, h) => {
-      const { postcode, token } = request.query
+      const { postcode } = request.query
       const { address } = request.payload
       const addresses = request.yar.get('addresses')
 
       if (!Array.isArray(addresses)) {
-        return h.redirect('/postcode')
+        return h.redirect('/postcode#')
       }
-      // Set friendly captchaa token to session
-      request.yar.set({
-        token: friendlyCaptchaEnabled ? postcode + token : undefined
-      })
       let errorMessage
       if (address < 0) {
         errorMessage = 'Select an address'
@@ -149,7 +97,7 @@ module.exports = [
         address: addresses[address]
       })
 
-      return h.redirect('/risk')
+      return h.redirect('/risk#')
     },
     options: {
       description: 'Post to the search page',
