@@ -98,11 +98,6 @@
 <script>
   window.mapCategories = {{ maps | dump | safe }}
 </script>
-<script>
-  function focusNotification () {
-    document.getElementById('map-overlay').focus()
-  }
-</script>
 
 <script src="{{ assetPath }}/js/map-page.js"></script>
 {% endblock %}

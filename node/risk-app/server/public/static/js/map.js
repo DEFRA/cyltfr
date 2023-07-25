@@ -210,6 +210,7 @@ function loadMap (point) {
 
       // Show the overlay
       $overlay.show()
+      focusNotification()
 
       sendGoogleAnalyticsEvent('ltfri', 'map', 'risk-type-legend-' + id)
     })
@@ -336,6 +337,7 @@ function loadMap (point) {
 
         // Show the overlay
         $overlay.show()
+        focusNotification()
 
         if (viewModel.isRiskDescription) {
           sendGoogleAnalyticsEvent('ltfri', 'map', 'risk-type-map-' + viewModel.id)
@@ -367,6 +369,10 @@ function sendGoogleAnalyticsEvent (category, event, label) {
   if (window.GOVUK && window.GOVUK.performance) {
     window.GOVUK.performance.sendGoogleAnalyticsEvent(category, event, label)
   }
+}
+
+function focusNotification () {
+  document.getElementById('map-overlay').focus()
 }
 
 function showMap (ref) {
