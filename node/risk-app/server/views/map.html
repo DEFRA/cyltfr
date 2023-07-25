@@ -53,7 +53,7 @@
       <div class="os-api-branding logo"></div>
       <div class="os-api-branding copyright"><a href="/os-terms">Contains OS data &#169; Crown copyright and database rights {{year}}</a></div>
     </div>
-    <div id="map-overlay">
+    <div id="map-overlay" tabindex="-1">
       <div class="map-overlay-container">
         <a class="map-overlay-close"></a>
         <div class="map-overlay-content"></div>
@@ -97,6 +97,11 @@
 
 <script>
   window.mapCategories = {{ maps | dump | safe }}
+</script>
+<script>
+  function focusNotification () {
+    document.getElementById('map-overlay').focus()
+  }
 </script>
 
 <script src="{{ assetPath }}/js/map-page.js"></script>
