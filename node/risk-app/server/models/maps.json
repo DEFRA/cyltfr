@@ -21,19 +21,19 @@
               },
               {
                 "text": "Medium",
-                "desc": "High risk description",
+                "desc": "Medium risk description",
                 "icon": "dark-blue",
                 "id": "rivers-seas-medium"
               },
               {
                 "text": "Low",
-                "desc": "High risk description",
+                "desc": "Low risk description",
                 "icon": "blue",
                 "id": "rivers-seas-low"
               },
               {
                 "text": "Very low",
-                "desc": "High risk description",
+                "desc": "Very low risk description",
                 "icon": "light-blue",
                 "id": "rivers-seas-very-low"
               }
