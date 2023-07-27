@@ -136,7 +136,6 @@
         sessionTimeoutTimer = null
       }
       if (expiry > 0) {
-        // expiry = 10000 // remove this test value
         sessionTimeoutTimer = setTimeout(() => showSessionAlert(), expiry);
       }  
     }
