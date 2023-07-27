@@ -79,7 +79,7 @@ async function captchaCheck (token, postcode, yar, server) {
   }
 
   if (token && (token === 'undefined' || token === '.FETCHING' ||
-  token === '.UNSTARTED' || token === '.UNFINISHED' || token === '.ERROR')) {
+  token === '.UNSTARTED' || token === '.UNFINISHED' || token === '.EXPIRED' || token === '.ERROR')) {
     clearStoredValues(yar)
     results.errorMessage = 'You cannot continue until Friendly Captcha' +
       ' has checked that you\'re not a robot'
@@ -92,7 +92,7 @@ async function captchaCheck (token, postcode, yar, server) {
     if (postcode === yar.get('tokenPostcode')) {
       if (tokenExpired(yar)) {
         clearStoredValues(yar)
-        results.errorMessage = errors.sessionTimeoutError
+        results.errorMessage = errors.friendlyCaptchaError.message
         return results
       }
       results.tokenValid = yar.get('tokenValid')
@@ -100,7 +100,7 @@ async function captchaCheck (token, postcode, yar, server) {
       return results
     } else {
       clearStoredValues(yar)
-      results.errorMessage = errors.sessionTimeoutError
+      results.errorMessage = errors.friendlyCaptchaError.message
       return results
     }
   }
@@ -111,10 +111,10 @@ async function captchaCheck (token, postcode, yar, server) {
     if (await validateCaptcha(token, server)) {
       results.tokenValid = true
     } else {
-      results.errorMessage = errors.sessionTimeoutError
+      results.errorMessage = errors.friendlyCaptchaError.message
     }
   } else {
-    results.errorMessage = errors.sessionTimeoutError
+    results.errorMessage = errors.friendlyCaptchaError.message
     clearStoredValues(yar)
     return results
   }

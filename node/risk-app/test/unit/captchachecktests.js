@@ -185,6 +185,20 @@ lab.experiment('CaptchaCheck', () => {
     Code.expect(results.tokenValid).to.equal(false)
   })
 
+  lab.test('fails with expired token', async () => {
+    const yar = new YarMock()
+    const captchacheck = proxyquire('../../server/services/captchacheck', { '../config': getConfigOptions({}) })
+
+    yar.set('token', 'thisisatoken')
+    yar.set('tokenPostcode', '1111111')
+    yar.set('tokenSet', (Date.now() - 1) - (10 * 60 * 1000))
+    yar.set('tokenValid', true)
+
+    const results = await captchacheck.captchaCheck('.EXPIRED', '1111111', yar, null)
+
+    Code.expect(results.tokenValid).to.equal(false)
+  })
+
   lab.test('fails with undefined token', async () => {
     const yar = new YarMock()
     const captchacheck = proxyquire('../../server/services/captchacheck', { '../config': getConfigOptions({}) })
