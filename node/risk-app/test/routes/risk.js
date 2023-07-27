@@ -164,7 +164,6 @@ lab.experiment('Risk page test', () => {
     const response = await server.inject(options)
     const { payload } = response
     Code.expect(response.statusCode).to.equal(200)
-    // console.log(payload)
     await payloadMatchTest(payload, /<caption class="govuk-table__caption">81, MOSS ROAD, NORTHWICH, CW8 4BH, ENGLAND<\/caption>/g)
     await payloadMatchTest(payload, /<td class="govuk-table__cell">\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\sFlooding from reservoirs is unlikely in this area\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s<\/td>/g)
     await payloadMatchTest(payload, /<td class="govuk-table__cell">\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\sFlooding from groundwater is unlikely in this area\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s<\/td>/g)
