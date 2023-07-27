@@ -14,7 +14,7 @@
   <li>
     {% if key.id %}
     <div class="legend-item round {{ key.icon }}">
-      <a class="govuk-link" href="risk-types#{{ key.id }}" data-id="{{ key.id }}">
+      <a onclick="focusNotification()" aria-label="{{ key.desc }}" aria-describedby="{{ key.id }}"class="govuk-link" aria-label="{{ key.desc }}" aria-describedby="{{ key.id }}" href="risk-types#{{ key.id }}" data-id="{{ key.id }}">
         {{ key.text }}
       </a>
     </div>
