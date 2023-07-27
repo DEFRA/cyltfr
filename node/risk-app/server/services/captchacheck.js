@@ -79,7 +79,7 @@ async function captchaCheck (token, postcode, yar, server) {
   }
 
   if (token && (token === 'undefined' || token === '.FETCHING' ||
-  token === '.UNSTARTED' || token === '.UNFINISHED' || token === '.EXPIRED')) {
+      token === '.UNSTARTED' || token === '.UNFINISHED' || token === '.ERROR' || token === '.EXPIRED')) {
     clearStoredValues(yar)
     results.errorMessage = 'You cannot continue until Friendly Captcha' +
       ' has checked that you\'re not a robot'

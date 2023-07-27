@@ -13,6 +13,7 @@ module.exports = {
       const payload = await util.get(url, {}, true)
       return h.response(payload).type('image/png')
     } catch (err) {
+      if (request.server.methods.notify) { request.server.methods.notify(err) }
       return Boom.badRequest(errors.osMapsProxy.message, err)
     }
   },
