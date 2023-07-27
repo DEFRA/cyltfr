@@ -5,6 +5,10 @@
 
 {% set pageTitle = "Select an address" %}
 
+{% block beforeContent %}
+<a href="javascript:window.history.go(-1)" class="govuk-back-link" data-id="risk-address">Back</a>
+{% endblock %}
+
 {% block content %}
 <div id="address-page">
   <div class="govuk-grid-row">

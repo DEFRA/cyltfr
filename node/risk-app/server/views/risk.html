@@ -2,6 +2,10 @@
 
 {% set pageTitle = "Your long term flood risk assessment" %}
 
+{% block beforeContent %}
+<a href="javascript:window.history.go(-1)" class="govuk-back-link" data-id="risk-address">Back</a>
+{% endblock %}
+
 {% block head %}
 {{ super() }}
 <link href="{{ assetPath }}/stylesheets/risk-page.css" rel="stylesheet" />
