@@ -16,7 +16,8 @@ module.exports = {
 
       const { x, y } = address
       const radius = 15
-
+      const pathRegex = new RegExp(/([^\/]+$)/);
+      const backLinkUri = pathRegex.exec(request.info.referrer)
       try {
         const risk = await riskService.getByCoordinates(x, y, radius)
         // FLO-1139 If query 1 to 6 errors then throw default error page
@@ -40,7 +41,7 @@ module.exports = {
         if (!risk.inEngland) {
           return h.redirect('/england-only')
         } else {
-          return h.view('risk', new RiskViewModel(risk, address))
+          return h.view('risk', new RiskViewModel(risk, address, backLinkUri))
         }
       } catch (err) {
         return boom.badRequest(errors.riskProfile.message, err)

@@ -21,7 +21,7 @@ const suitabilities = [
   'town to street'
 ]
 
-function RiskViewModel (risk, address) {
+function RiskViewModel (risk, address, backLinkUri) {
   const riverAndSeaRisk = risk.riverAndSeaRisk
     ? risk.riverAndSeaRisk.probabilityForBand
     : RiskLevel.VeryLow
@@ -35,6 +35,7 @@ function RiskViewModel (risk, address) {
   this.riverAndSeaClassName = riverAndSeaRisk.toLowerCase().replace(' ', '-')
   this.surfaceWaterClassName = surfaceWaterRisk.toLowerCase().replace(' ', '-')
   this.reservoirRisk = reservoirRisk
+  this.backLink = backLinkUri[0]
 
   if (reservoirRisk) {
     const reservoirs = []
