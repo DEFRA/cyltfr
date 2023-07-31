@@ -25,7 +25,7 @@ lab.experiment('Integration', () => {
     lab.test(url, async () => {
       const options = {
         method: 'GET',
-        url: url
+        url
       }
 
       const response = await server.inject(options)

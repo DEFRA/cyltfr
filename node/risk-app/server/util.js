@@ -1,4 +1,5 @@
 const { HttpsProxyAgent } = require('https-proxy-agent')
+
 const config = require('./config')
 const wreck = require('@hapi/wreck').defaults({
   timeout: config.httpTimeoutMs
@@ -14,11 +15,10 @@ if (config.http_proxy) {
 
 function get (url, options, ext = false) {
   const thisWreck = (ext && wreckExt) ? wreckExt : wreck
-
   return thisWreck.get(url, options)
     .then(response => {
       if (response.res.statusCode !== 200) {
-        throw new Error('Requested resource returned a non 200 status code')
+        throw new Error('Requested resource returned a non 200 status code', response)
       }
       return response.payload
     })
@@ -26,11 +26,10 @@ function get (url, options, ext = false) {
 
 function post (url, options, ext = false) {
   const thisWreck = (ext && wreckExt) ? wreckExt : wreck
-
   return thisWreck.post(url, options)
     .then(response => {
       if (response.res.statusCode !== 200) {
-        throw new Error('Requested resource returned a non 200 status code')
+        throw new Error('Requested resource returned a non 200 status code', response)
       }
       return response.payload
     })

@@ -84,15 +84,15 @@ module.exports = {
 
         const response = {
           inEngland: risk.in_england,
-          isGroundwaterArea: isGroundwaterArea,
-          floodAlertArea: floodAlertArea,
-          floodWarningArea: floodWarningArea,
+          isGroundwaterArea,
+          floodAlertArea,
+          floodWarningArea,
           inFloodAlertArea: risk.flood_alert_area === 'Error' ? 'Error' : floodAlertArea.length > 0,
           inFloodWarningArea: risk.flood_warning_area === 'Error' ? 'Error' : floodWarningArea.length > 0,
           leadLocalFloodAuthority: risk.lead_local_flood_authority,
-          reservoirDryRisk: reservoirDryRisk,
-          reservoirWetRisk: reservoirWetRisk,
-          riverAndSeaRisk: riverAndSeaRisk,
+          reservoirDryRisk,
+          reservoirWetRisk,
+          riverAndSeaRisk,
           surfaceWaterRisk: risk.surface_water_risk,
           surfaceWaterSuitability: risk.surface_water_suitability,
           extraInfo: risk.extra_info
