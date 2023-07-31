@@ -16,7 +16,7 @@ module.exports = {
 
       const { x, y } = address
       const radius = 15
-      const pathRegex = new RegExp(/([^\/]+$)/);
+      const pathRegex = /([^/]+$)/
       const backLinkUri = pathRegex.exec(request.info.referrer)
       try {
         const risk = await riskService.getByCoordinates(x, y, radius)
