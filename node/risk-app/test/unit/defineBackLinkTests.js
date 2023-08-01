@@ -19,7 +19,7 @@ lab.experiment('defineBackLink', () => {
     const backLink = await defineBackLink.defineBackLink(currentPage, cachedPostcode)
     Code.expect(backLink).to.equal(searchPagePath + cachedPostcode)
   })
- 
+
   lab.test('Map page backlink takes user back to postcode page', async () => {
     const postcodePage = '/postcode'
     const currentPage = '/map'
@@ -33,7 +33,7 @@ lab.experiment('defineBackLink', () => {
     const backLink = await defineBackLink.defineBackLink(currentPage)
     Code.expect(backLink).to.equal(postcodePage)
   })
-  
+
   lab.test('Search page backlink takes user back to postcode page', async () => {
     const postcodePage = '/postcode'
     const cachedPostcode = 'CF1%204QR'
