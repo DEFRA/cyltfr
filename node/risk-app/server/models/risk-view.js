@@ -35,7 +35,7 @@ function RiskViewModel (risk, address, backLinkUri) {
   this.riverAndSeaClassName = riverAndSeaRisk.toLowerCase().replace(' ', '-')
   this.surfaceWaterClassName = surfaceWaterRisk.toLowerCase().replace(' ', '-')
   this.reservoirRisk = reservoirRisk
-  this.backLink = backLinkUri[0]
+  this.backLink = backLinkUri
 
   if (reservoirRisk) {
     const reservoirs = []

@@ -1,4 +1,4 @@
-async function defineBackLink (currentPage, postcode) {
+function defineBackLink (currentPage, postcode) {
   if (currentPage === '/risk' || currentPage === '/england-only') {
     return '/search?postcode=' + postcode
   }

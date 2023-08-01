@@ -2,6 +2,7 @@ const boom = require('@hapi/boom')
 const riskService = require('../services/risk')
 const RiskViewModel = require('../models/risk-view')
 const errors = require('../models/errors.json')
+const { defineBackLink } = require('../services/defineBackLink.js')
 
 module.exports = {
   method: 'GET',
@@ -9,6 +10,7 @@ module.exports = {
   handler: async (request, h) => {
     try {
       const address = request.yar.get('address')
+      const path = request.path
 
       if (!address) {
         return h.redirect('/postcode')
@@ -16,8 +18,7 @@ module.exports = {
 
       const { x, y } = address
       const radius = 15
-      const pathRegex = /([^/]+$)/
-      const backLinkUri = pathRegex.exec(request.info.referrer)
+
       try {
         const risk = await riskService.getByCoordinates(x, y, radius)
         // FLO-1139 If query 1 to 6 errors then throw default error page
@@ -41,6 +42,7 @@ module.exports = {
         if (!risk.inEngland) {
           return h.redirect('/england-only')
         } else {
+          const backLinkUri = defineBackLink(path, address.postcode.split(' ').join('%20'))
           return h.view('risk', new RiskViewModel(risk, address, backLinkUri))
         }
       } catch (err) {

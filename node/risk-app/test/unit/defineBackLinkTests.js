@@ -8,7 +8,7 @@ lab.experiment('defineBackLink', () => {
     const searchPagePath = '/search?postcode='
     const cachedPostcode = 'CF1%204QR'
     const currentPage = '/risk'
-    const backLink = await defineBackLink.defineBackLink(currentPage, cachedPostcode)
+    const backLink = defineBackLink.defineBackLink(currentPage, cachedPostcode)
     Code.expect(backLink).to.equal(searchPagePath + cachedPostcode)
   })
 
@@ -16,21 +16,21 @@ lab.experiment('defineBackLink', () => {
     const searchPagePath = '/search?postcode='
     const cachedPostcode = 'NP18%203EZ'
     const currentPage = '/england-only'
-    const backLink = await defineBackLink.defineBackLink(currentPage, cachedPostcode)
+    const backLink = defineBackLink.defineBackLink(currentPage, cachedPostcode)
     Code.expect(backLink).to.equal(searchPagePath + cachedPostcode)
   })
 
   lab.test('Map page backlink takes user back to postcode page', async () => {
     const postcodePage = '/postcode'
     const currentPage = '/map'
-    const backLink = await defineBackLink.defineBackLink(currentPage)
+    const backLink = defineBackLink.defineBackLink(currentPage)
     Code.expect(backLink).to.equal(postcodePage)
   })
 
   lab.test('Map page backlink takes user back to postcode page even if directed through bookmark', async () => {
     const postcodePage = '/postcode'
     const currentPage = '/map'
-    const backLink = await defineBackLink.defineBackLink(currentPage)
+    const backLink = defineBackLink.defineBackLink(currentPage)
     Code.expect(backLink).to.equal(postcodePage)
   })
 
@@ -38,7 +38,7 @@ lab.experiment('defineBackLink', () => {
     const postcodePage = '/postcode'
     const cachedPostcode = 'CF1%204QR'
     const currentPage = '/search' + cachedPostcode
-    const backLink = await defineBackLink.defineBackLink(currentPage)
+    const backLink = defineBackLink.defineBackLink(currentPage)
     Code.expect(backLink).to.equal(postcodePage)
   })
 })
