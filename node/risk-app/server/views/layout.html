@@ -3,6 +3,8 @@
 {% from "components/footer/macro.njk" import govukFooter %}
 {% from "components/phase-banner/macro.njk" import govukPhaseBanner %}
 
+{% set pageOrErrorTitle = "Error: " + pageTitle if errorSummary else pageTitle %}
+
 {% block head %}
 <meta property="og:url" content="{{ fullUrl | safe }}" />
 <meta property="og:type" content="website" />
@@ -47,7 +49,7 @@
 {% endblock %}
 
 {% block pageTitle %}
-{{ pageTitle + " - GOV.UK" }}
+{{ pageOrErrorTitle + " - GOV.UK" }}
 {% endblock %}
 
 {% block bodyStart %}
