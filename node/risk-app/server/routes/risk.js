@@ -2,6 +2,7 @@ const boom = require('@hapi/boom')
 const riskService = require('../services/risk')
 const RiskViewModel = require('../models/risk-view')
 const errors = require('../models/errors.json')
+const { defineBackLink } = require('../services/defineBackLink.js')
 
 module.exports = {
   method: 'GET',
@@ -9,6 +10,7 @@ module.exports = {
   handler: async (request, h) => {
     try {
       const address = request.yar.get('address')
+      const path = request.path
 
       if (!address) {
         return h.redirect('/postcode')
@@ -40,7 +42,8 @@ module.exports = {
         if (!risk.inEngland) {
           return h.redirect('/england-only')
         } else {
-          return h.view('risk', new RiskViewModel(risk, address))
+          const backLinkUri = defineBackLink(path, address.postcode.split(' ').join('%20'))
+          return h.view('risk', new RiskViewModel(risk, address, backLinkUri))
         }
       } catch (err) {
         return boom.badRequest(errors.riskProfile.message, err)
