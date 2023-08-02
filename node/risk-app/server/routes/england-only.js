@@ -4,10 +4,14 @@ module.exports = {
   method: 'GET',
   path: '/england-only',
   handler: async (request, h) => {
+    const pathRegex = /([^/]+$)/
+    const backLinkUri = pathRegex.exec(request.info.referrer)
+    const backLink = backLinkUri[0]
     const model = {
       isWales: request.query.region === 'wales',
       isScotland: request.query.region === 'scotland',
-      isNorthernIreland: request.query.region === 'northern-ireland'
+      isNorthernIreland: request.query.region === 'northern-ireland',
+      backLink
     }
 
     return h.view('england-only', model)

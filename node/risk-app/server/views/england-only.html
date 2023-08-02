@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block beforeContent %}
-<a href="javascript:window.history.go(-1)" class="govuk-back-link" data-id="risk-address">Back</a>
+<a href="{{ backLink }}" class="govuk-back-link" data-id="risk-address">Back</a>
 {% endblock %}
 
 {% block content %}
