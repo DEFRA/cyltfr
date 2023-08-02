@@ -1,1 +1,1 @@
-lab test/unit -v -c --coverage-path server -r console -o stdout -r html -o test/output.html
+lab test/unit/*.js -v -c --coverage-path server -r console -o stdout -r html -o test/output/output.html -r lcov -o test/output/lcovu.info
