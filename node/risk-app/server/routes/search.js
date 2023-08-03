@@ -7,6 +7,8 @@ const addressService = require('../services/address')
 const SearchViewModel = require('../models/search-view')
 const errors = require('../models/errors.json')
 const { captchaCheck } = require('../services/captchacheck')
+const { defineBackLink } = require('../services/defineBackLink')
+
 const getWarnings = async (postcode, request) => {
   try {
     const warnings = await floodService.findWarnings(postcode)
@@ -52,7 +54,8 @@ module.exports = [
         try {
           warnings = await getWarnings(postcode, request)
         } catch {}
-        return h.view('search', new SearchViewModel(postcode, addresses, null, warnings))
+        const backLinkUri = defineBackLink(request.path)
+        return h.view('search', new SearchViewModel(postcode, addresses, null, warnings, backLinkUri))
       } catch (err) {
         return boom.badRequest(errors.addressByPostcode.message, err)
       }
