@@ -67,6 +67,4 @@ value.isDev = value.env === 'dev'
 value.isTest = value.env === 'test'
 value.isProd = value.env.startsWith('prod-')
 
-console.log('Version', process.versions)
-
 module.exports = value

@@ -3,10 +3,21 @@ const Code = require('@hapi/code')
 const createServer = require('../../server')
 const lab = exports.lab = Lab.script()
 const riskService = require('../../server/services/risk')
+const floodService = require('../../server/services/flood')
 const addressService = require('../../server/services/address')
-const { mock, mockOptions, mockCaptchaResponse } = require('../mock')
-const utils = require('../../server/util')
+const { mock, mockOptions } = require('../mock')
 const { payloadMatchTest } = require('../utils')
+const createAddressStub = () => {
+  return mock.replace(addressService, 'find', mock.makePromise(null, [
+    {
+      uprn: '100041117437',
+      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH, ENGLAND',
+      country: 'ENGLAND',
+      postcode: 'CW8 4BH'
+    }
+  ]))
+}
+const createWarningStub = () => mock.replace(floodService, 'findWarnings', mock.makePromise(null, null))
 
 lab.experiment('Risk page test', () => {
   let server, cookie
@@ -15,39 +26,49 @@ lab.experiment('Risk page test', () => {
     server = await createServer()
     await server.initialize()
 
-    const options = mockOptions('cw8 4bh')
-    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(true, null)))
+    const initial = mockOptions()
 
-    const addressStub = mock.replace(addressService, 'find', mock.makePromise(null, [
-      {
-        uprn: '100041117437',
-        address: '81, MOSS ROAD, NORTHWICH, CW8 4BH, ENGLAND',
-        country: 'ENGLAND',
-        postcode: 'CW8 4BH'
+    const addressStub = createAddressStub()
+    const warningStub = createWarningStub()
+
+    const homepageresponse = await server.inject(initial)
+    Code.expect(homepageresponse.statusCode).to.equal(200)
+    cookie = homepageresponse.headers['set-cookie'][0].split(';')[0]
+
+    const response = await server.inject({
+      method: 'POST',
+      url: '/postcode',
+      headers: {
+        cookie,
+        'Content-type': 'application/x-www-form-urlencoded'
+      },
+      payload: 'postcode=cw8+4bh'
+    })
+    Code.expect(response.statusCode).to.equal(302)
+
+    const addressresponse = await server.inject({
+      method: 'GET',
+      url: `/search?postcode=${encodeURIComponent('cw8 4bh')}`,
+      headers: {
+        cookie
       }
-    ]))
-
-    const response = await server.inject(options)
-    Code.expect(response.statusCode).to.equal(200)
-    captchastub.revert()
-    addressStub.revert()
-    cookie = response.headers['set-cookie'][0].split(';')[0]
+    })
+    Code.expect(addressresponse.statusCode).to.equal(200)
 
     const options2 = {
       method: 'POST',
-      url: '/search?postcode=cw8 4bh',
+      url: `/search?postcode=${encodeURIComponent('cw8 4bh')}`,
       headers: {
+        'Content-type': 'application/x-www-form-urlencoded',
         cookie
       },
-      payload: {
-        address: '0'
-      }
+      payload: 'address=0'
     }
 
     const response2 = await server.inject(options2)
+    addressStub.revert()
+    warningStub.revert()
     Code.expect(response2.statusCode).to.equal(302)
-    console.log('server => ', server.yar)
-    cookie = response.headers['set-cookie'][0].split(';')[0]
   })
 
   lab.after(async () => {
@@ -104,7 +125,6 @@ lab.experiment('Risk page test', () => {
     const response = await server.inject(options)
     const { payload } = response
     Code.expect(response.statusCode).to.equal(200)
-    console.log(payload)
     await payloadMatchTest(payload, /<caption class="govuk-table__caption">81, MOSS ROAD, NORTHWICH, CW8 4BH, ENGLAND<\/caption>/g)
     await payloadMatchTest(payload, /<td class="govuk-table__cell">\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\sThere is a risk of flooding from reservoirs in this area, reservoirs that can affect this area are:\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s<ul class="govuk-list govuk-list--bullet">\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s<li>Agden<\/li>\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s<li>Draycote Water<\/li>\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s<\/ul>\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s<\/td>/g)
     await payloadMatchTest(payload, /<td class="govuk-table__cell">\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\sFlooding is possible in the local area when groundwater levels are high\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s<\/td>/g)
@@ -144,13 +164,13 @@ lab.experiment('Risk page test', () => {
     const response = await server.inject(options)
     const { payload } = response
     Code.expect(response.statusCode).to.equal(200)
-    console.log(payload)
     await payloadMatchTest(payload, /<caption class="govuk-table__caption">81, MOSS ROAD, NORTHWICH, CW8 4BH, ENGLAND<\/caption>/g)
     await payloadMatchTest(payload, /<td class="govuk-table__cell">\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\sFlooding from reservoirs is unlikely in this area\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s<\/td>/g)
     await payloadMatchTest(payload, /<td class="govuk-table__cell">\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\sFlooding from groundwater is unlikely in this area\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s<\/td>/g)
 
     riskStub.revert()
   })
+
   lab.test('/risk - Risk service error', async () => {
     const options = {
       method: 'GET',
@@ -167,6 +187,7 @@ lab.experiment('Risk page test', () => {
     Code.expect(response.statusCode).to.equal(400)
     riskStub.revert()
   })
+
   lab.test('/risk - Not inEngland', async () => {
     const options = {
       method: 'GET',
@@ -197,6 +218,7 @@ lab.experiment('Risk page test', () => {
     Code.expect(response.headers.location).to.include('/england-only')
     riskStub.revert()
   })
+
   lab.test('/risk - inFloodWarningArea error', async () => {
     const options = {
       method: 'GET',
@@ -225,6 +247,7 @@ lab.experiment('Risk page test', () => {
     Code.expect(response.statusCode).to.equal(400)
     riskStub.revert()
   })
+
   lab.test('/risk - inFloodAlertArea error', async () => {
     const options = {
       method: 'GET',
@@ -253,6 +276,7 @@ lab.experiment('Risk page test', () => {
     Code.expect(response.statusCode).to.equal(400)
     riskStub.revert()
   })
+
   lab.test('/risk - riverAndSeaRisk error', async () => {
     const options = {
       method: 'GET',
@@ -611,6 +635,7 @@ lab.experiment('Risk page test', () => {
     Code.expect(response.statusCode).to.equal(200)
     riskStub.revert()
   })
+
   lab.test('/risk WELSH address to redirect to england-only', async () => {
     const options = {
       method: 'GET',
@@ -953,6 +978,128 @@ lab.experiment('Risk page test', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
+    riskStub.revert()
+  })
+
+  lab.test('Checking for Managing Risk link in risk result page', async () => {
+    const options = {
+      method: 'GET',
+      url: '/risk',
+      headers: {
+        cookie
+      }
+    }
+    const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
+      inEngland: true,
+      isGroundwaterArea: true,
+      floodAlertArea: ['AnyArea'],
+      floodWarningArea: [],
+      inFloodAlertArea: true,
+      inFloodWarningArea: false,
+      leadLocalFloodAuthority: 'Croydon',
+      reservoirRisk: null,
+      riverAndSeaRisk: { probabilityForBand: 'Very Low', suitability: 'County to Town' },
+      surfaceWaterRisk: 'Very Low',
+      surfaceWaterSuitability: 'National to County',
+      extraInfo: null
+    }))
+    const response = await server.inject(options)
+    const { payload } = response
+    Code.expect(response.statusCode).to.equal(200)
+    await payloadMatchTest(payload, /<h3 class="govuk-heading-m">Manage your flood risk<\/h3>/g, 1)
+    riskStub.revert()
+  })
+
+  lab.test('Implementing Rivers and Sea managing flood risk changes for very low risk areas', async () => {
+    const options = {
+      method: 'GET',
+      url: '/risk',
+      headers: {
+        cookie
+      }
+    }
+
+    const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
+      inEngland: true,
+      isGroundwaterArea: true,
+      floodAlertArea: ['064FAG99SElondon'],
+      floodWarningArea: [],
+      inFloodAlertArea: true,
+      inFloodWarningArea: false,
+      leadLocalFloodAuthority: 'Croydon',
+      reservoirRisk: null,
+      riverAndSeaRisk: { probabilityForBand: 'Very Low', suitability: 'County to Town' },
+      surfaceWaterRisk: 'Very Low',
+      surfaceWaterSuitability: 'National to County',
+      extraInfo: null
+    }))
+
+    const response = await server.inject(options)
+    const { payload } = response
+    Code.expect(response.statusCode).to.equal(200)
+    await payloadMatchTest(payload, /<span class="govuk-details__summary-text">What you can do<\/span>/g, 0)
+    riskStub.revert()
+  })
+
+  lab.test('Implementing Rivers and Sea managing flood risk changes for both surface water and rivers&sea in low risk areas', async () => {
+    const options = {
+      method: 'GET',
+      url: '/risk',
+      headers: {
+        cookie
+      }
+    }
+
+    const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
+      inEngland: true,
+      isGroundwaterArea: true,
+      floodAlertArea: ['064FAG99SElondon'],
+      floodWarningArea: [],
+      inFloodAlertArea: true,
+      inFloodWarningArea: false,
+      leadLocalFloodAuthority: 'Suffolk',
+      reservoirRisk: null,
+      riverAndSeaRisk: { probabilityForBand: 'Low', suitability: 'County to Town' },
+      surfaceWaterRisk: 'Low',
+      surfaceWaterSuitability: 'National to County',
+      extraInfo: null
+    }))
+
+    const response = await server.inject(options)
+    const { payload } = response
+    Code.expect(response.statusCode).to.equal(200)
+    await payloadMatchTest(payload, /<span class="govuk-details__summary-text">What you can do<\/span>/g, 2)
+    riskStub.revert()
+  })
+
+  lab.test('Implementing Rivers and Sea managing flood risk changes for only surface water in low risk areas', async () => {
+    const options = {
+      method: 'GET',
+      url: '/risk',
+      headers: {
+        cookie
+      }
+    }
+
+    const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
+      inEngland: true,
+      isGroundwaterArea: true,
+      floodAlertArea: ['064FAG99SElondon'],
+      floodWarningArea: [],
+      inFloodAlertArea: true,
+      inFloodWarningArea: false,
+      leadLocalFloodAuthority: 'Hertfordshire',
+      reservoirRisk: null,
+      riverAndSeaRisk: { probabilityForBand: 'Very Low', suitability: 'County to Town' },
+      surfaceWaterRisk: 'Low',
+      surfaceWaterSuitability: 'National to County',
+      extraInfo: null
+    }))
+
+    const response = await server.inject(options)
+    const { payload } = response
+    Code.expect(response.statusCode).to.equal(200)
+    await payloadMatchTest(payload, /<span class="govuk-details__summary-text">What you can do<\/span>/g, 1)
     riskStub.revert()
   })
 })

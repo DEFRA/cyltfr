@@ -6,7 +6,7 @@
     "message": "An error occurred finding the address by id"
   },
   "friendlyCaptchaError": {
-    "message": "puzzle expired"
+    "message": "An error occured during the FriendlyCaptcha check. Please try again."
   },
   "sessionTimeoutError": {
     "message": "Session timed out"
