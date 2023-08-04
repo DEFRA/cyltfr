@@ -25,7 +25,7 @@ lab.experiment('search page route', () => {
   const addressStub = createAddressStub()
   const warningStub = createWarningStub()
   // Make a server before the tests
-  lab.before(async () => {
+  lab.beforeEach(async () => {
     server = await createServer()
     await server.initialize()
     const initial = mockOptions()
@@ -37,14 +37,14 @@ lab.experiment('search page route', () => {
     warningStub
   })
 
-  lab.after(async () => {
+  lab.afterEach(async () => {
     warningStub.revert()
     addressStub.revert()
     console.log('Stopping server')
     await server.stop()
   })
 
-  lab.test.only('/search - banner ', async () => {
+  lab.test('/search - banner ', async () => {
     // This doesn't seem to actually test anything TODO: Check this test
     const { getOptions } = mockSearchOptions('cw8 4bh', cookie)
     const getResponse = await server.inject(getOptions)
