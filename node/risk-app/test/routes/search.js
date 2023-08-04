@@ -21,11 +21,10 @@ const createAddressStub = () => {
 const createWarningStub = () => mock.replace(floodService, 'findWarnings', mock.makePromise(null, null))
 
 lab.experiment('search page route', () => {
-  let server, cookie
-  const addressStub = createAddressStub()
-  const warningStub = createWarningStub()
+  let server, cookie, addressStub, warningStub
+
   // Make a server before the tests
-  lab.beforeEach(async () => {
+  lab.before(async () => {
     server = await createServer()
     await server.initialize()
     const initial = mockOptions()
@@ -33,13 +32,19 @@ lab.experiment('search page route', () => {
     const homepageresponse = await server.inject(initial)
     Code.expect(homepageresponse.statusCode).to.equal(200)
     cookie = homepageresponse.headers['set-cookie'][0].split(';')[0]
-    addressStub
-    warningStub
   })
 
-  lab.afterEach(async () => {
+  lab.beforeEach(() => {
+    addressStub = createAddressStub()
+    warningStub = createWarningStub()
+  })
+
+  lab.afterEach(() => {
     warningStub.revert()
     addressStub.revert()
+  })
+
+  lab.after(async () => {
     console.log('Stopping server')
     await server.stop()
   })
