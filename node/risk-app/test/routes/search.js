@@ -20,14 +20,12 @@ const createAddressStub = () => {
 }
 const createWarningStub = () => mock.replace(floodService, 'findWarnings', mock.makePromise(null, null))
 
-lab.experiment('Unit', () => {
+lab.experiment('search page route', () => {
   let server, cookie
-
   // Make a server before the tests
   lab.before(async () => {
     server = await createServer()
     await server.initialize()
-
     const initial = mockOptions()
 
     const homepageresponse = await server.inject(initial)
@@ -239,5 +237,27 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(400)
+  })
+
+  lab.test('should redirect user to postcode page if captcha times out or not found', async () => {
+    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(true, null)))
+    const addressStub = createAddressStub()
+    const warningStub = createWarningStub()
+    const responseUrl = await server.inject(mockSearchOptions('cw8 4bh').getOptions)
+    Code.expect(responseUrl.statusCode).to.equal(302)
+    captchastub.revert()
+    addressStub.revert()
+    warningStub.revert()
+  })
+
+  lab.test('should get search page with postcode if already queried and captcha not expired', async () => {
+    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(true, null)))
+    const addressStub = createAddressStub()
+    const warningStub = createWarningStub()
+    const responseUrl = await server.inject(mockSearchOptions('cw8 4bh', cookie).getOptions)
+    Code.expect(responseUrl.statusCode).to.equal(200)
+    captchastub.revert()
+    addressStub.revert()
+    warningStub.revert()
   })
 })

@@ -35,7 +35,7 @@ module.exports = [
         const captchaCheckResults = await captchaCheck('', postcode, request.yar)
 
         if (!captchaCheckResults.tokenValid) {
-          return boom.badRequest(errors.sessionTimeoutError.message)
+          return h.redirect('/postcode')
         }
 
         const addresses = await addressService.find(postcode)
