@@ -21,8 +21,9 @@ async function validateCaptcha (token, server) {
   try {
     const apiResponse = await util.post(uri, options, true)
     if (!apiResponse.success) {
-      if (server.methods.notify) { server.methods.notify(apiResponse) }
-      console.log(apiResponse.errors[0])
+      if (server.methods.notify) {
+        server.methods.notify(`FriendlyCaptcha server check returned error: '${apiResponse.errors.toString()}'\n Token passed was: '${token}'`)
+      }
       return false
     }
   } catch (error) {
