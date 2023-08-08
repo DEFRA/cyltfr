@@ -38,7 +38,6 @@ module.exports = [
         const captchaCheckResults = await captchaCheck('', postcode, request.yar)
 
         if (!captchaCheckResults.tokenValid) {
-          console.log('captcha failed')
           return h.redirect('/postcode')
         }
 
