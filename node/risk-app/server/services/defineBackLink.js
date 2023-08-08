@@ -1,6 +1,5 @@
 function defineBackLink (currentPage, mapPageQuery, postcode) {
   if (currentPage === '/risk' || currentPage === '/england-only') {
-    console.log('currentPageInside', currentPage)
     return '/search?postcode=' + postcode
   }
   if (currentPage === '/map') {
