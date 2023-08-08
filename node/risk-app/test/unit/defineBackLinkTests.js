@@ -36,18 +36,11 @@ lab.experiment('defineBackLink', () => {
     Code.expect(backLink).to.equal(searchPagePath + cachedPostcode)
   })
 
-  lab.test('Map page backlink takes user back to postcode page', async () => {
-    const postcodePage = '/postcode'
+  lab.test('Map page backlink takes user back to risk page', async () => {
+    const riskPage = '/risk'
     const currentPage = '/map'
     const backLink = defineBackLink.defineBackLink(currentPage)
-    Code.expect(backLink).to.equal(postcodePage)
-  })
-
-  lab.test('Map page backlink takes user back to postcode page even if directed through bookmark', async () => {
-    const postcodePage = '/postcode'
-    const currentPage = '/map'
-    const backLink = defineBackLink.defineBackLink(currentPage)
-    Code.expect(backLink).to.equal(postcodePage)
+    Code.expect(backLink).to.equal(riskPage)
   })
 
   lab.test('Search page backlink takes user back to postcode page', async () => {
