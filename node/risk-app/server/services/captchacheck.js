@@ -60,15 +60,20 @@ function tokenExpired (yar) {
   return true
 }
 
+function comparePostcode (postcode, yarStoredPostcode) {
+  const formattedPostcode = postcode.split(' ').join('').toUpperCase()
+  const formattedYarPostcode = yarStoredPostcode.split(' ').join('').toUpperCase()
+  return formattedPostcode === formattedYarPostcode ? true : false
+}
+
 async function captchaCheck (token, postcode, yar, server) {
   const results = {
     token,
-    tokenPostcode: postcode.split(' ').join('').toUpperCase(),
+    tokenPostcode: postcode,
     tokenSet: Date.now(),
     tokenValid: false,
     errorMessage: ''
   }
-  postcode = postcode.split(' ').join('').toUpperCase()
 
   if (!friendlyCaptchaEnabled) {
     results.tokenValid = true
@@ -92,7 +97,7 @@ async function captchaCheck (token, postcode, yar, server) {
   const storedToken = yar.get('token')
 
   if ((token && (token === storedToken)) || (storedToken && (!token))) {
-    if (postcode === yar.get('tokenPostcode')) {
+    if (comparePostcode(postcode, yar.get('tokenPostcode'))) {
       if (tokenExpired(yar)) {
         clearStoredValues(yar)
         results.errorMessage = errors.friendlyCaptchaError.message

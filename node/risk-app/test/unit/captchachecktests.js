@@ -105,13 +105,27 @@ lab.experiment('CaptchaCheck', () => {
     const captchacheck = proxyquire('../../server/services/captchacheck', { '../config': getConfigOptions({}) })
 
     yar.set('token', 'thisisatoken')
-    yar.set('tokenPostcode', '1111111')
+    yar.set('tokenPostcode', 'Ab23op')
     yar.set('tokenSet', Date.now())
     yar.set('tokenValid', true)
 
-    const results = await captchacheck.captchaCheck('thisisatoken', '1111112', yar, null)
+    const results = await captchacheck.captchaCheck('thisisatoken', 'PO45LE', yar, null)
 
     Code.expect(results.tokenValid).to.equal(false)
+  })
+
+  lab.test('should not fail even if token postcode formatted different to postcode', async () => {
+    const yar = new YarMock()
+    const captchacheck = proxyquire('../../server/services/captchacheck', { '../config': getConfigOptions({}) })
+
+    yar.set('token', 'thisisatoken')
+    yar.set('tokenPostcode', 'sp09rA')
+    yar.set('tokenSet', Date.now())
+    yar.set('tokenValid', true)
+
+    const results = await captchacheck.captchaCheck('thisisatoken', 'SP09RA', yar, null)
+
+    Code.expect(results.tokenValid).to.equal(true)
   })
 
   lab.test('fails with expired token', async () => {
@@ -141,6 +155,20 @@ lab.experiment('CaptchaCheck', () => {
     const results = await captchacheck.captchaCheck('', '1111111', yar, null)
 
     Code.expect(results.tokenValid).to.equal(true)
+  })
+
+  lab.test('fails with blank token and matching postcode, but expired', async () => {
+    const yar = new YarMock()
+    const captchacheck = proxyquire('../../server/services/captchacheck', { '../config': getConfigOptions({}) })
+
+    yar.set('token', 'thisisatoken')
+    yar.set('tokenPostcode', '1111111')
+    yar.set('tokenSet', (Date.now() - 1) - (10 * 60 * 1000))
+    yar.set('tokenValid', true)
+
+    const results = await captchacheck.captchaCheck('', '1111111', yar, null)
+
+    Code.expect(results.tokenValid).to.equal(false)
   })
 
   lab.test('fails with blank token and matching postcode, but expired', async () => {
