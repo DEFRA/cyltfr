@@ -338,12 +338,14 @@ lab.experiment('CaptchaCheck', () => {
       '../config': configoptions,
       '../util': utilStub
     })
-    const server = { methods: { notify: (error) => { Code.expect(error).to.equal(postResult) } } }
+    let notifyResult
+    const server = { methods: { notify: (error) => { notifyResult = error } } }
 
     const results = await captchacheck.captchaCheck('newtoken', '1111111', yar, server)
 
     Code.expect(results.tokenValid).to.equal(false)
     Code.expect(called).to.equal(true)
+    Code.expect(notifyResult).to.equal('FriendlyCaptcha server check returned error: \'an error\'\n Token passed was: \'newtoken\'')
   })
 
   lab.test('makes a call for a new token and handle rejection without notify', async () => {
