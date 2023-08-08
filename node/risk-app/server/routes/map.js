@@ -11,7 +11,10 @@ module.exports = {
       const { query } = request
       const { easting, northing } = query
       const address = request.yar.get('address')
-      const backLinkUri = defineBackLink(request.path)
+      const mapPageQuery = request.orig
+      const path = request.path
+      console.log(request)
+      const backLinkUri = defineBackLink(path, mapPageQuery)
 
       return h.view('map', new MapViewModel(easting, northing, address, backLinkUri))
     },
