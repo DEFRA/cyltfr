@@ -63,7 +63,7 @@ function tokenExpired (yar) {
 function comparePostcode (postcode, yarStoredPostcode) {
   const formattedPostcode = postcode.split(' ').join('').toUpperCase()
   const formattedYarPostcode = yarStoredPostcode.split(' ').join('').toUpperCase()
-  return formattedPostcode === formattedYarPostcode ? true : false
+  return formattedPostcode === formattedYarPostcode
 }
 
 async function captchaCheck (token, postcode, yar, server) {
