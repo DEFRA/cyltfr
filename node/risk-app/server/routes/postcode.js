@@ -9,6 +9,7 @@ module.exports = [
     method: 'GET',
     path: '/postcode',
     handler: (request, h) => {
+      request.yar.set('address', null)
       if (config.friendlyCaptchaEnabled) {
         if (Object.prototype.hasOwnProperty.call(request.query, 'captchabypass')) {
           // if value passed doesn't equal config value, clear out the session setting.
