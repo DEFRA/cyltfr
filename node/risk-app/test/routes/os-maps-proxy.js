@@ -33,7 +33,6 @@ lab.experiment('/os-maps-proxy test', () => {
     const fetchstub = mock.replace(utils, 'get', proxyResponse)
 
     const response = await server.inject(options)
-    console.log(response)
     Code.expect(response.statusCode).to.equal(200)
     fetchstub.revert()
   })
