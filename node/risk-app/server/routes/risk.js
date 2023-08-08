@@ -42,7 +42,9 @@ module.exports = {
         if (!risk.inEngland) {
           return h.redirect('/england-only')
         } else {
-          const backLinkUri = defineBackLink(path, address.postcode.split(' ').join('%20'))
+          console.log('here')
+          const backLinkUri = defineBackLink(path, null, address.postcode.split(' ').join('%20'))
+          console.log('backLinkUri', backLinkUri)
           return h.view('risk', new RiskViewModel(risk, address, backLinkUri))
         }
       } catch (err) {
