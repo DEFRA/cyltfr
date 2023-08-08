@@ -69,8 +69,7 @@ async function captchaCheck (token, postcode, yar, server) {
     errorMessage: ''
   }
   postcode = postcode.split(' ').join('').toUpperCase()
-  console.log('postcode:', postcode)
-  console.log('tokenPostcode:', results.tokenPostcode)
+
   if (!friendlyCaptchaEnabled) {
     results.tokenValid = true
     return results
