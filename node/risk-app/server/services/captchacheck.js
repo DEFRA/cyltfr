@@ -63,11 +63,14 @@ function tokenExpired (yar) {
 async function captchaCheck (token, postcode, yar, server) {
   const results = {
     token,
-    tokenPostcode: postcode,
+    tokenPostcode: postcode.split(' ').join('').toUpperCase(),
     tokenSet: Date.now(),
     tokenValid: false,
     errorMessage: ''
   }
+  postcode = postcode.split(' ').join('').toUpperCase()
+  console.log('postcode:', postcode)
+  console.log('tokenPostcode:', results.tokenPostcode)
   if (!friendlyCaptchaEnabled) {
     results.tokenValid = true
     return results
