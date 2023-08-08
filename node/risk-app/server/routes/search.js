@@ -25,6 +25,7 @@ module.exports = [
     path: '/search',
     handler: async (request, h) => {
       const { postcode } = request.query
+      const path = request.path
 
       // Our Address service doesn't support NI addresses
       // but all NI postcodes start with BT so redirect to
@@ -54,7 +55,7 @@ module.exports = [
         try {
           warnings = await getWarnings(postcode, request)
         } catch {}
-        const backLinkUri = defineBackLink(request.path)
+        const backLinkUri = defineBackLink(path)
         return h.view('search', new SearchViewModel(postcode, addresses, null, warnings, backLinkUri))
       } catch (err) {
         return boom.badRequest(errors.addressByPostcode.message, err)
