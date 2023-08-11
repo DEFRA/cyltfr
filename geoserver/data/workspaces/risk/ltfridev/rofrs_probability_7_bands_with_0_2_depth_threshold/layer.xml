@@ -1,0 +1,15 @@
+<layer>
+  <name>rofrs_probability_7_bands_with_0_2_depth_threshold</name>
+  <id>LayerInfoImpl--1a2a398b:1510f867e96:-8cbd</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-1a2a398b:1510f867e96:-8e95</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl--1a2a398b:1510f867e96:-8cbc</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+</layer>

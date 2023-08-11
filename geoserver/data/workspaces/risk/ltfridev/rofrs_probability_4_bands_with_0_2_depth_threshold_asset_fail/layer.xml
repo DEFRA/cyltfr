@@ -1,0 +1,15 @@
+<layer>
+  <name>rofrs_probability_4_bands_with_0_2_depth_threshold_asset_fail</name>
+  <id>LayerInfoImpl--1a2a398b:1510f867e96:-8ca7</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-1a2a398b:1510f867e96:-8e94</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl--1a2a398b:1510f867e96:-8ca6</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+</layer>
