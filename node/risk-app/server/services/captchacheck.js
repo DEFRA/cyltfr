@@ -21,8 +21,9 @@ async function validateCaptcha (token, server) {
   try {
     const apiResponse = await util.post(uri, options, true)
     if (!apiResponse.success) {
-      if (server.methods.notify) { server.methods.notify(apiResponse) }
-      console.log(apiResponse.errors[0])
+      if (server.methods.notify) {
+        server.methods.notify(`FriendlyCaptcha server check returned error: '${apiResponse.errors.toString()}'\n Token passed was: '${token}'`)
+      }
       return false
     }
   } catch (error) {
@@ -59,6 +60,12 @@ function tokenExpired (yar) {
   return true
 }
 
+function comparePostcode (postcode, yarStoredPostcode) {
+  const formattedPostcode = postcode.split(' ').join('').toUpperCase()
+  const formattedYarPostcode = yarStoredPostcode.split(' ').join('').toUpperCase()
+  return formattedPostcode === formattedYarPostcode
+}
+
 async function captchaCheck (token, postcode, yar, server) {
   const results = {
     token,
@@ -67,6 +74,7 @@ async function captchaCheck (token, postcode, yar, server) {
     tokenValid: false,
     errorMessage: ''
   }
+
   if (!friendlyCaptchaEnabled) {
     results.tokenValid = true
     return results
@@ -89,7 +97,7 @@ async function captchaCheck (token, postcode, yar, server) {
   const storedToken = yar.get('token')
 
   if ((token && (token === storedToken)) || (storedToken && (!token))) {
-    if (postcode === yar.get('tokenPostcode')) {
+    if (comparePostcode(postcode, yar.get('tokenPostcode'))) {
       if (tokenExpired(yar)) {
         clearStoredValues(yar)
         results.errorMessage = errors.friendlyCaptchaError.message

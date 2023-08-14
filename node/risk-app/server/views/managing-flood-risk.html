@@ -4,13 +4,13 @@
 {{ super() }}
 <link href="{{ assetPath }}/css/style.css" rel="stylesheet" />
 {% endblock %}
-
+{% set pageTitle = "Managing flood risk" %}
 {% block content %}
 <div id="managing-flood-risk-page">
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-xl">Managing flood risk</h1>
+      <h1 class="govuk-heading-xl">{{ pageTitle }}</h1>
 
       <div>
         <p class="govuk-body">
