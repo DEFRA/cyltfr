@@ -105,13 +105,27 @@ lab.experiment('CaptchaCheck', () => {
     const captchacheck = proxyquire('../../server/services/captchacheck', { '../config': getConfigOptions({}) })
 
     yar.set('token', 'thisisatoken')
-    yar.set('tokenPostcode', '1111111')
+    yar.set('tokenPostcode', 'Ab23op')
     yar.set('tokenSet', Date.now())
     yar.set('tokenValid', true)
 
-    const results = await captchacheck.captchaCheck('thisisatoken', '1111112', yar, null)
+    const results = await captchacheck.captchaCheck('thisisatoken', 'PO45LE', yar, null)
 
     Code.expect(results.tokenValid).to.equal(false)
+  })
+
+  lab.test('should not fail even if token postcode formatted different to postcode', async () => {
+    const yar = new YarMock()
+    const captchacheck = proxyquire('../../server/services/captchacheck', { '../config': getConfigOptions({}) })
+
+    yar.set('token', 'thisisatoken')
+    yar.set('tokenPostcode', 'sp09rA')
+    yar.set('tokenSet', Date.now())
+    yar.set('tokenValid', true)
+
+    const results = await captchacheck.captchaCheck('thisisatoken', 'SP09RA', yar, null)
+
+    Code.expect(results.tokenValid).to.equal(true)
   })
 
   lab.test('fails with expired token', async () => {
@@ -157,6 +171,20 @@ lab.experiment('CaptchaCheck', () => {
     Code.expect(results.tokenValid).to.equal(false)
   })
 
+  lab.test('fails with blank token and matching postcode, but expired', async () => {
+    const yar = new YarMock()
+    const captchacheck = proxyquire('../../server/services/captchacheck', { '../config': getConfigOptions({}) })
+
+    yar.set('token', 'thisisatoken')
+    yar.set('tokenPostcode', '1111111')
+    yar.set('tokenSet', (Date.now() - 1) - (10 * 60 * 1000))
+    yar.set('tokenValid', true)
+
+    const results = await captchacheck.captchaCheck('', '1111111', yar, null)
+
+    Code.expect(results.tokenValid).to.equal(false)
+  })
+
   lab.test('fails with unfinished token', async () => {
     const yar = new YarMock()
     const captchacheck = proxyquire('../../server/services/captchacheck', { '../config': getConfigOptions({}) })
@@ -185,6 +213,20 @@ lab.experiment('CaptchaCheck', () => {
     Code.expect(results.tokenValid).to.equal(false)
   })
 
+  lab.test('fails with expired token', async () => {
+    const yar = new YarMock()
+    const captchacheck = proxyquire('../../server/services/captchacheck', { '../config': getConfigOptions({}) })
+
+    yar.set('token', 'thisisatoken')
+    yar.set('tokenPostcode', '1111111')
+    yar.set('tokenSet', (Date.now() - 1) - (10 * 60 * 1000))
+    yar.set('tokenValid', true)
+
+    const results = await captchacheck.captchaCheck('.EXPIRED', '1111111', yar, null)
+
+    Code.expect(results.tokenValid).to.equal(false)
+  })
+
   lab.test('fails with undefined token', async () => {
     const yar = new YarMock()
     const captchacheck = proxyquire('../../server/services/captchacheck', { '../config': getConfigOptions({}) })
@@ -209,6 +251,20 @@ lab.experiment('CaptchaCheck', () => {
     yar.set('tokenValid', true)
 
     const results = await captchacheck.captchaCheck('.FETCHING', '1111111', yar, null)
+
+    Code.expect(results.tokenValid).to.equal(false)
+  })
+
+  lab.test('fails with error token', async () => {
+    const yar = new YarMock()
+    const captchacheck = proxyquire('../../server/services/captchacheck', { '../config': getConfigOptions({}) })
+
+    yar.set('token', 'thisisatoken')
+    yar.set('tokenPostcode', '1111111')
+    yar.set('tokenSet', (Date.now() - 1) - (10 * 60 * 1000))
+    yar.set('tokenValid', true)
+
+    const results = await captchacheck.captchaCheck('.ERROR', '1111111', yar, null)
 
     Code.expect(results.tokenValid).to.equal(false)
   })
@@ -310,12 +366,14 @@ lab.experiment('CaptchaCheck', () => {
       '../config': configoptions,
       '../util': utilStub
     })
-    const server = { methods: { notify: (error) => { Code.expect(error).to.equal(postResult) } } }
+    let notifyResult
+    const server = { methods: { notify: (error) => { notifyResult = error } } }
 
     const results = await captchacheck.captchaCheck('newtoken', '1111111', yar, server)
 
     Code.expect(results.tokenValid).to.equal(false)
     Code.expect(called).to.equal(true)
+    Code.expect(notifyResult).to.equal('FriendlyCaptcha server check returned error: \'an error\'\n Token passed was: \'newtoken\'')
   })
 
   lab.test('makes a call for a new token and handle rejection without notify', async () => {
