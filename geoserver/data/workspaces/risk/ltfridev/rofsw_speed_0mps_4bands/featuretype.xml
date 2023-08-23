@@ -1,14 +1,14 @@
 <featureType>
   <id>FeatureTypeInfoImpl--1a2a398b:1510f867e96:-8cf8</id>
-  <name>rofsw_speed_0_mps_4bands</name>
-  <nativeName>rofsw_speed_0_mps_4bands</nativeName>
+  <name>rofsw_speed_0mps_4bands</name>
+  <nativeName>rofsw_speed_0mps_4bands</nativeName>
   <namespace>
     <id>NamespaceInfoImpl-500e64e7:150fcd642d7:-7fe5</id>
   </namespace>
-  <title>rofsw_speed_0_mps_4bands</title>
+  <title>rofsw_speed_0mps_4bands</title>
   <keywords>
     <string>features</string>
-    <string>rofsw_speed_0_mps_4bands</string>
+    <string>rofsw_speed_0mps_4bands</string>
   </keywords>
   <srs>EPSG:27700</srs>
   <nativeBoundingBox>
