@@ -3,6 +3,7 @@ const Code = require('@hapi/code')
 const createServer = require('../../server')
 const lab = exports.lab = Lab.script()
 const { createMockYar } = require('../mock')
+const defineBackLink = require('../../server/services/defineBackLink')
 
 lab.experiment('england-only router', () => {
   let server
@@ -17,8 +18,10 @@ lab.experiment('england-only router', () => {
   })
 
   lab.test('should get the /england-only page if not an address in England', async () => {
+    const originalDefineBackLink = defineBackLink.defineBackLink
+    const mockDefineBackLink = () => 'Mocked Back Link'
+    defineBackLink.defineBackLink = mockDefineBackLink
     const mockYar = createMockYar()
-    console.log('mockYar: ', mockYar)
     mockYar.set('addresses', '')
     mockYar.set('address', {
       uprn: '100100679479',
@@ -27,17 +30,17 @@ lab.experiment('england-only router', () => {
       x: 333008,
       y: 191705
     })
-    console.log('mockYar: ', mockYar)
     const options = {
       method: 'GET',
       url: '/england-only'
     }
-
+    await defineBackLink.defineBackLink()
+    defineBackLink.defineBackLink = originalDefineBackLink
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
   })
 
-  lab.test('should redirect to /postcode page iF no address in payload', async () => {
+  lab.test('should redirect to /postcode page if no address in payload', async () => {
     const options = {
       method: 'GET',
       url: '/england-only'

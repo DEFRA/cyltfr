@@ -19,7 +19,7 @@ const getConfigOptions = ({
   sessionTimeout
 })
 
-lab.experiment.only('CaptchaCheck', () => {
+lab.experiment('CaptchaCheck', () => {
   lab.before(async () => {
     console.log('Creating server')
   })
@@ -50,7 +50,7 @@ lab.experiment.only('CaptchaCheck', () => {
     Code.expect(results.tokenValid).to.equal(false)
   })
 
-  lab.test.only('passed on captcha bypass', async () => {
+  lab.test('passed on captcha bypass', async () => {
     const yar = createMockYar()
     yar.set('captchabypass', true)
     const captchacheck = proxyquire('../../server/services/captchacheck', { '../config': getConfigOptions({}) })
