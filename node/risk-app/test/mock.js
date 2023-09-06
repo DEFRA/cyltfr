@@ -70,6 +70,26 @@ const mockCaptchaCheck = (postcode) => {
   }
 }
 
+const createMockYar = () => {
+  class YarMock {
+    constructor () {
+      this._store = { }
+    }
+
+    get (key) {
+      return this._store[key]
+    }
+
+    set (key, value) {
+      this._store[key] = value
+    }
+  }
+
+  const yar = new YarMock()
+
+  return yar
+}
+
 const mockCaptchaResponse = (responseType, errorType) => {
   if (responseType === false && errorType === 'solution timeout') {
     return { success: false, errors: ['solution_timeout_or_duplicate'] }
@@ -77,4 +97,4 @@ const mockCaptchaResponse = (responseType, errorType) => {
     return { success: false, errors: ['solution_invalid'] }
   } else { return { success: true } }
 }
-module.exports = { mock, mockOptions, mockSearchOptions, mockCaptchaResponse, mockCaptchaCheck }
+module.exports = { mock, mockOptions, mockSearchOptions, mockCaptchaResponse, createMockYar, mockCaptchaCheck }

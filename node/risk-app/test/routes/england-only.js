@@ -2,21 +2,7 @@ const Lab = require('@hapi/lab')
 const Code = require('@hapi/code')
 const createServer = require('../../server')
 const lab = exports.lab = Lab.script()
-
-class YarMock {
-  constructor () {
-    this._store = { }
-  }
-
-  get (key) {
-    return this._store[key]
-  }
-
-  set (key, value) {
-    this._store[key] = value
-  }
-}
-
+const { createMockYar } = require('../mock')
 
 lab.experiment('england-only router', () => {
   let server
@@ -31,15 +17,17 @@ lab.experiment('england-only router', () => {
   })
 
   lab.test('should get the /england-only page if not an address in England', async () => {
-    const yar = new YarMock()
-    yar.set('addresses', '')
-    yar.set('address', {
+    const mockYar = createMockYar()
+    console.log('mockYar: ', mockYar)
+    mockYar.set('addresses', '')
+    mockYar.set('address', {
       uprn: '100100679479',
       postcode: 'NP18 3EZ',
       address: '3, NORTHFIELD CLOSE, CAERLEON, NEWPORT, NP18 3EZ',
       x: 333008,
       y: 191705
     })
+    console.log('mockYar: ', mockYar)
     const options = {
       method: 'GET',
       url: '/england-only'
