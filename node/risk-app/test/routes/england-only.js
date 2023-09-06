@@ -2,7 +2,6 @@ const Lab = require('@hapi/lab')
 const Code = require('@hapi/code')
 const createServer = require('../../server')
 const lab = exports.lab = Lab.script()
-const config = require('../../config/server.json')
 
 class YarMock {
   constructor () {
