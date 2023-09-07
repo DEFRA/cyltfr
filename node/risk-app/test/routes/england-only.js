@@ -22,7 +22,7 @@ lab.experiment('england-only router', () => {
     const mockDefineBackLink = () => 'Mocked Back Link'
     defineBackLink.defineBackLink = mockDefineBackLink
     const mockYar = createMockYar()
-    mockYar.set('addresses', '')
+    mockYar.set('addresses', ' ')
     mockYar.set('address', {
       uprn: '100100679479',
       postcode: 'NP18 3EZ',
@@ -32,11 +32,11 @@ lab.experiment('england-only router', () => {
     })
     const options = {
       method: 'GET',
-      url: '/england-only'
+      url: '/england-only',
     }
-    await defineBackLink.defineBackLink()
-    defineBackLink.defineBackLink = originalDefineBackLink
+    defineBackLink.defineBackLink()
     const response = await server.inject(options)
+    defineBackLink.defineBackLink = originalDefineBackLink
     Code.expect(response.statusCode).to.equal(200)
   })
 
