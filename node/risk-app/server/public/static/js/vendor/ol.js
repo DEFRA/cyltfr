@@ -4840,7 +4840,7 @@
                   var u = document.createElement("button");
                   var z = document.createElement("span");
                   u.className = r + "-out", u.setAttribute("type", "button"), u.setAttribute("aria-label", "Zoom out of map"), u.title = h, u.appendChild(z), v(u, M.CLICK, this.handleClick_.bind(this, -n));
-                  z.className = "govuk-details__summary-text", t.style.textDecoration = "none", u.appendChild("string" == typeof s ? document.createTextNode(s) : s)
+                  z.className = "govuk-details__summary-text", z.style.textDecoration = "none", u.appendChild("string" == typeof s ? document.createTextNode(s) : s)
                   var p = r + " " + fo + " " + go,
                       c = this.element;
                   c.className = p, c.appendChild(l), c.appendChild(u), this.duration_ = void 0 !== i.duration ? i.duration : 250
@@ -19554,7 +19554,9 @@
                   var n = void 0 !== i.labelActive ? i.labelActive : "×";
                   this.labelActiveNode_ = "string" == typeof n ? document.createTextNode(n) : n, this.button_ = document.createElement("button");
                   var o = i.tipLabel ? i.tipLabel : "Toggle full-screen";
-                  this.setClassName_(this.button_, Km()), this.button_.setAttribute("type", "button"), this.button_.title = o, this.button_.appendChild(this.labelNode_), v(this.button_, M.CLICK, this.handleClick_, this);
+                  var k = document.createElement("span")
+                  k.className = "govuk-details__summary-text", k.style.textDecoration = "none", k.appendChild(this.labelNode_)
+                  this.setClassName_(this.button_, Km()), this.button_.setAttribute("type", "button"), this.button_.setAttribute("aria-label", "Full screen toggle"), this.button_.title = o, this.button_.appendChild(k), v(this.button_, M.CLICK, this.handleClick_, this);
                   var s = this.cssClassName_ + " " + fo + " " + go + " " + (Wm() ? "" : _o),
                       a = this.element;
                   a.className = s, a.appendChild(this.button_), this.keys_ = void 0 !== i.keys && i.keys, this.source_ = i.source
