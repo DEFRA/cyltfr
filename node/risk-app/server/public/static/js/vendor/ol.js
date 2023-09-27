@@ -4833,9 +4833,14 @@
                       a = void 0 !== i.zoomInTipLabel ? i.zoomInTipLabel : "Zoom in",
                       h = void 0 !== i.zoomOutTipLabel ? i.zoomOutTipLabel : "Zoom out",
                       l = document.createElement("button");
-                  l.className = r + "-in", l.setAttribute("type", "button"), 3l.title = a, l.appendChild("string" == typeof o ? document.createTextNode(o) : o), v(l, M.CLICK, this.handleClick_.bind(this, n));
+                      t = document.createElement("span");
+                  l.className = r + "-in", l.setAttribute("type", "button"), l.setAttribute("aria-label", "Zoom into map"), l.title = a, l.appendChild(t), v(l, M.CLICK, this.handleClick_.bind(this, n));
+                  t.className = "govuk-details__summary-text", t.style.textDecoration = "none", t.appendChild("string" == typeof o ? document.createTextNode(o) : o)
+
                   var u = document.createElement("button");
-                  u.className = r + "-out", u.setAttribute("type", "button"), u.title = h, u.appendChild("string" == typeof s ? document.createTextNode(s) : s), v(u, M.CLICK, this.handleClick_.bind(this, -n));
+                  var z = document.createElement("span");
+                  u.className = r + "-out", u.setAttribute("type", "button"), u.setAttribute("aria-label", "Zoom out of map"), u.title = h, u.appendChild(z), v(u, M.CLICK, this.handleClick_.bind(this, -n));
+                  z.className = "govuk-details__summary-text", t.style.textDecoration = "none", u.appendChild("string" == typeof s ? document.createTextNode(s) : s)
                   var p = r + " " + fo + " " + go,
                       c = this.element;
                   c.className = p, c.appendChild(l), c.appendChild(u), this.duration_ = void 0 !== i.duration ? i.duration : 250
