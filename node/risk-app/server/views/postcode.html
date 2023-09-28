@@ -15,16 +15,7 @@
         {{ govukErrorSummary(errorSummary) }}
       {% endif %}
       {% if friendlyCaptchaEnabled %}
-      <div id="session-alert" style="display: none;" tabindex="-1">
-        {{ govukErrorSummary({
-          titleText: "There is a problem",
-          errorList: [
-          {
-            text: "FriendlyCaptcha has timed out waiting for your response. Please click Restart to revalidate FriendlyCaptcha",
-            href: "#FriendlyCaptcha"
-          }]
-        })}}
-      </div>
+      <div id="session-alert" style="display: none;" tabindex="-1"></div>
       <div id="timeout" data-timeout="{{timeout}}">
       </div>
       {% endif %}
