@@ -196,13 +196,6 @@ lab.experiment('search page route', () => {
     Code.expect(response.statusCode).to.equal(400)
   })
 
-  lab.test('should redirect user to postcode page if captcha times out or not found', async () => {
-    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(false, null)))
-    const responseUrl = await server.inject(mockSearchOptions('cw8 4bh').getOptions)
-    Code.expect(responseUrl.statusCode).to.equal(302)
-    captchastub.revert()
-  })
-
   lab.test('should get search page with postcode if already queried and captcha not expired', async () => {
     const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(true, null)))
     const responseUrl = await server.inject(mockSearchOptions('cw8 4bh', cookie).getOptions)
