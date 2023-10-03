@@ -15,7 +15,6 @@
         {{ govukErrorSummary(errorSummary) }}
       {% endif %}
       {% if friendlyCaptchaEnabled %}
-      <div id="session-alert" style="display: none;" tabindex="-1"></div>
       <div id="timeout" data-timeout="{{timeout}}">
       </div>
       {% endif %}
@@ -106,19 +105,13 @@
     }
 
     function afterLoad() {
-      document.getElementById('session-alert').style.display = 'none'
       const captchaElement = document.getElementById('FriendlyCaptcha')
       captchaElement.classList.add('frc-captcha')
       friendlyChallenge.autoWidget = new friendlyChallenge.WidgetInstance(captchaElement,{
-        startedCallback: onCaptchaStart,
+        startedCallback: fixupFriendlyCaptcha,
         readyCallback:  fixupFriendlyCaptcha,
       })
       friendlyChallenge.autoWidget.start()
-    }
-
-    function onCaptchaStart() {
-      document.getElementById('session-alert').style.display = 'none'
-      fixupFriendlyCaptcha()
     }
 
     function enableTimeout(expiry) {
@@ -127,12 +120,10 @@
         sessionTimeoutTimer = null
       }
       if (expiry > 0) {
-        sessionTimeoutTimer = setTimeout(() => showSessionAlert(), expiry);
+        sessionTimeoutTimer = setTimeout(() => friendlyCaptchaExpire(), expiry);
       }  
     }
-    function showSessionAlert() {
-      document.getElementById('session-alert').style.display = 'block'
-      document.getElementById('session-alert').focus()
+    function friendlyCaptchaExpire() {
       friendlyChallenge.autoWidget.expire()
       fixupFriendlyCaptcha()
     }
@@ -151,9 +142,12 @@
       if (success.length > 0) {
         success.forEach((el) => {if (el.textContent === 'I am human') el.textContent = 'Check complete. I am human'})
       }
+      const button = document.querySelectorAll(".frc-container > div > button.frc-button")
+      if (button.length > 0) {
+        button.forEach((bt) => {bt.remove()})
+      }
     }
     function captchaDone(solutionPayload) {
-      document.getElementById('session-alert').style.display = 'none'
       enableTimeout(friendlyChallenge.autoWidget.puzzle.expiry)
       fixupFriendlyCaptcha()
     }
