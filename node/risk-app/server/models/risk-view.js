@@ -134,9 +134,9 @@ function RiskViewModel (risk, address, backLinkUri) {
   this.leadLocalFloodAuthority = risk.leadLocalFloodAuthority
   this.date = Date.now()
   this.year = new Date().getFullYear()
-  
   this.riversAndSeaTitle = RiskTitles[riverAndSeaRisk]
   this.surfaceWaterTitle = RiskTitles[surfaceWaterRisk]
+
   if (riverAndSeaRisk) {
     const name = riverAndSeaRisk.toLowerCase()
     this.riversAndSeaTextName = `partials/riskdescriptions/${name.replace(/ /g, '-')}.html`
