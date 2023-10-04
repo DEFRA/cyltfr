@@ -1,8 +1,22 @@
+.top-page-links {
+  display: flex;
+  justify-content: space-between;
+}
+
+#search-another-address::before {
+  content: none;
+}
+
 #risk-page {
   .govuk-inset-text {
     h3 {
       font-size: 1.5em;
     }
+  }
+
+
+  #search-another-address {
+    color: #E3000E;
   }
 
   .chance-content {
@@ -19,7 +33,7 @@
   }
 
   .govuk-inset-text.high {
-    border-left-color: #E3000E
+    border-left-color: #E3000E;
   }
   
   .no-margin {
