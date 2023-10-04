@@ -3,7 +3,10 @@
 {% set pageTitle = "Your long term flood risk assessment" %}
 
 {% block beforeContent %}
-<a href="{{ backLink }}" class="govuk-back-link" data-id="risk-address">Back</a>
+<div class="top-page-links">
+  <a href="{{ backLink }}" class="govuk-back-link" data-id="risk-address">Back</a>
+  <a href="/postcode" class="govuk-back-link" id="search-another-address" data-id="risk-address">Search for another address</a>
+</div>
 {% endblock %}
 
 {% block head %}
