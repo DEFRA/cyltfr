@@ -1,12 +1,6 @@
 <div class="govuk-summary-card govuk-!-margin-top-3 surface-water">
   <div class="govuk-summary-card__title-wrapper {{ surfaceWaterClassName }}">
     <h2 class="govuk-summary-card__title">Surface water<span class="chance-content risk">{{ surfaceWaterTitle }} of flooding</span></h2>
-    <ul class="govuk-summary-card__actions">
-      <li class="govuk-summary-card__action"> <a class="govuk-link" href="/map?easting={{easting}}&northing={{northing}}&map=SurfaceWater">
-          View a map<span class="govuk-visually-hidden">of the risk of surface water flooding</span>
-        </a>
-      </li>
-    </ul>
   </div>
   <div class="govuk-summary-card__content">
     <dl class="govuk-summary-list">
@@ -16,10 +10,12 @@
           How likely a flood is
         </dt>
         <dd class="govuk-summary-list__value risk-description">
-          Each year there is more than a 3.3% chance of flooding in a high risk area.
+          {% if surfaceWaterTextName %}
+        {% include surfaceWaterTextName %}
+        {% endif %}
           <br><br>
           <details class="govuk-details" data-module="govuk-details">
-            <summary class="govuk-details__summary">
+            <summary class="govuk-details__summary" data-journey-click="ltfri:risk:surface-water-details">
               <span class="govuk-details__summary-text">
                 What makes an area more likely to flood from surface water
               </span>
@@ -41,21 +37,12 @@
       </div>
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          How deep a flood could be
-        </dt>
-        <dd class="govuk-summary-list__value">
-          It is difficult to predict the exact depth of any flood water.
-          <br><br>
-          Flood models show the water would probably be shallower than 30cm. Deeper flooding cannot be ruled out in
-          extreme weather.
-        </dd>
-      </div>
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
           See your flood risk on a map
         </dt>
         <dd class="govuk-summary-list__value">
-          View the map to see information on:
+          <a class="govuk-link" href="/map?easting={{easting}}&northing={{northing}}&map=SurfaceWater">
+            View the map to see information on:
+          </a>
           <ul class="govuk-list--bullet">
             <li>where any flood water might spread to (extent of flooding)</li>
             <li>how deep any flood water could be (depth of flooding)</li>
@@ -91,7 +78,7 @@
           It is not specific to a property.
           <br><br>
           <details class="govuk-details" data-module="govuk-details">
-            <summary class="govuk-details__summary">
+            <summary class="govuk-details__summary" data-journey-click="ltfri:risk:surface-water-details">
               <span class="govuk-details__summary-text">
                 What you can use this information for
               </span>

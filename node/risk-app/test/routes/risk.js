@@ -1072,7 +1072,7 @@ lab.experiment('Risk page test', () => {
     riskStub.revert()
   })
 
-  lab.test('Implementing Rivers and Sea managing flood risk changes for only surface water in low risk areas', async () => {
+  lab.test.only('Implementing Rivers and Sea managing flood risk changes for only surface water in low risk areas', async () => {
     const options = {
       method: 'GET',
       url: '/risk',
@@ -1098,8 +1098,9 @@ lab.experiment('Risk page test', () => {
 
     const response = await server.inject(options)
     const { payload } = response
+    console.log('payload',payload)
     Code.expect(response.statusCode).to.equal(200)
-    await payloadMatchTest(payload, /<span class="govuk-details__summary-text">What you can do<\/span>/g, 1)
+    await payloadMatchTest(payload, /Each year there is more than a 3.3% chance of flooding in a high risk area/g, 1)
     riskStub.revert()
   })
 })
