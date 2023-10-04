@@ -1098,7 +1098,6 @@ lab.experiment('Risk page test', () => {
 
     const response = await server.inject(options)
     const { payload } = response
-    console.log('payload',payload)
     Code.expect(response.statusCode).to.equal(200)
     await payloadMatchTest(payload, /Each year there is more than a 3.3% chance of flooding in a high risk area/g, 1)
     riskStub.revert()
