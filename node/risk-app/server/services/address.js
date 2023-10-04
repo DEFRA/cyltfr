@@ -49,7 +49,7 @@ function capitaliseAddress (address) {
   // Split the address into its components
   const components = address.split(', ')
 
-  // Capitalize the first letter of each word except the last component (postcode)
+  // Capitalise the first letter of each word except the last component (postcode)
   for (let i = 0; i < components.length - 1; i++) {
     const words = components[i].split(' ')
     for (let j = 0; j < words.length; j++) {

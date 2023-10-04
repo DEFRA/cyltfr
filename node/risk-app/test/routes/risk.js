@@ -82,12 +82,6 @@ lab.experiment('Risk page test', () => {
       url: '/risk',
       headers: { cookie }
     }
-    // const address = {
-    //   uprn: '100041117437',
-    //   address: '81, MOSS ROAD, NORTHWICH, CW8 4BH, ENGLAND',
-    //   country: 'ENGLAND',
-    //   postcode: 'CW8 4BH'
-    // }
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -126,8 +120,8 @@ lab.experiment('Risk page test', () => {
     const { payload } = response
     Code.expect(response.statusCode).to.equal(200)
     await payloadMatchTest(payload, /<caption class="govuk-table__caption">81, MOSS ROAD, NORTHWICH, CW8 4BH, ENGLAND<\/caption>/g)
-    await payloadMatchTest(payload, /<td class="govuk-table__cell">\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\sThere is a risk of flooding from reservoirs in this area, reservoirs that can affect this area are:\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s<ul class="govuk-list govuk-list--bullet">\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s<li>Agden<\/li>\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s<li>Draycote Water<\/li>\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s<\/ul>\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s<\/td>/g)
-    await payloadMatchTest(payload, /<td class="govuk-table__cell">\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\sFlooding is possible in the local area when groundwater levels are high\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s<\/td>/g)
+    await payloadMatchTest(payload, /<strong>There is a risk of flooding from reservoirs in this area<\/strong>/g)
+    await payloadMatchTest(payload, /<strong>Flooding is possible in the local area when groundwater levels are high<\/strong>/g)
 
     riskStub.revert()
   })
@@ -138,12 +132,6 @@ lab.experiment('Risk page test', () => {
       url: '/risk',
       headers: { cookie }
     }
-    // const address = {
-    //   uprn: '100041117437',
-    //   address: '81, MOSS ROAD, NORTHWICH, CW8 4BH, ENGLAND',
-    //   country: 'ENGLAND',
-    //   postcode: 'CW8 4BH'
-    // }
 
     const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
       inEngland: true,
@@ -156,7 +144,7 @@ lab.experiment('Risk page test', () => {
       leadLocalFloodAuthority: 'Cheshire West and Chester',
       reservoirWetRisk: null,
       riverAndSeaRisk: { probabilityForBand: 'Low', suitability: 'County to Town' },
-      surfaceWaterRisk: 'High',
+      surfaceWaterRisk: 'Low',
       surfaceWaterSuitability: 'County to Town',
       extraInfo: null
     }))
@@ -165,8 +153,8 @@ lab.experiment('Risk page test', () => {
     const { payload } = response
     Code.expect(response.statusCode).to.equal(200)
     await payloadMatchTest(payload, /<caption class="govuk-table__caption">81, MOSS ROAD, NORTHWICH, CW8 4BH, ENGLAND<\/caption>/g)
-    await payloadMatchTest(payload, /<td class="govuk-table__cell">\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\sFlooding from reservoirs is unlikely in this area\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s<\/td>/g)
-    await payloadMatchTest(payload, /<td class="govuk-table__cell">\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\sFlooding from groundwater is unlikely in this area\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s<\/td>/g)
+    await payloadMatchTest(payload, /<strong>Flooding from reservoirs is unlikely in this area<\/strong>/g)
+    await payloadMatchTest(payload, /<strong>Flooding from groundwater is unlikely in this area <\/strong>/g)
 
     riskStub.revert()
   })
@@ -1010,7 +998,7 @@ lab.experiment('Risk page test', () => {
     riskStub.revert()
   })
 
-  lab.test('Implementing Rivers and Sea managing flood risk changes for very low risk areas', async () => {
+  lab.test('should include text specifically for high flood risk (both for page summary and print summary)', async () => {
     const options = {
       method: 'GET',
       url: '/risk',
@@ -1029,7 +1017,7 @@ lab.experiment('Risk page test', () => {
       leadLocalFloodAuthority: 'Croydon',
       reservoirRisk: null,
       riverAndSeaRisk: { probabilityForBand: 'Very Low', suitability: 'County to Town' },
-      surfaceWaterRisk: 'Very Low',
+      surfaceWaterRisk: 'High',
       surfaceWaterSuitability: 'National to County',
       extraInfo: null
     }))
@@ -1037,11 +1025,42 @@ lab.experiment('Risk page test', () => {
     const response = await server.inject(options)
     const { payload } = response
     Code.expect(response.statusCode).to.equal(200)
-    await payloadMatchTest(payload, /<span class="govuk-details__summary-text">What you can do<\/span>/g, 0)
+    await payloadMatchTest(payload, /Each year there is more than a 3.3% chance of flooding in a high risk area./g, 2)
     riskStub.revert()
   })
 
-  lab.test('Implementing Rivers and Sea managing flood risk changes for both surface water and rivers&sea in low risk areas', async () => {
+  lab.test('should include text specifically for medium flood risk (both for page summary and print summary)', async () => {
+    const options = {
+      method: 'GET',
+      url: '/risk',
+      headers: {
+        cookie
+      }
+    }
+
+    const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
+      inEngland: true,
+      isGroundwaterArea: true,
+      floodAlertArea: ['064FAG99SElondon'],
+      floodWarningArea: [],
+      inFloodAlertArea: true,
+      inFloodWarningArea: false,
+      leadLocalFloodAuthority: 'Croydon',
+      reservoirRisk: null,
+      riverAndSeaRisk: { probabilityForBand: 'Very Low', suitability: 'County to Town' },
+      surfaceWaterRisk: 'Medium',
+      surfaceWaterSuitability: 'National to County',
+      extraInfo: null
+    }))
+
+    const response = await server.inject(options)
+    const { payload } = response
+    Code.expect(response.statusCode).to.equal(200)
+    await payloadMatchTest(payload, /Each year there is between a 1% and 3.3% chance of flooding in a medium risk area./g, 2)
+    riskStub.revert()
+  })
+
+  lab.test('should include text specifically for low flood risk (both for page summary and print summary)', async () => {
     const options = {
       method: 'GET',
       url: '/risk',
@@ -1059,7 +1078,7 @@ lab.experiment('Risk page test', () => {
       inFloodWarningArea: false,
       leadLocalFloodAuthority: 'Suffolk',
       reservoirRisk: null,
-      riverAndSeaRisk: { probabilityForBand: 'Low', suitability: 'County to Town' },
+      riverAndSeaRisk: { probabilityForBand: 'Very Low', suitability: 'County to Town' },
       surfaceWaterRisk: 'Low',
       surfaceWaterSuitability: 'National to County',
       extraInfo: null
@@ -1068,11 +1087,11 @@ lab.experiment('Risk page test', () => {
     const response = await server.inject(options)
     const { payload } = response
     Code.expect(response.statusCode).to.equal(200)
-    await payloadMatchTest(payload, /<span class="govuk-details__summary-text">What you can do<\/span>/g, 2)
+    await payloadMatchTest(payload, /Each year there is between a 0.1% and 1% change of flooding in a low risk area/g, 2)
     riskStub.revert()
   })
 
-  lab.test.only('Implementing Rivers and Sea managing flood risk changes for only surface water in low risk areas', async () => {
+  lab.test('should include text specifically for very low flood risk (both for page summary and print summary)', async () => {
     const options = {
       method: 'GET',
       url: '/risk',
@@ -1090,8 +1109,8 @@ lab.experiment('Risk page test', () => {
       inFloodWarningArea: false,
       leadLocalFloodAuthority: 'Hertfordshire',
       reservoirRisk: null,
-      riverAndSeaRisk: { probabilityForBand: 'Very Low', suitability: 'County to Town' },
-      surfaceWaterRisk: 'Low',
+      riverAndSeaRisk: { probabilityForBand: 'Low', suitability: 'County to Town' },
+      surfaceWaterRisk: 'Very Low',
       surfaceWaterSuitability: 'National to County',
       extraInfo: null
     }))
@@ -1099,7 +1118,7 @@ lab.experiment('Risk page test', () => {
     const response = await server.inject(options)
     const { payload } = response
     Code.expect(response.statusCode).to.equal(200)
-    await payloadMatchTest(payload, /Each year there is more than a 3.3% chance of flooding in a high risk area/g, 1)
+    await payloadMatchTest(payload, /Each year there is less than a 0.1% chance of flooding in a very low risk area./g, 2)
     riskStub.revert()
   })
 })
