@@ -45,7 +45,27 @@ async function find (postcode) {
     })
 }
 
+function capitaliseAddress(address) {
+  // Split the address into its components
+  let components = address.split(', ')
+
+  // Capitalize the first letter of each word except the last component (postcode)
+  for (let i = 0; i < components.length - 1; i++) {
+      let words = components[i].split(' ')
+      for (let j = 0; j < words.length; j++) {
+          words[j] = words[j].charAt(0).toUpperCase() + words[j].slice(1).toLowerCase()
+      }
+      components[i] = words.join(' ')
+  }
+
+  // Join the components back together
+  let capitalisedAddress = components.join(', ')
+
+  return capitalisedAddress;
+}
+
 module.exports = {
   find,
-  findById
+  findById,
+  capitaliseAddress
 }

@@ -1,3 +1,5 @@
+const { capitaliseAddress } = require('../services/address.js')
+
 const RiskLevel = {
   VeryLow: 'Very Low',
   Low: 'Low',
@@ -128,10 +130,11 @@ function RiskViewModel (risk, address, backLinkUri) {
   this.postcode = address.postcode
   this.lines = address.address.split(', ')
   this.address = address
+  this.fullAddress = capitaliseAddress(address.address)
   this.leadLocalFloodAuthority = risk.leadLocalFloodAuthority
   this.date = Date.now()
   this.year = new Date().getFullYear()
-
+  
   this.riversAndSeaTitle = RiskTitles[riverAndSeaRisk]
   this.surfaceWaterTitle = RiskTitles[surfaceWaterRisk]
   if (riverAndSeaRisk) {
