@@ -3,7 +3,10 @@
 {% set pageTitle = "Your long term flood risk assessment" %}
 
 {% block beforeContent %}
-<a href="{{ backLink }}" class="govuk-back-link" data-id="risk-address">Back</a>
+<div class="top-page-links">
+  <a href="{{ backLink }}" class="govuk-back-link" data-id="risk-address">Back</a>
+  <a href="/postcode" class="govuk-back-link" id="search-another-address" data-id="risk-address">Search for another address</a>
+</div>
 {% endblock %}
 
 {% block head %}
@@ -13,14 +16,19 @@
 
 {% block content %}
 <div id="risk-page" data-test-info="{{ testInfo }}">
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <!-- Page summary -->
-      <div class="page-summary">
-        <h1 class="govuk-heading-xl">
-          Flood risk summary for the area around:
+  <!-- Page summary -->
+  <div class="page-summary ">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l govuk-!-padding-top-0">
+          The area around {{ fullAddress }} has a
         </h1>
-        <h2 class="govuk-heading-m">{{ address.address }}</h2>
+
+        <ul class="govuk-list--bullet">
+          <li class="govuk-body">{{ surfaceWaterRisk | lower }} risk of surface water flooding</li>
+          <li class="govuk-body">{{ riverAndSeaRisk | lower }} risk of flooding from rivers and the sea</li>
+        </ul>
+        <p class="govuk-body">This information is not specific to a property.</p>
 
         <!-- Holding Comments -->
         {% if hasHoldingComments %}
@@ -34,165 +42,168 @@
           </strong>
         </div>
         {% endif %}
-
-        <!-- Rivers and sea and surface water -->
-        {% include firstSource %}
-        {% include secondSource %}
-
-        
-        <h3 class="govuk-heading-m">Other flood risks</h3>
-
-        <!-- Reservoir -->
-        {% if reservoirRisk %}
-        <div class="reservoirs">
-          <div class="govuk-inset-text">
-            <h3 class="govuk-!-margin-bottom-2">Reservoirs</h3>
-            <p class="govuk-!-margin-top-0 risk"><strong>There is a risk of flooding from reservoirs in this area</strong></p>
-          </div>
-          <details class="govuk-details" data-module="govuk-details">
-            <summary class="govuk-details__summary">
-              <span class="govuk-details__summary-text">What a reservoir is and how we check an area’s risk</span>
-            </summary>
-            <div class="govuk-details__text">
-              <p class="govuk-body">
-                A reservoir is a large natural or artificial lake that is designed to collect and store water.
-              </p>
-              <p class="govuk-body">
-                We use predicted scenarios to understand the risk of flooding from reservoirs.
-              </p>
-            </div>
-           </details>
-           <p class="govuk-body">
-            Flooding from reservoirs is extremely unlikely.
-            An area is considered at risk if peoples' lives could be threatened in the event of a dam or reservoir failure.
-          </p>
-          <p class="govuk-body">
-            <a class="govuk-link"
-              href="/map?easting={{easting}}&northing={{northing}}&map=Reservoirs">
-              View a map of the risk of flooding from reservoirs
-            </a>
-          </p>
-
-          <details class="govuk-details" data-module="govuk-details">
-            <summary class="govuk-details__summary" data-journey-click="ltfri:risk:reservoir-details">
-              <span class="govuk-details__summary-text">Reservoirs that could affect this area</span>
-            </summary>
-            <div class="govuk-details__text">
-              {% for reservoir in reservoirs %}
-              <ul class="govuk-list">
-                <li><strong>{{reservoir.name}}</strong> (grid reference {{reservoir.location}})</li>
-                <li>Owner: {{reservoir.owner}}</li>
-                <li>Lead Local Flood Authority: {{reservoir.authority}}</li>
-                <!-- <li>Risk designation: {{reservoir.riskDesignation}}</li> -->
-                <li>Comments: {{reservoir.comments}}</li>
-              </ul>
-              {% endfor %}
-            </div>
-          </details>
-        </div>
-        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-        {% endif %}
-
-        {% if isGroundwaterArea %}
-        {% include 'partials/groundwater.html' %}
-        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-        {% endif %}
-        
-        {% if not reservoirRisk %}
-        <div class="govuk-inset-text very-low">
-          <h3 class="no-margin">Reservoirs</h3>
-          <p class="govuk-body">
-            <strong>Flooding from reservoirs is unlikely in this area</strong>
-         </p>
-        </div>
-         <details class="govuk-details" data-module="govuk-details">
-          <summary class="govuk-details__summary">
-            <span class="govuk-details__summary-text">What a reservoir is and how we check an area’s risk</span>
-          </summary>
-          <div class="govuk-details__text">
-            <p class="govuk-body">
-              A reservoir is a large natural or artificial lake that is designed to collect and store water.
-            </p>
-            <p class="govuk-body">
-              We use predicted scenarios to understand the risk of flooding from reservoirs.
-            </p>
-            <p class="govuk-body">
-              Flooding from reservoirs is extremely unlikely. An area is considered at risk if people’s lives could be threatened in the event of a dam or reservoir failure.
-          </p>
-          </div>
-         </details>
-         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-         {% endif %}
-
-        {% if not isGroundwaterArea %}
-        {% include 'partials/groundwater.html' %}
-        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-        {% endif %}
-
-        <p class="govuk-body">
-            <h3 class="govuk-heading-m">Manage your flood risk</h3>
-        </p>
-        <p class="govuk-body">
-          There are things everyone can do to prepare for flooding
-        </p>
-        <p class="govuk-body">
-          Find out more about <a href="/managing-flood-risk" class="govuk-link" data-journey-click="ltfri:risk:managing-flood-risk">managing your flood risk</a>
-        </p>
-      </div>
-
-      <!-- Print summary -->
-      <div class="print-summary">
-        <table class="govuk-table">
-          <caption class="govuk-table__caption">{{ address.address }}</caption>
-          <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-              <th scope="row" class="govuk-table__header">Rivers and sea risk</th>
-              <td class="govuk-table__cell"><b>{{ riversAndSeaTitle }}</b><br>
-                {% if riversAndSeaTextName %}
-                {% include riversAndSeaTextName %}
-                {% endif %}</td>
-            </tr>
-            <tr class="govuk-table__row">
-              <th scope="row" class="govuk-table__header">Surface water risk</th>
-              <td class="govuk-table__cell">
-                <p>
-                  <b>{{ surfaceWaterTitle }}</b><br>
-                  {% if surfaceWaterTextName %}
-                  {% include surfaceWaterTextName %}
-                  {% endif %}
-                </p>
-                <p class="govuk-body">
-                  Lead local flood authorities (LLFA) manage the risk from surface water flooding and may hold more
-                  detailed information.
-                  {% if leadLocalFloodAuthority %}Your LLFA is <b>{{leadLocalFloodAuthority}}</b>.{% endif %}
-                </p>
-              </td>
-            </tr>
-            <tr class="govuk-table__row">
-              <th scope="row" class="govuk-table__header">Reservoir risk</th>
-              <td class="govuk-table__cell">
-                {% if reservoirRisk %}
-                There is a risk of flooding from reservoirs in this area, reservoirs that can affect this area are:
-                <ul class="govuk-list govuk-list--bullet">
-                  {% for reservoir in reservoirs %}
-                  <li>{{reservoir.name}}</li>
-                  {% endfor %}
-                </ul>
-                {% else %}
-                Flooding from reservoirs is unlikely in this area
-                {% endif %}
-              </td>
-            </tr>
-            <tr class="govuk-table__row">
-              <th scope="row" class="govuk-table__header">Groundwater risk</th>
-              <td class="govuk-table__cell">
-                {{ "Flooding is possible in the local area when groundwater levels are high" if isGroundwaterArea else "Flooding from groundwater is unlikely in this area" }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </div>
+    <!-- Rivers and sea and surface water -->
+    {% include firstSource %}
+    {% include secondSource %}
+
+
+    <h3 class="govuk-heading-m">Other flood risks</h3>
+
+    <!-- Reservoir -->
+    {% if reservoirRisk %}
+    <div class="reservoirs">
+      <div class="govuk-inset-text">
+        <h3 class="govuk-!-margin-bottom-2">Reservoirs</h3>
+        <p class="govuk-!-margin-top-0 risk"><strong>There is a risk of flooding from reservoirs in this area</strong>
+        </p>
+      </div>
+      <details class="govuk-details" data-module="govuk-details">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">What a reservoir is and how we check an area’s risk</span>
+        </summary>
+        <div class="govuk-details__text">
+          <p class="govuk-body">
+            A reservoir is a large natural or artificial lake that is designed to collect and store water.
+          </p>
+          <p class="govuk-body">
+            We use predicted scenarios to understand the risk of flooding from reservoirs.
+          </p>
+        </div>
+      </details>
+      <p class="govuk-body">
+        Flooding from reservoirs is extremely unlikely.
+        An area is considered at risk if peoples' lives could be threatened in the event of a dam or reservoir failure.
+      </p>
+      <p class="govuk-body">
+        <a class="govuk-link" href="/map?easting={{easting}}&northing={{northing}}&map=Reservoirs">
+          View a map of the risk of flooding from reservoirs
+        </a>
+      </p>
+
+      <details class="govuk-details" data-module="govuk-details">
+        <summary class="govuk-details__summary" data-journey-click="ltfri:risk:reservoir-details">
+          <span class="govuk-details__summary-text">Reservoirs that could affect this area</span>
+        </summary>
+        <div class="govuk-details__text">
+          {% for reservoir in reservoirs %}
+          <ul class="govuk-list">
+            <li><strong>{{reservoir.name}}</strong> (grid reference {{reservoir.location}})</li>
+            <li>Owner: {{reservoir.owner}}</li>
+            <li>Lead Local Flood Authority: {{reservoir.authority}}</li>
+            <!-- <li>Risk designation: {{reservoir.riskDesignation}}</li> -->
+            <li>Comments: {{reservoir.comments}}</li>
+          </ul>
+          {% endfor %}
+        </div>
+      </details>
+    </div>
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    {% endif %}
+
+    {% if isGroundwaterArea %}
+    {% include 'partials/groundwater.html' %}
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    {% endif %}
+
+    {% if not reservoirRisk %}
+    <div class="govuk-inset-text very-low">
+      <h3 class="no-margin">Reservoirs</h3>
+      <p class="govuk-body">
+        <strong>Flooding from reservoirs is unlikely in this area</strong>
+      </p>
+    </div>
+    <details class="govuk-details" data-module="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">What a reservoir is and how we check an area’s risk</span>
+      </summary>
+      <div class="govuk-details__text">
+        <p class="govuk-body">
+          A reservoir is a large natural or artificial lake that is designed to collect and store water.
+        </p>
+        <p class="govuk-body">
+          We use predicted scenarios to understand the risk of flooding from reservoirs.
+        </p>
+        <p class="govuk-body">
+          Flooding from reservoirs is extremely unlikely. An area is considered at risk if people’s lives could be
+          threatened in the event of a dam or reservoir failure.
+        </p>
+      </div>
+    </details>
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    {% endif %}
+
+    {% if not isGroundwaterArea %}
+    {% include 'partials/groundwater.html' %}
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    {% endif %}
+
+    <p class="govuk-body">
+    <h3 class="govuk-heading-m">Manage your flood risk</h3>
+    </p>
+    <p class="govuk-body">
+      There are things everyone can do to prepare for flooding
+    </p>
+    <p class="govuk-body">
+      Find out more about <a href="/managing-flood-risk" class="govuk-link"
+        data-journey-click="ltfri:risk:managing-flood-risk">managing your flood risk</a>
+    </p>
   </div>
+
+  <!-- Print summary -->
+  <div class="print-summary">
+    <table class="govuk-table">
+      <caption class="govuk-table__caption">{{ address.address }}</caption>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">Rivers and sea risk</th>
+          <td class="govuk-table__cell"><b>{{ riversAndSeaTitle }}</b><br>
+            {% if riversAndSeaTextName %}
+            {% include riversAndSeaTextName %}
+            {% endif %}</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">Surface water risk</th>
+          <td class="govuk-table__cell">
+            <p>
+              <b>{{ surfaceWaterTitle }}</b><br>
+              {% if surfaceWaterTextName %}
+              {% include surfaceWaterTextName %}
+              {% endif %}
+            </p>
+            <p class="govuk-body">
+              Lead local flood authorities (LLFA) manage the risk from surface water flooding and may hold more
+              detailed information.
+              {% if leadLocalFloodAuthority %}Your LLFA is <b>{{leadLocalFloodAuthority}}</b>.{% endif %}
+            </p>
+          </td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">Reservoir risk</th>
+          <td class="govuk-table__cell">
+            {% if reservoirRisk %}
+            There is a risk of flooding from reservoirs in this area, reservoirs that can affect this area are:
+            <ul class="govuk-list govuk-list--bullet">
+              {% for reservoir in reservoirs %}
+              <li>{{reservoir.name}}</li>
+              {% endfor %}
+            </ul>
+            {% else %}
+            Flooding from reservoirs is unlikely in this area
+            {% endif %}
+          </td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">Groundwater risk</th>
+          <td class="govuk-table__cell">
+            {{ "Flooding is possible in the local area when groundwater levels are high" if isGroundwaterArea else
+            "Flooding from groundwater is unlikely in this area" }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </div>
 {% endblock %}
