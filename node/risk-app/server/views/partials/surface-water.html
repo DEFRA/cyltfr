@@ -67,6 +67,16 @@
               <br />
               <br />
               Your LLFA is {{leadLocalFloodAuthority}} council
+
+              <!-- LLFA Comments -->
+              {% if hasLlfaComments %}
+              They have the following information about surface water flooding:
+              <ul class="govuk-list govuk-list--bullet">
+                {% for comment in llfaComments %}
+                <li>{{ comment }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
             </li>
           </ul>
         </dd>
