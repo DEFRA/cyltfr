@@ -197,7 +197,7 @@ lab.experiment('search page route', () => {
   })
 
   lab.test('should redirect user to postcode page if captcha times out or not found', async () => {
-    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(true, null)))
+    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(false, null)))
     const responseUrl = await server.inject(mockSearchOptions('cw8 4bh').getOptions)
     Code.expect(responseUrl.statusCode).to.equal(302)
     captchastub.revert()
