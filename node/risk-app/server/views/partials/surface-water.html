@@ -64,21 +64,21 @@
             <li>find out what you can do to <a class="govuk-link" href="https://www.gov.uk/prepare-for-flooding" data-journey-click="ltfri:risk:surface-water-details">protect you and your property</a>
             </li>
             <li>Lead local flood authorities (LLFAs) are responsible for managing the flood risk from surface water. They may hold more detailed information.
-              <br />
-              <br />
-              Your LLFA is {{leadLocalFloodAuthority}} council
-
-              <!-- LLFA Comments -->
-              {% if hasLlfaComments %}
-              They have the following information about surface water flooding:
+            </li>
+          </ul>
+            <br>
+            Your LLFA is {{leadLocalFloodAuthority}} council.
+            
+            <!-- LLFA Comments -->
+            {% if hasLlfaComments %}
+            They have the following information about surface water flooding:
+            <br><br>
               <ul class="govuk-list govuk-list--bullet">
                 {% for comment in llfaComments %}
                 <li>{{ comment }}</li>
                 {% endfor %}
               </ul>
               {% endif %}
-            </li>
-          </ul>
         </dd>
       </div>
       <div class="govuk-summary-list__row">
