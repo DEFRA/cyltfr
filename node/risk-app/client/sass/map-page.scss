@@ -25,6 +25,15 @@ $govuk-assets-path: '/assets/';
     font-size: 10px
   }
 
+  .ol-control {
+    button:focus {
+    outline: 3px solid black;
+    color: #0b0c0c;
+    background-color: #ffdd00;
+    box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+    }
+  }
+
   label[for=location] {
     @include govuk-media-query ($until: tablet) {
       margin-top: 10px;
