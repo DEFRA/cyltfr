@@ -18,9 +18,8 @@ async function get (url, options, ext = false) {
   try {
     const response = await thisWreck.get(url, options)
     return response.payload
-  }
-  catch (err) {
-    err
+  } catch (err) {
+    return err
   }
 }
 
