@@ -13,15 +13,15 @@ if (config.http_proxy) {
   })
 }
 
-function get (url, options, ext = false) {
+async function get (url, options, ext = false) {
   const thisWreck = (ext && wreckExt) ? wreckExt : wreck
-  return thisWreck.get(url, options)
-    .then(response => {
-      if (response.res.statusCode !== 200) {
-        throw new Error('Requested resource returned a non 200 status code', response)
-      }
-      return response.payload
-    })
+  try {
+    const response = await thisWreck.get(url, options)
+    return response.payload
+  }
+  catch (err) {
+    err
+  }
 }
 
 function post (url, options, ext = false) {

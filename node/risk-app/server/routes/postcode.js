@@ -3,6 +3,7 @@ const joi = require('joi')
 const { postcodeRegex, redirectToHomeCounty } = require('../helpers')
 const PostcodeViewModel = require('../models/postcode-view')
 const { captchaCheck } = require('../services/captchacheck')
+const addressService = require('../services/address')
 
 module.exports = [
   {
@@ -33,6 +34,14 @@ module.exports = [
 
       if (!postcode || !postcode.match(postcodeRegex)) {
         const errorMessage = 'Enter a full postcode in England'
+        const model = new PostcodeViewModel(postcode, errorMessage, config.sessionTimeout)
+        return h.view('postcode', model)
+      }
+
+      const findAddressResponse = await addressService.find(postcode)
+
+      if (!findAddressResponse) {
+        const errorMessage = 'This postcode does not appear to exist'
         const model = new PostcodeViewModel(postcode, errorMessage, config.sessionTimeout)
         return h.view('postcode', model)
       }

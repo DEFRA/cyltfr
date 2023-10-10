@@ -28,7 +28,7 @@ async function find (postcode) {
   const payload = await util.getJson(uri, true)
 
   if (!payload || !payload.results || !payload.results.length) {
-    return []
+    return undefined
   }
 
   const results = payload.results.map(item => item.DPA)
