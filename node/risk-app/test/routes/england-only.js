@@ -32,7 +32,7 @@ lab.experiment('england-only router', () => {
     })
     const options = {
       method: 'GET',
-      url: '/england-only',
+      url: '/england-only'
     }
     defineBackLink.defineBackLink()
     const response = await server.inject(options)
