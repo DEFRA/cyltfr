@@ -2,15 +2,15 @@ const Lab = require('@hapi/lab')
 const Code = require('@hapi/code')
 const createServer = require('../../server')
 const lab = exports.lab = Lab.script()
-const sinon = require("sinon")
+const sinon = require('sinon')
 const addressService = require('../../server/services/address')
 
 lab.experiment('postcode page', () => {
-  let server, addressStub
+  let server
 
   lab.before(async () => {
     server = await createServer()
-    await server.initialize()    
+    await server.initialize()
   })
 
   lab.afterEach(() => {
@@ -22,7 +22,7 @@ lab.experiment('postcode page', () => {
     await server.stop()
   })
 
-  lab.test.only('should return a view with error message when findAddressResponse is falsy', async () => {
+  lab.test('should return a view with error message when findAddressResponse is falsy', async () => {
     const addressServiceMock = sinon.stub(addressService, 'find')
     addressServiceMock.returns(false)
     const options = {
