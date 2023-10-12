@@ -1025,7 +1025,7 @@ lab.experiment('Risk page test', () => {
     const response = await server.inject(options)
     const { payload } = response
     Code.expect(response.statusCode).to.equal(200)
-    await payloadMatchTest(payload, /Each year there is more than a 3.3% chance of flooding in a high risk area./g, 2)
+    await payloadMatchTest(payload, /High risk means that this area has a chance of flooding of greater than 3.3% each year./g, 2)
     riskStub.revert()
   })
 
@@ -1056,7 +1056,7 @@ lab.experiment('Risk page test', () => {
     const response = await server.inject(options)
     const { payload } = response
     Code.expect(response.statusCode).to.equal(200)
-    await payloadMatchTest(payload, /Each year there is between a 1% and 3.3% chance of flooding in a medium risk area./g, 2)
+    await payloadMatchTest(payload, /Medium risk means that this area has a chance of flooding of between 1% and 3.3% each year./g, 2)
     riskStub.revert()
   })
 
@@ -1087,7 +1087,7 @@ lab.experiment('Risk page test', () => {
     const response = await server.inject(options)
     const { payload } = response
     Code.expect(response.statusCode).to.equal(200)
-    await payloadMatchTest(payload, /Each year there is between a 0.1% and 1% change of flooding in a low risk area/g, 2)
+    await payloadMatchTest(payload, /Low risk means that this area has a chance of flooding of between 0.1% and 1% each year./g, 2)
     riskStub.revert()
   })
 
@@ -1118,7 +1118,7 @@ lab.experiment('Risk page test', () => {
     const response = await server.inject(options)
     const { payload } = response
     Code.expect(response.statusCode).to.equal(200)
-    await payloadMatchTest(payload, /Each year there is less than a 0.1% chance of flooding in a very low risk area./g, 2)
+    await payloadMatchTest(payload, /Very low risk means that this area has a chance of flooding of less than 0.1% each year./g, 2)
     riskStub.revert()
   })
 })
