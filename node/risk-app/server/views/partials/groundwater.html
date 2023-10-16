@@ -2,31 +2,31 @@
 <div class="govuk-summary-card" id="groundwater">
   <div class="govuk-summary-card__title-wrapper vlow">
     <h2 class="govuk-summary-card__title title-margin-fix">
-      Groundwater
-      {% if isGroundwaterArea %}
-      <span class="chance-content risk">Flooding is possible when groundwater levels are high</span>
-      {% else %}
-      <span class="chance-content very-low">Flooding from groundwater is unlikely in this area</span>
-      {% endif %}
+      Other flood risks
     </h2>
   </div>
   <div class="govuk-summary-card__content">
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          What this information covers
+          Groundwater
         </dt>
         <dd class="govuk-summary-list__value">
-          Use the <a href="https://www.gov.uk/check-flooding">'check for flooding'</a> service to check current groundwater levels.
+          {% if isGroundwaterArea %}
+          Flooding is possible when groundwater levels are high
+          {% else %}
+          Flooding from groundwater is unlikely in this area
+      {% endif %}
           <br><br>
           <details class="govuk-details" data-module="govuk-details">
-            <summary class="govuk-details__summary">
+            <summary class="govuk-details__summary" data-journey-click="ltfri:risk:managing">
               <span class="govuk-details__summary-text">
                 What groundwater is and how we check an area's risk
               </span>
             </summary>
             <div class="govuk-details__text">
               Groundwater is the water that is usually held in rocks and soil underground.s
+              <br><br>
               Groundwater flooding happens when this water rises and flows above the surface.
               <br><br>
               We use flood alert data to check the risk of flooding from groundwater.
