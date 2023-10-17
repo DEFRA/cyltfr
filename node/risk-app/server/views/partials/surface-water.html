@@ -23,11 +23,11 @@
             <div class="govuk-details__text">
               <p> Surface water flooding is sometimes known as flash flooding. It happens when rainwater cannot drain
                 away through normal drainage systems.</p>
-              <p> It can:</p>
+              <p>It's a problem because:</p>
               <ul class="govuk-list--bullet">
-                <li>be difficult to predict as it depends on how much it rains and where</li>
-                <li>happen up hills and away from rivers</li>
-                <li>be worse in areas which have harder surfaces, like concrete</li>
+                <li>it often happens in places you don't expect, like up hills</li>
+                <li>it's hard to predict, as heavy rain sometimes only affects a small part of an area</li>
+                <li>where there's lots of tarmac and concrete the water has nowhere to go</li>
               </ul>
             </div>
           </details>
@@ -37,48 +37,26 @@
       </div>
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          See your flood risk on a map
+          Manage your flood risk from surface water
         </dt>
         <dd class="govuk-summary-list__value">
-          <a class="govuk-link" href="/map?easting={{easting}}&northing={{northing}}&map=SurfaceWater" data-journey-click="ltfri:risk:surface-water-details">
-            View the map to see information on:
-          </a>
-          <ul class="govuk-list--bullet">
-            <li>where any flood water might spread to (extent of flooding)</li>
-            <li>how deep any flood water could be (depth of flooding)</li>
-            <li>the speed and direction of any flood water (velocity)</li>
-          </ul>
-        </dd>
-      </div>
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Manage your flood risk
-        </dt>
-        <dd class="govuk-summary-list__value">
-          <!-- An area can still be at risk of flooding even if it has not flooded in the past. -->
-          <!-- <br><br> -->
-          An area can still be at risk of flooding even if it has not flooded in the past.
+          An area can still be at risk of flooding even if it has not flooded in the past. You should check your long term flood risk regularly because the information may change.
           <br><br>
-          You should:
-          <ul class="govuk-list--bullet">
-            <li>find out what you can do to <a class="govuk-link" href="https://www.gov.uk/prepare-for-flooding" data-journey-click="ltfri:risk:surface-water-details">protect you and your property</a>
-            </li>
-            <li>Lead local flood authorities (LLFAs) are responsible for managing the flood risk from surface water. They may hold more detailed information.
-            </li>
+          Find out <a class="govuk-link" href="https://www.gov.uk/prepare-for-flooding">how to prepare for flooding.</a>
+          <br><br>
+          Lead local flood authorities (LLFAs) are responsible for managing the flood risk from surface water. They may hold more detailed information.
+          <br><br>
+          Your LLFA is {{leadLocalFloodAuthority}} council.
+          <!-- LLFA Comments -->
+          {% if hasLlfaComments %}
+          They have the following information about surface water flooding:
+          <br><br>
+          <ul class="govuk-list govuk-list--bullet">
+            {% for comment in llfaComments %}
+            <li>{{ comment }}</li>
+            {% endfor %}
           </ul>
-            <br>
-            Your LLFA is {{leadLocalFloodAuthority}} council.
-            
-            <!-- LLFA Comments -->
-            {% if hasLlfaComments %}
-            They have the following information about surface water flooding:
-            <br><br>
-              <ul class="govuk-list govuk-list--bullet">
-                {% for comment in llfaComments %}
-                <li>{{ comment }}</li>
-                {% endfor %}
-              </ul>
-              {% endif %}
+          {% endif %}
         </dd>
       </div>
       <div class="govuk-summary-list__row">
@@ -106,6 +84,22 @@
                 It's likely to be reliable for a local area but not for identifying individual properties at risk.</p>
             </div>
           </details>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          See your flood risk on a map
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <a class="govuk-link" href="/map?easting={{easting}}&northing={{northing}}&map=SurfaceWater" data-journey-click="ltfri:risk:surface-water-details">
+            View a map of surface water flood risk
+          </a>
+          for information on: 
+          <ul class="govuk-list--bullet">
+            <li>where any flood water might spread to (extent)</li>
+            <li>how deep any flood water could be (depth)</li>
+            <li>the speed and direction of any flood water (velocity)</li>
+          </ul>
         </dd>
       </div>
     </dl>
