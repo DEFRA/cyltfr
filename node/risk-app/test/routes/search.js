@@ -2,23 +2,12 @@ const Lab = require('@hapi/lab')
 const Code = require('@hapi/code')
 const createServer = require('../../server')
 const lab = exports.lab = Lab.script()
-const { mock, mockOptions, mockSearchOptions, mockCaptchaResponse, mockCaptchaCheck } = require('../mock')
+const { mock, mockOptions, mockSearchOptions, mockCaptchaResponse, mockCaptchaCheck, createWarningStub, createAddressStub } = require('../mock')
 const floodService = require('../../server/services/flood')
 const addressService = require('../../server/services/address')
 const utils = require('../../server/util')
 const captchaCheck = require('../../server/services/captchacheck')
 const { payloadMatchTest } = require('../utils')
-const createAddressStub = () => {
-  return mock.replace(addressService, 'find', mock.makePromise(null, [
-    {
-      uprn: '100041117437',
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH, ENGLAND',
-      country: 'ENGLAND',
-      postcode: 'CW8 4BH'
-    }
-  ]))
-}
-const createWarningStub = () => mock.replace(floodService, 'findWarnings', mock.makePromise(null, null))
 
 lab.experiment('search page route', () => {
   let server, cookie, addressStub, warningStub
@@ -35,8 +24,8 @@ lab.experiment('search page route', () => {
   })
 
   lab.beforeEach(() => {
-    addressStub = createAddressStub()
-    warningStub = createWarningStub()
+    addressStub = createAddressStub(addressService)
+    warningStub = createWarningStub(floodService)
   })
 
   lab.afterEach(() => {

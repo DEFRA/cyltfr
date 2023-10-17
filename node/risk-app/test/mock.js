@@ -97,4 +97,22 @@ const mockCaptchaResponse = (responseType, errorType) => {
     return { success: false, errors: ['solution_invalid'] }
   } else { return { success: true } }
 }
-module.exports = { mock, mockOptions, mockSearchOptions, mockCaptchaResponse, createMockYar, mockCaptchaCheck }
+
+const createWarningStub = (service) => mock.replace(service, 'findWarnings', mock.makePromise(null, null))
+
+const createAddressStub = (service, newAddress) => {
+  let addressToReplace = [
+    {
+      uprn: '100041117437',
+      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH, ENGLAND',
+      country: 'ENGLAND',
+      postcode: 'CW8 4BH'
+    }
+  ]
+  if (newAddress) {
+    addressToReplace = newAddress
+  }
+  return mock.replace(service, 'find', mock.makePromise(null, addressToReplace))
+}
+
+module.exports = { mock, mockOptions, mockSearchOptions, mockCaptchaResponse, createMockYar, mockCaptchaCheck, createWarningStub, createAddressStub }
