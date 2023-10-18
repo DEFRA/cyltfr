@@ -136,7 +136,7 @@ lab.experiment('search page route', () => {
       url: '/search?error=true',
       payload: { postcode: null }
     }
-    const addressServiceMock = sinon.stub(captchaCheck, 'captchaCheck')
+    const addressServiceMock = sinon.stub(addressService, 'find')
     addressServiceMock.returns(false)
     const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(true, null)))
     const responseUrl = await server.inject(options)
