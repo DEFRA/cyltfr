@@ -2,6 +2,7 @@ const Lab = require('@hapi/lab')
 const Code = require('@hapi/code')
 const createServer = require('../../server')
 const lab = exports.lab = Lab.script()
+const sinon = require('sinon')
 const { mock, mockOptions, mockSearchOptions, mockCaptchaResponse, mockCaptchaCheck } = require('../mock')
 const floodService = require('../../server/services/flood')
 const addressService = require('../../server/services/address')
@@ -42,6 +43,7 @@ lab.experiment('search page route', () => {
   lab.afterEach(() => {
     warningStub.revert()
     addressStub.revert()
+    sinon.restore()
   })
 
   lab.after(async () => {
@@ -140,11 +142,17 @@ lab.experiment('search page route', () => {
   })
 
   lab.test('/search - Address service error', async () => {
-    const { getOptions } = mockSearchOptions('cw8 4bh', cookie)
-    const customAddressStub = mock.replace(addressService, 'find', mock.makePromise('Mock Address Error'))
-    const getResponse = await server.inject(getOptions)
-    Code.expect(getResponse.statusCode).to.equal(400)
-    customAddressStub.revert()
+    const options = {
+      method: 'GET',
+      url: '/search?error=true',
+      payload: { postcode: null }
+    }
+    const addressServiceMock = sinon.stub(captchaCheck, 'captchaCheck')
+    addressServiceMock.returns(false)
+    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(true, null)))
+    const responseUrl = await server.inject(options)
+    Code.expect(responseUrl.statusCode).to.equal(400)
+    captchastub.revert()
   })
 
   lab.test('/search - Address service returns empty address array', async () => {
