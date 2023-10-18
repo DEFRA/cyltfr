@@ -1,30 +1,38 @@
-        <!-- Groundwater -->
-        {% if isGroundwaterArea %}
-        <div class="groundwater">
-          <div class="govuk-inset-text">
-            <h3 class="govuk-!-margin-bottom-2">Groundwater</h3>
-            <p class="govuk-!-margin-top-0 risk"><strong>Flooding is possible in the local area when groundwater levels are high</strong>
-            </p>
-          </div>
-        </div>
-        {% else %}
-        <div class="govuk-inset-text very-low">
-          <h3 class="no-margin">Groundwater</h3>
-          <p class="govuk-body">
-            <strong>Flooding from groundwater is unlikely in this area </strong>
-          </p>
-        </div>
-        {% endif %}
-         <details class="govuk-details" data-module="govuk-details">
-          <summary class="govuk-details__summary">
-            <span class="govuk-details__summary-text">What groundwater flooding is and how we can check an area’s risk</span>
-          </summary>
-          <div class="govuk-details__text">
-            <p class="govuk-body">
-              Flooding caused by groundwater happens when water underground that is usually held in the rocks and soil (known as the water table) gets so high that it flows above the surface.
-            </p>
-            <p class="govuk-body">
+<!-- Groundwater -->
+<div class="govuk-summary-card" id="groundwater">
+  <div class="govuk-summary-card__title-wrapper vlow">
+    <h2 class="govuk-summary-card__title title-margin-fix">
+      Other flood risks
+    </h2>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Groundwater
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {% if isGroundwaterArea %}
+          Flooding is possible when groundwater levels are high
+          {% else %}
+          Flooding from groundwater is unlikely in this area
+      {% endif %}
+          <br><br>
+          <details class="govuk-details" data-module="govuk-details">
+            <summary class="govuk-details__summary" data-journey-click="ltfri:risk:groundwater-details">
+              <span class="govuk-details__summary-text">
+                What groundwater is and how we check an area's risk
+              </span>
+            </summary>
+            <div class="govuk-details__text">
+              Groundwater is the water that is usually held in rocks and soil underground.
+              <br><br>
+              Groundwater flooding happens when this water rises and flows above the surface.
+              <br><br>
               We use flood alert data to check the risk of flooding from groundwater.
-            </p>
-          </div>
-         </details>
+          </div></details>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
