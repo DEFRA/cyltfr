@@ -1,5 +1,6 @@
 const joi = require('joi')
 const config = require('../config/server.json')
+const { runningUnitTests } = require('./helpers.js')
 
 // Define config schema
 const schema = joi.object().keys({
@@ -66,5 +67,7 @@ const value = result.value
 value.isDev = value.env === 'dev'
 value.isTest = value.env === 'test'
 value.isProd = value.env.startsWith('prod-')
+
+if (runningUnitTests()) { value.redisCacheEnabled = false }
 
 module.exports = value
