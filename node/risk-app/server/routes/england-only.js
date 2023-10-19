@@ -5,12 +5,16 @@ module.exports = {
   method: 'GET',
   path: '/england-only',
   handler: async (request, h) => {
+    let postcodeIn = request.query.postcode
     const address = request.yar.get('address')
-    if (address === null) {
+    if ((address) && ('postcode' in address)) {
+      postcodeIn = address.postcode
+    }
+    if (!postcodeIn) {
       return h.redirect('/postcode')
     }
     const path = request.path
-    const backLink = defineBackLink(path, address.postcode)
+    const backLink = defineBackLink(path, postcodeIn)
     const model = {
       isWales: request.query.region === 'wales',
       isScotland: request.query.region === 'scotland',
