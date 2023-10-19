@@ -44,108 +44,14 @@
         {% endif %}
       </div>
     </div>
-    <!-- Rivers and sea and surface water -->
+
     {% include firstSource %}
     {% include secondSource %}
 
-    <!-- Reservoir -->
-    {% if reservoirRisk %}
-    <div class="reservoirs">
-      <div class="govuk-inset-text">
-        <h3 class="govuk-!-margin-bottom-2">Reservoirs</h3>
-        <p class="govuk-!-margin-top-0 risk"><strong>There is a risk of flooding from reservoirs in this area</strong>
-        </p>
-      </div>
-      <details class="govuk-details" data-module="govuk-details">
-        <summary class="govuk-details__summary">
-          <span class="govuk-details__summary-text">What a reservoir is and how we check an area’s risk</span>
-        </summary>
-        <div class="govuk-details__text">
-          <p class="govuk-body">
-            A reservoir is a large natural or artificial lake that is designed to collect and store water.
-          </p>
-          <p class="govuk-body">
-            We use predicted scenarios to understand the risk of flooding from reservoirs.
-          </p>
-        </div>
-      </details>
-      <p class="govuk-body">
-        Flooding from reservoirs is extremely unlikely.
-        An area is considered at risk if peoples' lives could be threatened in the event of a dam or reservoir failure.
-      </p>
-      <p class="govuk-body">
-        <a class="govuk-link" href="/map?easting={{easting}}&northing={{northing}}&map=Reservoirs">
-          View a map of the risk of flooding from reservoirs
-        </a>
-      </p>
+    <!-- Groundwater & Reservoir -->
 
-      <details class="govuk-details" data-module="govuk-details">
-        <summary class="govuk-details__summary" data-journey-click="ltfri:risk:reservoir-details">
-          <span class="govuk-details__summary-text">Reservoirs that could affect this area</span>
-        </summary>
-        <div class="govuk-details__text">
-          {% for reservoir in reservoirs %}
-          <ul class="govuk-list">
-            <li><strong>{{reservoir.name}}</strong> (grid reference {{reservoir.location}})</li>
-            <li>Owner: {{reservoir.owner}}</li>
-            <li>Lead Local Flood Authority: {{reservoir.authority}}</li>
-            <!-- <li>Risk designation: {{reservoir.riskDesignation}}</li> -->
-            <li>Comments: {{reservoir.comments}}</li>
-          </ul>
-          {% endfor %}
-        </div>
-      </details>
-    </div>
-    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-    {% endif %}
+    {% include 'partials/groundwaterAndReservoirs.html' %}
 
-    {% if isGroundwaterArea %}
-    {% include 'partials/groundwater.html' %}
-    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-    {% endif %}
-
-    {% if not reservoirRisk %}
-    <div class="govuk-inset-text very-low">
-      <h3 class="no-margin">Reservoirs</h3>
-      <p class="govuk-body">
-        <strong>Flooding from reservoirs is unlikely in this area</strong>
-      </p>
-    </div>
-    <details class="govuk-details" data-module="govuk-details">
-      <summary class="govuk-details__summary">
-        <span class="govuk-details__summary-text">What a reservoir is and how we check an area’s risk</span>
-      </summary>
-      <div class="govuk-details__text">
-        <p class="govuk-body">
-          A reservoir is a large natural or artificial lake that is designed to collect and store water.
-        </p>
-        <p class="govuk-body">
-          We use predicted scenarios to understand the risk of flooding from reservoirs.
-        </p>
-        <p class="govuk-body">
-          Flooding from reservoirs is extremely unlikely. An area is considered at risk if people’s lives could be
-          threatened in the event of a dam or reservoir failure.
-        </p>
-      </div>
-    </details>
-    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-    {% endif %}
-
-    {% if not isGroundwaterArea %}
-    {% include 'partials/groundwater.html' %}
-    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-    {% endif %}
-
-    <p class="govuk-body">
-    <h3 class="govuk-heading-m">Manage your flood risk</h3>
-    </p>
-    <p class="govuk-body">
-      There are things everyone can do to prepare for flooding
-    </p>
-    <p class="govuk-body">
-      Find out more about <a href="/managing-flood-risk" class="govuk-link"
-        data-journey-click="ltfri:risk:managing-flood-risk">managing your flood risk</a>
-    </p>
   </div>
 
   <!-- Print summary -->
