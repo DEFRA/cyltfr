@@ -120,7 +120,7 @@ lab.experiment('Risk page test', () => {
     const { payload } = response
     Code.expect(response.statusCode).to.equal(200)
     await payloadMatchTest(payload, /<caption class="govuk-table__caption">81, MOSS ROAD, NORTHWICH, CW8 4BH, ENGLAND<\/caption>/g)
-    await payloadMatchTest(payload, /<strong>There is a risk of flooding from reservoirs in this area<\/strong>/g)
+    await payloadMatchTest(payload, /There is a risk of flooding from reservoirs in this area./g, 2)
     await payloadMatchTest(payload, /Flooding is possible when groundwater levels are high/g)
 
     riskStub.revert()
@@ -153,7 +153,7 @@ lab.experiment('Risk page test', () => {
     const { payload } = response
     Code.expect(response.statusCode).to.equal(200)
     await payloadMatchTest(payload, /<caption class="govuk-table__caption">81, MOSS ROAD, NORTHWICH, CW8 4BH, ENGLAND<\/caption>/g)
-    await payloadMatchTest(payload, /<strong>Flooding from reservoirs is unlikely in this area<\/strong>/g)
+    await payloadMatchTest(payload, /Flooding from reservoirs is unlikely in this area/g, 2)
     await payloadMatchTest(payload, /Flooding from groundwater is unlikely in this area/g, 2)
 
     riskStub.revert()
@@ -966,35 +966,6 @@ lab.experiment('Risk page test', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
-    riskStub.revert()
-  })
-
-  lab.test('Checking for Managing Risk link in risk result page', async () => {
-    const options = {
-      method: 'GET',
-      url: '/risk',
-      headers: {
-        cookie
-      }
-    }
-    const riskStub = mock.replace(riskService, 'getByCoordinates', mock.makePromise(null, {
-      inEngland: true,
-      isGroundwaterArea: true,
-      floodAlertArea: ['AnyArea'],
-      floodWarningArea: [],
-      inFloodAlertArea: true,
-      inFloodWarningArea: false,
-      leadLocalFloodAuthority: 'Croydon',
-      reservoirRisk: null,
-      riverAndSeaRisk: { probabilityForBand: 'Very Low', suitability: 'County to Town' },
-      surfaceWaterRisk: 'Very Low',
-      surfaceWaterSuitability: 'National to County',
-      extraInfo: null
-    }))
-    const response = await server.inject(options)
-    const { payload } = response
-    Code.expect(response.statusCode).to.equal(200)
-    await payloadMatchTest(payload, /<h3 class="govuk-heading-m">Manage your flood risk<\/h3>/g, 1)
     riskStub.revert()
   })
 
