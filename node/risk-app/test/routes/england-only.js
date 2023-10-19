@@ -82,4 +82,23 @@ lab.experiment('england-only router', () => {
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
   })
+
+  lab.test('requesting the england-only page with an NI postcode should display', async () => {
+    const initial = mockOptions()
+
+    // reset the cookie so we haven't done any searches
+    const homepageresponse = await server.inject(initial)
+    Code.expect(homepageresponse.statusCode).to.equal(200)
+    cookie = homepageresponse.headers['set-cookie'][0].split(';')[0]
+
+    const options = {
+      method: 'GET',
+      url: '/england-only?postcode=BT8%204AA',
+      headers: {
+        cookie
+      }
+    }
+    const response = await server.inject(options, cookie)
+    Code.expect(response.statusCode).to.equal(200)
+  })
 })
