@@ -12,12 +12,12 @@ lab.experiment('defineBackLink', () => {
     Code.expect(backLink).to.equal(searchPagePath + cachedPostcode)
   })
 
-  lab.test('England-only page backlink takes user back to search page with entered postcode showing', async () => {
-    const searchPagePath = '/search?postcode='
+  lab.test('England-only page backlink takes user back to postcode page', async () => {
+    const postcodePage = '/postcode'
     const cachedPostcode = 'NP18%203EZ'
     const currentPage = '/england-only'
     const backLink = defineBackLink.defineBackLink(currentPage, cachedPostcode)
-    Code.expect(backLink).to.equal(searchPagePath + cachedPostcode)
+    Code.expect(backLink).to.equal(postcodePage)
   })
 
   lab.test('Map page backlink takes user back to risk page', async () => {
