@@ -120,7 +120,7 @@ lab.experiment('Risk page test', () => {
     const { payload } = response
     Code.expect(response.statusCode).to.equal(200)
     await payloadMatchTest(payload, /<caption class="govuk-table__caption">81, MOSS ROAD, NORTHWICH, CW8 4BH, ENGLAND<\/caption>/g)
-    await payloadMatchTest(payload, /There is a risk of flooding from reservoirs in this area./g)
+    await payloadMatchTest(payload, /There is a risk of flooding from reservoirs in this area./g, 2)
     await payloadMatchTest(payload, /Flooding is possible when groundwater levels are high/g)
 
     riskStub.revert()
@@ -153,7 +153,7 @@ lab.experiment('Risk page test', () => {
     const { payload } = response
     Code.expect(response.statusCode).to.equal(200)
     await payloadMatchTest(payload, /<caption class="govuk-table__caption">81, MOSS ROAD, NORTHWICH, CW8 4BH, ENGLAND<\/caption>/g)
-    await payloadMatchTest(payload, /Flooding from reservoirs is unlikely in this area/g)
+    await payloadMatchTest(payload, /Flooding from reservoirs is unlikely in this area/g, 2)
     await payloadMatchTest(payload, /Flooding from groundwater is unlikely in this area/g, 2)
 
     riskStub.revert()
