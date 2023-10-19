@@ -361,7 +361,7 @@ lab.experiment('CaptchaCheck', () => {
 
     Code.expect(results.tokenValid).to.equal(false)
     Code.expect(called).to.equal(true)
-    Code.expect(notifyResult).to.equal('FriendlyCaptcha server check returned error: \'an error\'\n Token passed was: \'newtoken\'')
+    Code.expect(notifyResult).to.equal('FriendlyCaptcha server check returned error: \'an error\'')
   })
 
   lab.test('makes a call for a new token and handle rejection without notify', async () => {
