@@ -96,6 +96,17 @@
 {# Run JavaScript at end of the <body>, to avoid blocking the initial render. #}
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="{{ assetPath }}/all.js"></script>
+<script>
+  if(window.location.pathname === "/postcode") {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('error')) {
+        urlParams.delete('error');
+        const newParams = urlParams.toString();
+        const newUrl = newParams ? `${window.location.protocol}//${window.location.host}${window.location.pathname}?${newParams}` : `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
+        window.history.replaceState({ path: newUrl }, '', newUrl);
+    }
+}
+</script>
 <script>window.GOVUKFrontend.initAll()</script>
 {% if (analyticsAccount or G4AnalyticsAccount)  and cookiesPolicy.analytics %}
 <script src="{{ assetPath }}/js/vendor/stageprompt.js"></script>

@@ -2,23 +2,13 @@ const Lab = require('@hapi/lab')
 const Code = require('@hapi/code')
 const createServer = require('../../server')
 const lab = exports.lab = Lab.script()
-const { mock, mockOptions, mockSearchOptions, mockCaptchaResponse, mockCaptchaCheck } = require('../mock')
+const sinon = require('sinon')
+const { mock, mockOptions, mockSearchOptions, mockCaptchaResponse, mockCaptchaCheck, createWarningStub, createAddressStub } = require('../mock')
 const floodService = require('../../server/services/flood')
 const addressService = require('../../server/services/address')
 const utils = require('../../server/util')
 const captchaCheck = require('../../server/services/captchacheck')
 const { payloadMatchTest } = require('../utils')
-const createAddressStub = () => {
-  return mock.replace(addressService, 'find', mock.makePromise(null, [
-    {
-      uprn: '100041117437',
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH, ENGLAND',
-      country: 'ENGLAND',
-      postcode: 'CW8 4BH'
-    }
-  ]))
-}
-const createWarningStub = () => mock.replace(floodService, 'findWarnings', mock.makePromise(null, null))
 
 lab.experiment('search page route', () => {
   let server, cookie, addressStub, warningStub
@@ -35,13 +25,14 @@ lab.experiment('search page route', () => {
   })
 
   lab.beforeEach(() => {
-    addressStub = createAddressStub()
-    warningStub = createWarningStub()
+    addressStub = createAddressStub(addressService)
+    warningStub = createWarningStub(floodService)
   })
 
   lab.afterEach(() => {
     warningStub.revert()
     addressStub.revert()
+    sinon.restore()
   })
 
   lab.after(async () => {
@@ -140,11 +131,17 @@ lab.experiment('search page route', () => {
   })
 
   lab.test('/search - Address service error', async () => {
-    const { getOptions } = mockSearchOptions('cw8 4bh', cookie)
-    const customAddressStub = mock.replace(addressService, 'find', mock.makePromise('Mock Address Error'))
-    const getResponse = await server.inject(getOptions)
-    Code.expect(getResponse.statusCode).to.equal(400)
-    customAddressStub.revert()
+    const options = {
+      method: 'GET',
+      url: '/search?error=true',
+      payload: { postcode: null }
+    }
+    const addressServiceMock = sinon.stub(addressService, 'find')
+    addressServiceMock.returns(false)
+    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(true, null)))
+    const responseUrl = await server.inject(options)
+    Code.expect(responseUrl.statusCode).to.equal(400)
+    captchastub.revert()
   })
 
   lab.test('/search - Address service returns empty address array', async () => {
@@ -194,6 +191,13 @@ lab.experiment('search page route', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(400)
+  })
+
+  lab.test('should redirect user to postcode page if captcha times out or not found', async () => {
+    const captchastub = mock.replace(utils, 'post', mock.makePromise(null, mockCaptchaResponse(false, null)))
+    const responseUrl = await server.inject(mockSearchOptions('cw8 4bh').getOptions)
+    Code.expect(responseUrl.statusCode).to.equal(302)
+    captchastub.revert()
   })
 
   lab.test('should get search page with postcode if already queried and captcha not expired', async () => {
