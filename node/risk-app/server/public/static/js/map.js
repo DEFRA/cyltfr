@@ -30,6 +30,7 @@ function overlayTemplate (data) {
 }
 
 function loadMap (point) {
+  console.log(point)
   const $body = $(document.body)
 
   // add the projection to Window.proj4
@@ -133,20 +134,57 @@ function loadMap (point) {
     }
 
     if (point) {
+      const minZoomToShowCircle = 8
+      const yOffset = -30
+
+      const pinPoint = new ol.Feature({
+        geometry: new ol.geom.Point([point[0], point[1] - yOffset])
+      })
+
+      const circleFeature = new ol.Feature({
+        geometry: new ol.geom.Circle(point, 50)
+      })
+
       const centreLayer = new ol.layer.Vector({
-        ref: 'crosshair',
+        ref: 'pin',
         visible: true,
         source: new ol.source.Vector({
-          features: [new ol.Feature({
-            geometry: new ol.geom.Point(point)
-          })]
+          features: [pinPoint, circleFeature]
         }),
-        style: new ol.style.Style({
-          image: new ol.style.Icon({
-            src: 'assets/images/crosshair.png'
-          })
-        })
+        style: function () {
+          const currentZoom = map.getView().getZoom()
+          console.log(currentZoom)
+          if (currentZoom >= minZoomToShowCircle) {
+            console.log('here')
+            return [
+              new ol.style.Style({
+                image: new ol.style.Icon({
+                  src: 'assets/images/pin.png'
+                })
+              }),
+              new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                  color: 'yellow',
+                  width: 2
+                }),
+                fill: new ol.style.Fill({
+                  color: 'rgba(255, 255, 0, 0.1)'
+                })
+              })
+            ]
+          } else {
+            console.log('not in there')
+            return [
+              new ol.style.Style({
+                image: new ol.style.Icon({
+                  src: 'assets/images/pin.png'
+                })
+              })
+            ]
+          }
+        }
       })
+
       layers.push(centreLayer)
     }
 
@@ -379,7 +417,7 @@ function showMap (ref) {
   closeOverlay()
   map.getLayers().forEach(function (layer) {
     const name = layer.getProperties().ref
-    if (name !== config.OSLayer && name !== 'crosshair') {
+    if (name !== config.OSLayer && name !== 'pin') {
       currentLayer = name === ref ? layer : currentLayer
       layer.setVisible(name === ref)
     }

@@ -80,7 +80,7 @@
       }
     }
 
-    .legend-item.crosshair {
+    .legend-item.pin {
       margin-top: 20px;
 
       &::before {
@@ -89,7 +89,7 @@
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center bottom;
-        background-image: url('#{$govuk-images-path}crosshair.png');
+        background-image: url('#{$govuk-images-path}pin.png');
 
         @include govuk-media-query($from: mobile) {
           line-height: 20px;
