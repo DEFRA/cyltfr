@@ -70,6 +70,26 @@ const mockCaptchaCheck = (postcode) => {
   }
 }
 
+const createMockYar = () => {
+  class YarMock {
+    constructor () {
+      this._store = { }
+    }
+
+    get (key) {
+      return this._store[key]
+    }
+
+    set (key, value) {
+      this._store[key] = value
+    }
+  }
+
+  const yar = new YarMock()
+
+  return yar
+}
+
 const mockCaptchaResponse = (responseType, errorType) => {
   if (responseType === false && errorType === 'solution timeout') {
     return { success: false, errors: ['solution_timeout_or_duplicate'] }
@@ -77,4 +97,22 @@ const mockCaptchaResponse = (responseType, errorType) => {
     return { success: false, errors: ['solution_invalid'] }
   } else { return { success: true } }
 }
-module.exports = { mock, mockOptions, mockSearchOptions, mockCaptchaResponse, mockCaptchaCheck }
+
+const createWarningStub = (service) => mock.replace(service, 'findWarnings', mock.makePromise(null, null))
+
+const createAddressStub = (service, newAddress) => {
+  let addressToReplace = [
+    {
+      uprn: '100041117437',
+      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH, ENGLAND',
+      country: 'ENGLAND',
+      postcode: 'CW8 4BH'
+    }
+  ]
+  if (newAddress) {
+    addressToReplace = newAddress
+  }
+  return mock.replace(service, 'find', mock.makePromise(null, addressToReplace))
+}
+
+module.exports = { mock, mockOptions, mockSearchOptions, mockCaptchaResponse, createMockYar, mockCaptchaCheck, createWarningStub, createAddressStub }
