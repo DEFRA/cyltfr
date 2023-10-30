@@ -1,0 +1,111 @@
+
+<div class="govuk-summary-card" id="groundwater">
+  <div class="govuk-summary-card__title-wrapper vlow">
+    <h2 class="govuk-summary-card__title title-margin-fix">
+      Other flood risks
+    </h2>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      {% if reservoirRisk %}
+      <!-- Reservoirs -->
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+         Reservoirs
+        </dt>
+        <dd class="govuk-summary-list__value">
+          There is a risk of flooding from reservoirs in this area.
+          <br><br>
+          <details class="govuk-details" data-module="govuk-details">
+            <summary class="govuk-details__summary" data-journey-click="ltfri:risk:reservoir-details">
+              <span class="govuk-details__summary-text">
+                What a reservoir is and how we check an area's risk
+              </span>
+            </summary>
+            <div class="govuk-details__text">
+              A reservoir is a large natural or artificial lake that is designed to collect and store water.
+              <br><br>
+              We use predicted scenarios to understand the risk of flooding from reservoirs.    
+            </div>
+          </details>
+          Flooding from reservoirs is extremely unlikely. An area is considered at risk if people's lives could be threatened in the event of a dam or reservoir failure.
+          <br><br>
+          <a class="govuk-link"  
+            href="/map?easting={{easting}}&northing={{northing}}&map=Reservoirs" data-journey-click="ltfri:risk:reservoir-details">
+            View a map of the risk of flooding from reservoirs
+          </a>
+          <br><br>
+          <details class="govuk-details" data-module="govuk-details">
+          <summary class="govuk-details__summary" data-journey-click="ltfri:risk:reservoir-details">
+            <span class="govuk-details__summary-text">
+              Reservoirs that could affect this area
+            </span>
+          </summary>
+            {% for reservoir in reservoirs %}
+            <ul class="govuk-list">
+              <li><strong>{{reservoir.name}}</strong> (grid reference {{reservoir.location}})</li>
+              <li>Owner: {{reservoir.owner}}</li>
+              <li>Lead Local Flood Authority: {{reservoir.authority}}</li>
+              <li>Comments: {{reservoir.comments}}</li>
+            </ul>
+            {% endfor %}
+          </details>
+        </dd>
+      </div>
+      {% endif %}
+      <!-- Groundwater -->
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Groundwater
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {% if isGroundwaterArea %}
+          Flooding is possible when groundwater levels are high.
+          {% else %}
+          Flooding from groundwater is unlikely in this area.
+          {% endif %}
+          <br><br>
+          <details class="govuk-details" data-module="govuk-details">
+            <summary class="govuk-details__summary" data-journey-click="ltfri:risk:groundwater-details">
+              <span class="govuk-details__summary-text">
+                What groundwater is and how we check an area's risk
+              </span>
+            </summary>
+            <div class="govuk-details__text">
+              Groundwater is the water that is usually held in rocks and soil underground.
+              <br><br>
+              Groundwater flooding happens when this water rises and flows above the surface.
+              <br><br>
+              We use flood alert data to check the risk of flooding from groundwater.
+          </div></details>
+        </dd>
+      </div>
+      {% if not reservoirRisk %}
+      <!-- Reservoirs -->
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+         Reservoirs
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Flooding from reservoirs is unlikely in this area.
+          <br><br>
+          <details class="govuk-details" data-module="govuk-details">
+            <summary class="govuk-details__summary" data-journey-click="ltfri:risk:reservoir-details">
+              <span class="govuk-details__summary-text">
+                What a reservoir is and how we check an area's risk
+              </span>
+            </summary>
+            <div class="govuk-details__text">
+              A reservoir is a large natural or artificial lake that is designed to collect and store water.
+              <br><br>
+              We use predicted scenarios to understand the risk of flooding from reservoirs.    
+              <br><br>
+              Flooding from reservoirs is extremely unlikely. An area is considered at risk if people's lives could be threatened in the event of a dam or reservoir failure.
+            </div>
+          </details>
+        </dd>
+      </div>
+      {% endif %}
+    </dl>
+  </div>
+</div>
