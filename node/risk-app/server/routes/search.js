@@ -24,6 +24,7 @@ module.exports = [
     method: 'GET',
     path: '/search',
     handler: async (request, h) => {
+      let addresses
       const { postcode } = request.query
       const path = request.path
 
@@ -41,7 +42,11 @@ module.exports = [
           return h.redirect('/postcode')
         }
 
-        const addresses = await addressService.find(postcode)
+        try {
+          addresses = await addressService.find(postcode)
+        } catch {
+          return h.redirect('/postcode?error=postcode_does_not_exist')
+        }
 
         // Set addresses to session
         request.yar.set({

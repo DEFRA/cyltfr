@@ -5,19 +5,8 @@ const lab = exports.lab = Lab.script()
 const riskService = require('../../server/services/risk')
 const floodService = require('../../server/services/flood')
 const addressService = require('../../server/services/address')
-const { mock, mockOptions } = require('../mock')
+const { mock, mockOptions, createWarningStub, createAddressStub } = require('../mock')
 const { payloadMatchTest } = require('../utils')
-const createAddressStub = () => {
-  return mock.replace(addressService, 'find', mock.makePromise(null, [
-    {
-      uprn: '100041117437',
-      address: '81, MOSS ROAD, NORTHWICH, CW8 4BH, ENGLAND',
-      country: 'ENGLAND',
-      postcode: 'CW8 4BH'
-    }
-  ]))
-}
-const createWarningStub = () => mock.replace(floodService, 'findWarnings', mock.makePromise(null, null))
 
 lab.experiment('Risk page test', () => {
   let server, cookie
@@ -28,8 +17,8 @@ lab.experiment('Risk page test', () => {
 
     const initial = mockOptions()
 
-    const addressStub = createAddressStub()
-    const warningStub = createWarningStub()
+    const addressStub = createAddressStub(addressService)
+    const warningStub = createWarningStub(floodService)
 
     const homepageresponse = await server.inject(initial)
     Code.expect(homepageresponse.statusCode).to.equal(200)
