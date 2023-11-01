@@ -1,103 +1,66 @@
 {% extends 'layout.html' %}
 
-{% set pageTitle = "Learn more about this area's flood risk" if local else "Learn more about flood risk" %}
+{% set pageTitle = "See flood risk on a map" %}
+
+{% block header %}
+{% endblock %}
+
 
 {% block head %}
 {{ super() }}
-<link href="{{ assetPath }}/stylesheets/map-page.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ assetPath }}/css/ol.css" type="text/css">
+  <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="/assets/images/favicon.ico" type="image/x-icon">
+  <link href="{{ assetPath }}/stylesheets/map-page.css" rel="stylesheet" />
 {% endblock %}
 
-{% block beforeContent %}
-  <a href="{{ backLink }}" class="govuk-back-link" data-id="risk-address">Back</a>
+{% block bodyStart %}
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      position: absolute;
+    }
+
+    .map-container {
+      height: 100%;
+      margin: 0;
+    }
+
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+{{ super() }}
 {% endblock %}
 
-{% block content %}
-<div id="map-page">
-  <h1 class="govuk-heading-xl">
-    {{ pageTitle }}
-  </h1>
-
-  <p class="govuk-body-s">
-    Select the type of flood risk information you're interested in. The map will then update.
-  </p>
-
-  <div class="map-header">
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        <label class="govuk-label" for="map-selector">Flood risk</label>
-        <select class="govuk-select" id="map-selector">
-          {% for category in maps.categories %}
-          <optgroup label="{{category.name}}">
-            {% for map in category.maps %}
-            <option id="{{map.ref}}" value="{{map.ref}}" title="{{map.title}}">{{map.name}}</option>
-            {% endfor %}
-          </optgroup>
-          {% endfor %}
-        </select>
-      </div>
-      <div class="govuk-grid-column-one-third">
-        <form>
-          <label class="govuk-label" for="location">Location</label>
-          <input class="govuk-input govuk-input--width-full" id="location"
-            name="location" type="text" placeholder="Enter a place or postcode">
-        </form>
-      </div>
-    </div>
-  </div>
-  <div id="error-message" role="status" class="govuk-body-s govuk-!-margin-bottom-0 govuk-!-margin-top-1"></div>
+{% block main %}
   <div class="map-container">
     <div id="progress"></div>
     <div id="map">
     </div>
-    <div class="os-api-branding logo"></div>
-    <div class="os-api-branding copyright"><a class="govuk-link" href="/os-terms">Contains OS data &#169; Crown copyright and database rights {{year}}</a></div>
-    <div id="map-overlay" tabindex="-1">
-      <div class="map-overlay-container">
-        <button class="map-overlay-close" title="Close flood risk overlay notification" aria-label="Close flood risk overlay notification">
-          <span class="map-overlay-close-text">Close flood risk notification</span>
-        </button>
-        <div class="map-overlay-content"></div>
-      </div>
-    </div>
+    <!-- <div class="os-api-branding logo"></div> -- I have kept this in as it will be needed again later
+    <div class="os-api-branding copyright"><a class="govuk-link" href="/os-terms">Contains OS data &#169; Crown copyright and database rights {{year}}</a></div> -->
   </div>
-  <div id="legend"></div>
-
-  <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-
-  <div>
-    {% if address %}
-      <p>
-        <a class="govuk-link" href="/risk"
-          data-id="risk-address">View the flood risk information for the location you originally searched for</a>
-      </p>
-    {% endif %}
-
-    <p><a href="/postcode" class="govuk-link">View the flood risk information for another location</a></p>
-
-  </div>
-</div>
 {% endblock %}
 
 {% block bodyEnd %}
 {{ super() }}
-<link rel="stylesheet" href="{{ assetPath }}/css/ol.css" type="text/css">
-<style>
-  #map {
-    height: 570px;
-    width: 100%;
-  }
-</style>
-<script src="{{ assetPath }}/js/vendor/ol.js"></script>
+  <script src="{{ assetPath }}/js/vendor/ol.js"></script>
 <script src="{{ assetPath }}/js/vendor/proj4-2.5.0.js"></script>
 <script
   src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,Object.assign,Element.prototype.placeholder"></script>
 <script src="{{ assetPath }}/nunjucks-slim.js"></script>
 <script src="{{ assetPath }}/js/map.js"></script>
 <script src="{{ assetPath }}/js/templates.js"></script>
-
 <script>
   window.mapCategories = {{ maps | dump | safe }}
 </script>
 
 <script src="{{ assetPath }}/js/map-page.js"></script>
+{% endblock %}
+
+{% block footer %}
 {% endblock %}
