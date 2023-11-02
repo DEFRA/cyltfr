@@ -30,14 +30,13 @@ $govuk-assets-path: '/assets/';
     }
   }
   .defra-map__exit:hover {
-    filter: brightness(90%);
+    background: #f3f2f1;
+    cursor: pointer;
   }
 
   .defra-map__exit:focus {
-    outline: 3px solid black;
-    color: #0b0c0c;
-    background-color: #ffdd00;
-    box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+    outline: 3px solid transparent;
+    box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
   }
 
   #progress {
