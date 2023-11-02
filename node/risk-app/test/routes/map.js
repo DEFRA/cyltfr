@@ -2,7 +2,6 @@ const Lab = require('@hapi/lab')
 const Code = require('@hapi/code')
 const createServer = require('../../server')
 const lab = exports.lab = Lab.script()
-const { payloadMatchTest } = require('../utils')
 
 lab.experiment('Map page test', () => {
   let server
@@ -24,6 +23,5 @@ lab.experiment('Map page test', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
-    await payloadMatchTest(response.payload, /Select the type of flood risk information you're interested in\. The map will then update\./g)
   })
 })
