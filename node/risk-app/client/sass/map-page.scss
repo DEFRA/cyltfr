@@ -4,7 +4,42 @@ $govuk-assets-path: '/assets/';
 @import "node_modules/govuk-frontend/govuk/helpers/all";
 @import url(//fonts.googleapis.com/css?family=Source+Sans+Pro);
 
-#map-page {
+.map-container {
+  .defra-map-controls {
+    position: absolute;
+    z-index: 11;
+
+    .defra-map__exit {
+      width: auto;
+      padding: 0 11px 0 0;
+      float: left;
+      position: relative;
+      margin: 10px 0px 0px 10px;
+      border: 0;
+      height: 40px;
+      background-color: white;
+      color: #0b0c0c;
+      font-size: 16px;
+      line-height: 40px;
+
+      svg {
+        display: inline-block;
+        margin: 10px;
+        vertical-align: top;
+      }
+    }
+  }
+  .defra-map__exit:hover {
+    filter: brightness(90%);
+  }
+
+  .defra-map__exit:focus {
+    outline: 3px solid black;
+    color: #0b0c0c;
+    background-color: #ffdd00;
+    box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+  }
+
   #progress {
     position: absolute;
     top: 0;
