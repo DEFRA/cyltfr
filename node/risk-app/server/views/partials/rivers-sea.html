@@ -16,16 +16,6 @@
           {% include riversAndSeaTextName %}
           {% endif %}
           <br><br>
-          <details class="govuk-details" data-module="govuk-details">
-            <summary class="govuk-details__summary" data-journey-click="ltfri:risk:managing-rivers-and-sea-details">
-              <span class="govuk-details__summary-text">
-                What makes an area more likely to flood from rivers and the sea
-              </span>
-            </summary>
-            <div class="govuk-details__text">
-              Low-lying areas that are close to rivers or the sea are more likely to flood when water levels rise.
-            </div>
-          </details>
         </dd>
       </div>
       <div class="govuk-summary-list__row">
@@ -51,7 +41,6 @@
               </a>
             </li>
           </ul>
-          {% else %}
           An area can still be at risk of flooding even if it has not flooded in the past. 
           <br><br>
           You should check your long term flood risk regularly because the information may change.  
@@ -62,6 +51,8 @@
             how to prepare for flooding
           </a>
           .
+          {% else %}
+          You should check your long term flood risk regularly because the information may change.  
           {% endif %}
         </dd>
       </div>
@@ -78,6 +69,7 @@
             <li>they can fail</li>
             <li>water could spill over the top if it is deep enough</li>
           </ul>
+          {% if (riversAndSeaTitle !== 'Very low risk') %}
           <details class="govuk-details" data-module="govuk-details">
             <summary class="govuk-details__summary" data-journey-click="ltfri:risk:managing-rivers-and-sea-details">
               <span class="govuk-details__summary-text">
@@ -96,6 +88,7 @@
               </p>
             </div>
           </details>
+          {% endif %}
         </dd>
       </div>
       <div class="govuk-summary-list__row">
