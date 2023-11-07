@@ -28,6 +28,39 @@ $govuk-assets-path: '/assets/';
   #map {
     height: 100%;
     width: 100vw;
+
+  .defra-map-controls {
+    position: absolute;
+    z-index: 11;
+
+    .defra-map__exit {
+      width: auto;
+      padding: 0 11px 0 0;
+      float: left;
+      position: relative;
+      margin: 10px 0px 0px 10px;
+      border: 0;
+      height: 40px;
+      background-color: white;
+      color: #0b0c0c;
+      font-size: 16px;
+      line-height: 40px;
+
+      svg {
+        display: inline-block;
+        margin: 10px;
+        vertical-align: top;
+      }
+    }
+  }
+  .defra-map__exit:hover {
+    background: #f3f2f1;
+    cursor: pointer;
+  }
+
+  .defra-map__exit:focus {
+    outline: 3px solid transparent;
+    box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
   }
 
   #progress {
