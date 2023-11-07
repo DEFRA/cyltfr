@@ -34,7 +34,7 @@ $govuk-assets-path: '/assets/';
       border-radius: 0;
       background-color: white;
       button {
-        display: block;
+      display: block;
       position: relative;
       border: 0;
       height: 40px;
@@ -57,12 +57,13 @@ $govuk-assets-path: '/assets/';
   .defra-map-controls {
     position: absolute;
     z-index: 11;
+    width: 100%;
 
     .defra-map__exit {
       width: auto;
       padding: 0 11px 0 0;
       float: left;
-      position: absolute;
+      position: relative;
       margin: 10px 0px 0px 10px;
       border: 0;
       height: 40px;
