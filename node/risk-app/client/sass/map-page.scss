@@ -30,6 +30,10 @@ $govuk-assets-path: '/assets/';
     width: 100vw;
   }
 
+  .ol-scale-line {
+    display: none;
+  }
+
   .defra-map-controls {
     position: absolute;
     z-index: 11;

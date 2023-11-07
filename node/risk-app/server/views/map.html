@@ -23,6 +23,51 @@
     position: absolute;
   }
 
+  .ol-zoom {
+    float: right;
+    align-self: center;
+    /* As the zoom buttons are within the map they are not as easily positioned, which is why I
+      have used the calculation as seen below. */
+    left: calc(100% - 350px);
+    top: calc(100% - 100px);
+  }
+
+  .ol-zoom .ol-zoom-out {
+    margin: 0;
+    border-radius: 0;
+  }
+  
+  .ol-zoom .ol-zoom-out:hover {
+    background-color: #f3f2f1;
+  }
+  
+  .ol-zoom .ol-zoom-in {
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .ol-zoom .ol-zoom-in:hover {
+    background-color: #f3f2f1;
+  }
+
+  .ol-control {
+    padding: 0;
+    border-radius: 0;
+    background-color: white;
+  }
+  
+  .ol-control button {
+    display: block;
+    position: relative;
+    border: 0;
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    cursor: pointer;
+    background-color: white;
+    color: #0b0c0c;
+    border-radius: 0;
+  }
 </style>
 {{ super() }}
 {% endblock %}
@@ -36,6 +81,10 @@
       </svg>
       <span>Exit map</span>
     </button>
+
+    <div>
+
+    </div>
   </div>
   <div class="defra-map-key">
     <div class="defra-map-key__container" id="defra-map-key__container">
