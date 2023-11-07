@@ -28,16 +28,19 @@ $govuk-assets-path: '/assets/';
   #map {
     height: 100%;
     width: 100vw;
+  }
 
   .defra-map-controls {
     position: absolute;
     z-index: 11;
+    justify-self: center;
+    width: 100%;
 
     .defra-map__exit {
       width: auto;
       padding: 0 11px 0 0;
       float: left;
-      position: relative;
+      position: absolute;
       margin: 10px 0px 0px 10px;
       border: 0;
       height: 40px;
