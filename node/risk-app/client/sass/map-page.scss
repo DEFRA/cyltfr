@@ -120,6 +120,12 @@ $govuk-assets-path: '/assets/';
     box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
   }
 
+
+  .defra-map-attribution svg {
+    font-weight: 400;
+    margin: 10px;
+  }
+
   #progress {
     position: absolute;
     top: 0;
