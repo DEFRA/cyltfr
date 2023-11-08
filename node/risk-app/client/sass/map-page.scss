@@ -44,13 +44,19 @@ $govuk-assets-path: '/assets/';
       background-color: white;
       color: #0b0c0c;
       border-radius: 0;
-      }
+    }
+
+      button:hover {
+        background-color: #f3f2f1;
+      }    
+
       button:focus {
       outline: 3px solid black;
       color: #0b0c0c;
       background-color: #ffdd00;
       box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
       }
+    
     }
   }
 
@@ -120,6 +126,10 @@ $govuk-assets-path: '/assets/';
     box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
   }
 
+  #att-key-copyright-btn:hover {
+    background: #f3f2f1;
+    cursor: pointer;
+  }
 
   .defra-map-attribution svg {
     font-weight: 400;
@@ -152,16 +162,12 @@ $govuk-assets-path: '/assets/';
   border-radius: 0;
 }
 
-.ol-zoom .ol-zoom-out:hover {
-  background-color: #f3f2f1;
-}
-
 .ol-zoom .ol-zoom-in {
   margin: 0;
   border-radius: 0;
 }
 
-.ol-zoom .ol-zoom-in:hover {
+.ol-zoom .ol-zoom-in button:hover {
   background-color: #f3f2f1;
 }
 
