@@ -56,7 +56,6 @@ $govuk-assets-path: '/assets/';
 
   .defra-map-controls {
     position: absolute;
-    z-index: 11;
     width: 100%;
 
     .defra-map__exit {
@@ -90,6 +89,37 @@ $govuk-assets-path: '/assets/';
     box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
   }
 
+  #att-key-copyright-btn {
+    float: right;
+    clear: both;
+    position: relative;
+    font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 500;
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.25;
+    top: calc(100vh - 115px);
+    right: 310px;
+    border: 0;
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    margin-top: 5px;
+    cursor: pointer;
+    background-color: white;
+    color: #0b0c0c;
+    z-index: 15;
+  }
+
+  #att-key-copyright-btn:focus {
+    outline: 3px solid black;
+    color: #0b0c0c;
+    background-color: #ffdd00;
+    box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+  }
+
   #progress {
     position: absolute;
     top: 0;
@@ -108,7 +138,7 @@ $govuk-assets-path: '/assets/';
   /* As the zoom buttons are within the map they are not as easily positioned, which is why I
     have used the calculation as seen below. */
   left: calc(100% - 350px);
-  top: calc(100% - 100px);
+  top: calc(100% - 145px);
 }
 
 .ol-zoom .ol-zoom-out {
