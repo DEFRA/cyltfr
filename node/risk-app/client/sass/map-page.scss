@@ -51,10 +51,8 @@ $govuk-assets-path: '/assets/';
       }    
 
       button:focus {
-      outline: 3px solid black;
-      color: #0b0c0c;
-      background-color: #ffdd00;
-      box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+        outline: 3px solid transparent;
+        box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
       }
     
     }
@@ -120,10 +118,8 @@ $govuk-assets-path: '/assets/';
   }
 
   #att-key-copyright-btn:focus {
-    outline: 3px solid black;
-    color: #0b0c0c;
-    background-color: #ffdd00;
-    box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+    outline: 3px solid transparent;
+    box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
   }
 
   #att-key-copyright-btn:hover {
