@@ -136,6 +136,34 @@ $govuk-assets-path: '/assets/';
     margin: 10px;
   }
 
+  .defra-map-info__container {
+    display: none;
+    background-color: white;
+    position: absolute;
+    width: 330px;
+    height: 80px;
+    top: calc(100vh - 100px);
+    right: 360px;
+    z-index: 11;
+  }
+
+  .defra-map-info__close {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #0b0c0c;
+  }
+
+  .defra-map-info__close:hover {
+    background-color: #f3f2f1;
+  }
+
   #progress {
     position: absolute;
     top: 0;
@@ -174,6 +202,10 @@ $govuk-assets-path: '/assets/';
 .ol-attribution li {
   font-family: "GDS Transport", Arial, sans-serif;
   font-size: 10px
+}
+
+.ol-attribution {
+  padding: 10px;
 }
 
 label[for=location] {
