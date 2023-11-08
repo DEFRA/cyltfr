@@ -147,6 +147,10 @@ $govuk-assets-path: '/assets/';
     z-index: 11;
   }
 
+  .toggle-copyright-info {
+    display: block;
+  }
+
   .defra-map-info__close {
     position: absolute;
     top: 3px;
