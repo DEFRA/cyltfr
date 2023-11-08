@@ -4833,7 +4833,7 @@
                       a = void 0 !== i.zoomInTipLabel ? i.zoomInTipLabel : "Zoom in",
                       h = void 0 !== i.zoomOutTipLabel ? i.zoomOutTipLabel : "Zoom out",
                       l = document.createElement("button");
-                  l.className = r + "-in", l.setAttribute("type", "button"), l.setAttribute("aria-label", "Zoom into map"), l.title = a, l.appendChild(o), v(l, M.CLICK, this.handleClick_.bind(this, n));
+                  l.className = r + "-in", l.setAttribute("type", "button"), l.setAttribute("aria-label", "Zoom into map"), l.setAttribute("tabindex", 1), l.title = a, l.appendChild(o), v(l, M.CLICK, this.handleClick_.bind(this, n));
                   var rect1 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
                   rect1.setAttribute("x", "3"); 
                 rect1.setAttribute("y", "9");
@@ -4853,8 +4853,7 @@
                   rect3.setAttribute("height", "2");
 
                   var u = document.createElement("button");
-                  var z = document.createElement("span");
-                  u.className = r + "-out", u.setAttribute("type", "button"), u.setAttribute("aria-label", "Zoom out of map"), u.title = h, u.appendChild(s), v(u, M.CLICK, this.handleClick_.bind(this, -n));
+                  u.className = r + "-out", u.setAttribute("tabindex", 1), u.setAttribute("type", "button"), u.setAttribute("aria-label", "Zoom out of map"), u.title = h, u.appendChild(s), v(u, M.CLICK, this.handleClick_.bind(this, -n));
                   s.setAttribute("width", 20), s.setAttribute("height", 20), s.appendChild(rect3)
                   var p = r + " " + fo + " " + go,
                       c = this.element;
