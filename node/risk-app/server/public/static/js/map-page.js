@@ -43,6 +43,19 @@ MapController.prototype.setCurrent = function (ref) {
   this.currCategory = defaultCategory
 }
 
+/* eslint-disable no-unused-vars */
+function toggleCopyrightInfo () {
+  const copyrightInfoContainer = document.getElementsByClassName('defra-map-info__container')
+  if (!copyrightInfoContainer[0].classList.contains('showing')) {
+    copyrightInfoContainer[0].classList.add('showing')
+    copyrightInfoContainer[0].style.display = 'block'
+  } else {
+    copyrightInfoContainer[0].classList.remove('showing')
+    copyrightInfoContainer[0].style.display = 'none'
+  }
+}
+/* eslint-enable no-unused-vars */
+
 ;(function () {
   function getParameterByName (name) {
     name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]')
