@@ -78,6 +78,128 @@ $govuk-assets-path: '/assets/';
   }
 }
 
+#mapKeyLabel {
+  position:fixed;
+  background-color: white;
+  line-height: 2.125;
+  height: 40px;
+  width: 100%;
+  padding: 0px 18px 0 20px;
+  font-size: 19px;
+  margin: 0;
+  z-index: 15;
+}
+
+.defra-map-key__content {
+  padding: 0 18px 0 20px;
+  width: 270px;
+  height: 100%;
+  position: fixed; 
+  overflow-y: auto;
+}
+
+.govuk-fieldset__legend {
+  margin-bottom: 10px;
+}
+
+.defra-map-key label {
+  font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+}
+
+.defra-map-key__section-title {
+  position: relative;
+  font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 700;
+  font-size: 16px !important;
+  font-size: 0.875rem;
+  line-height: 1.1428571429;
+  display: block;
+  margin-top: 45px;
+  margin-bottom: 0;
+  padding: 10px 15px 0px 0px;
+  box-sizing: border-box;
+  width: 260px;
+}
+
+.defra-map-key__section-title::before {
+  position: absolute;
+  content: "";
+  height: 1px;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  border-top: 1px solid #b1b4b6;
+}
+
+.govuk-radios__label {
+  padding-top: 0;
+}
+
+.govuk-radios--small .govuk-radios__item {
+  min-height: 0;
+  margin-bottom: 0;
+  padding-left: 34px;
+  float: left;
+}
+
+.defra-map-key__symbol-container-v3 {
+  position: relative;
+  display: block;
+  margin-left: 34px;
+  margin-left: 0px;
+}
+
+.defra-map-key__symbol {
+  position: absolute;
+  top: -6px;
+  left: 0;
+  width: 28px;
+  height: 28px;
+  margin-left: -35px;
+  text-indent: -5000px;
+  background-size: 25px;
+  background-repeat: no-repeat;
+  border: 0;
+}
+
+.defra-map-key__symbol svg {
+  display: block; 
+  box-sizing: border-box;
+  top: 10px;
+}
+
+svg:not(:root) {
+  overflow-clip-margin: content-box;
+  overflow: hidden;
+}
+
+#surface-water-extent-heading {
+  padding-left: 34px;
+}
+
+.govuk-radios__label {
+  font-size: 16px;
+}
+
+.risk-context {
+  display: block;
+  font-size: 14px;
+  padding-top: 8px;
+  padding-bottom: 0;
+  height: 35px;
+  width: 210px;
+}
+
+.defra-map-key__symbol-container--multi {
+  margin-top: 19px;
+}
+
+.defra-map-key__symbol-container-v3 {
+  font-size: 16px;
+}
+
 .ol-attribution li {
   font-family: "GDS Transport", Arial, sans-serif;
   font-size: 10px

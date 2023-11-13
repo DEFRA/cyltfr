@@ -26,31 +26,6 @@
     position: absolute;
     overflow-x: hidden;
   }
-
-  #mapKeyLabel {
-    position:fixed;
-    background-color: white;
-    height: 40px;
-    width: 100%;
-    padding: 10px 18px 0 20px;
-    font-size: 19px;
-    margin: 0;
-    z-index: 15;
-  }
-
-  .defra-map-key__content {
-    padding: 0 18px 0 20px;
-    width: 270px;
-    height: 100%;
-    position: fixed; 
-    overflow-y: auto;
-  }
-
-  .defra-map-key__section-title {
-    font-size: 16px;
-    margin-top: 50px;
-
-  }
 </style>
 {{ super() }}
 {% endblock %}
@@ -72,17 +47,20 @@
       <h2 id="mapKeyLabel" class="defra-map-key__title">
         <span role="text">Key<span class="govuk-visually-hidden">for map features</span></span>
       </h2>
+
       <div class="defra-map-key__content">
         <div class="govuk-form-group" id="surface-water-key__section">
           <fieldset class="govuk-fieldset">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
               <h3 class="defra-map-key__section-title" ontoken="this.onscrolling = false">Surface water</h3>
             </legend>
+            
             <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
               <div class="govuk-radios__item">
                 <input class="govuk-radios__input" id="sw-extent" name="measurements" type="radio" value="7" checked="">
                 <label class="govuk-label govuk-radios__label" for="sw-extent">
-                  Extent
+                  <span class="surface-water-bulletpoint__heading" id="surface-water-extent__heading">Extent</span>
+
                   <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi"
                     id="high-risk-sw">
                     <span class="defra-map-key__symbol">
@@ -90,9 +68,10 @@
                         <rect x="5" y="5" width="22" height="22" style="fill:#555C9D"></rect>
                       </svg>
                     </span>
-                    High risk
-                    <span class="risk-context-v3">More than 3.3% chance each year</span>
+                    <span id="risk-severity">High risk</span>
+                    <span class="risk-context">More than 3.3% chance each year</span>
                   </span>
+
                   <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi"
                     id="med-risk-sw">
                     <span class="defra-map-key__symbol">
@@ -101,8 +80,9 @@
                       </svg>
                     </span>
                     Medium risk
-                    <span class="risk-context-v3">Between 3.3% and 1% chance each year</span>
+                    <span class="risk-context">Between 3.3% and 1% chance each year</span>
                   </span>
+
                   <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi"
                     id="low-risk-sw">
                     <span class="defra-map-key__symbol">
@@ -111,10 +91,11 @@
                       </svg>
                     </span>
                     Low risk
-                    <span class="risk-context-v3">Between 1% and 0.1% chance each year</span>
+                    <span class="risk-context">Between 1% and 0.1% chance each year</span>
                   </span>
                 </label>
               </div>
+              
               <div class="govuk-radios__item">
                 <input class="govuk-radios__input" id="sw-depth" name="measurements" type="radio" value="8">
                 <label class="govuk-label govuk-radios__label" for="sw-depth">
@@ -122,78 +103,6 @@
                 </label>
               </div>
 
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="sw-velocity" name="measurements" type="radio" value="9">
-                <label class="govuk-label govuk-radios__label" for="sw-velocity">
-                  Velocity
-                </label>
-              </div>
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="sw-velocity" name="measurements" type="radio" value="9">
-                <label class="govuk-label govuk-radios__label" for="sw-velocity">
-                  Velocity
-                </label>
-              </div>
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="sw-velocity" name="measurements" type="radio" value="9">
-                <label class="govuk-label govuk-radios__label" for="sw-velocity">
-                  Velocity
-                </label>
-              </div>
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="sw-velocity" name="measurements" type="radio" value="9">
-                <label class="govuk-label govuk-radios__label" for="sw-velocity">
-                  Velocity
-                </label>
-              </div>
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="sw-velocity" name="measurements" type="radio" value="9">
-                <label class="govuk-label govuk-radios__label" for="sw-velocity">
-                  Velocity
-                </label>
-              </div>
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="sw-velocity" name="measurements" type="radio" value="9">
-                <label class="govuk-label govuk-radios__label" for="sw-velocity">
-                  Velocity
-                </label>
-              </div>
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="sw-velocity" name="measurements" type="radio" value="9">
-                <label class="govuk-label govuk-radios__label" for="sw-velocity">
-                  Velocity
-                </label>
-              </div>
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="sw-velocity" name="measurements" type="radio" value="9">
-                <label class="govuk-label govuk-radios__label" for="sw-velocity">
-                  Velocity
-                </label>
-              </div>
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="sw-velocity" name="measurements" type="radio" value="9">
-                <label class="govuk-label govuk-radios__label" for="sw-velocity">
-                  Velocity
-                </label>
-              </div>
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="sw-velocity" name="measurements" type="radio" value="9">
-                <label class="govuk-label govuk-radios__label" for="sw-velocity">
-                  Velocity
-                </label>
-              </div>
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="sw-velocity" name="measurements" type="radio" value="9">
-                <label class="govuk-label govuk-radios__label" for="sw-velocity">
-                  Velocity
-                </label>
-              </div>
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="sw-velocity" name="measurements" type="radio" value="9">
-                <label class="govuk-label govuk-radios__label" for="sw-velocity">
-                  Velocity
-                </label>
-              </div>
               <div class="govuk-radios__item">
                 <input class="govuk-radios__input" id="sw-velocity" name="measurements" type="radio" value="9">
                 <label class="govuk-label govuk-radios__label" for="sw-velocity">
