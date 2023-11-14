@@ -176,6 +176,7 @@ $govuk-assets-path: '/assets/';
   }
 }
 
+
 .sw-depth-container {
   margin-left: 34px;
 }
@@ -272,7 +273,6 @@ $govuk-assets-path: '/assets/';
 .defra-map-key__symbol-container-v3 {
   position: relative;
   display: block;
-  margin-left: 34px;
   margin-left: 0px;
 }
 
@@ -319,10 +319,6 @@ svg:not(:root) {
 
 .defra-map-key__symbol-container--multi {
   margin-top: 19px;
-}
-
-.defra-map-key__symbol-container-v3 {
-  font-size: 16px;
 }
 
 .ol-zoom {
