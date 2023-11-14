@@ -4388,7 +4388,7 @@
               }(e);
               this.maxTilesLoading_ = void 0 !== e.maxTilesLoading ? e.maxTilesLoading : 16, this.loadTilesWhileAnimating_ = void 0 !== e.loadTilesWhileAnimating && e.loadTilesWhileAnimating, this.loadTilesWhileInteracting_ = void 0 !== e.loadTilesWhileInteracting && e.loadTilesWhileInteracting, this.pixelRatio_ = void 0 !== e.pixelRatio ? e.pixelRatio : Di, this.animationDelayKey_, this.animationDelay_ = function() {
                   this.animationDelayKey_ = void 0, this.renderFrame_.call(this, Date.now())
-              }.bind(this), this.coordinateToPixelTransform_ = [1, 0, 0, 1, 0, 0], this.pixelToCoordinateTransform_ = [1, 0, 0, 1, 0, 0], this.frameIndex_ = 0, this.frameState_ = null, this.previousExtent_ = null, this.viewPropertyListenerKey_ = null, this.viewChangeListenerKey_ = null, this.layerGroupPropertyListenerKeys_ = null, this.viewport_ = document.createElement("div"), this.viewport_.className = "ol-viewport" + (Ui ? " ol-touch" : ""), this.viewport_.style.position = "relative", this.viewport_.style.overflow = "hidden", this.viewport_.style.width = "100%", this.viewport_.style.height = "100%", this.viewport_.style.msTouchAction = "none", this.viewport_.style.touchAction = "none", this.overlayContainer_ = document.createElement("div"), this.overlayContainer_.className = "ol-overlaycontainer", this.viewport_.appendChild(this.overlayContainer_), this.overlayContainerStopEvent_ = document.createElement("div"), this.overlayContainerStopEvent_.className = "ol-overlaycontainer-stopevent";
+              }.bind(this), this.coordinateToPixelTransform_ = [1, 0, 0, 1, 0, 0], this.pixelToCoordinateTransform_ = [1, 0, 0, 1, 0, 0], this.frameIndex_ = 0, this.frameState_ = null, this.previousExtent_ = null, this.viewPropertyListenerKey_ = null, this.viewChangeListenerKey_ = null, this.layerGroupPropertyListenerKeys_ = null, this.viewport_ = document.createElement("div"), this.viewport_.className = "ol-viewport" + (Ui ? " ol-touch" : ""), this.viewport_.style.position = "relative", this.viewport_.style.overflow = "hidden", this.viewport_.style.width = "100%", this.viewport_.style.height = "100%", this.viewport_.style.msTouchAction = "none", this.viewport_.style.touchAction = "none", this.overlayContainer_ = document.createElement("div"), this.overlayContainer_.className = "ol-overlaycontainer", this.viewport_.appendChild(this.overlayContainer_), this.overlayContainerStopEvent_ = document.createElement("div"), this.overlayContainerStopEvent_.className = "defra-map-controls__bottom-v3", this.overlayContainerStopEvent_.className = "ol-overlaycontainer-stopevent";
               for (var r = [M.CLICK, M.DBLCLICK, M.MOUSEDOWN, M.TOUCHSTART, M.MSPOINTERDOWN, Ar.POINTERDOWN, M.MOUSEWHEEL, M.WHEEL], n = 0, o = r.length; n < o; ++n) v(this.overlayContainerStopEvent_, r[n], O);
               for (var s in this.viewport_.appendChild(this.overlayContainerStopEvent_), this.mapBrowserEventHandler_ = new Cn(this, e.moveTolerance), Ar) v(this.mapBrowserEventHandler_, Ar[s], this.handleMapBrowserEvent, this);
               this.keyboardEventTarget_ = i.keyboardEventTarget, this.keyHandlerKeys_ = null, v(this.viewport_, M.CONTEXTMENU, this.handleBrowserEvent, this), v(this.viewport_, M.WHEEL, this.handleBrowserEvent, this), v(this.viewport_, M.MOUSEWHEEL, this.handleBrowserEvent, this), this.controls = i.controls || new U, this.interactions = i.interactions || new U, this.overlays_ = i.overlays, this.overlayIdIndex_ = {}, this.renderer_ = this.createRenderer(), this.handleResize_, this.focus_ = null, this.postRenderFunctions_ = [], this.tileQueue_ = new Mn(this.getTilePriority.bind(this), this.handleTileChange_.bind(this)), this.skippedFeatureUids_ = {}, v(this, G(Ln.LAYERGROUP), this.handleLayerGroupChanged_, this), v(this, G(Ln.VIEW), this.handleViewChanged_, this), v(this, G(Ln.SIZE), this.handleSizeChanged_, this), v(this, G(Ln.TARGET), this.handleTargetChanged_, this), this.setProperties(i.values), this.controls.forEach(function(t) {
@@ -4828,19 +4828,33 @@
                   });
                   var r = void 0 !== i.className ? i.className : "ol-zoom",
                       n = void 0 !== i.delta ? i.delta : 1,
-                      o = void 0 !== i.zoomInLabel ? i.zoomInLabel : "+",
-                      s = void 0 !== i.zoomOutLabel ? i.zoomOutLabel : "−",
+                      o = void 0 !== i.zoomInLabel ? i.zoomInLabel : document.createElementNS("http://www.w3.org/2000/svg", "svg"),
+                      s = void 0 !== i.zoomOutLabel ? i.zoomOutLabel : document.createElementNS("http://www.w3.org/2000/svg", "svg"),
                       a = void 0 !== i.zoomInTipLabel ? i.zoomInTipLabel : "Zoom in",
                       h = void 0 !== i.zoomOutTipLabel ? i.zoomOutTipLabel : "Zoom out",
                       l = document.createElement("button");
-                      t = document.createElement("span");
-                  l.className = r + "-in", l.setAttribute("type", "button"), l.setAttribute("aria-label", "Zoom into map"), l.title = a, l.appendChild(t), v(l, M.CLICK, this.handleClick_.bind(this, n));
-                  t.className = "govuk-details__summary-text", t.style.textDecoration = "none", t.appendChild("string" == typeof o ? document.createTextNode(o) : o)
+                  l.className = r + "-in", l.setAttribute("type", "button"), l.setAttribute("aria-label", "Zoom into map"), l.setAttribute("tabindex", 1), l.title = a, l.appendChild(o), v(l, M.CLICK, this.handleClick_.bind(this, n));
+                  var rect1 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                  rect1.setAttribute("x", "3"); 
+                rect1.setAttribute("y", "9");
+                rect1.setAttribute("width", "14");
+                rect1.setAttribute("height", "2");
+                var rect2 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                rect2.setAttribute("x", "9"); 
+                rect2.setAttribute("y", "3"); 
+                rect2.setAttribute("width", "2");
+                rect2.setAttribute("height", "14");
+                  o.setAttribute("width", 20), o.setAttribute("height", 20), o.appendChild(rect1), o.appendChild(rect2)
+                
+                  var rect3 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                  rect3.setAttribute("x", "3"); 
+                  rect3.setAttribute("y", "9");
+                  rect3.setAttribute("width", "14");
+                  rect3.setAttribute("height", "2");
 
                   var u = document.createElement("button");
-                  var z = document.createElement("span");
-                  u.className = r + "-out", u.setAttribute("type", "button"), u.setAttribute("aria-label", "Zoom out of map"), u.title = h, u.appendChild(z), v(u, M.CLICK, this.handleClick_.bind(this, -n));
-                  z.className = "govuk-details__summary-text", z.style.textDecoration = "none", u.appendChild("string" == typeof s ? document.createTextNode(s) : s)
+                  u.className = r + "-out", u.setAttribute("tabindex", 1), u.setAttribute("type", "button"), u.setAttribute("aria-label", "Zoom out of map"), u.title = h, u.appendChild(s), v(u, M.CLICK, this.handleClick_.bind(this, -n));
+                  s.setAttribute("width", 20), s.setAttribute("height", 20), s.appendChild(rect3)
                   var p = r + " " + fo + " " + go,
                       c = this.element;
                   c.className = p, c.appendChild(l), c.appendChild(u), this.duration_ = void 0 !== i.duration ? i.duration : 250

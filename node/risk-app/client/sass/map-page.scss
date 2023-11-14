@@ -28,19 +28,45 @@ $govuk-assets-path: '/assets/';
   #map {
     height: 100%;
     width: 100vw;
+
+    .ol-control {
+      padding: 0;
+      border-radius: 0;
+      background-color: white;
+      button {
+      display: block;
+      position: relative;
+      border: 0;
+      height: 40px;
+      width: 40px;
+      padding: 0;
+      cursor: pointer;
+      background-color: white;
+      color: #0b0c0c;
+      border-radius: 0;
+    }
+
+      button:hover {
+        background-color: #f3f2f1;
+      }    
+
+      button:focus {
+        outline: 3px solid transparent;
+        box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
+      }
+    
+    }
   }
 
   .defra-map-controls {
     position: absolute;
-    z-index: 11;
-    justify-self: center;
     width: 100%;
 
     .defra-map__exit {
       width: auto;
       padding: 0 11px 0 0;
       float: left;
-      position: absolute;
+      position: relative;
       margin: 10px 0px 0px 10px;
       border: 0;
       height: 40px;
@@ -48,6 +74,7 @@ $govuk-assets-path: '/assets/';
       color: #0b0c0c;
       font-size: 16px;
       line-height: 40px;
+      z-index: 15;
 
       svg {
         display: inline-block;
@@ -64,6 +91,77 @@ $govuk-assets-path: '/assets/';
   .defra-map__exit:focus {
     outline: 3px solid transparent;
     box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
+  }
+
+  #att-key-copyright-btn {
+    float: right;
+    clear: both;
+    position: relative;
+    font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 500;
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.25;
+    top: calc(100vh - 115px);
+    right: 310px;
+    border: 0;
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    margin-top: 5px;
+    cursor: pointer;
+    background-color: white;
+    color: #0b0c0c;
+    z-index: 15;
+  }
+
+  #att-key-copyright-btn:focus {
+    outline: 3px solid transparent;
+    box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
+  }
+
+  #att-key-copyright-btn:hover {
+    background: #f3f2f1;
+    cursor: pointer;
+  }
+
+  .defra-map-attribution svg {
+    font-weight: 400;
+    margin: 10px;
+  }
+
+  .defra-map-info__container {
+    display: none;
+    background-color: white;
+    position: absolute;
+    width: 330px;
+    height: 80px;
+    top: calc(100vh - 100px);
+    right: 360px;
+    z-index: 11;
+  }
+
+  .toggle-copyright-info {
+    display: block;
+  }
+
+  .defra-map-info__close {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #0b0c0c;
+  }
+
+  .defra-map-info__close:hover {
+    background-color: #f3f2f1;
   }
 
   #progress {
@@ -198,6 +296,29 @@ svg:not(:root) {
 
 .defra-map-key__symbol-container-v3 {
   font-size: 16px;
+
+.ol-zoom {
+  float: right;
+  align-self: center;
+  /* As the zoom buttons are within the map they are not as easily positioned, which is why I
+    have used the calculation as seen below. */
+  left: calc(100% - 350px);
+  top: calc(100% - 145px);
+}
+
+.ol-zoom .ol-zoom-out {
+  margin: 0;
+  border-radius: 0;
+}
+
+.ol-zoom .ol-zoom-in {
+  margin: 0;
+  border-radius: 0;
+}
+
+.ol-zoom .ol-zoom-in button:hover {
+  background-color: #f3f2f1;
+
 }
 
 .ol-attribution li {
@@ -205,13 +326,8 @@ svg:not(:root) {
   font-size: 10px
 }
 
-.ol-control {
-  button:focus {
-  outline: 3px solid black;
-  color: #0b0c0c;
-  background-color: #ffdd00;
-  box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
-  }
+.ol-attribution {
+  padding: 10px;
 }
 
 label[for=location] {
