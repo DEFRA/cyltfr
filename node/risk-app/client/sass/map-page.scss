@@ -262,6 +262,14 @@ label[for=location] {
   text-decoration: underline;
 }
 
+.govuk-link {
+  font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+}
+
+.govuk-link:hover {
+  text-decoration-thickness: 3px;
+}
+
 @media only screen and (max-width: 420px) {
   /* max-width 420px, mobile-only styles */
   .os-api-branding.copyright {
