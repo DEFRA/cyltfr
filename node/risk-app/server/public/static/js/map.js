@@ -423,6 +423,30 @@ function layerLoaded () {
   isLoading = false
 }
 
+/* eslint-disable no-unused-vars */
+function handleRadioChange (selected) {
+  const extentInfo = document.getElementById('sw-extent-desc-container')
+  const depthInfo = document.getElementById('sw-depth-desc-container')
+  const velocityInfo = document.getElementById('sw-velocity-desc-container')
+
+  if (selected === 'extent') {
+    extentInfo.style.display = 'block'
+    depthInfo.style.display = 'none'
+    velocityInfo.style.display = 'none'
+  }
+  if (selected === 'depth') {
+    extentInfo.style.display = 'none'
+    depthInfo.style.display = 'block'
+    velocityInfo.style.display = 'none'
+  }
+  if (selected === 'velocity') {
+    extentInfo.style.display = 'none'
+    depthInfo.style.display = 'none'
+    velocityInfo.style.display = 'block'
+  }
+}
+/* eslint-disable no-unused-vars */
+
 function Progress (el) {
   this.el = el
   this.tilesLoading = 0

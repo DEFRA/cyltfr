@@ -26,6 +26,12 @@
     position: absolute;
     overflow-x: hidden;
   }
+  #sw-velocity-desc-container {
+    display: none;
+  }
+  #sw-depth-desc-container {
+    display: none;
+  }
 </style>
 {{ super() }}
 {% endblock %}
@@ -87,114 +93,120 @@
             
             <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="SurfaceWater_6-SW-Extent" value="SurfaceWater_6-SW-Extent" title="Extent of flooding from surface water" name="measurements" type="radio" checked="">
+                <input class="govuk-radios__input" id="sw-extent-radio" onclick="handleRadioChange('extent')" value="SurfaceWater_6-SW-Extent" title="Extent of flooding from surface water" name="measurements" type="radio" checked="">
                 <label class="govuk-label govuk-radios__label" for="SurfaceWater_6-SW-Extent">
                   <span class="surface-water-bulletpoint__heading" id="surface-water-extent__heading">Extent</span>
-
-                  <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-extent-container"
-                    id="sw-extent-high">
-                    <span class="defra-map-key__symbol">
-                      <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
-                        <rect x="5" y="5" width="22" height="22" style="fill:#555C9D"></rect>
-                      </svg>
+                  
+                  <div id="sw-extent-desc-container">
+                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-extent-container"
+                      id="sw-extent-high">
+                      <span class="defra-map-key__symbol">
+                        <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                          <rect x="5" y="5" width="22" height="22" style="fill:#555C9D"></rect>
+                        </svg>
+                      </span>
+                      <span id="risk-severity">High risk</span>
+                      <span class="risk-context">More than 3.3% chance each year</span>
                     </span>
-                    <span id="risk-severity">High risk</span>
-                    <span class="risk-context">More than 3.3% chance each year</span>
-                  </span>
 
-                  <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-extent-container"
-                    id="sw-extent-med">
-                    <span class="defra-map-key__symbol">
-                      <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
-                        <rect x="5" y="5" width="22" height="22" style="fill:#9AA0DE"></rect>
-                      </svg>
+                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-extent-container"
+                      id="sw-extent-med">
+                      <span class="defra-map-key__symbol">
+                        <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                          <rect x="5" y="5" width="22" height="22" style="fill:#9AA0DE"></rect>
+                        </svg>
+                      </span>
+                      Medium risk
+                      <span class="risk-context">Between 3.3% and 1% chance each year</span>
                     </span>
-                    Medium risk
-                    <span class="risk-context">Between 3.3% and 1% chance each year</span>
-                  </span>
 
-                  <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-extent-container"
-                    id="sw-extent-low">
-                    <span class="defra-map-key__symbol">
-                      <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
-                        <rect x="5" y="5" width="22" height="22" style="fill:#C4E1FF"></rect>
-                      </svg>
+                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-extent-container"
+                      id="sw-extent-low">
+                      <span class="defra-map-key__symbol">
+                        <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                          <rect x="5" y="5" width="22" height="22" style="fill:#C4E1FF"></rect>
+                        </svg>
+                      </span>
+                      Low risk
+                      <span class="risk-context">Between 1% and 0.1% chance each year</span>
                     </span>
-                    Low risk
-                    <span class="risk-context">Between 1% and 0.1% chance each year</span>
-                  </span>
+
+                  </div>
                 </label>
               </div>
               
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="sw-depth SurfaceWater_9-SWDH" value="SurfaceWater_9-SWDH" name="measurements" type="radio">
+                <input class="govuk-radios__input" id="sw-depth-radio" onclick="handleRadioChange('depth')" value="SurfaceWater_9-SWDH" name="measurements" type="radio">
                 <label class="govuk-label govuk-radios__label" for="SurfaceWater_9-SWDH">
-                  Depth
+                  <span class="surface-water-bulletpoint__heading" id="surface-water-depth__heading">Depth</span>
 
-                  <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-depth-container"
-                  id="sw-depth-above-90">
-                    <span class="defra-map-key__symbol">
-                      <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
-                        <rect x="5" y="5" width="22" height="22" style="fill:#555C9D"></rect>
-                      </svg>
+                  <div id="sw-depth-desc-container">
+                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-depth-container"
+                    id="sw-depth-above-90">
+                      <span class="defra-map-key__symbol">
+                        <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                          <rect x="5" y="5" width="22" height="22" style="fill:#555C9D"></rect>
+                        </svg>
+                      </span>
+                      <span id="surfacewater-depth-above-90">Above 90cm</span>
                     </span>
-                    <span id="surfacewater-depth-above-90">Above 90cm</span>
-                  </span>
 
-                  <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-depth-container"
-                    id="w-depth-30-90">
-                    <span class="defra-map-key__symbol">
-                      <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
-                        <rect x="5" y="5" width="22" height="22" style="fill:#9AA0DE"></rect>
-                      </svg>
+                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-depth-container"
+                      id="w-depth-30-90">
+                      <span class="defra-map-key__symbol">
+                        <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                          <rect x="5" y="5" width="22" height="22" style="fill:#9AA0DE"></rect>
+                        </svg>
+                      </span>
+                      <span id="surfacewater-depth-30-90">30cm to 90cm</span>
                     </span>
-                    <span id="surfacewater-depth-30-90">30cm to 90cm</span>
-                  </span>
 
-                  <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-depth-container"
-                    id="sw-depth-below-30">
-                    <span class="defra-map-key__symbol">
-                      <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
-                        <rect x="5" y="5" width="22" height="22" style="fill:#C4E1FF"></rect>
-                      </svg>
+                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-depth-container"
+                      id="sw-depth-below-30">
+                      <span class="defra-map-key__symbol">
+                        <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                          <rect x="5" y="5" width="22" height="22" style="fill:#C4E1FF"></rect>
+                        </svg>
+                      </span>
+                      <span class="surfacewater-depth-below-30">Below 30cm</span>
                     </span>
-                    <span class="surfacewater-depth-below-30">Below 30cm</span>
-                  </span>
+                  </div>
                 </label>
               </div>
 
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="SurfaceWater_12-SWVH" name="measurements" type="radio" value="SurfaceWater_12-SWVH">
+                <input class="govuk-radios__input" id="sw-velocity-radio" onclick="handleRadioChange('velocity')" name="measurements" type="radio" value="SurfaceWater_12-SWVH">
                 <label class="govuk-label govuk-radios__label" for="SurfaceWater_12-SWVH">
-                  Velocity
+                  <span class="surface-water-bulletpoint__heading" id="surface-water-velocity__heading">Velocity</span>
 
-                  <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-velocity-container"
-                    id="sw-velocity-more">
-                    <span class="defra-map-key__symbol">
-                      <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
-                        <rect x="5" y="5" width="22" height="22" style="fill:#555C9D"></rect>
-                      </svg>
+                  <div id="sw-velocity-desc-container">
+                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-velocity-container"
+                      id="sw-velocity-more">
+                      <span class="defra-map-key__symbol">
+                        <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                          <rect x="5" y="5" width="22" height="22" style="fill:#555C9D"></rect>
+                        </svg>
+                      </span>
+                      <span id="risk-severity">More than 0.25 m/s</span>
+                      <span class="risk-context">Metres per second</span>
                     </span>
-                    <span id="risk-severity">More than 0.25 m/s</span>
-                    <span class="risk-context">Metres per second</span>
-                  </span>
 
-                  <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-velocity-container"
-                    id="sw-velocity-less">
-                    <span class="defra-map-key__symbol">
-                      <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
-                        <rect x="5" y="5" width="22" height="22" style="fill:#C4E1FF"></rect>
-                      </svg>
+                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-velocity-container"
+                      id="sw-velocity-less">
+                      <span class="defra-map-key__symbol">
+                        <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                          <rect x="5" y="5" width="22" height="22" style="fill:#C4E1FF"></rect>
+                        </svg>
+                      </span>
+                      <span class="surfacewater-depth-below-30">Less than 0.25 m/s</span>
                     </span>
-                    <span class="surfacewater-depth-below-30">Less than 0.25 m/s</span>
-                  </span>
 
-                  <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-velocity-container"
-                    id="sw-velocity-arrow">
-                    <img class="defra-map-key__symbol arrow-symbol" src="{{ assetPath }}/images/arrow.png">
-                    Direction
-                  <span class="risk-context-v3"></span>
-                </span>
+                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-velocity-container"
+                      id="sw-velocity-arrow">
+                      <img class="defra-map-key__symbol arrow-symbol" src="{{ assetPath }}/images/arrow.png">
+                      Direction
+                    </span>
+                  </div>
                 </label>
               </div>
 
