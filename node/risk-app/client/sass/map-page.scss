@@ -195,6 +195,10 @@ $govuk-assets-path: '/assets/';
   border-radius: 0;
 }
 
+.ol-zoom .ol-zoom-in:focus {
+  z-index: 12;
+}
+
 .ol-zoom .ol-zoom-in button:hover {
   background-color: #f3f2f1;
 }
