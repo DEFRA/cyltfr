@@ -93,8 +93,9 @@
             
             <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="sw-extent-radio" onclick="handleRadioChange('extent')" value="SurfaceWater_6-SW-Extent" title="Extent of flooding from surface water" name="measurements" type="radio" checked="">
-                <label class="govuk-label govuk-radios__label" for="SurfaceWater_6-SW-Extent">
+                <input class="govuk-radios__input" id="sw-extent-radio" onchange="handleRadioChange('extent')" value="0" 
+                title="Extent of flooding from surface water" name="measurements" type="radio" checked="">
+                <label class="govuk-label govuk-radios__label" for="sw-extent-radio">
                   <span class="surface-water-bulletpoint__heading" id="surface-water-extent__heading">Extent</span>
                   
                   <div id="sw-extent-desc-container">
@@ -136,8 +137,9 @@
               </div>
               
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="sw-depth-radio" onclick="handleRadioChange('depth')" value="SurfaceWater_9-SWDH" name="measurements" type="radio">
-                <label class="govuk-label govuk-radios__label" for="SurfaceWater_9-SWDH">
+                <input class="govuk-radios__input" id="sw-depth-radio" onchange="handleRadioChange('depth')" value="1" name="measurements" 
+                title="Surface water flood risk: water depth in a high risk scenario" type="radio">
+                <label class="govuk-label govuk-radios__label" for="sw-depth-radio">
                   <span class="surface-water-bulletpoint__heading" id="surface-water-depth__heading">Depth</span>
 
                   <div id="sw-depth-desc-container">
@@ -175,8 +177,9 @@
               </div>
 
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="sw-velocity-radio" onclick="handleRadioChange('velocity')" name="measurements" type="radio" value="SurfaceWater_12-SWVH">
-                <label class="govuk-label govuk-radios__label" for="SurfaceWater_12-SWVH">
+                <input class="govuk-radios__input" id="sw-velocity-radio" onchange="handleRadioChange('velocity')" name="measurements" type="radio" 
+                title="Surface water flood risk: water velocity in a high risk scenario" value="2">
+                <label class="govuk-label govuk-radios__label" for="sw-velocity-radio">
                   <span class="surface-water-bulletpoint__heading" id="surface-water-velocity__heading">Velocity</span>
 
                   <div id="sw-velocity-desc-container">
