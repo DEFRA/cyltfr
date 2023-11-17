@@ -176,6 +176,44 @@ $govuk-assets-path: '/assets/';
   }
 }
 
+#sw-velocity-desc-container {
+  display: none;
+}
+#sw-depth-desc-container {
+  display: none;
+}
+
+.defra-map__advanced span {
+  vertical-align: top;
+}
+
+.defra-map__advanced {
+  z-index: 20;
+  float: right;
+  right: 300px;
+  position: relative;
+  margin: 10px 10px 0px 10px;
+  border: 0;
+  padding: 0;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  background-color: white;
+  color: #0b0c0c;
+  font-size: 16px;
+  line-height: 40px;
+  color: #0b0c0c;
+  width: auto;
+  padding-right: 11px;
+  pointer-events: auto;
+}
+
+.defra-map__advanced svg {
+  display: inline-block;
+  margin: 10px;
+  vertical-align: top;
+}
+
 #mapKeyLabel {
   position:fixed;
   background-color: white;
