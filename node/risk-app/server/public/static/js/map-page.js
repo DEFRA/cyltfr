@@ -150,3 +150,16 @@ function toggleCopyrightInfo () {
   }
 }
 /* eslint-enable no-unused-vars */
+
+/* eslint-disable no-unused-vars */
+function toggleAdvancedOptions () {
+  const advancedMapOptions = document.getElementsByClassName('advanced-map-option')
+  if (!advancedMapOptions[0].classList.contains('showing')) {
+    advancedMapOptions[0].classList.add('showing')
+    advancedMapOptions[0].style.display = 'block'
+  } else {
+    advancedMapOptions[0].classList.remove('showing')
+    advancedMapOptions[0].style.display = 'none'
+  }
+}
+/* eslint-enable no-unused-vars */

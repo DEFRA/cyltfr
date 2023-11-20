@@ -26,12 +26,6 @@
     position: absolute;
     overflow-x: hidden;
   }
-  #sw-velocity-desc-container {
-    display: none;
-  }
-  #sw-depth-desc-container {
-    display: none;
-  }
 </style>
 {{ super() }}
 {% endblock %}
@@ -45,6 +39,13 @@
           style="fill:currentColor;stroke:currentColor;stroke-width:0.1px"></path>
       </svg>
       <span>Exit map</span>
+    </button>
+
+    <button class="defra-map__advanced" id="advanced-map-button" tabindex="1" style="color:	#0b0c0c;" onclick="toggleAdvancedOptions()">
+      <svg viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <path d="M20.515 15.126 12 19.856l-8.515-4.73-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5zM16 4h6v2h-6zm5.484 7.125-9.022-5a1 1 0 0 0-.968-.001l-8.978 4.96a1 1 0 0 0-.003 1.749l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5a1 1 0 0 0-.002-1.749z"></path>
+      </svg>
+      <span id="map-button-text">Hide advanced options</span>
     </button>
 
     <div class="defra-map-controls-bottom">
@@ -176,7 +177,7 @@
                 </label>
               </div>
 
-              <div class="govuk-radios__item">
+              <div class="govuk-radios__item showing advanced-map-option" id="sw-velocity-section-container">
                 <input class="govuk-radios__input" id="sw-velocity-radio" onchange="handleRadioChange('velocity')" name="measurements" type="radio" 
                 title="Surface water flood risk: water velocity in a high risk scenario" value="SurfaceWater_12-SWVH">
                 <label class="govuk-label govuk-radios__label" for="sw-velocity-radio">
