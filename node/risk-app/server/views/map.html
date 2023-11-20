@@ -20,10 +20,14 @@
 {% block skipLink %}
 {% endblock %}
 <style>
+  html {
+    overflow-x: hidden;
+  }
   body {
     margin: 0;
     height: 100vh;
     position: absolute;
+    overflow-x: hidden;
   }
 </style>
 {{ super() }}
@@ -34,9 +38,17 @@
   <div class="defra-map-controls">
     <button class="defra-map__exit" id="exit-map" tabindex="1" onclick="window.location='{{ backLink }}'">
       <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20">
-        <path d="M4.828,11L12.314,18.485L10.899,19.899L1,10L10.899,0.101L12.314,1.515L4.828,9L19,9L19,11L4.828,11Z" style="fill:currentColor;stroke:currentColor;stroke-width:0.1px"></path>
+        <path d="M4.828,11L12.314,18.485L10.899,19.899L1,10L10.899,0.101L12.314,1.515L4.828,9L19,9L19,11L4.828,11Z"
+          style="fill:currentColor;stroke:currentColor;stroke-width:0.1px"></path>
       </svg>
       <span>Exit map</span>
+    </button>
+
+    <button class="defra-map__advanced" id="advanced-map-button" tabindex="1" style="color:	#0b0c0c;" onclick="toggleAdvancedOptions()">
+      <svg viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <path d="M20.515 15.126 12 19.856l-8.515-4.73-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5zM16 4h6v2h-6zm5.484 7.125-9.022-5a1 1 0 0 0-.968-.001l-8.978 4.96a1 1 0 0 0-.003 1.749l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5a1 1 0 0 0-.002-1.749z"></path>
+      </svg>
+      <span id="map-button-text">Hide advanced options</span>
     </button>
 
     <div class="defra-map-controls-bottom">
@@ -69,18 +81,151 @@
       </div>
     </div>
   </div>
+
   <div class="defra-map-key">
     <div class="defra-map-key__container" id="defra-map-key__container">
       <h2 id="mapKeyLabel" class="defra-map-key__title">
         <span role="text">Key<span class="govuk-visually-hidden">for map features</span></span>
       </h2>
+
+      <div class="defra-map-key__content">
+        <div class="govuk-form-group" id="surface-water-key__section">
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+              <h3 class="defra-map-key__section-title" ontoken="this.onscrolling = false">Surface water</h3>
+            </legend>
+            
+            <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="sw-extent-radio" onchange="handleRadioChange('extent')" value="SurfaceWater_6-SW-Extent" 
+                title="Extent of flooding from surface water" name="measurements" type="radio" checked="">
+                <label class="govuk-label govuk-radios__label" for="sw-extent-radio">
+                  <span class="surface-water-bulletpoint__heading" id="surface-water-extent__heading">Extent</span>
+                  
+                  <div id="sw-extent-desc-container">
+                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-extent-container"
+                      id="sw-extent-high">
+                      <span class="defra-map-key__symbol">
+                        <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                          <rect x="5" y="5" width="22" height="22" style="fill:#555C9D"></rect>
+                        </svg>
+                      </span>
+                      <span id="risk-severity">High risk</span>
+                      <span class="risk-context">More than 3.3% chance each year</span>
+                    </span>
+
+                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-extent-container"
+                      id="sw-extent-med">
+                      <span class="defra-map-key__symbol">
+                        <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                          <rect x="5" y="5" width="22" height="22" style="fill:#9AA0DE"></rect>
+                        </svg>
+                      </span>
+                      Medium risk
+                      <span class="risk-context">Between 3.3% and 1% chance each year</span>
+                    </span>
+
+                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-extent-container"
+                      id="sw-extent-low">
+                      <span class="defra-map-key__symbol">
+                        <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                          <rect x="5" y="5" width="22" height="22" style="fill:#C4E1FF"></rect>
+                        </svg>
+                      </span>
+                      Low risk
+                      <span class="risk-context">Between 1% and 0.1% chance each year</span>
+                    </span>
+
+                  </div>
+                </label>
+              </div>
+              
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="sw-depth-radio" onchange="handleRadioChange('depth')" value="SurfaceWater_9-SWDH" name="measurements" 
+                title="Surface water flood risk: water depth in a high risk scenario" type="radio">
+                <label class="govuk-label govuk-radios__label" for="sw-depth-radio">
+                  <span class="surface-water-bulletpoint__heading" id="surface-water-depth__heading">Depth</span>
+
+                  <div id="sw-depth-desc-container">
+                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-depth-container"
+                    id="sw-depth-above-90">
+                      <span class="defra-map-key__symbol">
+                        <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                          <rect x="5" y="5" width="22" height="22" style="fill:#555C9D"></rect>
+                        </svg>
+                      </span>
+                      <span id="surfacewater-depth-above-90">Above 90cm</span>
+                    </span>
+
+                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-depth-container"
+                      id="w-depth-30-90">
+                      <span class="defra-map-key__symbol">
+                        <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                          <rect x="5" y="5" width="22" height="22" style="fill:#9AA0DE"></rect>
+                        </svg>
+                      </span>
+                      <span id="surfacewater-depth-30-90">30cm to 90cm</span>
+                    </span>
+
+                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-depth-container"
+                      id="sw-depth-below-30">
+                      <span class="defra-map-key__symbol">
+                        <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                          <rect x="5" y="5" width="22" height="22" style="fill:#C4E1FF"></rect>
+                        </svg>
+                      </span>
+                      <span class="surfacewater-depth-below-30">Below 30cm</span>
+                    </span>
+                  </div>
+                </label>
+              </div>
+
+              <div class="govuk-radios__item showing advanced-map-option" id="sw-velocity-section-container">
+                <input class="govuk-radios__input" id="sw-velocity-radio" onchange="handleRadioChange('velocity')" name="measurements" type="radio" 
+                title="Surface water flood risk: water velocity in a high risk scenario" value="SurfaceWater_12-SWVH">
+                <label class="govuk-label govuk-radios__label" for="sw-velocity-radio">
+                  <span class="surface-water-bulletpoint__heading" id="surface-water-velocity__heading">Velocity</span>
+
+                  <div id="sw-velocity-desc-container">
+                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-velocity-container"
+                      id="sw-velocity-more">
+                      <span class="defra-map-key__symbol">
+                        <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                          <rect x="5" y="5" width="22" height="22" style="fill:#555C9D"></rect>
+                        </svg>
+                      </span>
+                      <span id="risk-severity">More than 0.25 m/s</span>
+                      <span class="risk-context">Metres per second</span>
+                    </span>
+
+                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-velocity-container"
+                      id="sw-velocity-less">
+                      <span class="defra-map-key__symbol">
+                        <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                          <rect x="5" y="5" width="22" height="22" style="fill:#C4E1FF"></rect>
+                        </svg>
+                      </span>
+                      <span class="surfacewater-depth-below-30">Less than 0.25 m/s</span>
+                    </span>
+
+                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-velocity-container"
+                      id="sw-velocity-arrow">
+                      <img class="defra-map-key__symbol arrow-symbol" src="{{ assetPath }}/images/arrow.png">
+                      Direction
+                    </span>
+                  </div>
+                </label>
+              </div>
+
+            </div>
+          </fieldset>
+        </div>
+      </div>
     </div>
   </div>
+
   <div id="progress"></div>
-  <div id="map">
-  </div>
-  <!-- <div class="os-api-branding logo"></div> -- I have kept this in as it will be needed again later
-    <div class="os-api-branding copyright"><a class="govuk-link" href="/os-terms">Contains OS data &#169; Crown copyright and database rights {{year}}</a></div> -->
+  <div id="map"></div>
 </div>
 {% endblock %}
 

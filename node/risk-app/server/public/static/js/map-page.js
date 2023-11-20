@@ -1,9 +1,6 @@
 /* global mapCategories $ */
-
 function MapController (categories) {
-  // this._data = data
   this._categories = categories
-  // this.setCurrent(ref)
 }
 
 /**
@@ -43,6 +40,104 @@ MapController.prototype.setCurrent = function (ref) {
   this.currCategory = defaultCategory
 }
 
+;(function () {
+  function getParameterByName (name) {
+    name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]')
+    const regex = new RegExp('[\\?&]' + name + '=([^&#]*)')
+    const results = regex.exec(window.location.search)
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
+  }
+
+  function mapPage () {
+    const mapController = new MapController(mapCategories.categories)
+    const extentRadio = document.getElementById('sw-extent-radio')
+    const depthRadio = document.getElementById('sw-depth-radio')
+    const velocityRadio = document.getElementById('sw-velocity-radio')
+    const $header = $('.govuk-radios')
+    const $selector = $('input[name=measurements]')
+    const $map = $('#map')
+    const $body = $(document.body)
+
+    const easting = parseInt(getParameterByName('easting'), 10)
+    const northing = parseInt(getParameterByName('northing'), 10)
+    const hasLocation = !!easting
+    const maps = window.maps
+
+    maps.loadMap(hasLocation && [easting, northing])
+
+    // This function updates the map to the radio button you select (extent, depth, velocity)
+    function setCurrent (ref) {
+      mapController.setCurrent(ref)
+
+      const currMap = mapController.currMap
+
+      // Update the mobile nav
+      $selector.val(currMap.ref)
+
+      // Depending on which radio button is selected, the relevant map layer reference is assigned
+      function selectedOption () {
+        if (extentRadio.checked) {
+          return 'SurfaceWater_6-SW-Extent'
+        }
+        if (depthRadio.checked) {
+          return 'SurfaceWater_9-SWDH'
+        }
+        if (velocityRadio.checked) {
+          return 'SurfaceWater_12-SWVH'
+        }
+      }
+      const mapReferenceValue = selectedOption()
+
+      maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1))
+    }
+
+    // Default to the first category/map
+    maps.onReady(function () {
+      // Handle the mobile map selector change
+      $header.on('change', 'input[name="measurements"]', function (e) {
+        e.preventDefault()
+        setCurrent($(this).val())
+      })
+
+      setCurrent(getParameterByName('map'))
+    })
+
+    // ensures mouse cursor returns to default if feature was at edge of map
+    $map.on('mouseleave', function (e) {
+      $body.css('cursor', 'default')
+    })
+  }
+
+  mapPage()
+})()
+
+/* eslint-disable no-unused-vars */
+// This function adjusts the descriptions that appear/disappear depending on selected radio button
+function handleRadioChange (selected) {
+  const maps = window.maps
+
+  const extentInfo = document.getElementById('sw-extent-desc-container')
+  const depthInfo = document.getElementById('sw-depth-desc-container')
+  const velocityInfo = document.getElementById('sw-velocity-desc-container')
+
+  if (selected === 'extent') {
+    extentInfo.style.display = 'block'
+    depthInfo.style.display = 'none'
+    velocityInfo.style.display = 'none'
+  }
+  if (selected === 'depth') {
+    extentInfo.style.display = 'none'
+    depthInfo.style.display = 'block'
+    velocityInfo.style.display = 'none'
+  }
+  if (selected === 'velocity') {
+    extentInfo.style.display = 'none'
+    depthInfo.style.display = 'none'
+    velocityInfo.style.display = 'block'
+  }
+}
+/* eslint-disable no-unused-vars */
+
 /* eslint-disable no-unused-vars */
 function toggleCopyrightInfo () {
   const copyrightInfoContainer = document.getElementsByClassName('defra-map-info__container')
@@ -56,107 +151,15 @@ function toggleCopyrightInfo () {
 }
 /* eslint-enable no-unused-vars */
 
-;(function () {
-  function getParameterByName (name) {
-    name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]')
-    const regex = new RegExp('[\\?&]' + name + '=([^&#]*)')
-    const results = regex.exec(window.location.search)
-    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
+/* eslint-disable no-unused-vars */
+function toggleAdvancedOptions () {
+  const advancedMapOptions = document.getElementsByClassName('advanced-map-option')
+  if (!advancedMapOptions[0].classList.contains('showing')) {
+    advancedMapOptions[0].classList.add('showing')
+    advancedMapOptions[0].style.display = 'block'
+  } else {
+    advancedMapOptions[0].classList.remove('showing')
+    advancedMapOptions[0].style.display = 'none'
   }
-
-  function legendTemplate (data) {
-    return window.nunjucks.render('legend.html', data)
-  }
-
-  function mapPage () {
-    const mapController = new MapController(mapCategories.categories)
-
-    const $header = $('.map-header')
-    const $selector = $('select', $header)
-    const $error = $('#error-message')
-    const $query = $('input[name=location]', $header)
-    const $map = $('#map')
-    const $body = $(document.body)
-
-    const easting = parseInt(getParameterByName('easting'), 10)
-    const northing = parseInt(getParameterByName('northing'), 10)
-    const hasLocation = !!easting
-    const maps = window.maps
-
-    maps.loadMap(hasLocation && [easting, northing])
-
-    // Store a reference to the map legend element
-    const $legend = $('#legend')
-
-    function setCurrent (ref) {
-      mapController.setCurrent(ref)
-
-      const currMap = mapController.currMap
-
-      // Update the mobile nav
-      $selector.val(currMap.ref)
-
-      // Update the legend
-      $legend.html(legendTemplate(Object.assign({ hasLocation }, currMap)))
-
-      // Load the map
-      maps.showMap('risk:' + currMap.ref.substring(currMap.ref.indexOf('_') + 1))
-    }
-
-    // Default to the first category/map
-    maps.onReady(function () {
-      // Handle the mobile map selector change
-      $selector.on('change', function (e) {
-        e.preventDefault()
-        setCurrent($(this).val())
-      })
-
-      setCurrent(getParameterByName('map'))
-    })
-
-    $header.on('submit', 'form', function (e) {
-      e.preventDefault()
-
-      const location = $query.val().replace(/[^a-zA-Z0-9',-.& ]/g, '')
-      const noResults = 'No results match this search term.'
-      const serviceUnavailable = 'There is currently a delay in obtaining the results for this area. Normal service will be resumed as soon as possible. In the meantime please use the map below to find the latest information near you.'
-
-      if (location) {
-        const url = '/api/geocode?location=' + location
-        $error.text('')
-
-        $.ajax({
-          url
-        }).done(function (data) {
-          if (data) {
-            if (data.error) {
-              $error.text(serviceUnavailable)
-            } else if (data.isEngland) {
-              const point = [data.easting, data.northing]
-              maps.panTo(point, 7)
-            } else {
-              $error.text(noResults)
-            }
-          } else {
-            $error.text(noResults)
-          }
-        }).fail(function (jqxhr, textStatus, error) {
-          if (jqxhr.status === 400) {
-            $error.text(noResults)
-          } else {
-            $error.text(serviceUnavailable)
-          }
-        })
-      } else {
-        $error.text(noResults)
-      }
-    })
-
-    // ensures mouse cursor returns to default if feature was at edge of map
-    $map.on('mouseleave', function (e) {
-      $body.css('cursor', 'default')
-    })
-  }
-
-  mapPage()
-})()
+}
+/* eslint-enable no-unused-vars */
