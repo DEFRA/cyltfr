@@ -23,12 +23,90 @@
   html {
     overflow-x: hidden;
   }
+
   body {
     margin: 0;
     height: 100vh;
     position: absolute;
     overflow-x: hidden;
   }
+
+  .defra-map-scenarios-depth .govuk-radios{
+    z-index: 15;
+    position: relative;
+    display: flex;
+    width: 660px;
+    height: 82px;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    background-color: white;
+    padding: 5px 0px 0px 0px;
+    float: right;
+    top: calc(100vh - 150px);
+    right: 270px;
+  }
+
+  .defra-map-scenarios-depth .govuk-radios__item {
+    flex: 1 1 auto;
+    font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    font-size: 12px;
+    font-size: 0.75rem;
+    line-height: 1.25;
+    font-size: 14px;
+    padding-bottom: 10px;
+    padding-left: 54px;
+    border-bottom: 7px solid transparent;
+}
+
+  .govuk-radios__label {
+    display: inline-block;
+    margin-bottom: 0;
+    padding: 8px 15px 5px;
+    cursor: pointer;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+}
+
+.govuk-radios__input {
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    top: -2px;
+    left: -2px;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    opacity: 0;
+}
+
+.defra-map-scenarios-depth .risk-context-v3 {
+    display: block;
+    font-size: 14px;
+    padding-top: 2px;
+    padding-bottom: 0;
+}
+.govuk-radios--small .govuk-radios__label {
+    margin-top: -2px;
+    padding: 13px 15px 13px 1px;
+    float: left;
+    font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+}
+
+.defra-map-scenarios-depth .govuk-radios--small .govuk-radios__label:before {
+    margin-left: 15px;
+    margin-top: 8px;
+    height: 28px;
+    width: 28px;
+}
+
+.defra-map-scenarios-depth .govuk-radios--small .govuk-radios__label:after {
+    margin-left: 15px;
+    margin-top: 8px;
+    border-width: 7px;
+}
 </style>
 {{ super() }}
 {% endblock %}
@@ -44,37 +122,77 @@
       <span>Exit map</span>
     </button>
 
-    <button class="defra-map__advanced" id="advanced-map-button" tabindex="1" style="color:	#0b0c0c;" onclick="toggleAdvancedOptions()">
-      <svg viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-        <path d="M20.515 15.126 12 19.856l-8.515-4.73-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5zM16 4h6v2h-6zm5.484 7.125-9.022-5a1 1 0 0 0-.968-.001l-8.978 4.96a1 1 0 0 0-.003 1.749l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5a1 1 0 0 0-.002-1.749z"></path>
+    <button class="defra-map__advanced" id="advanced-map-button" tabindex="1" style="color:	#0b0c0c;"
+      onclick="toggleAdvancedOptions()">
+      <svg viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+        focusable="false">
+        <path
+          d="M20.515 15.126 12 19.856l-8.515-4.73-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5zM16 4h6v2h-6zm5.484 7.125-9.022-5a1 1 0 0 0-.968-.001l-8.978 4.96a1 1 0 0 0-.003 1.749l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5a1 1 0 0 0-.002-1.749z">
+        </path>
       </svg>
       <span id="map-button-text">Hide advanced options</span>
     </button>
 
     <div class="defra-map-controls-bottom">
 
-      <button class="defra-map-attribution" id="att-key-copyright-btn" tabindex="0" aria-controls="viewport" onclick="toggleCopyrightInfo()">
+      <button class="defra-map-attribution" id="att-key-copyright-btn" tabindex="0" aria-controls="viewport"
+        onclick="toggleCopyrightInfo()">
         <div class="button-content">
           <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20">
-            <path d="M10,2.5C11.286,2.5 12.52,2.823 13.701,3.469C14.883,4.116 15.811,5.038 16.487,6.235C17.162,7.433 17.5,8.688 17.5,10C17.5,11.305 17.169,12.551 16.506,13.735C15.844,14.92 14.92,15.844 13.735,16.506C12.551,17.169 11.305,17.5 10,17.5C8.695,17.5 7.449,17.169 6.265,16.506C5.08,15.844 4.156,14.92 3.494,13.735C2.831,12.551 2.5,11.305 2.5,10C2.5,8.688 2.838,7.433 3.513,6.235C4.189,5.038 5.117,4.116 6.299,3.469C7.48,2.823 8.714,2.5 10,2.5ZM10,3.978C8.969,3.978 7.978,4.236 7.028,4.752C6.079,5.268 5.333,6.007 4.791,6.97C4.249,7.932 3.978,8.943 3.978,10C3.978,11.044 4.244,12.043 4.776,12.996C5.308,13.949 6.051,14.692 7.004,15.224C7.957,15.756 8.956,16.022 10,16.022C11.044,16.022 12.043,15.756 12.996,15.224C13.949,14.692 14.692,13.949 15.224,12.996C15.756,12.043 16.022,11.044 16.022,10C16.022,8.949 15.751,7.941 15.209,6.975C14.667,6.008 13.921,5.268 12.972,4.752C12.022,4.236 11.031,3.978 10,3.978ZM11.821,11.116L13.398,11.645C13.149,12.467 12.738,13.097 12.164,13.535C11.589,13.972 10.904,14.191 10.108,14.191C8.992,14.191 8.081,13.825 7.376,13.094C6.671,12.363 6.319,11.354 6.319,10.069C6.319,9.227 6.475,8.476 6.789,7.817C7.102,7.157 7.554,6.664 8.145,6.338C8.735,6.012 9.396,5.849 10.127,5.849C10.93,5.849 11.601,6.039 12.139,6.421C12.678,6.803 13.097,7.405 13.398,8.228L11.811,8.6C11.629,8.123 11.392,7.777 11.102,7.562C10.811,7.347 10.467,7.239 10.069,7.239C9.475,7.239 8.988,7.462 8.61,7.91C8.231,8.357 8.042,9.057 8.042,10.01C8.042,10.963 8.228,11.664 8.6,12.115C8.972,12.565 9.419,12.79 9.941,12.79C10.379,12.79 10.757,12.662 11.077,12.404C11.397,12.146 11.645,11.717 11.821,11.116Z" style="fill:currentColor;"></path>
+            <path
+              d="M10,2.5C11.286,2.5 12.52,2.823 13.701,3.469C14.883,4.116 15.811,5.038 16.487,6.235C17.162,7.433 17.5,8.688 17.5,10C17.5,11.305 17.169,12.551 16.506,13.735C15.844,14.92 14.92,15.844 13.735,16.506C12.551,17.169 11.305,17.5 10,17.5C8.695,17.5 7.449,17.169 6.265,16.506C5.08,15.844 4.156,14.92 3.494,13.735C2.831,12.551 2.5,11.305 2.5,10C2.5,8.688 2.838,7.433 3.513,6.235C4.189,5.038 5.117,4.116 6.299,3.469C7.48,2.823 8.714,2.5 10,2.5ZM10,3.978C8.969,3.978 7.978,4.236 7.028,4.752C6.079,5.268 5.333,6.007 4.791,6.97C4.249,7.932 3.978,8.943 3.978,10C3.978,11.044 4.244,12.043 4.776,12.996C5.308,13.949 6.051,14.692 7.004,15.224C7.957,15.756 8.956,16.022 10,16.022C11.044,16.022 12.043,15.756 12.996,15.224C13.949,14.692 14.692,13.949 15.224,12.996C15.756,12.043 16.022,11.044 16.022,10C16.022,8.949 15.751,7.941 15.209,6.975C14.667,6.008 13.921,5.268 12.972,4.752C12.022,4.236 11.031,3.978 10,3.978ZM11.821,11.116L13.398,11.645C13.149,12.467 12.738,13.097 12.164,13.535C11.589,13.972 10.904,14.191 10.108,14.191C8.992,14.191 8.081,13.825 7.376,13.094C6.671,12.363 6.319,11.354 6.319,10.069C6.319,9.227 6.475,8.476 6.789,7.817C7.102,7.157 7.554,6.664 8.145,6.338C8.735,6.012 9.396,5.849 10.127,5.849C10.93,5.849 11.601,6.039 12.139,6.421C12.678,6.803 13.097,7.405 13.398,8.228L11.811,8.6C11.629,8.123 11.392,7.777 11.102,7.562C10.811,7.347 10.467,7.239 10.069,7.239C9.475,7.239 8.988,7.462 8.61,7.91C8.231,8.357 8.042,9.057 8.042,10.01C8.042,10.963 8.228,11.664 8.6,12.115C8.972,12.565 9.419,12.79 9.941,12.79C10.379,12.79 10.757,12.662 11.077,12.404C11.397,12.146 11.645,11.717 11.821,11.116Z"
+              style="fill:currentColor;"></path>
           </svg>
           <span class="govuk-visually-hidden" id="copyright-hidden-text">copyright information</span>
         </div>
       </button>
+
+      <div class="defra-map-scenarios-depth horizontal-overflow scenario-float-right v6-width-fix-depth">
+        <div class="defra-map-scenarios-v3_container" id="scenarios-controls">
+          <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
+            <i class="fa-solid fa-chevron-left left-btn" aria-hidden="true" style="display: none;"></i>
+            <i class="fa-solid fa-chevron-right right-btn" aria-hidden="true" style="display: none;"></i>
+            <div class="govuk-radios__item" style="border-bottom: 7px solid rgb(29, 112, 184);">
+              <input class="govuk-radios__input" id="sw-high" name="scenarios" type="radio" value="10" checked="">
+              <label class="govuk-label govuk-radios__label" for="sw-high">
+                <strong>High risk</strong>
+                <span class="risk-context-v3">3.3% chance each year</span>
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="sw-med" name="scenarios" type="radio" value="11">
+              <label class="govuk-label govuk-radios__label" for="sw-med">
+                <strong>Medium risk</strong>
+                <span class="risk-context-v3">1% chance each year</span>
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="sw-low" name="scenarios" type="radio" value="12">
+              <label class="govuk-label govuk-radios__label" for="sw-low">
+                <strong>Low risk</strong>
+                <span class="risk-context-v3">0.1% chance each year</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div class="defra-map-info__container">
         <div id="infoContent" class="defra-map-info__content">
           <div id="infoDescription">
             <div class="govuk-!-padding-2">
               <ul class="govuk-list">
-                <li class="govuk-!-font-size-14"><a class="govuk-link" href="https://check-long-term-flood-risk.service.gov.uk/os-terms" previewlistener="true">Contains OS data</a><br>© Crown copyright and database rights 2023</li>
+                <li class="govuk-!-font-size-14"><a class="govuk-link"
+                    href="https://check-long-term-flood-risk.service.gov.uk/os-terms" previewlistener="true">Contains OS
+                    data</a><br>© Crown copyright and database rights 2023</li>
               </ul>
             </div>
           </div>
         </div>
         <button class="defra-map-info__close" onclick="toggleCopyrightInfo()">
           <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20">
-            <path d="M10,8.6L15.6,3L17,4.4L11.4,10L17,15.6L15.6,17L10,11.4L4.4,17L3,15.6L8.6,10L3,4.4L4.4,3L10,8.6Z" style="fill:currentColor;stroke:currentColor;stroke-width:0.1px;"></path>
+            <path d="M10,8.6L15.6,3L17,4.4L11.4,10L17,15.6L15.6,17L10,11.4L4.4,17L3,15.6L8.6,10L3,4.4L4.4,3L10,8.6Z"
+              style="fill:currentColor;stroke:currentColor;stroke-width:0.1px;"></path>
           </svg>
           <span class="govuk-visually-hidden">Close</span>
         </button>
@@ -94,16 +212,18 @@
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
               <h3 class="defra-map-key__section-title" ontoken="this.onscrolling = false">Surface water</h3>
             </legend>
-            
+
             <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="sw-extent-radio" onchange="handleRadioChange('extent')" value="SurfaceWater_6-SW-Extent" 
-                title="Extent of flooding from surface water" name="measurements" type="radio" checked="">
+                <input class="govuk-radios__input" id="sw-extent-radio" onchange="handleRadioChange('extent')"
+                  value="SurfaceWater_6-SW-Extent" title="Extent of flooding from surface water" name="measurements"
+                  type="radio" checked="">
                 <label class="govuk-label govuk-radios__label" for="sw-extent-radio">
                   <span class="surface-water-bulletpoint__heading" id="surface-water-extent__heading">Extent</span>
-                  
+
                   <div id="sw-extent-desc-container">
-                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-extent-container"
+                    <span
+                      class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-extent-container"
                       id="sw-extent-high">
                       <span class="defra-map-key__symbol">
                         <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
@@ -114,7 +234,8 @@
                       <span class="risk-context">More than 3.3% chance each year</span>
                     </span>
 
-                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-extent-container"
+                    <span
+                      class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-extent-container"
                       id="sw-extent-med">
                       <span class="defra-map-key__symbol">
                         <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
@@ -125,7 +246,8 @@
                       <span class="risk-context">Between 3.3% and 1% chance each year</span>
                     </span>
 
-                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-extent-container"
+                    <span
+                      class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-extent-container"
                       id="sw-extent-low">
                       <span class="defra-map-key__symbol">
                         <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
@@ -139,16 +261,18 @@
                   </div>
                 </label>
               </div>
-              
+
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="sw-depth-radio" onchange="handleRadioChange('depth')" value="SurfaceWater_9-SWDH" name="measurements" 
-                title="Surface water flood risk: water depth in a high risk scenario" type="radio">
+                <input class="govuk-radios__input" id="sw-depth-radio" onchange="handleRadioChange('depth')"
+                  value="SurfaceWater_9-SWDH" name="measurements"
+                  title="Surface water flood risk: water depth in a high risk scenario" type="radio">
                 <label class="govuk-label govuk-radios__label" for="sw-depth-radio">
                   <span class="surface-water-bulletpoint__heading" id="surface-water-depth__heading">Depth</span>
 
                   <div id="sw-depth-desc-container">
-                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-depth-container"
-                    id="sw-depth-above-90">
+                    <span
+                      class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-depth-container"
+                      id="sw-depth-above-90">
                       <span class="defra-map-key__symbol">
                         <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
                           <rect x="5" y="5" width="22" height="22" style="fill:#555C9D"></rect>
@@ -157,7 +281,8 @@
                       <span id="surfacewater-depth-above-90">Above 90cm</span>
                     </span>
 
-                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-depth-container"
+                    <span
+                      class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-depth-container"
                       id="w-depth-30-90">
                       <span class="defra-map-key__symbol">
                         <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
@@ -167,7 +292,8 @@
                       <span id="surfacewater-depth-30-90">30cm to 90cm</span>
                     </span>
 
-                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-depth-container"
+                    <span
+                      class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-depth-container"
                       id="sw-depth-below-30">
                       <span class="defra-map-key__symbol">
                         <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
@@ -181,13 +307,15 @@
               </div>
 
               <div class="govuk-radios__item showing advanced-map-option" id="sw-velocity-section-container">
-                <input class="govuk-radios__input" id="sw-velocity-radio" onchange="handleRadioChange('velocity')" name="measurements" type="radio" 
-                title="Surface water flood risk: water velocity in a high risk scenario" value="SurfaceWater_12-SWVH">
+                <input class="govuk-radios__input" id="sw-velocity-radio" onchange="handleRadioChange('velocity')"
+                  name="measurements" type="radio"
+                  title="Surface water flood risk: water velocity in a high risk scenario" value="SurfaceWater_12-SWVH">
                 <label class="govuk-label govuk-radios__label" for="sw-velocity-radio">
                   <span class="surface-water-bulletpoint__heading" id="surface-water-velocity__heading">Velocity</span>
 
                   <div id="sw-velocity-desc-container">
-                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-velocity-container"
+                    <span
+                      class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-velocity-container"
                       id="sw-velocity-more">
                       <span class="defra-map-key__symbol">
                         <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
@@ -198,7 +326,8 @@
                       <span class="risk-context">Metres per second</span>
                     </span>
 
-                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-velocity-container"
+                    <span
+                      class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-velocity-container"
                       id="sw-velocity-less">
                       <span class="defra-map-key__symbol">
                         <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
@@ -208,7 +337,8 @@
                       <span class="surfacewater-depth-below-30">Less than 0.25 m/s</span>
                     </span>
 
-                    <span class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-velocity-container"
+                    <span
+                      class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-velocity-container"
                       id="sw-velocity-arrow">
                       <img class="defra-map-key__symbol arrow-symbol" src="{{ assetPath }}/images/arrow.png">
                       Direction
