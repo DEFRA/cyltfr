@@ -366,7 +366,15 @@ svg:not(:root) {
   margin-top: 25px;
 }
 
-.defra-map-scenarios-depth .govuk-radios{
+#scenario-container-depth {
+  display: none;
+}
+
+#scenario-container-velocity {
+  display: none;
+}
+
+.defra-map-scenarios .govuk-radios{
   z-index: 15;
   position: relative;
   display: flex;
@@ -381,7 +389,7 @@ svg:not(:root) {
   right: 270px;
 }
 
-.defra-map-scenarios-depth .govuk-radios__item {
+.defra-map-scenarios .govuk-radios__item {
   flex: 1 1 auto;
   font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -417,7 +425,7 @@ svg:not(:root) {
   opacity: 0;
 }
 
-.defra-map-scenarios-depth .risk-context-v3 {
+.defra-map-scenarios .risk-context-v3 {
   display: block;
   font-size: 14px;
   padding-top: 2px;
@@ -430,14 +438,14 @@ svg:not(:root) {
   font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
 }
 
-.defra-map-scenarios-depth .govuk-radios--small .govuk-radios__label:before {
+.defra-map-scenarios .govuk-radios--small .govuk-radios__label:before {
   margin-left: 15px;
   margin-top: 8px;
   height: 28px;
   width: 28px;
 }
 
-.defra-map-scenarios-depth .govuk-radios--small .govuk-radios__label:after {
+.defra-map-scenarios .govuk-radios--small .govuk-radios__label:after {
   margin-left: 15px;
   margin-top: 8px;
   border-width: 7px;

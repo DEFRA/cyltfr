@@ -40,82 +40,61 @@ MapController.prototype.setCurrent = function (ref) {
   this.currCategory = defaultCategory
 }
 
-;(function () {
+function mapPage () {
   function getParameterByName (name) {
     name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]')
     const regex = new RegExp('[\\?&]' + name + '=([^&#]*)')
     const results = regex.exec(window.location.search)
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
   }
+  const mapController = new MapController(mapCategories.categories)
+  const $header = $('.govuk-radios')
+  // const $selector = $('input[name=measurements]')
+  const $map = $('#map')
+  const $body = $(document.body)
 
-  function mapPage () {
-    const mapController = new MapController(mapCategories.categories)
-    const extentRadio = document.getElementById('sw-extent-radio')
-    const depthRadio = document.getElementById('sw-depth-radio')
-    const velocityRadio = document.getElementById('sw-velocity-radio')
-    const $header = $('.govuk-radios')
-    const $selector = $('input[name=measurements]')
-    const $map = $('#map')
-    const $body = $(document.body)
+  const easting = parseInt(getParameterByName('easting'), 10)
+  const northing = parseInt(getParameterByName('northing'), 10)
+  const hasLocation = !!easting
+  const maps = window.maps
 
-    const easting = parseInt(getParameterByName('easting'), 10)
-    const northing = parseInt(getParameterByName('northing'), 10)
-    const hasLocation = !!easting
-    const maps = window.maps
+  maps.loadMap(hasLocation && [easting, northing])
 
-    maps.loadMap(hasLocation && [easting, northing])
+  // This function updates the map to the radio button you select (extent, depth, velocity)
+  function setCurrent (ref) {
+    mapController.setCurrent(ref)
 
-    // This function updates the map to the radio button you select (extent, depth, velocity)
-    function setCurrent (ref) {
-      mapController.setCurrent(ref)
+    // const currMap = mapController.currMap
 
-      const currMap = mapController.currMap
+    // Update the mobile nav
+    // $selector.val(currMap.ref)
 
-      // Update the mobile nav
-      $selector.val(currMap.ref)
-
-      // Depending on which radio button is selected, the relevant map layer reference is assigned
-      function selectedOption () {
-        if (extentRadio.checked) {
-          return 'SurfaceWater_6-SW-Extent'
-        }
-        if (depthRadio.checked) {
-          return 'SurfaceWater_9-SWDH'
-        }
-        if (velocityRadio.checked) {
-          return 'SurfaceWater_12-SWVH'
-        }
-      }
-      const mapReferenceValue = selectedOption()
-
-      maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1))
-    }
-
-    // Default to the first category/map
-    maps.onReady(function () {
-      // Handle the mobile map selector change
-      $header.on('change', 'input[name="measurements"]', function (e) {
-        e.preventDefault()
-        setCurrent($(this).val())
-      })
-
-      setCurrent(getParameterByName('map'))
-    })
-
-    // ensures mouse cursor returns to default if feature was at edge of map
-    $map.on('mouseleave', function (e) {
-      $body.css('cursor', 'default')
-    })
+    const mapReferenceValue = selectedOption()
+    maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1))
   }
 
-  mapPage()
-})()
+  // Default to the first category/map
+  maps.onReady(function () {
+    // Handle the mobile map selector change
+    $header.on('change', 'input[name="measurements"]', function (e) {
+      e.preventDefault()
+      setCurrent($(this).val())
+    })
+
+    setCurrent(getParameterByName('map'))
+  })
+
+  // ensures mouse cursor returns to default if feature was at edge of map
+  $map.on('mouseleave', function (e) {
+    $body.css('cursor', 'default')
+  })
+}
 
 /* eslint-disable no-unused-vars */
 // This function adjusts the descriptions that appear/disappear depending on selected radio button
 function handleRadioChange (selected) {
-  const maps = window.maps
-
+  const scenarioBarDepth = document.getElementById('scenario-container-depth')
+  const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
   const extentInfo = document.getElementById('sw-extent-desc-container')
   const depthInfo = document.getElementById('sw-depth-desc-container')
   const velocityInfo = document.getElementById('sw-velocity-desc-container')
@@ -124,16 +103,22 @@ function handleRadioChange (selected) {
     extentInfo.style.display = 'block'
     depthInfo.style.display = 'none'
     velocityInfo.style.display = 'none'
+    scenarioBarDepth.style.display = 'none'
+    scenarioBarVelocity.style.display = 'none'
   }
   if (selected === 'depth') {
     extentInfo.style.display = 'none'
     depthInfo.style.display = 'block'
     velocityInfo.style.display = 'none'
+    scenarioBarDepth.style.display = 'block'
+    scenarioBarVelocity.style.display = 'none'
   }
   if (selected === 'velocity') {
     extentInfo.style.display = 'none'
     depthInfo.style.display = 'none'
     velocityInfo.style.display = 'block'
+    scenarioBarDepth.style.display = 'none'
+    scenarioBarVelocity.style.display = 'block'
   }
 }
 /* eslint-disable no-unused-vars */
@@ -163,3 +148,51 @@ function toggleAdvancedOptions () {
   }
 }
 /* eslint-enable no-unused-vars */
+
+/* eslint-disable no-unused-vars */
+function scenarioDisplayUpdate () {
+  const scenariosRadios = document.querySelectorAll('input[name="scenarios"]')
+  scenariosRadios.forEach(radio => {
+    console.log(radio)
+  })
+}
+/* eslint-enable no-unused-vars */
+
+function selectedOption () {
+  const measurementsRadios = document.querySelector('input[name="measurements"]:checked')
+  const scenariosRadiosDepth = document.querySelector('input[name="scenarios-depth"]:checked')
+  const scenariosRadiosVelocity = document.querySelector('input[name="scenarios-velocity"]:checked')
+
+  const extentRadio = document.getElementById('sw-extent-radio')
+  const depthRadio = document.getElementById('sw-depth-radio')
+  const velocityRadio = document.getElementById('sw-velocity-radio')
+
+  const mediumRadioDepth = document.getElementById('risk-radio-medium-depth')
+  const lowRadioDepth = document.getElementById('risk-radio-low-depth')
+  const mediumRadioVelocity = document.getElementById('risk-radio-medium-velocity')
+  const lowRadioVelocity = document.getElementById('risk-radio-low-velocity')
+  if (extentRadio.checked) {
+    return measurementsRadios.value
+  }
+  if (depthRadio.checked) {
+    if (mediumRadioDepth.checked) {
+      return mediumRadioDepth.value
+    }
+    if (lowRadioDepth.checked) {
+      return lowRadioDepth.value
+    }
+    return scenariosRadiosDepth.value
+  }
+  if (velocityRadio.checked) {
+    if (mediumRadioVelocity.checked) {
+      return mediumRadioVelocity.value
+    }
+    if (lowRadioVelocity.checked) {
+      return lowRadioVelocity.value
+    }
+    return scenariosRadiosVelocity.value
+  }
+  return measurementsRadios.value
+}
+
+mapPage()

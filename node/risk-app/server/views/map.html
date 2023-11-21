@@ -30,83 +30,6 @@
     position: absolute;
     overflow-x: hidden;
   }
-
-  .defra-map-scenarios-depth .govuk-radios{
-    z-index: 15;
-    position: relative;
-    display: flex;
-    width: 660px;
-    height: 82px;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    background-color: white;
-    padding: 5px 0px 0px 0px;
-    float: right;
-    top: calc(100vh - 150px);
-    right: 270px;
-  }
-
-  .defra-map-scenarios-depth .govuk-radios__item {
-    flex: 1 1 auto;
-    font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-weight: 400;
-    font-size: 12px;
-    font-size: 0.75rem;
-    line-height: 1.25;
-    font-size: 14px;
-    padding-bottom: 10px;
-    padding-left: 54px;
-    border-bottom: 7px solid transparent;
-}
-
-  .govuk-radios__label {
-    display: inline-block;
-    margin-bottom: 0;
-    padding: 8px 15px 5px;
-    cursor: pointer;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-}
-
-.govuk-radios__input {
-    cursor: pointer;
-    position: absolute;
-    z-index: 1;
-    top: -2px;
-    left: -2px;
-    width: 44px;
-    height: 44px;
-    margin: 0;
-    opacity: 0;
-}
-
-.defra-map-scenarios-depth .risk-context-v3 {
-    display: block;
-    font-size: 14px;
-    padding-top: 2px;
-    padding-bottom: 0;
-}
-.govuk-radios--small .govuk-radios__label {
-    margin-top: -2px;
-    padding: 13px 15px 13px 1px;
-    float: left;
-    font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
-}
-
-.defra-map-scenarios-depth .govuk-radios--small .govuk-radios__label:before {
-    margin-left: 15px;
-    margin-top: 8px;
-    height: 28px;
-    width: 28px;
-}
-
-.defra-map-scenarios-depth .govuk-radios--small .govuk-radios__label:after {
-    margin-left: 15px;
-    margin-top: 8px;
-    border-width: 7px;
-}
 </style>
 {{ super() }}
 {% endblock %}
@@ -147,37 +70,74 @@
         </div>
       </button>
 
-      <div class="defra-map-scenarios-depth horizontal-overflow scenario-float-right v6-width-fix-depth">
-        <div class="defra-map-scenarios-v3_container" id="scenarios-controls">
+      <div class="defra-map-scenarios horizontal-overflow scenario-float-right v6-width-fix" id="scenario-container-depth">
+        <div class="defra-map-scenarios-v3_container" id="scenarios-controls-depth">
           <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
-            <i class="fa-solid fa-chevron-left left-btn" aria-hidden="true" style="display: none;"></i>
-            <i class="fa-solid fa-chevron-right right-btn" aria-hidden="true" style="display: none;"></i>
             <div class="govuk-radios__item" style="border-bottom: 7px solid rgb(29, 112, 184);">
-              <input class="govuk-radios__input" id="sw-high" name="scenarios" type="radio" value="10" checked="">
-              <label class="govuk-label govuk-radios__label" for="sw-high">
-                <strong>High risk</strong>
+              <input class="govuk-radios__input" id="risk-radio-high-depth" onchange="scenarioDisplayUpdate()"
+              name="scenarios-depth" type="radio" value="{{maps.categories[1].maps[1].ref}}" checked="">
+              <label class="govuk-label govuk-radios__label" for="risk-radio-high-depth">
+                <strong >High risk</strong>
                 <span class="risk-context-v3">3.3% chance each year</span>
               </label>
             </div>
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="sw-med" name="scenarios" type="radio" value="11">
-              <label class="govuk-label govuk-radios__label" for="sw-med">
-                <strong>Medium risk</strong>
+              <input class="govuk-radios__input" id="risk-radio-medium-depth" onchange="scenarioDisplayUpdate()"
+              name="scenarios-depth" type="radio" value="{{maps.categories[1].maps[3].ref}}">
+              <label class="govuk-label govuk-radios__label" for="risk-radio-medium-depth">
+                <strong >Medium risk</strong>
                 <span class="risk-context-v3">1% chance each year</span>
               </label>
             </div>
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="sw-low" name="scenarios" type="radio" value="12">
-              <label class="govuk-label govuk-radios__label" for="sw-low">
-                <strong>Low risk</strong>
+              <input class="govuk-radios__input" id="risk-radio-low-depth" onchange="scenarioDisplayUpdate()"
+              name="scenarios-depth" type="radio" value="{{maps.categories[1].maps[5].ref}}">
+              <label class="govuk-label govuk-radios__label" for="risk-radio-low-depth">
+                <strong >Low risk</strong>
                 <span class="risk-context-v3">0.1% chance each year</span>
               </label>
             </div>
           </div>
         </div>
       </div>
+      
+      <div class="defra-map-scenarios horizontal-overflow scenario-float-right v6-width-fix" id="scenario-container-velocity">
+        <div class="defra-map-scenarios-v3_container" id="scenarios-controls-velocity">
+          <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
+            
+            <div class="govuk-radios__item" style="border-bottom: 7px solid rgb(29, 112, 184);">
+              <input class="govuk-radios__input" id="risk-radio-high-velocity" onchange="scenarioDisplayUpdate()"
+              name="scenarios-velocity" type="radio" value="{{maps.categories[1].maps[2].ref}}" checked="">
+              <label class="govuk-label govuk-radios__label" for="risk-radio-high-velocity">
+                <strong >High risk</strong>
+                <span class="risk-context-v3">3.3% chance each year</span>
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="risk-radio-medium-velocity" onchange="scenarioDisplayUpdate()"
+              name="scenarios-velocity" type="radio" value="{{maps.categories[1].maps[4].ref}}">
+              <label class="govuk-label govuk-radios__label" for="risk-radio-medium-velocity">
+                <strong >Medium risk</strong>
+                <span class="risk-context-v3">1% chance each year</span>
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="risk-radio-low-velocity" onchange="scenarioDisplayUpdate()"
+              name="scenarios-velocity" type="radio" value="{{maps.categories[1].maps[6].ref}}">
+              <label class="govuk-label govuk-radios__label" for="risk-radio-low-velocity">
+                <strong >Low risk</strong>
+                <span class="risk-context-v3">0.1% chance each year</span>
+              </label>
+            </div>
+            
+          </div>
+        </div>
+      </div>
 
       <div class="defra-map-info__container">
+
         <div id="infoContent" class="defra-map-info__content">
           <div id="infoDescription">
             <div class="govuk-!-padding-2">
@@ -196,6 +156,7 @@
           </svg>
           <span class="govuk-visually-hidden">Close</span>
         </button>
+
       </div>
     </div>
   </div>
@@ -216,8 +177,7 @@
             <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
               <div class="govuk-radios__item">
                 <input class="govuk-radios__input" id="sw-extent-radio" onchange="handleRadioChange('extent')"
-                  value="SurfaceWater_6-SW-Extent" title="Extent of flooding from surface water" name="measurements"
-                  type="radio" checked="">
+                  value="{{maps.categories[1].maps[0].ref}}" title="Extent of flooding from surface water" name="measurements" type="radio" checked="">
                 <label class="govuk-label govuk-radios__label" for="sw-extent-radio">
                   <span class="surface-water-bulletpoint__heading" id="surface-water-extent__heading">Extent</span>
 
@@ -264,8 +224,7 @@
 
               <div class="govuk-radios__item">
                 <input class="govuk-radios__input" id="sw-depth-radio" onchange="handleRadioChange('depth')"
-                  value="SurfaceWater_9-SWDH" name="measurements"
-                  title="Surface water flood risk: water depth in a high risk scenario" type="radio">
+                  value="{{maps.categories[1].maps[1].ref}}" name="measurements" title="Surface water flood risk: water depth in a high risk scenario" type="radio">
                 <label class="govuk-label govuk-radios__label" for="sw-depth-radio">
                   <span class="surface-water-bulletpoint__heading" id="surface-water-depth__heading">Depth</span>
 
@@ -307,9 +266,8 @@
               </div>
 
               <div class="govuk-radios__item showing advanced-map-option" id="sw-velocity-section-container">
-                <input class="govuk-radios__input" id="sw-velocity-radio" onchange="handleRadioChange('velocity')"
-                  name="measurements" type="radio"
-                  title="Surface water flood risk: water velocity in a high risk scenario" value="SurfaceWater_12-SWVH">
+                <input class="govuk-radios__input" id="sw-velocity-radio" onchange="handleRadioChange('velocity')" value="{{maps.categories[1].maps[2].ref}}"
+                  name="measurements" title="Surface water flood risk: water velocity in a high risk scenario" type="radio">
                 <label class="govuk-label govuk-radios__label" for="sw-velocity-radio">
                   <span class="surface-water-bulletpoint__heading" id="surface-water-velocity__heading">Velocity</span>
 
@@ -350,6 +308,13 @@
             </div>
           </fieldset>
         </div>
+        <p>{{maps.categories[1].maps[1].ref}}</p>
+        {% for category in maps.categories %}
+          {{category.name}}
+          {% for map in category.maps %}
+          {{map.ref}}
+          {% endfor %}
+        {% endfor %}
       </div>
     </div>
   </div>
