@@ -151,9 +151,21 @@ function toggleAdvancedOptions () {
 
 /* eslint-disable no-unused-vars */
 function scenarioDisplayUpdate () {
-  const scenariosRadios = document.querySelectorAll('input[name="scenarios"]')
+  const scenariosRadios = document.querySelectorAll('input[name="scenarios-depth"]')
   scenariosRadios.forEach(radio => {
-    console.log(radio)
+    if (radio.checked) {
+      const parent = radio.parentNode
+      parent.style.borderBottom = '7px solid rgb(29, 112, 184)'
+      const scenarioHeading = parent.querySelector('.scenario-heading')
+      scenarioHeading.style.textDecoration = 'none'
+    } else {
+      const parent = radio.parentNode
+      parent.style.borderBottom = 'none'
+      const scenarioHeading = parent.querySelector('.scenario-heading')
+      scenarioHeading.style.textDecoration = 'underline'
+      scenarioHeading.style.textDecorationThickness = '2px'
+      console.log(scenarioHeading.style.textDecorationThickness)
+    }
   })
 }
 /* eslint-enable no-unused-vars */
