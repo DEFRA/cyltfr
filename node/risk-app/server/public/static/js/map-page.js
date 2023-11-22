@@ -150,8 +150,8 @@ function toggleAdvancedOptions () {
 /* eslint-enable no-unused-vars */
 
 /* eslint-disable no-unused-vars */
-function scenarioDisplayUpdate () {
-  const scenariosRadios = document.querySelectorAll('input[name="scenarios-depth"]')
+function scenarioDisplayUpdate (scenarioBar) {
+  const scenariosRadios = document.querySelectorAll(`input[name="scenarios-${scenarioBar}"]`)
   scenariosRadios.forEach(radio => {
     if (radio.checked) {
       const parent = radio.parentNode
@@ -164,7 +164,6 @@ function scenarioDisplayUpdate () {
       const scenarioHeading = parent.querySelector('.scenario-heading')
       scenarioHeading.style.textDecoration = 'underline'
       scenarioHeading.style.textDecorationThickness = '2px'
-      console.log(scenarioHeading.style.textDecorationThickness)
     }
   })
 }
