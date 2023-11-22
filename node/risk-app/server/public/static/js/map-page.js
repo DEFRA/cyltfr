@@ -143,27 +143,30 @@ function toggleCopyrightInfo () {
   const copyrightInfoContainer = document.getElementsByClassName('defra-map-info__container')
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
-  if (scenarioBarDepth.style.display === 'block') {
-    if (!copyrightInfoContainer[0].classList.contains('showing')) {
-      scenarioBarDepth.style.display = 'none'
+  const extentRadio = document.getElementById('sw-extent-radio')
+  if (!extentRadio.checked) {
+    if (scenarioBarDepth.style.display === 'block') {
+      if (!copyrightInfoContainer[0].classList.contains('showing')) {
+        scenarioBarDepth.style.display = 'none'
+      }
     }
-  }
-  if (scenarioBarDepth.style.display === 'none') {
-    if (copyrightInfoContainer[0].classList.contains('showing')) {
-      scenarioBarDepth.style.display = 'block'
-      scenarioBarVelocity.style.display = 'none'
+    if (scenarioBarDepth.style.display === 'none') {
+      if (copyrightInfoContainer[0].classList.contains('showing')) {
+        scenarioBarDepth.style.display = 'block'
+        scenarioBarVelocity.style.display = 'none'
+      }
     }
-  }
 
-  if (scenarioBarVelocity.style.display === 'block') {
-    if (!copyrightInfoContainer[0].classList.contains('showing')) {
-      scenarioBarVelocity.style.display = 'none'
+    if (scenarioBarVelocity.style.display === 'block') {
+      if (!copyrightInfoContainer[0].classList.contains('showing')) {
+        scenarioBarVelocity.style.display = 'none'
+      }
     }
-  }
-  if (scenarioBarVelocity.style.display === 'none') {
-    if (copyrightInfoContainer[0].classList.contains('showing')) {
-      scenarioBarVelocity.style.display = 'block'
-      scenarioBarDepth.style.display = 'none'
+    if (scenarioBarVelocity.style.display === 'none') {
+      if (copyrightInfoContainer[0].classList.contains('showing')) {
+        scenarioBarVelocity.style.display = 'block'
+        scenarioBarDepth.style.display = 'none'
+      }
     }
   }
 
