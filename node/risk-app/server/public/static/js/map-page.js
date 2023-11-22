@@ -105,8 +105,6 @@ function handleRadioChange (selected) {
   const copyrightInfo = document.getElementById('copyright-info-container')
   const olZoom = document.getElementsByClassName('ol-zoom')
 
-  console.log(olZoom[0].style.display)
-
   if (selected === 'extent') {
     extentInfo.style.display = 'block'
     depthInfo.style.display = 'none'
