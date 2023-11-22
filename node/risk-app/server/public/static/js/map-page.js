@@ -98,6 +98,11 @@ function handleRadioChange (selected) {
   const extentInfo = document.getElementById('sw-extent-desc-container')
   const depthInfo = document.getElementById('sw-depth-desc-container')
   const velocityInfo = document.getElementById('sw-velocity-desc-container')
+  const copyrightBtn = document.getElementById('att-key-copyright-btn')
+  const copyrightInfo = document.getElementById('copyright-info-container')
+  const olZoom = document.getElementsByClassName('ol-zoom')
+
+  console.log(olZoom[0].style.display)
 
   if (selected === 'extent') {
     extentInfo.style.display = 'block'
@@ -105,6 +110,9 @@ function handleRadioChange (selected) {
     velocityInfo.style.display = 'none'
     scenarioBarDepth.style.display = 'none'
     scenarioBarVelocity.style.display = 'none'
+    copyrightBtn.style.top = 'calc(100vh - 115px)'
+    copyrightInfo.style.right = '360px'
+    olZoom[0].style.top = 'calc(100% - 145px)'
   }
   if (selected === 'depth') {
     extentInfo.style.display = 'none'
@@ -112,6 +120,9 @@ function handleRadioChange (selected) {
     velocityInfo.style.display = 'none'
     scenarioBarDepth.style.display = 'block'
     scenarioBarVelocity.style.display = 'none'
+    copyrightBtn.style.top = 'calc(100vh - 205px)'
+    copyrightInfo.style.right = '310px'
+    olZoom[0].style.top = 'calc(100% - 235px)'
   }
   if (selected === 'velocity') {
     extentInfo.style.display = 'none'
@@ -119,6 +130,9 @@ function handleRadioChange (selected) {
     velocityInfo.style.display = 'block'
     scenarioBarDepth.style.display = 'none'
     scenarioBarVelocity.style.display = 'block'
+    copyrightBtn.style.top = 'calc(100vh - 205px);'
+    copyrightInfo.style.right = '310px'
+    olZoom[0].style.top = 'calc(100% - 235px)'
   }
 }
 /* eslint-disable no-unused-vars */
@@ -126,6 +140,32 @@ function handleRadioChange (selected) {
 /* eslint-disable no-unused-vars */
 function toggleCopyrightInfo () {
   const copyrightInfoContainer = document.getElementsByClassName('defra-map-info__container')
+  const scenarioBarDepth = document.getElementById('scenario-container-depth')
+  const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
+  if (scenarioBarDepth.style.display === 'block') {
+    if (!copyrightInfoContainer[0].classList.contains('showing')) {
+      scenarioBarDepth.style.display = 'none'
+    }
+  }
+  if (scenarioBarDepth.style.display === 'none') {
+    if (copyrightInfoContainer[0].classList.contains('showing')) {
+      scenarioBarDepth.style.display = 'block'
+      scenarioBarVelocity.style.display = 'none'
+    }
+  }
+
+  if (scenarioBarVelocity.style.display === 'block') {
+    if (!copyrightInfoContainer[0].classList.contains('showing')) {
+      scenarioBarVelocity.style.display = 'none'
+    }
+  }
+  if (scenarioBarVelocity.style.display === 'none') {
+    if (copyrightInfoContainer[0].classList.contains('showing')) {
+      scenarioBarVelocity.style.display = 'block'
+      scenarioBarDepth.style.display = 'none'
+    }
+  }
+
   if (!copyrightInfoContainer[0].classList.contains('showing')) {
     copyrightInfoContainer[0].classList.add('showing')
     copyrightInfoContainer[0].style.display = 'block'
