@@ -93,33 +93,30 @@ function mapPage () {
 /* eslint-disable no-unused-vars */
 // This function adjusts the descriptions that appear/disappear depending on selected radio button
 function handleRadioChange (selected) {
-  const scenarioBarDepth = document.getElementById('scenario-container-depth')
-  const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
-  const extentInfo = document.getElementById('sw-extent-desc-container')
-  const depthInfo = document.getElementById('sw-depth-desc-container')
-  const velocityInfo = document.getElementById('sw-velocity-desc-container')
+  const scenarioBars = {
+    extent: 'scenario-container-depth',
+    depth: 'scenario-container-velocity',
+    velocity: 'scenario-container-velocity'
+  }
 
-  if (selected === 'extent') {
-    extentInfo.style.display = 'block'
-    depthInfo.style.display = 'none'
-    velocityInfo.style.display = 'none'
-    scenarioBarDepth.style.display = 'none'
-    scenarioBarVelocity.style.display = 'none'
+  const infoContainers = {
+    extent: 'sw-extent-desc-container',
+    depth: 'sw-depth-desc-container',
+    velocity: 'sw-velocity-desc-container'
   }
-  if (selected === 'depth') {
-    extentInfo.style.display = 'none'
-    depthInfo.style.display = 'block'
-    velocityInfo.style.display = 'none'
-    scenarioBarDepth.style.display = 'block'
-    scenarioBarVelocity.style.display = 'none'
-  }
-  if (selected === 'velocity') {
-    extentInfo.style.display = 'none'
-    depthInfo.style.display = 'none'
-    velocityInfo.style.display = 'block'
-    scenarioBarDepth.style.display = 'none'
-    scenarioBarVelocity.style.display = 'block'
-  }
+
+  Object.keys(scenarioBars).forEach(key => {
+    const scenarioBar = document.getElementById(scenarioBars[key])
+    const infoContainer = document.getElementById(infoContainers[key])
+
+    if (key === selected) {
+      infoContainer.style.display = 'block'
+      scenarioBar.style.display = key === 'velocity' ? 'block' : 'none'
+    } else {
+      infoContainer.style.display = 'none'
+      scenarioBar.style.display = 'none'
+    }
+  })
 }
 /* eslint-disable no-unused-vars */
 
