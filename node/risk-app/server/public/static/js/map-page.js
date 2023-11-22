@@ -64,11 +64,6 @@ function mapPage () {
   function setCurrent (ref) {
     mapController.setCurrent(ref)
 
-    // const currMap = mapController.currMap
-
-    // Update the mobile nav
-    // $selector.val(currMap.ref)
-
     const mapReferenceValue = selectedOption()
     maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1))
   }
@@ -77,6 +72,14 @@ function mapPage () {
   maps.onReady(function () {
     // Handle the mobile map selector change
     $header.on('change', 'input[name="measurements"]', function (e) {
+      e.preventDefault()
+      setCurrent($(this).val())
+    })
+    $header.on('change', 'input[name="scenarios-depth"]', function (e) {
+      e.preventDefault()
+      setCurrent($(this).val())
+    })
+    $header.on('change', 'input[name="scenarios-velocity"]', function (e) {
       e.preventDefault()
       setCurrent($(this).val())
     })
