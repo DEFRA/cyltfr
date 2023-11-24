@@ -37,6 +37,8 @@
 {% block main %}
 <div class="map-container">
   <div class="defra-map-controls">
+
+    <!-- Exit button -->
     <button class="defra-map__exit" id="exit-map" tabindex="1" onclick="window.location='{{ backLink }}'">
       <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20">
         <path d="M4.828,11L12.314,18.485L10.899,19.899L1,10L10.899,0.101L12.314,1.515L4.828,9L19,9L19,11L4.828,11Z"
@@ -45,6 +47,7 @@
       <span>Exit map</span>
     </button>
 
+    <!-- Advanced options button -->
     <button class="defra-map__advanced" id="advanced-map-button" tabindex="1" style="color:	#0b0c0c;"
       onclick="toggleAdvancedOptions()">
       <svg viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
@@ -57,7 +60,8 @@
     </button>
 
     <div class="defra-map-controls-bottom">
-
+      
+      <!-- Copyright -->
       <button class="defra-map-attribution" id="att-key-copyright-btn" tabindex="0" aria-controls="viewport"
         onclick="toggleCopyrightInfo()">
         <div class="button-content">
@@ -70,6 +74,29 @@
         </div>
       </button>
 
+      <div class="defra-map-info__container" id="copyright-info-container" style="display: none;">
+
+        <div id="infoContent" class="defra-map-info__content">
+          <div id="infoDescription">
+            <div class="govuk-!-padding-2">
+              <ul class="govuk-list">
+                <li class="govuk-!-font-size-14"><a class="govuk-link"
+                    href="https://check-long-term-flood-risk.service.gov.uk/os-terms" previewlistener="true">Contains OS
+                    data</a><br>© Crown copyright and database rights 2023</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <button class="defra-map-info__close" onclick="toggleCopyrightInfo()">
+          <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20">
+            <path d="M10,8.6L15.6,3L17,4.4L11.4,10L17,15.6L15.6,17L10,11.4L4.4,17L3,15.6L8.6,10L3,4.4L4.4,3L10,8.6Z"
+              style="fill:currentColor;stroke:currentColor;stroke-width:0.1px;"></path>
+          </svg>
+          <span class="govuk-visually-hidden">Close</span>
+        </button>
+      </div>
+
+      <!-- Depth scenarios -->
       <div class="defra-map-scenarios horizontal-overflow scenario-float-right v6-width-fix" id="scenario-container-depth">
         <div class="defra-map-scenarios-v3_container" id="scenarios-controls-depth">
           <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
@@ -101,6 +128,7 @@
         </div>
       </div>
       
+      <!-- Velocity scenarios -->
       <div class="defra-map-scenarios horizontal-overflow scenario-float-right v6-width-fix" id="scenario-container-velocity">
         <div class="defra-map-scenarios-v3_container" id="scenarios-controls-velocity">
           <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
@@ -131,36 +159,13 @@
                 <span class="risk-context-v3">0.1% chance each year</span>
               </label>
             </div>
-            
           </div>
         </div>
-      </div>
-
-      <div class="defra-map-info__container" id="copyright-info-container">
-
-        <div id="infoContent" class="defra-map-info__content">
-          <div id="infoDescription">
-            <div class="govuk-!-padding-2">
-              <ul class="govuk-list">
-                <li class="govuk-!-font-size-14"><a class="govuk-link"
-                    href="https://check-long-term-flood-risk.service.gov.uk/os-terms" previewlistener="true">Contains OS
-                    data</a><br>© Crown copyright and database rights 2023</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <button class="defra-map-info__close" onclick="toggleCopyrightInfo()">
-          <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20">
-            <path d="M10,8.6L15.6,3L17,4.4L11.4,10L17,15.6L15.6,17L10,11.4L4.4,17L3,15.6L8.6,10L3,4.4L4.4,3L10,8.6Z"
-              style="fill:currentColor;stroke:currentColor;stroke-width:0.1px;"></path>
-          </svg>
-          <span class="govuk-visually-hidden">Close</span>
-        </button>
-
       </div>
     </div>
   </div>
 
+  <!-- Key -->
   <div class="defra-map-key">
     <div class="defra-map-key__container" id="defra-map-key__container">
       <h2 id="mapKeyLabel" class="defra-map-key__title">
@@ -176,7 +181,7 @@
 
             <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="sw-extent-radio" onchange="handleRadioChange('extent')"
+                <input class="govuk-radios__input extent-radio" id="sw-extent-radio" onchange="handleRadioChange('extent', 'surface water')"
                   value="{{maps.categories[1].maps[0].ref}}" title="Extent of flooding from surface water" name="measurements" type="radio" checked="">
                 <label class="govuk-label govuk-radios__label" for="sw-extent-radio">
                   <span class="surface-water-bulletpoint__heading" id="surface-water-extent__heading">Extent</span>
@@ -307,6 +312,48 @@
 
             </div>
           </fieldset>
+
+          <!-- Reservoirs -->
+          <div class="reservoir-container" id="reservoir-key__section">
+            <fieldset class="govuk-fieldset">
+              <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                <h3 class="defra-map-key__section-title" id="reservoir-title" ontoken="this.onscrolling = false">Reservoirs</h3>
+              </legend>
+
+              <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input extent-radio" id="reservoirs-radio" onchange="handleRadioChange('extent', 'reservoirs')"
+                    value="{{maps.categories[1].maps[0].ref}}" title="Extent of flooding from reservoirs" name="measurements" type="radio">
+                  <label class="govuk-label govuk-radios__label" for="reservoirs-radio">
+                    <span class="reservoirs-water-bulletpoint__heading" id="reservoirs-extent__heading">Extent</span>
+                      <div id="reservoirs-extent-desc-container">
+                        <span
+                        class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi reservoirs-extent-container"
+                        id="reservoirs-extent-med">
+                          <span class="defra-map-key__symbol">
+                            <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                              <rect x="5" y="5" width="22" height="22" style="fill:#9AA0DE"></rect>
+                            </svg>
+                          </span>
+                          When river levels are normal
+                        </span>
+
+                      <span
+                        class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi reservoirs-extent-container"
+                        id="reservoirs-extent-low">
+                        <span class="defra-map-key__symbol">
+                          <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                            <rect x="5" y="5" width="22" height="22" style="fill:#C4E1FF"></rect>
+                          </svg>
+                        </span>
+                        When there is also flooding from rivers
+                      </span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
         </div>
       </div>
     </div>

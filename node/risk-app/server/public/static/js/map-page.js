@@ -95,87 +95,95 @@ function mapPage () {
 
 /* eslint-disable no-unused-vars */
 // This function adjusts the descriptions that appear/disappear depending on selected radio button
-function handleRadioChange (selected) {
+function handleRadioChange (selected, type) {
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
-  const extentInfo = document.getElementById('sw-extent-desc-container')
+  const extentInfoReservoirs = document.getElementById('reservoirs-extent-desc-container')
+  const extentInfoSw = document.getElementById('sw-extent-desc-container')
   const depthInfo = document.getElementById('sw-depth-desc-container')
   const velocityInfo = document.getElementById('sw-velocity-desc-container')
   const copyrightBtn = document.getElementById('att-key-copyright-btn')
   const copyrightInfo = document.getElementById('copyright-info-container')
   const olZoom = document.getElementsByClassName('ol-zoom')
 
-  if (selected === 'extent') {
-    extentInfo.style.display = 'block'
-    depthInfo.style.display = 'none'
-    velocityInfo.style.display = 'none'
-    scenarioBarDepth.style.display = 'none'
-    scenarioBarVelocity.style.display = 'none'
-    copyrightBtn.style.top = 'calc(100vh - 115px)'
-    copyrightInfo.style.right = '360px'
-    olZoom[0].style.top = 'calc(100% - 145px)'
-  }
   if (selected === 'depth') {
-    extentInfo.style.display = 'none'
+    extentInfoReservoirs.style.display = 'none'
+    extentInfoSw.style.display = 'none'
     depthInfo.style.display = 'block'
     velocityInfo.style.display = 'none'
     scenarioBarDepth.style.display = 'block'
     scenarioBarVelocity.style.display = 'none'
     copyrightBtn.style.top = 'calc(100vh - 205px)'
     copyrightInfo.style.right = '310px'
+    copyrightInfo.style.display = 'none'
     olZoom[0].style.top = 'calc(100% - 235px)'
   }
   if (selected === 'velocity') {
-    extentInfo.style.display = 'none'
+    console.log('here')
+    extentInfoReservoirs.style.display = 'none'
+    extentInfoSw.style.display = 'none'
     depthInfo.style.display = 'none'
     velocityInfo.style.display = 'block'
     scenarioBarDepth.style.display = 'none'
     scenarioBarVelocity.style.display = 'block'
-    copyrightBtn.style.top = 'calc(100vh - 205px);'
+    copyrightBtn.style.top = 'calc(100vh - 205px)'
     copyrightInfo.style.right = '310px'
+    copyrightInfo.style.display = 'none'
     olZoom[0].style.top = 'calc(100% - 235px)'
+  }
+
+  if (selected === 'extent') {
+    if (type === 'reservoirs') {
+      console.log('here324')
+      extentInfoReservoirs.style.display = 'block'
+      extentInfoSw.style.display = 'none'
+      depthInfo.style.display = 'none'
+      velocityInfo.style.display = 'none'
+      scenarioBarDepth.style.display = 'none'
+      scenarioBarVelocity.style.display = 'none'
+      copyrightBtn.style.top = 'calc(100vh - 115px)'
+      copyrightInfo.style.right = '360px'
+      olZoom[0].style.top = 'calc(100% - 145px)'
+    }
+    if (type === 'surface water') {
+      extentInfoReservoirs.style.display = 'none'
+      extentInfoSw.style.display = 'block'
+      depthInfo.style.display = 'none'
+      velocityInfo.style.display = 'none'
+      scenarioBarDepth.style.display = 'none'
+      scenarioBarVelocity.style.display = 'none'
+      copyrightBtn.style.top = 'calc(100vh - 115px)'
+      copyrightInfo.style.right = '360px'
+      olZoom[0].style.top = 'calc(100% - 145px)'
+    }
   }
 }
 /* eslint-disable no-unused-vars */
 
 /* eslint-disable no-unused-vars */
 function toggleCopyrightInfo () {
-  const copyrightInfoContainer = document.getElementsByClassName('defra-map-info__container')
+  const copyrightInfoContainer = document.getElementById('copyright-info-container')
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
-  const extentRadio = document.getElementById('sw-extent-radio')
-  if (!extentRadio.checked) {
-    if (scenarioBarDepth.style.display === 'block') {
-      if (!copyrightInfoContainer[0].classList.contains('showing')) {
-        scenarioBarDepth.style.display = 'none'
-      }
-    }
-    if (scenarioBarDepth.style.display === 'none') {
-      if (copyrightInfoContainer[0].classList.contains('showing')) {
-        scenarioBarDepth.style.display = 'block'
-        scenarioBarVelocity.style.display = 'none'
-      }
-    }
+  const swExtentRadio = document.getElementsByClassName('sw-extent-radio')
+  const reservoirsExtentRadio = document.getElementsByClassName('reservoirs-extent-radio')
+  const depthRadio = document.getElementById('sw-depth-radio')
+  const velocityRadio = document.getElementById('sw-velocity-radio')
 
-    if (scenarioBarVelocity.style.display === 'block') {
-      if (!copyrightInfoContainer[0].classList.contains('showing')) {
-        scenarioBarVelocity.style.display = 'none'
-      }
+  if (copyrightInfoContainer.style.display === 'none') {
+    if (scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block') {
+      scenarioBarDepth.style.display = 'none'
+      scenarioBarVelocity.style.display = 'none'
     }
-    if (scenarioBarVelocity.style.display === 'none') {
-      if (copyrightInfoContainer[0].classList.contains('showing')) {
-        scenarioBarVelocity.style.display = 'block'
-        scenarioBarDepth.style.display = 'none'
-      }
-    }
-  }
-
-  if (!copyrightInfoContainer[0].classList.contains('showing')) {
-    copyrightInfoContainer[0].classList.add('showing')
-    copyrightInfoContainer[0].style.display = 'block'
+    copyrightInfoContainer.style.display = 'block'
   } else {
-    copyrightInfoContainer[0].classList.remove('showing')
-    copyrightInfoContainer[0].style.display = 'none'
+    if (depthRadio.checked) {
+      scenarioBarDepth.style.display = 'block'
+    }
+    if (velocityRadio.checked) {
+      scenarioBarVelocity.style.display = 'block'
+    }
+    copyrightInfoContainer.style.display = 'none'
   }
 }
 /* eslint-enable no-unused-vars */
@@ -184,10 +192,8 @@ function toggleCopyrightInfo () {
 function toggleAdvancedOptions () {
   const advancedMapOptions = document.getElementsByClassName('advanced-map-option')
   if (!advancedMapOptions[0].classList.contains('showing')) {
-    advancedMapOptions[0].classList.add('showing')
     advancedMapOptions[0].style.display = 'block'
   } else {
-    advancedMapOptions[0].classList.remove('showing')
     advancedMapOptions[0].style.display = 'none'
   }
 }

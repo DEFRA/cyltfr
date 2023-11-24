@@ -132,8 +132,11 @@ $govuk-assets-path: '/assets/';
     margin: 10px;
   }
 
-  .defra-map-info__container {
+  #copyright-info-container {
     display: none;
+  }
+
+  .defra-map-info__container {
     background-color: white;
     position: absolute;
     width: 330px;
@@ -160,10 +163,6 @@ $govuk-assets-path: '/assets/';
     color: #0b0c0c;
   }
 
-  .defra-map-info__close:hover {
-    background-color: #f3f2f1;
-  }
-
   #progress {
     position: absolute;
     top: 0;
@@ -179,7 +178,12 @@ $govuk-assets-path: '/assets/';
 #sw-velocity-desc-container {
   display: none;
 }
+
 #sw-depth-desc-container {
+  display: none;
+}
+
+#reservoirs-extent-desc-container {
   display: none;
 }
 
@@ -275,6 +279,10 @@ $govuk-assets-path: '/assets/';
   left: 0px;
   right: 0px;
   border-top: 1px solid #b1b4b6;
+}
+
+#reservoir-title {
+  margin-top: 5px;
 }
 
 .govuk-radios__label {
