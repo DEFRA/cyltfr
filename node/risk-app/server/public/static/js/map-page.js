@@ -119,7 +119,6 @@ function handleRadioChange (selected, type) {
     olZoom[0].style.top = 'calc(100% - 235px)'
   }
   if (selected === 'velocity') {
-    console.log('here')
     extentInfoReservoirs.style.display = 'none'
     extentInfoSw.style.display = 'none'
     depthInfo.style.display = 'none'
@@ -134,7 +133,6 @@ function handleRadioChange (selected, type) {
 
   if (selected === 'extent') {
     if (type === 'reservoirs') {
-      console.log('here324')
       extentInfoReservoirs.style.display = 'block'
       extentInfoSw.style.display = 'none'
       depthInfo.style.display = 'none'
@@ -224,7 +222,8 @@ function selectedOption () {
   const scenariosRadiosDepth = document.querySelector('input[name="scenarios-depth"]:checked')
   const scenariosRadiosVelocity = document.querySelector('input[name="scenarios-velocity"]:checked')
 
-  const extentRadio = document.getElementById('sw-extent-radio')
+  const extentRadioReservoirs = document.getElementById('reservoirs-radio')
+  const extentRadioSw = document.getElementById('sw-extent-radio')
   const depthRadio = document.getElementById('sw-depth-radio')
   const velocityRadio = document.getElementById('sw-velocity-radio')
 
@@ -232,7 +231,10 @@ function selectedOption () {
   const lowRadioDepth = document.getElementById('risk-radio-low-depth')
   const mediumRadioVelocity = document.getElementById('risk-radio-medium-velocity')
   const lowRadioVelocity = document.getElementById('risk-radio-low-velocity')
-  if (extentRadio.checked) {
+  if (extentRadioSw.checked) {
+    return measurementsRadios.value
+  }
+  if (extentRadioReservoirs.checked) {
     return measurementsRadios.value
   }
   if (depthRadio.checked) {
