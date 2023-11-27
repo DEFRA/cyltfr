@@ -313,8 +313,50 @@
             </div>
           </fieldset>
 
+          <!-- Rivers and the sea -->
+          <div class="key-item-container" id="rs-key__section">
+            <fieldset class="govuk-fieldset">
+              <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                <h3 class="defra-map-key__section-title" id="rs-title" ontoken="this.onscrolling = false">Rivers and the sea</h3>
+              </legend>
+
+              <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input extent-radio" id="rs-radio" onchange="handleRadioChange('extent', 'rivers and the sea')"
+                    value="{{maps.categories[0].maps[0].ref}}" title="Extent of flooding from rivers and seas" name="measurements" type="radio">
+                  <label class="govuk-label govuk-radios__label" for="rs-radio">
+                    <span class="bulletpoint__heading" id="rs-extent__heading">Extent</span>
+                      <div class="extent-desc-container" id="rs-extent-desc-container">
+                        <span
+                        class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi extent-container"
+                        id="rs-extent-med">
+                          <span class="defra-map-key__symbol">
+                            <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                              <rect x="5" y="5" width="22" height="22" style="fill:#9AA0DE"></rect>
+                            </svg>
+                          </span>
+                          When river levels are normal
+                        </span>
+
+                      <span
+                        class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi extent-container"
+                        id="rs-extent-low">
+                        <span class="defra-map-key__symbol">
+                          <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                            <rect x="5" y="5" width="22" height="22" style="fill:#C4E1FF"></rect>
+                          </svg>
+                        </span>
+                        When there is also flooding from rivers
+                      </span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
           <!-- Reservoirs -->
-          <div class="reservoir-container" id="reservoir-key__section">
+          <div class="key-item-container" id="reservoir-key__section">
             <fieldset class="govuk-fieldset">
               <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
                 <h3 class="defra-map-key__section-title" id="reservoir-title" ontoken="this.onscrolling = false">Reservoirs</h3>
@@ -325,10 +367,10 @@
                   <input class="govuk-radios__input extent-radio" id="reservoirs-radio" onchange="handleRadioChange('extent', 'reservoirs')"
                     value="{{maps.categories[2].maps[0].ref}}" title="Extent of flooding from reservoirs" name="measurements" type="radio">
                   <label class="govuk-label govuk-radios__label" for="reservoirs-radio">
-                    <span class="reservoirs-water-bulletpoint__heading" id="reservoirs-extent__heading">Extent</span>
-                      <div id="reservoirs-extent-desc-container">
+                    <span class="bulletpoint__heading" id="reservoirs-extent__heading">Extent</span>
+                      <div class="extent-desc-container" id="reservoirs-extent-desc-container">
                         <span
-                        class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi reservoirs-extent-container"
+                        class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi extent-container"
                         id="reservoirs-extent-med">
                           <span class="defra-map-key__symbol">
                             <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
@@ -339,7 +381,7 @@
                         </span>
 
                       <span
-                        class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi reservoirs-extent-container"
+                        class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi extent-container"
                         id="reservoirs-extent-low">
                         <span class="defra-map-key__symbol">
                           <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">

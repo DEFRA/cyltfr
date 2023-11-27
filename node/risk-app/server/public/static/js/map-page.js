@@ -98,6 +98,7 @@ function mapPage () {
 function handleRadioChange (selected, type) {
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
+  const extentInfoRs = document.getElementById('rs-extent-desc-container')
   const extentInfoReservoirs = document.getElementById('reservoirs-extent-desc-container')
   const extentInfoSw = document.getElementById('sw-extent-desc-container')
   const depthInfo = document.getElementById('sw-depth-desc-container')
@@ -107,6 +108,7 @@ function handleRadioChange (selected, type) {
   const olZoom = document.getElementsByClassName('ol-zoom')
 
   if (selected === 'depth') {
+    extentInfoRs.style.display = 'none'
     extentInfoReservoirs.style.display = 'none'
     extentInfoSw.style.display = 'none'
     depthInfo.style.display = 'block'
@@ -119,6 +121,7 @@ function handleRadioChange (selected, type) {
     olZoom[0].style.top = 'calc(100% - 235px)'
   }
   if (selected === 'velocity') {
+    extentInfoRs.style.display = 'none'
     extentInfoReservoirs.style.display = 'none'
     extentInfoSw.style.display = 'none'
     depthInfo.style.display = 'none'
@@ -133,6 +136,7 @@ function handleRadioChange (selected, type) {
 
   if (selected === 'extent') {
     if (type === 'reservoirs') {
+      extentInfoRs.style.display = 'none'
       extentInfoReservoirs.style.display = 'block'
       extentInfoSw.style.display = 'none'
       depthInfo.style.display = 'none'
@@ -143,7 +147,20 @@ function handleRadioChange (selected, type) {
       copyrightInfo.style.right = '360px'
       olZoom[0].style.top = 'calc(100% - 145px)'
     }
+    if (type === 'rivers and the sea') {
+      extentInfoRs.style.display = 'block'
+      extentInfoReservoirs.style.display = 'none'
+      extentInfoSw.style.display = 'none'
+      depthInfo.style.display = 'none'
+      velocityInfo.style.display = 'none'
+      scenarioBarDepth.style.display = 'none'
+      scenarioBarVelocity.style.display = 'none'
+      copyrightBtn.style.top = 'calc(100vh - 115px)'
+      copyrightInfo.style.right = '360px'
+      olZoom[0].style.top = 'calc(100% - 145px)'
+    }
     if (type === 'surface water') {
+      extentInfoRs.style.display = 'none'
       extentInfoReservoirs.style.display = 'none'
       extentInfoSw.style.display = 'block'
       depthInfo.style.display = 'none'
@@ -163,8 +180,7 @@ function toggleCopyrightInfo () {
   const copyrightInfoContainer = document.getElementById('copyright-info-container')
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
-  const swExtentRadio = document.getElementsByClassName('sw-extent-radio')
-  const reservoirsExtentRadio = document.getElementsByClassName('reservoirs-extent-radio')
+
   const depthRadio = document.getElementById('sw-depth-radio')
   const velocityRadio = document.getElementById('sw-velocity-radio')
 
