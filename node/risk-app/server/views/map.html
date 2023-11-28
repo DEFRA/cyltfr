@@ -30,6 +30,38 @@
     position: absolute;
     overflow-x: hidden;
   }
+
+  #map-display-toggles-title {
+    margin-top: 5px;
+  }
+  
+  #rs-title {
+    margin-top: 5px;
+  }
+
+  .govuk-checkboxes__label:after {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    top: 11px;
+    left: 9px;
+    width: 23px;
+    height: 12px;
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    border: solid;
+    border-width: 0 0 5px 5px;
+    border-top-color: transparent;
+    opacity: 0;
+    background: transparent;
+}
+
+.defra-map-key__symbol-container {
+  position: relative;
+    display: block;
+    margin-left: 34px;
+}
 </style>
 {{ super() }}
 {% endblock %}
@@ -60,7 +92,7 @@
     </button>
 
     <div class="defra-map-controls-bottom">
-      
+
       <!-- Copyright -->
       <button class="defra-map-attribution" id="att-key-copyright-btn" tabindex="0" aria-controls="viewport"
         onclick="toggleCopyrightInfo()">
@@ -97,12 +129,13 @@
       </div>
 
       <!-- Depth scenarios -->
-      <div class="defra-map-scenarios horizontal-overflow scenario-float-right v6-width-fix" id="scenario-container-depth">
+      <div class="defra-map-scenarios horizontal-overflow scenario-float-right v6-width-fix"
+        id="scenario-container-depth">
         <div class="defra-map-scenarios-v3_container" id="scenarios-controls-depth">
           <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
             <div class="govuk-radios__item" style="border-bottom: 7px solid rgb(29, 112, 184);">
               <input class="govuk-radios__input" id="risk-radio-high-depth" onchange="scenarioDisplayUpdate('depth')"
-              name="scenarios-depth" type="radio" value="{{maps.categories[1].maps[1].ref}}" checked="">
+                name="scenarios-depth" type="radio" value="{{maps.categories[1].maps[1].ref}}" checked="">
               <label class="govuk-label govuk-radios__label" for="risk-radio-high-depth">
                 <strong class="scenario-heading">High risk</strong>
                 <span class="risk-context-v3">3.3% chance each year</span>
@@ -110,32 +143,36 @@
             </div>
             <div class="govuk-radios__item">
               <input class="govuk-radios__input" id="risk-radio-medium-depth" onchange="scenarioDisplayUpdate('depth')"
-              name="scenarios-depth" type="radio" value="{{maps.categories[1].maps[3].ref}}">
+                name="scenarios-depth" type="radio" value="{{maps.categories[1].maps[3].ref}}">
               <label class="govuk-label govuk-radios__label" for="risk-radio-medium-depth">
-                <strong class="scenario-heading" style="text-decoration: underline; text-decoration-thickness: 2px;">Medium risk</strong>
+                <strong class="scenario-heading"
+                  style="text-decoration: underline; text-decoration-thickness: 2px;">Medium risk</strong>
                 <span class="risk-context-v3">1% chance each year</span>
               </label>
             </div>
             <div class="govuk-radios__item">
               <input class="govuk-radios__input" id="risk-radio-low-depth" onchange="scenarioDisplayUpdate('depth')"
-              name="scenarios-depth" type="radio" value="{{maps.categories[1].maps[5].ref}}">
+                name="scenarios-depth" type="radio" value="{{maps.categories[1].maps[5].ref}}">
               <label class="govuk-label govuk-radios__label" for="risk-radio-low-depth">
-                <strong class="scenario-heading" style="text-decoration: underline; text-decoration-thickness: 2px;">Low risk</strong>
+                <strong class="scenario-heading" style="text-decoration: underline; text-decoration-thickness: 2px;">Low
+                  risk</strong>
                 <span class="risk-context-v3">0.1% chance each year</span>
               </label>
             </div>
           </div>
         </div>
       </div>
-      
+
       <!-- Velocity scenarios -->
-      <div class="defra-map-scenarios horizontal-overflow scenario-float-right v6-width-fix" id="scenario-container-velocity">
+      <div class="defra-map-scenarios horizontal-overflow scenario-float-right v6-width-fix"
+        id="scenario-container-velocity">
         <div class="defra-map-scenarios-v3_container" id="scenarios-controls-velocity">
           <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
-            
+
             <div class="govuk-radios__item" style="border-bottom: 7px solid rgb(29, 112, 184);">
-              <input class="govuk-radios__input" id="risk-radio-high-velocity" onchange="scenarioDisplayUpdate('velocity')"
-              name="scenarios-velocity" type="radio" value="{{maps.categories[1].maps[2].ref}}" checked="">
+              <input class="govuk-radios__input" id="risk-radio-high-velocity"
+                onchange="scenarioDisplayUpdate('velocity')" name="scenarios-velocity" type="radio"
+                value="{{maps.categories[1].maps[2].ref}}" checked="">
               <label class="govuk-label govuk-radios__label" for="risk-radio-high-velocity">
                 <strong class="scenario-heading">High risk</strong>
                 <span class="risk-context-v3">3.3% chance each year</span>
@@ -143,19 +180,23 @@
             </div>
 
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="risk-radio-medium-velocity" onchange="scenarioDisplayUpdate('velocity')"
-              name="scenarios-velocity" type="radio" value="{{maps.categories[1].maps[4].ref}}">
+              <input class="govuk-radios__input" id="risk-radio-medium-velocity"
+                onchange="scenarioDisplayUpdate('velocity')" name="scenarios-velocity" type="radio"
+                value="{{maps.categories[1].maps[4].ref}}">
               <label class="govuk-label govuk-radios__label" for="risk-radio-medium-velocity">
-                <strong class="scenario-heading" style="text-decoration: underline; text-decoration-thickness: 2px;">Medium risk</strong>
+                <strong class="scenario-heading"
+                  style="text-decoration: underline; text-decoration-thickness: 2px;">Medium risk</strong>
                 <span class="risk-context-v3">1% chance each year</span>
               </label>
             </div>
 
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="risk-radio-low-velocity" onchange="scenarioDisplayUpdate('velocity')"
-              name="scenarios-velocity" type="radio" value="{{maps.categories[1].maps[6].ref}}">
+              <input class="govuk-radios__input" id="risk-radio-low-velocity"
+                onchange="scenarioDisplayUpdate('velocity')" name="scenarios-velocity" type="radio"
+                value="{{maps.categories[1].maps[6].ref}}">
               <label class="govuk-label govuk-radios__label" for="risk-radio-low-velocity">
-                <strong class="scenario-heading" style="text-decoration: underline; text-decoration-thickness: 2px;">Low risk</strong>
+                <strong class="scenario-heading" style="text-decoration: underline; text-decoration-thickness: 2px;">Low
+                  risk</strong>
                 <span class="risk-context-v3">0.1% chance each year</span>
               </label>
             </div>
@@ -181,8 +222,9 @@
 
             <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input extent-radio" id="sw-extent-radio" onchange="handleRadioChange('extent', 'surface water')"
-                  value="{{maps.categories[1].maps[0].ref}}" title="Extent of flooding from surface water" name="measurements" type="radio" checked="">
+                <input class="govuk-radios__input extent-radio" id="sw-extent-radio"
+                  onchange="handleRadioChange('extent', 'surface water')" value="{{maps.categories[1].maps[0].ref}}"
+                  title="Extent of flooding from surface water" name="measurements" type="radio" checked="">
                 <label class="govuk-label govuk-radios__label" for="sw-extent-radio">
                   <span class="surface-water-bulletpoint__heading" id="surface-water-extent__heading">Extent</span>
 
@@ -229,7 +271,8 @@
 
               <div class="govuk-radios__item">
                 <input class="govuk-radios__input" id="sw-depth-radio" onchange="handleRadioChange('depth')"
-                  value="{{maps.categories[1].maps[1].ref}}" name="measurements" title="Surface water flood risk: water depth in a high risk scenario" type="radio">
+                  value="{{maps.categories[1].maps[1].ref}}" name="measurements"
+                  title="Surface water flood risk: water depth in a high risk scenario" type="radio">
                 <label class="govuk-label govuk-radios__label" for="sw-depth-radio">
                   <span class="surface-water-bulletpoint__heading" id="surface-water-depth__heading">Depth</span>
 
@@ -271,8 +314,9 @@
               </div>
 
               <div class="govuk-radios__item showing advanced-map-option" id="sw-velocity-section-container">
-                <input class="govuk-radios__input" id="sw-velocity-radio" onchange="handleRadioChange('velocity')" value="{{maps.categories[1].maps[2].ref}}"
-                  name="measurements" title="Surface water flood risk: water velocity in a high risk scenario" type="radio">
+                <input class="govuk-radios__input" id="sw-velocity-radio" onchange="handleRadioChange('velocity')"
+                  value="{{maps.categories[1].maps[2].ref}}" name="measurements"
+                  title="Surface water flood risk: water velocity in a high risk scenario" type="radio">
                 <label class="govuk-label govuk-radios__label" for="sw-velocity-radio">
                   <span class="surface-water-bulletpoint__heading" id="surface-water-velocity__heading">Velocity</span>
 
@@ -317,26 +361,29 @@
           <div class="key-item-container" id="rs-key__section">
             <fieldset class="govuk-fieldset">
               <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-                <h3 class="defra-map-key__section-title" id="rs-title" ontoken="this.onscrolling = false">Rivers and the sea</h3>
+                <h3 class="defra-map-key__section-title" id="rs-title" ontoken="this.onscrolling = false">Rivers and the
+                  sea</h3>
               </legend>
 
               <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
                 <div class="govuk-radios__item">
-                  <input class="govuk-radios__input extent-radio" id="rs-radio" onchange="handleRadioChange('extent', 'rivers and the sea')"
-                    value="{{maps.categories[0].maps[0].ref}}" title="Extent of flooding from rivers and seas" name="measurements" type="radio">
+                  <input class="govuk-radios__input extent-radio" id="rs-radio"
+                    onchange="handleRadioChange('extent', 'rivers and the sea')"
+                    value="{{maps.categories[0].maps[0].ref}}" title="Extent of flooding from rivers and seas"
+                    name="measurements" type="radio">
                   <label class="govuk-label govuk-radios__label" for="rs-radio">
                     <span class="bulletpoint__heading" id="rs-extent__heading">Extent</span>
-                      <div class="extent-desc-container" id="rs-extent-desc-container">
-                        <span
+                    <div class="extent-desc-container" id="rs-extent-desc-container">
+                      <span
                         class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi extent-container"
                         id="rs-extent-med">
-                          <span class="defra-map-key__symbol">
-                            <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
-                              <rect x="5" y="5" width="22" height="22" style="fill:#9AA0DE"></rect>
-                            </svg>
-                          </span>
-                          When river levels are normal
+                        <span class="defra-map-key__symbol">
+                          <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                            <rect x="5" y="5" width="22" height="22" style="fill:#9AA0DE"></rect>
+                          </svg>
                         </span>
+                        When river levels are normal
+                      </span>
 
                       <span
                         class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi extent-container"
@@ -359,26 +406,28 @@
           <div class="key-item-container" id="reservoir-key__section">
             <fieldset class="govuk-fieldset">
               <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-                <h3 class="defra-map-key__section-title" id="reservoir-title" ontoken="this.onscrolling = false">Reservoirs</h3>
+                <h3 class="defra-map-key__section-title" id="reservoir-title" ontoken="this.onscrolling = false">
+                  Reservoirs</h3>
               </legend>
 
               <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
                 <div class="govuk-radios__item">
-                  <input class="govuk-radios__input extent-radio" id="reservoirs-radio" onchange="handleRadioChange('extent', 'reservoirs')"
-                    value="{{maps.categories[2].maps[0].ref}}" title="Extent of flooding from reservoirs" name="measurements" type="radio">
+                  <input class="govuk-radios__input extent-radio" id="reservoirs-radio"
+                    onchange="handleRadioChange('extent', 'reservoirs')" value="{{maps.categories[2].maps[0].ref}}"
+                    title="Extent of flooding from reservoirs" name="measurements" type="radio">
                   <label class="govuk-label govuk-radios__label" for="reservoirs-radio">
                     <span class="bulletpoint__heading" id="reservoirs-extent__heading">Extent</span>
-                      <div class="extent-desc-container" id="reservoirs-extent-desc-container">
-                        <span
+                    <div class="extent-desc-container" id="reservoirs-extent-desc-container">
+                      <span
                         class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi extent-container"
                         id="reservoirs-extent-med">
-                          <span class="defra-map-key__symbol">
-                            <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
-                              <rect x="5" y="5" width="22" height="22" style="fill:#9AA0DE"></rect>
-                            </svg>
-                          </span>
-                          When river levels are normal
+                        <span class="defra-map-key__symbol">
+                          <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                            <rect x="5" y="5" width="22" height="22" style="fill:#9AA0DE"></rect>
+                          </svg>
                         </span>
+                        When river levels are normal
+                      </span>
 
                       <span
                         class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi extent-container"
@@ -392,6 +441,51 @@
                       </span>
                     </div>
                   </label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <!-- Toggle checkbox -->
+          <div class="govuk-form-group">
+            <fieldset class="govuk-fieldset">
+              <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                <h3 class="defra-map-key__section-title" id="map-display-toggles-title">Map details</h3>
+              </legend>
+              <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                <div class="govuk-checkboxes__item">
+                  <input class="govuk-checkboxes__input" id="display-option" name="map-toggle" type="checkbox"
+                    value="30" checked="">
+                  <label class="govuk-label  govuk-checkboxes__label" for="display-option">
+                    Show flooding
+                  </label>
+                </div>
+                <div class="govuk-checkboxes__item">
+                  <input class="govuk-checkboxes__input" id="toggle" name="map-toggle" type="checkbox" value=""
+                    checked="">
+                  <label class="govuk-label govuk-checkboxes__label" for="toggle">
+                    <span class="defra-map-key__symbol-container">
+                      <span class="defra-map-key__symbol">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#f54545" class="w-6 h-6">
+                          <path fill-rule="evenodd"
+                            d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z"
+                            clip-rule="evenodd"></path>
+                        </svg>
+                      </span>
+                      Selected address
+                    </span>
+                    <span class="defra-map-key__symbol-container defra-map-key__symbol-container--multi">
+                      <span class="defra-map-key__symbol">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="#ede72e">
+                          <circle cx="50" cy="50" r="40"></circle>
+                        </svg>
+                      </span>
+                      15m boundary
+                    </span>
+                  </label>
+                </div>
+                <div class="govuk-checkboxes__item">
+                  <input class="govuk-checkboxes__input" id="tech-option" name="map-toggle" type="checkbox" value="40">
                 </div>
               </div>
             </fieldset>
