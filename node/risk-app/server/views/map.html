@@ -30,38 +30,6 @@
     position: absolute;
     overflow-x: hidden;
   }
-
-  #map-display-toggles-title {
-    margin-top: 5px;
-  }
-  
-  #rs-title {
-    margin-top: 5px;
-  }
-
-  .govuk-checkboxes__label:after {
-    content: "";
-    box-sizing: border-box;
-    position: absolute;
-    top: 11px;
-    left: 9px;
-    width: 23px;
-    height: 12px;
-    -webkit-transform: rotate(-45deg);
-    -ms-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-    border: solid;
-    border-width: 0 0 5px 5px;
-    border-top-color: transparent;
-    opacity: 0;
-    background: transparent;
-}
-
-.defra-map-key__symbol-container {
-  position: relative;
-    display: block;
-    margin-left: 34px;
-}
 </style>
 {{ super() }}
 {% endblock %}
@@ -452,18 +420,18 @@
               <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
                 <h3 class="defra-map-key__section-title" id="map-display-toggles-title">Map details</h3>
               </legend>
-              <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+              <div class="govuk-radios govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
                 <div class="govuk-checkboxes__item">
-                  <input class="govuk-checkboxes__input" id="display-option" name="map-toggle" type="checkbox"
-                    value="30" checked="">
-                  <label class="govuk-label  govuk-checkboxes__label" for="display-option">
+                  <input class="govuk-checkboxes__input" id="display-layers-checkbox" name="map-toggle" type="checkbox"
+                    onchange="" value="30" checked="">
+                  <label class="govuk-label  govuk-checkboxes__label" for="display-layers-checkbox">
                     Show flooding
                   </label>
                 </div>
                 <div class="govuk-checkboxes__item">
-                  <input class="govuk-checkboxes__input" id="toggle" name="map-toggle" type="checkbox" value=""
+                  <input class="govuk-checkboxes__input" id="selected-address-checkbox" name="map-toggle" type="checkbox" value=""
                     checked="">
-                  <label class="govuk-label govuk-checkboxes__label" for="toggle">
+                  <label class="govuk-label govuk-checkboxes__label" for="selected-address-checkbox">
                     <span class="defra-map-key__symbol-container">
                       <span class="defra-map-key__symbol">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#f54545" class="w-6 h-6">
@@ -512,7 +480,6 @@
 <script>
   window.mapCategories = {{ maps | dump | safe }}
 </script>
-
 <script src="{{ assetPath }}/js/map-page.js"></script>
 {% endblock %}
 
