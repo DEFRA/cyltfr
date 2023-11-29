@@ -183,7 +183,7 @@ $govuk-assets-path: '/assets/';
   display: none;
 }
 
-#reservoirs-extent-desc-container {
+.extent-desc-container {
   display: none;
 }
 
@@ -252,6 +252,7 @@ $govuk-assets-path: '/assets/';
 
 .defra-map-key label {
   font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+  font-size: 16px;
 }
 
 .defra-map-key__section-title {
@@ -300,6 +301,38 @@ $govuk-assets-path: '/assets/';
   position: relative;
   display: block;
   margin-left: 0px;
+}
+
+#map-display-toggles-title {
+  margin-top: 5px;
+}
+
+#rs-title {
+  margin-top: 5px;
+}
+
+.govuk-checkboxes__label:after {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 11px;
+  left: 9px;
+  width: 23px;
+  height: 12px;
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  border: solid;
+  border-width: 0 0 5px 5px;
+  border-top-color: transparent;
+  opacity: 0;
+  background: transparent;
+}
+
+.defra-map-key__symbol-container {
+  position: relative;
+  display: block;
+  margin-left: 34px;
 }
 
 .defra-map-key__symbol {

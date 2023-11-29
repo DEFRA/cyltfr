@@ -49,7 +49,6 @@ function mapPage () {
   }
   const mapController = new MapController(mapCategories.categories)
   const $header = $('.govuk-radios')
-  // const $selector = $('input[name=measurements]')
   const $map = $('#map')
   const $body = $(document.body)
 
@@ -58,19 +57,24 @@ function mapPage () {
   const hasLocation = !!easting
   const maps = window.maps
 
-  maps.loadMap(hasLocation && [easting, northing])
+  maps.loadMap((hasLocation && [easting, northing]))
 
   // This function updates the map to the radio button you select (extent, depth, velocity)
   function setCurrent (ref) {
     mapController.setCurrent(ref)
-
+    const selectedAddressCheckbox = document.getElementById('selected-address-checkbox')
+    const showFloodingCheckbox = document.getElementById('display-layers-checkbox')
     const mapReferenceValue = selectedOption()
-    maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1))
+
+    if (showFloodingCheckbox.checked) {
+      maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1), selectedAddressCheckbox.checked)
+    } else {
+      maps.showMap(undefined, selectedAddressCheckbox.checked)
+    }
   }
 
   // Default to the first category/map
   maps.onReady(function () {
-    // Handle the mobile map selector change
     $header.on('change', 'input[name="measurements"]', function (e) {
       e.preventDefault()
       setCurrent($(this).val())
@@ -80,6 +84,10 @@ function mapPage () {
       setCurrent($(this).val())
     })
     $header.on('change', 'input[name="scenarios-velocity"]', function (e) {
+      e.preventDefault()
+      setCurrent($(this).val())
+    })
+    $header.on('change', 'input[name="map-toggle"]', function (e) {
       e.preventDefault()
       setCurrent($(this).val())
     })
@@ -98,6 +106,7 @@ function mapPage () {
 function handleRadioChange (selected, type) {
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
+  const extentInfoRs = document.getElementById('rs-extent-desc-container')
   const extentInfoReservoirs = document.getElementById('reservoirs-extent-desc-container')
   const extentInfoSw = document.getElementById('sw-extent-desc-container')
   const depthInfo = document.getElementById('sw-depth-desc-container')
@@ -107,6 +116,7 @@ function handleRadioChange (selected, type) {
   const olZoom = document.getElementsByClassName('ol-zoom')
 
   if (selected === 'depth') {
+    extentInfoRs.style.display = 'none'
     extentInfoReservoirs.style.display = 'none'
     extentInfoSw.style.display = 'none'
     depthInfo.style.display = 'block'
@@ -119,6 +129,7 @@ function handleRadioChange (selected, type) {
     olZoom[0].style.top = 'calc(100% - 235px)'
   }
   if (selected === 'velocity') {
+    extentInfoRs.style.display = 'none'
     extentInfoReservoirs.style.display = 'none'
     extentInfoSw.style.display = 'none'
     depthInfo.style.display = 'none'
@@ -133,6 +144,7 @@ function handleRadioChange (selected, type) {
 
   if (selected === 'extent') {
     if (type === 'reservoirs') {
+      extentInfoRs.style.display = 'none'
       extentInfoReservoirs.style.display = 'block'
       extentInfoSw.style.display = 'none'
       depthInfo.style.display = 'none'
@@ -143,7 +155,20 @@ function handleRadioChange (selected, type) {
       copyrightInfo.style.right = '360px'
       olZoom[0].style.top = 'calc(100% - 145px)'
     }
+    if (type === 'rivers and the sea') {
+      extentInfoRs.style.display = 'block'
+      extentInfoReservoirs.style.display = 'none'
+      extentInfoSw.style.display = 'none'
+      depthInfo.style.display = 'none'
+      velocityInfo.style.display = 'none'
+      scenarioBarDepth.style.display = 'none'
+      scenarioBarVelocity.style.display = 'none'
+      copyrightBtn.style.top = 'calc(100vh - 115px)'
+      copyrightInfo.style.right = '360px'
+      olZoom[0].style.top = 'calc(100% - 145px)'
+    }
     if (type === 'surface water') {
+      extentInfoRs.style.display = 'none'
       extentInfoReservoirs.style.display = 'none'
       extentInfoSw.style.display = 'block'
       depthInfo.style.display = 'none'
@@ -163,8 +188,7 @@ function toggleCopyrightInfo () {
   const copyrightInfoContainer = document.getElementById('copyright-info-container')
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
-  const swExtentRadio = document.getElementsByClassName('sw-extent-radio')
-  const reservoirsExtentRadio = document.getElementsByClassName('reservoirs-extent-radio')
+
   const depthRadio = document.getElementById('sw-depth-radio')
   const velocityRadio = document.getElementById('sw-velocity-radio')
 

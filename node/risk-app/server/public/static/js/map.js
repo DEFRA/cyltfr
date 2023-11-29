@@ -375,13 +375,21 @@ function focusNotification () {
   document.getElementById('map-overlay').focus()
 }
 
-function showMap (ref) {
+function showMap (ref, crosshair) {
   closeOverlay()
   map.getLayers().forEach(function (layer) {
     const name = layer.getProperties().ref
     if (name !== config.OSLayer && name !== 'crosshair') {
       currentLayer = name === ref ? layer : currentLayer
       layer.setVisible(name === ref)
+    }
+
+    if (name === 'crosshair') {
+      if (crosshair) {
+        layer.setVisible(true)
+      } else {
+        layer.setVisible(false)
+      }
     }
   })
 }
