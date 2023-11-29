@@ -49,7 +49,6 @@ function mapPage () {
   }
   const mapController = new MapController(mapCategories.categories)
   const $header = $('.govuk-radios')
-  // const $selector = $('input[name=measurements]')
   const $map = $('#map')
   const $body = $(document.body)
 
@@ -58,19 +57,24 @@ function mapPage () {
   const hasLocation = !!easting
   const maps = window.maps
 
-  maps.loadMap(hasLocation && [easting, northing])
+  maps.loadMap((hasLocation && [easting, northing]))
 
   // This function updates the map to the radio button you select (extent, depth, velocity)
   function setCurrent (ref) {
     mapController.setCurrent(ref)
-
+    const selectedAddressCheckbox = document.getElementById('selected-address-checkbox')
+    const showFloodingCheckbox = document.getElementById('display-layers-checkbox')
     const mapReferenceValue = selectedOption()
-    maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1))
+
+    if (showFloodingCheckbox.checked) {
+      maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1), selectedAddressCheckbox.checked)
+    } else {
+      maps.showMap(undefined, selectedAddressCheckbox.checked)
+    }
   }
 
   // Default to the first category/map
   maps.onReady(function () {
-    // Handle the mobile map selector change
     $header.on('change', 'input[name="measurements"]', function (e) {
       e.preventDefault()
       setCurrent($(this).val())
@@ -80,6 +84,10 @@ function mapPage () {
       setCurrent($(this).val())
     })
     $header.on('change', 'input[name="scenarios-velocity"]', function (e) {
+      e.preventDefault()
+      setCurrent($(this).val())
+    })
+    $header.on('change', 'input[name="map-toggle"]', function (e) {
       e.preventDefault()
       setCurrent($(this).val())
     })
