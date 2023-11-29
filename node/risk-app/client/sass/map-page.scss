@@ -132,8 +132,11 @@ $govuk-assets-path: '/assets/';
     margin: 10px;
   }
 
-  .defra-map-info__container {
+  #copyright-info-container {
     display: none;
+  }
+
+  .defra-map-info__container {
     background-color: white;
     position: absolute;
     width: 330px;
@@ -160,10 +163,6 @@ $govuk-assets-path: '/assets/';
     color: #0b0c0c;
   }
 
-  .defra-map-info__close:hover {
-    background-color: #f3f2f1;
-  }
-
   #progress {
     position: absolute;
     top: 0;
@@ -179,7 +178,12 @@ $govuk-assets-path: '/assets/';
 #sw-velocity-desc-container {
   display: none;
 }
+
 #sw-depth-desc-container {
+  display: none;
+}
+
+.extent-desc-container {
   display: none;
 }
 
@@ -248,6 +252,7 @@ $govuk-assets-path: '/assets/';
 
 .defra-map-key label {
   font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+  font-size: 16px;
 }
 
 .defra-map-key__section-title {
@@ -277,6 +282,10 @@ $govuk-assets-path: '/assets/';
   border-top: 1px solid #b1b4b6;
 }
 
+#reservoir-title {
+  margin-top: 5px;
+}
+
 .govuk-radios__label {
   padding-top: 0;
 }
@@ -292,6 +301,38 @@ $govuk-assets-path: '/assets/';
   position: relative;
   display: block;
   margin-left: 0px;
+}
+
+#map-display-toggles-title {
+  margin-top: 5px;
+}
+
+#rs-title {
+  margin-top: 5px;
+}
+
+.govuk-checkboxes__label:after {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 11px;
+  left: 9px;
+  width: 23px;
+  height: 12px;
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  border: solid;
+  border-width: 0 0 5px 5px;
+  border-top-color: transparent;
+  opacity: 0;
+  background: transparent;
+}
+
+.defra-map-key__symbol-container {
+  position: relative;
+  display: block;
+  margin-left: 34px;
 }
 
 .defra-map-key__symbol {
