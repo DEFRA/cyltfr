@@ -41,6 +41,8 @@ MapController.prototype.setCurrent = function (ref) {
 }
 
 function mapPage () {
+  getInitialKeyOptions()
+
   function getParameterByName (name) {
     name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]')
     const regex = new RegExp('[\\?&]' + name + '=([^&#]*)')
@@ -99,6 +101,17 @@ function mapPage () {
   $map.on('mouseleave', function (e) {
     $body.css('cursor', 'default')
   })
+}
+
+function getInitialKeyOptions () {
+  const velocityContainer = document.getElementById('sw-velocity-section-container')
+  const rsContainer = document.getElementById('rs-section-container')
+  const reservoirsContainer = document.getElementById('reservoirs-section-container')
+  if (window.location.href.includes('map=SurfaceWater')) {
+    velocityContainer.style.display = 'none'
+    rsContainer.style.display = 'none'
+    reservoirsContainer.style.display = 'none'
+  }
 }
 
 /* eslint-disable no-unused-vars */
