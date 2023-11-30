@@ -105,12 +105,34 @@ function mapPage () {
 
 function getInitialKeyOptions () {
   const velocityContainer = document.getElementById('sw-velocity-section-container')
+  const swContainer = document.getElementById('sw-section-container')
   const rsContainer = document.getElementById('rs-section-container')
   const reservoirsContainer = document.getElementById('reservoirs-section-container')
+  const rsRadio = document.getElementById('rs-radio')
+  const reservoirsRadio = document.getElementById('reservoirs-radio')
+  const extentInfoRs = document.getElementById('rs-extent-desc-container')
+  const extentInfoReservoirs = document.getElementById('reservoirs-extent-desc-container')
+
   if (window.location.href.includes('map=SurfaceWater')) {
     velocityContainer.style.display = 'none'
     rsContainer.style.display = 'none'
     reservoirsContainer.style.display = 'none'
+  }
+  if (window.location.href.includes('map=RiversOrSea')) {
+    swContainer.style.display = 'none'
+    rsContainer.style.display = 'block'
+    rsContainer.style.marginTop = '40px'
+    rsRadio.checked = true
+    extentInfoRs.style.display = 'block'
+    reservoirsContainer.style.display = 'none'
+  }
+  if (window.location.href.includes('map=Reservoirs')) {
+    swContainer.style.display = 'none'
+    rsContainer.style.display = 'none'
+    reservoirsContainer.style.display = 'block'
+    reservoirsContainer.style.marginTop = '40px'
+    reservoirsRadio.checked = true
+    extentInfoReservoirs.style.display = 'block'
   }
 }
 
