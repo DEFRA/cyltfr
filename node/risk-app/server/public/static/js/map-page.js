@@ -112,6 +112,7 @@ function getInitialKeyOptions () {
   const reservoirsRadio = document.getElementById('reservoirs-radio')
   const extentInfoRs = document.getElementById('rs-extent-desc-container')
   const extentInfoReservoirs = document.getElementById('reservoirs-extent-desc-container')
+  const boundaryContainer = document.getElementById('boundary-container')
 
   if (window.location.href.includes('map=SurfaceWater')) {
     velocityContainer.style.display = 'none'
@@ -125,6 +126,7 @@ function getInitialKeyOptions () {
     rsRadio.checked = true
     extentInfoRs.style.display = 'block'
     reservoirsContainer.style.display = 'none'
+    boundaryContainer.style.display = 'none'
   }
   if (window.location.href.includes('map=Reservoirs')) {
     swContainer.style.display = 'none'
@@ -133,6 +135,7 @@ function getInitialKeyOptions () {
     reservoirsContainer.style.marginTop = '40px'
     reservoirsRadio.checked = true
     extentInfoReservoirs.style.display = 'block'
+    boundaryContainer.style.display = 'none'
   }
 }
 
@@ -148,6 +151,7 @@ function handleRadioChange (selected, type) {
   const velocityInfo = document.getElementById('sw-velocity-desc-container')
   const copyrightBtn = document.getElementById('att-key-copyright-btn')
   const copyrightInfo = document.getElementById('copyright-info-container')
+  const boundaryContainer = document.getElementById('boundary-container')
   const olZoom = document.getElementsByClassName('ol-zoom')
 
   if (selected === 'depth') {
@@ -189,6 +193,7 @@ function handleRadioChange (selected, type) {
       copyrightBtn.style.top = 'calc(100vh - 115px)'
       copyrightInfo.style.right = '360px'
       olZoom[0].style.top = 'calc(100% - 145px)'
+      boundaryContainer.style.display = 'block'
     }
     if (type === 'rivers and the sea') {
       extentInfoRs.style.display = 'block'
@@ -201,6 +206,7 @@ function handleRadioChange (selected, type) {
       copyrightBtn.style.top = 'calc(100vh - 115px)'
       copyrightInfo.style.right = '360px'
       olZoom[0].style.top = 'calc(100% - 145px)'
+      boundaryContainer.style.display = 'none'
     }
     if (type === 'surface water') {
       extentInfoRs.style.display = 'none'
@@ -213,6 +219,7 @@ function handleRadioChange (selected, type) {
       copyrightBtn.style.top = 'calc(100vh - 115px)'
       copyrightInfo.style.right = '360px'
       olZoom[0].style.top = 'calc(100% - 145px)'
+      boundaryContainer.style.display = 'none'
     }
   }
 }
