@@ -254,11 +254,15 @@ function toggleCopyrightInfo () {
 
 /* eslint-disable no-unused-vars */
 function toggleAdvancedOptions () {
-  const advancedMapOptions = document.getElementsByClassName('advanced-map-option')
-  if (!advancedMapOptions[0].classList.contains('showing')) {
-    advancedMapOptions[0].style.display = 'block'
+  const advancedButtonText = document.getElementById('advanced-button-text')
+  const advancedButtonImage = document.getElementById('advanced-button-image')
+
+  if (advancedButtonText.textContent.includes('Show')) {
+    advancedButtonText.textContent = 'Hide advanced options'
+    advancedButtonImage.setAttribute('d', 'M20.515 15.126 12 19.856l-8.515-4.73-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5zM16 4h6v2h-6zm5.484 7.125-9.022-5a1 1 0 0 0-.968-.001l-8.978 4.96a1 1 0 0 0-.003 1.749l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5a1 1 0 0 0-.002-1.749z')
   } else {
-    advancedMapOptions[0].style.display = 'none'
+    advancedButtonText.textContent = 'Show advanced options'
+    advancedButtonImage.setAttribute('d', 'm3.485 15.126-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5-.971-1.748L12 19.856ZM20 8V6h2V4h-2V2h-2v2h-2v2h2v2zM2.513 12.833l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5a1 1 0 0 0-.002-1.749l-9.022-5a1 1 0 0 0-.968-.001l-8.978 4.96a1 1 0 0 0-.003 1.749z')
   }
 }
 /* eslint-enable no-unused-vars */
