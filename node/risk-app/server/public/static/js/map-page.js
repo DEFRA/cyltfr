@@ -267,11 +267,6 @@ function toggleAdvancedOptions () {
   const rsContainer = document.getElementById('rs-section-container')
   const reservoirsContainer = document.getElementById('reservoirs-section-container')
   const swExtentRadio = document.getElementById('sw-extent-radio')
-  const rsRadio = document.getElementById('rs-radio')
-  const reservoirsRadio = document.getElementById('reservoirs-radio')
-  const extentInfoRs = document.getElementById('rs-extent-desc-container')
-  const extentInfoReservoirs = document.getElementById('reservoirs-extent-desc-container')
-  const boundaryContainer = document.getElementById('boundary-container')
 
   if (advancedButtonText.textContent.includes('Show')) {
     advancedButtonText.textContent = 'Hide advanced options'
