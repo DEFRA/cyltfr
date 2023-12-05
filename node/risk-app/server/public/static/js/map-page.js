@@ -41,6 +41,8 @@ MapController.prototype.setCurrent = function (ref) {
 }
 
 function mapPage () {
+  getInitialKeyOptions()
+
   function getParameterByName (name) {
     name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]')
     const regex = new RegExp('[\\?&]' + name + '=([^&#]*)')
@@ -49,6 +51,7 @@ function mapPage () {
   }
   const mapController = new MapController(mapCategories.categories)
   const $header = $('.govuk-radios')
+  const $advancedHeader = $('.defra-map-controls')
   const $map = $('#map')
   const $body = $(document.body)
 
@@ -91,6 +94,11 @@ function mapPage () {
       e.preventDefault()
       setCurrent($(this).val())
     })
+    $advancedHeader.on('click', '#advanced-key-button', function (e) {
+      toggleAdvancedOptions()
+      e.preventDefault()
+      setCurrent($(this).val())
+    })
 
     setCurrent(getParameterByName('map'))
   })
@@ -99,6 +107,45 @@ function mapPage () {
   $map.on('mouseleave', function (e) {
     $body.css('cursor', 'default')
   })
+}
+
+function getInitialKeyOptions () {
+  const velocityContainer = document.getElementById('sw-velocity-section-container')
+  const swContainer = document.getElementById('sw-section-container')
+  const rsContainer = document.getElementById('rs-section-container')
+  const reservoirsContainer = document.getElementById('reservoirs-section-container')
+  const rsRadio = document.getElementById('rs-radio')
+  const reservoirsRadio = document.getElementById('reservoirs-radio')
+  const extentInfoRs = document.getElementById('rs-extent-desc-container')
+  const extentInfoReservoirs = document.getElementById('reservoirs-extent-desc-container')
+  const boundaryContainer = document.getElementById('boundary-container')
+  const extentInfoSw = document.getElementById('sw-extent-desc-container')
+
+  if (window.location.href.includes('map=SurfaceWater')) {
+    velocityContainer.style.display = 'none'
+    rsContainer.style.display = 'none'
+    reservoirsContainer.style.display = 'none'
+  }
+  if (window.location.href.includes('map=RiversOrSea')) {
+    swContainer.style.display = 'none'
+    extentInfoSw.style.display = 'none'
+    rsContainer.style.display = 'block'
+    rsContainer.style.marginTop = '40px'
+    rsRadio.checked = true
+    extentInfoRs.style.display = 'block'
+    reservoirsContainer.style.display = 'none'
+    boundaryContainer.style.display = 'none'
+  }
+  if (window.location.href.includes('map=Reservoirs')) {
+    swContainer.style.display = 'none'
+    extentInfoSw.style.display = 'none'
+    rsContainer.style.display = 'none'
+    reservoirsContainer.style.display = 'block'
+    reservoirsContainer.style.marginTop = '40px'
+    reservoirsRadio.checked = true
+    extentInfoReservoirs.style.display = 'block'
+    boundaryContainer.style.display = 'none'
+  }
 }
 
 /* eslint-disable no-unused-vars */
@@ -113,6 +160,7 @@ function handleRadioChange (selected, type) {
   const velocityInfo = document.getElementById('sw-velocity-desc-container')
   const copyrightBtn = document.getElementById('att-key-copyright-btn')
   const copyrightInfo = document.getElementById('copyright-info-container')
+  const boundaryContainer = document.getElementById('boundary-container')
   const olZoom = document.getElementsByClassName('ol-zoom')
 
   if (selected === 'depth') {
@@ -154,6 +202,7 @@ function handleRadioChange (selected, type) {
       copyrightBtn.style.top = 'calc(100vh - 115px)'
       copyrightInfo.style.right = '360px'
       olZoom[0].style.top = 'calc(100% - 145px)'
+      boundaryContainer.style.display = 'block'
     }
     if (type === 'rivers and the sea') {
       extentInfoRs.style.display = 'block'
@@ -166,6 +215,7 @@ function handleRadioChange (selected, type) {
       copyrightBtn.style.top = 'calc(100vh - 115px)'
       copyrightInfo.style.right = '360px'
       olZoom[0].style.top = 'calc(100% - 145px)'
+      boundaryContainer.style.display = 'none'
     }
     if (type === 'surface water') {
       extentInfoRs.style.display = 'none'
@@ -178,6 +228,7 @@ function handleRadioChange (selected, type) {
       copyrightBtn.style.top = 'calc(100vh - 115px)'
       copyrightInfo.style.right = '360px'
       olZoom[0].style.top = 'calc(100% - 145px)'
+      boundaryContainer.style.display = 'none'
     }
   }
 }
@@ -212,11 +263,55 @@ function toggleCopyrightInfo () {
 
 /* eslint-disable no-unused-vars */
 function toggleAdvancedOptions () {
-  const advancedMapOptions = document.getElementsByClassName('advanced-map-option')
-  if (!advancedMapOptions[0].classList.contains('showing')) {
-    advancedMapOptions[0].style.display = 'block'
+  const advancedButtonText = document.getElementById('advanced-button-text')
+  const advancedButtonImage = document.getElementById('advanced-button-image')
+  const velocityContainer = document.getElementById('sw-velocity-section-container')
+  const swContainer = document.getElementById('sw-section-container')
+  const rsContainer = document.getElementById('rs-section-container')
+  const reservoirsContainer = document.getElementById('reservoirs-section-container')
+  const swExtentRadio = document.getElementById('sw-extent-radio')
+  const rsExtentRadio = document.getElementById('rs-radio')
+  const reservoirsRadio = document.getElementById('reservoirs-radio')
+
+  if (advancedButtonText.textContent.includes('Show')) {
+    advancedButtonText.textContent = 'Hide advanced options'
+    advancedButtonImage.setAttribute('d', 'M20.515 15.126 12 19.856l-8.515-4.73-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5zM16 4h6v2h-6zm5.484 7.125-9.022-5a1 1 0 0 0-.968-.001l-8.978 4.96a1 1 0 0 0-.003 1.749l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5a1 1 0 0 0-.002-1.749z')
+    velocityContainer.style.display = 'block'
+    swContainer.style.display = 'block'
+    rsContainer.style.display = 'block'
+    rsContainer.style.marginTop = '0px'
+    reservoirsContainer.style.marginTop = '0px'
+    reservoirsContainer.style.display = 'block'
   } else {
-    advancedMapOptions[0].style.display = 'none'
+    if (window.location.href.includes('map=SurfaceWater')) {
+      swContainer.style.display = 'block'
+      velocityContainer.style.display = 'none'
+      rsContainer.style.display = 'none'
+      reservoirsContainer.style.display = 'none'
+      swExtentRadio.checked = true
+      handleRadioChange('extent', 'surface water')
+    }
+    if (window.location.href.includes('map=RiversOrSea')) {
+      swContainer.style.display = 'none'
+      velocityContainer.style.display = 'none'
+      rsContainer.style.display = 'block'
+      reservoirsContainer.style.marginTop = '40px'
+      rsExtentRadio.checked = true
+      reservoirsContainer.style.display = 'none'
+      handleRadioChange('extent', 'rivers and the sea')
+    }
+    if (window.location.href.includes('map=Reservoirs')) {
+      swContainer.style.display = 'none'
+      velocityContainer.style.display = 'none'
+      rsContainer.style.display = 'none'
+      reservoirsContainer.style.display = 'block'
+      reservoirsContainer.style.marginTop = '40px'
+      reservoirsRadio.checked = true
+      handleRadioChange('extent', 'reservoirs')
+    }
+    selectedOption()
+    advancedButtonText.textContent = 'Show advanced options'
+    advancedButtonImage.setAttribute('d', 'm3.485 15.126-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5-.971-1.748L12 19.856ZM20 8V6h2V4h-2V2h-2v2h-2v2h2v2zM2.513 12.833l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5a1 1 0 0 0-.002-1.749l-9.022-5a1 1 0 0 0-.968-.001l-8.978 4.96a1 1 0 0 0-.003 1.749z')
   }
 }
 /* eslint-enable no-unused-vars */
