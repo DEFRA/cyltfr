@@ -12,7 +12,7 @@ const config = {
   },
   OSGetCapabilities: 'os-get-capabilities',
   OSWMTS: 'os-maps-proxy',
-  OSAttribution: "&#169; Crown copyright and database rights {{year}} <a class='govuk-link' href='http://www.ordnancesurvey.co.uk'>OS</a> 100024198. Use of this mapping data is subject to terms and conditions",
+  OSAttribution: "&#169; Crown copyright and database rights {{year}} <a class='govuk-link' href='http://www.ordnancesurvey.co.uk'>OS</a> AC0000807064. Use of this mapping data is subject to terms and conditions",
   OSLayer: 'Outdoor_27700',
   OSMatrixSet: 'EPSG:27700',
   GSWMSGetCapabilities: 'gwc-proxy?SERVICE=WMS&VERSION=1.1.1&REQUEST=getcapabilities&TILED=true',
