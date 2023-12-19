@@ -1,0 +1,15 @@
+<layer>
+  <name>rofrs_ccrs4_4band_0_9m_depth</name>
+  <id>LayerInfoImpl--1a2a398b:1510f867e96:-8d1f</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-1a2a398b:1510f867e96:-8e94</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl--1a2a398b:1510f867e96:-8d1e</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+</layer>
