@@ -15,7 +15,7 @@
     "build": "bin/build",
     "lint": "standard",
     "unit-test": "bin/unit-test",
-    "test": "jest --no-cache  --detectOpenHandles --runInBand --forceExit",
+    "test": "jest --no-cache  --detectOpenHandles --runInBand --forceExit && npm run test:lab",
     "test:watch": "npm run test -- --watch",
     "test:lab": "npm run lint && npm run unit-test",
     "debug": "node --inspect-brk=0.0.0.0:9229 index.js",
