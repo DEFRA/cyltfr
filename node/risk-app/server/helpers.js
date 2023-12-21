@@ -8,7 +8,9 @@ const redirectToHomeCounty = (h, postcode, region) => {
 }
 
 const runningUnitTests = () => {
-  return (process.mainModule.path.endsWith('/lab/bin'))
+  if (!require.main.filename.includes('risk-data')) {
+    return (process.mainModule.path.endsWith('/lab/bin'))
+  }
 }
 
 module.exports = {
