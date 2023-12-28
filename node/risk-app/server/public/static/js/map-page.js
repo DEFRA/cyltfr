@@ -380,4 +380,16 @@ function selectedOption () {
   return measurementsRadios.value
 }
 
+/* eslint-disable no-unused-vars */
+function closeKey () {
+  const keyDisplay = document.getElementById('map-key')
+  const copyrightBtn = document.getElementById('att-key-copyright-btn')
+
+  if (keyDisplay.style.display === 'block') {
+    keyDisplay.style.display = 'none'
+    copyrightBtn.style.display = 'block'
+  }
+}
+/* eslint-enable no-unused-vars */
+
 mapPage()

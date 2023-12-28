@@ -173,11 +173,16 @@
   </div>
 
   <!-- Key -->
-  <div class="defra-map-key">
+  <div id="map-key" class="defra-map-key">
     <div class="defra-map-key__container" id="defra-map-key__container">
       <h2 id="mapKeyLabel" class="defra-map-key__title">
         <span role="text">Key<span class="govuk-visually-hidden">for map features</span></span>
       </h2>
+      <button class="defra-map-key__close" id="close-key" onclick="closeKey()">
+        <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20"><path d="M10,8.6L15.6,3L17,4.4L11.4,10L17,15.6L15.6,17L10,11.4L4.4,17L3,15.6L8.6,10L3,4.4L4.4,3L10,8.6Z" fill="" style="fill:currentColor;stroke:currentColor;stroke-width:0.1px;"></path>
+        </svg>
+        <span class="govuk-visually-hidden">Close key</span>
+      </button>
 
       <div class="defra-map-key__content">
         <div class="govuk-form-group" id="map-key__section">
