@@ -253,7 +253,7 @@ function toggleCopyrightInfo () {
       scenarioBarVelocity.style.display = 'none'
     }
     if (window.screen.width) {
-      openKeyBtn.style.top = 'calc(100vh - 219px)'
+      openKeyBtn.style.top = 'calc(100vh - 172px)'
       copyrightBtn.style.top = 'calc(100vh - 177px)'
     }
     copyrightInfoContainer.style.display = 'block'
@@ -265,8 +265,8 @@ function toggleCopyrightInfo () {
       scenarioBarVelocity.style.display = 'block'
     }
     if (window.screen.width) {
-      openKeyBtn.style.top = 'calc(100vh - 157px)'
-      copyrightBtn.style.top = 'calc(100vh - 115px)'
+      openKeyBtn.style.top = 'calc(100vh - 105px)'
+      copyrightBtn.style.top = 'calc(100vh - 110px)'
     }
     copyrightInfoContainer.style.display = 'none'
   }
@@ -396,7 +396,11 @@ function closeKey () {
   const openKeyBtn = document.getElementById('open-key-button')
   keyDisplay.style.display = 'none'
   copyrightBtn.style.display = 'block'
+  copyrightBtn.style.top = 'calc(100vh - 110px)'
+  copyrightBtn.style.right = '18px'
   openKeyBtn.style.display = 'flex'
+  openKeyBtn.style.top = 'calc(100vh - 105px)'
+  openKeyBtn.style.left = '-18px'
 }
 
 function openKey () {
