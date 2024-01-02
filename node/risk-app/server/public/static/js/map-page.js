@@ -242,14 +242,19 @@ function toggleCopyrightInfo () {
   const copyrightInfoContainer = document.getElementById('copyright-info-container')
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
-
   const depthRadio = document.getElementById('sw-depth-radio')
   const velocityRadio = document.getElementById('sw-velocity-radio')
+  const openKeyBtn = document.getElementById('open-key-button')
+  const copyrightBtn = document.getElementById('att-key-copyright-btn')
 
   if (copyrightInfoContainer.style.display === 'none') {
     if (scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block') {
       scenarioBarDepth.style.display = 'none'
       scenarioBarVelocity.style.display = 'none'
+    }
+    if (window.screen.width) {
+      openKeyBtn.style.top = 'calc(100vh - 219px)'
+      copyrightBtn.style.top = 'calc(100vh - 177px)'
     }
     copyrightInfoContainer.style.display = 'block'
   } else {
@@ -258,6 +263,10 @@ function toggleCopyrightInfo () {
     }
     if (velocityRadio.checked) {
       scenarioBarVelocity.style.display = 'block'
+    }
+    if (window.screen.width) {
+      openKeyBtn.style.top = 'calc(100vh - 157px)'
+      copyrightBtn.style.top = 'calc(100vh - 115px)'
     }
     copyrightInfoContainer.style.display = 'none'
   }
