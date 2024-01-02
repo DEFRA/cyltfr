@@ -384,12 +384,22 @@ function selectedOption () {
 function closeKey () {
   const keyDisplay = document.getElementById('map-key')
   const copyrightBtn = document.getElementById('att-key-copyright-btn')
-
-  if (keyDisplay.style.display === 'block') {
-    keyDisplay.style.display = 'none'
-    copyrightBtn.style.display = 'block'
-  }
+  const openKeyBtn = document.getElementById('open-key-button')
+  keyDisplay.style.display = 'none'
+  copyrightBtn.style.display = 'block'
+  openKeyBtn.style.display = 'flex'
 }
-/* eslint-enable no-unused-vars */
+
+function openKey () {
+  const keyDisplay = document.getElementById('map-key')
+  const copyrightBtn = document.getElementById('att-key-copyright-btn')
+  const openKeyBtn = document.getElementById('open-key-button')
+  const copyrightInfo = document.getElementById('copyright-info-container')
+
+  keyDisplay.style.display = 'block'
+  copyrightBtn.style.display = 'none'
+  openKeyBtn.style.display = 'none'
+  copyrightInfo.style.display = 'none'
+}
 
 mapPage()
