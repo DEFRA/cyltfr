@@ -17,10 +17,6 @@ $govuk-assets-path: '/assets/';
     display: none;
   }
 
-  #open-key-button {
-    display: none;
-  }
-
   @media screen and (min-width: 769px) {
     #map-key {
       display: block !important;
@@ -77,6 +73,16 @@ $govuk-assets-path: '/assets/';
       line-height: 1.1428571429;
       line-height: 40px;
       color: #0b0c0c;
+      
+      &:hover {
+        background: #f3f2f1;
+        cursor: pointer;
+      }
+
+      &:focus {
+        outline: 3px solid transparent;
+        box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
+      }
   
       svg {
         display: block;
