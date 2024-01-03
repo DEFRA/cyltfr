@@ -388,7 +388,11 @@ function closeKey () {
   copyrightBtn.style.right = '20px'
   openKeyBtn.style.display = 'flex'
   openKeyBtn.style.top = 'calc(100vh - 105px)'
-  openKeyBtn.style.left = '-20px'
+  if (window.location.search === '') {
+    openKeyBtn.style.left = '-20px'
+  } else {
+    openKeyBtn.style.left = '230px'
+  }
 }
 
 function openKey () {
