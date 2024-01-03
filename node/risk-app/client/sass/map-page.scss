@@ -202,6 +202,11 @@ $govuk-assets-path: '/assets/';
     @media screen and (max-width: 768px) {
       display: none;
     }
+
+    @media screen and (min-width: 769px) {
+      top: calc(100vh - 115px) !important;
+      right: 310px !important;
+    }
   }
 
   #att-key-copyright-btn:focus {

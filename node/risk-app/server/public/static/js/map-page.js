@@ -235,9 +235,7 @@ function handleRadioChange (selected, type) {
     }
   }
 }
-/* eslint-disable no-unused-vars */
 
-/* eslint-disable no-unused-vars */
 function toggleCopyrightInfo () {
   const copyrightInfoContainer = document.getElementById('copyright-info-container')
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
@@ -252,10 +250,8 @@ function toggleCopyrightInfo () {
       scenarioBarDepth.style.display = 'none'
       scenarioBarVelocity.style.display = 'none'
     }
-    if (window.screen.width) {
-      openKeyBtn.style.top = 'calc(100vh - 172px)'
-      copyrightBtn.style.top = 'calc(100vh - 177px)'
-    }
+    openKeyBtn.style.top = 'calc(100vh - 172px)'
+    copyrightBtn.style.top = 'calc(100vh - 177px)'
     copyrightInfoContainer.style.display = 'block'
   } else {
     if (depthRadio.checked) {
@@ -264,16 +260,12 @@ function toggleCopyrightInfo () {
     if (velocityRadio.checked) {
       scenarioBarVelocity.style.display = 'block'
     }
-    if (window.screen.width) {
-      openKeyBtn.style.top = 'calc(100vh - 105px)'
-      copyrightBtn.style.top = 'calc(100vh - 110px)'
-    }
+    openKeyBtn.style.top = 'calc(100vh - 105px)'
+    copyrightBtn.style.top = 'calc(100vh - 110px)'
     copyrightInfoContainer.style.display = 'none'
   }
 }
-/* eslint-enable no-unused-vars */
 
-/* eslint-disable no-unused-vars */
 function toggleAdvancedOptions () {
   const advancedButtonText = document.getElementById('advanced-button-text')
   const advancedButtonImage = document.getElementById('advanced-button-image')
@@ -326,9 +318,7 @@ function toggleAdvancedOptions () {
     advancedButtonImage.setAttribute('d', 'm3.485 15.126-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5-.971-1.748L12 19.856ZM20 8V6h2V4h-2V2h-2v2h-2v2h2v2zM2.513 12.833l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5a1 1 0 0 0-.002-1.749l-9.022-5a1 1 0 0 0-.968-.001l-8.978 4.96a1 1 0 0 0-.003 1.749z')
   }
 }
-/* eslint-enable no-unused-vars */
 
-/* eslint-disable no-unused-vars */
 function scenarioDisplayUpdate (scenarioBar) {
   const scenariosRadios = document.querySelectorAll(`input[name="scenarios-${scenarioBar}"]`)
   scenariosRadios.forEach(radio => {
@@ -346,7 +336,6 @@ function scenarioDisplayUpdate (scenarioBar) {
     }
   })
 }
-/* eslint-enable no-unused-vars */
 
 function selectedOption () {
   const measurementsRadios = document.querySelector('input[name="measurements"]:checked')
@@ -389,7 +378,6 @@ function selectedOption () {
   return measurementsRadios.value
 }
 
-/* eslint-disable no-unused-vars */
 function closeKey () {
   const keyDisplay = document.getElementById('map-key')
   const copyrightBtn = document.getElementById('att-key-copyright-btn')
@@ -397,10 +385,10 @@ function closeKey () {
   keyDisplay.style.display = 'none'
   copyrightBtn.style.display = 'block'
   copyrightBtn.style.top = 'calc(100vh - 110px)'
-  copyrightBtn.style.right = '18px'
+  copyrightBtn.style.right = '20px'
   openKeyBtn.style.display = 'flex'
   openKeyBtn.style.top = 'calc(100vh - 105px)'
-  openKeyBtn.style.left = '-18px'
+  openKeyBtn.style.left = '-20px'
 }
 
 function openKey () {
@@ -414,5 +402,6 @@ function openKey () {
   openKeyBtn.style.display = 'none'
   copyrightInfo.style.display = 'none'
 }
+/* eslint-enable no-unused-vars */
 
 mapPage()
