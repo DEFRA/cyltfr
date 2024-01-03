@@ -206,6 +206,7 @@ $govuk-assets-path: '/assets/';
     @media screen and (min-width: 769px) {
       top: calc(100vh - 115px) !important;
       right: 310px !important;
+      display: block !important;
     }
   }
 

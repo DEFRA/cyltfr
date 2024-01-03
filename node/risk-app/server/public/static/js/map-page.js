@@ -398,9 +398,13 @@ function openKey () {
   const copyrightInfo = document.getElementById('copyright-info-container')
 
   keyDisplay.style.display = 'block'
-  copyrightBtn.style.display = 'none'
   openKeyBtn.style.display = 'none'
+  copyrightBtn.style.display = 'none'
   copyrightInfo.style.display = 'none'
+  if (document.innerWidth <= 768) {
+    copyrightBtn.style.display = 'none'
+    copyrightInfo.style.display = 'none'
+  }
 }
 /* eslint-enable no-unused-vars */
 
