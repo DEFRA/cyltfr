@@ -51,7 +51,6 @@ $govuk-assets-path: '/assets/';
     }
 
     #open-key-button {
-      display: none;
       position: relative; 
       z-index: 25;
       float: right;
@@ -85,10 +84,12 @@ $govuk-assets-path: '/assets/';
       }
   
       svg {
-        display: block;
         margin: 10px;
       }
     }
+  }
+  #open-key-button {
+    display: none;
   }
 
   .defra-map-key {
