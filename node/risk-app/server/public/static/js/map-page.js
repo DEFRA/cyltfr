@@ -402,10 +402,12 @@ function closeKey () {
   const openKeyBtn = document.getElementById('open-key-button')
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
+  const copyrightInfo = document.getElementById('copyright-info-container')
 
   keyDisplay.style.display = 'none'
   copyrightBtn.style.display = 'block'
-  console.log(scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block')
+  copyrightInfo.style.display = 'none'
+
   if (scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block') {
     copyrightBtn.style.top = 'calc(100vh - 205px)'
     openKeyBtn.style.top = 'calc(100vh - 200px)'
