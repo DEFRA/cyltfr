@@ -165,6 +165,7 @@ function handleRadioChange (selected, type) {
   const copyrightInfo = document.getElementById('copyright-info-container')
   const boundaryContainer = document.getElementById('boundary-container')
   const olZoom = document.getElementsByClassName('ol-zoom')
+  const keyDisplay = document.getElementById('map-key')
 
   if (selected === 'depth') {
     extentInfoRs.style.display = 'none'
@@ -175,7 +176,17 @@ function handleRadioChange (selected, type) {
     scenarioBarDepth.style.display = 'block'
     scenarioBarVelocity.style.display = 'none'
     copyrightBtn.style.top = 'calc(100vh - 205px)'
-    copyrightInfo.style.right = '310px'
+    console.log(keyDisplay.style.display)
+    if (window.innerWidth <= 768) {
+      console.log('here')
+      copyrightInfo.style.right = '0'
+      if (keyDisplay.style.display === 'block') {
+        console.log('here')
+        scenarioBarDepth.style.display = 'none'
+      }
+    } else {
+      copyrightInfo.style.right = '310px'
+    }
     copyrightInfo.style.display = 'none'
     olZoom[0].style.top = 'calc(100% - 235px)'
   }
@@ -251,7 +262,9 @@ function toggleCopyrightInfo () {
       scenarioBarVelocity.style.display = 'none'
     }
     openKeyBtn.style.top = 'calc(100vh - 172px)'
-    copyrightBtn.style.top = 'calc(100vh - 177px)'
+    if (window.innerWidth <= 768) {
+      copyrightBtn.style.top = 'calc(100vh - 177px)'
+    }
     copyrightInfoContainer.style.display = 'block'
   } else {
     if (depthRadio.checked) {
@@ -261,7 +274,12 @@ function toggleCopyrightInfo () {
       scenarioBarVelocity.style.display = 'block'
     }
     openKeyBtn.style.top = 'calc(100vh - 105px)'
-    copyrightBtn.style.top = 'calc(100vh - 110px)'
+
+    if (scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block') {
+      copyrightBtn.style.top = 'calc(100vh - 205px)'
+    } else {
+      copyrightBtn.style.top = 'calc(100vh - 115px)'
+    }
     copyrightInfoContainer.style.display = 'none'
   }
 }
@@ -382,12 +400,20 @@ function closeKey () {
   const keyDisplay = document.getElementById('map-key')
   const copyrightBtn = document.getElementById('att-key-copyright-btn')
   const openKeyBtn = document.getElementById('open-key-button')
+  const scenarioBarDepth = document.getElementById('scenario-container-depth')
+  const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
+
   keyDisplay.style.display = 'none'
   copyrightBtn.style.display = 'block'
-  copyrightBtn.style.top = 'calc(100vh - 110px)'
+  if (scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block') {
+    copyrightBtn.style.top = 'calc(100vh - 205px)'
+    openKeyBtn.style.top = 'calc(100vh - 200px)'
+  } else {
+    copyrightBtn.style.top = 'calc(100vh - 110px)'
+    openKeyBtn.style.top = 'calc(100vh - 105px)'
+  }
   copyrightBtn.style.right = '20px'
   openKeyBtn.style.display = 'flex'
-  openKeyBtn.style.top = 'calc(100vh - 105px)'
   if (window.location.search === '') {
     openKeyBtn.style.left = '-20px'
   } else {
@@ -400,14 +426,20 @@ function openKey () {
   const copyrightBtn = document.getElementById('att-key-copyright-btn')
   const openKeyBtn = document.getElementById('open-key-button')
   const copyrightInfo = document.getElementById('copyright-info-container')
+  const scenarioBarDepth = document.getElementById('scenario-container-depth')
+  const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
 
   keyDisplay.style.display = 'block'
   openKeyBtn.style.display = 'none'
   copyrightBtn.style.display = 'none'
   copyrightInfo.style.display = 'none'
-  if (document.innerWidth <= 768) {
+  if (window.innerWidth <= 768) {
     copyrightBtn.style.display = 'none'
     copyrightInfo.style.display = 'none'
+  }
+  if (keyDisplay.style.display === 'block') {
+    scenarioBarDepth.style.display = 'none'
+    scenarioBarVelocity.style.display = 'none'
   }
 }
 /* eslint-enable no-unused-vars */
