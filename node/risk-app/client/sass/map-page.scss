@@ -160,10 +160,20 @@ $govuk-assets-path: '/assets/';
       line-height: 40px;
       z-index: 15;
 
+      @media screen and (max-width: 768px) {
+        padding: 0;
+      }
+
       svg {
         display: inline-block;
         margin: 10px;
         vertical-align: top;
+      }
+
+      #exit-text {
+        @media screen and (max-width: 768px) {
+          display: none;
+        }
       }
     }
   }
