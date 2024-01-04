@@ -213,7 +213,7 @@ function handleRadioChange (selected, type) {
       velocityInfo.style.display = 'none'
       scenarioBarDepth.style.display = 'none'
       scenarioBarVelocity.style.display = 'none'
-      copyrightBtn.style.top = 'calc(100vh - 115px)'
+      copyrightBtn.style.top = 'calc(100vh - 110px)'
       copyrightInfo.style.right = '360px'
       olZoom[0].style.top = 'calc(100% - 145px)'
       boundaryContainer.style.display = 'none'
@@ -226,7 +226,7 @@ function handleRadioChange (selected, type) {
       velocityInfo.style.display = 'none'
       scenarioBarDepth.style.display = 'none'
       scenarioBarVelocity.style.display = 'none'
-      copyrightBtn.style.top = 'calc(100vh - 115px)'
+      copyrightBtn.style.top = 'calc(100vh - 110px)'
       copyrightInfo.style.right = '360px'
       olZoom[0].style.top = 'calc(100% - 145px)'
       boundaryContainer.style.display = 'none'
@@ -239,7 +239,7 @@ function handleRadioChange (selected, type) {
       velocityInfo.style.display = 'none'
       scenarioBarDepth.style.display = 'none'
       scenarioBarVelocity.style.display = 'none'
-      copyrightBtn.style.top = 'calc(100vh - 115px)'
+      copyrightBtn.style.top = 'calc(100vh - 110px)'
       copyrightInfo.style.right = '360px'
       olZoom[0].style.top = 'calc(100% - 145px)'
       boundaryContainer.style.display = 'block'
@@ -278,7 +278,7 @@ function toggleCopyrightInfo () {
     if (scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block') {
       copyrightBtn.style.top = 'calc(100vh - 205px)'
     } else {
-      copyrightBtn.style.top = 'calc(100vh - 115px)'
+      copyrightBtn.style.top = 'calc(100vh - 110px)'
     }
     copyrightInfoContainer.style.display = 'none'
   }
@@ -405,6 +405,7 @@ function closeKey () {
 
   keyDisplay.style.display = 'none'
   copyrightBtn.style.display = 'block'
+  console.log(scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block')
   if (scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block') {
     copyrightBtn.style.top = 'calc(100vh - 205px)'
     openKeyBtn.style.top = 'calc(100vh - 200px)'

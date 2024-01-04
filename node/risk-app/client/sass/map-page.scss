@@ -205,7 +205,7 @@ $govuk-assets-path: '/assets/';
     }
 
     @media screen and (min-width: 769px) {
-      top: calc(100vh - 115px);
+      top: calc(100vh - 115px) !important;
       right: 310px !important;
       display: block !important;
     }
@@ -230,6 +230,7 @@ $govuk-assets-path: '/assets/';
     display: none;
 
     @media screen and (max-width: 768px) {
+      display: none;
       width: 100%;
       right: 0;
       top: calc(100vh - 80px);
@@ -246,7 +247,7 @@ $govuk-assets-path: '/assets/';
     z-index: 11;
 
     @media screen and (max-width: 768px) {
-      right: 160px;
+      right: 0 !important;
     }
   }
 
