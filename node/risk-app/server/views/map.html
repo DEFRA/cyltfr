@@ -30,6 +30,14 @@
     position: absolute;
     overflow-x: hidden;
   }
+
+  .higher {
+    top: calc(100vh - 177px);
+  }
+
+  .lower {
+    top: calc(100vh - 110px);
+  }
 </style>
 {{ super() }}
 {% endblock %}
@@ -185,7 +193,7 @@
   </div>
 
   <!-- Key -->
-  <div id="map-key" class="defra-map-key">
+  <div id="map-key" class="defra-map-key" style="display: block;">
     <div class="defra-map-key__container" id="defra-map-key__container">
       <h2 id="mapKeyLabel" class="defra-map-key__title">
         <span role="text">Key<span class="govuk-visually-hidden">for map features</span></span>

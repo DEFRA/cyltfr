@@ -18,6 +18,8 @@ $govuk-assets-path: '/assets/';
   }
 
   #map-key {
+    display: block;
+
     @media screen and (min-width: 769px) {
       display: block !important;
     }

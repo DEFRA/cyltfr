@@ -176,12 +176,9 @@ function handleRadioChange (selected, type) {
     scenarioBarDepth.style.display = 'block'
     scenarioBarVelocity.style.display = 'none'
     copyrightBtn.style.top = 'calc(100vh - 205px)'
-    console.log(keyDisplay.style.display)
     if (window.innerWidth <= 768) {
-      console.log('here')
       copyrightInfo.style.right = '0'
       if (keyDisplay.style.display === 'block') {
-        console.log('here')
         scenarioBarDepth.style.display = 'none'
       }
     } else {
@@ -446,5 +443,18 @@ function openKey () {
   }
 }
 /* eslint-enable no-unused-vars */
+function adjustPosition () {
+  const copyrightInfo = document.getElementById('copyright-info-container')
+  const copyrightBtn = document.getElementById('att-key-copyright-btn')
+  const keyDisplay = document.getElementById('map-key')
+  if (keyDisplay.style.display === 'block' && window.innerWidth <= 768) {
+    copyrightInfo.style.display = 'none'
+  }
 
+  if (copyrightInfo.style.display === 'block' && window.innerWidth <= 768) {
+    copyrightBtn.style.top = 'calc(100vh - 177px)'
+  }
+}
+
+window.onresize = adjustPosition
 mapPage()
