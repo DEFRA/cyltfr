@@ -217,7 +217,7 @@ $govuk-assets-path: '/assets/';
     }
 
     @media screen and (min-width: 769px) {
-      top: calc(100vh - 115px) !important;
+      top: calc(100vh - 110px);
       right: 310px !important;
       display: block !important;
     }
@@ -254,7 +254,7 @@ $govuk-assets-path: '/assets/';
     position: absolute;
     width: 330px;
     height: 80px;
-    top: calc(100vh - 100px);
+    top: calc(100vh - 95px);
     right: 360px;
     z-index: 11;
 

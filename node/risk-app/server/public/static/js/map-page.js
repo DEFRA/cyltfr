@@ -258,9 +258,9 @@ function toggleCopyrightInfo () {
       scenarioBarDepth.style.display = 'none'
       scenarioBarVelocity.style.display = 'none'
     }
-    openKeyBtn.style.top = 'calc(100vh - 172px)'
+    openKeyBtn.style.top = 'calc(100vh - 200px)'
     if (window.innerWidth <= 768) {
-      copyrightBtn.style.top = 'calc(100vh - 177px)'
+      copyrightBtn.style.top = 'calc(100vh - 205px)'
     }
     copyrightInfoContainer.style.display = 'block'
   } else {
@@ -447,12 +447,23 @@ function adjustPosition () {
   const copyrightInfo = document.getElementById('copyright-info-container')
   const copyrightBtn = document.getElementById('att-key-copyright-btn')
   const keyDisplay = document.getElementById('map-key')
+  const scenarioBarDepth = document.getElementById('scenario-container-depth')
+  const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
+
   if (keyDisplay.style.display === 'block' && window.innerWidth <= 768) {
     copyrightInfo.style.display = 'none'
   }
 
-  if (copyrightInfo.style.display === 'block' && window.innerWidth <= 768) {
-    copyrightBtn.style.top = 'calc(100vh - 177px)'
+  if ((copyrightInfo.style.display === 'block' ||
+  scenarioBarDepth.style.display === 'block' ||
+  scenarioBarVelocity.style.display === 'block') &&
+  window.innerWidth <= 768
+  ) {
+    copyrightBtn.style.top = 'calc(100vh - 205px)'
+  }
+
+  if (copyrightInfo.style.display === 'block' && window.innerWidth > 768) {
+    copyrightBtn.style.top = 'calc(100vh - 110px)'
   }
 }
 
