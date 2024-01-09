@@ -4,6 +4,8 @@ $govuk-assets-path: '/assets/';
 @import "node_modules/govuk-frontend/govuk/helpers/all";
 @import url(//fonts.googleapis.com/css?family=Source+Sans+Pro);
 
+$scenarioWidthCap: 980px;
+
 .map-container {
   height: 100%;
   width: 100%;
@@ -20,7 +22,7 @@ $govuk-assets-path: '/assets/';
   #map-key {
     display: block;
 
-    @media screen and (min-width: 769px) {
+    @media screen and (min-width: 768px) {
       display: block !important;
     }
   }
@@ -546,6 +548,12 @@ svg:not(:root) {
   float: right;
   top: calc(100vh - 150px);
   right: 270px;
+
+  @media screen and (max-width: $scenarioWidthCap) {
+    width: calc(67vw - 50px);
+    text-wrap: nowrap;
+    overflow-x: auto;
+  }
 }
 
 .defra-map-scenarios .govuk-radios__item {

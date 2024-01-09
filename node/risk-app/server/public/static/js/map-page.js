@@ -428,12 +428,13 @@ function openKey () {
   const copyrightInfo = document.getElementById('copyright-info-container')
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
+  const deviceScreenWidth = 768
 
   keyDisplay.style.display = 'block'
   openKeyBtn.style.display = 'none'
   copyrightBtn.style.display = 'none'
   copyrightInfo.style.display = 'none'
-  if (window.innerWidth <= 768) {
+  if (window.innerWidth <= deviceScreenWidth) {
     copyrightBtn.style.display = 'none'
     copyrightInfo.style.display = 'none'
   }
@@ -449,20 +450,21 @@ function adjustPosition () {
   const keyDisplay = document.getElementById('map-key')
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
+  const deviceScreenWidth = 768
 
-  if (keyDisplay.style.display === 'block' && window.innerWidth <= 768) {
+  if (keyDisplay.style.display === 'block' && window.innerWidth <= deviceScreenWidth) {
     copyrightInfo.style.display = 'none'
   }
 
   if ((copyrightInfo.style.display === 'block' ||
   scenarioBarDepth.style.display === 'block' ||
   scenarioBarVelocity.style.display === 'block') &&
-  window.innerWidth <= 768
+  window.innerWidth <= deviceScreenWidth
   ) {
     copyrightBtn.style.top = 'calc(100vh - 205px)'
   }
 
-  if (copyrightInfo.style.display === 'block' && window.innerWidth > 768) {
+  if (copyrightInfo.style.display === 'block' && window.innerWidth > deviceScreenWidth) {
     copyrightBtn.style.top = 'calc(100vh - 110px)'
   }
 }
