@@ -438,10 +438,6 @@ function openKey () {
     copyrightBtn.style.display = 'none'
     copyrightInfo.style.display = 'none'
   }
-  if (keyDisplay.style.display === 'block') {
-    scenarioBarDepth.style.display = 'none'
-    scenarioBarVelocity.style.display = 'none'
-  }
 }
 /* eslint-enable no-unused-vars */
 function adjustPosition () {
@@ -450,10 +446,12 @@ function adjustPosition () {
   const keyDisplay = document.getElementById('map-key')
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
+  const mapScenariosSelector = document.getElementById('defra-map-scenarios')
   const deviceScreenWidth = 768
 
   if (keyDisplay.style.display === 'block' && window.innerWidth <= deviceScreenWidth) {
     copyrightInfo.style.display = 'none'
+    mapScenariosSelector.style.display = ''
   }
 
   if ((copyrightInfo.style.display === 'block' ||

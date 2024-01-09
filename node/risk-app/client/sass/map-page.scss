@@ -4,6 +4,9 @@ $govuk-assets-path: '/assets/';
 @import "node_modules/govuk-frontend/govuk/helpers/all";
 @import url(//fonts.googleapis.com/css?family=Source+Sans+Pro);
 
+$mobile-width: 480px;
+$tablet-width: 768px;
+$desktop-width: 769px;
 $scenarioWidthCap: 980px;
 
 .map-container {
@@ -22,12 +25,12 @@ $scenarioWidthCap: 980px;
   #map-key {
     display: block;
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: $tablet-width) {
       display: block !important;
     }
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: $tablet-width) {
     justify-content: start;
     .defra-map-key__close {
       z-index: 25;
@@ -129,7 +132,7 @@ $scenarioWidthCap: 980px;
       color: #0b0c0c;
       border-radius: 0;
 
-      @media screen and (max-width: 768px) {
+      @media screen and (max-width: $tablet-width) {
         display: none;
       }
     }
@@ -164,7 +167,7 @@ $scenarioWidthCap: 980px;
       line-height: 40px;
       z-index: 15;
 
-      @media screen and (max-width: 768px) {
+      @media screen and (max-width: $tablet-width) {
         padding: 0;
       }
 
@@ -175,7 +178,7 @@ $scenarioWidthCap: 980px;
       }
 
       #exit-text {
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: $tablet-width) {
           display: none;
         }
       }
@@ -214,11 +217,11 @@ $scenarioWidthCap: 980px;
     color: #0b0c0c;
     z-index: 15;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: $tablet-width) {
       display: none;
     }
 
-    @media screen and (min-width: 769px) {
+    @media screen and (min-width: $desktop-width) {
       top: calc(100vh - 110px);
       right: 310px !important;
       display: block !important;
@@ -243,7 +246,7 @@ $scenarioWidthCap: 980px;
   #copyright-info-container {
     display: none;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: $tablet-width) {
       display: none;
       width: 100%;
       right: 0;
@@ -260,7 +263,7 @@ $scenarioWidthCap: 980px;
     right: 360px;
     z-index: 11;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: $tablet-width) {
       right: 0 !important;
       display: none;
     }
@@ -553,6 +556,12 @@ svg:not(:root) {
     width: calc(67vw - 50px);
     text-wrap: nowrap;
     overflow-x: auto;
+  }
+
+  @media screen and (max-width: $tablet-width) {
+    right: 20px;
+    width: 96vw;
+    top: calc(100vh - 190px);
   }
 }
 
