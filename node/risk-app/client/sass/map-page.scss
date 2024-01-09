@@ -4,6 +4,8 @@ $govuk-assets-path: '/assets/';
 @import "node_modules/govuk-frontend/govuk/helpers/all";
 @import url(//fonts.googleapis.com/css?family=Source+Sans+Pro);
 
+$device-width: 768px;
+
 .map-container {
   height: 100%;
   width: 100%;
@@ -23,7 +25,7 @@ $govuk-assets-path: '/assets/';
     }
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: $device-width) {
     justify-content: start;
     .defra-map-key__close {
       z-index: 25;
@@ -125,7 +127,7 @@ $govuk-assets-path: '/assets/';
       color: #0b0c0c;
       border-radius: 0;
 
-      @media screen and (max-width: 768px) {
+      @media screen and (max-width: $device-width) {
         display: none;
       }
     }
@@ -160,7 +162,7 @@ $govuk-assets-path: '/assets/';
       line-height: 40px;
       z-index: 15;
 
-      @media screen and (max-width: 768px) {
+      @media screen and (max-width: $device-width) {
         padding: 0;
       }
 
@@ -171,7 +173,7 @@ $govuk-assets-path: '/assets/';
       }
 
       #exit-text {
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: $device-width) {
           display: none;
         }
       }
@@ -210,12 +212,12 @@ $govuk-assets-path: '/assets/';
     color: #0b0c0c;
     z-index: 15;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: $device-width) {
       display: none;
     }
 
     @media screen and (min-width: 769px) {
-      top: calc(100vh - 115px) !important;
+      top: calc(100vh - 110px);
       right: 310px !important;
       display: block !important;
     }
@@ -239,7 +241,7 @@ $govuk-assets-path: '/assets/';
   #copyright-info-container {
     display: none;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: $device-width) {
       display: none;
       width: 100%;
       right: 0;
@@ -252,11 +254,11 @@ $govuk-assets-path: '/assets/';
     position: absolute;
     width: 330px;
     height: 80px;
-    top: calc(100vh - 100px);
+    top: calc(100vh - 95px);
     right: 360px;
     z-index: 11;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: $device-width) {
       right: 0 !important;
       display: none;
     }

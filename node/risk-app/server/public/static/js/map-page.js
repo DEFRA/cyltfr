@@ -176,12 +176,9 @@ function handleRadioChange (selected, type) {
     scenarioBarDepth.style.display = 'block'
     scenarioBarVelocity.style.display = 'none'
     copyrightBtn.style.top = 'calc(100vh - 205px)'
-    console.log(keyDisplay.style.display)
     if (window.innerWidth <= 768) {
-      console.log('here')
       copyrightInfo.style.right = '0'
       if (keyDisplay.style.display === 'block') {
-        console.log('here')
         scenarioBarDepth.style.display = 'none'
       }
     } else {
