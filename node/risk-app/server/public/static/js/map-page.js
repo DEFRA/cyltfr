@@ -273,11 +273,11 @@ function toggleCopyrightInfo () {
   } else {
     if (depthRadio.checked) {
       scenarioBarDepth.style.display = 'block'
-    }
-    if (velocityRadio.checked) {
+    } else if (velocityRadio.checked) {
       scenarioBarVelocity.style.display = 'block'
+    } else {
+      openKeyBtn.style.top = 'calc(100vh - 105px)'
     }
-    openKeyBtn.style.top = 'calc(100vh - 105px)'
 
     if (scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block') {
       copyrightBtn.style.top = 'calc(100vh - 205px)'
