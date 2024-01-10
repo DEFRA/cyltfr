@@ -400,6 +400,7 @@ function closeKey () {
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
   const copyrightInfo = document.getElementById('copyright-info-container')
+  const scenariosSelector = document.getElementById('scenario-selection')
 
   keyDisplay.style.display = 'none'
   copyrightBtn.style.display = 'block'
@@ -408,6 +409,7 @@ function closeKey () {
   if (scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block') {
     copyrightBtn.style.top = 'calc(100vh - 205px)'
     openKeyBtn.style.top = 'calc(100vh - 200px)'
+    scenariosSelector.style.top = null
   } else {
     copyrightBtn.style.top = 'calc(100vh - 110px)'
     openKeyBtn.style.top = 'calc(100vh - 105px)'
@@ -426,14 +428,14 @@ function openKey () {
   const copyrightBtn = document.getElementById('att-key-copyright-btn')
   const openKeyBtn = document.getElementById('open-key-button')
   const copyrightInfo = document.getElementById('copyright-info-container')
-  const scenarioBarDepth = document.getElementById('scenario-container-depth')
-  const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
+  const scenariosSelector = document.getElementById('scenario-selection')
   const deviceScreenWidth = 768
 
   keyDisplay.style.display = 'block'
   openKeyBtn.style.display = 'none'
   copyrightBtn.style.display = 'none'
   copyrightInfo.style.display = 'none'
+  scenariosSelector.style.top = ' calc(100vh - 145px)'
   if (window.innerWidth <= deviceScreenWidth) {
     copyrightBtn.style.display = 'none'
     copyrightInfo.style.display = 'none'
@@ -446,12 +448,16 @@ function adjustPosition () {
   const keyDisplay = document.getElementById('map-key')
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
-  const mapScenariosSelector = document.getElementById('defra-map-scenarios')
+  const scenariosSelector = document.getElementById('scenario-selection')
   const deviceScreenWidth = 768
 
-  if (keyDisplay.style.display === 'block' && window.innerWidth <= deviceScreenWidth) {
+  if (window.innerWidth > deviceScreenWidth) {
+    scenariosSelector.style.top = 'calc(100vh - 145px)'
+  } else if (keyDisplay.style.display === 'block' && window.innerWidth <= deviceScreenWidth) {
     copyrightInfo.style.display = 'none'
-    mapScenariosSelector.style.display = ''
+    scenariosSelector.style.top = 'calc(100vh - 145px)'
+  } else if (keyDisplay.style.display === 'none' && window.innerWidth <= deviceScreenWidth) {
+    scenariosSelector.style.top = 'calc(100vh - 190px)'
   }
 
   if ((copyrightInfo.style.display === 'block' ||
