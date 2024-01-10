@@ -165,7 +165,8 @@ function handleRadioChange (selected, type) {
   const copyrightInfo = document.getElementById('copyright-info-container')
   const boundaryContainer = document.getElementById('boundary-container')
   const olZoom = document.getElementsByClassName('ol-zoom')
-  const keyDisplay = document.getElementById('map-key')
+  const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
+  const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
 
   if (selected === 'depth') {
     extentInfoRs.style.display = 'none'
@@ -178,9 +179,8 @@ function handleRadioChange (selected, type) {
     copyrightBtn.style.top = 'calc(100vh - 205px)'
     if (window.innerWidth <= 768) {
       copyrightInfo.style.right = '0'
-      if (keyDisplay.style.display === 'block') {
-        scenarioBarDepth.style.display = 'none'
-      }
+      scenariosSelectorDepth.style.top = ' calc(100vh - 145px)'
+      scenariosSelectorVelocity.style.top = ' calc(100vh - 145px)'
     } else {
       copyrightInfo.style.right = '310px'
     }
@@ -196,6 +196,14 @@ function handleRadioChange (selected, type) {
     scenarioBarDepth.style.display = 'none'
     scenarioBarVelocity.style.display = 'block'
     copyrightBtn.style.top = 'calc(100vh - 205px)'
+    if (window.innerWidth <= 768) {
+      console.log('here')
+      copyrightInfo.style.right = '0'
+      scenariosSelectorDepth.style.top = ' calc(100vh - 145px)'
+      scenariosSelectorVelocity.style.top = ' calc(100vh - 145px)'
+    } else {
+      copyrightInfo.style.right = '310px'
+    }
     copyrightInfo.style.right = '310px'
     copyrightInfo.style.display = 'none'
     olZoom[0].style.top = 'calc(100% - 235px)'
@@ -400,7 +408,8 @@ function closeKey () {
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
   const copyrightInfo = document.getElementById('copyright-info-container')
-  const scenariosSelector = document.getElementById('scenario-selection')
+  const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
+  const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
 
   keyDisplay.style.display = 'none'
   copyrightBtn.style.display = 'block'
@@ -409,7 +418,8 @@ function closeKey () {
   if (scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block') {
     copyrightBtn.style.top = 'calc(100vh - 205px)'
     openKeyBtn.style.top = 'calc(100vh - 200px)'
-    scenariosSelector.style.top = null
+    scenariosSelectorDepth.style.top = null
+    scenariosSelectorVelocity.style.top = null
   } else {
     copyrightBtn.style.top = 'calc(100vh - 110px)'
     openKeyBtn.style.top = 'calc(100vh - 105px)'
@@ -428,15 +438,19 @@ function openKey () {
   const copyrightBtn = document.getElementById('att-key-copyright-btn')
   const openKeyBtn = document.getElementById('open-key-button')
   const copyrightInfo = document.getElementById('copyright-info-container')
-  const scenariosSelector = document.getElementById('scenario-selection')
+  const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
+  const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
   const deviceScreenWidth = 768
 
   keyDisplay.style.display = 'block'
   openKeyBtn.style.display = 'none'
   copyrightBtn.style.display = 'none'
   copyrightInfo.style.display = 'none'
-  scenariosSelector.style.top = ' calc(100vh - 145px)'
+  scenariosSelectorDepth.style.top = ' calc(100vh - 145px)'
+  scenariosSelectorVelocity.style.top = ' calc(100vh - 145px)'
   if (window.innerWidth <= deviceScreenWidth) {
+    scenariosSelectorDepth.style.top = ' calc(100vh - 145px)'
+    scenariosSelectorVelocity.style.top = ' calc(100vh - 145px)'
     copyrightBtn.style.display = 'none'
     copyrightInfo.style.display = 'none'
   }
@@ -448,16 +462,20 @@ function adjustPosition () {
   const keyDisplay = document.getElementById('map-key')
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
-  const scenariosSelector = document.getElementById('scenario-selection')
+  const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
+  const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
   const deviceScreenWidth = 768
 
   if (window.innerWidth > deviceScreenWidth) {
-    scenariosSelector.style.top = 'calc(100vh - 145px)'
+    scenariosSelectorDepth.style.top = 'calc(100vh - 145px)'
+    scenariosSelectorVelocity.style.top = 'calc(100vh - 145px)'
   } else if (keyDisplay.style.display === 'block' && window.innerWidth <= deviceScreenWidth) {
     copyrightInfo.style.display = 'none'
-    scenariosSelector.style.top = 'calc(100vh - 145px)'
+    scenariosSelectorDepth.style.top = 'calc(100vh - 145px)'
+    scenariosSelectorVelocity.style.top = 'calc(100vh - 145px)'
   } else if (keyDisplay.style.display === 'none' && window.innerWidth <= deviceScreenWidth) {
-    scenariosSelector.style.top = 'calc(100vh - 190px)'
+    scenariosSelectorDepth.style.top = 'calc(100vh - 190px)'
+    scenariosSelectorVelocity.style.top = 'calc(100vh - 190px)'
   }
 
   if ((copyrightInfo.style.display === 'block' ||
