@@ -197,7 +197,6 @@ function handleRadioChange (selected, type) {
     scenarioBarVelocity.style.display = 'block'
     copyrightBtn.style.top = 'calc(100vh - 205px)'
     if (window.innerWidth <= 768) {
-      console.log('here')
       copyrightInfo.style.right = '0'
       scenariosSelectorDepth.style.top = ' calc(100vh - 145px)'
       scenariosSelectorVelocity.style.top = ' calc(100vh - 145px)'
