@@ -4,6 +4,12 @@ $govuk-assets-path: '/assets/';
 @import "node_modules/govuk-frontend/govuk/helpers/all";
 @import url(//fonts.googleapis.com/css?family=Source+Sans+Pro);
 
+$mobile-width: 480px;
+$tablet-width: 768px;
+$desktop-width: 769px;
+$scenarioWidthCap: 980px;
+
+
 .map-container {
   height: 100%;
   width: 100%;
@@ -18,12 +24,14 @@ $govuk-assets-path: '/assets/';
   }
 
   #map-key {
-    @media screen and (min-width: 769px) {
+    display: block;
+
+    @media screen and (min-width: $tablet-width) {
       display: block !important;
     }
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: $tablet-width) {
     justify-content: start;
     .defra-map-key__close {
       z-index: 25;
@@ -101,7 +109,7 @@ $govuk-assets-path: '/assets/';
 
     #mapKeyLabel {
       font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
-      width: fit-content;
+      width: 250px;
     }
   }
 
@@ -125,7 +133,7 @@ $govuk-assets-path: '/assets/';
       color: #0b0c0c;
       border-radius: 0;
 
-      @media screen and (max-width: 768px) {
+      @media screen and (max-width: $tablet-width) {
         display: none;
       }
     }
@@ -160,10 +168,20 @@ $govuk-assets-path: '/assets/';
       line-height: 40px;
       z-index: 15;
 
+      @media screen and (max-width: $tablet-width) {
+        padding: 0;
+      }
+
       svg {
         display: inline-block;
         margin: 10px;
         vertical-align: top;
+      }
+
+      #exit-text {
+        @media screen and (max-width: $tablet-width) {
+          display: none;
+        }
       }
     }
   }
@@ -200,12 +218,12 @@ $govuk-assets-path: '/assets/';
     color: #0b0c0c;
     z-index: 15;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: $tablet-width) {
       display: none;
     }
 
-    @media screen and (min-width: 769px) {
-      top: calc(100vh - 115px) !important;
+    @media screen and (min-width: $desktop-width) {
+      top: calc(100vh - 110px);
       right: 310px !important;
       display: block !important;
     }
@@ -229,7 +247,7 @@ $govuk-assets-path: '/assets/';
   #copyright-info-container {
     display: none;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: $tablet-width) {
       display: none;
       width: 100%;
       right: 0;
@@ -242,11 +260,11 @@ $govuk-assets-path: '/assets/';
     position: absolute;
     width: 330px;
     height: 80px;
-    top: calc(100vh - 100px);
+    top: calc(100vh - 95px);
     right: 360px;
     z-index: 11;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: $tablet-width) {
       right: 0 !important;
       display: none;
     }
@@ -532,8 +550,20 @@ svg:not(:root) {
   background-color: white;
   padding: 5px 0px 0px 0px;
   float: right;
-  top: calc(100vh - 150px);
+  top: calc(100vh - 145px);
   right: 270px;
+
+  @media screen and (max-width: $scenarioWidthCap) {
+    width: calc(67vw - 50px);
+    text-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  @media screen and (max-width: $tablet-width) {
+    right: 20px;
+    width: 96vw;
+    top: calc(100vh - 190px);
+  }
 }
 
 .defra-map-scenarios .govuk-radios__item {
