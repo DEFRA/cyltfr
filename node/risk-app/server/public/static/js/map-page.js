@@ -168,6 +168,7 @@ function handleRadioChange (selected, type) {
   const olZoom = document.getElementsByClassName('ol-zoom')
   const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
   const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
+  const deviceScreenWidth = 768
 
   if (selected === 'depth') {
     extentInfoRs.style.display = 'none'
@@ -179,7 +180,7 @@ function handleRadioChange (selected, type) {
     scenariosSelectorDepth.style.display = 'flex'
     scenarioBarVelocity.style.display = 'none'
     copyrightBtn.style.top = 'calc(100vh - 205px)'
-    if (window.innerWidth <= 768) {
+    if (window.innerWidth <= deviceScreenWidth) {
       copyrightInfo.style.right = '0'
       scenariosSelectorDepth.style.display = 'none'
       scenariosSelectorVelocity.style.display = 'none'
@@ -199,7 +200,7 @@ function handleRadioChange (selected, type) {
     scenarioBarVelocity.style.display = 'block'
     scenariosSelectorVelocity.style.display = 'flex'
     copyrightBtn.style.top = 'calc(100vh - 205px)'
-    if (window.innerWidth <= 768 && keyDisplay.style.display === 'block') {
+    if (window.innerWidth <= deviceScreenWidth && keyDisplay.style.display === 'block') {
       copyrightInfo.style.right = '0'
       scenariosSelectorDepth.style.top = ' calc(100vh - 145px)'
       scenariosSelectorVelocity.style.top = ' calc(100vh - 145px)'
@@ -265,6 +266,7 @@ function toggleCopyrightInfo () {
   const openKeyBtn = document.getElementById('open-key-button')
   const copyrightBtn = document.getElementById('att-key-copyright-btn')
   const zoomBtns = document.getElementsByClassName('ol-control')
+  const deviceScreenWidth = 768
 
   if (copyrightInfoContainer.style.display === 'none') {
     if (scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block') {
@@ -272,7 +274,7 @@ function toggleCopyrightInfo () {
       scenarioBarVelocity.style.display = 'none'
     }
     openKeyBtn.style.top = 'calc(100vh - 200px)'
-    if (window.innerWidth <= 768) {
+    if (window.innerWidth <= deviceScreenWidth) {
       copyrightBtn.style.top = 'calc(100vh - 205px)'
     }
     copyrightInfoContainer.style.display = 'block'
