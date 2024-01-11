@@ -21,6 +21,7 @@ $scenarioWidthCap: 980px;
 
   @media screen and (max-width: $tablet-width) {
     justify-content: start;
+  }
     
   .defra-map-key__close {
     display: none;
@@ -85,7 +86,7 @@ $scenarioWidthCap: 980px;
       color: #0b0c0c;
       
       &:hover {
-        background: #f3f2f1;
+        background-color: #f3f2f1;
         cursor: pointer;
       }
 
