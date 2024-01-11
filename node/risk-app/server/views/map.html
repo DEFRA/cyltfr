@@ -30,6 +30,14 @@
     position: absolute;
     overflow-x: hidden;
   }
+
+  .higher {
+    top: calc(100vh - 177px);
+  }
+
+  .lower {
+    top: calc(100vh - 110px);
+  }
 </style>
 {{ super() }}
 {% endblock %}
@@ -110,7 +118,8 @@
       <div class="defra-map-scenarios horizontal-overflow scenario-float-right v6-width-fix"
         id="scenario-container-depth">
         <div class="defra-map-scenarios-v3_container" id="scenarios-controls-depth">
-          <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
+          <div class="govuk-radios govuk-radios--small" id="scenario-selection-depth" data-module="govuk-radios">
+
             <div class="govuk-radios__item" style="border-bottom: 7px solid rgb(29, 112, 184);">
               <input class="govuk-radios__input" id="risk-radio-high-depth" onchange="scenarioDisplayUpdate('depth')"
                 name="scenarios-depth" type="radio" value="{{maps.categories[1].maps[1].ref}}" checked="">
@@ -145,7 +154,7 @@
       <div class="defra-map-scenarios horizontal-overflow scenario-float-right v6-width-fix"
         id="scenario-container-velocity">
         <div class="defra-map-scenarios-v3_container" id="scenarios-controls-velocity">
-          <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
+          <div class="govuk-radios govuk-radios--small" id="scenario-selection-velocity" data-module="govuk-radios">
 
             <div class="govuk-radios__item" style="border-bottom: 7px solid rgb(29, 112, 184);">
               <input class="govuk-radios__input" id="risk-radio-high-velocity"
@@ -185,7 +194,7 @@
   </div>
 
   <!-- Key -->
-  <div id="map-key" class="defra-map-key">
+  <div id="map-key" class="defra-map-key" style="display: block;">
     <div class="defra-map-key__container" id="defra-map-key__container">
       <h2 id="mapKeyLabel" class="defra-map-key__title">
         <span role="text">Key<span class="govuk-visually-hidden">for map features</span></span>
