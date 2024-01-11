@@ -111,8 +111,10 @@
     }
   }
 
-  const riskDataLink = document.getElementsByClassName('govuk-footer__link')
-  riskDataLink[4].setAttribute('data-journey-click', 'ltfri:footer:risk-data-link')
+  if (!window.location.pathname === "/map") {
+    const riskDataLink = document.getElementsByClassName('govuk-footer__link')
+    riskDataLink[4].setAttribute('data-journey-click', 'ltfri:footer:risk-data-link')
+  }
 </script>
 <script>window.GOVUKFrontend.initAll()</script>
 {% if (analyticsAccount or G4AnalyticsAccount)  and cookiesPolicy.analytics %}
