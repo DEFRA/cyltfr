@@ -203,6 +203,7 @@ function handleRadioChange (selected, type) {
       copyrightInfo.style.right = '0'
       scenariosSelectorDepth.style.top = ' calc(100vh - 145px)'
       scenariosSelectorVelocity.style.top = ' calc(100vh - 145px)'
+      scenariosSelectorVelocity.style.display = 'none'
     } else {
       copyrightInfo.style.right = '310px'
       scenariosSelectorVelocity.style.display = 'flex'
