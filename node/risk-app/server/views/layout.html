@@ -83,6 +83,10 @@
       {
         href: "/accessibility-statement",
         text: "Accessibility statement"
+      },
+      {
+        href: "/risk-data",
+        text: "Get flood risk data"
       }
     ],
     html: 'Built by the <a href="https://www.gov.uk/government/organisations/environment-agency" class="govuk-footer__link">Environment Agency</a>
@@ -105,13 +109,15 @@
         const newUrl = newParams ? `${window.location.protocol}//${window.location.host}${window.location.pathname}?${newParams}` : `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
         window.history.replaceState({ path: newUrl }, '', newUrl);
     }
-}
+  }
+
+  const riskDataLink = document.getElementsByClassName('govuk-footer__link')
+  riskDataLink[4].setAttribute('data-journey-click', 'ltfri:footer:risk-data-link')
 </script>
 <script>window.GOVUKFrontend.initAll()</script>
 {% if (analyticsAccount or G4AnalyticsAccount)  and cookiesPolicy.analytics %}
 <script src="{{ assetPath }}/js/vendor/stageprompt.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id={{G4AnalyticsAccount}}"></script>
-
 <script type="text/javascript">
   var analyticsAccount = '{{ analyticsAccount }}'
   var G4AnalyticsAccount = '{{G4AnalyticsAccount}}'

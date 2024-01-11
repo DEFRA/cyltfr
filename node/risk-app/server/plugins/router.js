@@ -3,6 +3,7 @@ const routes = [].concat(
   require('../routes/postcode'),
   require('../routes/search'),
   require('../routes/england-only'),
+  require('../routes/risk-data'),
   require('../routes/risk'),
   require('../routes/map'),
   require('../routes/managing-flood-risk'),
