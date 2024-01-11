@@ -19,6 +19,9 @@ $scenarioWidthCap: 980px;
   flex-basis: 100%;
   flex-wrap: wrap;
 
+  @media screen and (max-width: $tablet-width) {
+    justify-content: start;
+    
   .defra-map-key__close {
     display: none;
   }
@@ -109,6 +112,10 @@ $scenarioWidthCap: 980px;
 
     #mapKeyLabel {
       font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+
+      @media screen and (max-width: $tablet-width) {
+        width: fit-content;
+      }
       width: 250px;
     }
   }
