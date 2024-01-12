@@ -111,10 +111,14 @@
     }
   }
 
-  if (!window.location.pathname === "/map") {
-    const riskDataLink = document.getElementsByClassName('govuk-footer__link')
-    riskDataLink[4].setAttribute('data-journey-click', 'ltfri:footer:risk-data-link')
+  const riskDataLink = document.getElementsByClassName('govuk-footer__link');
+
+  if (riskDataLink && riskDataLink.length >= 5) {
+      riskDataLink[4].setAttribute('data-journey-click', 'ltfri:footer:risk-data-link');
+  } else {
+      console.error("Error: Unable to find the required elements. Unable to update footer link attribute.");
   }
+
 </script>
 <script>window.GOVUKFrontend.initAll()</script>
 {% if (analyticsAccount or G4AnalyticsAccount)  and cookiesPolicy.analytics %}
