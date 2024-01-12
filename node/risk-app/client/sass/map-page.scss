@@ -327,7 +327,8 @@ $scenarioWidthCap: 980px;
     outline: 3px solid transparent;
     box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
 }
-.defra-map__advanced {
+
+#advanced-key-button {
   z-index: 20;
   float: right;
   right: 300px;
@@ -346,6 +347,10 @@ $scenarioWidthCap: 980px;
   width: auto;
   padding-right: 11px;
   pointer-events: auto;
+
+  @media screen and (max-width: $tablet-width) {
+    right: 10px;
+  }
 }
 
 .defra-map__advanced:hover {
