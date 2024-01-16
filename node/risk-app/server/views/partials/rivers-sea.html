@@ -41,6 +41,7 @@
               </a>
             </li>
           </ul>
+          {% else %}
           An area can still be at risk of flooding even if it has not flooded in the past. 
           <br><br>
           You should check your long term flood risk regularly because the information may change.  
@@ -51,8 +52,6 @@
             how to prepare for flooding
           </a>
           .
-          {% else %}
-          <span id="managing-{{ riverAndSeaClassName }}-rivers-and-seas-risk-text">You should check your long term flood risk regularly because the information may change.</span>
           {% endif %}
         </dd>
       </div>
