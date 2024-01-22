@@ -446,7 +446,6 @@ function closeKey () {
   keyDisplay.style.display = 'none'
   copyrightBtn.style.display = 'block'
   copyrightInfo.style.display = 'none'
-  advancedToggle.style.display = 'block'
 
   if (depthRadio.checked) {
     scenarioBarDepth.style.display = 'block'
@@ -567,6 +566,18 @@ function adjustPosition () {
     zoomBtns[0].style.top = 'calc(100% - 145px)'
   }
 }
+
+document.addEventListener('click', function (event) {
+  const keyDisplay = document.getElementById('map-key')
+  const isClickInsideSideMenu = keyDisplay.contains(event.target)
+  const openKeyBtn = document.getElementById('open-key-button')
+
+  if (!isClickInsideSideMenu && keyDisplay.style.display === 'block') {
+    closeKey()
+  } else if (openKeyBtn.contains(event.target)) {
+    openKeyBtn.addEventListener('click', openKey())
+  }
+})
 
 window.onresize = adjustPosition
 mapPage()
