@@ -25,7 +25,7 @@
           <Abstract></Abstract>
           <PolygonSymbolizer>
             <Fill>
-              <CssParameter name="fill">#555C9D</CssParameter>
+              <CssParameter name="fill">#C4E1FF</CssParameter>
             </Fill>
           </PolygonSymbolizer>
         </Rule>
