@@ -369,6 +369,7 @@ function toggleAdvancedOptions () {
     advancedButtonText.textContent = 'Show advanced options'
     advancedButtonImage.setAttribute('d', 'm3.485 15.126-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5-.971-1.748L12 19.856ZM20 8V6h2V4h-2V2h-2v2h-2v2h2v2zM2.513 12.833l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5a1 1 0 0 0-.002-1.749l-9.022-5a1 1 0 0 0-.968-.001l-8.978 4.96a1 1 0 0 0-.003 1.749z')
   }
+  openKey()
 }
 
 function scenarioDisplayUpdate (scenarioBar) {
@@ -446,6 +447,9 @@ function closeKey () {
   keyDisplay.style.display = 'none'
   copyrightBtn.style.display = 'block'
   copyrightInfo.style.display = 'none'
+  if (window.location.href.includes('?')) {
+    advancedToggle.style.display = 'block'
+  }
 
   if (depthRadio.checked) {
     scenarioBarDepth.style.display = 'block'
@@ -505,6 +509,7 @@ function adjustPosition () {
   const copyrightBtn = document.getElementById('att-key-copyright-btn')
   const zoomBtns = document.getElementsByClassName('ol-control')
   const keyDisplay = document.getElementById('map-key')
+  const openKeyBtn = document.getElementById('open-key-button')
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
   const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
@@ -559,6 +564,7 @@ function adjustPosition () {
   ) {
     zoomBtns[0].style.top = 'calc(100% - 235px)'
     copyrightBtn.style.top = 'calc(100vh - 205px)'
+    openKeyBtn.style.top = 'calc(100vh - 200px)'
   }
 
   if (copyrightInfo.style.display === 'block' && window.innerWidth > deviceScreenWidth) {
@@ -575,7 +581,7 @@ document.addEventListener('click', function (event) {
   if (!isClickInsideSideMenu && keyDisplay.style.display === 'block') {
     closeKey()
   } else if (openKeyBtn.contains(event.target)) {
-    openKeyBtn.addEventListener('click', openKey())
+    openKeyBtn.addEventListener('click', openKey)
   }
 })
 
