@@ -1,29 +1,29 @@
 <layerGroup>
-  <id>LayerGroupInfoImpl--1a2a398b:1510f867e96:-7f50</id>
-  <name>14-ROFRS-4band</name>
+  <id>LayerGroupInfoImpl--1a2a398b:1510f867e96:-7f51</id>
+  <name>15-ROFRS-CCRS2-4band</name>
   <mode>SINGLE</mode>
-  <title>Map 14: Risk of flooding from Rivers and Sea</title>
+  <title>Map 15: Risk of flooding from Rivers and Sea</title>
   <workspace>
     <id>WorkspaceInfoImpl-500e64e7:150fcd642d7:-7fe6</id>
   </workspace>
   <publishables>
     <published type="layer">
-      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8cff</id>
+      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8d0b</id>
     </published>
     <published type="layer">
-      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8d01</id>
+      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8d0d</id>
     </published>
     <published type="layer">
-      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8d03</id>
+      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8d0f</id>
     </published>
     <published type="layer">
-      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8d05</id>
+      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8d11</id>
     </published>
     <published type="layer">
-      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8d07</id>
+      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8d13</id>
     </published>
     <published type="layer">
-      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8d09</id>
+      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8d15</id>
     </published>
   </publishables>
   <styles>
