@@ -1,3 +1,12 @@
+.top-page-links {
+  display: flex;
+  justify-content: space-between;
+}
+
+#search-another-address::before {
+  content: none;
+}
+
 #risk-page {
   .govuk-inset-text {
     h3 {
@@ -5,16 +14,38 @@
     }
   }
 
+
+  #search-another-address {
+    color: #E3000E;
+  }
+
+  .chance-content {
+    padding-left: 10px;
+    border-style: solid;
+    border-width: 0 0 0 1px;
+    border-color: #b1b4b6;
+    font-weight: normal;
+    margin-left: 10px;
+}
+
   .no-margin {
     margin: 0 0 10px 0 !important;
   }
 
   .govuk-inset-text.high {
-    border-left-color: #E3000E
+    border-left-color: #E3000E;
   }
   
-  .govuk-inset-text.medium {
-    border-left-color: #F18604
+  .no-margin {
+    margin: 0 0 10px 0 !important;
+  }
+
+  .high {
+    border-left: 10px solid #E3000E;
+  }
+  
+  .medium {
+    border-left: 10px solid #F18604;
   }
 
   .print-summary {

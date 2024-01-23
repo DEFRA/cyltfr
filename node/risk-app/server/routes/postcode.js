@@ -9,6 +9,15 @@ module.exports = [
     method: 'GET',
     path: '/postcode',
     handler: (request, h) => {
+      request.yar.set('address', null)
+      const error = request.query.error
+
+      if (error) {
+        const errorMessage = 'This postcode does not appear to exist'
+        const model = new PostcodeViewModel(null, errorMessage, config.sessionTimeout)
+        return h.view('postcode', model)
+      }
+
       if (config.friendlyCaptchaEnabled) {
         if (Object.prototype.hasOwnProperty.call(request.query, 'captchabypass')) {
           // if value passed doesn't equal config value, clear out the session setting.

@@ -83,10 +83,14 @@
       {
         href: "/accessibility-statement",
         text: "Accessibility statement"
+      },
+      {
+        href: "/risk-data",
+        text: "Get flood risk data"
       }
     ],
     html: 'Built by the <a href="https://www.gov.uk/government/organisations/environment-agency" class="govuk-footer__link">Environment Agency</a>
-    <br><br><p class="govuk-body-s">© Crown copyright and database rights 2019 <a href="http://www.ordnancesurvey.co.uk" class="govuk-link">Ordnance Survey (OS)</a> 100024198.
+    <br><br><p class="govuk-body-s">© Crown Copyright and Database Rights 2024 <a href="http://www.ordnancesurvey.co.uk" class="govuk-link">Ordnance Survey (OS)</a> AC0000807064.
     <br>Use of the address and mapping data is subject to&nbsp;the <a href="/os-terms" class="govuk-link">Ordnance Survey terms and conditions</a>.</p>'
   }
 }) }}
@@ -96,11 +100,30 @@
 {# Run JavaScript at end of the <body>, to avoid blocking the initial render. #}
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="{{ assetPath }}/all.js"></script>
+<script>
+  if(window.location.pathname === "/postcode") {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('error')) {
+        urlParams.delete('error');
+        const newParams = urlParams.toString();
+        const newUrl = newParams ? `${window.location.protocol}//${window.location.host}${window.location.pathname}?${newParams}` : `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
+        window.history.replaceState({ path: newUrl }, '', newUrl);
+    }
+  }
+
+  const riskDataLink = document.getElementsByClassName('govuk-footer__link');
+
+  if (riskDataLink && riskDataLink.length >= 5) {
+      riskDataLink[4].setAttribute('data-journey-click', 'ltfri:footer:risk-data-link');
+  } else {
+      console.error("Error: Unable to find the required elements. Unable to update footer link attribute.");
+  }
+
+</script>
 <script>window.GOVUKFrontend.initAll()</script>
 {% if (analyticsAccount or G4AnalyticsAccount)  and cookiesPolicy.analytics %}
 <script src="{{ assetPath }}/js/vendor/stageprompt.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id={{G4AnalyticsAccount}}"></script>
-
 <script type="text/javascript">
   var analyticsAccount = '{{ analyticsAccount }}'
   var G4AnalyticsAccount = '{{G4AnalyticsAccount}}'

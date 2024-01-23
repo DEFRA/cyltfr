@@ -1,6 +1,9 @@
+/* $lab:coverage:off$ */
 const CatboxRedis = require('@hapi/catbox-redis')
 const config = require('./config')
 const { redisCacheEnabled, redisCacheHost, redisCachePort } = config
+let CatboxMemory
+if (!redisCacheEnabled) { CatboxMemory = require('@hapi/catbox-memory') }
 
 module.exports = redisCacheEnabled
   ? {
@@ -13,4 +16,10 @@ module.exports = redisCacheEnabled
         }
       }
     }
-  : undefined
+  : {
+      name: 'memory_cache',
+      provider: {
+        constructor: CatboxMemory.Engine
+      }
+    }
+/* $lab:coverage:on$ */

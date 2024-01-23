@@ -4,7 +4,297 @@ $govuk-assets-path: '/assets/';
 @import "node_modules/govuk-frontend/govuk/helpers/all";
 @import url(//fonts.googleapis.com/css?family=Source+Sans+Pro);
 
-#map-page {
+$mobile-width: 480px;
+$tablet-width: 768px;
+$desktop-width: 769px;
+$scenarioWidthCap: 980px;
+
+
+.map-container {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: end;
+  flex-basis: 100%;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: $tablet-width) {
+    justify-content: start;
+  }
+    
+  .defra-map-key__close {
+    display: none;
+  }
+
+  #map-key {
+    display: block;
+
+    @media screen and (min-width: $tablet-width) {
+      display: block !important;
+    }
+  }
+
+  @media screen and (max-width: $tablet-width) {
+    justify-content: start;
+    .defra-map-key__close {
+      z-index: 25;
+      display: block;
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      width: 40px;
+      height: 40px;
+      margin: 0;
+      border: 0;
+      padding: 0;
+      border: 0;
+      cursor: pointer;
+      background-color: #ffffff;
+      color: #0b0c0c;
+
+      &:hover {
+        background-color: #f3f2f1;
+      }
+
+      svg {
+        margin: 10px;
+      }
+    }
+
+    #open-key-button {
+      position: relative; 
+      z-index: 25;
+      float: right;
+      top: calc(100vh - 157px);
+      left: 30px;
+      margin-left: 0px;
+      margin-top: 0px;
+      height: 40px;
+      width: 80px;
+      padding: 0;
+      border: 0;
+      cursor: pointer;
+      background-color: white;
+      font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+      align-items: center;
+      font-weight: 400;
+      font-size: 14px;
+      font-size: 0.875rem;
+      line-height: 1.1428571429;
+      line-height: 40px;
+      color: #0b0c0c;
+      
+      &:hover {
+        background-color: #f3f2f1;
+        cursor: pointer;
+      }
+
+      &:focus {
+        outline: 3px solid transparent;
+        box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
+      }
+  
+      svg {
+        margin: 10px;
+      }
+    }
+  }
+  #open-key-button {
+    display: none;
+  }
+
+  .defra-map-key {
+    z-index: 25;
+    position: absolute;
+    height: 100%;
+    width: 290px;
+    background-color: white;
+
+    #mapKeyLabel {
+      font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+
+      @media screen and (max-width: $tablet-width) {
+        width: fit-content;
+      }
+      width: 250px;
+    }
+  }
+
+  #map {
+    height: 100%;
+    width: 100vw;
+
+    .ol-control {
+      padding: 0;
+      border-radius: 0;
+      background-color: white;
+      button {
+      display: block;
+      position: relative;
+      border: 0;
+      height: 40px;
+      width: 40px;
+      padding: 0;
+      cursor: pointer;
+      background-color: white;
+      color: #0b0c0c;
+      border-radius: 0;
+
+      @media screen and (max-width: $tablet-width) {
+        display: none;
+      }
+    }
+
+      button:hover {
+        background-color: #f3f2f1;
+      }    
+
+      button:focus {
+        outline: 3px solid transparent;
+        box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
+      }
+    
+    }
+  }
+
+  .defra-map-controls {
+    position: absolute;
+    width: 100%;
+
+    .defra-map__exit {
+      width: auto;
+      padding: 0 11px 0 0;
+      float: left;
+      position: relative;
+      margin: 10px 0px 0px 10px;
+      border: 0;
+      height: 40px;
+      background-color: white;
+      color: #0b0c0c;
+      font-size: 16px;
+      line-height: 40px;
+      z-index: 15;
+
+      @media screen and (max-width: $tablet-width) {
+        padding: 0;
+      }
+
+      svg {
+        display: inline-block;
+        margin: 10px;
+        vertical-align: top;
+      }
+
+      #exit-text {
+        @media screen and (max-width: $tablet-width) {
+          display: none;
+        }
+      }
+    }
+  }
+  .defra-map__exit:hover {
+    background: #f3f2f1;
+    cursor: pointer;
+  }
+
+  .defra-map__exit:focus {
+    outline: 3px solid transparent;
+    box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
+  }
+
+  #att-key-copyright-btn {
+    float: right;
+    clear: both;
+    position: relative;
+    font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 500;
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.25;
+    top: calc(100vh - 115px);
+    right: 310px;
+    border: 0;
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    margin-top: 5px;
+    cursor: pointer;
+    background-color: white;
+    color: #0b0c0c;
+    z-index: 15;
+
+    @media screen and (max-width: $tablet-width) {
+      display: none;
+    }
+
+    @media screen and (min-width: $desktop-width) {
+      top: calc(100vh - 110px);
+      right: 310px !important;
+      display: block !important;
+    }
+  }
+
+  #att-key-copyright-btn:focus {
+    outline: 3px solid transparent;
+    box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
+  }
+
+  #att-key-copyright-btn:hover {
+    background: #f3f2f1;
+    cursor: pointer;
+  }
+
+  .defra-map-attribution svg {
+    font-weight: 400;
+    margin: 10px;
+  }
+
+  #copyright-info-container {
+    display: none;
+
+    @media screen and (max-width: $tablet-width) {
+      display: none;
+      width: 100%;
+      right: 0;
+      top: calc(100vh - 80px);
+    }
+  }
+
+  .defra-map-info__container {
+    background-color: white;
+    position: absolute;
+    width: 330px;
+    height: 80px;
+    top: calc(100vh - 95px);
+    right: 360px;
+    z-index: 11;
+
+    @media screen and (max-width: $tablet-width) {
+      right: 0 !important;
+      display: none;
+    }
+  }
+
+  .toggle-copyright-info {
+    display: block;
+  }
+
+  .defra-map-info__close {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #0b0c0c;
+  }
+
   #progress {
     position: absolute;
     top: 0;
@@ -15,70 +305,444 @@ $govuk-assets-path: '/assets/';
     transition: width 250ms;
     z-index: 1;
   }
+}
 
-  #error-message {
-    color: $govuk-error-colour;
+#sw-velocity-desc-container {
+  display: none;
+}
+
+#sw-depth-desc-container {
+  display: none;
+}
+
+.extent-desc-container {
+  display: none;
+}
+
+.defra-map__advanced span {
+  vertical-align: top;
+}
+
+.defra-map__advanced:focus {
+    outline: 3px solid transparent;
+    box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
+}
+
+#advanced-key-button {
+  z-index: 20;
+  float: right;
+  right: 300px;
+  position: relative;
+  margin: 10px 10px 0px 10px;
+  border: 0;
+  padding: 0;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  background-color: white;
+  color: #0b0c0c;
+  font-size: 16px;
+  line-height: 40px;
+  color: #0b0c0c;
+  width: auto;
+  padding-right: 11px;
+  pointer-events: auto;
+
+  @media screen and (max-width: $tablet-width) {
+    right: 10px;
+  }
+}
+
+.defra-map__advanced:hover {
+  background-color: #f3f2f1;
+}
+
+.defra-map__advanced svg {
+  display: inline-block;
+  margin: 10px;
+  vertical-align: top;
+}
+
+#mapKeyLabel {
+  position:fixed;
+  background-color: white;
+  line-height: 2.125;
+  height: 40px;
+  width: 100%;
+  padding: 0px 18px 0 20px;
+  font-size: 19px;
+  margin: 0;
+  z-index: 15;
+}
+
+.defra-map-key__content {
+  padding: 0 18px 0 20px;
+  width: 270px;
+  height: 100%;
+  position: fixed; 
+  overflow-y: auto;
+}
+
+.govuk-fieldset__legend {
+  margin-bottom: 10px;
+}
+
+.defra-map-key label {
+  font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+  font-size: 16px;
+}
+
+.defra-map-key__section-title {
+  position: relative;
+  font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 700;
+  font-size: 16px !important;
+  font-size: 0.875rem;
+  line-height: 1.1428571429;
+  display: block;
+  margin-top: 45px;
+  margin-bottom: 0;
+  padding: 10px 15px 0px 0px;
+  box-sizing: border-box;
+  width: 260px;
+}
+
+.defra-map-key__section-title::before {
+  position: absolute;
+  content: "";
+  height: 1px;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  border-top: 1px solid #b1b4b6;
+}
+
+#reservoir-title {
+  margin-top: 5px;
+}
+
+.govuk-radios__label {
+  padding-top: 0;
+}
+
+.govuk-radios--small .govuk-radios__item {
+  min-height: 0;
+  margin-bottom: 0;
+  padding-left: 34px;
+  float: left;
+}
+
+.defra-map-key__symbol-container-v3 {
+  position: relative;
+  display: block;
+  margin-left: 0px;
+}
+
+#map-display-toggles-title {
+  margin-top: 5px;
+}
+
+#rs-title {
+  margin-top: 5px;
+}
+
+.govuk-checkboxes__label:after {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 11px;
+  left: 9px;
+  width: 23px;
+  height: 12px;
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  border: solid;
+  border-width: 0 0 5px 5px;
+  border-top-color: transparent;
+  opacity: 0;
+  background: transparent;
+}
+
+.defra-map-key__symbol-container {
+  position: relative;
+  display: block;
+  margin-left: 34px;
+}
+
+.defra-map-key__symbol {
+  position: absolute;
+  top: -6px;
+  left: 0;
+  width: 28px;
+  height: 28px;
+  margin-left: -35px;
+  text-indent: -5000px;
+  background-size: 25px;
+  background-repeat: no-repeat;
+  border: 0;
+}
+
+.defra-map-key__symbol svg {
+  display: block; 
+  box-sizing: border-box;
+  top: 10px;
+}
+
+svg:not(:root) {
+  overflow-clip-margin: content-box;
+  overflow: hidden;
+}
+
+#surface-water-extent-heading {
+  padding-left: 34px;
+}
+
+.govuk-radios__label {
+  font-size: 16px;
+}
+
+.risk-context {
+  display: block;
+  font-size: 14px;
+  padding-top: 8px;
+  padding-bottom: 0;
+  height: 35px;
+  width: 210px;
+}
+
+.defra-map-key__symbol-container--multi {
+  margin-top: 19px;
+}
+
+.sw-depth-container {
+  margin-left: 34px;
+}
+
+.sw--container {
+  margin-left: 34px;
+}
+
+.sw-velocity-container {
+  margin-left: 34px;
+}
+
+#sw-velocity-less {
+  margin-top: 0;
+}
+
+.arrow-symbol {
+  padding-top: 5px;
+  padding-left: 6px;
+  height: 18px;
+  width: 18px;
+}
+
+#sw-velocity-arrow {
+  margin-top: 25px;
+}
+
+#scenario-container-depth {
+  display: none;
+}
+
+#scenario-container-velocity {
+  display: none;
+}
+
+.defra-map-scenarios .govuk-radios{
+  z-index: 15;
+  position: relative;
+  display: flex;
+  width: 660px;
+  height: 82px;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  background-color: white;
+  padding: 5px 0px 0px 0px;
+  float: right;
+  top: calc(100vh - 145px);
+  right: 270px;
+
+  @media screen and (max-width: $scenarioWidthCap) {
+    width: calc(67vw - 50px);
+    text-wrap: nowrap;
+    overflow-x: auto;
   }
 
-  .ol-attribution li {
-    font-family: "GDS Transport", Arial, sans-serif;
-    font-size: 10px
+  @media screen and (max-width: $tablet-width) {
+    right: 20px;
+    width: 96vw;
+    top: calc(100vh - 190px);
   }
+}
 
-  label[for=location] {
-    @include govuk-media-query ($until: tablet) {
-      margin-top: 10px;
-    }
-  }
+.defra-map-scenarios .govuk-radios__item {
+  flex: 1 1 auto;
+  font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 12px;
+  font-size: 0.75rem;
+  line-height: 1.25;
+  font-size: 14px;
+  padding-bottom: 10px;
+  padding-left: 54px;
+  border-bottom: 7px solid transparent;
+}
 
-  .os-api-branding {
-    position: absolute;
-    bottom: 0;
-    margin: 0;
-    display: block;
-    z-index: 1000;
-    pointer-events: none;
+.govuk-radios__label {
+  display: inline-block;
+  margin-bottom: 0;
+  padding: 8px 15px 5px;
+  cursor: pointer;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
+
+.govuk-radios__input {
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  top: -2px;
+  left: -2px;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  opacity: 0;
+}
+
+.defra-map-scenarios .risk-context-v3 {
+  display: block;
+  font-size: 14px;
+  padding-top: 2px;
+  padding-bottom: 0;
+}
+.govuk-radios--small .govuk-radios__label {
+  margin-top: -2px;
+  padding: 13px 15px 13px 1px;
+  float: left;
+  font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+}
+
+.defra-map-scenarios .govuk-radios--small .govuk-radios__label:before {
+  margin-left: 15px;
+  margin-top: 8px;
+  height: 28px;
+  width: 28px;
+}
+
+.defra-map-scenarios .govuk-radios--small .govuk-radios__label:after {
+  margin-left: 15px;
+  margin-top: 8px;
+  border-width: 7px;
+}
+
+.ol-zoom {
+  float: right;
+  align-self: center;
+  /* As the zoom buttons are within the map they are not as easily positioned, which is why I
+    have used the calculation as seen below. */
+  left: calc(100% - 350px);
+  top: calc(100% - 145px);
+}
+
+.ol-zoom .ol-zoom-out {
+  margin: 0;
+  border-radius: 0;
+}
+
+.ol-zoom .ol-zoom-in {
+  margin: 0;
+  border-radius: 0;
+}
+
+.ol-zoom .ol-zoom-in:focus {
+  z-index: 12;
+}
+
+.ol-zoom .ol-zoom-in button:hover {
+  background-color: #f3f2f1;
+
+}
+
+.ol-full-screen {
+  display: none;
+}
+
+.ol-attribution li {
+  font-family: "GDS Transport", Arial, sans-serif;
+  font-size: 10px
+}
+
+.ol-attribution {
+  padding: 10px;
+}
+
+label[for=location] {
+  @include govuk-media-query ($until: tablet) {
+    margin-top: 10px;
   }
+}
+
+.os-api-branding {
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  display: block;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.os-api-branding.logo {
+  left: 0;
+  padding: 8px;
+  width: 90px;
+  height: 24px;
   
-  .os-api-branding.logo {
-    left: 0;
-    padding: 8px;
-    width: 90px;
-    height: 24px;
-    
-    background-image: url('#{$govuk-images-path}os-logo-maps.svg');
-    background-size: 90px 24px;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  
+  background-image: url('#{$govuk-images-path}os-logo-maps.svg');
+  background-size: 90px 24px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.os-api-branding.copyright {
+  right: 0;
+  padding: 0 4px;
+  font: 10px 'Source Sans Pro', Arial, sans-serif;
+  line-height: 16px;
+  background: rgba(255, 255, 255, 0.7);
+}
+.os-api-branding.copyright span {
+  margin: 0 4px;
+}
+.os-api-branding.copyright a:link,
+.os-api-branding.copyright a:visited,
+.os-api-branding.copyright a:hover,
+.os-api-branding.copyright a:active {
+  color: #0071bc;
+  text-decoration: none;
+  pointer-events: all;
+  cursor: pointer;
+}
+.os-api-branding.copyright a:hover {
+  text-decoration: underline;
+}
+
+.govuk-link {
+  font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+}
+
+.govuk-link:hover {
+  text-decoration-thickness: 3px;
+}
+
+@media only screen and (max-width: 420px) {
+  /* max-width 420px, mobile-only styles */
   .os-api-branding.copyright {
-    right: 0;
-    padding: 0 4px;
-    font: 10px 'Source Sans Pro', Arial, sans-serif;
-    line-height: 16px;
-    background: rgba(255, 255, 255, 0.7);
-  }
-  .os-api-branding.copyright span {
-    margin: 0 4px;
-  }
-  .os-api-branding.copyright a:link,
-  .os-api-branding.copyright a:visited,
-  .os-api-branding.copyright a:hover,
-  .os-api-branding.copyright a:active {
-    color: #0071bc;
-    text-decoration: none;
-    pointer-events: all;
-    cursor: pointer;
-  }
-  .os-api-branding.copyright a:hover {
-    text-decoration: underline;
-  }
-  
-  @media only screen and (max-width: 420px) {
-    /* max-width 420px, mobile-only styles */
-    .os-api-branding.copyright {
-      display: none;
-    }
+    display: none;
   }
 }
