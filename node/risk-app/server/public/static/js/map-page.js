@@ -578,10 +578,10 @@ document.addEventListener('click', function (event) {
   const isClickInsideSideMenu = keyDisplay.contains(event.target)
   const openKeyBtn = document.getElementById('open-key-button')
 
-  if (!isClickInsideSideMenu && keyDisplay.style.display === 'block') {
+  if (openKeyBtn.contains(event.target)) {
+    openKey()
+  } else if (!isClickInsideSideMenu && keyDisplay.style.display === 'block') {
     closeKey()
-  } else if (openKeyBtn.contains(event.target)) {
-    openKeyBtn.addEventListener('click', openKey)
   }
 })
 
