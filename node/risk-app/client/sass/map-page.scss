@@ -30,7 +30,7 @@ $scenarioWidthCap: 980px;
   #map-key {
     display: block;
 
-    @media screen and (min-width: $tablet-width) {
+    @media screen and (min-width: $desktop-width) {
       display: block !important;
     }
   }
