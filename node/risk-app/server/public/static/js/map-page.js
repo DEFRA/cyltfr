@@ -49,7 +49,6 @@ function mapPage () {
     const results = regex.exec(window.location.search)
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
   }
-  const mapController = new MapController(mapCategories.categories)
   const $header = $('.govuk-radios')
   const $advancedHeader = $('.defra-map-controls')
   const $map = $('#map')
@@ -61,20 +60,6 @@ function mapPage () {
   const maps = window.maps
 
   maps.loadMap((hasLocation && [easting, northing]))
-
-  // This function updates the map to the radio button you select (extent, depth, velocity)
-  function setCurrent (ref) {
-    mapController.setCurrent(ref)
-    const selectedAddressCheckbox = document.getElementById('selected-address-checkbox')
-    const showFloodingCheckbox = document.getElementById('display-layers-checkbox')
-    const mapReferenceValue = selectedOption()
-
-    if (showFloodingCheckbox.checked) {
-      maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1), selectedAddressCheckbox.checked)
-    } else {
-      maps.showMap(undefined, selectedAddressCheckbox.checked)
-    }
-  }
 
   // Default to the first category/map
   maps.onReady(function () {
@@ -122,15 +107,32 @@ document.addEventListener('click', function (event) {
 
 openKeyBtn.addEventListener('click', function (event) {
   event.stopPropagation()
-
   openKey()
 })
 
-advancedToggle.addEventListener('onchange', function (event) {
+advancedToggle.addEventListener('click', function (event) {
   event.stopPropagation()
-
+  openKey()
   toggleAdvancedOptions()
+  selectedOption()
+  setCurrent()
 })
+
+// This function updates the map to the radio button you select (extent, depth, velocity)
+function setCurrent (ref) {
+  const maps = window.maps
+  const mapController = new MapController(mapCategories.categories)
+  mapController.setCurrent(ref)
+  const selectedAddressCheckbox = document.getElementById('selected-address-checkbox')
+  const showFloodingCheckbox = document.getElementById('display-layers-checkbox')
+  const mapReferenceValue = selectedOption()
+
+  if (showFloodingCheckbox.checked) {
+    maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1), selectedAddressCheckbox.checked)
+  } else {
+    maps.showMap(undefined, selectedAddressCheckbox.checked)
+  }
+}
 
 function toggleAdvancedOptions () {
   const copyrightBtn = document.getElementById('att-key-copyright-btn')
@@ -196,7 +198,6 @@ function toggleAdvancedOptions () {
     advancedButtonText.textContent = 'Show advanced options'
     advancedButtonImage.setAttribute('d', 'm3.485 15.126-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5-.971-1.748L12 19.856ZM20 8V6h2V4h-2V2h-2v2h-2v2h2v2zM2.513 12.833l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5a1 1 0 0 0-.002-1.749l-9.022-5a1 1 0 0 0-.968-.001l-8.978 4.96a1 1 0 0 0-.003 1.749z')
   }
-  openKey()
 }
 
 function openKey () {
@@ -209,10 +210,10 @@ function openKey () {
   openKeyBtn.style.display = 'none'
   copyrightBtn.style.display = 'none'
   copyrightInfo.style.display = 'none'
-  advancedToggle.style.display = 'none'
   scenariosSelectorDepth.style.display = 'none'
   scenariosSelectorVelocity.style.display = 'none'
   if (window.innerWidth <= deviceScreenWidth) {
+    advancedToggle.style.display = 'none'
     scenariosSelectorDepth.style.top = ' calc(100vh - 145px)'
     scenariosSelectorVelocity.style.top = ' calc(100vh - 145px)'
     copyrightBtn.style.display = 'none'
