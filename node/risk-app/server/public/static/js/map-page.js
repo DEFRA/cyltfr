@@ -112,6 +112,7 @@ function mapPage () {
 const advancedToggle = document.getElementById('advanced-key-button')
 const keyDisplay = document.getElementById('map-key')
 const openKeyBtn = document.getElementById('open-key-button')
+const deviceScreenWidth = 768
 
 document.addEventListener('click', function (event) {
   if (keyDisplay.style.display === 'block' && !keyDisplay.contains(event.target)) {
@@ -132,12 +133,9 @@ advancedToggle.addEventListener('onchange', function (event) {
 })
 
 function toggleAdvancedOptions () {
-  const keyDisplay = document.getElementById('map-key')
   const copyrightBtn = document.getElementById('att-key-copyright-btn')
-  const openKeyBtn = document.getElementById('open-key-button')
   const copyrightInfo = document.getElementById('copyright-info-container')
   const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
-  const advancedToggle = document.getElementById('advanced-key-button')
   const advancedButtonText = document.getElementById('advanced-button-text')
   const advancedButtonImage = document.getElementById('advanced-button-image')
   const velocityContainer = document.getElementById('sw-velocity-section-container')
@@ -147,7 +145,6 @@ function toggleAdvancedOptions () {
   const swExtentRadio = document.getElementById('sw-extent-radio')
   const rsExtentRadio = document.getElementById('rs-radio')
   const reservoirsRadio = document.getElementById('reservoirs-radio')
-  const deviceScreenWidth = 768
 
   if (window.innerWidth <= deviceScreenWidth) {
     keyDisplay.style.display = 'block'
@@ -203,14 +200,10 @@ function toggleAdvancedOptions () {
 }
 
 function openKey () {
-  const keyDisplay = document.getElementById('map-key')
   const copyrightBtn = document.getElementById('att-key-copyright-btn')
-  const openKeyBtn = document.getElementById('open-key-button')
   const copyrightInfo = document.getElementById('copyright-info-container')
   const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
   const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
-  const advancedToggle = document.getElementById('advanced-key-button')
-  const deviceScreenWidth = 768
 
   keyDisplay.style.display = 'block'
   openKeyBtn.style.display = 'none'
@@ -239,8 +232,6 @@ function getInitialKeyOptions () {
   const extentInfoSw = document.getElementById('sw-extent-desc-container')
   const selectedAddressInput = document.getElementById('selected-address')
   const boundaryContainer = document.getElementById('boundary-container')
-  const advancedToggle = document.getElementById('advanced-key-button')
-  const deviceScreenWidth = 768
 
   if (window.innerWidth <= deviceScreenWidth) {
     advancedToggle.style.display = 'none'
@@ -277,7 +268,6 @@ function getInitialKeyOptions () {
 /* eslint-disable no-unused-vars */
 // This function adjusts the descriptions that appear/disappear depending on selected radio button
 function handleRadioChange (selected, type) {
-  const keyDisplay = document.getElementById('map-key')
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
   const extentInfoRs = document.getElementById('rs-extent-desc-container')
@@ -291,7 +281,6 @@ function handleRadioChange (selected, type) {
   const olZoom = document.getElementsByClassName('ol-zoom')
   const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
   const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
-  const deviceScreenWidth = 768
 
   if (selected === 'depth') {
     extentInfoRs.style.display = 'none'
@@ -386,10 +375,8 @@ function toggleCopyrightInfo () {
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
   const depthRadio = document.getElementById('sw-depth-radio')
   const velocityRadio = document.getElementById('sw-velocity-radio')
-  const openKeyBtn = document.getElementById('open-key-button')
   const copyrightBtn = document.getElementById('att-key-copyright-btn')
   const zoomBtns = document.getElementsByClassName('ol-control')
-  const deviceScreenWidth = 768
 
   if (copyrightInfoContainer.style.display === 'none') {
     if (scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block') {
@@ -480,9 +467,7 @@ function selectedOption () {
 }
 
 function closeKey () {
-  const keyDisplay = document.getElementById('map-key')
   const copyrightBtn = document.getElementById('att-key-copyright-btn')
-  const openKeyBtn = document.getElementById('open-key-button')
   const copyrightInfo = document.getElementById('copyright-info-container')
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
@@ -490,7 +475,6 @@ function closeKey () {
   const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
   const depthRadio = document.getElementById('sw-depth-radio')
   const velocityRadio = document.getElementById('sw-velocity-radio')
-  const advancedToggle = document.getElementById('advanced-key-button')
   const advancedButtonText = document.getElementById('advanced-button-text')
 
   keyDisplay.style.display = 'none'
@@ -537,16 +521,12 @@ function adjustPosition () {
   const copyrightInfo = document.getElementById('copyright-info-container')
   const copyrightBtn = document.getElementById('att-key-copyright-btn')
   const zoomBtns = document.getElementsByClassName('ol-control')
-  const keyDisplay = document.getElementById('map-key')
-  const openKeyBtn = document.getElementById('open-key-button')
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
   const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
   const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
   const depthRadio = document.getElementById('sw-depth-radio')
   const velocityRadio = document.getElementById('sw-velocity-radio')
-  const advancedToggle = document.getElementById('advanced-key-button')
-  const deviceScreenWidth = 768
 
   if (window.innerWidth > deviceScreenWidth) {
     scenariosSelectorDepth.style.top = 'calc(100vh - 145px)'
