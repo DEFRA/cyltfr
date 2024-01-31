@@ -49,7 +49,6 @@ function mapPage () {
     const results = regex.exec(window.location.search)
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
   }
-  const mapController = new MapController(mapCategories.categories)
   const $header = $('.govuk-radios')
   const $advancedHeader = $('.defra-map-controls')
   const $map = $('#map')
@@ -61,20 +60,6 @@ function mapPage () {
   const maps = window.maps
 
   maps.loadMap((hasLocation && [easting, northing]))
-
-  // This function updates the map to the radio button you select (extent, depth, velocity)
-  function setCurrent (ref) {
-    mapController.setCurrent(ref)
-    const selectedAddressCheckbox = document.getElementById('selected-address-checkbox')
-    const showFloodingCheckbox = document.getElementById('display-layers-checkbox')
-    const mapReferenceValue = selectedOption()
-
-    if (showFloodingCheckbox.checked) {
-      maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1), selectedAddressCheckbox.checked)
-    } else {
-      maps.showMap(undefined, selectedAddressCheckbox.checked)
-    }
-  }
 
   // Default to the first category/map
   maps.onReady(function () {
@@ -109,6 +94,133 @@ function mapPage () {
   })
 }
 
+const advancedToggle = document.getElementById('advanced-key-button')
+const keyDisplay = document.getElementById('map-key')
+const openKeyBtn = document.getElementById('open-key-button')
+const deviceScreenWidth = 768
+
+document.addEventListener('click', function (event) {
+  if (keyDisplay.style.display === 'block' && !keyDisplay.contains(event.target)) {
+    closeKey()
+  }
+})
+
+openKeyBtn.addEventListener('click', function (event) {
+  event.stopPropagation()
+  openKey()
+})
+
+advancedToggle.addEventListener('click', function (event) {
+  event.stopPropagation()
+  openKey()
+  toggleAdvancedOptions()
+  selectedOption()
+  setCurrent()
+})
+
+// This function updates the map to the radio button you select (extent, depth, velocity)
+function setCurrent (ref) {
+  const maps = window.maps
+  const mapController = new MapController(mapCategories.categories)
+  mapController.setCurrent(ref)
+  const selectedAddressCheckbox = document.getElementById('selected-address-checkbox')
+  const showFloodingCheckbox = document.getElementById('display-layers-checkbox')
+  const mapReferenceValue = selectedOption()
+
+  if (showFloodingCheckbox.checked) {
+    maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1), selectedAddressCheckbox.checked)
+  } else {
+    maps.showMap(undefined, selectedAddressCheckbox.checked)
+  }
+}
+
+function toggleAdvancedOptions () {
+  const copyrightBtn = document.getElementById('att-key-copyright-btn')
+  const copyrightInfo = document.getElementById('copyright-info-container')
+  const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
+  const advancedButtonText = document.getElementById('advanced-button-text')
+  const advancedButtonImage = document.getElementById('advanced-button-image')
+  const velocityContainer = document.getElementById('sw-velocity-section-container')
+  const swContainer = document.getElementById('sw-section-container')
+  const rsContainer = document.getElementById('rs-section-container')
+  const reservoirsContainer = document.getElementById('reservoirs-section-container')
+  const swExtentRadio = document.getElementById('sw-extent-radio')
+  const rsExtentRadio = document.getElementById('rs-radio')
+  const reservoirsRadio = document.getElementById('reservoirs-radio')
+
+  if (window.innerWidth <= deviceScreenWidth) {
+    keyDisplay.style.display = 'block'
+    copyrightBtn.style.display = 'none'
+    openKeyBtn.style.display = 'none'
+    copyrightInfo.style.display = 'none'
+    scenariosSelectorDepth.style.display = 'none'
+    advancedToggle.style.display = 'none'
+  }
+
+  if (advancedButtonText.textContent.includes('Show')) {
+    advancedButtonText.textContent = 'Hide advanced options'
+    advancedButtonImage.setAttribute('d', 'M20.515 15.126 12 19.856l-8.515-4.73-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5zM16 4h6v2h-6zm5.484 7.125-9.022-5a1 1 0 0 0-.968-.001l-8.978 4.96a1 1 0 0 0-.003 1.749l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5a1 1 0 0 0-.002-1.749z')
+    velocityContainer.style.display = 'block'
+    swContainer.style.display = 'block'
+    rsContainer.style.display = 'block'
+    rsContainer.style.marginTop = '0px'
+    reservoirsContainer.style.marginTop = '0px'
+    reservoirsContainer.style.display = 'block'
+    openKeyBtn.style.left = '222px'
+  } else {
+    if (window.location.href.includes('map=SurfaceWater')) {
+      swContainer.style.display = 'block'
+      velocityContainer.style.display = 'none'
+      rsContainer.style.display = 'none'
+      reservoirsContainer.style.display = 'none'
+      swExtentRadio.checked = true
+      handleRadioChange('extent', 'surface water')
+    }
+    if (window.location.href.includes('map=RiversOrSea')) {
+      swContainer.style.display = 'none'
+      velocityContainer.style.display = 'none'
+      rsContainer.style.display = 'block'
+      rsContainer.style.marginTop = '40px'
+      rsExtentRadio.checked = true
+      reservoirsContainer.style.display = 'none'
+      handleRadioChange('extent', 'rivers and the sea')
+    }
+    if (window.location.href.includes('map=Reservoirs')) {
+      swContainer.style.display = 'none'
+      velocityContainer.style.display = 'none'
+      rsContainer.style.display = 'none'
+      reservoirsContainer.style.display = 'block'
+      reservoirsContainer.style.marginTop = '40px'
+      reservoirsRadio.checked = true
+      handleRadioChange('extent', 'reservoirs')
+    }
+    selectedOption()
+    advancedButtonText.textContent = 'Show advanced options'
+    advancedButtonImage.setAttribute('d', 'm3.485 15.126-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5-.971-1.748L12 19.856ZM20 8V6h2V4h-2V2h-2v2h-2v2h2v2zM2.513 12.833l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5a1 1 0 0 0-.002-1.749l-9.022-5a1 1 0 0 0-.968-.001l-8.978 4.96a1 1 0 0 0-.003 1.749z')
+  }
+}
+
+function openKey () {
+  const copyrightBtn = document.getElementById('att-key-copyright-btn')
+  const copyrightInfo = document.getElementById('copyright-info-container')
+  const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
+  const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
+
+  keyDisplay.style.display = 'block'
+  openKeyBtn.style.display = 'none'
+  copyrightBtn.style.display = 'none'
+  copyrightInfo.style.display = 'none'
+  scenariosSelectorDepth.style.display = 'none'
+  scenariosSelectorVelocity.style.display = 'none'
+  if (window.innerWidth <= deviceScreenWidth) {
+    advancedToggle.style.display = 'none'
+    scenariosSelectorDepth.style.top = ' calc(100vh - 145px)'
+    scenariosSelectorVelocity.style.top = ' calc(100vh - 145px)'
+    copyrightBtn.style.display = 'none'
+    copyrightInfo.style.display = 'none'
+  }
+}
+
 function getInitialKeyOptions () {
   const velocityContainer = document.getElementById('sw-velocity-section-container')
   const swContainer = document.getElementById('sw-section-container')
@@ -121,8 +233,6 @@ function getInitialKeyOptions () {
   const extentInfoSw = document.getElementById('sw-extent-desc-container')
   const selectedAddressInput = document.getElementById('selected-address')
   const boundaryContainer = document.getElementById('boundary-container')
-  const advancedToggle = document.getElementById('advanced-key-button')
-  const deviceScreenWidth = 768
 
   if (window.innerWidth <= deviceScreenWidth) {
     advancedToggle.style.display = 'none'
@@ -159,7 +269,6 @@ function getInitialKeyOptions () {
 /* eslint-disable no-unused-vars */
 // This function adjusts the descriptions that appear/disappear depending on selected radio button
 function handleRadioChange (selected, type) {
-  const keyDisplay = document.getElementById('map-key')
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
   const extentInfoRs = document.getElementById('rs-extent-desc-container')
@@ -173,7 +282,6 @@ function handleRadioChange (selected, type) {
   const olZoom = document.getElementsByClassName('ol-zoom')
   const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
   const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
-  const deviceScreenWidth = 768
 
   if (selected === 'depth') {
     extentInfoRs.style.display = 'none'
@@ -268,10 +376,8 @@ function toggleCopyrightInfo () {
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
   const depthRadio = document.getElementById('sw-depth-radio')
   const velocityRadio = document.getElementById('sw-velocity-radio')
-  const openKeyBtn = document.getElementById('open-key-button')
   const copyrightBtn = document.getElementById('att-key-copyright-btn')
   const zoomBtns = document.getElementsByClassName('ol-control')
-  const deviceScreenWidth = 768
 
   if (copyrightInfoContainer.style.display === 'none') {
     if (scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block') {
@@ -300,76 +406,6 @@ function toggleCopyrightInfo () {
     }
     copyrightInfoContainer.style.display = 'none'
   }
-}
-
-function toggleAdvancedOptions () {
-  const keyDisplay = document.getElementById('map-key')
-  const copyrightBtn = document.getElementById('att-key-copyright-btn')
-  const openKeyBtn = document.getElementById('open-key-button')
-  const copyrightInfo = document.getElementById('copyright-info-container')
-  const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
-  const advancedToggle = document.getElementById('advanced-key-button')
-  const advancedButtonText = document.getElementById('advanced-button-text')
-  const advancedButtonImage = document.getElementById('advanced-button-image')
-  const velocityContainer = document.getElementById('sw-velocity-section-container')
-  const swContainer = document.getElementById('sw-section-container')
-  const rsContainer = document.getElementById('rs-section-container')
-  const reservoirsContainer = document.getElementById('reservoirs-section-container')
-  const swExtentRadio = document.getElementById('sw-extent-radio')
-  const rsExtentRadio = document.getElementById('rs-radio')
-  const reservoirsRadio = document.getElementById('reservoirs-radio')
-  const deviceScreenWidth = 768
-
-  if (window.innerWidth <= deviceScreenWidth) {
-    keyDisplay.style.display = 'block'
-    copyrightBtn.style.display = 'none'
-    openKeyBtn.style.display = 'none'
-    copyrightInfo.style.display = 'none'
-    scenariosSelectorDepth.style.display = 'none'
-    advancedToggle.style.display = 'none'
-  }
-
-  if (advancedButtonText.textContent.includes('Show')) {
-    advancedButtonText.textContent = 'Hide advanced options'
-    advancedButtonImage.setAttribute('d', 'M20.515 15.126 12 19.856l-8.515-4.73-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5zM16 4h6v2h-6zm5.484 7.125-9.022-5a1 1 0 0 0-.968-.001l-8.978 4.96a1 1 0 0 0-.003 1.749l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5a1 1 0 0 0-.002-1.749z')
-    velocityContainer.style.display = 'block'
-    swContainer.style.display = 'block'
-    rsContainer.style.display = 'block'
-    rsContainer.style.marginTop = '0px'
-    reservoirsContainer.style.marginTop = '0px'
-    reservoirsContainer.style.display = 'block'
-  } else {
-    if (window.location.href.includes('map=SurfaceWater')) {
-      swContainer.style.display = 'block'
-      velocityContainer.style.display = 'none'
-      rsContainer.style.display = 'none'
-      reservoirsContainer.style.display = 'none'
-      swExtentRadio.checked = true
-      handleRadioChange('extent', 'surface water')
-    }
-    if (window.location.href.includes('map=RiversOrSea')) {
-      swContainer.style.display = 'none'
-      velocityContainer.style.display = 'none'
-      rsContainer.style.display = 'block'
-      rsContainer.style.marginTop = '40px'
-      rsExtentRadio.checked = true
-      reservoirsContainer.style.display = 'none'
-      handleRadioChange('extent', 'rivers and the sea')
-    }
-    if (window.location.href.includes('map=Reservoirs')) {
-      swContainer.style.display = 'none'
-      velocityContainer.style.display = 'none'
-      rsContainer.style.display = 'none'
-      reservoirsContainer.style.display = 'block'
-      reservoirsContainer.style.marginTop = '40px'
-      reservoirsRadio.checked = true
-      handleRadioChange('extent', 'reservoirs')
-    }
-    selectedOption()
-    advancedButtonText.textContent = 'Show advanced options'
-    advancedButtonImage.setAttribute('d', 'm3.485 15.126-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5-.971-1.748L12 19.856ZM20 8V6h2V4h-2V2h-2v2h-2v2h2v2zM2.513 12.833l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5a1 1 0 0 0-.002-1.749l-9.022-5a1 1 0 0 0-.968-.001l-8.978 4.96a1 1 0 0 0-.003 1.749z')
-  }
-  openKey()
 }
 
 function scenarioDisplayUpdate (scenarioBar) {
@@ -432,9 +468,7 @@ function selectedOption () {
 }
 
 function closeKey () {
-  const keyDisplay = document.getElementById('map-key')
   const copyrightBtn = document.getElementById('att-key-copyright-btn')
-  const openKeyBtn = document.getElementById('open-key-button')
   const copyrightInfo = document.getElementById('copyright-info-container')
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
@@ -442,7 +476,7 @@ function closeKey () {
   const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
   const depthRadio = document.getElementById('sw-depth-radio')
   const velocityRadio = document.getElementById('sw-velocity-radio')
-  const advancedToggle = document.getElementById('advanced-key-button')
+  const advancedButtonText = document.getElementById('advanced-button-text')
 
   keyDisplay.style.display = 'none'
   copyrightBtn.style.display = 'block'
@@ -475,49 +509,25 @@ function closeKey () {
   if (window.location.search === '') {
     openKeyBtn.style.left = '-20px'
   } else {
-    openKeyBtn.style.left = '230px'
+    if (advancedButtonText.textContent.includes('Hide')) {
+      openKeyBtn.style.display = '222px'
+    } else {
+      openKeyBtn.style.left = '229px'
+    }
   }
 }
 
-function openKey () {
-  const keyDisplay = document.getElementById('map-key')
-  const copyrightBtn = document.getElementById('att-key-copyright-btn')
-  const openKeyBtn = document.getElementById('open-key-button')
-  const copyrightInfo = document.getElementById('copyright-info-container')
-  const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
-  const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
-  const advancedToggle = document.getElementById('advanced-key-button')
-  const deviceScreenWidth = 768
-
-  keyDisplay.style.display = 'block'
-  openKeyBtn.style.display = 'none'
-  copyrightBtn.style.display = 'none'
-  copyrightInfo.style.display = 'none'
-  advancedToggle.style.display = 'none'
-  scenariosSelectorDepth.style.display = 'none'
-  scenariosSelectorVelocity.style.display = 'none'
-  if (window.innerWidth <= deviceScreenWidth) {
-    scenariosSelectorDepth.style.top = ' calc(100vh - 145px)'
-    scenariosSelectorVelocity.style.top = ' calc(100vh - 145px)'
-    copyrightBtn.style.display = 'none'
-    copyrightInfo.style.display = 'none'
-  }
-}
 /* eslint-enable no-unused-vars */
 function adjustPosition () {
   const copyrightInfo = document.getElementById('copyright-info-container')
   const copyrightBtn = document.getElementById('att-key-copyright-btn')
   const zoomBtns = document.getElementsByClassName('ol-control')
-  const keyDisplay = document.getElementById('map-key')
-  const openKeyBtn = document.getElementById('open-key-button')
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
   const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
   const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
   const depthRadio = document.getElementById('sw-depth-radio')
   const velocityRadio = document.getElementById('sw-velocity-radio')
-  const advancedToggle = document.getElementById('advanced-key-button')
-  const deviceScreenWidth = 768
 
   if (window.innerWidth > deviceScreenWidth) {
     scenariosSelectorDepth.style.top = 'calc(100vh - 145px)'
@@ -572,18 +582,6 @@ function adjustPosition () {
     zoomBtns[0].style.top = 'calc(100% - 145px)'
   }
 }
-
-document.addEventListener('click', function (event) {
-  const keyDisplay = document.getElementById('map-key')
-  const isClickInsideSideMenu = keyDisplay.contains(event.target)
-  const openKeyBtn = document.getElementById('open-key-button')
-
-  if (openKeyBtn.contains(event.target)) {
-    openKey()
-  } else if (!isClickInsideSideMenu && keyDisplay.style.display === 'block') {
-    closeKey()
-  }
-})
 
 window.onresize = adjustPosition
 mapPage()

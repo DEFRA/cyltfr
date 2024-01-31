@@ -307,6 +307,13 @@ $scenarioWidthCap: 980px;
   }
 }
 
+#direction-desc {
+  background-image: url('#{$govuk-images-path}arrow.png');
+  background-size: 12px;
+  margin-left: -25px;
+  margin-top: 6px;
+}
+
 #sw-velocity-desc-container {
   display: none;
 }
