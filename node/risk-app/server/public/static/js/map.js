@@ -18,16 +18,11 @@ const config = {
   GSWMSGetCapabilities: 'gwc-proxy?SERVICE=WMS&VERSION=1.1.1&REQUEST=getcapabilities&TILED=true',
   GSWMS: 'gwc-proxy?'
 }
-// var overlayTemplate = require('./overlay.hbs')
-let map, callback, currentLayer, $overlay, $overlayContent
+let map, callback, currentLayer
 let isLoading = false
 let loading = 0
 let loaded = 0
 let maxResolution = 1000
-
-function overlayTemplate (data) {
-  return window.nunjucks.render('overlay.html', data)
-}
 
 function loadMap (point) {
   const $body = $(document.body)
@@ -133,8 +128,29 @@ function loadMap (point) {
     }
 
     if (point) {
+      const radiusLayer = new ol.layer.Vector({
+        ref: 'pointMarker',
+        className: 'radiusMarker',
+        visible: false,
+        source: new ol.source.Vector({
+          features: [new ol.Feature({
+            geometry: new ol.geom.Circle(point, 15)
+          })]
+        }),
+        style: new ol.style.Style({
+          fill: new ol.style.Fill({
+            color: 'rgba(237, 231, 46, 0.6)'
+          }),
+          stroke: new ol.style.Stroke({
+            color: 'rgba(237, 231, 46, 1)',
+            width: 2
+          })
+        })
+      })
+
       const centreLayer = new ol.layer.Vector({
-        ref: 'crosshair',
+        ref: 'pointMarker',
+        className: 'pointMarker',
         visible: true,
         source: new ol.source.Vector({
           features: [new ol.Feature({
@@ -143,11 +159,12 @@ function loadMap (point) {
         }),
         style: new ol.style.Style({
           image: new ol.style.Icon({
-            src: 'assets/images/crosshair.png'
+            anchor: [0.5, 1],
+            src: 'assets/images/icon-location.png'
           })
         })
       })
-      layers.push(centreLayer)
+      layers.push(centreLayer, radiusLayer)
     }
 
     let controls = ol.control.defaults({ attributionOptions: { collapsible: true } })
@@ -183,45 +200,22 @@ function loadMap (point) {
       })
     })
 
-    function isFullscreen () {
-      return document.fullscreenElement ||
-        document.mozFullScreenElement ||
-        document.webkitFullscreenElement ||
-        document.msFullscreenElement
-    }
-
     $('#legend').on('click', 'a[data-id]', function (e) {
       e.preventDefault()
       // Build a view model from the properties
       const $link = $(this)
       const id = $link.data('id')
-      const viewModel = {
-        isRiskDescription: true,
-        isRiversOrSeas: id.substr(0, 11) === 'rivers-seas',
-        isSurfaceWater: id.substr(0, 13) === 'surface-water',
-        id
-      }
-
-      // Get the overlay content html using the template
-      const html = overlayTemplate(viewModel)
-
-      // Update the content
-      $overlayContent.html(html)
-
-      // Show the overlay
-      $overlay.show()
-      focusNotification()
 
       sendGoogleAnalyticsEvent('ltfri', 'map', 'risk-type-legend-' + id)
     })
 
     // Map interaction functions
     map.on('pointermove', function (e) {
-      const currentLayerRef = currentLayer && currentLayer.getProperties().ref
       if (e.dragging) {
         return
       }
 
+      const currentLayerRef = currentLayer && currentLayer.getProperties().ref
       const pixel = map.getEventPixel(e.originalEvent)
       if ((currentLayerRef === 'risk:1-ROFRS' || currentLayerRef === 'risk:6-SW-Extent') || (bullseye(pixel) && !(currentLayerRef !== 'risk:1-ROFRS' && currentLayerRef !== 'risk:6-SW-Extent' && currentLayerRef !== 'risk:2-FWLRSF'))) {
         $body.css('cursor', 'pointer')
@@ -229,134 +223,6 @@ function loadMap (point) {
         $body.css('cursor', 'default')
       }
     })
-
-    map.on('singleclick', function (e) {
-      const currentLayerRef = currentLayer && currentLayer.getProperties().ref
-
-      if (isFullscreen()) {
-        return
-      }
-
-      if (currentLayerRef !== 'risk:1-ROFRS' && currentLayerRef !== 'risk:6-SW-Extent' && currentLayerRef !== 'risk:2-FWLRSF') {
-        return
-      }
-
-      const resolution = map.getView().getResolution()
-      const url = currentLayer.getSource().getGetFeatureInfoUrl(e.coordinate, resolution, config.projection.ref, {
-        INFO_FORMAT: 'application/json',
-        FEATURE_COUNT: 10
-      })
-
-      function toFixed (number) {
-        if (number !== null && typeof number !== 'undefined') {
-          return number.toFixed(2)
-        }
-      }
-
-      $.get(url, function (data) {
-        if (!data || !data.features) {
-          return
-        }
-
-        let viewModel, properties, feature
-
-        if (currentLayerRef === 'risk:1-ROFRS') {
-          if (data.features.length) {
-            feature = data.features[0]
-            properties = feature.properties
-          }
-
-          const prob4band = properties && properties.prob_4band
-            ? properties.prob_4band.replace(/\s+/g, '-').toLowerCase()
-            : 'very-low'
-
-          viewModel = {
-            isRiskDescription: true,
-            isRiversOrSeas: true,
-            isSurfaceWater: false,
-            id: 'rivers-seas-' + prob4band
-          }
-        } else if (currentLayerRef === 'risk:6-SW-Extent') {
-          const levels = {}
-          let level = ''
-
-          data.features.forEach(function (item) {
-            if (item.id.indexOf('ufmfsw_extent_1_in_30_') > -1) {
-              levels['30'] = true
-            } else if (item.id.indexOf('ufmfsw_extent_1_in_100_') > -1) {
-              levels['100'] = true
-            } else if (item.id.indexOf('ufmfsw_extent_1_in_1000_') > -1) {
-              levels['1000'] = true
-            }
-          })
-
-          if (levels['30']) {
-            level = 'high'
-          } else if (levels['100']) {
-            level = 'medium'
-          } else if (levels['1000']) {
-            level = 'low'
-          } else {
-            level = 'very-low'
-          }
-
-          viewModel = {
-            isRiskDescription: true,
-            isRiversOrSeas: false,
-            isSurfaceWater: true,
-            id: 'surface-water-' + level
-          }
-        } else {
-          if (!data.features.length) {
-            return
-          }
-
-          feature = data.features[0]
-          properties = feature.properties
-
-          // Get the feature and build a view model from the properties
-          const isRiverLevelStation = feature.id.indexOf('river_level') === 0
-          viewModel = {
-            isMonitoringStation: true,
-            flow30: isRiverLevelStation && toFixed(properties.flow_30),
-            flow100: isRiverLevelStation && toFixed(properties.flow_100),
-            flow1000: isRiverLevelStation && toFixed(properties.flow_1000),
-            depth30: toFixed(isRiverLevelStation ? properties.depth_30 : properties.lev_30),
-            depth100: toFixed(isRiverLevelStation ? properties.depth_100 : properties.lev_100),
-            depth1000: toFixed(isRiverLevelStation ? properties.depth_1000 : properties.lev_1000),
-            isRiverLevelStation,
-            stationName: properties.location || properties.site
-          }
-        }
-
-        // Get the overlay content html using the template
-        const html = overlayTemplate(viewModel)
-
-        // update the content
-        $overlayContent.html(html)
-
-        // Show the overlay
-        $overlay.show()
-        focusNotification()
-
-        if (viewModel.isRiskDescription) {
-          sendGoogleAnalyticsEvent('ltfri', 'map', 'risk-type-map-' + viewModel.id)
-        }
-      })
-    })
-
-    // Initialise the overlays
-    function hideOverlay (e) {
-      e.preventDefault()
-      $overlay.hide()
-    }
-
-    $overlay = $('#map-overlay')
-    $overlay
-      .on('click', '.map-overlay-close', hideOverlay)
-      .on('click', '.map-overlay-close-link', hideOverlay)
-
-    $overlayContent = $('.map-overlay-content', $overlay)
 
     // Callback to notify map is ready
     if (callback) {
@@ -371,22 +237,22 @@ function sendGoogleAnalyticsEvent (category, event, label) {
   }
 }
 
-function focusNotification () {
-  document.getElementById('map-overlay').focus()
-}
-
-function showMap (ref, crosshair) {
-  closeOverlay()
+function showMap (layerReference, hasLocation) {
   map.getLayers().forEach(function (layer) {
-    const name = layer.getProperties().ref
-    if (name !== config.OSLayer && name !== 'crosshair') {
-      currentLayer = name === ref ? layer : currentLayer
-      layer.setVisible(name === ref)
+    const layerName = layer.getProperties().ref
+    if (layerName !== config.OSLayer && layerName !== 'pointMarker') {
+      currentLayer = layerName === layerReference ? layer : currentLayer
+      layer.setVisible(layerName === layerReference)
     }
 
-    if (name === 'crosshair') {
-      if (crosshair) {
+    if (layerName === 'pointMarker') {
+      const className = layer.getProperties().className
+      if (className === 'pointMarker' && hasLocation) {
         layer.setVisible(true)
+        layer.setZIndex(1)
+      } else if (className === 'radiusMarker' && layerReference.substr(7, 2) === 'SW') {
+        layer.setVisible(true)
+        layer.setZIndex(0)
       } else {
         layer.setVisible(false)
       }
@@ -402,10 +268,6 @@ function panTo (point, zoom) {
   const view = map.getView()
   view.setCenter(point)
   view.setZoom(zoom)
-}
-
-function closeOverlay () {
-  $overlay.hide()
 }
 
 function bullseye (pixel) {
@@ -482,7 +344,6 @@ window.maps = {
   showMap,
   panTo,
   updateSize,
-  closeOverlay,
   testValues,
   onReady: function (fn) {
     callback = fn
