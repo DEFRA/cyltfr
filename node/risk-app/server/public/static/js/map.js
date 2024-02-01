@@ -133,8 +133,29 @@ function loadMap (point) {
     }
 
     if (point) {
+      const radiusLayer = new ol.layer.Vector({
+        ref: 'pointMarker',
+        className: 'radiusMarker',
+        visible: false,
+        source: new ol.source.Vector({
+          features: [new ol.Feature({
+            geometry: new ol.geom.Circle(point, 15)
+          })]
+        }),
+        style: new ol.style.Style({
+          fill: new ol.style.Fill({
+            color: 'rgba(237, 231, 46, 0.6)'
+          }),
+          stroke: new ol.style.Stroke({
+            color: 'rgba(237, 231, 46, 1)',
+            width: 2
+          })
+        })
+      })
+
       const centreLayer = new ol.layer.Vector({
-        ref: 'crosshair',
+        ref: 'pointMarker',
+        className: 'pointMarker',
         visible: true,
         source: new ol.source.Vector({
           features: [new ol.Feature({
@@ -143,11 +164,12 @@ function loadMap (point) {
         }),
         style: new ol.style.Style({
           image: new ol.style.Icon({
-            src: 'assets/images/crosshair.png'
+            anchor: [0.5, 1],
+            src: 'assets/images/icon-location.png'
           })
         })
       })
-      layers.push(centreLayer)
+      layers.push(centreLayer, radiusLayer)
     }
 
     let controls = ol.control.defaults({ attributionOptions: { collapsible: true } })
@@ -375,18 +397,23 @@ function focusNotification () {
   document.getElementById('map-overlay').focus()
 }
 
-function showMap (ref, crosshair) {
+function showMap (layerReference, hasLocation) {
   closeOverlay()
   map.getLayers().forEach(function (layer) {
-    const name = layer.getProperties().ref
-    if (name !== config.OSLayer && name !== 'crosshair') {
-      currentLayer = name === ref ? layer : currentLayer
-      layer.setVisible(name === ref)
+    const layerName = layer.getProperties().ref
+    if (layerName !== config.OSLayer && layerName !== 'pointMarker') {
+      currentLayer = layerName === layerReference ? layer : currentLayer
+      layer.setVisible(layerName === layerReference)
     }
 
-    if (name === 'crosshair') {
-      if (crosshair) {
+    if (layerName === 'pointMarker') {
+      const className = layer.getProperties().className
+      if (className === 'pointMarker' && hasLocation) {
         layer.setVisible(true)
+        layer.setZIndex(1)
+      } else if (className === 'radiusMarker' && layerReference.substr(7, 2) === 'SW') {
+        layer.setVisible(true)
+        layer.setZIndex(0)
       } else {
         layer.setVisible(false)
       }
