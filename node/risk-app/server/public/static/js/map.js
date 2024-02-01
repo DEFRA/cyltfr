@@ -144,14 +144,14 @@ function loadMap (point) {
         }),
         style: new ol.style.Style({
           fill: new ol.style.Fill({
-            color: 'rgba(237, 231, 46, 0.6)',
+            color: 'rgba(237, 231, 46, 0.6)'
           }),
           stroke: new ol.style.Stroke({
             color: 'rgba(237, 231, 46, 1)',
-            width: 2,
+            width: 2
           })
         })
-      })     
+      })
 
       const centreLayer = new ol.layer.Vector({
         ref: 'pointMarker',
@@ -169,8 +169,7 @@ function loadMap (point) {
           })
         })
       })
-        console.log(point)
-        layers.push(centreLayer, radiusLayer)
+      layers.push(centreLayer, radiusLayer)
     }
 
     let controls = ol.control.defaults({ attributionOptions: { collapsible: true } })
@@ -412,17 +411,15 @@ function showMap (layerReference, hasLocation) {
       if (className === 'pointMarker' && hasLocation) {
         layer.setVisible(true)
         layer.setZIndex(1)
-      } else  if (className === 'radiusMarker' && layerReference.substr(7,2) === 'SW') {
+      } else if (className === 'radiusMarker' && layerReference.substr(7, 2) === 'SW') {
         layer.setVisible(true)
         layer.setZIndex(0)
       } else {
         layer.setVisible(false)
       }
     }
-      
   })
 }
-
 
 function updateSize () {
   map.updateSize()
