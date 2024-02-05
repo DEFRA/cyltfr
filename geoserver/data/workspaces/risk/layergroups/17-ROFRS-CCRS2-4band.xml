@@ -1,0 +1,44 @@
+<layerGroup>
+  <id>LayerGroupInfoImpl--1a2a398b:1510f867e96:-7f53</id>
+  <name>17-ROFRS-CCRS2-4band</name>
+  <mode>SINGLE</mode>
+  <title>Map 17: Risk of flooding from Rivers and Sea</title>
+  <workspace>
+    <id>WorkspaceInfoImpl-500e64e7:150fcd642d7:-7fe6</id>
+  </workspace>
+  <publishables>
+    <published type="layer">
+      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8d0d</id>
+    </published>
+    <published type="layer">
+      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8d0f</id>
+    </published>
+    <published type="layer">
+      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8d11</id>
+    </published>
+    <published type="layer">
+      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8d13</id>
+    </published>
+  </publishables>
+  <styles>
+    <style>
+      <id>StyleInfoImpl-1a2a398b:1510f867e96:-8e97</id>
+    </style>
+    <style>
+      <id>StyleInfoImpl-1a2a398b:1510f867e96:-8e98</id>
+    </style>
+    <style>
+      <id>StyleInfoImpl-1a2a398b:1510f867e96:-8e99</id>
+    </style>
+    <style>
+      <id>StyleInfoImpl-1a2a398b:1510f867e96:-8e9a</id>
+    </style>
+  </styles>
+  <bounds>
+    <minx>0.0</minx>
+    <maxx>700000.0</maxx>
+    <miny>0.0</miny>
+    <maxy>800000.0</maxy>
+    <crs class="projected">EPSG:27700</crs>
+  </bounds>
+</layerGroup>

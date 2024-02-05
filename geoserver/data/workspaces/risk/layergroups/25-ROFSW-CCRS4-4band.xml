@@ -1,0 +1,44 @@
+<layerGroup>
+  <id>LayerGroupInfoImpl--1a2a398b:1510f867e96:-7f5b</id>
+  <name>25-ROFSW-CCRS4-4band</name>
+  <mode>SINGLE</mode>
+  <title>Map 25: Risk of flooding from Surface Water</title>
+  <workspace>
+    <id>WorkspaceInfoImpl-500e64e7:150fcd642d7:-7fe6</id>
+  </workspace>
+  <publishables>
+    <published type="layer">
+      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8ceb</id>
+    </published>
+    <published type="layer">
+      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8ced</id>
+    </published>
+    <published type="layer">
+      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8cef</id>
+    </published>
+    <published type="layer">
+      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8cf1</id>
+    </published>
+  </publishables>
+  <styles>
+    <style>
+      <id>StyleInfoImpl-1a2a398b:1510f867e96:-8e97</id>
+    </style>
+    <style>
+      <id>StyleInfoImpl-1a2a398b:1510f867e96:-8e98</id>
+    </style>
+    <style>
+      <id>StyleInfoImpl-1a2a398b:1510f867e96:-8e99</id>
+    </style>
+    <style>
+      <id>StyleInfoImpl-1a2a398b:1510f867e96:-8e9a</id>
+    </style>
+  </styles>
+  <bounds>
+    <minx>0.0</minx>
+    <maxx>700000.0</maxx>
+    <miny>0.0</miny>
+    <maxy>800000.0</maxy>
+    <crs class="projected">EPSG:27700</crs>
+  </bounds>
+</layerGroup>

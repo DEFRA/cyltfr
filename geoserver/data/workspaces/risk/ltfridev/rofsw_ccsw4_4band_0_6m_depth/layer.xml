@@ -1,0 +1,15 @@
+<layer>
+  <name>rofsw_ccsw4_4band_0_6m_depth</name>
+  <id>LayerInfoImpl--1a2a398b:1510f867e96:-8cef</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-1a2a398b:1510f867e96:-8e94</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl--1a2a398b:1510f867e96:-8cee</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+</layer>

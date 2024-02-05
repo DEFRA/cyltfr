@@ -29,7 +29,7 @@
         </ogc:Filter>
           <PolygonSymbolizer>
             <Fill>
-              <CssParameter name="fill">#CCE5FF</CssParameter>
+              <CssParameter name="fill">#C4E1FF</CssParameter>
             </Fill>
           </PolygonSymbolizer>
         </Rule>
@@ -70,7 +70,7 @@
         </ogc:Filter>
           <PolygonSymbolizer>
             <Fill>
-              <CssParameter name="fill">#6699CD</CssParameter>
+              <CssParameter name="fill">#9AA0DE</CssParameter>
             </Fill>
           </PolygonSymbolizer>
         </Rule>
