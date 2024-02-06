@@ -1,7 +1,7 @@
 <GeoServerTileLayer>
-  <id>LayerGroupInfoImpl--1a2a398b:1510f867e96:-7f55</id>
+  <id>LayerGroupInfoImpl--1a2a398b:1510f867e96:-7f62</id>
   <enabled>true</enabled>
-  <name>risk:19-ROFRS-CCRS2-4band-Extent</name>
+  <name>risk:32-ROFSW-4band-0-6m-depth</name>
   <blobStoreId>ltfri</blobStoreId>
   <mimeFormats>
     <string>image/png</string>

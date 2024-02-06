@@ -1,14 +1,14 @@
 <layerGroup>
-  <id>LayerGroupInfoImpl--1a2a398b:1510f867e96:-7f54</id>
-  <name>18-ROFRS-CCRS4-4band-Extent</name>
+  <id>LayerGroupInfoImpl--1a2a398b:1510f867e96:-7f64</id>
+  <name>34-ROFSW-CCRS3-4band-Extent</name>
   <mode>SINGLE</mode>
-  <title>Map 18: Risk of flooding from Rivers and Sea</title>
+  <title>Map 34: Risk of flooding from Surface Water</title>
   <workspace>
     <id>WorkspaceInfoImpl-500e64e7:150fcd642d7:-7fe6</id>
   </workspace>
   <publishables>
     <published type="layer">
-      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8d17</id>
+      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8cd1</id>
     </published>
   </publishables>
   <styles>

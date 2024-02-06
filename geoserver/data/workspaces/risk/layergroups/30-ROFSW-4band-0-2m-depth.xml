@@ -1,14 +1,14 @@
 <layerGroup>
-  <id>LayerGroupInfoImpl--1a2a398b:1510f867e96:-7f56</id>
-  <name>20-ROFSW-4band-Extent</name>
+  <id>LayerGroupInfoImpl--1a2a398b:1510f867e96:-7f60</id>
+  <name>30-ROFSW-4band-0-2m-depth</name>
   <mode>SINGLE</mode>
-  <title>Map 20: Risk of flooding from Surface Water</title>
+  <title>Map 30: Risk of flooding from Surface Water</title>
   <workspace>
     <id>WorkspaceInfoImpl-500e64e7:150fcd642d7:-7fe6</id>
   </workspace>
   <publishables>
     <published type="layer">
-      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8cdd</id>
+      <id>LayerInfoImpl--1a2a398b:1510f867e96:-8cdf</id>
     </published>
   </publishables>
   <styles>
