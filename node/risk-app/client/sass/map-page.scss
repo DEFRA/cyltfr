@@ -10,6 +10,12 @@ $desktop-width: 769px;
 $scenarioWidthCap: 980px;
 
 
+.defra-map-os-logo {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+}
+
 .map-container {
   height: 100%;
   width: 100%;
@@ -35,6 +41,100 @@ $scenarioWidthCap: 980px;
     }
   }
 
+  .defra-map-controls-bottom {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    right: 10px;
+    pointer-events: none;
+  }
+  .defra-map-controls-bottom * {
+    pointer-events: auto;
+  }
+
+  .defra-map__open-key {
+    float: right;
+    position: relative;
+    display: block;
+    margin-left: 0px;
+    margin-top: 0px;
+    height: 40px;
+    width: 80px;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+    background-color: white;
+    font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.1428571429;
+    line-height: 40px;
+    /*   text-indent: -5000px; */
+    color: #0b0c0c;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    pointer-events: auto;
+
+    @media screen and (min-width: $desktop-width) {
+      display: none !important;
+    }
+
+  }
+  @media print {
+    .defra-map__open-key {
+      font-family: sans-serif;
+    }
+  }
+  @media (min-width: 40.0625em) {
+    .defra-map__open-key {
+      font-size: 1rem;
+      line-height: 1.25;
+    }
+  }
+  @media print {
+    .defra-map__open-key {
+      font-size: 14pt;
+      line-height: 1.2;
+    }
+  }
+  @media (min-width: 48.0625em) {
+    .defra-map__open-key {
+      display: none;
+    }
+  }
+  .defra-map__open-key svg {
+    display: block;
+    margin: 10px;
+    vertical-align: middle;
+  }
+  .defra-map__open-key:hover {
+    background-color: #f3f2f1;
+  }
+  .defra-map__open-key:focus-visible {
+    /* outline: none; */
+    outline: 3px solid transparent;
+    box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
+  }
+  .defra-map__open-key:focus[keyboard-focus]:after {
+    /* @include focus; */
+    outline: 3px solid transparent;
+    box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
+  }
+  .defra-map__open-key::-moz-focus-inner {
+    border: 0;
+  }
+  .defra-map__open-key .button-content {
+    display: flex;
+    align-items: center;
+  }
+  .defra-map__open-key .open-button-text {
+    margin-left: 2px;
+  }
   @media screen and (max-width: $tablet-width) {
     justify-content: start;
     .defra-map-key__close {
@@ -66,7 +166,7 @@ $scenarioWidthCap: 980px;
       position: relative; 
       z-index: 25;
       float: right;
-      top: calc(100vh - 157px);
+      top: calc(100vh - 60px);
       left: 30px;
       margin-left: 0px;
       margin-top: 0px;
@@ -160,126 +260,105 @@ $scenarioWidthCap: 980px;
 
   .defra-map-controls {
     position: absolute;
-    width: 100%;
-
-    .defra-map__exit {
-      width: auto;
-      padding: 0 11px 0 0;
-      float: left;
-      position: relative;
-      margin: 10px 0px 0px 10px;
-      border: 0;
-      height: 40px;
-      background-color: white;
-      color: #0b0c0c;
-      font-size: 16px;
-      line-height: 40px;
-      z-index: 15;
-
-      @media screen and (max-width: $tablet-width) {
-        padding: 0;
-      }
-
-      svg {
-        display: inline-block;
-        margin: 10px;
-        vertical-align: top;
-      }
-
-      #exit-text {
-        @media screen and (max-width: $tablet-width) {
-          display: none;
-        }
-      }
+    z-index: 1;
+    overflow: hidden;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    pointer-events: none;
+  }
+  @media (min-width: 48.0625em) {
+    .defra-map-controls {
+      right: 290px;
     }
   }
-  .defra-map__exit:hover {
-    background: #f3f2f1;
-    cursor: pointer;
-  }
 
-  .defra-map__exit:focus {
-    outline: 3px solid transparent;
-    box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
-  }
-
-  #att-key-copyright-btn {
-    float: right;
-    clear: both;
+  .defra-map__exit {
+    float: left;
     position: relative;
-    font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-weight: 500;
-    font-size: 16px;
-    font-size: 1rem;
-    line-height: 1.25;
-    top: calc(100vh - 115px);
-    right: 310px;
+    margin: 10px 0px 0px 10px;
     border: 0;
+    padding: 0;
     height: 40px;
     width: 40px;
-    padding: 0;
-    margin-top: 5px;
     cursor: pointer;
     background-color: white;
     color: #0b0c0c;
-    z-index: 15;
-
-    @media screen and (max-width: $tablet-width) {
-      display: none;
-    }
-
-    @media screen and (min-width: $desktop-width) {
-      top: calc(100vh - 110px);
-      right: 310px !important;
-      display: block !important;
-    }
+    font-size: 16px;
+    line-height: 40px;
+    color: #0b0c0c;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    pointer-events: auto;
   }
-
-  #att-key-copyright-btn:focus {
-    outline: 3px solid transparent;
-    box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
-  }
-
-  #att-key-copyright-btn:hover {
-    background: #f3f2f1;
-    cursor: pointer;
-  }
-
-  .defra-map-attribution svg {
-    font-weight: 400;
+  .defra-map__exit svg {
+    display: inline-block;
     margin: 10px;
+    vertical-align: top;
   }
-
-  #copyright-info-container {
-    display: none;
-
-    @media screen and (max-width: $tablet-width) {
-      display: none;
-      width: 100%;
-      right: 0;
-      top: calc(100vh - 80px);
+  .defra-map__exit span {
+    vertical-align: top;
+  }
+  @media (max-width: 48.0525em) {
+    .defra-map__exit span {
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      height: 1px;
+      overflow: hidden;
+      position: absolute;
+      white-space: nowrap;
+      width: 1px;
     }
+  }
+  @media (min-width: 48.0625em) {
+    .defra-map__exit {
+      width: auto;
+      padding-right: 11px;
+    }
+  }
+  .defra-map__exit:hover {
+    background-color: #f3f2f1;
+  }
+  .defra-map__exit:focus {
+    outline: none;
+  }
+  .defra-map__exit:focus[keyboard-focus]:after {
+    position: absolute;
+    content: "";
+    left: 5px;
+    right: 5px;
+    top: 5px;
+    bottom: 5px;
+    box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
+    outline: 3px solid transparent;
+    pointer-events: none;
+    z-index: 99;
+  }
+  .defra-map__exit::-moz-focus-inner {
+    border: 0;
   }
 
   .defra-map-info__container {
     background-color: white;
-    position: absolute;
-    width: 330px;
-    height: 80px;
-    top: calc(100vh - 95px);
-    right: 360px;
+    display: block;
+    // position: relative;
+    margin: 4px;
+    padding: 4px;
+    float: right;
+    clear: right;
+    // width: 330px;
+    // height: 80px;
+    // top: calc(100vh - 95px);
     z-index: 11;
 
     @media screen and (max-width: $tablet-width) {
       right: 0 !important;
       display: none;
     }
-  }
-
-  .toggle-copyright-info {
-    display: block;
   }
 
   .defra-map-info__close {
@@ -326,19 +405,8 @@ $scenarioWidthCap: 980px;
   display: none;
 }
 
-.defra-map__advanced span {
-  vertical-align: top;
-}
-
-.defra-map__advanced:focus {
-    outline: 3px solid transparent;
-    box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
-}
-
-#advanced-key-button {
-  z-index: 20;
+.defra-map__advanced {
   float: right;
-  right: 300px;
   position: relative;
   margin: 10px 10px 0px 10px;
   border: 0;
@@ -353,21 +421,36 @@ $scenarioWidthCap: 980px;
   color: #0b0c0c;
   width: auto;
   padding-right: 11px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   pointer-events: auto;
-
-  @media screen and (max-width: $tablet-width) {
-    right: 10px;
-  }
 }
-
-.defra-map__advanced:hover {
-  background-color: #f3f2f1;
-}
-
 .defra-map__advanced svg {
   display: inline-block;
   margin: 10px;
   vertical-align: top;
+}
+.defra-map__advanced span {
+  vertical-align: top;
+}
+@media (max-width: 48.0525em) {
+  .defra-map__advanced span {
+    font-size: 14px;
+    padding-left: 0;
+  }
+}
+.defra-map__advanced:hover {
+  background-color: #f3f2f1;
+}
+.defra-map__advanced:focus-visible {
+  outline: 3px solid transparent;
+  box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
+}
+.defra-map__advanced::-moz-focus-inner {
+  border: 0;
 }
 
 #mapKeyLabel {
@@ -559,6 +642,190 @@ svg:not(:root) {
   display: none;
 }
 
+@media (max-width: 820px) {
+  .horizontal-overflow {
+    overflow-x: auto;
+    display: block;
+    scroll-behavior: smooth;
+  }
+  .search-container-v3 {
+    display: none !important;
+  }
+  .defra-map-scenarios-depth-v4.dragging {
+    scroll-behavior: unset;
+  }
+  .defra-map-scenarios-depth-v4::-webkit-scrollbar {
+    display: none;
+  }
+  .defra-map-scenarios-depth-v4 .govuk-radios {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    background-color: white;
+    padding: 5px 0px 0px 0px;
+    width: 800px;
+  }
+  .left-btn, .right-btn {
+    position: absolute;
+    font-size: 1.8em;
+    padding: 30px;
+    cursor: pointer;
+    color: #000000;
+    z-index: 2;
+  }
+  /* .circle-behind-btn {
+    height: 25px;
+    width: 25px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: block;
+  } */
+  .left-btn {
+    display: none;
+    left: 0;
+    background: linear-gradient(to left, transparent, #ffffff 50%);
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    padding-left: 30px;
+  }
+  .right-btn {
+    right: 0;
+    background: linear-gradient(to right, transparent, #ffffff 50%);
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    padding-right: 30px;
+  }
+}
+.defra-map-scenarios-depth-v4 {
+  width: 100%;
+  padding-top: 10px;
+  overflow-x: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+@media screen and (min-width: 938px) {
+  .defra-map-scenarios-depth-v4 {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    max-width: 830px;
+  }
+}
+.defra-map-scenarios-depth-v4__container {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+.defra-map-scenarios-depth-v4 .govuk-radios {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  background-color: white;
+  padding: 5px 0px 0px 0px;
+}
+.defra-map-scenarios-depth-v4 .govuk-radios__item {
+  flex: 1 1 auto;
+  font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.25;
+  font-size: 14px;
+  padding-bottom: 10px;
+  padding-left: 54px;
+  border-bottom: 7px solid transparent;
+}
+@media print {
+  .defra-map-scenarios-depth-v4 .govuk-radios__item {
+    font-family: sans-serif;
+  }
+}
+@media (min-width: 40.0625em) {
+  .defra-map-scenarios-depth-v4 .govuk-radios__item {
+    font-size: 0.875rem;
+    line-height: 1.4285714286;
+  }
+}
+@media print {
+  .defra-map-scenarios-depth-v4 .govuk-radios__item {
+    font-size: 12pt;
+    line-height: 1.2;
+  }
+}
+.defra-map-scenarios-depth-v4 .govuk-radios--small .govuk-radios__label:before {
+  margin-left: 15px;
+  margin-top: 8px;
+  height: 28px;
+  width: 28px;
+}
+.defra-map-scenarios-depth-v4 .govuk-radios--small .govuk-radios__label:after {
+  margin-left: 15px;
+  margin-top: 8px;
+  border-width: 7px;
+}
+.defra-map-scenarios-depth-v4 .govuk-radios__item input[type=radio]:checked + label strong {
+  text-decoration: none;
+}
+.defra-map-scenarios-depth-v4 .govuk-radios--small strong {
+  display: inline-block;
+  font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 1.1428571429;
+  font-size: 16px;
+  line-height: 1.31579;
+  margin-bottom: 2px;
+  pointer-events: none;
+  text-decoration: underline;
+}
+@media print {
+  .defra-map-scenarios-depth-v4 .govuk-radios--small strong {
+    font-family: sans-serif;
+  }
+}
+@media (min-width: 40.0625em) {
+  .defra-map-scenarios-depth-v4 .govuk-radios--small strong {
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+}
+@media print {
+  .defra-map-scenarios-depth-v4 .govuk-radios--small strong {
+    font-size: 14pt;
+    line-height: 1.2;
+  }
+}
+.defra-map-scenarios-depth-v4 .risk-context-v3 {
+  display: block;
+  font-size: 14px;
+  padding-top: 2px;
+  padding-bottom: 0;
+}
+
+@media screen and (min-width: 821px) {
+  .right-btn {
+    display: none;
+  }
+}
+.last-scenario {
+  margin-bottom: 7px;
+}
+
+.scenario-float-right {
+  right: 0;
+  left: auto;
+}
+
+.v6-width-fix-depth {
+  max-width: 660px;
+}
+.v6-width-fix-depth .govuk-radios {
+  width: 660px;
+}
+
 .defra-map-scenarios .govuk-radios{
   z-index: 15;
   position: relative;
@@ -745,11 +1012,4 @@ label[for=location] {
 
 .govuk-link:hover {
   text-decoration-thickness: 3px;
-}
-
-@media only screen and (max-width: 420px) {
-  /* max-width 420px, mobile-only styles */
-  .os-api-branding.copyright {
-    display: none;
-  }
 }
