@@ -68,8 +68,6 @@
     <!-- map controls bottom -->
     <div class="defra-map-controls-bottom">
 
-      <img class="defra-map-os-logo" alt="Ordnance Survey logo" src="{{ assetPath }}/images/os-logo-maps.svg" width="90" height="24" style="pointer-events: auto; display: block;">
-
       <!-- open map on mobile -->
       <button class="defra-map__open-key" focusable="true" id="open-key" style="display: none">
         <div class="button-content">
@@ -77,6 +75,8 @@
         <span class="govuk-visually-hidden">open</span><span class="open-button-text">Key</span>
       </div>
       </button>
+
+      <div class="scenarios">
 
       <!-- Depth scenarios -->
       <div class="defra-map-scenarios horizontal-overflow scenario-float-right v6-width-fix-depth"
@@ -156,15 +156,17 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <img class="defra-map-os-logo" alt="Ordnance Survey logo" src="{{ assetPath }}/images/os-logo-maps.svg" width="90" height="24" style="pointer-events: auto; display: block;">
 
       <div class="defra-map-info__container" id="copyright-info-container" style="display: block;">
         <div id="infoContent" class="defra-map-info__content">
           <div id="infoDescription" >
-              <ul class="govuk-list" style="margin: 0px">
-                <li class="govuk-!-font-size-14"><a class="govuk-link"
+                <p id="copyright-text"><a class="govuk-link"
                     href="https://check-long-term-flood-risk.service.gov.uk/os-terms" previewlistener="true">Contains OS
-                    data</a><br>© Crown copyright and database rights {{year}}</li>
-              </ul>
+                    data</a><span id="copyright-text-span"> © Crown copyright and database rights {{year}}</span>
+                </p>
           </div>
         </div>
       </div>

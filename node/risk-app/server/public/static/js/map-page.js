@@ -280,7 +280,7 @@ function handleRadioChange (selected, type) {
       scenariosSelectorDepth.style.display = 'none'
       scenariosSelectorVelocity.style.display = 'none'
     }
-    olZoom[0].style.top = 'calc(100% - 235px)'
+    olZoom[0].style.top = 'calc(100% - 200px)'
   }
   if (selected === 'velocity') {
     extentInfoRs.style.display = 'none'
@@ -298,7 +298,7 @@ function handleRadioChange (selected, type) {
     } else {
       scenariosSelectorVelocity.style.display = 'flex'
     }
-    olZoom[0].style.top = 'calc(100% - 235px)'
+    olZoom[0].style.top = 'calc(100% - 200px)'
   }
 
   if (selected === 'extent') {
@@ -482,22 +482,22 @@ function adjustPosition () {
     scenariosSelectorVelocity.style.display = 'flex'
   }
 
-  if (keyDisplay.style.display === 'none' && window.innerWidth <= deviceScreenWidth) {
-    scenariosSelectorDepth.style.top = 'calc(100vh - 190px)'
-    scenariosSelectorVelocity.style.top = 'calc(100vh - 190px)'
-  }
+  // if (keyDisplay.style.display === 'none' && window.innerWidth <= deviceScreenWidth) {
+  //   scenariosSelectorDepth.style.top = 'calc(100vh - 190px)'
+  //   scenariosSelectorVelocity.style.top = 'calc(100vh - 190px)'
+  // }
 
   if ((scenarioBarDepth.style.display === 'block' ||
   scenarioBarVelocity.style.display === 'block') &&
   window.innerWidth <= deviceScreenWidth
   ) {
-    zoomBtns[0].style.top = 'calc(100% - 235px)'
+    zoomBtns[0].style.top = 'calc(100% - 200px)'
     // openKeyBtn.style.top = 'calc(100vh - 160px)'
   }
 
-  if (window.innerWidth > deviceScreenWidth) {
-    zoomBtns[0].style.top = 'calc(100% - 145px)'
-  }
+  // if (window.innerWidth > deviceScreenWidth) {
+  //   zoomBtns[0].style.top = 'calc(100% - 145px)'
+  // }
 }
 
 window.onresize = adjustPosition

@@ -7,11 +7,14 @@ $govuk-assets-path: '/assets/';
 $mobile-width: 480px;
 $tablet-width: 768px;
 $desktop-width: 769px;
-$scenarioWidthCap: 980px;
+$scenarioWidthCap1: 1090px;
+$scenarioWidthCap2: 920px;
 
-* {
-  border: 1px solid red;
-}
+$gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+
+// * {
+//   border: 1px solid red;
+// }
 
 .defra-map-os-logo {
   position: absolute;
@@ -47,10 +50,11 @@ $scenarioWidthCap: 980px;
   .defra-map-controls-bottom {
     position: absolute;
     left: 10px;
-    bottom: 10px;
+    bottom: 0;
     right: 10px;
     pointer-events: none;
   }
+
   .defra-map-controls-bottom * {
     pointer-events: auto;
   }
@@ -345,12 +349,16 @@ $scenarioWidthCap: 980px;
     border: 0;
   }
 
+  .scenarios {
+    display: flex;
+    justify-content: flex-end;
+  }
+
   .defra-map-info__container {
     background-color: white;
     display: block;
+    margin-top: 10px;
     // position: relative;
-    margin: 4px;
-    padding: 4px;
     float: right;
     clear: right;
     // width: 330px;
@@ -361,6 +369,16 @@ $scenarioWidthCap: 980px;
     @media screen and (max-width: $tablet-width) {
       right: 0 !important;
       display: none;
+    }
+  }
+
+  #copyright-text {
+    margin: 0;
+    white-space: nowrap;
+    font-size: 10px;
+
+    #copyright-text-span {
+      font-family: $gov-font;
     }
   }
 
@@ -639,10 +657,12 @@ svg:not(:root) {
 
 #scenario-container-depth {
   display: none;
+  align-self: flex-end;
 }
 
 #scenario-container-velocity {
   display: none;
+  justify-content: flex-end;
 }
 
 @media (max-width: 820px) {
@@ -841,8 +861,13 @@ svg:not(:root) {
   padding: 5px 0px 0px 0px;
   float: right;
 
-  @media screen and (max-width: $scenarioWidthCap) {
-    width: calc(67vw - 50px);
+  @media screen and (max-width: $scenarioWidthCap1) {
+    width: 55vw;
+    text-wrap: nowrap;
+    overflow-x: auto;
+  }
+  @media screen and (max-width: $scenarioWidthCap2) {
+    width: 45vw;
     text-wrap: nowrap;
     overflow-x: auto;
   }
@@ -850,7 +875,6 @@ svg:not(:root) {
   @media screen and (max-width: $tablet-width) {
     right: 20px;
     width: 96vw;
-    top: calc(100vh - 190px);
   }
 }
 
@@ -921,8 +945,8 @@ svg:not(:root) {
   align-self: center;
   /* As the zoom buttons are within the map they are not as easily positioned, which is why I
     have used the calculation as seen below. */
-  left: calc(100% - 350px);
-  top: calc(100% - 145px);
+  left: calc(100% - 340px);
+  top: calc(100% - 102px);
 }
 
 .ol-zoom .ol-zoom-out {
