@@ -9,6 +9,9 @@ $tablet-width: 768px;
 $desktop-width: 769px;
 $scenarioWidthCap: 980px;
 
+* {
+  border: 1px solid red;
+}
 
 .defra-map-os-logo {
   position: absolute;
@@ -837,8 +840,6 @@ svg:not(:root) {
   background-color: white;
   padding: 5px 0px 0px 0px;
   float: right;
-  top: calc(100vh - 145px);
-  right: 270px;
 
   @media screen and (max-width: $scenarioWidthCap) {
     width: calc(67vw - 50px);

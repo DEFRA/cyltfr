@@ -206,8 +206,8 @@ function openKey () {
   scenariosSelectorVelocity.style.display = 'none'
   if (window.innerWidth <= deviceScreenWidth) {
     // advancedToggle.style.display = 'none'
-    scenariosSelectorDepth.style.top = ' calc(100vh - 145px)'
-    scenariosSelectorVelocity.style.top = ' calc(100vh - 145px)'
+    // scenariosSelectorDepth.style.top = ' calc(100vh - 145px)'
+    // scenariosSelectorVelocity.style.top = ' calc(100vh - 145px)'
   }
 }
 
@@ -292,8 +292,8 @@ function handleRadioChange (selected, type) {
     scenarioBarVelocity.style.display = 'block'
     scenariosSelectorVelocity.style.display = 'flex'
     if (window.innerWidth <= deviceScreenWidth && keyDisplay.style.display === 'block') {
-      scenariosSelectorDepth.style.top = ' calc(100vh - 145px)'
-      scenariosSelectorVelocity.style.top = ' calc(100vh - 145px)'
+      // scenariosSelectorDepth.style.top = ' calc(100vh - 145px)'
+      // scenariosSelectorVelocity.style.top = ' calc(100vh - 145px)'
       scenariosSelectorVelocity.style.display = 'none'
     } else {
       scenariosSelectorVelocity.style.display = 'flex'
@@ -452,8 +452,8 @@ function adjustPosition () {
   const velocityRadio = document.getElementById('sw-velocity-radio')
 
   if (window.innerWidth > deviceScreenWidth) {
-    scenariosSelectorDepth.style.top = 'calc(100vh - 145px)'
-    scenariosSelectorVelocity.style.top = 'calc(100vh - 145px)'
+    // scenariosSelectorDepth.style.top = 'calc(100vh - 145px)'
+    // scenariosSelectorVelocity.style.top = 'calc(100vh - 145px)'
   }
 
   if (keyDisplay.style.display === 'block' && window.innerWidth <= deviceScreenWidth) {
