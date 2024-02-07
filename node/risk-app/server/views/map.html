@@ -84,8 +84,8 @@
 
         <div class="defra-map-scenarios-v3_container" id="scenarios-controls-depth">
           <div class="govuk-radios govuk-radios--small" id="scenario-selection-depth" data-module="govuk-radios">
-            <i class="fa-solid fa-chevron-left left-btn" aria-hidden="true"></i>
-            <i class="fa-solid fa-chevron-right right-btn" aria-hidden="true"></i>
+            <!-- <i class="fa-solid fa-chevron-left left-btn" aria-hidden="true"></i>
+            <i class="fa-solid fa-chevron-right right-btn" aria-hidden="true"></i> -->
             <div class="govuk-radios__item" style="border-bottom: 7px solid rgb(29, 112, 184);">
               <input class="govuk-radios__input" id="risk-radio-high-depth" onchange="scenarioDisplayUpdate('depth')"
                 name="scenarios-depth" type="radio" value="{{maps.categories[1].maps[1].ref}}" checked="">
@@ -160,7 +160,7 @@
 
     <img class="defra-map-os-logo" alt="Ordnance Survey logo" src="{{ assetPath }}/images/os-logo-maps.svg" width="90" height="24" style="pointer-events: auto; display: block;">
 
-      <div class="defra-map-info__container" id="copyright-info-container" style="display: block;">
+      <div class="defra-map-info__container" id="copyright-info-container">
         <div id="infoContent" class="defra-map-info__content">
           <div id="infoDescription" >
                 <p id="copyright-text"><a class="govuk-link"
