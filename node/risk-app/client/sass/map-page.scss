@@ -12,15 +12,13 @@ $scenarioWidthCap2: 920px;
 
 $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
 
-// * {
-//   border: 1px solid red;
-// }
-
 .defra-map-os-logo {
   position: absolute;
   left: 10px;
   bottom: 10px;
+}
 
+.os-logo-position-change {
   @media screen and (max-width: $tablet-width) {
     bottom: 110px;
   }
@@ -63,6 +61,7 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
       display: grid;
       justify-items: end;
       left: 0px;
+      padding-right: 0;
     }
   }
 
@@ -109,7 +108,7 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
     }
 
     @media screen and (max-width: $tablet-width) {
-      margin: 0 15px 10px 0;
+      margin: 0 10px 10px 0;
     }
 
   }

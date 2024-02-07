@@ -205,7 +205,7 @@ function openKey () {
   scenariosSelectorDepth.style.display = 'none'
   scenariosSelectorVelocity.style.display = 'none'
   if (window.innerWidth <= deviceScreenWidth) {
-    // advancedToggle.style.display = 'none'
+    advancedToggle.style.display = 'none'
     // scenariosSelectorDepth.style.top = ' calc(100vh - 145px)'
     // scenariosSelectorVelocity.style.top = ' calc(100vh - 145px)'
   }
@@ -310,7 +310,7 @@ function handleRadioChange (selected, type) {
       velocityInfo.style.display = 'none'
       scenarioBarDepth.style.display = 'none'
       scenarioBarVelocity.style.display = 'none'
-      olZoom[0].style.top = 'calc(100% - 155px)'
+      olZoom[0].style.top = 'calc(100% - 102px)'
       boundaryContainer.style.display = 'none'
     }
     if (type === 'rivers and the sea') {
@@ -321,7 +321,7 @@ function handleRadioChange (selected, type) {
       velocityInfo.style.display = 'none'
       scenarioBarDepth.style.display = 'none'
       scenarioBarVelocity.style.display = 'none'
-      olZoom[0].style.top = 'calc(100% - 155px)'
+      olZoom[0].style.top = 'calc(100% - 102px)'
       boundaryContainer.style.display = 'none'
     }
     if (type === 'surface water') {
@@ -332,7 +332,7 @@ function handleRadioChange (selected, type) {
       velocityInfo.style.display = 'none'
       scenarioBarDepth.style.display = 'none'
       scenarioBarVelocity.style.display = 'none'
-      olZoom[0].style.top = 'calc(100% - 155px)'
+      olZoom[0].style.top = 'calc(100% - 102px)'
       boundaryContainer.style.display = 'block'
     }
   }
@@ -404,7 +404,7 @@ function closeKey () {
   const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
   const depthRadio = document.getElementById('sw-depth-radio')
   const velocityRadio = document.getElementById('sw-velocity-radio')
-  const advancedButtonText = document.getElementById('advanced-button-text')
+  const osLogo = document.getElementById('os-logo')
 
   keyDisplay.style.display = 'none'
   if (window.location.href.includes('?')) {
@@ -424,11 +424,11 @@ function closeKey () {
   }
 
   openKeyBtn.style.display = 'block'
-  // if (scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block') {
-  //   openKeyBtn.style.top = 'calc(100vh - 140px)'
-  // } else {
-  //   openKeyBtn.style.top = 'calc(100vh - 60px)'
-  // }
+  if (scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block') {
+    osLogo.classList.add('os-logo-position-change')
+  } else {
+    osLogo.classList.remove('os-logo-position-change')
+  }
   // openKeyBtn.style.display = 'flex'
   // if (window.location.search === '') {
   //   openKeyBtn.style.left = '-20px'
@@ -450,6 +450,15 @@ function adjustPosition () {
   const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
   const depthRadio = document.getElementById('sw-depth-radio')
   const velocityRadio = document.getElementById('sw-velocity-radio')
+  const osLogo = document.getElementById('os-logo')
+
+  if ((scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block') &&
+  window.innerWidth <= deviceScreenWidth) {
+    osLogo.classList.add('os-logo-position-change')
+  } else {
+    console.log('here2')
+    osLogo.classList.remove('os-logo-position-change')
+  }
 
   if (window.innerWidth > deviceScreenWidth) {
     // scenariosSelectorDepth.style.top = 'calc(100vh - 145px)'
