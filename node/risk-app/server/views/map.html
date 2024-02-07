@@ -150,6 +150,49 @@
         </div>
       </div>
 
+      <!-- Depth scenarios -->
+      <div class="defra-map-scenarios horizontal-overflow scenario-float-right v6-width-fix"
+        id="scenario-container-rs-depth">
+        <div class="defra-map-scenarios-v3_container" id="scenarios-controls-rs-depth">
+          <div class="govuk-radios govuk-radios--small" id="scenario-selection-rs-depth" data-module="govuk-radios">
+
+            <div class="govuk-radios__item" style="border-bottom: 7px solid rgb(29, 112, 184);">
+              <input class="govuk-radios__input" id="risk-radio-high-rs-depth" onchange="scenarioDisplayUpdate('rsdepth')"
+                name="scenarios-depth" type="radio" value="{{maps.categories[3].maps[1].ref}}" checked="">
+              <label class="govuk-label govuk-radios__label" for="risk-radio-high-depth">
+                <strong class="scenario-heading">Up to 20cm</strong>
+                <span class="risk-context-v3">(8in))</span>
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="risk-radio-medium-rs-depth" onchange="scenarioDisplayUpdate('rsdepth')"
+                name="scenarios-depth" type="radio" value="{{maps.categories[3].maps[2].ref}}">
+              <label class="govuk-label govuk-radios__label" for="risk-radio-medium-depth">
+                <strong class="scenario-heading"
+                  style="text-decoration: underline; text-decoration-thickness: 2px;">Up to 30cm</strong>
+                <span class="risk-context-v3">(1ft))</span>
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="risk-radio-low-rs-depth" onchange="scenarioDisplayUpdate('rsdepth')"
+                name="scenarios-depth" type="radio" value="{{maps.categories[3].maps[3].ref}}">
+              <label class="govuk-label govuk-radios__label" for="risk-radio-low-depth">
+                <strong class="scenario-heading" style="text-decoration: underline; text-decoration-thickness: 2px;">Up to 60cm</strong>
+                <span class="risk-context-v3">(2ft)</span>
+              </label>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="risk-radio-very-low-rs-depth" onchange="scenarioDisplayUpdate('rsdepth')"
+                  name="scenarios-depth" type="radio" value="{{maps.categories[3].maps[4].ref}}">
+                <label class="govuk-label govuk-radios__label" for="risk-radio-very-low-depth">
+                  <strong class="scenario-heading" style="text-decoration: underline; text-decoration-thickness: 2px;">Up to 90cm</strong>
+                  <span class="risk-context-v3">(3ft)</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Velocity scenarios -->
       <div class="defra-map-scenarios horizontal-overflow scenario-float-right v6-width-fix"
         id="scenario-container-velocity">
@@ -210,16 +253,16 @@
           <div id="sw-section-container">
             <fieldset class="govuk-fieldset">
               <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-                <h3 class="defra-map-key__section-title" ontoken="this.onscrolling = false">Surface water</h3>
+                <h3 class="defra-map-key__section-title" ontoken="this.onscrolling = false">Surface water: Current likelihood of flooding</h3>
               </legend>
 
               <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
                 <div class="govuk-radios__item">
                   <input class="govuk-radios__input extent-radio" id="sw-extent-radio"
-                    onchange="handleRadioChange('extent', 'surface water')" value="{{maps.categories[1].maps[0].ref}}"
+                    onchange="handleRadioChange('extent', 'surface water')" value="{{maps.categories[4].maps[0].ref}}"
                     title="Extent of flooding from surface water" name="measurements" type="radio" checked="">
                   <label class="govuk-label govuk-radios__label" for="sw-extent-radio">
-                    <span class="surface-water-bulletpoint__heading" id="surface-water-extent__heading">Extent</span>
+                    <span class="surface-water-bulletpoint__heading" id="surface-water-extent__heading">Flood area (predicted extent)</span>
 
                     <div id="sw-extent-desc-container">
                       <span
@@ -230,7 +273,7 @@
                             <rect x="5" y="5" width="22" height="22" style="fill:#555C9D"></rect>
                           </svg>
                         </span>
-                        <span id="risk-severity">High risk</span>
+                        <span id="risk-severity">High chance</span>
                         <span class="risk-context">More than 3.3% chance each year</span>
                       </span>
 
@@ -242,7 +285,7 @@
                             <rect x="5" y="5" width="22" height="22" style="fill:#9AA0DE"></rect>
                           </svg>
                         </span>
-                        Medium risk
+                        Medium chance
                         <span class="risk-context">Between 3.3% and 1% chance each year</span>
                       </span>
 
@@ -254,10 +297,21 @@
                             <rect x="5" y="5" width="22" height="22" style="fill:#C4E1FF"></rect>
                           </svg>
                         </span>
-                        Low risk
+                        Low chance
                         <span class="risk-context">Between 1% and 0.1% chance each year</span>
                       </span>
 
+                      <span
+                        class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-extent-container"
+                        id="sw-extent-very-low">
+                        <span class="defra-map-key__symbol">
+                          <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                            <rect x="5" y="5" width="22" height="22" style="fill:#c9f8ff"></rect>
+                          </svg>
+                        </span>
+                        Very low chance
+                        <span class="risk-context">Less than 0.1% chance each year</span>
+                      </span>                   
                     </div>
                   </label>
                 </div>
@@ -363,7 +417,7 @@
                 <div class="govuk-radios__item">
                   <input class="govuk-radios__input extent-radio" id="rs-radio"
                     onchange="handleRadioChange('extent', 'rivers and the sea')"
-                    value="{{maps.categories[0].maps[0].ref}}" title="Extent of flooding from rivers and seas"
+                    value="{{maps.categories[3].maps[0].ref}}" title="Extent of flooding from rivers and seas"
                     name="measurements" type="radio">
                   <label class="govuk-label govuk-radios__label" for="rs-radio">
                     <span class="bulletpoint__heading" id="rs-extent__heading">Extent</span>
@@ -415,6 +469,62 @@
                     </div>
                   </label>
                 </div>
+
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="rs-depth-radio" onchange="handleRadioChange('rsdepth')"
+                    value="{{maps.categories[3].maps[1].ref}}" name="measurements"
+                    title="Rivers and seas flood risk: water depth in a high risk scenario" type="radio">
+                  <label class="govuk-label govuk-radios__label" for="rs-depth-radio">
+                    <span class="surface-water-bulletpoint__heading" id="surface-water-depth__heading">Depth</span>
+
+                    <div id="rs-depth-desc-container">
+                      <span
+                        class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-depth-container"
+                        id="rs-depth-above-90">
+                        <span class="defra-map-key__symbol">
+                          <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                            <rect x="5" y="5" width="22" height="22" style="fill:#555C9D"></rect>
+                          </svg>
+                        </span>
+                        <span id="riversea-depth-above-90">High risk</span>
+                      </span>
+
+                      <span
+                        class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-depth-container"
+                        id="rs-depth-30-90">
+                        <span class="defra-map-key__symbol">
+                          <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                            <rect x="5" y="5" width="22" height="22" style="fill:#9AA0DE"></rect>
+                          </svg>
+                        </span>
+                        <span id="riversea-depth-30-90">Medium risk</span>
+                      </span>
+
+                      <span
+                        class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-depth-container"
+                        id="rs-depth-below-30">
+                        <span class="defra-map-key__symbol">
+                          <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                            <rect x="5" y="5" width="22" height="22" style="fill:#C4E1FF"></rect>
+                          </svg>
+                        </span>
+                        <span class="riversea-depth-below-30">Low risk</span>
+                      </span>
+
+                      <span
+                        class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-depth-container"
+                        id="rs-depth-below-30">
+                        <span class="defra-map-key__symbol">
+                          <svg aria-hidden="true" focusable="false" width="32" height="32" viewBox="0 0 32 32">
+                            <rect x="5" y="5" width="22" height="22" style="fill: #c9f8ff"></rect>
+                          </svg>
+                        </span>
+                        <span class="riversea-depth-below-30">Very low risk</span>
+                      </span>
+                    </div>
+                  </label>
+                </div>
+
               </div>
             </fieldset>
           </div>

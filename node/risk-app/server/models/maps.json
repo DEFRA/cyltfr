@@ -263,6 +263,252 @@
           }
         }
       ]
-    }
+    },
+    {
+      "ref": "RiversOrSea",
+      "icon": "rivers-sea",
+      "name": "Flood risk from rivers or the sea",
+      "title": "Flood risk from rivers or the sea",
+      "maps": [
+        {
+          "ref": "RiversOrSea_14-ROFRS-4band-Extent",
+          "name": "Extent of flooding",
+          "title": "Extent of flooding from rivers or the sea",
+          "legend": {
+            "title": "Flood risk",
+            "keys": [
+              {
+                "text": "High",
+                "desc": "High risk description",
+                "icon": "purple",
+                "id": "rivers-seas-high"
+              },
+              {
+                "text": "Medium",
+                "desc": "Medium risk description",
+                "icon": "dark-blue",
+                "id": "rivers-seas-medium"
+              },
+              {
+                "text": "Low",
+                "desc": "Low risk description",
+                "icon": "blue",
+                "id": "rivers-seas-low"
+              },
+              {
+                "text": "Very low",
+                "desc": "Very low risk description",
+                "icon": "light-blue",
+                "id": "rivers-seas-very-low"
+              }
+            ]
+          }
+        },
+        {
+          "ref": "RiversOrSea_15-ROFRS-4band-0-2m-depth",
+          "name": "Depth of flooding",
+          "title": "Depth of flooding from rivers or the sea",
+          "legend": {
+            "title": "Flood risk",
+            "keys": [
+              {
+                "text": "High",
+                "desc": "High risk description",
+                "icon": "purple",
+                "id": "rivers-seas-high"
+              },
+              {
+                "text": "Medium",
+                "desc": "Medium risk description",
+                "icon": "dark-blue",
+                "id": "rivers-seas-medium"
+              },
+              {
+                "text": "Low",
+                "desc": "Low risk description",
+                "icon": "blue",
+                "id": "rivers-seas-low"
+              },
+              {
+                "text": "Very low",
+                "desc": "Very low risk description",
+                "icon": "light-blue",
+                "id": "rivers-seas-very-low"
+              }
+            ]
+          }
+        },
+        {
+          "ref": "RiversOrSea_16-ROFRS-4band-0-3m-depth",
+          "name": "Depth of flooding",
+          "title": "Depth of flooding from rivers or the sea",
+          "legend": {
+            "title": "Flood risk",
+            "keys": [
+              {
+                "text": "High",
+                "desc": "High risk description",
+                "icon": "purple",
+                "id": "rivers-seas-high"
+              },
+              {
+                "text": "Medium",
+                "desc": "Medium risk description",
+                "icon": "dark-blue",
+                "id": "rivers-seas-medium"
+              },
+              {
+                "text": "Low",
+                "desc": "Low risk description",
+                "icon": "blue",
+                "id": "rivers-seas-low"
+              },
+              {
+                "text": "Very low",
+                "desc": "Very low risk description",
+                "icon": "light-blue",
+                "id": "rivers-seas-very-low"
+              }
+            ]
+          }
+        },
+        {
+          "ref": "RiversOrSea_17-ROFRS-4band-0-6m-depth",
+          "name": "Depth of flooding",
+          "title": "Depth of flooding from rivers or the sea",
+          "legend": {
+            "title": "Flood risk",
+            "keys": [
+              {
+                "text": "High",
+                "desc": "High risk description",
+                "icon": "purple",
+                "id": "rivers-seas-high"
+              },
+              {
+                "text": "Medium",
+                "desc": "Medium risk description",
+                "icon": "dark-blue",
+                "id": "rivers-seas-medium"
+              },
+              {
+                "text": "Low",
+                "desc": "Low risk description",
+                "icon": "blue",
+                "id": "rivers-seas-low"
+              },
+              {
+                "text": "Very low",
+                "desc": "Very low risk description",
+                "icon": "light-blue",
+                "id": "rivers-seas-very-low"
+              }
+            ]
+          }
+        },
+        {
+          "ref": "RiversOrSea_18-ROFRS-4band-0-9m-depth",
+          "name": "Depth of flooding",
+          "title": "Depth of flooding from rivers or the sea",
+          "legend": {
+            "title": "Flood risk",
+            "keys": [
+              {
+                "text": "High",
+                "desc": "High risk description",
+                "icon": "purple",
+                "id": "rivers-seas-high"
+              },
+              {
+                "text": "Medium",
+                "desc": "Medium risk description",
+                "icon": "dark-blue",
+                "id": "rivers-seas-medium"
+              },
+              {
+                "text": "Low",
+                "desc": "Low risk description",
+                "icon": "blue",
+                "id": "rivers-seas-low"
+              },
+              {
+                "text": "Very low",
+                "desc": "Very low risk description",
+                "icon": "light-blue",
+                "id": "rivers-seas-very-low"
+              }
+            ]
+          }
+        }        
+      ]
+    },
+    {
+      "ref": "SurfaceWater",
+      "icon": "surface-water",
+      "name": "Flood risk from surface water",
+      "title": "Flood risk from surface water",
+      "maps": [
+        {
+          "ref": "SurfaceWater_29-ROFSW-4band-Extent",
+          "name": "Extent of flooding",
+          "title": "Extent of flooding from surface water",
+          "legend": {
+            "title": "Flood risk",
+            "keys": [
+              {
+                "text": "High",
+                "icon": "purple",
+                "id": "surface-water-high"
+              },
+              {
+                "text": "Medium",
+                "icon": "dark-blue",
+                "id": "surface-water-medium"
+              },
+              {
+                "text": "Low",
+                "icon": "blue",
+                "id": "surface-water-low"
+              },
+              {
+                "text": "Very low",
+                "icon": "white",
+                "id": "surface-water-very-low"
+              }
+            ]
+          }
+        },
+        {
+          "ref": "SurfaceWater_34-CCRS3-ROFSW-4band-Extent",
+          "name": "CCRS3 Extent of flooding",
+          "title": "Extent of flooding from surface water",
+          "legend": {
+            "title": "Flood risk",
+            "keys": [
+              {
+                "text": "High",
+                "icon": "purple",
+                "id": "surface-water-high"
+              },
+              {
+                "text": "Medium",
+                "icon": "dark-blue",
+                "id": "surface-water-medium"
+              },
+              {
+                "text": "Low",
+                "icon": "blue",
+                "id": "surface-water-low"
+              },
+              {
+                "text": "Very low",
+                "icon": "white",
+                "id": "surface-water-very-low"
+              }
+            ]
+          }
+        }
+      ]
+    }  
   ]
 }
