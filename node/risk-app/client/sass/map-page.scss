@@ -369,6 +369,7 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   }
 
   #copyright-info-container-key {
+    font-size: 10px;
     @media screen and (min-width: $tablet-width) {
       display: none;
     }
