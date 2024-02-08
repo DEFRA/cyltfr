@@ -507,6 +507,9 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
 }
 
 .defra-map-key__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 0 0 0 20px;
   width: 270px;
   height: 100%;

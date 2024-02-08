@@ -456,7 +456,6 @@ function adjustPosition () {
   window.innerWidth <= deviceScreenWidth) {
     osLogo.classList.add('os-logo-position-change')
   } else {
-    console.log('here2')
     osLogo.classList.remove('os-logo-position-change')
   }
 
