@@ -162,8 +162,8 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
       z-index: 25;
       display: block;
       position: absolute;
-      right: 5px;
-      top: 5px;
+      right: 16px;
+      top: 0;
       width: 40px;
       height: 40px;
       margin: 0;
@@ -236,7 +236,7 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
       font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
 
       @media screen and (max-width: $tablet-width) {
-        width: fit-content;
+        width: 236px;
       }
       width: 250px;
     }
@@ -492,6 +492,9 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
 }
 
 .defra-map-key__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 0 0 0 20px;
   width: 270px;
   height: 100%;
