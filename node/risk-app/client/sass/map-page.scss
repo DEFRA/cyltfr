@@ -368,28 +368,13 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
     justify-content: flex-end;
   }
 
-  #copyright-info-container-key {
-    font-size: 10px;
-    @media screen and (min-width: $tablet-width) {
-      display: none;
-    }
-  }
-
   .defra-map-info__container {
     background-color: white;
     display: block;
     margin-top: 10px;
-    // position: relative;
     float: right;
     clear: right;
-    // width: 330px;
-    // height: 80px;
-    // top: calc(100vh - 95px);
     z-index: 11;
-
-    @media screen and (max-width: $tablet-width) {
-      display: none;
-    }
   }
 
   #copyright-text {

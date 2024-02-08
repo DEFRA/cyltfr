@@ -205,7 +205,7 @@ function openKey () {
   scenariosSelectorDepth.style.display = 'none'
   scenariosSelectorVelocity.style.display = 'none'
   if (window.innerWidth <= deviceScreenWidth) {
-    advancedToggle.style.display = 'none'
+    // advancedToggle.style.display = 'none'
     // scenariosSelectorDepth.style.top = ' calc(100vh - 145px)'
     // scenariosSelectorVelocity.style.top = ' calc(100vh - 145px)'
   }
