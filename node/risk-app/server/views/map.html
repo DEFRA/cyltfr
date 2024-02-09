@@ -78,6 +78,17 @@
 
       <img id="os-logo" class="defra-map-os-logo" alt="Ordnance Survey logo" src="{{ assetPath }}/images/os-logo-maps.svg" width="90" height="24" style="pointer-events: auto; display: block;">
 
+      <div class="defra-map-info__container hide" id="copyright-info-container-top">
+        <div id="infoContent" class="defra-map-info__content">
+          <div id="infoDescription" >
+                <p id="copyright-text"><a class="govuk-link"
+                    href="https://check-long-term-flood-risk.service.gov.uk/os-terms" previewlistener="true">Contains OS
+                    data</a><span id="copyright-text-span"> © Crown copyright and database rights {{year}}</span>
+                </p>
+          </div>
+        </div>
+      </div>
+
       <div class="scenarios">
 
       <!-- Depth scenarios -->
@@ -160,7 +171,7 @@
       </div>
     </div>
 
-      <div class="defra-map-info__container" id="copyright-info-container">
+      <div class="defra-map-info__container" id="copyright-info-container-bottom">
         <div id="infoContent" class="defra-map-info__content">
           <div id="infoDescription" >
                 <p id="copyright-text"><a class="govuk-link"

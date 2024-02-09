@@ -205,7 +205,7 @@ function openKey () {
   scenariosSelectorDepth.style.display = 'none'
   scenariosSelectorVelocity.style.display = 'none'
   if (window.innerWidth <= deviceScreenWidth) {
-    // advancedToggle.style.display = 'none'
+    advancedToggle.style.display = 'none'
     // scenariosSelectorDepth.style.top = ' calc(100vh - 145px)'
     // scenariosSelectorVelocity.style.top = ' calc(100vh - 145px)'
   }
@@ -266,7 +266,19 @@ function handleRadioChange (selected, type) {
   const olZoom = document.getElementsByClassName('ol-zoom')
   const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
   const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
+  const topCopyrightContainer = document.getElementById('copyright-info-container-top')
+  const bottomCopyrightContainer = document.getElementById('copyright-info-container-bottom')
 
+  // if (scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block' &&
+  // window.innerWidth <= deviceScreenWidth) {
+  //   osLogo.classList.add('os-logo-position-change')
+  //   bottomCopyrightContainer.classList.add('hide')
+  //   topCopyrightContainer.classList.remove('hide')
+  // } else {
+  //   osLogo.classList.remove('os-logo-position-change')
+  //   bottomCopyrightContainer.classList.remove('hide')
+  //   topCopyrightContainer.classList.add('hide')
+  // }
   if (selected === 'depth') {
     extentInfoRs.style.display = 'none'
     extentInfoReservoirs.style.display = 'none'
@@ -279,6 +291,8 @@ function handleRadioChange (selected, type) {
     if (window.innerWidth <= deviceScreenWidth) {
       scenariosSelectorDepth.style.display = 'none'
       scenariosSelectorVelocity.style.display = 'none'
+      bottomCopyrightContainer.classList.add('hide')
+      topCopyrightContainer.classList.remove('hide')
     }
     olZoom[0].style.top = 'calc(100% - 200px)'
   }
@@ -297,6 +311,8 @@ function handleRadioChange (selected, type) {
       scenariosSelectorVelocity.style.display = 'none'
     } else {
       scenariosSelectorVelocity.style.display = 'flex'
+      bottomCopyrightContainer.classList.add('hide')
+      topCopyrightContainer.classList.remove('hide')
     }
     olZoom[0].style.top = 'calc(100% - 200px)'
   }
@@ -335,6 +351,8 @@ function handleRadioChange (selected, type) {
       olZoom[0].style.top = 'calc(100% - 102px)'
       boundaryContainer.style.display = 'block'
     }
+    bottomCopyrightContainer.classList.remove('hide')
+    topCopyrightContainer.classList.add('hide')
   }
 }
 
@@ -451,23 +469,24 @@ function adjustPosition () {
   const depthRadio = document.getElementById('sw-depth-radio')
   const velocityRadio = document.getElementById('sw-velocity-radio')
   const osLogo = document.getElementById('os-logo')
+  const topCopyrightContainer = document.getElementById('copyright-info-container-top')
+  const bottomCopyrightContainer = document.getElementById('copyright-info-container-bottom')
 
   if ((scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block') &&
   window.innerWidth <= deviceScreenWidth) {
     osLogo.classList.add('os-logo-position-change')
+    bottomCopyrightContainer.classList.add('hide')
+    topCopyrightContainer.classList.remove('hide')
   } else {
     osLogo.classList.remove('os-logo-position-change')
-  }
-
-  if (window.innerWidth > deviceScreenWidth) {
-    // scenariosSelectorDepth.style.top = 'calc(100vh - 145px)'
-    // scenariosSelectorVelocity.style.top = 'calc(100vh - 145px)'
+    console.log('here')
+    bottomCopyrightContainer.classList.remove('hide')
+    topCopyrightContainer.classList.add('hide')
   }
 
   if (keyDisplay.style.display === 'block' && window.innerWidth <= deviceScreenWidth) {
     scenariosSelectorDepth.style.display = 'none'
     scenariosSelectorVelocity.style.display = 'none'
-    // advancedToggle.style.display = 'none'
   } else if (keyDisplay.style.display === 'block' && window.innerWidth > deviceScreenWidth) {
     if (window.location.href.includes('map=RiversOrSea') ||
     window.location.href.includes('map=SurfaceWater') ||

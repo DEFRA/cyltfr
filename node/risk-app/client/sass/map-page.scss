@@ -4,6 +4,7 @@ $govuk-assets-path: '/assets/';
 @import "node_modules/govuk-frontend/govuk/helpers/all";
 @import url(//fonts.googleapis.com/css?family=Source+Sans+Pro);
 
+$small-mobile-width: 400px;
 $mobile-width: 480px;
 $tablet-width: 768px;
 $desktop-width: 769px;
@@ -16,12 +17,24 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   position: absolute;
   left: 10px;
   bottom: 10px;
+
+  @media screen and (max-width: $small-mobile-width) {
+    bottom: 40px;
+  }
 }
 
 .os-logo-position-change {
   @media screen and (max-width: $tablet-width) {
     bottom: 110px;
   }
+}
+
+.defra-map-info__container {
+  display: none;
+}
+
+.hide {
+  display: none !important;
 }
 
 .map-container {
@@ -370,7 +383,7 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
 
   .defra-map-info__container {
     background-color: white;
-    display: block;
+    display: flex;
     margin-top: 10px;
     float: right;
     clear: right;
