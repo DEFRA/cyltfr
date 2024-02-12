@@ -148,9 +148,7 @@ function toggleAdvancedOptions () {
 
   if (window.innerWidth <= deviceScreenWidth) {
     keyDisplay.style.display = 'block'
-    // openKeyBtn.style.display = 'none'
     scenariosSelectorDepth.style.display = 'none'
-    // advancedToggle.style.display = 'none'
   }
 
   if (advancedButtonText.textContent.includes('Show')) {
@@ -162,7 +160,6 @@ function toggleAdvancedOptions () {
     rsContainer.style.marginTop = '0px'
     reservoirsContainer.style.marginTop = '0px'
     reservoirsContainer.style.display = 'block'
-    // openKeyBtn.style.left = '222px'
   } else {
     if (window.location.href.includes('map=SurfaceWater')) {
       swContainer.style.display = 'block'
@@ -204,11 +201,6 @@ function openKey () {
   openKeyBtn.style.display = 'none'
   scenariosSelectorDepth.style.display = 'none'
   scenariosSelectorVelocity.style.display = 'none'
-  if (window.innerWidth <= deviceScreenWidth) {
-    advancedToggle.style.display = 'none'
-    // scenariosSelectorDepth.style.top = ' calc(100vh - 145px)'
-    // scenariosSelectorVelocity.style.top = ' calc(100vh - 145px)'
-  }
 }
 
 function getInitialKeyOptions () {
@@ -447,16 +439,6 @@ function closeKey () {
   } else {
     osLogo.classList.remove('os-logo-position-change')
   }
-  // openKeyBtn.style.display = 'flex'
-  // if (window.location.search === '') {
-  //   openKeyBtn.style.left = '-20px'
-  // } else {
-  //   if (advancedButtonText.textContent.includes('Hide')) {
-  //     openKeyBtn.style.display = 'none'
-  //   } else {
-  //     openKeyBtn.style.left = '229px'
-  //   }
-  // }
 }
 
 /* eslint-enable no-unused-vars */
@@ -479,7 +461,6 @@ function adjustPosition () {
     topCopyrightContainer.classList.remove('hide')
   } else {
     osLogo.classList.remove('os-logo-position-change')
-    console.log('here')
     bottomCopyrightContainer.classList.remove('hide')
     topCopyrightContainer.classList.add('hide')
   }
@@ -509,22 +490,12 @@ function adjustPosition () {
     scenariosSelectorVelocity.style.display = 'flex'
   }
 
-  // if (keyDisplay.style.display === 'none' && window.innerWidth <= deviceScreenWidth) {
-  //   scenariosSelectorDepth.style.top = 'calc(100vh - 190px)'
-  //   scenariosSelectorVelocity.style.top = 'calc(100vh - 190px)'
-  // }
-
   if ((scenarioBarDepth.style.display === 'block' ||
   scenarioBarVelocity.style.display === 'block') &&
   window.innerWidth <= deviceScreenWidth
   ) {
     zoomBtns[0].style.top = 'calc(100% - 200px)'
-    // openKeyBtn.style.top = 'calc(100vh - 160px)'
   }
-
-  // if (window.innerWidth > deviceScreenWidth) {
-  //   zoomBtns[0].style.top = 'calc(100% - 145px)'
-  // }
 }
 
 window.onresize = adjustPosition
