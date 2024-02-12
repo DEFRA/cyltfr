@@ -513,7 +513,127 @@
           }
         },
         {
-          "ref": "SurfaceWater_34-CCRS3-ROFSW-4band-Extent",
+          "ref": "SurfaceWater_30-ROFSW-4band-0-2m-depth",
+          "name": "Depth of flooding",
+          "title": "Depth of flooding from surface water",
+          "legend": {
+            "title": "Flood risk",
+            "keys": [
+              {
+                "text": "High",
+                "icon": "purple",
+                "id": "surface-water-high"
+              },
+              {
+                "text": "Medium",
+                "icon": "dark-blue",
+                "id": "surface-water-medium"
+              },
+              {
+                "text": "Low",
+                "icon": "blue",
+                "id": "surface-water-low"
+              },
+              {
+                "text": "Very low",
+                "icon": "white",
+                "id": "surface-water-very-low"
+              }
+            ]
+          }
+        },
+        {
+          "ref": "SurfaceWater_31-ROFSW-4band-0-3m-depth",
+          "name": "Depth of flooding",
+          "title": "Depth of flooding from surface water",
+          "legend": {
+            "title": "Flood risk",
+            "keys": [
+              {
+                "text": "High",
+                "icon": "purple",
+                "id": "surface-water-high"
+              },
+              {
+                "text": "Medium",
+                "icon": "dark-blue",
+                "id": "surface-water-medium"
+              },
+              {
+                "text": "Low",
+                "icon": "blue",
+                "id": "surface-water-low"
+              },
+              {
+                "text": "Very low",
+                "icon": "white",
+                "id": "surface-water-very-low"
+              }
+            ]
+          }
+        },
+        {
+          "ref": "SurfaceWater_32-ROFSW-4band-0-6m-depth",
+          "name": "Depth of flooding",
+          "title": "Depth of flooding from surface water",
+          "legend": {
+            "title": "Flood risk",
+            "keys": [
+              {
+                "text": "High",
+                "icon": "purple",
+                "id": "surface-water-high"
+              },
+              {
+                "text": "Medium",
+                "icon": "dark-blue",
+                "id": "surface-water-medium"
+              },
+              {
+                "text": "Low",
+                "icon": "blue",
+                "id": "surface-water-low"
+              },
+              {
+                "text": "Very low",
+                "icon": "white",
+                "id": "surface-water-very-low"
+              }
+            ]
+          }
+        },
+        {
+          "ref": "SurfaceWater_33-ROFSW-4band-0-9m-depth",
+          "name": "Depth of flooding",
+          "title": "Depth of flooding from surface water",
+          "legend": {
+            "title": "Flood risk",
+            "keys": [
+              {
+                "text": "High",
+                "icon": "purple",
+                "id": "surface-water-high"
+              },
+              {
+                "text": "Medium",
+                "icon": "dark-blue",
+                "id": "surface-water-medium"
+              },
+              {
+                "text": "Low",
+                "icon": "blue",
+                "id": "surface-water-low"
+              },
+              {
+                "text": "Very low",
+                "icon": "white",
+                "id": "surface-water-very-low"
+              }
+            ]
+          }
+        },     
+        {
+          "ref": "SurfaceWater_34-ROFSW-CCRS3-4band-Extent",
           "name": "CCRS3 Extent of flooding",
           "title": "Extent of flooding from surface water",
           "legend": {

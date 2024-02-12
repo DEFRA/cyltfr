@@ -86,6 +86,10 @@ function mapPage () {
       e.preventDefault()
       setCurrent($(this).val())
     })
+    $header.on('change', 'input[name="scenarios-rs-depth"]', function (e) {
+      e.preventDefault()
+      setCurrent($(this).val())
+    })
     $header.on('change', 'input[name="scenarios-velocity"]', function (e) {
       e.preventDefault()
       setCurrent($(this).val())
@@ -112,6 +116,7 @@ function mapPage () {
 function getInitialKeyOptions () {
   const velocityContainer = document.getElementById('sw-velocity-section-container')
   const swContainer = document.getElementById('sw-section-container')
+  const swCcrs3Container = document.getElementById('sw-ccrs3-section-container')
   const rsContainer = document.getElementById('rs-section-container')
   const rsCcrs2Container = document.getElementById('rs-ccrs2-section-container')
   const reservoirsContainer = document.getElementById('reservoirs-section-container')
@@ -121,23 +126,30 @@ function getInitialKeyOptions () {
   const extentInfoRsCcrs2 = document.getElementById('rs-ccrs2-extent-desc-container')
   const extentInfoReservoirs = document.getElementById('reservoirs-extent-desc-container')
   const extentInfoSw = document.getElementById('sw-extent-desc-container')
+  const extentInfoSwCcrs3 = document.getElementById('sw-ccrs3-extent-desc-container')
   const selectedAddressInput = document.getElementById('selected-address')
   const boundaryContainer = document.getElementById('boundary-container')
   const advancedToggle = document.getElementById('advanced-key-button')
-  const deviceScreenWidth = 768
+  // const deviceScreenWidth = 768
 
+  /**
   if (window.innerWidth <= deviceScreenWidth) {
     advancedToggle.style.display = 'none'
   }
+  */
+  advancedToggle.style.display = 'none'
 
   if (window.location.href.includes('map=SurfaceWater')) {
     velocityContainer.style.display = 'none'
     rsContainer.style.display = 'none'
     rsCcrs2Container.style.display = 'none'
     reservoirsContainer.style.display = 'none'
+    extentInfoSwCcrs3.style.display = 'none'
   } else if (window.location.href.includes('map=RiversOrSea')) {
     swContainer.style.display = 'none'
+    swCcrs3Container.style.display = 'none'
     extentInfoSw.style.display = 'none'
+    extentInfoSwCcrs3.style.display = 'none'
     rsContainer.style.display = 'block'
     rsCcrs2Container.style.display = 'block'
     rsContainer.style.marginTop = '40px'
@@ -148,6 +160,7 @@ function getInitialKeyOptions () {
     boundaryContainer.style.display = 'none'
   } else if (window.location.href.includes('map=Reservoirs')) {
     swContainer.style.display = 'none'
+    swCcrs3Container.style.display = 'none'
     extentInfoSw.style.display = 'none'
     rsContainer.style.display = 'none'
     rsCcrs2Container.style.display = 'none'
@@ -173,6 +186,7 @@ function handleRadioChange (selected, type) {
   const extentInfoRsCcrs2 = document.getElementById('rs-ccrs2-extent-desc-container')
   const extentInfoReservoirs = document.getElementById('reservoirs-extent-desc-container')
   const extentInfoSw = document.getElementById('sw-extent-desc-container')
+  const extentInfoSwCcrs3 = document.getElementById('sw-ccrs3-extent-desc-container')
   const depthInfo = document.getElementById('sw-depth-desc-container')
   const rsDepthInfo = document.getElementById('rs-depth-desc-container')
   const velocityInfo = document.getElementById('sw-velocity-desc-container')
@@ -190,6 +204,7 @@ function handleRadioChange (selected, type) {
     extentInfoRsCcrs2.style.display = 'none'
     extentInfoReservoirs.style.display = 'none'
     extentInfoSw.style.display = 'none'
+    extentInfoSwCcrs3.style.display = 'none'
     depthInfo.style.display = 'block'
     rsDepthInfo.style.display = 'none'
     velocityInfo.style.display = 'none'
@@ -214,6 +229,7 @@ function handleRadioChange (selected, type) {
     extentInfoRsCcrs2.style.display = 'none'
     extentInfoReservoirs.style.display = 'none'
     extentInfoSw.style.display = 'none'
+    extentInfoSwCcrs3.style.display = 'none'
     depthInfo.style.display = 'none'
     rsDepthInfo.style.display = 'block'
     velocityInfo.style.display = 'none'
@@ -238,6 +254,7 @@ function handleRadioChange (selected, type) {
     extentInfoRsCcrs2.style.display = 'none'
     extentInfoReservoirs.style.display = 'none'
     extentInfoSw.style.display = 'none'
+    extentInfoSwCcrs3.style.display = 'none'
     depthInfo.style.display = 'none'
     rsDepthInfo.style.display = 'none'
     velocityInfo.style.display = 'block'
@@ -267,6 +284,7 @@ function handleRadioChange (selected, type) {
       extentInfoRsCcrs2.style.display = 'none'
       extentInfoReservoirs.style.display = 'block'
       extentInfoSw.style.display = 'none'
+      extentInfoSwCcrs3.style.display = 'none'
       depthInfo.style.display = 'none'
       rsDepthInfo.style.display = 'none'
       velocityInfo.style.display = 'none'
@@ -283,6 +301,7 @@ function handleRadioChange (selected, type) {
       extentInfoRsCcrs2.style.display = 'none'
       extentInfoReservoirs.style.display = 'none'
       extentInfoSw.style.display = 'none'
+      extentInfoSwCcrs3.style.display = 'none'
       depthInfo.style.display = 'none'
       rsDepthInfo.style.display = 'none'
       velocityInfo.style.display = 'none'
@@ -299,6 +318,7 @@ function handleRadioChange (selected, type) {
       extentInfoRsCcrs2.style.display = 'block'
       extentInfoReservoirs.style.display = 'none'
       extentInfoSw.style.display = 'none'
+      extentInfoSwCcrs3.style.display = 'none'
       depthInfo.style.display = 'none'
       rsDepthInfo.style.display = 'none'
       velocityInfo.style.display = 'none'
@@ -315,6 +335,24 @@ function handleRadioChange (selected, type) {
       extentInfoRsCcrs2.style.display = 'none'
       extentInfoReservoirs.style.display = 'none'
       extentInfoSw.style.display = 'block'
+      extentInfoSwCcrs3.style.display = 'none'
+      depthInfo.style.display = 'none'
+      rsDepthInfo.style.display = 'none'
+      velocityInfo.style.display = 'none'
+      scenarioBarDepth.style.display = 'none'
+      scenarioBarRsDepth.style.display = 'none'
+      scenarioBarVelocity.style.display = 'none'
+      copyrightBtn.style.top = 'calc(100vh - 110px)'
+      copyrightInfo.style.right = '360px'
+      olZoom[0].style.top = 'calc(100% - 145px)'
+      boundaryContainer.style.display = 'block'
+    }
+    if (type === 'surface water climate change') {
+      extentInfoRs.style.display = 'none'
+      extentInfoRsCcrs2.style.display = 'none'
+      extentInfoReservoirs.style.display = 'none'
+      extentInfoSw.style.display = 'none'
+      extentInfoSwCcrs3.style.display = 'block'
       depthInfo.style.display = 'none'
       rsDepthInfo.style.display = 'none'
       velocityInfo.style.display = 'none'
@@ -466,6 +504,7 @@ function scenarioDisplayUpdate (scenarioBar) {
 function selectedOption () {
   const measurementsRadios = document.querySelector('input[name="measurements"]:checked')
   const scenariosRadiosDepth = document.querySelector('input[name="scenarios-depth"]:checked')
+  const scenariosRadiosRsDepth = document.querySelector('input[name="scenarios-rs-depth"]:checked')
   const scenariosRadiosVelocity = document.querySelector('input[name="scenarios-velocity"]:checked')
 
   const extentRadioReservoirs = document.getElementById('reservoirs-radio')
@@ -500,7 +539,7 @@ function selectedOption () {
     if (lowRadioDepth.checked) {
       return lowRadioDepth.value
     }
-    return scenariosRadiosDepth.value
+    return scenariosRadiosRsDepth.value
   }
   if (velocityRadio.checked) {
     if (mediumRadioVelocity.checked) {
