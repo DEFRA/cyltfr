@@ -261,16 +261,6 @@ function handleRadioChange (selected, type) {
   const topCopyrightContainer = document.getElementById('copyright-info-container-top')
   const bottomCopyrightContainer = document.getElementById('copyright-info-container-bottom')
 
-  // if (scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block' &&
-  // window.innerWidth <= deviceScreenWidth) {
-  //   osLogo.classList.add('os-logo-position-change')
-  //   bottomCopyrightContainer.classList.add('hide')
-  //   topCopyrightContainer.classList.remove('hide')
-  // } else {
-  //   osLogo.classList.remove('os-logo-position-change')
-  //   bottomCopyrightContainer.classList.remove('hide')
-  //   topCopyrightContainer.classList.add('hide')
-  // }
   if (selected === 'depth') {
     extentInfoRs.style.display = 'none'
     extentInfoReservoirs.style.display = 'none'
@@ -297,14 +287,11 @@ function handleRadioChange (selected, type) {
     scenarioBarDepth.style.display = 'none'
     scenarioBarVelocity.style.display = 'block'
     scenariosSelectorVelocity.style.display = 'flex'
+    topCopyrightContainer.classList.add('hide')
+    bottomCopyrightContainer.classList.remove('hide')
+    scenariosSelectorVelocity.style.display = 'flex'
     if (window.innerWidth <= deviceScreenWidth && keyDisplay.style.display === 'block') {
-      // scenariosSelectorDepth.style.top = ' calc(100vh - 145px)'
-      // scenariosSelectorVelocity.style.top = ' calc(100vh - 145px)'
       scenariosSelectorVelocity.style.display = 'none'
-    } else {
-      scenariosSelectorVelocity.style.display = 'flex'
-      bottomCopyrightContainer.classList.add('hide')
-      topCopyrightContainer.classList.remove('hide')
     }
     olZoom[0].style.top = 'calc(100% - 200px)'
   }
