@@ -439,7 +439,41 @@
               }
             ]
           }
-        }        
+        },
+        {
+          "ref": "RiversOrSea_19-ROFRS-CCRS2-4band-Extent",
+          "name": "Extent of flooding",
+          "title": "Extent of flooding from rivers or the sea",
+          "legend": {
+            "title": "Flood risk",
+            "keys": [
+              {
+                "text": "High",
+                "desc": "High risk description",
+                "icon": "purple",
+                "id": "rivers-seas-high"
+              },
+              {
+                "text": "Medium",
+                "desc": "Medium risk description",
+                "icon": "dark-blue",
+                "id": "rivers-seas-medium"
+              },
+              {
+                "text": "Low",
+                "desc": "Low risk description",
+                "icon": "blue",
+                "id": "rivers-seas-low"
+              },
+              {
+                "text": "Very low",
+                "desc": "Very low risk description",
+                "icon": "light-blue",
+                "id": "rivers-seas-very-low"
+              }
+            ]
+          }
+        }         
       ]
     },
     {

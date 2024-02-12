@@ -113,10 +113,12 @@ function getInitialKeyOptions () {
   const velocityContainer = document.getElementById('sw-velocity-section-container')
   const swContainer = document.getElementById('sw-section-container')
   const rsContainer = document.getElementById('rs-section-container')
+  const rsCcrs2Container = document.getElementById('rs-ccrs2-section-container')
   const reservoirsContainer = document.getElementById('reservoirs-section-container')
   const rsRadio = document.getElementById('rs-radio')
   const reservoirsRadio = document.getElementById('reservoirs-radio')
   const extentInfoRs = document.getElementById('rs-extent-desc-container')
+  const extentInfoRsCcrs2 = document.getElementById('rs-ccrs2-extent-desc-container')
   const extentInfoReservoirs = document.getElementById('reservoirs-extent-desc-container')
   const extentInfoSw = document.getElementById('sw-extent-desc-container')
   const selectedAddressInput = document.getElementById('selected-address')
@@ -131,20 +133,24 @@ function getInitialKeyOptions () {
   if (window.location.href.includes('map=SurfaceWater')) {
     velocityContainer.style.display = 'none'
     rsContainer.style.display = 'none'
+    rsCcrs2Container.style.display = 'none'
     reservoirsContainer.style.display = 'none'
   } else if (window.location.href.includes('map=RiversOrSea')) {
     swContainer.style.display = 'none'
     extentInfoSw.style.display = 'none'
     rsContainer.style.display = 'block'
+    rsCcrs2Container.style.display = 'block'
     rsContainer.style.marginTop = '40px'
     rsRadio.checked = true
     extentInfoRs.style.display = 'block'
+    extentInfoRsCcrs2.style.display = 'none'
     reservoirsContainer.style.display = 'none'
     boundaryContainer.style.display = 'none'
   } else if (window.location.href.includes('map=Reservoirs')) {
     swContainer.style.display = 'none'
     extentInfoSw.style.display = 'none'
     rsContainer.style.display = 'none'
+    rsCcrs2Container.style.display = 'none'
     reservoirsContainer.style.display = 'block'
     reservoirsContainer.style.marginTop = '40px'
     reservoirsRadio.checked = true
@@ -164,23 +170,28 @@ function handleRadioChange (selected, type) {
   const scenarioBarRsDepth = document.getElementById('scenario-container-rs-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
   const extentInfoRs = document.getElementById('rs-extent-desc-container')
+  const extentInfoRsCcrs2 = document.getElementById('rs-ccrs2-extent-desc-container')
   const extentInfoReservoirs = document.getElementById('reservoirs-extent-desc-container')
   const extentInfoSw = document.getElementById('sw-extent-desc-container')
   const depthInfo = document.getElementById('sw-depth-desc-container')
+  const rsDepthInfo = document.getElementById('rs-depth-desc-container')
   const velocityInfo = document.getElementById('sw-velocity-desc-container')
   const copyrightBtn = document.getElementById('att-key-copyright-btn')
   const copyrightInfo = document.getElementById('copyright-info-container')
   const boundaryContainer = document.getElementById('boundary-container')
   const olZoom = document.getElementsByClassName('ol-zoom')
   const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
+  const scenariosSelectorRsDepth = document.getElementById('scenario-selection-rs-depth')
   const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
   const deviceScreenWidth = 768
 
   if (selected === 'depth') {
     extentInfoRs.style.display = 'none'
+    extentInfoRsCcrs2.style.display = 'none'
     extentInfoReservoirs.style.display = 'none'
     extentInfoSw.style.display = 'none'
     depthInfo.style.display = 'block'
+    rsDepthInfo.style.display = 'none'
     velocityInfo.style.display = 'none'
     scenarioBarDepth.style.display = 'block'
     scenarioBarRsDepth.style.display = 'none'
@@ -200,18 +211,20 @@ function handleRadioChange (selected, type) {
 
   if (selected === 'rsdepth') {
     extentInfoRs.style.display = 'none'
+    extentInfoRsCcrs2.style.display = 'none'
     extentInfoReservoirs.style.display = 'none'
     extentInfoSw.style.display = 'none'
-    depthInfo.style.display = 'block'
+    depthInfo.style.display = 'none'
+    rsDepthInfo.style.display = 'block'
     velocityInfo.style.display = 'none'
     scenarioBarDepth.style.display = 'none'
     scenarioBarRsDepth.style.display = 'block'
-    scenariosSelectorDepth.style.display = 'flex'
+    scenariosSelectorRsDepth.style.display = 'flex'
     scenarioBarVelocity.style.display = 'none'
     copyrightBtn.style.top = 'calc(100vh - 205px)'
     if (window.innerWidth <= deviceScreenWidth) {
       copyrightInfo.style.right = '0'
-      scenariosSelectorDepth.style.display = 'none'
+      scenariosSelectorRsDepth.style.display = 'none'
       scenariosSelectorVelocity.style.display = 'none'
     } else {
       copyrightInfo.style.right = '310px'
@@ -222,9 +235,11 @@ function handleRadioChange (selected, type) {
 
   if (selected === 'velocity') {
     extentInfoRs.style.display = 'none'
+    extentInfoRsCcrs2.style.display = 'none'
     extentInfoReservoirs.style.display = 'none'
     extentInfoSw.style.display = 'none'
     depthInfo.style.display = 'none'
+    rsDepthInfo.style.display = 'none'
     velocityInfo.style.display = 'block'
     scenarioBarDepth.style.display = 'none'
     scenarioBarRsDepth.style.display = 'none'
@@ -234,6 +249,7 @@ function handleRadioChange (selected, type) {
     if (window.innerWidth <= deviceScreenWidth && keyDisplay.style.display === 'block') {
       copyrightInfo.style.right = '0'
       scenariosSelectorDepth.style.top = ' calc(100vh - 145px)'
+      scenariosSelectorRsDepth.style.top = ' calc(100vh - 145px)'
       scenariosSelectorVelocity.style.top = ' calc(100vh - 145px)'
       scenariosSelectorVelocity.style.display = 'none'
     } else {
@@ -248,9 +264,11 @@ function handleRadioChange (selected, type) {
   if (selected === 'extent') {
     if (type === 'reservoirs') {
       extentInfoRs.style.display = 'none'
+      extentInfoRsCcrs2.style.display = 'none'
       extentInfoReservoirs.style.display = 'block'
       extentInfoSw.style.display = 'none'
       depthInfo.style.display = 'none'
+      rsDepthInfo.style.display = 'none'
       velocityInfo.style.display = 'none'
       scenarioBarDepth.style.display = 'none'
       scenarioBarRsDepth.style.display = 'none'
@@ -262,9 +280,27 @@ function handleRadioChange (selected, type) {
     }
     if (type === 'rivers and the sea') {
       extentInfoRs.style.display = 'block'
+      extentInfoRsCcrs2.style.display = 'none'
       extentInfoReservoirs.style.display = 'none'
       extentInfoSw.style.display = 'none'
       depthInfo.style.display = 'none'
+      rsDepthInfo.style.display = 'none'
+      velocityInfo.style.display = 'none'
+      scenarioBarDepth.style.display = 'none'
+      scenarioBarRsDepth.style.display = 'none'
+      scenarioBarVelocity.style.display = 'none'
+      copyrightBtn.style.top = 'calc(100vh - 110px)'
+      copyrightInfo.style.right = '360px'
+      olZoom[0].style.top = 'calc(100% - 145px)'
+      boundaryContainer.style.display = 'none'
+    }
+    if (type === 'rivers and the sea climate change') {
+      extentInfoRs.style.display = 'none'
+      extentInfoRsCcrs2.style.display = 'block'
+      extentInfoReservoirs.style.display = 'none'
+      extentInfoSw.style.display = 'none'
+      depthInfo.style.display = 'none'
+      rsDepthInfo.style.display = 'none'
       velocityInfo.style.display = 'none'
       scenarioBarDepth.style.display = 'none'
       scenarioBarRsDepth.style.display = 'none'
@@ -276,9 +312,11 @@ function handleRadioChange (selected, type) {
     }
     if (type === 'surface water') {
       extentInfoRs.style.display = 'none'
+      extentInfoRsCcrs2.style.display = 'none'
       extentInfoReservoirs.style.display = 'none'
       extentInfoSw.style.display = 'block'
       depthInfo.style.display = 'none'
+      rsDepthInfo.style.display = 'none'
       velocityInfo.style.display = 'none'
       scenarioBarDepth.style.display = 'none'
       scenarioBarRsDepth.style.display = 'none'
@@ -342,6 +380,7 @@ function toggleAdvancedOptions () {
   const openKeyBtn = document.getElementById('open-key-button')
   const copyrightInfo = document.getElementById('copyright-info-container')
   const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
+  const scenariosSelectorRsDepth = document.getElementById('scenario-selection-rs-depth')
   const advancedToggle = document.getElementById('advanced-key-button')
   const advancedButtonText = document.getElementById('advanced-button-text')
   const advancedButtonImage = document.getElementById('advanced-button-image')
@@ -360,6 +399,7 @@ function toggleAdvancedOptions () {
     openKeyBtn.style.display = 'none'
     copyrightInfo.style.display = 'none'
     scenariosSelectorDepth.style.display = 'none'
+    scenariosSelectorRsDepth.style.display = 'none'
     advancedToggle.style.display = 'none'
   }
 
@@ -483,6 +523,7 @@ function closeKey () {
   const scenarioBarRsDepth = document.getElementById('scenario-container-rs-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
   const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
+  const scenariosSelectorRsDepth = document.getElementById('scenario-selection-rs-depth')
   const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
   const depthRadio = document.getElementById('sw-depth-radio')
   const rsDepthRadio = document.getElementById('rs-depth-radio')
@@ -502,8 +543,8 @@ function closeKey () {
 
   if (rsDepthRadio.checked) {
     scenarioBarRsDepth.style.display = 'block'
-    scenariosSelectorDepth.style.display = 'flex'
-    scenariosSelectorDepth.style.top = null
+    scenariosSelectorRsDepth.style.display = 'flex'
+    scenariosSelectorRsDepth.style.top = null
   }
 
   if (velocityRadio.checked) {
@@ -534,6 +575,7 @@ function openKey () {
   const openKeyBtn = document.getElementById('open-key-button')
   const copyrightInfo = document.getElementById('copyright-info-container')
   const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
+  const scenariosSelectorRsDepth = document.getElementById('scenario-selection-rs-depth')
   const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
   const advancedToggle = document.getElementById('advanced-key-button')
   const deviceScreenWidth = 768
@@ -544,9 +586,11 @@ function openKey () {
   copyrightInfo.style.display = 'none'
   advancedToggle.style.display = 'none'
   scenariosSelectorDepth.style.display = 'none'
+  scenariosSelectorRsDepth.style.display = 'none'
   scenariosSelectorVelocity.style.display = 'none'
   if (window.innerWidth <= deviceScreenWidth) {
     scenariosSelectorDepth.style.top = ' calc(100vh - 145px)'
+    scenariosSelectorRsDepth.style.top = ' calc(100vh - 145px)'
     scenariosSelectorVelocity.style.top = ' calc(100vh - 145px)'
     copyrightBtn.style.display = 'none'
     copyrightInfo.style.display = 'none'
@@ -562,6 +606,7 @@ function adjustPosition () {
   const scenarioBarRsDepth = document.getElementById('scenario-container-rs-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
   const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
+  const scenariosSelectorRsDepth = document.getElementById('scenario-selection-rs-depth')
   const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
   const depthRadio = document.getElementById('sw-depth-radio')
   const rsDepthRadio = document.getElementById('rs-depth-radio')
@@ -571,6 +616,7 @@ function adjustPosition () {
 
   if (window.innerWidth > deviceScreenWidth) {
     scenariosSelectorDepth.style.top = 'calc(100vh - 145px)'
+    scenariosSelectorRsDepth.style.top = 'calc(100vh - 145px)'
     scenariosSelectorVelocity.style.top = 'calc(100vh - 145px)'
     copyrightInfo.style.right = '360px'
   }
@@ -578,6 +624,7 @@ function adjustPosition () {
   if (keyDisplay.style.display === 'block' && window.innerWidth <= deviceScreenWidth) {
     copyrightInfo.style.display = 'none'
     scenariosSelectorDepth.style.display = 'none'
+    scenariosSelectorRsDepth.style.display = 'none'
     scenariosSelectorVelocity.style.display = 'none'
     advancedToggle.style.display = 'none'
   } else if (keyDisplay.style.display === 'block' && window.innerWidth > deviceScreenWidth) {
@@ -592,7 +639,7 @@ function adjustPosition () {
     }
     if (rsDepthRadio.checked) {
       scenarioBarRsDepth.style.display = 'block'
-      scenariosSelectorDepth.style.display = 'flex'
+      scenariosSelectorRsDepth.style.display = 'flex'
     }
     if (velocityRadio.checked) {
       scenarioBarVelocity.style.display = 'block'

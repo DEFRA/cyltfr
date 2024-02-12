@@ -315,6 +315,10 @@ $scenarioWidthCap: 980px;
   display: none;
 }
 
+#rs-depth-desc-container {
+  display: none;
+}
+
 .extent-desc-container {
   display: none;
 }
@@ -545,6 +549,10 @@ svg:not(:root) {
 }
 
 #scenario-container-depth {
+  display: none;
+}
+
+#scenario-container-rs-depth {
   display: none;
 }
 
