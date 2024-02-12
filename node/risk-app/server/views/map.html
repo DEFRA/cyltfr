@@ -69,57 +69,36 @@
     <div class="defra-map-controls-bottom">
 
       <!-- open map on mobile -->
-      <button class="button-content" id="open-key-button" onclick="openKey()">
-        <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20">
-          <path d="M17.215,11.31L19,12.5L10,18.5L1,12.5L2.785,11.31L9.945,16.083C9.978,16.106 10.022,16.106 10.055,16.083L17.215,11.31Z"
-          style="fill:currentColor;"></path>
-          <path d="M10,1.5L1,7.5L10,13.5L19,7.5L10,1.5ZM10,3.88L15.43,7.5L10,11.12L4.57,7.5L10,3.88Z"
-          style="fill:currentColor;"></path>
-        </svg>
-        <span class="govuk-visually-hidden">open</span><span class="open-button-text">Key</span>
-      </button>
-
-      <!-- Copyright -->
-      <button class="defra-map-attribution" id="att-key-copyright-btn" tabindex="0" aria-controls="viewport"
-        onclick="toggleCopyrightInfo()">
+      <button class="defra-map__open-key" focusable="true" id="open-key" style="display: none">
         <div class="button-content">
-          <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20">
-            <path
-              d="M10,2.5C11.286,2.5 12.52,2.823 13.701,3.469C14.883,4.116 15.811,5.038 16.487,6.235C17.162,7.433 17.5,8.688 17.5,10C17.5,11.305 17.169,12.551 16.506,13.735C15.844,14.92 14.92,15.844 13.735,16.506C12.551,17.169 11.305,17.5 10,17.5C8.695,17.5 7.449,17.169 6.265,16.506C5.08,15.844 4.156,14.92 3.494,13.735C2.831,12.551 2.5,11.305 2.5,10C2.5,8.688 2.838,7.433 3.513,6.235C4.189,5.038 5.117,4.116 6.299,3.469C7.48,2.823 8.714,2.5 10,2.5ZM10,3.978C8.969,3.978 7.978,4.236 7.028,4.752C6.079,5.268 5.333,6.007 4.791,6.97C4.249,7.932 3.978,8.943 3.978,10C3.978,11.044 4.244,12.043 4.776,12.996C5.308,13.949 6.051,14.692 7.004,15.224C7.957,15.756 8.956,16.022 10,16.022C11.044,16.022 12.043,15.756 12.996,15.224C13.949,14.692 14.692,13.949 15.224,12.996C15.756,12.043 16.022,11.044 16.022,10C16.022,8.949 15.751,7.941 15.209,6.975C14.667,6.008 13.921,5.268 12.972,4.752C12.022,4.236 11.031,3.978 10,3.978ZM11.821,11.116L13.398,11.645C13.149,12.467 12.738,13.097 12.164,13.535C11.589,13.972 10.904,14.191 10.108,14.191C8.992,14.191 8.081,13.825 7.376,13.094C6.671,12.363 6.319,11.354 6.319,10.069C6.319,9.227 6.475,8.476 6.789,7.817C7.102,7.157 7.554,6.664 8.145,6.338C8.735,6.012 9.396,5.849 10.127,5.849C10.93,5.849 11.601,6.039 12.139,6.421C12.678,6.803 13.097,7.405 13.398,8.228L11.811,8.6C11.629,8.123 11.392,7.777 11.102,7.562C10.811,7.347 10.467,7.239 10.069,7.239C9.475,7.239 8.988,7.462 8.61,7.91C8.231,8.357 8.042,9.057 8.042,10.01C8.042,10.963 8.228,11.664 8.6,12.115C8.972,12.565 9.419,12.79 9.941,12.79C10.379,12.79 10.757,12.662 11.077,12.404C11.397,12.146 11.645,11.717 11.821,11.116Z"
-              style="fill:currentColor;"></path>
-          </svg>
-          <span class="govuk-visually-hidden" id="copyright-hidden-text">copyright information</span>
-        </div>
+        <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20"><path d="M17.215,11.31L19,12.5L10,18.5L1,12.5L2.785,11.31L9.945,16.083C9.978,16.106 10.022,16.106 10.055,16.083L17.215,11.31Z" style="fill:currentColor;"></path><path d="M10,1.5L1,7.5L10,13.5L19,7.5L10,1.5ZM10,3.88L15.43,7.5L10,11.12L4.57,7.5L10,3.88Z" style="fill:currentColor;"></path></svg>
+        <span class="govuk-visually-hidden">open</span><span class="open-button-text">Key</span>
+      </div>
       </button>
 
-      <div class="defra-map-info__container" id="copyright-info-container" style="display: none;">
+      <img id="os-logo" class="defra-map-os-logo" alt="Ordnance Survey logo" src="{{ assetPath }}/images/os-logo-maps.svg" width="90" height="24" style="pointer-events: auto; display: block;">
+
+      <div class="defra-map-info__container hide" id="copyright-info-container-top">
         <div id="infoContent" class="defra-map-info__content">
-          <div id="infoDescription">
-            <div class="govuk-!-padding-2">
-              <ul class="govuk-list">
-                <li class="govuk-!-font-size-14"><a class="govuk-link"
+          <div id="infoDescription" >
+                <p id="copyright-text"><a class="govuk-link"
                     href="https://check-long-term-flood-risk.service.gov.uk/os-terms" previewlistener="true">Contains OS
-                    data</a><br>© Crown copyright and database rights {{year}}</li>
-              </ul>
-            </div>
+                    data</a><span id="copyright-text-span"> © Crown copyright and database rights {{year}}</span>
+                </p>
           </div>
         </div>
-
-        <button class="defra-map-info__close" onclick="toggleCopyrightInfo()">
-          <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20">
-            <path d="M10,8.6L15.6,3L17,4.4L11.4,10L17,15.6L15.6,17L10,11.4L4.4,17L3,15.6L8.6,10L3,4.4L4.4,3L10,8.6Z"
-              style="fill:currentColor;stroke:currentColor;stroke-width:0.1px;"></path>
-          </svg>
-          <span class="govuk-visually-hidden">Close</span>
-        </button>
       </div>
 
+      <div class="scenarios">
+
       <!-- Depth scenarios -->
-      <div class="defra-map-scenarios horizontal-overflow scenario-float-right v6-width-fix"
+      <div class="defra-map-scenarios horizontal-overflow scenario-float-right v6-width-fix-depth"
         id="scenario-container-depth">
+
         <div class="defra-map-scenarios-v3_container" id="scenarios-controls-depth">
           <div class="govuk-radios govuk-radios--small" id="scenario-selection-depth" data-module="govuk-radios">
-
+            <!-- <i class="fa-solid fa-chevron-left left-btn" aria-hidden="true"></i>
+            <i class="fa-solid fa-chevron-right right-btn" aria-hidden="true"></i> -->
             <div class="govuk-radios__item" style="border-bottom: 7px solid rgb(29, 112, 184);">
               <input class="govuk-radios__input" id="risk-radio-high-depth" onchange="scenarioDisplayUpdate('depth')"
                 name="scenarios-depth" type="radio" value="{{maps.categories[1].maps[1].ref}}" checked="">
@@ -191,6 +170,18 @@
         </div>
       </div>
     </div>
+
+      <div class="defra-map-info__container" id="copyright-info-container-bottom">
+        <div id="infoContent" class="defra-map-info__content">
+          <div id="infoDescription" >
+                <p id="copyright-text"><a class="govuk-link"
+                    href="https://check-long-term-flood-risk.service.gov.uk/os-terms" previewlistener="true">Contains OS
+                    data</a><span id="copyright-text-span"> © Crown copyright and database rights {{year}}</span>
+                </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Key -->
@@ -198,12 +189,12 @@
     <div class="defra-map-key__container" id="defra-map-key__container">
       <h2 id="mapKeyLabel" class="defra-map-key__title">
         <span role="text">Key<span class="govuk-visually-hidden">for map features</span></span>
+        <button class="defra-map-key__close" id="close-key" onclick="closeKey()">
+          <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20"><path d="M10,8.6L15.6,3L17,4.4L11.4,10L17,15.6L15.6,17L10,11.4L4.4,17L3,15.6L8.6,10L3,4.4L4.4,3L10,8.6Z" fill="" style="fill:currentColor;stroke:currentColor;stroke-width:0.1px;"></path>
+          </svg>
+          <span class="govuk-visually-hidden">Close key</span>
+        </button>
       </h2>
-      <button class="defra-map-key__close" id="close-key" onclick="closeKey()">
-        <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20"><path d="M10,8.6L15.6,3L17,4.4L11.4,10L17,15.6L15.6,17L10,11.4L4.4,17L3,15.6L8.6,10L3,4.4L4.4,3L10,8.6Z" fill="" style="fill:currentColor;stroke:currentColor;stroke-width:0.1px;"></path>
-        </svg>
-        <span class="govuk-visually-hidden">Close key</span>
-      </button>
 
       <div class="defra-map-key__content">
         <div class="govuk-form-group" id="map-key__section">
@@ -505,6 +496,7 @@
               </div>
             </fieldset>
           </div>
+          
         </div>
       </div>
     </div>
