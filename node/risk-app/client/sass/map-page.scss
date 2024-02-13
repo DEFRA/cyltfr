@@ -1,7 +1,7 @@
 $govuk-assets-path: '/assets/';
 
-@import "node_modules/govuk-frontend/govuk/settings/all";
-@import "node_modules/govuk-frontend/govuk/helpers/all";
+@import "node_modules/govuk-frontend/dist/govuk/settings/all";
+@import "node_modules/govuk-frontend/dist/govuk/helpers/all";
 @import url(//fonts.googleapis.com/css?family=Source+Sans+Pro);
 
 $small-mobile-width: 400px;
@@ -563,7 +563,7 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   min-height: 0;
   margin-bottom: 0;
   padding-left: 34px;
-  float: left;
+  // float: left;
 }
 
 .defra-map-key__symbol-container-v3 {
@@ -692,23 +692,6 @@ svg:not(:root) {
     display: block;
     scroll-behavior: smooth;
   }
-  .search-container-v3 {
-    display: none !important;
-  }
-  .defra-map-scenarios-depth-v4.dragging {
-    scroll-behavior: unset;
-  }
-  .defra-map-scenarios-depth-v4::-webkit-scrollbar {
-    display: none;
-  }
-  .defra-map-scenarios-depth-v4 .govuk-radios {
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    background-color: white;
-    padding: 5px 0px 0px 0px;
-    width: 800px;
-  }
   .left-btn, .right-btn {
     position: absolute;
     font-size: 1.8em;
@@ -717,13 +700,6 @@ svg:not(:root) {
     color: #000000;
     z-index: 2;
   }
-  /* .circle-behind-btn {
-    height: 25px;
-    width: 25px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: block;
-  } */
   .left-btn {
     display: none;
     left: 0;
@@ -740,122 +716,11 @@ svg:not(:root) {
     padding-right: 30px;
   }
 }
-.defra-map-scenarios-depth-v4 {
-  width: 100%;
-  padding-top: 10px;
-  overflow-x: auto;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-}
-@media screen and (min-width: 938px) {
-  .defra-map-scenarios-depth-v4 {
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    max-width: 830px;
-  }
-}
-.defra-map-scenarios-depth-v4__container {
-  width: 100%;
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-}
-.defra-map-scenarios-depth-v4 .govuk-radios {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  background-color: white;
-  padding: 5px 0px 0px 0px;
-}
-.defra-map-scenarios-depth-v4 .govuk-radios__item {
-  flex: 1 1 auto;
-  font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-  font-size: 0.75rem;
-  line-height: 1.25;
-  font-size: 14px;
-  padding-bottom: 10px;
-  padding-left: 54px;
-  border-bottom: 7px solid transparent;
-}
-@media print {
-  .defra-map-scenarios-depth-v4 .govuk-radios__item {
-    font-family: sans-serif;
-  }
-}
-@media (min-width: 40.0625em) {
-  .defra-map-scenarios-depth-v4 .govuk-radios__item {
-    font-size: 0.875rem;
-    line-height: 1.4285714286;
-  }
-}
-@media print {
-  .defra-map-scenarios-depth-v4 .govuk-radios__item {
-    font-size: 12pt;
-    line-height: 1.2;
-  }
-}
-.defra-map-scenarios-depth-v4 .govuk-radios--small .govuk-radios__label:before {
-  margin-left: 15px;
-  margin-top: 8px;
-  height: 28px;
-  width: 28px;
-}
-.defra-map-scenarios-depth-v4 .govuk-radios--small .govuk-radios__label:after {
-  margin-left: 15px;
-  margin-top: 8px;
-  border-width: 7px;
-}
-.defra-map-scenarios-depth-v4 .govuk-radios__item input[type=radio]:checked + label strong {
-  text-decoration: none;
-}
-.defra-map-scenarios-depth-v4 .govuk-radios--small strong {
-  display: inline-block;
-  font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 700;
-  font-size: 0.875rem;
-  line-height: 1.1428571429;
-  font-size: 16px;
-  line-height: 1.31579;
-  margin-bottom: 2px;
-  pointer-events: none;
-  text-decoration: underline;
-}
-@media print {
-  .defra-map-scenarios-depth-v4 .govuk-radios--small strong {
-    font-family: sans-serif;
-  }
-}
-@media (min-width: 40.0625em) {
-  .defra-map-scenarios-depth-v4 .govuk-radios--small strong {
-    font-size: 1rem;
-    line-height: 1.25;
-  }
-}
-@media print {
-  .defra-map-scenarios-depth-v4 .govuk-radios--small strong {
-    font-size: 14pt;
-    line-height: 1.2;
-  }
-}
-.defra-map-scenarios-depth-v4 .risk-context-v3 {
-  display: block;
-  font-size: 14px;
-  padding-top: 2px;
-  padding-bottom: 0;
-}
 
 @media screen and (min-width: 821px) {
   .right-btn {
     display: none;
   }
-}
-.last-scenario {
-  margin-bottom: 7px;
 }
 
 .scenario-float-right {
@@ -912,7 +777,6 @@ svg:not(:root) {
   font-size: 0.75rem;
   line-height: 1.25;
   font-size: 14px;
-  padding-bottom: 10px;
   padding-left: 54px;
   border-bottom: 7px solid transparent;
 }
@@ -946,7 +810,7 @@ svg:not(:root) {
 }
 .govuk-radios--small .govuk-radios__label {
   margin-top: -2px;
-  padding: 13px 15px 13px 1px;
+  padding: 13px 15px 10px 1px;
   float: left;
   font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
 }
