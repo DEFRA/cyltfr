@@ -38,6 +38,19 @@
   .lower {
     top: calc(100vh - 110px);
   }
+
+  .arrows {
+    width: 20px;
+    height: 60px;
+    background-color: red;
+    position: absolute;
+    z-index: 20;
+    right: 30px;
+  }
+
+  #right-arrow-svg {
+    position: absolute;
+  }
 </style>
 {{ super() }}
 {% endblock %}
@@ -94,11 +107,27 @@
       <!-- Depth scenarios -->
       <div class="defra-map-scenarios horizontal-overflow scenario-float-right v6-width-fix-depth"
         id="scenario-container-depth">
+        <div class="arrows">
+
+          <svg preserveAspectRatio="x200Y200 meet"
+           height="80px" width="50px" version="1.1" id="right-arrow-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 222.40 222.40" xml:space="preserve" fill="#000000">
+          <g id="SVGRepo_bgCarrier" stroke-width="0">
+            <rect x="0" y="-100" width="222.40" height="350" rx="0" fill="#7ed0ec" strokewidth="0"></rect>
+          </g>
+          <g>
+          <svg viewBox="-50 -40 300 300">
+            <path style="fill:#010002;" d="M51.707,185.343c-2.741,0-5.493-1.044-7.593-3.149c-4.194-4.194-4.194-10.981,0-15.175 l74.352-74.347L44.114,18.32c-4.194-4.194-4.194-10.987,0-15.175c4.194-4.194,10.987-4.194,15.18,0l81.934,81.934 c4.194,4.194,4.194,10.987,0,15.175l-81.934,81.939C57.201,184.293,54.454,185.343,51.707,185.343z"></path>
+          </svg>
+          </g>
+          </svg>
+
+        </div>
 
         <div class="defra-map-scenarios-v3_container" id="scenarios-controls-depth">
           <div class="govuk-radios govuk-radios--small" id="scenario-selection-depth" data-module="govuk-radios">
-            <!-- <i class="fa-solid fa-chevron-left left-btn" aria-hidden="true"></i>
-            <i class="fa-solid fa-chevron-right right-btn" aria-hidden="true"></i> -->
+            <!-- <i class="left-btn" aria-hidden="true"> -->
+            <!-- </i> -->
+            <i class="right-btn" aria-hidden="true"></i>
             <div class="govuk-radios__item" style="border-bottom: 7px solid rgb(29, 112, 184);">
               <input class="govuk-radios__input" id="risk-radio-high-depth" onchange="scenarioDisplayUpdate('depth')"
                 name="scenarios-depth" type="radio" value="{{maps.categories[1].maps[1].ref}}" checked="">
@@ -125,6 +154,7 @@
                 <span class="risk-context-v3">0.1% chance each year</span>
               </label>
             </div>
+            <!-- <svg height="200px" width="200px" version="1.1" id="right-arrow-btn-container" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-18.53 -18.53 222.40 222.40" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"><rect x="-18.53" y="-18.53" width="222.40" height="222.40" rx="0" fill="#7ed0ec" strokewidth="0"></rect></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path style="fill:#010002;" d="M51.707,185.343c-2.741,0-5.493-1.044-7.593-3.149c-4.194-4.194-4.194-10.981,0-15.175 l74.352-74.347L44.114,18.32c-4.194-4.194-4.194-10.987,0-15.175c4.194-4.194,10.987-4.194,15.18,0l81.934,81.934 c4.194,4.194,4.194,10.987,0,15.175l-81.934,81.939C57.201,184.293,54.454,185.343,51.707,185.343z"></path> </g> </g> </g></svg> -->
           </div>
         </div>
       </div>
