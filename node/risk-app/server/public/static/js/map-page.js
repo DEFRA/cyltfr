@@ -94,6 +94,9 @@ function mapPage () {
   })
 }
 
+const rightArrow = document.getElementById('right-arrow-svg')
+const scenarioBarDepth = document.getElementById('scenario-selection-depth')
+
 const advancedToggle = document.getElementById('advanced-key-button')
 const keyDisplay = document.getElementById('map-key')
 const openKeyBtn = document.getElementById('open-key')
@@ -103,6 +106,10 @@ document.addEventListener('click', function (event) {
   if (keyDisplay.style.display === 'block' && !keyDisplay.contains(event.target)) {
     closeKey()
   }
+})
+
+rightArrow.addEventListener('click', () => {
+  scenarioBarDepth.scrollBy(120, 0)
 })
 
 openKeyBtn.addEventListener('click', function (event) {
