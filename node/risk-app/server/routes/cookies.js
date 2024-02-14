@@ -7,7 +7,6 @@ module.exports = [
     handler: async (request, h) => {
       const { query } = request
       const { updated } = query
-
       return h.view('cookies', { updated })
     },
     options: {

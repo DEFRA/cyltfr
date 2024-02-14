@@ -7,8 +7,15 @@ const redirectToHomeCounty = (h, postcode, region) => {
   return h.redirect(url)
 }
 
+const runningUnitTests = () => {
+  if (!require.main.filename.includes('risk-data')) {
+    return (process.mainModule.path.endsWith('/lab/bin'))
+  }
+}
+
 module.exports = {
   postcodeRegex,
   errorSummaryTitle,
-  redirectToHomeCounty
+  redirectToHomeCounty,
+  runningUnitTests
 }
