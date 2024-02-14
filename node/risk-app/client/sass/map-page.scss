@@ -10,29 +10,9 @@ $tablet-width: 768px;
 $desktop-width: 769px;
 $scenarioWidthCap1: 1090px;
 $scenarioWidthCap2: 920px;
+$scenarioArrowPoint: 640px;
 
 $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
-
-.arrow-background-gradient-100 {
-  stop-color: white;
-  stop-opacity: 100;
-}
-.arrow-background-gradient-75 {
-  stop-color: white;
-  stop-opacity: 75;
-}
-.arrow-background-gradient-50 {
-  stop-color: white;
-  stop-opacity: 50;
-}
-.arrow-background-gradient-25 {
-  stop-color: white;
-  stop-opacity: 25;
-}
-.arrow-background-gradient-0 {
-  stop-color: white;
-  stop-opacity: 0;
-}
 
 .defra-map-os-logo {
   position: absolute;
@@ -702,6 +682,65 @@ svg:not(:root) {
 #scenario-container-depth {
   display: none;
   align-self: flex-end;
+
+  .scenario-arrows {
+    display: none;
+  }
+
+  @media screen and (max-width: $scenarioArrowPoint) {
+    .scenario-arrows {
+      display: block;
+    }
+
+    .arrow-background-gradient-100 {
+      stop-color: white;
+      stop-opacity: 100;
+    }
+    .arrow-background-gradient-75 {
+      stop-color: white;
+      stop-opacity: 75;
+    }
+    .arrow-background-gradient-50 {
+      stop-color: white;
+      stop-opacity: 50;
+    }
+    .arrow-background-gradient-25 {
+      stop-color: white;
+      stop-opacity: 25;
+    }
+    .arrow-background-gradient-0 {
+      stop-color: white;
+      stop-opacity: 0;
+    }
+    
+    #right-scenario-arrow {
+      height: 60px;
+      position: absolute;
+      z-index: 20;
+      right: 49px;
+    
+      &:active {
+        background-color: red;
+      }
+    }
+    
+    #right-arrow-svg {
+      position: absolute;
+    }
+    
+    #left-scenario-arrow {
+      height: 60px;
+      position: absolute;
+      z-index: 20;
+      left: 0px;
+    }
+    
+    #left-arrow-svg {
+      transform-box: fill-box;
+      transform-origin: center;
+      transform: rotate(180deg);
+    }
+  }
 }
 
 #scenario-container-velocity {

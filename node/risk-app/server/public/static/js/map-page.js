@@ -95,6 +95,7 @@ function mapPage () {
 }
 
 const rightArrow = document.getElementById('right-arrow-svg')
+const leftArrow = document.getElementById('left-arrow-svg')
 const scenarioBarDepth = document.getElementById('scenario-selection-depth')
 
 const advancedToggle = document.getElementById('advanced-key-button')
@@ -110,6 +111,10 @@ document.addEventListener('click', function (event) {
 
 rightArrow.addEventListener('click', () => {
   scenarioBarDepth.scrollBy(120, 0)
+})
+
+leftArrow.addEventListener('click', () => {
+  scenarioBarDepth.scrollBy(-120, 0)
 })
 
 openKeyBtn.addEventListener('click', function (event) {
