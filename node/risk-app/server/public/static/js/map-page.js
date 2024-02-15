@@ -94,8 +94,8 @@ function mapPage () {
   })
 }
 
-const rightArrow = document.getElementById('right-arrow-svg')
-const leftArrow = document.getElementById('left-arrow-svg')
+const rightArrow = document.getElementById('right-scenario-arrow')
+const leftArrow = document.getElementById('left-scenario-arrow')
 const scenarioBarDepth = document.getElementById('scenario-selection-depth')
 
 const advancedToggle = document.getElementById('advanced-key-button')
@@ -109,12 +109,32 @@ document.addEventListener('click', function (event) {
   }
 })
 
-rightArrow.addEventListener('click', () => {
-  scenarioBarDepth.scrollBy(120, 0)
+scenarioBarDepth.addEventListener('scroll', function () {
+  const newScrollLeft = scenarioBarDepth.scrollLeft
+  const divWidth = scenarioBarDepth.offsetWidth
+  const scrollWidth = scenarioBarDepth.scrollWidth
+
+  if (newScrollLeft === scrollWidth - divWidth) {
+    rightArrow.classList.add('hide')
+  }
 })
 
-leftArrow.addEventListener('click', () => {
+rightArrow.addEventListener('click', function () {
+  scenarioBarDepth.scrollBy(120, 0)
+  if (scenarioBarDepth.scrollLeft !== 0) {
+    leftArrow.classList.remove('hide')
+  }
+})
+
+leftArrow.addEventListener('click', function () {
+  const currentScrollPosition = scenarioBarDepth.scrollLeft
   scenarioBarDepth.scrollBy(-120, 0)
+  if (scenarioBarDepth.scrollLeft === 0) {
+    leftArrow.classList.add('hide')
+  }
+  if (scenarioBarDepth.scrollLeft !== currentScrollPosition) {
+    rightArrow.classList.remove('hide')
+  }
 })
 
 openKeyBtn.addEventListener('click', function (event) {
