@@ -110,31 +110,30 @@ document.addEventListener('click', function (event) {
 })
 
 scenarioBarDepth.addEventListener('scroll', function () {
-  const newScrollLeft = scenarioBarDepth.scrollLeft
+  const currentScrollPosition = scenarioBarDepth.scrollLeft
   const divWidth = scenarioBarDepth.offsetWidth
   const scrollWidth = scenarioBarDepth.scrollWidth
 
-  if (newScrollLeft === scrollWidth - divWidth) {
+  if (currentScrollPosition === scrollWidth - divWidth) {
     rightArrow.classList.add('hide')
+  }
+  if (currentScrollPosition !== scrollWidth - divWidth) {
+    rightArrow.classList.remove('hide')
+  }
+  if (scenarioBarDepth.scrollLeft !== 0) {
+    leftArrow.classList.remove('hide')
+  }
+  if (scenarioBarDepth.scrollLeft === 0) {
+    leftArrow.classList.add('hide')
   }
 })
 
 rightArrow.addEventListener('click', function () {
   scenarioBarDepth.scrollBy(120, 0)
-  if (scenarioBarDepth.scrollLeft !== 0) {
-    leftArrow.classList.remove('hide')
-  }
 })
 
 leftArrow.addEventListener('click', function () {
-  const currentScrollPosition = scenarioBarDepth.scrollLeft
   scenarioBarDepth.scrollBy(-120, 0)
-  if (scenarioBarDepth.scrollLeft === 0) {
-    leftArrow.classList.add('hide')
-  }
-  if (scenarioBarDepth.scrollLeft !== currentScrollPosition) {
-    rightArrow.classList.remove('hide')
-  }
 })
 
 openKeyBtn.addEventListener('click', function (event) {
