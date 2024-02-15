@@ -130,7 +130,7 @@ function setCurrent (ref) {
   if (showFloodingCheckbox.checked) {
     maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1), selectedAddressCheckbox.checked)
   } else {
-    maps.showMap(undefined, selectedAddressCheckbox.checked)
+    maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1) + 'DONOTDISPLAY', selectedAddressCheckbox.checked)
   }
 }
 
