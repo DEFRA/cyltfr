@@ -129,11 +129,11 @@ scenarioBarDepth.addEventListener('scroll', function () {
 })
 
 rightArrow.addEventListener('click', function () {
-  scenarioBarDepth.scrollBy(120, 0)
+  scenarioBarDepth.scrollBy({ top: 0, left: 150, behavior: 'smooth' })
 })
 
 leftArrow.addEventListener('click', function () {
-  scenarioBarDepth.scrollBy(-120, 0)
+  scenarioBarDepth.scrollBy({ top: 0, left: -150, behavior: 'smooth' })
 })
 
 openKeyBtn.addEventListener('click', function (event) {
