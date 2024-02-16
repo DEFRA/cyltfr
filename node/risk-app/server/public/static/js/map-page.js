@@ -293,6 +293,10 @@ function handleRadioChange (selected, type) {
     if (window.innerWidth <= deviceScreenWidth && keyDisplay.style.display === 'block') {
       scenariosSelectorVelocity.style.display = 'none'
     }
+    if (window.innerWidth <= deviceScreenWidth) {
+      bottomCopyrightContainer.classList.add('hide')
+      topCopyrightContainer.classList.remove('hide')
+    }
     olZoom[0].style.top = 'calc(100% - 200px)'
   }
 
