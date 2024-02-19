@@ -313,25 +313,27 @@
                     info: {
                       type: 'string',
                       title: isHoldingComment ? 'Info' : 'Report',
-                      enum: isHoldingComment ? undefined : [
-                        'Flood report',
-                        'Non compliant mapping',
-                        'Proposed schemes',
-                        'Completed schemes',
-                        'Flood action plan',
-                        'Other info'
-                      ],
+                      enum: isHoldingComment
+                        ? undefined
+                        : [
+                            'Flood report',
+                            'Non compliant mapping',
+                            'Proposed schemes',
+                            'Completed schemes',
+                            'Flood action plan',
+                            'Other info'
+                          ],
                       maxLength: 150
                     },
                     start: {
                       type: 'string',
                       format: 'date',
-                      title: 'Valid from'
+                      title: 'Enter the start date'
                     },
                     end: {
                       type: 'string',
                       format: 'date',
-                      title: 'Valid to'
+                      title: 'Enter the end date'
                     }
                   }
                 }
@@ -373,7 +375,7 @@
                   : 'The report text will display to public users in this geometry.'
               },
               riskOverride: {
-                'ui:widget':  isHoldingComment ? 'radio': 'hidden',
+                'ui:widget': isHoldingComment ? 'radio' : 'hidden',
                 classNames: 'govuk-form-group riskOverride',
                 'ui:description': 'Choose if the risk for surface water flooding should be overriden for points inside this area'
               },
@@ -392,7 +394,6 @@
         }
       }
     }
-
     return commentSchema
   }
 
