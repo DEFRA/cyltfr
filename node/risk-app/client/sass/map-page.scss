@@ -716,6 +716,10 @@ svg:not(:root) {
   display: none;
   justify-content: flex-end;
 
+  .scenario-arrows {
+    display: none;
+  }
+
   @media screen and (max-width: $scenarioArrowPoint) {
     .scenario-arrows {
       display: block;

@@ -96,8 +96,8 @@ function mapPage () {
 
 const rightArrow = document.getElementsByClassName('right-scenario-arrow')
 const leftArrow = document.getElementsByClassName('left-scenario-arrow')
-const scenarioBarDepth = document.getElementById('scenario-selection-depth')
-const scenarioBarVelocity = document.getElementById('scenario-selection-velocity')
+const scenarioSelectionDepth = document.getElementById('scenario-selection-depth')
+const scenarioSelectionVelocity = document.getElementById('scenario-selection-velocity')
 
 const advancedToggle = document.getElementById('advanced-key-button')
 const keyDisplay = document.getElementById('map-key')
@@ -110,10 +110,10 @@ document.addEventListener('click', function (event) {
   }
 })
 
-scenarioBarDepth.addEventListener('scroll', function () {
-  const currentScrollPosition = scenarioBarDepth.scrollLeft
-  const divWidth = scenarioBarDepth.offsetWidth
-  const scrollWidth = scenarioBarDepth.scrollWidth
+scenarioSelectionDepth.addEventListener('scroll', function () {
+  const currentScrollPosition = scenarioSelectionDepth.scrollLeft
+  const divWidth = scenarioSelectionDepth.offsetWidth
+  const scrollWidth = scenarioSelectionDepth.scrollWidth
 
   if (currentScrollPosition === scrollWidth - divWidth) {
     rightArrow[0].classList.add('hide')
@@ -121,17 +121,17 @@ scenarioBarDepth.addEventListener('scroll', function () {
   if (currentScrollPosition !== scrollWidth - divWidth) {
     rightArrow[0].classList.remove('hide')
   }
-  if (scenarioBarDepth.scrollLeft !== 0) {
+  if (scenarioSelectionDepth.scrollLeft !== 0) {
     leftArrow[0].classList.remove('hide')
   }
-  if (scenarioBarDepth.scrollLeft === 0) {
+  if (scenarioSelectionDepth.scrollLeft === 0) {
     leftArrow[0].classList.add('hide')
   }
 })
-scenarioBarVelocity.addEventListener('scroll', function () {
-  const currentScrollPosition = scenarioBarVelocity.scrollLeft
-  const divWidth = scenarioBarVelocity.offsetWidth
-  const scrollWidth = scenarioBarVelocity.scrollWidth
+scenarioSelectionVelocity.addEventListener('scroll', function () {
+  const currentScrollPosition = scenarioSelectionVelocity.scrollLeft
+  const divWidth = scenarioSelectionVelocity.offsetWidth
+  const scrollWidth = scenarioSelectionVelocity.scrollWidth
 
   if (currentScrollPosition === scrollWidth - divWidth) {
     rightArrow[1].classList.add('hide')
@@ -139,25 +139,25 @@ scenarioBarVelocity.addEventListener('scroll', function () {
   if (currentScrollPosition !== scrollWidth - divWidth) {
     rightArrow[1].classList.remove('hide')
   }
-  if (scenarioBarVelocity.scrollLeft !== 0) {
+  if (scenarioSelectionVelocity.scrollLeft !== 0) {
     leftArrow[1].classList.remove('hide')
   }
-  if (scenarioBarVelocity.scrollLeft === 0) {
+  if (scenarioSelectionVelocity.scrollLeft === 0) {
     leftArrow[1].classList.add('hide')
   }
 })
 
 for (let i = 0; i < rightArrow.length; i++) {
   rightArrow[i].addEventListener('click', function () {
-    scenarioBarDepth.scrollBy({ top: 0, left: 150, behavior: 'smooth' })
-    scenarioBarVelocity.scrollBy({ top: 0, left: 150, behavior: 'smooth' })
+    scenarioSelectionDepth.scrollBy({ top: 0, left: 150, behavior: 'smooth' })
+    scenarioSelectionVelocity.scrollBy({ top: 0, left: 150, behavior: 'smooth' })
   })
 }
 
 for (let i = 0; i < leftArrow.length; i++) {
   leftArrow[i].addEventListener('click', function () {
-    scenarioBarDepth.scrollBy({ top: 0, left: -150, behavior: 'smooth' })
-    scenarioBarVelocity.scrollBy({ top: 0, left: -150, behavior: 'smooth' })
+    scenarioSelectionDepth.scrollBy({ top: 0, left: -150, behavior: 'smooth' })
+    scenarioSelectionVelocity.scrollBy({ top: 0, left: -150, behavior: 'smooth' })
   })
 }
 
@@ -191,7 +191,6 @@ function setCurrent (ref) {
 }
 
 function toggleAdvancedOptions () {
-  const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
   const advancedButtonText = document.getElementById('advanced-button-text')
   const advancedButtonImage = document.getElementById('advanced-button-image')
   const velocityContainer = document.getElementById('sw-velocity-section-container')
@@ -204,7 +203,7 @@ function toggleAdvancedOptions () {
 
   if (window.innerWidth <= deviceScreenWidth) {
     keyDisplay.style.display = 'block'
-    scenariosSelectorDepth.style.display = 'none'
+    scenarioSelectionDepth.style.display = 'none'
   }
 
   if (advancedButtonText.textContent.includes('Show')) {
@@ -250,13 +249,12 @@ function toggleAdvancedOptions () {
 }
 
 function openKey () {
-  const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
-  const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
+  const scenarioSelectionDepth = document.getElementById('scenario-selection-depth')
 
   keyDisplay.style.display = 'block'
   openKeyBtn.style.display = 'none'
-  scenariosSelectorDepth.style.display = 'none'
-  scenariosSelectorVelocity.style.display = 'none'
+  scenarioSelectionDepth.style.display = 'none'
+  scenarioSelectionVelocity.style.display = 'none'
 }
 
 function getInitialKeyOptions () {
@@ -312,8 +310,6 @@ function handleRadioChange (selected, type) {
   const velocityInfo = document.getElementById('sw-velocity-desc-container')
   const boundaryContainer = document.getElementById('boundary-container')
   const olZoom = document.getElementsByClassName('ol-zoom')
-  const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
-  const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
   const topCopyrightContainer = document.getElementById('copyright-info-container-top')
   const bottomCopyrightContainer = document.getElementById('copyright-info-container-bottom')
 
@@ -324,11 +320,11 @@ function handleRadioChange (selected, type) {
     depthInfo.style.display = 'block'
     velocityInfo.style.display = 'none'
     scenarioBarDepth.style.display = 'block'
-    scenariosSelectorDepth.style.display = 'flex'
+    scenarioSelectionDepth.style.display = 'flex'
     scenarioBarVelocity.style.display = 'none'
     if (window.innerWidth <= deviceScreenWidth) {
-      scenariosSelectorDepth.style.display = 'none'
-      scenariosSelectorVelocity.style.display = 'none'
+      scenarioSelectionDepth.style.display = 'none'
+      scenarioSelectionVelocity.style.display = 'none'
       bottomCopyrightContainer.classList.add('hide')
       topCopyrightContainer.classList.remove('hide')
     }
@@ -342,12 +338,12 @@ function handleRadioChange (selected, type) {
     velocityInfo.style.display = 'block'
     scenarioBarDepth.style.display = 'none'
     scenarioBarVelocity.style.display = 'block'
-    scenariosSelectorVelocity.style.display = 'flex'
+    scenarioSelectionVelocity.style.display = 'flex'
     topCopyrightContainer.classList.add('hide')
     bottomCopyrightContainer.classList.remove('hide')
-    scenariosSelectorVelocity.style.display = 'flex'
+    scenarioSelectionVelocity.style.display = 'flex'
     if (window.innerWidth <= deviceScreenWidth && keyDisplay.style.display === 'block') {
-      scenariosSelectorVelocity.style.display = 'none'
+      scenarioSelectionVelocity.style.display = 'none'
     }
     if (window.innerWidth <= deviceScreenWidth) {
       bottomCopyrightContainer.classList.add('hide')
@@ -457,8 +453,6 @@ function selectedOption () {
 function closeKey () {
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
-  const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
-  const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
   const depthRadio = document.getElementById('sw-depth-radio')
   const velocityRadio = document.getElementById('sw-velocity-radio')
   const osLogo = document.getElementById('os-logo')
@@ -470,14 +464,14 @@ function closeKey () {
 
   if (depthRadio.checked) {
     scenarioBarDepth.style.display = 'block'
-    scenariosSelectorDepth.style.display = 'flex'
-    scenariosSelectorDepth.style.top = null
+    scenarioSelectionDepth.style.display = 'flex'
+    scenarioSelectionDepth.style.top = null
   }
 
   if (velocityRadio.checked) {
     scenarioBarVelocity.style.display = 'block'
-    scenariosSelectorVelocity.style.display = 'flex'
-    scenariosSelectorVelocity.style.top = null
+    scenarioSelectionVelocity.style.display = 'flex'
+    scenarioSelectionVelocity.style.top = null
   }
 
   openKeyBtn.style.display = 'block'
@@ -493,8 +487,6 @@ function adjustPosition () {
   const zoomBtns = document.getElementsByClassName('ol-control')
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
-  const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
-  const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
   const depthRadio = document.getElementById('sw-depth-radio')
   const velocityRadio = document.getElementById('sw-velocity-radio')
   const osLogo = document.getElementById('os-logo')
@@ -513,8 +505,8 @@ function adjustPosition () {
   }
 
   if (keyDisplay.style.display === 'block' && window.innerWidth <= deviceScreenWidth) {
-    scenariosSelectorDepth.style.display = 'none'
-    scenariosSelectorVelocity.style.display = 'none'
+    scenarioSelectionDepth.style.display = 'none'
+    scenarioSelectionVelocity.style.display = 'none'
   } else if (keyDisplay.style.display === 'block' && window.innerWidth > deviceScreenWidth) {
     if (window.location.href.includes('map=RiversOrSea') ||
     window.location.href.includes('map=SurfaceWater') ||
@@ -523,18 +515,18 @@ function adjustPosition () {
     }
     if (depthRadio.checked) {
       scenarioBarDepth.style.display = 'block'
-      scenariosSelectorDepth.style.display = 'flex'
+      scenarioSelectionDepth.style.display = 'flex'
     }
     if (velocityRadio.checked) {
       scenarioBarVelocity.style.display = 'block'
-      scenariosSelectorVelocity.style.display = 'flex'
+      scenarioSelectionVelocity.style.display = 'flex'
     }
   }
 
   if (depthRadio.checked && window.innerWidth > deviceScreenWidth) {
-    scenariosSelectorDepth.style.display = 'flex'
+    scenarioSelectionDepth.style.display = 'flex'
   } else if (velocityRadio.checked && window.innerWidth > deviceScreenWidth) {
-    scenariosSelectorVelocity.style.display = 'flex'
+    scenarioSelectionVelocity.style.display = 'flex'
   }
 
   if ((scenarioBarDepth.style.display === 'block' ||
