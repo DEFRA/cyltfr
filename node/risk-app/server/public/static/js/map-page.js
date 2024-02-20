@@ -110,54 +110,42 @@ document.addEventListener('click', function (event) {
   }
 })
 
-scenarioSelectionDepth.addEventListener('scroll', function () {
-  const currentScrollPosition = scenarioSelectionDepth.scrollLeft
-  const divWidth = scenarioSelectionDepth.offsetWidth
-  const scrollWidth = scenarioSelectionDepth.scrollWidth
+document.addEventListener('DOMContentLoaded', function () {
+  const radios = document.querySelectorAll('input[type="radio"]')
 
-  if (currentScrollPosition === scrollWidth - divWidth) {
-    rightArrow[0].classList.add('hide')
-  }
-  if (currentScrollPosition !== scrollWidth - divWidth) {
-    rightArrow[0].classList.remove('hide')
-  }
-  if (scenarioSelectionDepth.scrollLeft !== 0) {
-    leftArrow[0].classList.remove('hide')
-  }
-  if (scenarioSelectionDepth.scrollLeft === 0) {
-    leftArrow[0].classList.add('hide')
-  }
-})
-scenarioSelectionVelocity.addEventListener('scroll', function () {
-  const currentScrollPosition = scenarioSelectionVelocity.scrollLeft
-  const divWidth = scenarioSelectionVelocity.offsetWidth
-  const scrollWidth = scenarioSelectionVelocity.scrollWidth
-
-  if (currentScrollPosition === scrollWidth - divWidth) {
-    rightArrow[1].classList.add('hide')
-  }
-  if (currentScrollPosition !== scrollWidth - divWidth) {
-    rightArrow[1].classList.remove('hide')
-  }
-  if (scenarioSelectionVelocity.scrollLeft !== 0) {
-    leftArrow[1].classList.remove('hide')
-  }
-  if (scenarioSelectionVelocity.scrollLeft === 0) {
-    leftArrow[1].classList.add('hide')
-  }
-})
-
-for (let i = 0; i < rightArrow.length; i++) {
-  rightArrow[i].addEventListener('click', function () {
-    scenarioSelectionDepth.scrollBy({ top: 0, left: 150, behavior: 'smooth' })
-    scenarioSelectionVelocity.scrollBy({ top: 0, left: 150, behavior: 'smooth' })
+  radios.forEach(function (radio) {
+    radio.addEventListener('change', function () {
+      const label = document.querySelector('label[for="' + this.id + '"]')
+      if (label) {
+        label.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+      }
+    })
   })
+})
+
+handleArrowClick(rightArrow, 150)
+handleArrowClick(leftArrow, -150)
+
+handleScroll(scenarioSelectionDepth, [rightArrow[0], leftArrow[0]])
+handleScroll(scenarioSelectionVelocity, [rightArrow[1], leftArrow[1]])
+
+function handleArrowClick (arrows, scrollDirection) {
+  for (let i = 0; i < arrows.length; i++) {
+    arrows[i].addEventListener('click', function () {
+      scenarioSelectionDepth.scrollBy({ top: 0, left: scrollDirection, behavior: 'smooth' })
+      scenarioSelectionVelocity.scrollBy({ top: 0, left: scrollDirection, behavior: 'smooth' })
+    })
+  }
 }
 
-for (let i = 0; i < leftArrow.length; i++) {
-  leftArrow[i].addEventListener('click', function () {
-    scenarioSelectionDepth.scrollBy({ top: 0, left: -150, behavior: 'smooth' })
-    scenarioSelectionVelocity.scrollBy({ top: 0, left: -150, behavior: 'smooth' })
+function handleScroll (scenarioBar, arrows) {
+  scenarioBar.addEventListener('scroll', function () {
+    const currentScrollPosition = scenarioBar.scrollLeft
+    const divWidth = scenarioBar.offsetWidth
+    const scrollWidth = scenarioBar.scrollWidth
+
+    arrows[0].classList.toggle('hide', currentScrollPosition === scrollWidth - divWidth)
+    arrows[1].classList.toggle('hide', currentScrollPosition === 0)
   })
 }
 
