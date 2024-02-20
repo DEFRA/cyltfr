@@ -12,6 +12,10 @@ module.exports = [
       request.yar.set('address', null)
       const error = request.query.error
 
+      if (Object.prototype.hasOwnProperty.call(request.query, 'password')) {
+        request.cookieAuth.Password = request.query.password
+      }
+
       if (error) {
         const errorMessage = 'This postcode does not appear to exist'
         const model = new PostcodeViewModel(null, errorMessage, config.sessionTimeout)

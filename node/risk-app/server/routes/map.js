@@ -7,6 +7,10 @@ module.exports = {
   path: '/map',
   options: {
     description: 'Get the map page',
+    auth: {
+      strategy: 'session',
+      mode: 'required'
+    },
     handler: (request, h) => {
       const { query } = request
       const { easting, northing } = query
