@@ -1,6 +1,7 @@
 const hapi = require('@hapi/hapi')
 const config = require('./config')
 const cache = require('./cache')
+const sndPassword = require('./services/snd-password')
 
 async function createServer () {
   // Create the hapi server
@@ -26,7 +27,6 @@ async function createServer () {
   await server.register(require('@hapi/h2o2'))
   await server.register(require('@hapi/inert'))
   await server.register(require('./plugins/views'))
-  await server.register(require('./plugins/router'))
   await server.register(require('./plugins/rate-limit'))
   await server.register(require('./plugins/error-pages'))
   await server.register(require('./plugins/full-url'))
@@ -34,6 +34,20 @@ async function createServer () {
   await server.register(require('./plugins/session'))
   await server.register(require('./plugins/cookies'))
   await server.register(require('blipp'))
+  await server.register(require('@hapi/cookie'))
+  sndPassword.server = server
+
+  server.auth.strategy('session', 'cookie', {
+    cookie: {
+      name: 'floodsandbox',
+      password: config.authcookie.cookiepassword,
+      isSecure: config.authcookie.secure
+    },
+    redirectTo: '/postcode?login=invalid',
+    validate: sndPassword.validate
+  })
+
+  await server.register(require('./plugins/router'))
 
   if (config.mockAddressService) {
     require('../mock/address')

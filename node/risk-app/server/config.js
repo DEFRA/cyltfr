@@ -45,7 +45,13 @@ const schema = joi.object().keys({
       host: joi.string().required(),
       proxy: joi.string().allow('')
     }
-  })
+  }),
+  authcookie: {
+    cookiepassword: joi.string().required(),
+    sitepassword: joi.string().required(),
+    secure: joi.boolean().default(true),
+    defaultdestination: joi.string().default('')
+  }
 })
 
 config.http_proxy = process.env.http_proxy

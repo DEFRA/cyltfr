@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+
+{% from "components/notification-banner/macro.njk" import govukNotificationBanner %}
+{% from "components/radios/macro.njk" import govukRadios %}
+{% from "components/input/macro.njk" import govukInput %}
+{% from "components/back-link/macro.njk" import govukBackLink %}
+{% from "components/table/macro.njk" import govukTable %}
+
+{% set pageTitle = "Login" %}
+
+{% block content %}
+  <main>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-l">Login</h1>
+        <p class="govuk-body">
+          Login here
+        </p>
+
+        <form method="POST">
+          {{ govukInput({
+            label: {
+              text: 'Enter the password'
+            },
+            id: 'password',
+            value: "",
+            name: 'password',
+            classes: 'govuk-input--width-10'
+          }) }}
+          {{ govukRadios({
+            classes: "govuk-radios--inline",
+            idPrefix: "generate",
+            name: "generate",
+            fieldset: {
+              legend: {
+                text: "Do you want to generate a new link?",
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            items: [
+              {
+                text: "Yes",
+                value: "true",
+                checked: "false"
+              },
+              {
+                text: "No",
+                value: "false",
+                checked: "true"
+              }
+            ]
+          }) }}
+          {{ govukInput(defaultdestination) }}
+          <button class="govuk-button" type="submit">Login</button>
+          {% if isAdmin %}
+          <p class="govuk-body">Login link
+            <a href="{{ linkurl }}" class="govuk-link">{{ linkurl }}</a>
+          </p>
+          <p class="govuk-body">Redirect on login to
+            <a href="{{ destinationurl }}" class="govuk-link">{{ destinationurl }}</a>
+          </p>
+            {% endif %}
+        </form>
+      </div>
+    </div>
+  </main>
+{% endblock %}
