@@ -10,6 +10,7 @@ $tablet-width: 768px;
 $desktop-width: 769px;
 $scenarioWidthCap1: 1090px;
 $scenarioWidthCap2: 920px;
+$scenarioArrowPoint: 640px;
 
 $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
 
@@ -675,11 +676,69 @@ svg:not(:root) {
 #scenario-container-depth {
   display: none;
   align-self: flex-end;
+
+  .scenario-arrows {
+    display: none;
+  }
+
+  @media screen and (max-width: $scenarioArrowPoint) {
+    .scenario-arrows {
+      display: block;
+    }
+    
+    .right-scenario-arrow {
+      height: 100px;
+      width: 60px;
+      position: absolute;
+      z-index: 20;
+      right: 0;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), white);
+    }
+    
+    .left-scenario-arrow {
+      height: 88px;
+      position: absolute;
+      z-index: 20;
+      left: 0px;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), white);
+      transform-origin: center;
+      transform: rotate(180deg);
+    }
+  }
 }
 
 #scenario-container-velocity {
   display: none;
   justify-content: flex-end;
+
+  .scenario-arrows {
+    display: none;
+  }
+
+  @media screen and (max-width: $scenarioArrowPoint) {
+    .scenario-arrows {
+      display: block;
+    }
+    
+    .right-scenario-arrow {
+      height: 100px;
+      width: 60px;
+      position: absolute;
+      z-index: 20;
+      right: 0;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), white);
+    }
+    
+    .left-scenario-arrow {
+      height: 88px;
+      position: absolute;
+      z-index: 20;
+      left: 0px;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), white);
+      transform-origin: center;
+      transform: rotate(180deg);
+    }
+  }
 }
 
 @media (max-width: 820px) {
@@ -688,28 +747,22 @@ svg:not(:root) {
     display: block;
     scroll-behavior: smooth;
   }
-  .left-btn, .right-btn {
-    position: absolute;
-    font-size: 1.8em;
-    padding: 30px;
-    cursor: pointer;
-    color: #000000;
-    z-index: 2;
+  .search-container-v3 {
+    display: none !important;
   }
-  .left-btn {
+  .defra-map-scenarios-depth-v4.dragging {
+    scroll-behavior: unset;
+  }
+  .defra-map-scenarios-depth-v4::-webkit-scrollbar {
     display: none;
-    left: 0;
-    background: linear-gradient(to left, transparent, #ffffff 50%);
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
-    padding-left: 30px;
   }
-  .right-btn {
-    right: 0;
-    background: linear-gradient(to right, transparent, #ffffff 50%);
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
-    padding-right: 30px;
+  .defra-map-scenarios-depth-v4 .govuk-radios {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    background-color: white;
+    padding: 5px 0px 0px 0px;
+    width: 800px;
   }
 }
 
