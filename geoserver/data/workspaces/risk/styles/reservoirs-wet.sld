@@ -23,27 +23,10 @@
           <Name>Rule 1</Name>
           <Title>Reservoirs wet</Title>
           <Abstract></Abstract>
-          <!-- like a linesymbolizer but with a fill too -->
           <PolygonSymbolizer>
-              <Fill>
-                <GraphicFill>
-                  <Graphic>
-                    <Mark>
-                      <WellKnownName>shape://slash</WellKnownName>
-                      <Stroke>
-                        <CssParameter name="stroke">#ff3232</CssParameter>
-                        <CssParameter name="stroke-width">2</CssParameter>
-                      </Stroke>
-                    </Mark>
-                    <Size>16</Size>
-                  </Graphic>
-                </GraphicFill>
-              </Fill>
-              <Stroke>
-                <CssParameter name="stroke">#ff3232</CssParameter>
-                <CssParameter name="stroke-width">0.4</CssParameter>
-                <CssParameter name="stroke-linejoin">bevel</CssParameter>
-              </Stroke>
+            <Fill>
+              <CssParameter name="fill">#C4E1FF</CssParameter>
+            </Fill>
           </PolygonSymbolizer>
         </Rule>
       </FeatureTypeStyle>
