@@ -3,21 +3,34 @@ const joi = require('joi')
 const { postcodeRegex, redirectToHomeCounty } = require('../helpers')
 const PostcodeViewModel = require('../models/postcode-view')
 const { captchaCheck } = require('../services/captchacheck')
+const sndPassword = require('../services/snd-password')
 
 module.exports = [
   {
     method: 'GET',
     path: '/postcode',
-    handler: (request, h) => {
+    handler: async (request, h) => {
       request.yar.set('address', null)
       const error = request.query.error
+      const loginerror = request.query.login
 
       if (Object.prototype.hasOwnProperty.call(request.query, 'password')) {
-        request.cookieAuth.Password = request.query.password
+        request.cookieAuth.clear()
+        request.cookieAuth.set({ Password: request.query.password })
+        const { isValid, pwConfigRedirectUrl } = await sndPassword.authenticate(request.query.password)
+        if (isValid) {
+          return h.redirect(pwConfigRedirectUrl)
+        }
       }
 
       if (error) {
         const errorMessage = 'This postcode does not appear to exist'
+        const model = new PostcodeViewModel(null, errorMessage, config.sessionTimeout)
+        return h.view('postcode', model)
+      }
+
+      if (loginerror) {
+        const errorMessage = 'You must be authenticated to view the map'
         const model = new PostcodeViewModel(null, errorMessage, config.sessionTimeout)
         return h.view('postcode', model)
       }

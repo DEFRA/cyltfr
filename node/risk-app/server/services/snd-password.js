@@ -26,8 +26,16 @@ const sndPassword = {
     }
     return { isValid: false }
   },
-  authenticate: async (request, session) => {
-
+  authenticate: async (password) => {
+    const pwValues = await sndPassword.PasswordValues()
+    if (pwValues.pwConfigPassword === password) {
+      return {
+        isValid: true,
+        pwConfigRedirectUrl: pwValues.pwConfigRedirectUrl
+      }
+    } else {
+      return { isValid: false }
+    }
   },
   randomHexString: async () => {
     return randomstring.generate({
@@ -36,24 +44,32 @@ const sndPassword = {
       charset: 'hex'
     })
   },
+  setVal: async (key, value) => {
+    if (value) {
+      return client.set(key, value)
+    } else {
+      return client.set(key, '')
+    }
+  },
   setNewPassword: async (newPassword, linkurl, redirecturl) => {
     try {
       await client.connect()
     } catch (error) {
     }
-    await client.set('pwConfigPassword', newPassword)
-    await client.set('pwconfigLinkUrl', linkurl)
-    await client.set('pwConfigRedirectUrl', redirecturl)
+    await Promise.all([sndPassword.setVal('pwConfigPassword', newPassword),
+      sndPassword.setVal('pwConfigLinkUrl', linkurl),
+      sndPassword.setVal('pwConfigRedirectUrl', redirecturl)])
   },
   PasswordValues: async () => {
     try {
       await client.connect()
     } catch (error) {
     }
-    const retval = {}
-    retval.pwConfigPassword = client.get('pwConfigPassword')
-    retval.pwconfigLinkUrl = client.get('pwconfigLinkUrl')
-    retval.pwConfigRedirectUrl = client.get('pwConfigRedirectUrl')
+    const retval = {};
+    [retval.pwConfigPassword, retval.pwConfigLinkUrl, retval.pwConfigRedirectUrl] = await Promise.all([
+      client.get('pwConfigPassword'),
+      client.get('pwConfigLinkUrl'),
+      client.get('pwConfigRedirectUrl')])
     return retval
   }
 }

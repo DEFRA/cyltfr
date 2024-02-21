@@ -8,13 +8,23 @@ module.exports = [
     path: '/login',
     handler: async (request, h) => {
       let PasswordValues = {}
-      if (request.cookieAuth.isAdmin) {
-        console.log('isAdmin')
+      if (request.yar.get('isAdmin') === true) {
         PasswordValues = await sndPassword.PasswordValues()
       }
+      const defaultdestination = {
+        label: {
+          text: 'Enter the redirect destination'
+        },
+        id: 'url',
+        value: config.authcookie.defaultdestination,
+        name: 'url',
+        classes: 'govuk-input--width-20'
+      }
       return h.view('login', {
-        isAdmin: request.cookieAuth.isAdmin,
-        linkurl: PasswordValues.pwconfigLinkUrl
+        isAdmin: request.yar.get('isAdmin'),
+        linkurl: PasswordValues.pwConfigLinkUrl ? PasswordValues.pwConfigLinkUrl : '',
+        defaultdestination,
+        destinationurl: PasswordValues.pwConfigRedirectUrl ? PasswordValues.pwConfigRedirectUrl : ''
       })
     },
     options: {
@@ -36,22 +46,22 @@ module.exports = [
     handler: async (request, h) => {
       const { password, generate, url } = request.payload
       let isAdmin = false
-      let destination = '/postcode'
+      const destination = '/login'
       if ((password) && (password === config.authcookie.sitepassword)) {
         isAdmin = true
+        request.yar.set('isAdmin', true)
         request.cookieAuth.set({ isAdmin: true })
-        destination = '/login'
       } else if (password) {
+        request.yar.set('isAdmin', '')
         request.cookieAuth.clear()
       }
-      if (request.cookieAuth.isAdmin) { isAdmin = true }
+      if (request.yar.get('isAdmin')) { isAdmin = true }
       if (isAdmin) {
         if (generate) {
           const randompass = await sndPassword.randomHexString()
           const linkurl = 'http' + (config.authcookie.secure ? 's' : '') + '://' + request.info.host + '/postcode?password=' + randompass
           sndPassword.setNewPassword(randompass, linkurl, url)
         }
-        destination = '/login'
       }
       return h.redirect(destination)
     },
@@ -60,16 +70,16 @@ module.exports = [
       auth: {
         strategy: 'session',
         mode: 'try'
-      // },
-      // validate: {
-      //   payload: joi.object({
-      //     password: joi.string().default(''),
-      //     generate: joi.boolean().default(false),
-      //     url: joi.string().default('')
-      //   }),
-      //   failAction: async (request, h, err) => {
-      //     return h.view('login').takeover()
-      //   }
+        // },
+        // validate: {
+        //   payload: joi.object({
+        //     password: joi.string().default(''),
+        //     generate: joi.boolean().default(false),
+        //     url: joi.string().default('')
+        //   }),
+        //   failAction: async (request, h, err) => {
+        //     return h.view('login').takeover()
+        //   }
       }
     }
   }

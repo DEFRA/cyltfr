@@ -43,7 +43,7 @@ async function createServer () {
       password: config.authcookie.cookiepassword,
       isSecure: config.authcookie.secure
     },
-    redirectTo: '/login',
+    redirectTo: '/postcode?login=invalid',
     validate: sndPassword.validate
   })
 
