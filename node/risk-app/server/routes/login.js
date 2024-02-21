@@ -70,16 +70,6 @@ module.exports = [
       auth: {
         strategy: 'session',
         mode: 'try'
-        // },
-        // validate: {
-        //   payload: joi.object({
-        //     password: joi.string().default(''),
-        //     generate: joi.boolean().default(false),
-        //     url: joi.string().default('')
-        //   }),
-        //   failAction: async (request, h, err) => {
-        //     return h.view('login').takeover()
-        //   }
       }
     }
   }
