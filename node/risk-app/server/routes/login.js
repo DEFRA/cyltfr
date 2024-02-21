@@ -57,7 +57,7 @@ module.exports = [
       }
       if (request.yar.get('isAdmin')) { isAdmin = true }
       if (isAdmin) {
-        if (generate) {
+        if (generate === 'true') {
           const randompass = await sndPassword.randomHexString()
           const linkurl = 'http' + (config.authcookie.secure ? 's' : '') + '://' + request.info.host + '/postcode?password=' + randompass
           sndPassword.setNewPassword(randompass, linkurl, url)
