@@ -174,7 +174,7 @@ function setCurrent (ref) {
   if (showFloodingCheckbox.checked) {
     maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1), selectedAddressCheckbox.checked)
   } else {
-    maps.showMap(undefined, selectedAddressCheckbox.checked)
+    maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1) + 'DONOTDISPLAY', selectedAddressCheckbox.checked)
   }
 }
 
@@ -332,6 +332,10 @@ function handleRadioChange (selected, type) {
     scenarioSelectionVelocity.style.display = 'flex'
     if (window.innerWidth <= deviceScreenWidth && keyDisplay.style.display === 'block') {
       scenarioSelectionVelocity.style.display = 'none'
+    }
+    if (window.innerWidth <= deviceScreenWidth) {
+      bottomCopyrightContainer.classList.add('hide')
+      topCopyrightContainer.classList.remove('hide')
     }
     if (window.innerWidth <= deviceScreenWidth) {
       bottomCopyrightContainer.classList.add('hide')

@@ -250,7 +250,7 @@ function showMap (layerReference, hasLocation) {
       if (className === 'pointMarker' && hasLocation) {
         layer.setVisible(true)
         layer.setZIndex(1)
-      } else if (className === 'radiusMarker' && layerReference.substr(7, 2) === 'SW') {
+      } else if (className === 'radiusMarker' && hasLocation && layerReference.substr(7, 2) === 'SW') {
         layer.setVisible(true)
         layer.setZIndex(0)
       } else {
