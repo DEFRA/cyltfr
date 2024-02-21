@@ -16,9 +16,9 @@ module.exports = [
 
       if (Object.prototype.hasOwnProperty.call(request.query, 'password')) {
         request.cookieAuth.clear()
-        request.cookieAuth.set({ Password: request.query.password })
         const { isValid, pwConfigRedirectUrl } = await sndPassword.authenticate(request.query.password)
         if (isValid) {
+          request.cookieAuth.set({ Password: request.query.password })
           return h.redirect(pwConfigRedirectUrl)
         }
       }
