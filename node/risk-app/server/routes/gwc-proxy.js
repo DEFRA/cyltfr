@@ -14,6 +14,10 @@ module.exports = {
     }
   },
   options: {
-    description: 'Get GWC map proxy'
+    description: 'Get GWC map proxy',
+    auth: {
+      strategy: 'session',
+      mode: 'required'
+    }
   }
 }
