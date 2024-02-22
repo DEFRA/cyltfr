@@ -221,15 +221,24 @@
   }
 
   const inputWidget = function (props) {
+    const [isModified, setIsModified] = React.useState(false)
+
+    const handleInputChange = (event) => {
+      setIsModified(true)
+      props.onChange(event.target.value)
+    }
+
     const p = {
       type: props.type || 'text',
       id: props.id,
       className: 'govuk-input govuk-input--width-20',
-      value: props.value,
+      placeholder: !isModified && props.type === 'date' ? 'dd/mm/yyyy' : null,
+      value: props.type === 'date' && (isModified || !props.value) ? props.value : '',
       autoComplete: 'off',
+      formatPattern: props.type === 'date' ? 'DD/MM/YYYY' : '',
       required: props.required,
       maxLength: props.schema.maxLength,
-      onChange: function (event) { props.onChange(event.target.value) }
+      onChange: props.type === 'date' ? handleInputChange : function (event) { props.onChange(event.target.value) }
     }
 
     return React.createElement('input', p)
@@ -382,12 +391,12 @@
               start: {
                 'ui:widget': dateWidget,
                 classNames: 'govuk-form-group start',
-                'ui:description': 'For your reference and will not be displayed to public users. Your comments will not be uploaded automatically on this date. Your comments will go live once they’re approved. If a date picker is not available, use YYYY-MM-DD.'
+                'ui:description': 'Select the date the holding comment is valid from. Your holding comment will not go live automatically - it’ll be uploaded after it’s approved. For internal use only - the date will not be displayed to public users.'
               },
               end: {
                 'ui:widget': dateWidget,
                 classNames: 'govuk-form-group end',
-                'ui:description': 'For your reference and will not be displayed to public users. Your comments will not be removed automatically. It is your responsibility to remove them on the ‘valid to’ date. If a date picker is not available, use YYYY-MM-DD.'
+                'ui:description': 'Select the date the holding comment is valid to. You must remove your holding comment on the end date - it will not be removed automatically. For internal use only - the date will not be displayed to public users.'
               }
             }
           }
