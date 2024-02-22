@@ -41,7 +41,8 @@ async function createServer () {
     cookie: {
       name: 'floodsandbox',
       password: config.authcookie.cookiepassword,
-      isSecure: config.authcookie.secure
+      isSecure: config.authcookie.secure,
+      isSameSite: 'Lax'
     },
     redirectTo: '/postcode?login=invalid',
     validate: sndPassword.validate
