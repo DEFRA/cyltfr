@@ -95,11 +95,21 @@
       <div class="defra-map-scenarios horizontal-overflow scenario-float-right v6-width-fix-depth"
         id="scenario-container-depth">
 
+        <div class="scenario-arrows left-scenario-arrow hide">
+          <svg width="60" height="100">
+            <use xlink:href="{{ assetPath }}/images/left-chevron.svg#arrow"/>
+          </svg>
+        </div>
+
+        <div class="scenario-arrows right-scenario-arrow">
+          <svg width="60" height="100">
+            <use xlink:href="{{ assetPath }}/images/right-chevron.svg#arrow"/>
+          </svg>
+        </div>
+
         <div class="defra-map-scenarios-v3_container" id="scenarios-controls-depth">
           <div class="govuk-radios govuk-radios--small" id="scenario-selection-depth" data-module="govuk-radios">
-            <!-- <i class="fa-solid fa-chevron-left left-btn" aria-hidden="true"></i>
-            <i class="fa-solid fa-chevron-right right-btn" aria-hidden="true"></i> -->
-            <div class="govuk-radios__item" style="border-bottom: 7px solid rgb(29, 112, 184);">
+            <div id="high-risk-depth" class="govuk-radios__item" style="border-bottom: 7px solid rgb(29, 112, 184);">
               <input class="govuk-radios__input" id="risk-radio-high-depth" onchange="scenarioDisplayUpdate('depth')"
                 name="scenarios-depth" type="radio" value="{{maps.categories[1].maps[1].ref}}" checked="">
               <label class="govuk-label govuk-radios__label" for="risk-radio-high-depth">
@@ -116,7 +126,7 @@
                 <span class="risk-context-v3">1% chance each year</span>
               </label>
             </div>
-            <div class="govuk-radios__item">
+            <div id="low-risk-depth" class="govuk-radios__item" id="low-depth-label">
               <input class="govuk-radios__input" id="risk-radio-low-depth" onchange="scenarioDisplayUpdate('depth')"
                 name="scenarios-depth" type="radio" value="{{maps.categories[1].maps[5].ref}}">
               <label class="govuk-label govuk-radios__label" for="risk-radio-low-depth">
@@ -132,6 +142,19 @@
       <!-- Velocity scenarios -->
       <div class="defra-map-scenarios horizontal-overflow scenario-float-right v6-width-fix"
         id="scenario-container-velocity">
+
+        <div class="scenario-arrows left-scenario-arrow hide">
+          <svg width="60" height="100">
+            <use xlink:href="{{ assetPath }}/images/left-chevron.svg#arrow"/>
+          </svg>
+        </div>
+
+        <div class="scenario-arrows right-scenario-arrow">
+          <svg width="60" height="100">
+            <use xlink:href="{{ assetPath }}/images/right-chevron.svg#arrow"/>
+          </svg>
+        </div>
+        
         <div class="defra-map-scenarios-v3_container" id="scenarios-controls-velocity">
           <div class="govuk-radios govuk-radios--small" id="scenario-selection-velocity" data-module="govuk-radios">
 
