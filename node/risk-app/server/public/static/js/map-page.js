@@ -111,7 +111,7 @@ document.addEventListener('click', function (event) {
 })
 
 document.addEventListener('DOMContentLoaded', function () {
-  const radios = document.querySelectorAll('input[type="radio"]')
+  const radios = document.querySelectorAll('input[type="radio"].scenario-radio-button')
 
   radios.forEach(function (radio) {
     radio.addEventListener('change', function () {
