@@ -1,5 +1,5 @@
-FROM node:16-alpine AS node
-FROM osgeo/gdal:alpine-small-latest
+FROM node:18-alpine AS node
+FROM ghcr.io/osgeo/gdal:alpine-small-latest
 COPY --from=node /usr/lib /usr/lib
 COPY --from=node /usr/local/share /usr/local/share
 COPY --from=node /usr/local/lib /usr/local/lib
@@ -27,7 +27,7 @@ COPY ./client ./client
 
 COPY ./index.js .
 
-RUN npm install --production
+RUN npm install --omit=dev
 
 RUN npm run build
 
