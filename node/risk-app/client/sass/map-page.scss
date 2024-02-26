@@ -233,7 +233,7 @@ $scenarioWidthCap: 980px;
     @media screen and (min-width: $desktop-width) {
       top: calc(100vh - 110px);
       right: 310px !important;
-      display: block !important;
+      display: block;
     }
   }
 

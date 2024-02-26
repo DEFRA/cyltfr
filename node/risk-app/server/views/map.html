@@ -81,7 +81,7 @@
 
       <!-- Copyright -->
       <button class="defra-map-attribution" id="att-key-copyright-btn" tabindex="0" aria-controls="viewport"
-        onclick="toggleCopyrightInfo()">
+        onclick="toggleCopyrightInfo()" style="display: none;">
         <div class="button-content">
           <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20">
             <path
@@ -202,7 +202,7 @@
 
       <!-- Velocity scenarios -->
       <div class="defra-map-scenarios horizontal-overflow scenario-float-right v6-width-fix"
-        id="scenario-container-velocity">
+        id="scenario-container-velocity" style="display: none;">
         <div class="defra-map-scenarios-v3_container" id="scenarios-controls-velocity">
           <div class="govuk-radios govuk-radios--small" id="scenario-selection-velocity" data-module="govuk-radios">
 
@@ -323,7 +323,7 @@
                   </label>
                 </div>
 
-                <!-- <div class="govuk-radios__item">
+                <div class="govuk-radios__item" style="display: none;">
                   <input class="govuk-radios__input" id="sw-depth-radio" onchange="handleRadioChange('depth')"
                     value="{{maps.categories[4].maps[1].ref}}" name="measurements"
                     title="Surface water flood risk: water depth in a high risk scenario" type="radio">
@@ -377,7 +377,7 @@
 
                     </div>
                   </label>
-                </div> -->
+                </div>
 
                 <div class="govuk-radios__item showing advanced-map-option" id="sw-velocity-section-container">
                   <input class="govuk-radios__input" id="sw-velocity-radio" onchange="handleRadioChange('velocity')"
@@ -489,7 +489,7 @@
                   </label>
                 </div>
 
-                <!-- <div class="govuk-radios__item">
+                <div class="govuk-radios__item" style="display: none;">
                   <input class="govuk-radios__input" id="rs-depth-radio" onchange="handleRadioChange('rsdepth')"
                     value="{{maps.categories[3].maps[1].ref}}" name="measurements"
                     title="Rivers and seas flood risk: water depth in a high risk scenario" type="radio">
@@ -542,7 +542,7 @@
                       </span>
                     </div>
                   </label>
-                </div> -->
+                </div>
               </div>
             </fieldset>
           </div>
