@@ -4,7 +4,7 @@
   "description": "LTFRI Admin Web App",
   "main": "index.js",
   "engines": {
-    "node": ">16.14.0"
+    "node": ">18.1.0"
   },
   "scripts": {
     "build:css": "bin/build-css",
@@ -21,29 +21,29 @@
   "author": "defra.gov.uk",
   "license": "ISC",
   "dependencies": {
-    "@hapi/bell": "12.3.0",
-    "@hapi/boom": "9.1.4",
-    "@hapi/cookie": "11.0.2",
-    "@hapi/hapi": "20.2.1",
-    "@hapi/inert": "6.0.5",
-    "@hapi/vision": "6.1.0",
+    "@hapi/bell": "^13.0.0",
+    "@hapi/boom": "^10.0.0",
+    "@hapi/cookie": "^12.0.0",
+    "@hapi/hapi": "^21.0.0",
+    "@hapi/inert": "^7.0.0",
+    "@hapi/vision": "^7.0.0",
     "aws-sdk": "2.1074.0",
     "blipp": "4.0.2",
     "dotenv": "^16.1.4",
-    "govuk-frontend": "4.0.1",
-    "hapi-pino": "9.1.2",
+    "govuk-frontend": "^4.0.1",
+    "hapi-pino": "^12.0.0",
     "joi": "^17.6.0",
     "jsonexport": "3.2.0",
-    "moment-timezone": "0.5.40",
-    "node-sass": "7.0.3",
-    "node-schedule": "2.1.0",
-    "nunjucks": "3.2.3",
+    "moment-timezone": "^0.5.40",
+    "node-sass": "^9.0.0",
+    "node-schedule": "^2.1.0",
+    "nunjucks": "^3.2.3",
     "ogr2ogr": "3.1.1"
   },
   "devDependencies": {
-    "@hapi/code": "8.0.7",
-    "@hapi/lab": "24.5.1",
-    "standard": "16.0.4"
+    "@hapi/code": "^9.0.0",
+    "@hapi/lab": "^25.0.0",
+    "standard": "^17.0.0"
   },
   "standard": {
     "ignore": [
