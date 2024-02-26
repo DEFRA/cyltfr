@@ -95,12 +95,22 @@
       <div class="defra-map-scenarios horizontal-overflow scenario-float-right v6-width-fix-depth"
         id="scenario-container-depth">
 
+        <div class="scenario-arrows left-scenario-arrow hide">
+          <svg width="60" height="100">
+            <use xlink:href="{{ assetPath }}/images/left-chevron.svg#arrow"/>
+          </svg>
+        </div>
+
+        <div class="scenario-arrows right-scenario-arrow">
+          <svg width="60" height="100">
+            <use xlink:href="{{ assetPath }}/images/right-chevron.svg#arrow"/>
+          </svg>
+        </div>
+
         <div class="defra-map-scenarios-v3_container" id="scenarios-controls-depth">
           <div class="govuk-radios govuk-radios--small" id="scenario-selection-depth" data-module="govuk-radios">
-            <!-- <i class="fa-solid fa-chevron-left left-btn" aria-hidden="true"></i>
-            <i class="fa-solid fa-chevron-right right-btn" aria-hidden="true"></i> -->
-            <div class="govuk-radios__item" style="border-bottom: 7px solid rgb(29, 112, 184);">
-              <input class="govuk-radios__input" id="risk-radio-high-depth" onchange="scenarioDisplayUpdate('depth')"
+            <div id="high-risk-depth" class="govuk-radios__item" style="border-bottom: 7px solid rgb(29, 112, 184);">
+              <input class="govuk-radios__input scenario-radio-button" id="risk-radio-high-depth" onchange="scenarioDisplayUpdate('depth')"
                 name="scenarios-depth" type="radio" value="{{maps.categories[1].maps[1].ref}}" checked="">
               <label class="govuk-label govuk-radios__label" for="risk-radio-high-depth">
                 <strong class="scenario-heading">High risk</strong>
@@ -108,7 +118,7 @@
               </label>
             </div>
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="risk-radio-medium-depth" onchange="scenarioDisplayUpdate('depth')"
+              <input class="govuk-radios__input scenario-radio-button" id="risk-radio-medium-depth" onchange="scenarioDisplayUpdate('depth')"
                 name="scenarios-depth" type="radio" value="{{maps.categories[1].maps[3].ref}}">
               <label class="govuk-label govuk-radios__label" for="risk-radio-medium-depth">
                 <strong class="scenario-heading"
@@ -116,8 +126,8 @@
                 <span class="risk-context-v3">1% chance each year</span>
               </label>
             </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="risk-radio-low-depth" onchange="scenarioDisplayUpdate('depth')"
+            <div id="low-risk-depth" class="govuk-radios__item" id="low-depth-label">
+              <input class="govuk-radios__input scenario-radio-button" id="risk-radio-low-depth" onchange="scenarioDisplayUpdate('depth')"
                 name="scenarios-depth" type="radio" value="{{maps.categories[1].maps[5].ref}}">
               <label class="govuk-label govuk-radios__label" for="risk-radio-low-depth">
                 <strong class="scenario-heading" style="text-decoration: underline; text-decoration-thickness: 2px;">Low
@@ -132,10 +142,23 @@
       <!-- Velocity scenarios -->
       <div class="defra-map-scenarios horizontal-overflow scenario-float-right v6-width-fix"
         id="scenario-container-velocity">
+
+        <div class="scenario-arrows left-scenario-arrow hide">
+          <svg width="60" height="100">
+            <use xlink:href="{{ assetPath }}/images/left-chevron.svg#arrow"/>
+          </svg>
+        </div>
+
+        <div class="scenario-arrows right-scenario-arrow">
+          <svg width="60" height="100">
+            <use xlink:href="{{ assetPath }}/images/right-chevron.svg#arrow"/>
+          </svg>
+        </div>
+        
         <div class="defra-map-scenarios-v3_container" id="scenarios-controls-velocity">
           <div class="govuk-radios govuk-radios--small" id="scenario-selection-velocity" data-module="govuk-radios">
 
-            <div class="govuk-radios__item" style="border-bottom: 7px solid rgb(29, 112, 184);">
+            <div class="govuk-radios__item scenario-radio-button" style="border-bottom: 7px solid rgb(29, 112, 184);">
               <input class="govuk-radios__input" id="risk-radio-high-velocity"
                 onchange="scenarioDisplayUpdate('velocity')" name="scenarios-velocity" type="radio"
                 value="{{maps.categories[1].maps[2].ref}}" checked="">
@@ -145,7 +168,7 @@
               </label>
             </div>
 
-            <div class="govuk-radios__item">
+            <div class="govuk-radios__item scenario-radio-button">
               <input class="govuk-radios__input" id="risk-radio-medium-velocity"
                 onchange="scenarioDisplayUpdate('velocity')" name="scenarios-velocity" type="radio"
                 value="{{maps.categories[1].maps[4].ref}}">
@@ -156,7 +179,7 @@
               </label>
             </div>
 
-            <div class="govuk-radios__item">
+            <div class="govuk-radios__item scenario-radio-button">
               <input class="govuk-radios__input" id="risk-radio-low-velocity"
                 onchange="scenarioDisplayUpdate('velocity')" name="scenarios-velocity" type="radio"
                 value="{{maps.categories[1].maps[6].ref}}">
@@ -503,7 +526,7 @@
   </div>
 
   <div id="progress"></div>
-  <div id="map"></div>
+  <div id="map" tabindex="0" aria-label="Use your arrows to navigate the map. To zoom in and out cycle back to the zoom buttons."></div>
 </div>
 {% endblock %}
 
