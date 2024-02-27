@@ -45,5 +45,12 @@ module.exports = [
     options: {
       description: 'Get public assets'
     }
+  },
+  {
+    method: 'GET',
+    path: '/node_modules/ol/ol.css',
+    handler: {
+      file: '/node_modules/ol/ol.css'
+    }
   }
 ]
