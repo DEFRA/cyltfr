@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   radios.forEach(function (radio) {
     radio.addEventListener('change', function () {
-      const label = document.querySelector('label[for="' + this.id + '"]')
+      const label = document.querySelector(`label[for="${this.id}"]`)
       if (label) {
         label.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
       }
@@ -130,8 +130,8 @@ handleScroll(scenarioSelectionDepth, [rightArrow[0], leftArrow[0]])
 handleScroll(scenarioSelectionVelocity, [rightArrow[1], leftArrow[1]])
 
 function handleArrowClick (arrows, scrollDirection) {
-  for (let i = 0; i < arrows.length; i++) {
-    arrows[i].addEventListener('click', function () {
+  for (const arrow of arrows) {
+    arrow.addEventListener('click', function () {
       scenarioSelectionDepth.scrollBy({ top: 0, left: scrollDirection, behavior: 'smooth' })
       scenarioSelectionVelocity.scrollBy({ top: 0, left: scrollDirection, behavior: 'smooth' })
     })
