@@ -16,16 +16,17 @@
 {% block body %}
   <div class="govuk-body">
     {{ govukTable(table) }}
-    <a style="float: right" href="/comments.csv" download>Download all comments</a>
-    <!-- <pre>{{comments | dump(2) | safe}}</pre> -->
-    <p>
-      <a href="/comment/create/holding" class="govuk-button">Create PSO comment</a>
-      For PSO users wanting to add local information
-    </p>
-    <p>
-      <a href="/comment/create/llfa" class="govuk-button">Create LLFA comment</a>
-      For national teams adding non-modelled surface water information
-    </p>
+    <h3 class="govuk-heading-s govuk-!-margin-bottom-2">PSO users (area teams)</h3>
+    <ul class="govuk-list govuk-list--spaced">
+      <li>Select this option to add local information</li>
+      <li><a class="govuk-button govuk-!-margin-bottom-3" href="/comment/create/holding">Create holding comment</a></li>
+    </ul>
+    <h3 class="govuk-heading-s govuk-!-margin-bottom-2">National teams</h3>
+    <ul class="govuk-list govuk-list--spaced">
+      <li>Select this option to add non-modelled surface water information</li>
+      <li><a class="govuk-button" href="/comment/create/llfa" >Create LLFA comment</a></li>
+    </ul>
+    <p class="govuk-body"><a href="/comments.csv" download>Download all comments</a></p>
   </div>
 
   <script>
