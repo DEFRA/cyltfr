@@ -103,6 +103,8 @@ const advancedToggle = document.getElementById('advanced-key-button')
 const keyDisplay = document.getElementById('map-key')
 const openKeyBtn = document.getElementById('open-key')
 const deviceScreenWidth = 768
+const rightMove = 150
+const leftMove = -150
 
 document.addEventListener('click', function (event) {
   if (keyDisplay.style.display === 'block' && !keyDisplay.contains(event.target)) {
@@ -123,8 +125,8 @@ document.addEventListener('DOMContentLoaded', function () {
   })
 })
 
-handleArrowClick(rightArrow, 150)
-handleArrowClick(leftArrow, -150)
+handleArrowClick(rightArrow, rightMove)
+handleArrowClick(leftArrow, leftMove)
 
 handleScroll(scenarioSelectionDepth, [rightArrow[0], leftArrow[0]])
 handleScroll(scenarioSelectionVelocity, [rightArrow[1], leftArrow[1]])
