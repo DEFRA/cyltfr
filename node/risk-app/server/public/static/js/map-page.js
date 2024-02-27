@@ -1,43 +1,45 @@
 /* global mapCategories $ */
-function MapController (categories) {
-  this._categories = categories
-}
+class MapController {
+  constructor (categories) {
+    this._categories = categories
+  }
 
-/**
+  /**
  * setCurrent
  * @param {string} ref The ref of either a category or map. If a category ref is passed, the first map in that category is used.
  */
-MapController.prototype.setCurrent = function (ref) {
+  setCurrent (ref) {
   // Work out the current category and map
-  let category, map, defaultCategory, defaultMap
-  for (let i = 0; i < this._categories.length; i++) {
-    category = this._categories[i]
-    if (i === 0) {
-      defaultCategory = category
-    }
-
-    if (category.ref === ref) {
-      this.currMap = category.maps[0]
-      this.currCategory = category
-      return
-    }
-
-    for (let j = 0; j < category.maps.length; j++) {
-      map = category.maps[j]
-      if (i === 0 && j === 0) {
-        defaultMap = map
+    let category, map, defaultCategory, defaultMap
+    for (let i = 0; i < this._categories.length; i++) {
+      category = this._categories[i]
+      if (i === 0) {
+        defaultCategory = category
       }
 
-      if (map.ref === ref) {
-        this.currMap = map
+      if (category.ref === ref) {
+        this.currMap = category.maps[0]
         this.currCategory = category
         return
       }
-    }
-  }
 
-  this.currMap = defaultMap
-  this.currCategory = defaultCategory
+      for (let j = 0; j < category.maps.length; j++) {
+        map = category.maps[j]
+        if (i === 0 && j === 0) {
+          defaultMap = map
+        }
+
+        if (map.ref === ref) {
+          this.currMap = map
+          this.currCategory = category
+          return
+        }
+      }
+    }
+
+    this.currMap = defaultMap
+    this.currCategory = defaultCategory
+  }
 }
 
 function mapPage () {
@@ -103,6 +105,8 @@ const advancedToggle = document.getElementById('advanced-key-button')
 const keyDisplay = document.getElementById('map-key')
 const openKeyBtn = document.getElementById('open-key')
 const deviceScreenWidth = 768
+const rightMove = 150
+const leftMove = -150
 
 document.addEventListener('click', function (event) {
   if (keyDisplay.style.display === 'block' && !keyDisplay.contains(event.target)) {
@@ -115,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   radios.forEach(function (radio) {
     radio.addEventListener('change', function () {
-      const label = document.querySelector('label[for="' + this.id + '"]')
+      const label = document.querySelector(`label[for="${this.id}"]`)
       if (label) {
         label.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
       }
@@ -123,15 +127,15 @@ document.addEventListener('DOMContentLoaded', function () {
   })
 })
 
-handleArrowClick(rightArrow, 150)
-handleArrowClick(leftArrow, -150)
+handleArrowClick(rightArrow, rightMove)
+handleArrowClick(leftArrow, leftMove)
 
 handleScroll(scenarioSelectionDepth, [rightArrow[0], leftArrow[0]])
 handleScroll(scenarioSelectionVelocity, [rightArrow[1], leftArrow[1]])
 
 function handleArrowClick (arrows, scrollDirection) {
-  for (let i = 0; i < arrows.length; i++) {
-    arrows[i].addEventListener('click', function () {
+  for (const arrow of arrows) {
+    arrow.addEventListener('click', function () {
       scenarioSelectionDepth.scrollBy({ top: 0, left: scrollDirection, behavior: 'smooth' })
       scenarioSelectionVelocity.scrollBy({ top: 0, left: scrollDirection, behavior: 'smooth' })
     })
@@ -237,8 +241,6 @@ function toggleAdvancedOptions () {
 }
 
 function openKey () {
-  const scenarioSelectionDepth = document.getElementById('scenario-selection-depth')
-
   keyDisplay.style.display = 'block'
   openKeyBtn.style.display = 'none'
   scenarioSelectionDepth.style.display = 'none'
