@@ -3,7 +3,7 @@
 node_modules
 npm-debug.log
 server/public/build
-config/server.json
-config/pm2.json
+config/*.json
 lcov.info
 test/output/*
+test/output.html
