@@ -4,6 +4,7 @@ node_modules
 npm-debug.log
 server/public/build
 config/server.json
+config/server-sandpit.json
 config/pm2.json
 lcov.info
 test/output/*
