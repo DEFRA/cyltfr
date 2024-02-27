@@ -239,8 +239,6 @@ function toggleAdvancedOptions () {
 }
 
 function openKey () {
-  const scenarioSelectionDepth = document.getElementById('scenario-selection-depth')
-
   keyDisplay.style.display = 'block'
   openKeyBtn.style.display = 'none'
   scenarioSelectionDepth.style.display = 'none'
