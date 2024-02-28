@@ -102,9 +102,11 @@ const scenarioSelectionDepth = document.getElementById('scenario-selection-depth
 const scenarioSelectionVelocity = document.getElementById('scenario-selection-velocity')
 
 const advancedToggle = document.getElementById('advanced-key-button')
+const advancedToggleText = document.getElementById('advanced-button-text')
 const keyDisplay = document.getElementById('map-key')
 const openKeyBtn = document.getElementById('open-key')
 const deviceScreenWidth = 768
+const advancedToggleCutoff = 510
 const rightMove = 150
 const leftMove = -150
 
@@ -125,6 +127,8 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     })
   })
+
+  showOrHideAdvancedToggleText()
 })
 
 handleArrowClick(rightArrow, rightMove)
@@ -196,6 +200,7 @@ function toggleAdvancedOptions () {
   if (window.innerWidth <= deviceScreenWidth) {
     keyDisplay.style.display = 'block'
     scenarioSelectionDepth.style.display = 'none'
+    showOrHideAdvancedToggleText()
   }
 
   if (advancedButtonText.textContent.includes('Show')) {
@@ -245,6 +250,7 @@ function openKey () {
   openKeyBtn.style.display = 'none'
   scenarioSelectionDepth.style.display = 'none'
   scenarioSelectionVelocity.style.display = 'none'
+  showOrHideAdvancedToggleText()
 }
 
 function getInitialKeyOptions () {
@@ -474,6 +480,10 @@ function closeKey () {
   } else {
     osLogo.classList.remove('os-logo-position-change')
   }
+
+  if (window.innerWidth <= deviceScreenWidth) {
+    advancedToggleText.classList.remove('hide')
+  }
 }
 
 /* eslint-enable no-unused-vars */
@@ -528,6 +538,16 @@ function adjustPosition () {
   window.innerWidth <= deviceScreenWidth
   ) {
     zoomBtns[0].style.top = 'calc(100% - 200px)'
+  }
+  showOrHideAdvancedToggleText()
+}
+
+function showOrHideAdvancedToggleText () {
+  if (window.innerWidth <= deviceScreenWidth) {
+    advancedToggleText.classList.remove('hide')
+  }
+  if (window.innerWidth <= advancedToggleCutoff && keyDisplay.style.display === 'block') {
+    advancedToggleText.classList.add('hide')
   }
 }
 
