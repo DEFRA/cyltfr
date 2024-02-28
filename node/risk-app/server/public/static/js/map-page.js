@@ -128,7 +128,6 @@ function getInitialKeyOptions () {
   const extentInfoSw = document.getElementById('sw-extent-desc-container')
   const extentInfoSwCcrs3 = document.getElementById('sw-ccrs3-extent-desc-container')
   const selectedAddressInput = document.getElementById('selected-address')
-  const boundaryContainer = document.getElementById('boundary-container')
   const advancedToggle = document.getElementById('advanced-key-button')
   // const deviceScreenWidth = 768
 
@@ -157,7 +156,6 @@ function getInitialKeyOptions () {
     extentInfoRs.style.display = 'block'
     extentInfoRsCcrs2.style.display = 'none'
     reservoirsContainer.style.display = 'none'
-    boundaryContainer.style.display = 'none'
   } else if (window.location.href.includes('map=Reservoirs')) {
     swContainer.style.display = 'none'
     swCcrs3Container.style.display = 'none'
@@ -168,7 +166,6 @@ function getInitialKeyOptions () {
     reservoirsContainer.style.marginTop = '40px'
     reservoirsRadio.checked = true
     extentInfoReservoirs.style.display = 'block'
-    boundaryContainer.style.display = 'none'
   } else {
     advancedToggle.style.display = 'none'
     selectedAddressInput.style.display = 'none'
@@ -192,7 +189,6 @@ function handleRadioChange (selected, type) {
   const velocityInfo = document.getElementById('sw-velocity-desc-container')
   const copyrightBtn = document.getElementById('att-key-copyright-btn')
   const copyrightInfo = document.getElementById('copyright-info-container')
-  const boundaryContainer = document.getElementById('boundary-container')
   const olZoom = document.getElementsByClassName('ol-zoom')
   const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
   const scenariosSelectorRsDepth = document.getElementById('scenario-selection-rs-depth')
@@ -294,7 +290,6 @@ function handleRadioChange (selected, type) {
       copyrightBtn.style.top = 'calc(100vh - 110px)'
       copyrightInfo.style.right = '360px'
       // olZoom[0].style.top = 'calc(100% - 145px)'
-      boundaryContainer.style.display = 'none'
     }
     if (type === 'rivers and the sea') {
       extentInfoRs.style.display = 'block'
@@ -311,7 +306,6 @@ function handleRadioChange (selected, type) {
       copyrightBtn.style.top = 'calc(100vh - 110px)'
       copyrightInfo.style.right = '360px'
       // olZoom[0].style.top = 'calc(100% - 145px)'
-      boundaryContainer.style.display = 'none'
     }
     if (type === 'rivers and the sea climate change') {
       extentInfoRs.style.display = 'none'
@@ -328,7 +322,6 @@ function handleRadioChange (selected, type) {
       copyrightBtn.style.top = 'calc(100vh - 110px)'
       copyrightInfo.style.right = '360px'
       // olZoom[0].style.top = 'calc(100% - 145px)'
-      boundaryContainer.style.display = 'none'
     }
     if (type === 'surface water') {
       extentInfoRs.style.display = 'none'
@@ -345,7 +338,6 @@ function handleRadioChange (selected, type) {
       copyrightBtn.style.top = 'calc(100vh - 110px)'
       copyrightInfo.style.right = '360px'
       // olZoom[0].style.top = 'calc(100% - 145px)'
-      boundaryContainer.style.display = 'block'
     }
     if (type === 'surface water climate change') {
       extentInfoRs.style.display = 'none'
@@ -362,7 +354,6 @@ function handleRadioChange (selected, type) {
       copyrightBtn.style.top = 'calc(100vh - 110px)'
       copyrightInfo.style.right = '360px'
       // olZoom[0].style.top = 'calc(100% - 145px)'
-      boundaryContainer.style.display = 'block'
     }
   }
 }

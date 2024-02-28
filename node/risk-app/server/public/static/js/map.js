@@ -224,8 +224,6 @@ function showMap (layerReference, hasLocation) {
       currentLayer = layerName === layerReference ? layer : currentLayer
       layer.setVisible(layerName === layerReference)
     }
-    console.log(hasLocation)
-    console.log(layerReference.substr(7, 2) === 'SW')
     if (layerName === 'pointMarker') {
       const className = layer.getProperties().className
       if (className === 'pointMarker' && hasLocation) {
