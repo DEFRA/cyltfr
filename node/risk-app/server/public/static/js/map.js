@@ -128,26 +128,6 @@ function loadMap (point) {
     }
 
     if (point) {
-      const radiusLayer = new ol.layer.Vector({
-        ref: 'pointMarker',
-        className: 'radiusMarker',
-        visible: false,
-        source: new ol.source.Vector({
-          features: [new ol.Feature({
-            geometry: new ol.geom.Circle(point, 15)
-          })]
-        }),
-        style: new ol.style.Style({
-          fill: new ol.style.Fill({
-            color: 'rgba(237, 231, 46, 0.6)'
-          }),
-          stroke: new ol.style.Stroke({
-            color: 'rgba(237, 231, 46, 1)',
-            width: 2
-          })
-        })
-      })
-
       const centreLayer = new ol.layer.Vector({
         ref: 'pointMarker',
         className: 'pointMarker',
@@ -164,7 +144,7 @@ function loadMap (point) {
           })
         })
       })
-      layers.push(centreLayer, radiusLayer)
+      layers.push(centreLayer)
     }
 
     let controls = ol.control.defaults({ attributionOptions: { collapsible: true } })
@@ -251,9 +231,6 @@ function showMap (layerReference, hasLocation) {
       if (className === 'pointMarker' && hasLocation) {
         layer.setVisible(true)
         layer.setZIndex(1)
-      } else if (className === 'radiusMarker' && hasLocation && window.location.href.includes('SurfaceWater')) {
-        layer.setVisible(true)
-        layer.setZIndex(0)
       } else {
         layer.setVisible(false)
       }
