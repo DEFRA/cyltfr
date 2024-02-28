@@ -293,7 +293,7 @@ function handleRadioChange (selected, type) {
       scenarioBarVelocity.style.display = 'none'
       copyrightBtn.style.top = 'calc(100vh - 110px)'
       copyrightInfo.style.right = '360px'
-      olZoom[0].style.top = 'calc(100% - 145px)'
+      // olZoom[0].style.top = 'calc(100% - 145px)'
       boundaryContainer.style.display = 'none'
     }
     if (type === 'rivers and the sea') {
@@ -310,7 +310,7 @@ function handleRadioChange (selected, type) {
       scenarioBarVelocity.style.display = 'none'
       copyrightBtn.style.top = 'calc(100vh - 110px)'
       copyrightInfo.style.right = '360px'
-      olZoom[0].style.top = 'calc(100% - 145px)'
+      // olZoom[0].style.top = 'calc(100% - 145px)'
       boundaryContainer.style.display = 'none'
     }
     if (type === 'rivers and the sea climate change') {
@@ -327,7 +327,7 @@ function handleRadioChange (selected, type) {
       scenarioBarVelocity.style.display = 'none'
       copyrightBtn.style.top = 'calc(100vh - 110px)'
       copyrightInfo.style.right = '360px'
-      olZoom[0].style.top = 'calc(100% - 145px)'
+      // olZoom[0].style.top = 'calc(100% - 145px)'
       boundaryContainer.style.display = 'none'
     }
     if (type === 'surface water') {
@@ -344,7 +344,7 @@ function handleRadioChange (selected, type) {
       scenarioBarVelocity.style.display = 'none'
       copyrightBtn.style.top = 'calc(100vh - 110px)'
       copyrightInfo.style.right = '360px'
-      olZoom[0].style.top = 'calc(100% - 145px)'
+      // olZoom[0].style.top = 'calc(100% - 145px)'
       boundaryContainer.style.display = 'block'
     }
     if (type === 'surface water climate change') {
@@ -361,7 +361,7 @@ function handleRadioChange (selected, type) {
       scenarioBarVelocity.style.display = 'none'
       copyrightBtn.style.top = 'calc(100vh - 110px)'
       copyrightInfo.style.right = '360px'
-      olZoom[0].style.top = 'calc(100% - 145px)'
+      // olZoom[0].style.top = 'calc(100% - 145px)'
       boundaryContainer.style.display = 'block'
     }
   }
