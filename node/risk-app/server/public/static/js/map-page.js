@@ -102,9 +102,11 @@ const scenarioSelectionDepth = document.getElementById('scenario-selection-depth
 const scenarioSelectionVelocity = document.getElementById('scenario-selection-velocity')
 
 const advancedToggle = document.getElementById('advanced-key-button')
+const advancedToggleText = document.getElementById('advanced-button-text')
 const keyDisplay = document.getElementById('map-key')
 const openKeyBtn = document.getElementById('open-key')
 const deviceScreenWidth = 768
+const advancedToggleCutoff = 510
 const rightMove = 150
 const leftMove = -150
 
@@ -140,6 +142,12 @@ function handleArrowClick (arrows, scrollDirection) {
       scenarioSelectionVelocity.scrollBy({ top: 0, left: scrollDirection, behavior: 'smooth' })
     })
   }
+}
+
+if (window.innerWidth <= advancedToggleCutoff && keyDisplay.style.display === 'none') {
+  advancedToggleText.classList.add('hide')
+} else {
+  advancedToggleText.classList.remove('hide')
 }
 
 function handleScroll (scenarioBar, arrows) {

@@ -11,7 +11,6 @@ $desktop-width: 769px;
 $scenarioWidthCap1: 1090px;
 $scenarioWidthCap2: 920px;
 $scenarioArrowPoint: 640px;
-$advancedToggleCutoff: 510px;
 
 $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
 
@@ -457,14 +456,6 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   -moz-user-select: none;
   -ms-user-select: none;
   pointer-events: auto;
-
-  @media screen and (max-width: $advancedToggleCutoff) {
-    padding: 0;
-
-    span {
-      display: none;
-    }
-  }
 }
 .defra-map__advanced svg {
   display: inline-block;
