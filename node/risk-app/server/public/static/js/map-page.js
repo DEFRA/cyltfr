@@ -144,7 +144,7 @@ function handleArrowClick (arrows, scrollDirection) {
   }
 }
 
-if (window.innerWidth <= advancedToggleCutoff && keyDisplay.style.display === 'none') {
+if (window.innerWidth <= advancedToggleCutoff && keyDisplay.style.display !== 'none') {
   advancedToggleText.classList.add('hide')
 } else {
   advancedToggleText.classList.remove('hide')
@@ -204,6 +204,7 @@ function toggleAdvancedOptions () {
   if (window.innerWidth <= deviceScreenWidth) {
     keyDisplay.style.display = 'block'
     scenarioSelectionDepth.style.display = 'none'
+    showOrHideAdvancedToggleText()
   }
 
   if (advancedButtonText.textContent.includes('Show')) {
@@ -253,6 +254,7 @@ function openKey () {
   openKeyBtn.style.display = 'none'
   scenarioSelectionDepth.style.display = 'none'
   scenarioSelectionVelocity.style.display = 'none'
+  showOrHideAdvancedToggleText()
 }
 
 function getInitialKeyOptions () {
@@ -482,6 +484,10 @@ function closeKey () {
   } else {
     osLogo.classList.remove('os-logo-position-change')
   }
+
+  if (window.innerWidth <= deviceScreenWidth) {
+    advancedToggleText.classList.remove('hide')
+  }
 }
 
 /* eslint-enable no-unused-vars */
@@ -536,6 +542,16 @@ function adjustPosition () {
   window.innerWidth <= deviceScreenWidth
   ) {
     zoomBtns[0].style.top = 'calc(100% - 200px)'
+  }
+  showOrHideAdvancedToggleText()
+}
+
+function showOrHideAdvancedToggleText () {
+  if (window.innerWidth <= deviceScreenWidth) {
+    advancedToggleText.classList.remove('hide')
+  }
+  if (window.innerWidth <= advancedToggleCutoff && keyDisplay.style.display === 'block') {
+    advancedToggleText.classList.add('hide')
   }
 }
 
