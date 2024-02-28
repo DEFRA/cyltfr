@@ -127,6 +127,8 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     })
   })
+
+  showOrHideAdvancedToggleText()
 })
 
 handleArrowClick(rightArrow, rightMove)
@@ -142,12 +144,6 @@ function handleArrowClick (arrows, scrollDirection) {
       scenarioSelectionVelocity.scrollBy({ top: 0, left: scrollDirection, behavior: 'smooth' })
     })
   }
-}
-
-if (window.innerWidth <= advancedToggleCutoff && keyDisplay.style.display !== 'none') {
-  advancedToggleText.classList.add('hide')
-} else {
-  advancedToggleText.classList.remove('hide')
 }
 
 function handleScroll (scenarioBar, arrows) {
