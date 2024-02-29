@@ -38,7 +38,7 @@ lab.experiment('Unit', () => {
   lab.test('Ignore unknown cookies', async () => {
     const options = {
       method: 'GET',
-      url: '/managing-flood-risk',
+      url: '/cookies',
       headers: {
         cookie: 'some-token=<token>'
       }
@@ -46,5 +46,15 @@ lab.experiment('Unit', () => {
 
     const response = await server.inject(options)
     Code.expect(response.statusCode).to.equal(200)
+  })
+
+  lab.test('Managing flood risk redirects to Prepare for flooding', async () => {
+    const options = {
+      method: 'GET',
+      url: '/managing-flood-risk'
+    }
+
+    const response = await server.inject(options)
+    Code.expect(response.statusCode).to.equal(301)
   })
 })
