@@ -2,6 +2,7 @@ const Lab = require('@hapi/lab')
 const Code = require('@hapi/code')
 const createServer = require('../../server')
 const lab = exports.lab = Lab.script()
+const STATUS_CODES = require('http').STATUS_CODES
 
 lab.experiment('Unit', () => {
   let server
@@ -22,7 +23,7 @@ lab.experiment('Unit', () => {
     }
 
     const response = await server.inject(options)
-    Code.expect(response.statusCode).to.equal(301)
+    Code.expect(STATUS_CODES[response.statusCode]).to.equal('Moved Permanently') // 301
   })
 
   lab.test('/os-terms', async () => {
@@ -32,7 +33,7 @@ lab.experiment('Unit', () => {
     }
 
     const response = await server.inject(options)
-    Code.expect(response.statusCode).to.equal(200)
+    Code.expect(STATUS_CODES[response.statusCode]).to.equal('OK') // 200
   })
 
   lab.test('Ignore unknown cookies', async () => {
@@ -45,7 +46,7 @@ lab.experiment('Unit', () => {
     }
 
     const response = await server.inject(options)
-    Code.expect(response.statusCode).to.equal(200)
+    Code.expect(STATUS_CODES[response.statusCode]).to.equal('OK') // 200
   })
 
   lab.test('Managing flood risk redirects to Prepare for flooding', async () => {
@@ -55,6 +56,6 @@ lab.experiment('Unit', () => {
     }
 
     const response = await server.inject(options)
-    Code.expect(response.statusCode).to.equal(301)
+    Code.expect(STATUS_CODES[response.statusCode]).to.equal('Moved Permanently') // 301
   })
 })
