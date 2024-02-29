@@ -2,6 +2,10 @@ const STATUS_CODES = require('http2').constants
 const createServer = require('../../../server')
 const util = require('../../util')
 let server
+const options = {
+  method: 'GET',
+  url: '/os-maps-proxy?layer=Road_27700&style=default&tilematrixset=EPSG%3A27700&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A27700%3A8&TileCol=636&TileRow=1374'
+}
 
 jest.mock('../../util')
 
@@ -16,26 +20,12 @@ afterAll(async () => {
 
 describe('/os-maps-proxy test', () => {
   it('/os-maps-proxy standard call', async () => {
-    const options = {
-      method: 'GET',
-      url: '/os-maps-proxy?layer=Road_27700&style=default&tilematrixset=EPSG%3A27700&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A27700%3A8&TileCol=636&TileRow=1374',
-      headers: {
-
-      }
-    }
     util.get.mockResolvedValue('Response')
     const response = await server.inject(options)
     expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK) // 200
   })
 
   it('/os-maps-proxy error call', async () => {
-    const options = {
-      method: 'GET',
-      url: '/os-maps-proxy?layer=Road_27700&style=default&tilematrixset=EPSG%3A27700&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A27700%3A8&TileCol=636&TileRow=1374',
-      headers: {
-
-      }
-    }
     const oldNotify = server.methods.notify
     let notifyCalled = false
     const newNotify = () => { notifyCalled = true }
@@ -51,15 +41,12 @@ describe('/os-maps-proxy test', () => {
   })
 
   it('/os-maps-proxy error call no notify', async () => {
-    const options = {
-      method: 'GET',
-      url: '/os-maps-proxy?layer=Road_27700&style=default&tilematrixset=EPSG%3A27700&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A27700%3A8&TileCol=636&TileRow=1374',
-      headers: {
-
-      }
-    }
     const oldNotify = server.methods.notify
     server.methods.notify = null
+    util.get.mockImplementation(() => {
+      const fakeResponse = { FakeResponse: true }
+      throw new Error('Error during call', fakeResponse)
+    })
     const response = await server.inject(options)
     expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_BAD_REQUEST) // 400
     server.methods.notify = oldNotify
