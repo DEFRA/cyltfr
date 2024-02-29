@@ -1,5 +1,12 @@
 const STATUS_CODES = require('http2').constants
 const createServer = require('../../../server')
+const defaultPostOptions = {
+  method: 'POST',
+  url: '/cookies',
+  headers: {
+    'Content-type': 'application/x-www-form-urlencoded'
+  }
+}
 let server
 
 beforeAll(async () => {
@@ -35,42 +42,24 @@ describe('cookies page', () => {
   })
 
   it('post cookie update', async () => {
-    const options = {
-      method: 'POST',
-      url: '/cookies',
-      headers: {
-        'Content-type': 'application/x-www-form-urlencoded'
-      },
-      payload: 'analytics=true'
-    }
+    const options = defaultPostOptions
+    options.payload = 'analytics=true'
 
     const response = await server.inject(options)
     expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_FOUND) // 302
   })
 
   it('post async cookie update', async () => {
-    const options = {
-      method: 'POST',
-      url: '/cookies',
-      headers: {
-        'Content-type': 'application/x-www-form-urlencoded'
-      },
-      payload: 'analytics=true&async=true'
-    }
+    const options = defaultPostOptions
+    options.payload = 'analytics=true&async=true'
     const response = await server.inject(options)
     expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK) // 200
     expect(response.payload).toMatch(/ok/g)
   })
 
   it('post invalid cookie update', async () => {
-    const options = {
-      method: 'POST',
-      url: '/cookies',
-      headers: {
-        'Content-type': 'application/x-www-form-urlencoded'
-      },
-      payload: 'blah=blah'
-    }
+    const options = defaultPostOptions
+    options.payload = 'blah=blah'
     const response = await server.inject(options)
     expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK) // 200
   })

@@ -25,7 +25,7 @@ describe('/Feedback test', () => {
     const options = {
       method: 'GET',
       url: '/feedback',
-      headers: { referer: 'http://en.wikipedia.org/wiki/Main_Page' }
+      headers: { referer: 'https://en.wikipedia.org/wiki/Main_Page' }
     }
 
     const response = await server.inject(options)
@@ -36,7 +36,7 @@ describe('/Feedback test', () => {
       method: 'GET',
       url: '/feedback',
       headers: {
-        referer: 'http://en.wikipedia.org/wiki/Main_Page',
+        referer: 'https://en.wikipedia.org/wiki/Main_Page',
         'user-agent': ''
       }
     }
