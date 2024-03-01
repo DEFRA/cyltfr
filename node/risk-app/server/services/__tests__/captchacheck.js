@@ -322,7 +322,7 @@ describe('/captchacheck test', () => {
   test('makes a call for a new token', async () => {
     config.setConfigOptions(getConfigOptions({}))
     const yar = createMockYar()
-    util.post.mockImplementation((uri, options, flag) => {
+    util.post.mockImplementation(() => {
       return Promise.resolve({ success: true })
     })
 
@@ -337,7 +337,7 @@ describe('/captchacheck test', () => {
   test('makes a call for a new token when new token passed (same postcode)', async () => {
     config.setConfigOptions(getConfigOptions({}))
     const yar = createMockYar()
-    util.post.mockImplementation((uri, options, flag) => {
+    util.post.mockImplementation(() => {
       return Promise.resolve({ success: true })
     })
 
@@ -355,7 +355,7 @@ describe('/captchacheck test', () => {
   test('makes a call for a new token when new token passed (different postcode)', async () => {
     config.setConfigOptions(getConfigOptions({}))
     const yar = createMockYar()
-    util.post.mockImplementation((uri, options, flag) => {
+    util.post.mockImplementation(() => {
       return Promise.resolve({ success: true })
     })
 
@@ -374,7 +374,7 @@ describe('/captchacheck test', () => {
     config.setConfigOptions(getConfigOptions({}))
     const yar = createMockYar()
     const mockpostResult = { success: false, errors: ['an error'] }
-    util.post.mockImplementation((uri, options, flag) => {
+    util.post.mockImplementation(() => {
       return Promise.resolve(mockpostResult)
     })
     const captchacheck = require('../captchacheck')
@@ -392,7 +392,7 @@ describe('/captchacheck test', () => {
     config.setConfigOptions(getConfigOptions({}))
     const yar = createMockYar()
     const mockpostResult = { success: false, errors: ['an error'] }
-    util.post.mockImplementation((uri, options, flag) => {
+    util.post.mockImplementation(() => {
       return Promise.resolve(mockpostResult)
     })
     const captchacheck = require('../captchacheck')
@@ -407,7 +407,7 @@ describe('/captchacheck test', () => {
   test('makes a call for a new token and handles error as success', async () => {
     config.setConfigOptions(getConfigOptions({}))
     const yar = createMockYar()
-    util.post.mockImplementation((uri, options, flag) => {
+    util.post.mockImplementation(() => {
       throw new Error('an error')
     })
     const captchacheck = require('../captchacheck')
@@ -424,7 +424,7 @@ describe('/captchacheck test', () => {
   test('makes a call for a new token and handles error without notify', async () => {
     config.setConfigOptions(getConfigOptions({}))
     const yar = createMockYar()
-    util.post.mockImplementation((uri, options, flag) => {
+    util.post.mockImplementation(() => {
       throw new Error('an error')
     })
     const server = { methods: { } }
