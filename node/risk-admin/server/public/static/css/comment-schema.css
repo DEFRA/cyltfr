@@ -1,50 +1,26 @@
-.array-item {
-  margin-bottom: 27px;
-  /* border-bottom: solid 1px grey; */
-  /* border-top: solid 1px grey; */
+ol {
+  margin-left: -20px;
+  list-style-type: none;
+}
+.feature {
+  margin-left:-20px;
+  margin-bottom: 35px;
+  padding: 10px;
   border-left: 20px solid grey;
-  padding-left: 10px;
-  /* padding-top: 20px; */
-  display: list-item;
-  list-style: decimal;
 }
-
-legend {
+.nested-list {
   display: none;
+  border-left: 10px solid grey;
+  margin-left: 5px;
+  padding-left: 5px;
 }
-
-fieldset {
-  border: none;
-  margin: 0;
-  padding: 0;
+.end-date.div {
+  margin-bottom: 5px;
 }
-
-.govuk-form-group {
-  float: left;
-}
-
-.govuk-form-group.name, .govuk-form-group.boundary {
-  float: none;
-}
-
 .govuk-form-group.info {
   width: 100%;
 }
-
-.govuk-form-group.info .govuk-textarea {
-  margin-bottom: 0;
+.govuk-textarea {
+  margin-bottom: 5px;
 }
 
-.govuk-form-group.start {
-  /* width: 19%; */
-  margin-right: 1%;
-}
-
-.govuk-form-group.end {
-  /* width: 19%; */
-  margin-right: 1%;
-}
-
-label.control-label {
-  font-weight: bold;
-}

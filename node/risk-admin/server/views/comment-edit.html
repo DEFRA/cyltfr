@@ -4,16 +4,43 @@
 {% set pageTitle = "Edit comment" %}
 
 {% block body %}
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <div id="map"></div>
-    </div>
-    <div class="govuk-grid-column-one-third">
-    </div>
-    <div class="govuk-grid-column-two-thirds">
-      <div id="root"></div>
-    </div>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <div id="map"></div>
   </div>
+  <div class="govuk-grid-column-one-third">
+  </div>
+  <div class="govuk-grid-column-two-thirds">
+    <form id="comment-form">
+      <div class="govuk-form-group">
+        <h1 class="govuk-label-wrapper">
+          <label class="govuk-label govuk-label--s" for="comment-description">
+            Description
+          </label>
+        </h1>
+        <div id="account-number-hint" class="govuk-hint">
+          For internal use, to describe the comments that you are uploading. This will not be displayed to public users.
+        </div>
+        <input class="govuk-input govuk-input--width-20 name" id="comment-description" name="commentDescription" type="text" maxlength="75"/>
+      </div>
+      <div class="govuk-form-group">
+        <h1 class="govuk-label-wrapper">
+          <label class="govuk-label govuk-label--s" for="comment-boundary">
+            Boundary
+          </label>
+        </h1>
+        <div id="boundary-hint" class="govuk-hint">
+          For internal use, choose the boundary to which this comment applies. This will not be displayed to public users.
+        </div>
+        <select class="govuk-select" id="comment-boundary" name="comment-boundary" aria-describedby="boundary-hint">
+        </select>
+      </div>
+      <ol id="comment-container"></ol>
+      <button class='govuk-button' type="button" onclick="submitForm()">Save</button>
+    </form>
+  </div>
+</div>
+
 {% endblock %}
 
 {% block bodyEnd %}
@@ -22,6 +49,7 @@
     window.LTFMGMT.geometry = {{ geometry | dump | safe }}
     window.LTFMGMT.capabilities = {{ capabilities | dump | safe }}
   </script>
-  <script src="/assets/js/edit-comment.js"></script>
+  <script type="module" src="/assets/js/edit-comment.js"></script>
+  <script src="/assets/js/submit-form.js"></script>
 {% endblock %}
 
