@@ -13,7 +13,7 @@ const createCommentSchema = () => {
   const isHoldingComment = comment.type === 'holding'
   const commentMap = window.LTFMGMT.commentMap
   const capabilities = window.LTFMGMT.capabilities
-  const selectedArray = isHoldingComment ? holdingCommentBoundaries : llfaBoundaries
+  const boundaries = isHoldingComment ? holdingCommentBoundaries : llfaBoundaries
 
   // Description
   const commentName = document.getElementById('comment-description')
@@ -21,11 +21,11 @@ const createCommentSchema = () => {
   // Generate boundary options
   const commentBoundarySelect = document.getElementById('comment-boundary')
 
-  for (let i = 0; i < selectedArray.length; i++) {
+  for (const boundary of boundaries) {
     const option = document.createElement('option')
-    option.value = selectedArray[i].toLowerCase().replace(/\s+/g, '')
-    option.text = selectedArray[i]
-    if (selectedArray[i] === comment.boundary) {
+    option.value = boundary.toLowerCase().replace(/\s+/g, '')
+    option.text = boundary
+    if (boundary === comment.boundary) {
       option.selected = true
     }
     commentBoundarySelect.add(option)
