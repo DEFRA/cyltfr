@@ -1,7 +1,11 @@
 import { holdingCommentBoundaries, llfaBoundaries } from './boundaries.js'
-import { createOverrideRadio } from './create-override-radio.js'
+
+import { createLabel } from './create-label.js'
 import { createRadio } from './create-radio.js'
+import { createRiskOverrideDiv } from './create-risk-override-div.js'
 import { createTextarea } from './create-text-area.js'
+
+const govukFormClass = 'govuk-form-group'
 // The form's inputs are not required, but they should be if visible on the page (the elements when hidden shouldn't be required)
 const createCommentSchema = () => {
   const geometry = window.LTFMGMT.geometry
@@ -48,7 +52,7 @@ const createCommentSchema = () => {
 
     // Flood risk div
     const floodRiskDiv = document.createElement('div')
-    floodRiskDiv.className = 'govuk-form-group'
+    floodRiskDiv.className = govukFormClass
     const floodRiskLabel = createLabel('Select the flood risk you want to update for points inside this area', `comment-type_${index}`)
     floodRiskDiv.appendChild(floodRiskLabel)
 
@@ -60,37 +64,8 @@ const createCommentSchema = () => {
 
     // Override risk div
     if (isHoldingComment) {
-      const overrideDiv = document.createElement('div')
-      overrideDiv.className = 'govuk-form-group'
-      overrideDiv.id = `override-div_${index}`
       const riskOverrideValue = feature.properties.riskOverride
-
-      const overrideLabel = createLabel('Do you want to override the flood risk rating?', `override_${index}`)
-      const noOverrideRadio = createOverrideRadio(`override_${index}`, 'No, do not override', 'Do not override', riskOverrideValue, true, `overrideValues_${index}`)
-      const overrideRadio = createOverrideRadio(`override_${index}`, 'Yes, override surface water', 'Override', riskOverrideValue, true, `overrideValues_${index}`)
-
-      const nestedList = document.createElement('div')
-      nestedList.className = 'nested-list'
-      nestedList.id = `overrideValues_${index}`
-
-      const highRadio = createOverrideRadio(`overrideValue_${index}`, 'High', 'High', riskOverrideValue)
-      const mediumRadio = createOverrideRadio(`overrideValue_${index}`, 'Medium', 'Medium', riskOverrideValue)
-      const lowRadio = createOverrideRadio(`overrideValue_${index}`, 'Low', 'Low', riskOverrideValue)
-      const veryLowRadio = createOverrideRadio(`overrideValue_${index}`, 'Very low', 'Very low', riskOverrideValue)
-
-      nestedList.appendChild(highRadio)
-      nestedList.appendChild(mediumRadio)
-      nestedList.appendChild(lowRadio)
-      nestedList.appendChild(veryLowRadio)
-
-      if (riskOverrideValue !== 'Do not override') {
-        nestedList.style.display = 'block'
-      }
-      overrideDiv.appendChild(overrideLabel)
-      overrideDiv.appendChild(noOverrideRadio)
-      overrideDiv.appendChild(overrideRadio)
-      overrideDiv.appendChild(nestedList)
-      listEl.appendChild(overrideDiv)
+      listEl.appendChild(createRiskOverrideDiv(index, riskOverrideValue))
     }
 
     // Info div
@@ -126,14 +101,6 @@ const createCommentSchema = () => {
   }
 }
 
-function createLabel (string, labeledElement) {
-  const label = document.createElement('label')
-  label.classList.add('govuk-label', 'govuk-label--s')
-  label.setAttribute('for', labeledElement)
-  label.textContent = string
-  return label
-}
-
 function createHint (text) {
   const hint = document.createElement('div')
   hint.className = 'govuk-hint'
@@ -143,7 +110,7 @@ function createHint (text) {
 
 function createFormGroupWithDate (date, labelText, hintText, inputId) {
   const dateDiv = document.createElement('div')
-  dateDiv.classList.add('govuk-form-group')
+  dateDiv.classList.add(govukFormClass)
 
   const label = createLabel(labelText)
   const hint = createHint(hintText)

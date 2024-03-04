@@ -3,10 +3,8 @@ function submitForm () {
   const serverUrl = '/comment/edit/'
   const commentId = comment.id
   const fetch = window.fetch
-  if (comment.approvedAt) {
-    if (!window.confirm('The comment will need re-approving. Continue?')) {
-      return
-    }
+  if (comment.approvedAt && !window.confirm('The comment will need re-approving. Continue?')) {
+    return
   }
   const formData = {
     name: document.getElementById('comment-description').value,
