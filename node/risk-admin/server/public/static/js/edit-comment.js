@@ -66,17 +66,17 @@ const createCommentSchema = () => {
       const riskOverrideValue = feature.properties.riskOverride
 
       const overrideLabel = createLabel('Do you want to override the flood risk rating?', `override_${index}`)
-      const noOverrideRadio = createOverrideRadio(`override_${index}`, riskOverrideValue, 'No, do not override', 'Do not override', true, `overrideValues_${index}`)
-      const overrideRadio = createOverrideRadio(`override_${index}`, riskOverrideValue, 'Yes, override surface water', 'Override', true, `overrideValues_${index}`)
+      const noOverrideRadio = createOverrideRadio(`override_${index}`, 'No, do not override', 'Do not override', riskOverrideValue, true, `overrideValues_${index}`)
+      const overrideRadio = createOverrideRadio(`override_${index}`, 'Yes, override surface water', 'Override', riskOverrideValue, true, `overrideValues_${index}`)
 
       const nestedList = document.createElement('div')
       nestedList.className = 'nested-list'
       nestedList.id = `overrideValues_${index}`
 
-      const highRadio = createOverrideRadio(`overrideValue_${index}`, riskOverrideValue, 'High', 'High')
-      const mediumRadio = createOverrideRadio(`overrideValue_${index}`, riskOverrideValue, 'Medium', 'Medium')
-      const lowRadio = createOverrideRadio(`overrideValue_${index}`, riskOverrideValue, 'Low', 'Low')
-      const veryLowRadio = createOverrideRadio(`overrideValue_${index}`, riskOverrideValue, 'Very low', 'Very low')
+      const highRadio = createOverrideRadio(`overrideValue_${index}`, 'High', 'High', riskOverrideValue)
+      const mediumRadio = createOverrideRadio(`overrideValue_${index}`, 'Medium', 'Medium', riskOverrideValue)
+      const lowRadio = createOverrideRadio(`overrideValue_${index}`, 'Low', 'Low', riskOverrideValue)
+      const veryLowRadio = createOverrideRadio(`overrideValue_${index}`, 'Very low', 'Very low', riskOverrideValue)
 
       nestedList.appendChild(highRadio)
       nestedList.appendChild(mediumRadio)

@@ -2,10 +2,11 @@ export function createTextarea (id, text, rows, maxLength, hintId) {
   const textarea = document.createElement('textarea')
   const textareaHint = document.createElement('div')
   const textareaDiv = document.createElement('div')
+  const textContent = 'You have ' + (maxLength - text?.length) + ' characters remaining.'
 
   textareaHint.id = hintId
   textareaHint.className = 'govuk-hint'
-  textareaHint.textContent = 'You have ' + (maxLength - text?.length) + ' characters remaining.'
+  textareaHint.textContent = textContent
   textarea.classList.add('govuk-textarea')
   textarea.setAttribute('id', id)
   textarea.setAttribute('rows', rows)
@@ -23,6 +24,7 @@ export function createTextarea (id, text, rows, maxLength, hintId) {
 function updateCharCount (textArea, hintId) {
   const charCount = document.getElementById(hintId)
   const remainingChars = textArea.maxLength - textArea.value.length
+  const textContent = 'You have ' + remainingChars + ' characters remaining.'
 
-  charCount.textContent = 'You have ' + remainingChars + ' characters remaining.'
+  charCount.textContent = textContent
 }

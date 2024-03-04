@@ -1,4 +1,4 @@
-export function createOverrideRadio (name, riskOverrideValue = '', labelText, value, hasNested = false, nestedId = '') {
+export function createOverrideRadio (name, labelText, value, riskOverrideValue = '', hasNested = false, nestedId = '') {
   const radio = document.createElement('input')
   const transformedValue = value.toLowerCase().replace(/\s+/g, '-')
   radio.setAttribute('type', 'radio')
