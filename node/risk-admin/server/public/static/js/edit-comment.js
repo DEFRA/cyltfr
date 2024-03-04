@@ -31,8 +31,6 @@ const createCommentSchema = () => {
   const container = document.getElementById('comment-container')
 
   geometry.features.forEach(function (feature, index) {
-    console.log(feature)
-    console.log(geometry)
     const listEl = document.createElement('li')
     listEl.className = 'feature'
     listEl.style.textAlign = 'start'
