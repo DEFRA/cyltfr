@@ -8,8 +8,6 @@ A full code build needs to be performed to update the RISK-APP and RISK-SERVICE.
 
 LTFRI-672 Decommission the Managing Risk Page and Redirect Users
 
-LTFRI-994 Hide zoom button
-
 LTFRI-1067 Show Advanced Options button text disappears on mobile devices
 
 LTFRI-1097 Velocity scenario bar does not have smooth scroll
