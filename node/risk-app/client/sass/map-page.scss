@@ -102,7 +102,6 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
     font-size: 0.875rem;
     line-height: 1.1428571429;
     line-height: 40px;
-    /*   text-indent: -5000px; */
     color: #0b0c0c;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -151,7 +150,6 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
     background-color: #f3f2f1;
   }
   .defra-map__open-key:focus-visible {
-    /* outline: none; */
     outline: 3px solid transparent;
     box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
   }
@@ -178,7 +176,6 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
       margin: 0;
       border: 0;
       padding: 0;
-      border: 0;
       cursor: pointer;
       background-color: #ffffff;
       color: #0b0c0c;
@@ -209,7 +206,6 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
       font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
       align-items: center;
       font-weight: 400;
-      font-size: 14px;
       font-size: 0.875rem;
       line-height: 1.1428571429;
       line-height: 40px;
@@ -317,7 +313,6 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
     color: #0b0c0c;
     font-size: 16px;
     line-height: 40px;
-    color: #0b0c0c;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -448,13 +443,11 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   border: 0;
   padding: 0;
   height: 40px;
-  width: 40px;
   cursor: pointer;
   background-color: white;
   color: #0b0c0c;
   font-size: 16px;
   line-height: 40px;
-  color: #0b0c0c;
   width: auto;
   padding-right: 11px;
   -webkit-touch-callout: none;
@@ -528,7 +521,6 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
   font-size: 16px !important;
-  font-size: 0.875rem;
   line-height: 1.1428571429;
   display: block;
   margin-top: 45px;
@@ -552,15 +544,10 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   margin-top: 5px;
 }
 
-.govuk-radios__label {
-  padding-top: 0;
-}
-
 .govuk-radios--small .govuk-radios__item {
   min-height: 0;
   margin-bottom: 0;
   padding-left: 34px;
-  // float: left;
 }
 
 .defra-map-key__symbol-container-v3 {
@@ -627,10 +614,6 @@ svg:not(:root) {
 
 #surface-water-extent-heading {
   padding-left: 34px;
-}
-
-.govuk-radios__label {
-  font-size: 16px;
 }
 
 .risk-context {
@@ -822,8 +805,6 @@ svg:not(:root) {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
-  font-size: 12px;
-  font-size: 0.75rem;
   line-height: 1.25;
   font-size: 14px;
   padding-left: 54px;
@@ -832,6 +813,7 @@ svg:not(:root) {
 
 .govuk-radios__label {
   display: inline-block;
+  font-size: 16px;
   margin-bottom: 0;
   padding: 8px 15px 5px;
   cursor: pointer;
