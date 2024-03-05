@@ -54,6 +54,13 @@ lab.experiment('search page route', () => {
     Code.expect(getResponse.statusCode).to.equal(200)
   })
 
+  lab.test('/address - flood warnings for unknown address', async () => {
+    // TODO: Return a result with address of "England" to test what happens with whole country results
+    const { getOptions } = mockSearchOptions('cw8 4bh', cookie)
+    const getResponse = await server.inject(getOptions)
+    Code.expect(getResponse.statusCode).to.equal(200)
+  })
+
   lab.test('/search - No warning banner severity', async () => {
     // This doesn't seem to actually test anything TODO: Check this test
     const { getOptions } = mockSearchOptions('cw8 4bh', cookie)
