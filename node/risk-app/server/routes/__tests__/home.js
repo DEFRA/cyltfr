@@ -12,7 +12,7 @@ afterAll(async () => {
 })
 
 describe('default route page', () => {
-  it('gets redirected when requesting root page', async () => {
+  test('gets redirected when requesting root page', async () => {
     const options = {
       method: 'GET',
       url: '/'

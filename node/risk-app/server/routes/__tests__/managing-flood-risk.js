@@ -12,7 +12,7 @@ afterAll(async () => {
 })
 
 describe('managing flood risk page', () => {
-  it('gets redirected to the govuk page', async () => {
+  test('gets redirected to the govuk page', async () => {
     const options = {
       method: 'GET',
       url: '/managing-flood-risk'

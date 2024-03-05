@@ -11,7 +11,7 @@ afterAll(async () => {
 })
 
 describe('risk data page', () => {
-  it('gets the risk data page with an 200OK', async () => {
+  test('gets the risk data page with an 200OK', async () => {
     const options = {
       method: 'GET',
       url: '/risk-data'

@@ -12,7 +12,7 @@ afterAll(async () => {
 })
 
 describe('/Accessibility statement test', () => {
-  it('Assert Accessibility statement page', async () => {
+  test('Assert Accessibility statement page', async () => {
     const options = {
       method: 'GET',
       url: '/accessibility-statement',

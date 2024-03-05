@@ -1,7 +1,7 @@
 const defineBackLink = require('../defineBackLink.js')
 
 describe('defineBackLink', () => {
-  it('Risk page backlink takes user back to search page with entered postcode showing', async () => {
+  test('Risk page backlink takes user back to search page with entered postcode showing', async () => {
     const searchPagePath = '/search?postcode='
     const cachedPostcode = 'CF1%204QR'
     const currentPage = '/risk'
@@ -9,7 +9,7 @@ describe('defineBackLink', () => {
     expect(backLink).toEqual(searchPagePath + cachedPostcode)
   })
 
-  it('England-only page backlink takes user back to postcode page', async () => {
+  test('England-only page backlink takes user back to postcode page', async () => {
     const postcodePage = '/postcode'
     const cachedPostcode = 'NP18%203EZ'
     const currentPage = '/england-only'
@@ -17,14 +17,14 @@ describe('defineBackLink', () => {
     expect(backLink).toEqual(postcodePage)
   })
 
-  it('Map page backlink takes user back to risk page', async () => {
+  test('Map page backlink takes user back to risk page', async () => {
     const riskPage = '/risk'
     const currentPage = '/map'
     const backLink = defineBackLink.defineBackLink(currentPage)
     expect(backLink).toEqual(riskPage)
   })
 
-  it('Search page backlink takes user back to postcode page', async () => {
+  test('Search page backlink takes user back to postcode page', async () => {
     const postcodePage = '/postcode'
     const cachedPostcode = 'CF1%204QR'
     const currentPage = '/search' + cachedPostcode
