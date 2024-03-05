@@ -12,7 +12,7 @@ afterAll(async () => {
 })
 
 describe('/Feedback test', () => {
-  it('/feedback', async () => {
+  test('/feedback', async () => {
     const options = {
       method: 'GET',
       url: '/feedback'
@@ -21,7 +21,7 @@ describe('/Feedback test', () => {
     const response = await server.inject(options)
     expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK) // 200
   })
-  it('/feedback - With referrer header', async () => {
+  test('/feedback - With referrer header', async () => {
     const options = {
       method: 'GET',
       url: '/feedback',
@@ -31,7 +31,7 @@ describe('/Feedback test', () => {
     const response = await server.inject(options)
     expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK) // 200
   })
-  it('/feedback - With no agent', async () => {
+  test('/feedback - With no agent', async () => {
     const options = {
       method: 'GET',
       url: '/feedback',

@@ -12,7 +12,7 @@ afterAll(async () => {
 })
 
 describe('/Map page test', () => {
-  it('Assert Map page', async () => {
+  test('Assert Map page', async () => {
     const options = {
       method: 'GET',
       url: '/map?easting=1&northing=1'

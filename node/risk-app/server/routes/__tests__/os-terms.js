@@ -12,7 +12,7 @@ afterAll(async () => {
 })
 
 describe('/os-terms page', () => {
-  it('/os-terms', async () => {
+  test('/os-terms', async () => {
     const options = {
       method: 'GET',
       url: '/os-terms'

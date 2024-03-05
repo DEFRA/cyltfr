@@ -12,7 +12,7 @@ afterAll(async () => {
 })
 
 describe('/Healthcheck test', () => {
-  it('Assert Healthcheck page', async () => {
+  test('Assert Healthcheck page', async () => {
     const options = {
       method: 'GET',
       url: '/healthcheck',

@@ -19,7 +19,7 @@ afterAll(async () => {
 })
 
 describe('cookies page', () => {
-  it('can handle invalid cookies', async () => {
+  test('can handle invalid cookies', async () => {
     const options = {
       method: 'GET',
       url: '/cookies',
@@ -31,7 +31,7 @@ describe('cookies page', () => {
     expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK) // 200
   })
 
-  it('returns correct content', async () => {
+  test('returns correct content', async () => {
     const options = {
       method: 'GET',
       url: '/cookies'
@@ -41,7 +41,7 @@ describe('cookies page', () => {
     expect(response.payload).toMatch(/We use cookies to make Check your long term flood risk work/g)
   })
 
-  it('post cookie update', async () => {
+  test('post cookie update', async () => {
     const options = defaultPostOptions
     options.payload = 'analytics=true'
 
@@ -49,7 +49,7 @@ describe('cookies page', () => {
     expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_FOUND) // 302
   })
 
-  it('post async cookie update', async () => {
+  test('post async cookie update', async () => {
     const options = defaultPostOptions
     options.payload = 'analytics=true&async=true'
     const response = await server.inject(options)
@@ -57,7 +57,7 @@ describe('cookies page', () => {
     expect(response.payload).toMatch(/ok/g)
   })
 
-  it('post invalid cookie update', async () => {
+  test('post invalid cookie update', async () => {
     const options = defaultPostOptions
     options.payload = 'blah=blah'
     const response = await server.inject(options)
