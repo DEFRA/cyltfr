@@ -12,7 +12,7 @@ afterAll(async () => {
 })
 
 describe('/Terms and Conditions test', () => {
-  it('Assert Terms and Conditions statement page', async () => {
+  test('Assert Terms and Conditions statement page', async () => {
     const options = {
       method: 'GET',
       url: '/terms-and-conditions'

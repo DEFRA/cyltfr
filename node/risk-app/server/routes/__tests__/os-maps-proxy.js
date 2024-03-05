@@ -19,13 +19,13 @@ afterAll(async () => {
 })
 
 describe('/os-maps-proxy test', () => {
-  it('/os-maps-proxy standard call', async () => {
+  test('/os-maps-proxy standard call', async () => {
     util.get.mockResolvedValue('Response')
     const response = await server.inject(options)
     expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK) // 200
   })
 
-  it('/os-maps-proxy error call', async () => {
+  test('/os-maps-proxy error call', async () => {
     const oldNotify = server.methods.notify
     let notifyCalled = false
     const newNotify = () => { notifyCalled = true }
@@ -40,7 +40,7 @@ describe('/os-maps-proxy test', () => {
     expect(notifyCalled).toEqual(true)
   })
 
-  it('/os-maps-proxy error call no notify', async () => {
+  test('/os-maps-proxy error call no notify', async () => {
     const oldNotify = server.methods.notify
     server.methods.notify = null
     util.get.mockImplementation(() => {

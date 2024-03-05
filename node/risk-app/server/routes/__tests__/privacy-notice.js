@@ -12,7 +12,7 @@ afterAll(async () => {
 })
 
 describe('/Privacy notice test', () => {
-  it('Assert Privacy page', async () => {
+  test('Assert Privacy page', async () => {
     const options = {
       method: 'GET',
       url: '/privacy-notice',
