@@ -1,3 +1,4 @@
+const STATUS_CODES = require('http2').constants
 const createServer = require('../../../server')
 let server
 
@@ -10,13 +11,14 @@ afterAll(async () => {
   await server.stop()
 })
 
-describe('risk data page', () => {
-  test('gets the risk data page with an 200OK', async () => {
+describe('/Map page test', () => {
+  test('Assert Map page', async () => {
     const options = {
       method: 'GET',
-      url: '/risk-data'
+      url: '/map?easting=1&northing=1'
     }
+
     const response = await server.inject(options)
-    expect(response.statusCode).toEqual(200)
+    expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK) // 200
   })
 })
