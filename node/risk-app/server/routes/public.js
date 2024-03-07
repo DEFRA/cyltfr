@@ -11,12 +11,22 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/assets/all.js',
+    path: '/assets/govuk-frontend.min.js',
     handler: {
-      file: 'node_modules/govuk-frontend/govuk/all.js'
+      file: 'node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.js'
     },
     options: {
-      description: 'Get the GDS all.js asset'
+      description: 'Get the GDS govuk-frontend.min.js asset'
+    }
+  },
+  {
+    method: 'GET',
+    path: '/assets/govuk-frontend.min.js.map',
+    handler: {
+      file: 'node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.js.map'
+    },
+    options: {
+      description: 'Get the GDS govuk-frontend.min.js.map asset'
     }
   },
   {
@@ -27,7 +37,7 @@ module.exports = [
         path: [
           'server/public/static',
           'server/public/build',
-          'node_modules/govuk-frontend/govuk/assets',
+          'node_modules/govuk-frontend/dist/govuk/assets',
           'node_modules/nunjucks/browser'
         ]
       }

@@ -1,7 +1,7 @@
 $govuk-assets-path: '/assets/';
 
-@import "node_modules/govuk-frontend/govuk/settings/all";
-@import "node_modules/govuk-frontend/govuk/helpers/all";
+@import "node_modules/govuk-frontend/dist/govuk/settings/all";
+@import "node_modules/govuk-frontend/dist/govuk/helpers/all";
 @import url(//fonts.googleapis.com/css?family=Source+Sans+Pro);
 
 $small-mobile-width: 400px;
@@ -10,6 +10,7 @@ $tablet-width: 768px;
 $desktop-width: 769px;
 $scenarioWidthCap1: 1090px;
 $scenarioWidthCap2: 920px;
+$scenarioArrowPoint: 640px;
 
 $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
 
@@ -101,7 +102,6 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
     font-size: 0.875rem;
     line-height: 1.1428571429;
     line-height: 40px;
-    /*   text-indent: -5000px; */
     color: #0b0c0c;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -150,12 +150,6 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
     background-color: #f3f2f1;
   }
   .defra-map__open-key:focus-visible {
-    /* outline: none; */
-    outline: 3px solid transparent;
-    box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
-  }
-  .defra-map__open-key:focus[keyboard-focus]:after {
-    /* @include focus; */
     outline: 3px solid transparent;
     box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
   }
@@ -182,7 +176,6 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
       margin: 0;
       border: 0;
       padding: 0;
-      border: 0;
       cursor: pointer;
       background-color: #ffffff;
       color: #0b0c0c;
@@ -213,7 +206,6 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
       font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
       align-items: center;
       font-weight: 400;
-      font-size: 14px;
       font-size: 0.875rem;
       line-height: 1.1428571429;
       line-height: 40px;
@@ -224,7 +216,7 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
         cursor: pointer;
       }
 
-      &:focus {
+      &:focus-visible {
         outline: 3px solid transparent;
         box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
       }
@@ -284,7 +276,7 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
         background-color: #f3f2f1;
       }    
 
-      button:focus {
+      button:focus-visible {
         outline: 3px solid transparent;
         box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
       }
@@ -321,7 +313,6 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
     color: #0b0c0c;
     font-size: 16px;
     line-height: 40px;
-    color: #0b0c0c;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -357,8 +348,9 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   .defra-map__exit:hover {
     background-color: #f3f2f1;
   }
-  .defra-map__exit:focus {
-    outline: none;
+  .defra-map__exit:focus-visible {
+    outline: 3px solid transparent;
+    box-shadow: 0px 0px 0px 2px white, inset 0px 0px 0px 0px #0b0c0c, 0px 0px 0px 5px #0b0c0c, 0px 0px 0px 8px #ffdd00;
   }
   .defra-map__exit:focus[keyboard-focus]:after {
     position: absolute;
@@ -451,13 +443,11 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   border: 0;
   padding: 0;
   height: 40px;
-  width: 40px;
   cursor: pointer;
   background-color: white;
   color: #0b0c0c;
   font-size: 16px;
   line-height: 40px;
-  color: #0b0c0c;
   width: auto;
   padding-right: 11px;
   -webkit-touch-callout: none;
@@ -531,7 +521,6 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
   font-size: 16px !important;
-  font-size: 0.875rem;
   line-height: 1.1428571429;
   display: block;
   margin-top: 45px;
@@ -555,15 +544,10 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   margin-top: 5px;
 }
 
-.govuk-radios__label {
-  padding-top: 0;
-}
-
 .govuk-radios--small .govuk-radios__item {
   min-height: 0;
   margin-bottom: 0;
   padding-left: 34px;
-  float: left;
 }
 
 .defra-map-key__symbol-container-v3 {
@@ -632,10 +616,6 @@ svg:not(:root) {
   padding-left: 34px;
 }
 
-.govuk-radios__label {
-  font-size: 16px;
-}
-
 .risk-context {
   display: block;
   font-size: 14px;
@@ -679,11 +659,69 @@ svg:not(:root) {
 #scenario-container-depth {
   display: none;
   align-self: flex-end;
+
+  .scenario-arrows {
+    display: none;
+  }
+
+  @media screen and (max-width: $scenarioArrowPoint) {
+    .scenario-arrows {
+      display: block;
+    }
+    
+    .right-scenario-arrow {
+      height: 100px;
+      width: 60px;
+      position: absolute;
+      z-index: 20;
+      right: 0;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), white);
+    }
+    
+    .left-scenario-arrow {
+      height: 88px;
+      position: absolute;
+      z-index: 20;
+      left: 0px;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), white);
+      transform-origin: center;
+      transform: rotate(180deg);
+    }
+  }
 }
 
 #scenario-container-velocity {
   display: none;
   justify-content: flex-end;
+
+  .scenario-arrows {
+    display: none;
+  }
+
+  @media screen and (max-width: $scenarioArrowPoint) {
+    .scenario-arrows {
+      display: block;
+    }
+    
+    .right-scenario-arrow {
+      height: 100px;
+      width: 60px;
+      position: absolute;
+      z-index: 20;
+      right: 0;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), white);
+    }
+    
+    .left-scenario-arrow {
+      height: 88px;
+      position: absolute;
+      z-index: 20;
+      left: 0px;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), white);
+      transform-origin: center;
+      transform: rotate(180deg);
+    }
+  }
 }
 
 @media (max-width: 820px) {
@@ -709,153 +747,12 @@ svg:not(:root) {
     padding: 5px 0px 0px 0px;
     width: 800px;
   }
-  .left-btn, .right-btn {
-    position: absolute;
-    font-size: 1.8em;
-    padding: 30px;
-    cursor: pointer;
-    color: #000000;
-    z-index: 2;
-  }
-  /* .circle-behind-btn {
-    height: 25px;
-    width: 25px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: block;
-  } */
-  .left-btn {
-    display: none;
-    left: 0;
-    background: linear-gradient(to left, transparent, #ffffff 50%);
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
-    padding-left: 30px;
-  }
-  .right-btn {
-    right: 0;
-    background: linear-gradient(to right, transparent, #ffffff 50%);
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
-    padding-right: 30px;
-  }
-}
-.defra-map-scenarios-depth-v4 {
-  width: 100%;
-  padding-top: 10px;
-  overflow-x: auto;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-}
-@media screen and (min-width: 938px) {
-  .defra-map-scenarios-depth-v4 {
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    max-width: 830px;
-  }
-}
-.defra-map-scenarios-depth-v4__container {
-  width: 100%;
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-}
-.defra-map-scenarios-depth-v4 .govuk-radios {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  background-color: white;
-  padding: 5px 0px 0px 0px;
-}
-.defra-map-scenarios-depth-v4 .govuk-radios__item {
-  flex: 1 1 auto;
-  font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-  font-size: 0.75rem;
-  line-height: 1.25;
-  font-size: 14px;
-  padding-bottom: 10px;
-  padding-left: 54px;
-  border-bottom: 7px solid transparent;
-}
-@media print {
-  .defra-map-scenarios-depth-v4 .govuk-radios__item {
-    font-family: sans-serif;
-  }
-}
-@media (min-width: 40.0625em) {
-  .defra-map-scenarios-depth-v4 .govuk-radios__item {
-    font-size: 0.875rem;
-    line-height: 1.4285714286;
-  }
-}
-@media print {
-  .defra-map-scenarios-depth-v4 .govuk-radios__item {
-    font-size: 12pt;
-    line-height: 1.2;
-  }
-}
-.defra-map-scenarios-depth-v4 .govuk-radios--small .govuk-radios__label:before {
-  margin-left: 15px;
-  margin-top: 8px;
-  height: 28px;
-  width: 28px;
-}
-.defra-map-scenarios-depth-v4 .govuk-radios--small .govuk-radios__label:after {
-  margin-left: 15px;
-  margin-top: 8px;
-  border-width: 7px;
-}
-.defra-map-scenarios-depth-v4 .govuk-radios__item input[type=radio]:checked + label strong {
-  text-decoration: none;
-}
-.defra-map-scenarios-depth-v4 .govuk-radios--small strong {
-  display: inline-block;
-  font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 700;
-  font-size: 0.875rem;
-  line-height: 1.1428571429;
-  font-size: 16px;
-  line-height: 1.31579;
-  margin-bottom: 2px;
-  pointer-events: none;
-  text-decoration: underline;
-}
-@media print {
-  .defra-map-scenarios-depth-v4 .govuk-radios--small strong {
-    font-family: sans-serif;
-  }
-}
-@media (min-width: 40.0625em) {
-  .defra-map-scenarios-depth-v4 .govuk-radios--small strong {
-    font-size: 1rem;
-    line-height: 1.25;
-  }
-}
-@media print {
-  .defra-map-scenarios-depth-v4 .govuk-radios--small strong {
-    font-size: 14pt;
-    line-height: 1.2;
-  }
-}
-.defra-map-scenarios-depth-v4 .risk-context-v3 {
-  display: block;
-  font-size: 14px;
-  padding-top: 2px;
-  padding-bottom: 0;
 }
 
 @media screen and (min-width: 821px) {
   .right-btn {
     display: none;
   }
-}
-.last-scenario {
-  margin-bottom: 7px;
 }
 
 .scenario-float-right {
@@ -908,17 +805,15 @@ svg:not(:root) {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
-  font-size: 12px;
-  font-size: 0.75rem;
   line-height: 1.25;
   font-size: 14px;
-  padding-bottom: 10px;
   padding-left: 54px;
   border-bottom: 7px solid transparent;
 }
 
 .govuk-radios__label {
   display: inline-block;
+  font-size: 16px;
   margin-bottom: 0;
   padding: 8px 15px 5px;
   cursor: pointer;
@@ -946,7 +841,7 @@ svg:not(:root) {
 }
 .govuk-radios--small .govuk-radios__label {
   margin-top: -2px;
-  padding: 13px 15px 13px 1px;
+  padding: 13px 15px 10px 1px;
   float: left;
   font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
 }

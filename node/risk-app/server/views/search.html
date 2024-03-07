@@ -42,7 +42,7 @@
             <span class="govuk-warning-text__assistive">Warning</span>
             {{ banner.message }}
             {% if banner.url %}
-            &nbsp;<a class="govuk-link" href="{{ banner.url }}" target="_blank"
+            &nbsp;<a class="govuk-link" rel="noopener" href="{{ banner.url }}" target="_blank"
               data-journey-click="ltfri:search:live-flood-warnings">View details</a>
             {% endif %}
           </strong>

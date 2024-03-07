@@ -1,43 +1,45 @@
 /* global mapCategories $ */
-function MapController (categories) {
-  this._categories = categories
-}
+class MapController {
+  constructor (categories) {
+    this._categories = categories
+  }
 
-/**
+  /**
  * setCurrent
  * @param {string} ref The ref of either a category or map. If a category ref is passed, the first map in that category is used.
  */
-MapController.prototype.setCurrent = function (ref) {
+  setCurrent (ref) {
   // Work out the current category and map
-  let category, map, defaultCategory, defaultMap
-  for (let i = 0; i < this._categories.length; i++) {
-    category = this._categories[i]
-    if (i === 0) {
-      defaultCategory = category
-    }
-
-    if (category.ref === ref) {
-      this.currMap = category.maps[0]
-      this.currCategory = category
-      return
-    }
-
-    for (let j = 0; j < category.maps.length; j++) {
-      map = category.maps[j]
-      if (i === 0 && j === 0) {
-        defaultMap = map
+    let category, map, defaultCategory, defaultMap
+    for (let i = 0; i < this._categories.length; i++) {
+      category = this._categories[i]
+      if (i === 0) {
+        defaultCategory = category
       }
 
-      if (map.ref === ref) {
-        this.currMap = map
+      if (category.ref === ref) {
+        this.currMap = category.maps[0]
         this.currCategory = category
         return
       }
-    }
-  }
 
-  this.currMap = defaultMap
-  this.currCategory = defaultCategory
+      for (let j = 0; j < category.maps.length; j++) {
+        map = category.maps[j]
+        if (i === 0 && j === 0) {
+          defaultMap = map
+        }
+
+        if (map.ref === ref) {
+          this.currMap = map
+          this.currCategory = category
+          return
+        }
+      }
+    }
+
+    this.currMap = defaultMap
+    this.currCategory = defaultCategory
+  }
 }
 
 function mapPage () {
@@ -94,16 +96,66 @@ function mapPage () {
   })
 }
 
+const rightArrow = document.getElementsByClassName('right-scenario-arrow')
+const leftArrow = document.getElementsByClassName('left-scenario-arrow')
+const scenarioSelectionDepth = document.getElementById('scenario-selection-depth')
+const scenarioSelectionVelocity = document.getElementById('scenario-selection-velocity')
+
 const advancedToggle = document.getElementById('advanced-key-button')
+const advancedToggleText = document.getElementById('advanced-button-text')
 const keyDisplay = document.getElementById('map-key')
 const openKeyBtn = document.getElementById('open-key')
 const deviceScreenWidth = 768
+const advancedToggleCutoff = 510
+const rightMove = 150
+const leftMove = -150
 
 document.addEventListener('click', function (event) {
   if (keyDisplay.style.display === 'block' && !keyDisplay.contains(event.target)) {
     closeKey()
   }
 })
+
+document.addEventListener('DOMContentLoaded', function () {
+  const radios = document.querySelectorAll('input[type="radio"].scenario-radio-button')
+
+  radios.forEach(function (radio) {
+    radio.addEventListener('change', function () {
+      const label = document.querySelector(`label[for="${this.id}"]`)
+      if (label) {
+        label.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+      }
+    })
+  })
+
+  showOrHideAdvancedToggleText()
+})
+
+handleArrowClick(rightArrow, rightMove)
+handleArrowClick(leftArrow, leftMove)
+
+handleScroll(scenarioSelectionDepth, [rightArrow[0], leftArrow[0]])
+handleScroll(scenarioSelectionVelocity, [rightArrow[1], leftArrow[1]])
+
+function handleArrowClick (arrows, scrollDirection) {
+  for (const arrow of arrows) {
+    arrow.addEventListener('click', function () {
+      scenarioSelectionDepth.scrollBy({ top: 0, left: scrollDirection, behavior: 'smooth' })
+      scenarioSelectionVelocity.scrollBy({ top: 0, left: scrollDirection, behavior: 'smooth' })
+    })
+  }
+}
+
+function handleScroll (scenarioBar, arrows) {
+  scenarioBar.addEventListener('scroll', function () {
+    const currentScrollPosition = scenarioBar.scrollLeft
+    const divWidth = scenarioBar.offsetWidth
+    const scrollWidth = scenarioBar.scrollWidth
+
+    arrows[0].classList.toggle('hide', currentScrollPosition === scrollWidth - divWidth)
+    arrows[1].classList.toggle('hide', currentScrollPosition === 0)
+  })
+}
 
 openKeyBtn.addEventListener('click', function (event) {
   event.stopPropagation()
@@ -135,7 +187,6 @@ function setCurrent (ref) {
 }
 
 function toggleAdvancedOptions () {
-  const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
   const advancedButtonText = document.getElementById('advanced-button-text')
   const advancedButtonImage = document.getElementById('advanced-button-image')
   const velocityContainer = document.getElementById('sw-velocity-section-container')
@@ -148,7 +199,8 @@ function toggleAdvancedOptions () {
 
   if (window.innerWidth <= deviceScreenWidth) {
     keyDisplay.style.display = 'block'
-    scenariosSelectorDepth.style.display = 'none'
+    scenarioSelectionDepth.style.display = 'none'
+    showOrHideAdvancedToggleText()
   }
 
   if (advancedButtonText.textContent.includes('Show')) {
@@ -194,13 +246,11 @@ function toggleAdvancedOptions () {
 }
 
 function openKey () {
-  const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
-  const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
-
   keyDisplay.style.display = 'block'
   openKeyBtn.style.display = 'none'
-  scenariosSelectorDepth.style.display = 'none'
-  scenariosSelectorVelocity.style.display = 'none'
+  scenarioSelectionDepth.style.display = 'none'
+  scenarioSelectionVelocity.style.display = 'none'
+  showOrHideAdvancedToggleText()
 }
 
 function getInitialKeyOptions () {
@@ -256,8 +306,6 @@ function handleRadioChange (selected, type) {
   const velocityInfo = document.getElementById('sw-velocity-desc-container')
   const boundaryContainer = document.getElementById('boundary-container')
   const olZoom = document.getElementsByClassName('ol-zoom')
-  const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
-  const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
   const topCopyrightContainer = document.getElementById('copyright-info-container-top')
   const bottomCopyrightContainer = document.getElementById('copyright-info-container-bottom')
 
@@ -268,11 +316,11 @@ function handleRadioChange (selected, type) {
     depthInfo.style.display = 'block'
     velocityInfo.style.display = 'none'
     scenarioBarDepth.style.display = 'block'
-    scenariosSelectorDepth.style.display = 'flex'
+    scenarioSelectionDepth.style.display = 'flex'
     scenarioBarVelocity.style.display = 'none'
     if (window.innerWidth <= deviceScreenWidth) {
-      scenariosSelectorDepth.style.display = 'none'
-      scenariosSelectorVelocity.style.display = 'none'
+      scenarioSelectionDepth.style.display = 'none'
+      scenarioSelectionVelocity.style.display = 'none'
       bottomCopyrightContainer.classList.add('hide')
       topCopyrightContainer.classList.remove('hide')
     }
@@ -286,12 +334,20 @@ function handleRadioChange (selected, type) {
     velocityInfo.style.display = 'block'
     scenarioBarDepth.style.display = 'none'
     scenarioBarVelocity.style.display = 'block'
-    scenariosSelectorVelocity.style.display = 'flex'
+    scenarioSelectionVelocity.style.display = 'flex'
     topCopyrightContainer.classList.add('hide')
     bottomCopyrightContainer.classList.remove('hide')
-    scenariosSelectorVelocity.style.display = 'flex'
+    scenarioSelectionVelocity.style.display = 'flex'
     if (window.innerWidth <= deviceScreenWidth && keyDisplay.style.display === 'block') {
-      scenariosSelectorVelocity.style.display = 'none'
+      scenarioSelectionVelocity.style.display = 'none'
+    }
+    if (window.innerWidth <= deviceScreenWidth) {
+      bottomCopyrightContainer.classList.add('hide')
+      topCopyrightContainer.classList.remove('hide')
+    }
+    if (window.innerWidth <= deviceScreenWidth) {
+      bottomCopyrightContainer.classList.add('hide')
+      topCopyrightContainer.classList.remove('hide')
     }
     olZoom[0].style.top = 'calc(100% - 200px)'
   }
@@ -397,8 +453,6 @@ function selectedOption () {
 function closeKey () {
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
-  const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
-  const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
   const depthRadio = document.getElementById('sw-depth-radio')
   const velocityRadio = document.getElementById('sw-velocity-radio')
   const osLogo = document.getElementById('os-logo')
@@ -410,14 +464,14 @@ function closeKey () {
 
   if (depthRadio.checked) {
     scenarioBarDepth.style.display = 'block'
-    scenariosSelectorDepth.style.display = 'flex'
-    scenariosSelectorDepth.style.top = null
+    scenarioSelectionDepth.style.display = 'flex'
+    scenarioSelectionDepth.style.top = null
   }
 
   if (velocityRadio.checked) {
     scenarioBarVelocity.style.display = 'block'
-    scenariosSelectorVelocity.style.display = 'flex'
-    scenariosSelectorVelocity.style.top = null
+    scenarioSelectionVelocity.style.display = 'flex'
+    scenarioSelectionVelocity.style.top = null
   }
 
   openKeyBtn.style.display = 'block'
@@ -426,6 +480,10 @@ function closeKey () {
   } else {
     osLogo.classList.remove('os-logo-position-change')
   }
+
+  if (window.innerWidth <= deviceScreenWidth) {
+    advancedToggleText.classList.remove('hide')
+  }
 }
 
 /* eslint-enable no-unused-vars */
@@ -433,8 +491,6 @@ function adjustPosition () {
   const zoomBtns = document.getElementsByClassName('ol-control')
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
-  const scenariosSelectorDepth = document.getElementById('scenario-selection-depth')
-  const scenariosSelectorVelocity = document.getElementById('scenario-selection-velocity')
   const depthRadio = document.getElementById('sw-depth-radio')
   const velocityRadio = document.getElementById('sw-velocity-radio')
   const osLogo = document.getElementById('os-logo')
@@ -453,8 +509,8 @@ function adjustPosition () {
   }
 
   if (keyDisplay.style.display === 'block' && window.innerWidth <= deviceScreenWidth) {
-    scenariosSelectorDepth.style.display = 'none'
-    scenariosSelectorVelocity.style.display = 'none'
+    scenarioSelectionDepth.style.display = 'none'
+    scenarioSelectionVelocity.style.display = 'none'
   } else if (keyDisplay.style.display === 'block' && window.innerWidth > deviceScreenWidth) {
     if (window.location.href.includes('map=RiversOrSea') ||
     window.location.href.includes('map=SurfaceWater') ||
@@ -463,18 +519,18 @@ function adjustPosition () {
     }
     if (depthRadio.checked) {
       scenarioBarDepth.style.display = 'block'
-      scenariosSelectorDepth.style.display = 'flex'
+      scenarioSelectionDepth.style.display = 'flex'
     }
     if (velocityRadio.checked) {
       scenarioBarVelocity.style.display = 'block'
-      scenariosSelectorVelocity.style.display = 'flex'
+      scenarioSelectionVelocity.style.display = 'flex'
     }
   }
 
   if (depthRadio.checked && window.innerWidth > deviceScreenWidth) {
-    scenariosSelectorDepth.style.display = 'flex'
+    scenarioSelectionDepth.style.display = 'flex'
   } else if (velocityRadio.checked && window.innerWidth > deviceScreenWidth) {
-    scenariosSelectorVelocity.style.display = 'flex'
+    scenarioSelectionVelocity.style.display = 'flex'
   }
 
   if ((scenarioBarDepth.style.display === 'block' ||
@@ -482,6 +538,16 @@ function adjustPosition () {
   window.innerWidth <= deviceScreenWidth
   ) {
     zoomBtns[0].style.top = 'calc(100% - 200px)'
+  }
+  showOrHideAdvancedToggleText()
+}
+
+function showOrHideAdvancedToggleText () {
+  if (window.innerWidth <= deviceScreenWidth) {
+    advancedToggleText.classList.remove('hide')
+  }
+  if (window.innerWidth <= advancedToggleCutoff && keyDisplay.style.display === 'block') {
+    advancedToggleText.classList.add('hide')
   }
 }
 
