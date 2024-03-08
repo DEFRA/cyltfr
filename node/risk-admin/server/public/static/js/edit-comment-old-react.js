@@ -64,6 +64,4 @@ geometry.features.forEach(function (feature, index) {
   commentMap(geo, 'map_' + index, capabilities)
 })
 
-// if (geometry.features.length > 1) {
-//   commentMap(geometry, 'map', capabilities, 'The map below shows all geometries contained within the shapefile')
-// }
+commentMap(geometry, 'map', capabilities, 'The map below shows all geometries contained within the shapefile')
