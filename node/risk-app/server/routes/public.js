@@ -45,5 +45,29 @@ module.exports = [
     options: {
       description: 'Get public assets'
     }
+  },
+  {
+    method: 'GET',
+    path: '/ol/{param*}',
+    handler: {
+      directory: {
+        path: 'node_modules/ol/',
+        index: false,
+        listing: false
+      }
+    },
+    options: {
+      description: 'Get the openlayers library'
+    }
+  },
+  {
+    method: 'GET',
+    path: '/proj4/proj4.js',
+    handler: {
+      file: 'node_modules/proj4/dist/proj4.js'
+    },
+    options: {
+      description: 'Get the proj4 js asset'
+    }
   }
 ]
