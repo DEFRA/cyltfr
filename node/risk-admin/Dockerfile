@@ -1,4 +1,4 @@
-FROM node:18-alpine AS node
+FROM node:20-alpine AS node
 FROM ghcr.io/osgeo/gdal:alpine-small-3.8.4
 COPY --from=node /usr/lib /usr/lib
 COPY --from=node /usr/local/share /usr/local/share
@@ -6,34 +6,40 @@ COPY --from=node /usr/local/lib /usr/local/lib
 COPY --from=node /usr/local/include /usr/local/include
 COPY --from=node /usr/local/bin /usr/local/bin
 
+USER root
+
 RUN set -xe \
     && apk update && apk upgrade \
     && apk add bash make gcc g++ py-pip curl postgresql-client npm \
     && bash --version && npm -v && node -v && psql --version && ogr2ogr --version \
     && npm install -g npm \
-    && rm -rf /var/cache/apk/*
+    && rm -rf /var/cache/apk/* \
+    && addgroup -S node \
+    && adduser -S -D -G node node \
+    && mkdir /home/node/app \
+    && chown -R node:node /home/node/
 
 WORKDIR /home/node/app
 
+USER node
+
 RUN mkdir -p ./node_modules
 
-# USER node
+COPY --chown=node:node ./package*.json ./
 
-COPY ./package*.json ./
+COPY --chown=node:node ./bin ./bin
 
-COPY ./bin ./bin
+COPY --chown=node:node ./client ./client
 
-COPY ./client ./client
-
-COPY ./index.js .
+COPY --chown=node:node ./index.js .
 
 RUN npm install --omit=dev
 
 RUN npm run build
 
-COPY ./server ./server
+COPY --chown=node:node ./server ./server
 
-COPY ./dbscripts ./dbscripts
+COPY --chown=node:node ./dbscripts ./dbscripts
 
 # COPY --chown=node:node . .
 
