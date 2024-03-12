@@ -9,7 +9,7 @@
   "scripts": {
     "prepare": "cd ../.. && husky install node/risk-app/.husky",
     "start": "pm2 start config/pm2.json",
-    "build:webpack": "webpack --config webpack.config.js",
+    "build:webpack": "webpack",
     "build:js": "bin/build-js",
     "build:css": "bin/build-css",
     "watch": "bin/watch",
@@ -55,7 +55,9 @@
     "proxyquire": "^2.1.3",
     "sass": "^1.71.1",
     "sinon": "^17.0.0",
-    "standard": "^17.0.0"
+    "standard": "^17.0.0",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
   },
   "standard": {
     "env": [

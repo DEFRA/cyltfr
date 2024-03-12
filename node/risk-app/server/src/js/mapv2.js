@@ -1,6 +1,7 @@
 import { Map, View } from 'ol'
-import proj4 from 'proj4/proj4.js'
-import { register, get as getProjection } from 'ol/proj'
+import proj4 from 'proj4'
+import { register, get as getProjection } from 'ol/proj.js'
+import WMTS, {optionsFromCapabilities} from 'ol/source/WMTS.js'
 
 const config = {
   projection: {
@@ -23,6 +24,21 @@ register(proj4)
 const projection = getProjection(config.projection.ref)
 
 projection.setExtent(config.projection.extent)
+
+// load capabilities from OS and GSWSM
+
+const options = optionsFromCapabilities(result, {
+  layer: config.OSLayer,
+  matrixSet: config.OSMatrixSet,
+  crossOrigin: 'anonymous'
+})
+
+const wmts = new WMTS({
+  attributions: config.OSAttribution,
+  layer: config.OSLayer,
+  projection
+
+})
 
 const map = new Map({
   target: 'map',

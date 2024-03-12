@@ -69,5 +69,15 @@ module.exports = [
     options: {
       description: 'Get the proj4 js asset'
     }
+  },
+  {
+    method: 'GET',
+    path: '/proj4/proj4-src.js',
+    handler: {
+      file: 'node_modules/proj4/dist/proj4-src.js'
+    },
+    options: {
+      description: 'Get the proj4 js asset'
+    }
   }
 ]

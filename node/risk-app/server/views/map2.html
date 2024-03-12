@@ -13,15 +13,6 @@
 <link rel="stylesheet" href="/ol/ol.css" type="text/css">
 <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="/assets/images/favicon.ico" type="image/x-icon">
 <link href="{{ assetPath }}/stylesheets/map-page.css" rel="stylesheet" />
-<script type="importmap">
-  {
-    "imports": {
-      "ol": "/ol/dist/ol.js",
-      "proj4/": "/proj4/",
-      "ol/": "/ol/"
-    }
-  }
-</script>
 {% endblock %}
 
 
@@ -541,7 +532,6 @@
 
 {% block bodyEnd %}
 {{ super() }}
-<script src="/proj4/proj4.js"></script>
 <script src="{{ assetPath }}/nunjucks-slim.js"></script>
 <script src="{{ assetPath }}/js/mapv2.js" type="module"></script>
 <script>
