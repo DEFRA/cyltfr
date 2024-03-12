@@ -1,6 +1,6 @@
 $govuk-assets-path: '/assets/';
 
-@import "node_modules/govuk-frontend/dist/govuk/all";
+@import "govuk-frontend/dist/govuk/all";
 @import "./legend";
 @import "./overlay";
 @import "./social";
