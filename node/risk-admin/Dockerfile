@@ -25,21 +25,21 @@ USER node
 
 RUN mkdir -p ./node_modules
 
-COPY --chown=node:node ./package*.json ./
+COPY --chown=root:root ./package*.json ./
 
-COPY --chown=node:node ./bin ./bin
+COPY --chown=root:root ./bin ./bin
 
-COPY --chown=node:node ./client ./client
+COPY --chown=root:root ./client ./client
 
-COPY --chown=node:node ./index.js .
+COPY --chown=root:root ./index.js .
 
-RUN npm install --omit=dev
+RUN npm ci --omit=dev
 
 RUN npm run build
 
-COPY --chown=node:node ./server ./server
+COPY --chown=root:root ./server ./server
 
-COPY --chown=node:node ./dbscripts ./dbscripts
+COPY --chown=root:root ./dbscripts ./dbscripts
 
 # COPY --chown=node:node . .
 
