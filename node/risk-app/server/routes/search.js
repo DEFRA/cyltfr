@@ -11,7 +11,10 @@ const { defineBackLink } = require('../services/defineBackLink')
 
 const getWarnings = async (postcode, request) => {
   try {
-    const warnings = await floodService.findWarnings(postcode)
+    let warnings = await floodService.findWarnings(postcode)
+    if (warnings?.address === 'England') {
+      warnings = {}
+    }
     return warnings
   } catch (error) {
     if (request.server.methods.notify) request.server.methods.notify(error)

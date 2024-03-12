@@ -26,12 +26,10 @@ class SearchViewModel {
       items
     }
 
-    if (warnings && warnings.message) {
-      if (warnings.severity && warnings.severity < 4) {
-        this.banner = {
-          url: floodWarningsUrl + '/location?q=' + encodeURIComponent(postcode),
-          message: warnings.message
-        }
+    if (warnings?.message && warnings?.severity < 4) {
+      this.banner = {
+        url: floodWarningsUrl + '/location?q=' + encodeURIComponent(postcode),
+        message: warnings.message
       }
     }
 
