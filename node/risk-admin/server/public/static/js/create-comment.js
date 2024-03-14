@@ -1,8 +1,4 @@
 
-;(function () {
-  const Form = window.JSONSchemaForm.default
-  const React = window.React
-  const ReactDOM = window.ReactDOM
   const FormData = window.FormData
   const fetch = window.fetch
   const commentMap = window.LTFMGMT.commentMap
@@ -43,63 +39,41 @@
       return response
     }).then(function (response) {
       return response.json()
-    }).then(function (response) {
+    }).then(function (jsonFileData) {
+      const featureMapDivs = document.querySelectorAll('.comment-map')
+      const featureTextAreas = document.querySelectorAll('.govuk-textarea')
+      const dataName = document.getElementById('data_name')
+
+      // dataName.setAttribute('value', `${jsonFileData.name}`)
+      console.log(dataName)
+
       document.getElementById('file').remove()
+      document.getElementById('comment-form').style.display = 'block'
 
-      const props = {
-        formData: response,
-        schema: commentSchema.schema,
-        uiSchema: commentSchema.uiSchema,
-        ArrayFieldTemplate: window.LTFMGMT.ArrayFieldTemplate,
-        onSubmit: function (e) {
-          if (window.confirm('Are you sure you want to add the comment?')) {
-            fetch('/comment/create/' + type, {
-              method: 'post',
-              body: JSON.stringify(e.formData),
-              headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-              }
-            }).then(function (response) {
-              if (response.ok) {
-                window.location.href = '/'
-              } else {
-                throw new Error(response.statusText)
-              }
-            }).catch(function (err) {
-              console.error(err)
-              window.alert('Save failed')
-            })
-          }
-        }
-      }
+      featureMapDivs.forEach(function (div, index) {
+        div.id = 'map_' + index
+      })
 
-      const submitButton = React.createElement('button', {
-        type: 'submit',
-        className: 'govuk-button'
-      }, 'Save')
-
-      ReactDOM.render(
-        React.createElement(Form, props, submitButton),
-        document.getElementById('root')
-      )
-
-      response.features.forEach(function (feature, index) {
-        const geo = Object.assign({}, response, {
-          features: response.features.filter(function (f) {
+      jsonFileData.features.forEach(function (feature, index) {
+        const geo = Object.assign({}, jsonFileData, {
+          features: jsonFileData.features.filter(function (f) {
             return f === feature
           })
         })
 
+        featureTextAreas[index].value = `${jsonFileData.features[index].properties.info}`
+        console.log(jsonFileData)
+        console.log('featureTextAreas[index]', featureTextAreas[index])
+        
         commentMap(geo, 'map_' + index, capabilities)
       })
+      console.log(jsonFileData.features)
 
-      if (response.features.length > 1) {
-        commentMap(response, 'map', capabilities, 'The map below shows all geometries contained within the shapefile')
+      if (jsonFileData.features.length > 1) {
+        commentMap(jsonFileData, 'map', capabilities, 'The map below shows all geometries contained within the shapefile')
       }
     }).catch(function (err) {
       console.error(err)
       window.alert('Invalid shapefile')
     })
   })
-})()

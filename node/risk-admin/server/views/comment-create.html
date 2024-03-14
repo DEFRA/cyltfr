@@ -32,7 +32,170 @@
         <img id="spinner" class="loader" alt="loading" src="/assets/images/loading.gif" style="display: none;" />
       </div>
       <div id="map"></div>
-      <div id="root"></div>
+      <div id="root">
+        <form id="comment-form" style="display: none;">
+          <div class="form-group field field-object">
+            <fieldset id="root">
+              <legend id="root__title">A geojson form</legend>
+
+              <div class="form-group field field-string  govuk-form-group name"><label class="control-label"
+                  for="root_name">Description<span class="required">*</span></label>
+                <p id="root_name__description" class="field-description">For internal use, to describe the comments that you are
+                  uploading. This will not be displayed to public users.</p><input type="text" id="data_name"
+                  class="govuk-input govuk-input--width-20" autocomplete="off" required="" maxlength="75"
+                  value="">
+              </div>
+              <div class="form-group field field-string  govuk-form-group boundary"><label class="control-label"
+                  for="root_boundary">Boundary<span class="required">*</span></label>
+                <p id="root_boundary__description" class="field-description">For internal use, choose the boundary to which this
+                  comment applies. This will not be displayed to public users.</p><input rows="5" id="root_boundary" required=""
+                  autocomplete="off" list="options" class="govuk-input" value=""><datalist id="options">
+                  <option>Cumbria and Lancashire (CLA)</option>
+                  <option>Devon, Cornwall and the Isles of Scilly (DCS)</option>
+                  <option>East Anglia (EAN)</option>
+                  <option>East Midlands (EMD)</option>
+                  <option>Greater Manchester, Merseyside and Cheshire (GMC)</option>
+                  <option>Hertfordshire and North London (HNL)</option>
+                  <option>Kent, South London and East Sussex (KSL)</option>
+                  <option>Lincolnshire and Northamptonshire (LNA)</option>
+                  <option>North East (NEA)</option>
+                  <option>Solent and South Downs (SSD)</option>
+                  <option>Thames (THM)</option>
+                  <option>Wessex (WSX)</option>
+                  <option>West Midlands (WMD)</option>
+                  <option>Yorkshire (YOR)</option>
+                </datalist>
+              </div>
+              <div class="form-group field field-array">
+                <div>
+                  <div id="item_0" class="array-item">
+                    <div class="form-group field field-object">
+                      <fieldset id="root_features_0">
+                        <div class="form-group field field-object">
+                          <fieldset id="root_features_0_properties">
+                            <legend id="root_features_0_properties__title">properties</legend>
+                            <div class="hidden"><input type="hidden" id="root_features_0_properties_apply" value="holding">
+                            </div>
+                            <div class="form-group field field-string  govuk-form-group riskOverride"><label
+                                class="control-label" for="root_features_0_properties_riskOverride">Override surface water
+                                risk</label>
+                              <p id="root_features_0_properties_riskOverride__description" class="field-description">Choose if
+                                the risk for surface water flooding should be overriden for points inside this area</p>
+                              <div class="field-radio-group" id="root_features_0_properties_riskOverride">
+                                <div class="radio "><label><span><input type="radio" name="0.3823849214745727"
+                                        value="Do not override"><span>Do not override</span></span></label></div>
+                                <div class="radio "><label><span><input type="radio" name="0.3823849214745727"
+                                        value="Very low"><span>Very low</span></span></label></div>
+                                <div class="radio "><label><span><input type="radio" name="0.3823849214745727"
+                                        value="Low"><span>Low</span></span></label></div>
+                                <div class="radio "><label><span><input type="radio" name="0.3823849214745727"
+                                        value="Medium"><span>Medium</span></span></label></div>
+                                <div class="radio "><label><span><input type="radio" name="0.3823849214745727"
+                                        value="High"><span>High</span></span></label></div>
+                              </div>
+                            </div>
+                            <div class="form-group field field-string  govuk-form-group info"><label class="control-label"
+                                for="root_features_0_properties_info">Info</label>
+                              <div id="root_features_0_properties_info__description" class="field-description">
+                                <p>The info text will display to public users in this geometry. Read <a href="/comment-guidance"
+                                    target="_blank" previewlistener="true">comment guidance</a> before writing or pasting
+                                  anything. The maximum number of characters is 150.</p>
+                              </div>
+                              <div><textarea rows="5" id="root_features_0_properties_info" maxlength="150"
+                                  class="govuk-textarea"></textarea>
+                                <p class="govuk-hint govuk-character-count__message">You have 23 characters remaining</p>
+                              </div>
+                            </div>
+                            <div class="form-group field field-string  govuk-form-group start"><label class="control-label"
+                                for="root_features_0_properties_start">Valid from<span class="required">*</span></label>
+                              <p id="root_features_0_properties_start__description" class="field-description">For your reference
+                                and will not be displayed to public users. Your comments will not be uploaded automatically on
+                                this date. Your comments will go live once they’re approved. If a date picker is not available,
+                                use YYYY-MM-DD.</p><input type="date" id="root_features_0_properties_start"
+                                class="govuk-input govuk-input--width-20" autocomplete="off" required="" value="2019-09-01">
+                            </div>
+                            <div class="form-group field field-string  govuk-form-group end"><label class="control-label"
+                                for="root_features_0_properties_end">Valid to<span class="required">*</span></label>
+                              <p id="root_features_0_properties_end__description" class="field-description">For your reference
+                                and will not be displayed to public users. Your comments will not be removed automatically. It
+                                is your responsibility to remove them on the ‘valid to’ date. If a date picker is not available,
+                                use YYYY-MM-DD.</p><input type="date" id="root_features_0_properties_end"
+                                class="govuk-input govuk-input--width-20" autocomplete="off" required="" value="2020-03-30">
+                            </div>
+                          </fieldset>
+                        </div>
+                      </fieldset>
+                    </div>
+                    <div class="comment-map">
+                    </div>
+                  </div>
+                  <div id="item_1" class="array-item">
+                    <div class="form-group field field-object">
+                      <fieldset id="root_features_1">
+                        <div class="form-group field field-object">
+                          <fieldset id="root_features_1_properties">
+                            <legend id="root_features_1_properties__title">properties</legend>
+                            <div class="hidden"><input type="hidden" id="root_features_1_properties_apply" value="holding">
+                            </div>
+                            <div class="form-group field field-string  govuk-form-group riskOverride"><label
+                                class="control-label" for="root_features_1_properties_riskOverride">Override surface water
+                                risk</label>
+                              <p id="root_features_1_properties_riskOverride__description" class="field-description">Choose if
+                                the risk for surface water flooding should be overriden for points inside this area</p>
+                              <div class="field-radio-group" id="root_features_1_properties_riskOverride">
+                                <div class="radio "><label><span><input type="radio" name="0.4237392533012898"
+                                        value="Do not override"><span>Do not override</span></span></label></div>
+                                <div class="radio "><label><span><input type="radio" name="0.4237392533012898"
+                                        value="Very low"><span>Very low</span></span></label></div>
+                                <div class="radio "><label><span><input type="radio" name="0.4237392533012898"
+                                        value="Low"><span>Low</span></span></label></div>
+                                <div class="radio "><label><span><input type="radio" name="0.4237392533012898"
+                                        value="Medium"><span>Medium</span></span></label></div>
+                                <div class="radio "><label><span><input type="radio" name="0.4237392533012898"
+                                        value="High"><span>High</span></span></label></div>
+                              </div>
+                            </div>
+                            <div class="form-group field field-string  govuk-form-group info"><label class="control-label"
+                                for="root_features_1_properties_info">Info</label>
+                              <div id="root_features_1_properties_info__description" class="field-description">
+                                <p>The info text will display to public users in this geometry. Read <a href="/comment-guidance"
+                                    target="_blank" previewlistener="true">comment guidance</a> before writing or pasting
+                                  anything. The maximum number of characters is 150.</p>
+                              </div>
+                              <div><textarea rows="5" id="root_features_1_properties_info" maxlength="150"
+                                  class="govuk-textarea"></textarea>
+                                <p class="govuk-hint govuk-character-count__message">You have 23 characters remaining</p>
+                              </div>
+                            </div>
+                            <div class="form-group field field-string  govuk-form-group start"><label class="control-label"
+                                for="root_features_1_properties_start">Valid from<span class="required">*</span></label>
+                              <p id="root_features_1_properties_start__description" class="field-description">For your reference
+                                and will not be displayed to public users. Your comments will not be uploaded automatically on
+                                this date. Your comments will go live once they’re approved. If a date picker is not available,
+                                use YYYY-MM-DD.</p><input type="date" id="root_features_1_properties_start"
+                                class="govuk-input govuk-input--width-20" autocomplete="off" required="" value="2019-09-01">
+                            </div>
+                            <div class="form-group field field-string  govuk-form-group end"><label class="control-label"
+                                for="root_features_1_properties_end">Valid to<span class="required">*</span></label>
+                              <p id="root_features_1_properties_end__description" class="field-description">For your reference
+                                and will not be displayed to public users. Your comments will not be removed automatically. It
+                                is your responsibility to remove them on the ‘valid to’ date. If a date picker is not available,
+                                use YYYY-MM-DD.</p><input type="date" id="root_features_1_properties_end"
+                                class="govuk-input govuk-input--width-20" autocomplete="off" required="" value="2020-03-30">
+                            </div>
+                          </fieldset>
+                        </div>
+                      </fieldset>
+                    </div>
+                    <div class="comment-map">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div><button type="submit" class="govuk-button">Save</button>
+        </form>
+      </div>
     </div>
   </div>
 {% endblock %}

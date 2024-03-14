@@ -36,14 +36,10 @@ module.exports = [
       const { params } = request
       const { id } = params
       const provider = request.provider
-      console.log('provider here', provider)
       const comments = await provider.load()
-      console.log('comments', comments)
       const comment = comments.find(c => c.id === id)
       const key = `${config.holdingCommentsPrefix}/${comment.keyname}`
-      console.log('key here', key)
       const geometryFile = await provider.getFile(key)
-      console.log('geometryFile here', geometryFile)
       const geometry = JSON.parse(geometryFile.Body)
       const features = geometry.features
       
