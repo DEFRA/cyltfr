@@ -27,7 +27,6 @@ module.exports = {
 
       geojson.features.forEach(f => {
         const props = f.properties
-        console.log('props', props)
         f.properties = {
           apply: params.type,
           start: props.Start_date

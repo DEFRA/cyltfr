@@ -50,11 +50,11 @@
     }).then(function (jsonFileData) {
       const featureMapDivs = document.querySelectorAll('.comment-map')
       const featureTextAreas = document.querySelectorAll('.govuk-textarea')
+      const startDateField = document.querySelectorAll('.start-date')
+      const endDateField = document.querySelectorAll('.end-date')
       const dataName = document.getElementById('data_name')
       document.getElementById('file').remove()
       document.getElementById('comment-form').style.display = 'block'
-
-      
 
       dataName.setAttribute('value', `${jsonFileData.name}`)
 
@@ -68,6 +68,8 @@
             return f === feature
           })
         })
+        startDateField[index].value = `${jsonFileData.features[index].properties.start}`
+        endDateField[index].value = `${jsonFileData.features[index].properties.end}`
         featureTextAreas[index].value = `${jsonFileData.features[index].properties.info}`
         commentMap(geo, 'map_' + index, capabilities)
       })

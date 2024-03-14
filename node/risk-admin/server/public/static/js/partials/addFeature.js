@@ -38,12 +38,12 @@ function addFeature(featureIndex) {
               <div class="form-group field field-string  govuk-form-group start">
                 <label class="control-label" for="root_features_${featureIndex}_properties_start">Valid from<span class="required">*</span></label>
                 <p id="root_features_${featureIndex}_properties_start__description" class="field-description">For your reference and will not be displayed to public users. Your comments will not be uploaded automatically on this date. Your comments will go live once they’re approved. If a date picker is not available, use YYYY-MM-DD.</p>
-                <input type="date" id="root_features_${featureIndex}_properties_start" class="govuk-input govuk-input--width-20" autocomplete="off" required="" value="2019-09-01">
+                <input type="date" id="root_features_${featureIndex}_properties_start" class="start-date govuk-input govuk-input--width-20" autocomplete="off" required="">
               </div>
               <div class="form-group field field-string  govuk-form-group end">
                 <label class="control-label" for="root_features_${featureIndex}_properties_end">Valid to<span class="required">*</span></label>
                 <p id="root_features_${featureIndex}_properties_end__description" class="field-description">For your reference and will not be displayed to public users. Your comments will not be removed automatically. It is your responsibility to remove them on the ‘valid to’ date. If a date picker is not available, use YYYY-MM-DD.</p>
-                <input type="date" id="root_features_${featureIndex}_properties_end" class="govuk-input govuk-input--width-20" autocomplete="off" required="" value="2020-03-30">
+                <input type="date" id="root_features_${featureIndex}_properties_end" class="end-date govuk-input govuk-input--width-20" autocomplete="off" required="">
               </div>
             </fieldset>
           </div>
