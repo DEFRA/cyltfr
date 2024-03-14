@@ -67,8 +67,8 @@
                 </datalist>
               </div>
               <div class="form-group field field-array">
-                <div>
-                  <div id="item_0" class="array-item">
+                <div id="feature-form">
+                  <!-- <div id="item_0" class="array-item">
                     <div class="form-group field field-object">
                       <fieldset id="root_features_0">
                         <div class="form-group field field-object">
@@ -189,7 +189,7 @@
                     </div>
                     <div class="comment-map">
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </fieldset>
@@ -205,5 +205,6 @@
   window.LTFMGMT.type = '{{ type }}'
   window.LTFMGMT.capabilities = {{ capabilities | dump | safe }}
 </script>
+<script src="/assets/js/partials/addFeature.js"></script>
 <script src="/assets/js/create-comment.js"></script>
 {% endblock %}

@@ -40,15 +40,23 @@
     }).then(function (response) {
       return response.json()
     }).then(function (jsonFileData) {
+      const featureForm = document.getElementById('feature-form')
+
+      jsonFileData.features.forEach(function (feature, index) {
+        featureForm.insertAdjacentHTML('beforeend', addFeature(index))
+      })
+
+      return jsonFileData
+    }).then(function (jsonFileData) {
       const featureMapDivs = document.querySelectorAll('.comment-map')
       const featureTextAreas = document.querySelectorAll('.govuk-textarea')
       const dataName = document.getElementById('data_name')
-
-      // dataName.setAttribute('value', `${jsonFileData.name}`)
-      console.log(dataName)
-
       document.getElementById('file').remove()
       document.getElementById('comment-form').style.display = 'block'
+
+      
+
+      dataName.setAttribute('value', `${jsonFileData.name}`)
 
       featureMapDivs.forEach(function (div, index) {
         div.id = 'map_' + index
@@ -60,14 +68,9 @@
             return f === feature
           })
         })
-
         featureTextAreas[index].value = `${jsonFileData.features[index].properties.info}`
-        console.log(jsonFileData)
-        console.log('featureTextAreas[index]', featureTextAreas[index])
-        
         commentMap(geo, 'map_' + index, capabilities)
       })
-      console.log(jsonFileData.features)
 
       if (jsonFileData.features.length > 1) {
         commentMap(jsonFileData, 'map', capabilities, 'The map below shows all geometries contained within the shapefile')
