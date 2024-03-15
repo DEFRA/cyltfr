@@ -12,8 +12,6 @@ geometry.features.forEach(function (feature, index) {
   commentMap(geo, 'map_' + index, capabilities)
 })
 
-console.log(geometry.crs.properties)
-
 const textareas = document.querySelectorAll('textarea')
 const remainingCharsTexts = document.querySelectorAll('.remaining-chars-text')
 const maxLengths = Array.from(textareas).map(textarea => parseInt(textarea.getAttribute('maxLength')))

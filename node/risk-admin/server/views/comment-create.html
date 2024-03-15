@@ -33,15 +33,15 @@
       </div>
       <div id="map"></div>
       <div id="root">
-        <form id="comment-form" style="display: none;" action="/comment/create/{{type}}" method="POST">
+        <form id="comment-form" style="display: none;">
           <div class="form-group field field-object">
             <fieldset id="root">
               <legend id="root__title">A geojson form</legend>
 
               <div class="form-group field field-string  govuk-form-group name"><label class="control-label"
                   for="root_name">Description<span class="required">*</span></label>
-                <p id="root_name__description" class="field-description">For internal use, to describe the comments that you are
-                  uploading. This will not be displayed to public users.</p><input type="text" id="data_name"
+                <p id="name" class="field-description">For internal use, to describe the comments that you are
+                  uploading. This will not be displayed to public users.</p><input name="name" type="text" id="data_name"
                   class="govuk-input govuk-input--width-20" autocomplete="off" required="" maxlength="75"
                   value="">
               </div>
@@ -49,7 +49,7 @@
                   for="root_boundary">Boundary<span class="required">*</span></label>
                 <p id="root_boundary__description" class="field-description">For internal use, choose the boundary to which this
                   comment applies. This will not be displayed to public users.</p>
-                  <input rows="5" id="root_boundary" required=""
+                  <input name="boundary" rows="5" id="root_boundary" required=""
                     autocomplete="off" list="options" class="govuk-input" value=""><datalist id="options">
                   <option>Cumbria and Lancashire (CLA)</option>
                   <option>Devon, Cornwall and the Isles of Scilly (DCS)</option>
@@ -68,12 +68,12 @@
                 </datalist>
               </div>
               <div class="form-group field field-array">
-                <div id="feature-form">
+                <div id="features">
                 </div>
               </div>
             </fieldset>
           </div>
-          <button type="submit" class="govuk-button">Save</button>
+          <button id="submit" type="submit" class="govuk-button">Save</button>
         </form>
       </div>
     </div>
