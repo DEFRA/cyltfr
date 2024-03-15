@@ -42,7 +42,7 @@
     }).then(function (jsonFileData) {
       const featureForm = document.getElementById('feature-form')
 
-      jsonFileData.features.forEach(function (feature, index) {
+      jsonFileData.features.forEach(function (_feature, index) {
         featureForm.insertAdjacentHTML('beforeend', addFeature(index))
       })
 
@@ -63,11 +63,10 @@
       })
 
       jsonFileData.features.forEach(function (feature, index) {
-        const geo = Object.assign({}, jsonFileData, {
-          features: jsonFileData.features.filter(function (f) {
-            return f === feature
-          })
-        })
+        const geo = {
+          ...jsonFileData,
+          features: jsonFileData.features.filter(f => f === feature)
+        }
         startDateField[index].value = `${jsonFileData.features[index].properties.start}`
         endDateField[index].value = `${jsonFileData.features[index].properties.end}`
         featureTextAreas[index].value = `${jsonFileData.features[index].properties.info}`

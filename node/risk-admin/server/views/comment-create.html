@@ -33,7 +33,7 @@
       </div>
       <div id="map"></div>
       <div id="root">
-        <form id="comment-form" style="display: none;">
+        <form id="comment-form" style="display: none;" action="/comment/create/{{type}}" method="POST">
           <div class="form-group field field-object">
             <fieldset id="root">
               <legend id="root__title">A geojson form</legend>
@@ -48,8 +48,9 @@
               <div class="form-group field field-string  govuk-form-group boundary"><label class="control-label"
                   for="root_boundary">Boundary<span class="required">*</span></label>
                 <p id="root_boundary__description" class="field-description">For internal use, choose the boundary to which this
-                  comment applies. This will not be displayed to public users.</p><input rows="5" id="root_boundary" required=""
-                  autocomplete="off" list="options" class="govuk-input" value=""><datalist id="options">
+                  comment applies. This will not be displayed to public users.</p>
+                  <input rows="5" id="root_boundary" required=""
+                    autocomplete="off" list="options" class="govuk-input" value=""><datalist id="options">
                   <option>Cumbria and Lancashire (CLA)</option>
                   <option>Devon, Cornwall and the Isles of Scilly (DCS)</option>
                   <option>East Anglia (EAN)</option>
@@ -71,7 +72,8 @@
                 </div>
               </div>
             </fieldset>
-          </div><button type="submit" class="govuk-button">Save</button>
+          </div>
+          <button type="submit" class="govuk-button">Save</button>
         </form>
       </div>
     </div>
