@@ -44,11 +44,25 @@ fileInput.addEventListener('change', function (e) {
 
     jsonFileData.features.forEach(function (_feature, index) {
       featureForm.insertAdjacentHTML('beforeend', addFeature(index))
+      
+      const textareas = document.querySelectorAll('textarea')
+      const remainingCharsTexts = document.querySelectorAll('.remaining-chars-text')
+
+      textareas.forEach((textarea, index) => {
+        updateRemainingChars(textarea, remainingCharsTexts[index])
+        textarea.addEventListener('input', () => {
+          updateRemainingChars(textarea, remainingCharsTexts[index])
+        })
+      })
+
+      function updateRemainingChars(textarea, remainingCharsText) {
+        const maxLength = parseInt(textarea.getAttribute('maxLength'))
+        remainingCharsText.innerHTML = maxLength - textarea.value.length
+      }
     })
 
     return jsonFileData
   }).then(function (jsonFileData) {
-    console.log(jsonFileData)
     const featureMapDivs = document.querySelectorAll('.comment-map')
     const featureTextAreas = document.querySelectorAll('.govuk-textarea')
     const startDateField = document.querySelectorAll('.start-date')
@@ -89,36 +103,45 @@ fileInput.addEventListener('change', function (e) {
       const boundaryValue = formData.get('boundary')
       jsonFileData.boundary = boundaryValue
 
-      jsonFileData.features.forEach(function (feature, index) {
+      jsonFileData.features.forEach(function (_feature, index) {
         const riskOverrideValue = formData.get(`features_${index}_properties_riskOverride`)
         jsonFileData.features[index].properties.riskOverride = riskOverrideValue
-      })
-      console.log(jsonFileData)
 
-      // need to add code to update any edited fields
+        if (jsonFileData.name !== formData.get(`name`)) {
+          jsonFileData.name = formData.get(`name`)
+        }
+        if (jsonFileData.features[index].properties.start !== formData.get(`features_${index}_properties_start`)) {
+          jsonFileData.features[index].properties.start = formData.get(`features_${index}_properties_start`)
+        }
+        if (jsonFileData.features[index].properties.end !== formData.get(`features_${index}_properties_end`)) {
+          jsonFileData.features[index].properties.end = formData.get(`features_${index}_properties_end`)
+        }
+        if (jsonFileData.features[index].properties.info !== formData.get(`features_${index}_properties_info`)) {
+          jsonFileData.features[index].properties.info = formData.get(`features_${index}_properties_info`)
+        }
+      })
     }
 
     commentForm.addEventListener('submit', function (event) {
-      // fetch('/comment/create/' + type, {
-      //   method: 'post',
-      //   body: handleFormSubmit(event),
-      //   headers: {
-      //     Accept: 'application/json',
-      //     'Content-Type': 'application/json'
-      //   }
-      // }).then(function (response) {
-      //   if (response.ok) {
-      //     window.location.href = '/'
-      //   } else {
-      //     throw new Error(response.statusText)
-      //   }
-      // }).catch(function (err) {
-      //   console.error(err)
-      //   window.alert('Save failed')
-      // })
       handleFormSubmit(event)
-      event.preventDefault();
-      // console.log('JSON.stringify(e.formData): ', JSON.stringify(jsonFileData))
+
+      fetch('/comment/create/' + type, {
+        method: 'post',
+        body: JSON.stringify(jsonFileData),
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }).then(function (response) {
+        if (response.ok) {
+          window.location.href = '/'
+        } else {
+          throw new Error(response.statusText)
+        }
+      }).catch(function (err) {
+        console.error(err)
+        window.alert('Save failed')
+      })
     })
   }).catch(function (err) {
     console.error(err)

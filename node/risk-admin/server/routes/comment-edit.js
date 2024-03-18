@@ -18,13 +18,6 @@ module.exports = [
       const key = `${config.holdingCommentsPrefix}/${comment.keyname}`
       const geometryFile = await provider.getFile(key)
       const geometry = JSON.parse(geometryFile.Body)
-      // console.log('id: ', id)
-      // console.log('provider: ', provider)
-      // console.log('comments: ', comments)
-      // console.log('comment: ', comment)
-      // console.log('key: ', key)
-      // console.log('geometryFile: ', geometryFile)
-      console.log('geometry: ', geometry.features[0].properties)
 
       return h.view('comment-view', new CommentView(comment, geometry, request.auth, capabilities))
     },

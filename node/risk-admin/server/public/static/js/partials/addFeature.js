@@ -32,7 +32,7 @@ function addFeature(featureIndex) {
                 </div>
                 <div>
                   <textarea name="features_${featureIndex}_properties_info" rows="5" id="root_features_${featureIndex}_properties_info" maxlength="150" class="govuk-textarea"></textarea>
-                  <p class="govuk-hint govuk-character-count__message">You have 23 characters remaining</p>
+                  <p class="govuk-hint govuk-character-count__message">You have <span class="remaining-chars-text"></span> characters remaining</p>
                 </div>
               </div>
               <div class="form-group field field-string  govuk-form-group start">

@@ -29,11 +29,6 @@ module.exports = [
       const id = shortId()
       const keyname = `${id}.json`
       const now = new Date()
-      console.log('provider: ', provider)
-      console.log('type: ', type)
-      console.log('id: ', id)
-      console.log('keyname: ', keyname)
-      console.log('now: ', now)
 
       try {
         // Update manifest
@@ -49,7 +44,6 @@ module.exports = [
           keyname,
           id
         })
-        console.log('here now')
 
         // Upload file to s3
         await provider.uploadObject(keyname, JSON.stringify(payload))
@@ -73,7 +67,6 @@ module.exports = [
           features: joi.array().required()
         }).unknown(),
         failAction: async (request, h, err) => {
-          console.log(request)
           console.log(err)
           const data = request.payload
           const type = request.params.type
