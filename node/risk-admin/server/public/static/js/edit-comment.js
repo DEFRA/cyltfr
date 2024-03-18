@@ -1,6 +1,10 @@
 const commentMap = window.LTFMGMT.commentMap
 const geometry = window.LTFMGMT.geometry
 const capabilities = window.LTFMGMT.capabilities
+const textareas = document.querySelectorAll('textarea')
+const remainingCharsTexts = document.querySelectorAll('.remaining-chars-text')
+const maxLengths = Array.from(textareas).map(textarea => parseInt(textarea.getAttribute('maxLength')))
+const editForm = document.getElementById('comment-form-edit')
 
 geometry.features.forEach(function (feature, index) {
   const geo = Object.assign({}, geometry, {
@@ -11,10 +15,6 @@ geometry.features.forEach(function (feature, index) {
 
   commentMap(geo, 'map_' + index, capabilities)
 })
-
-const textareas = document.querySelectorAll('textarea')
-const remainingCharsTexts = document.querySelectorAll('.remaining-chars-text')
-const maxLengths = Array.from(textareas).map(textarea => parseInt(textarea.getAttribute('maxLength')))
 
 document.addEventListener('DOMContentLoaded', () => {
   textareas.forEach((textarea, index) => {

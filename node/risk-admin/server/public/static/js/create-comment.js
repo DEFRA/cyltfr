@@ -97,7 +97,7 @@ fileInput.addEventListener('change', function (e) {
     const commentForm = document.getElementById('comment-form')
 
     function handleFormSubmit(event) {
-      event.preventDefault();
+      event.preventDefault()
       const formData = new FormData(event.target)
 
       const boundaryValue = formData.get('boundary')

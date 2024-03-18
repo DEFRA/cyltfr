@@ -18,21 +18,23 @@
     </div>
     <div class="govuk-grid-column-two-thirds">
       <div id="root">
-        <form class="rjsf">
+        <form id="comment-form-edit" action="/comment/edit/{{id}}" method="POST">
           <div class="form-group field field-object">
             <fieldset id="root">
               <legend id="root__title">A geojson form</legend>
               <div class="form-group field field-string  govuk-form-group name"><label class="control-label"
                   for="root_name">Description<span class="required">*</span></label>
                 <p id="root_name__description" class="field-description">For internal use, to describe the comments that you
-                  are uploading. This will not be displayed to public users.</p><input type="text" id="root_name"
+                  are uploading. This will not be displayed to public users.</p>
+                  <input name="name" type="text"
                   class="govuk-input govuk-input--width-2{{ features.indexOf(feature) }}" autocomplete="off" required="" maxlength="75"
                   value="{{ comment.description }}">
               </div>
               <div class="form-group field field-string  govuk-form-group boundary"><label class="control-label"
                   for="root_boundary">Boundary<span class="required">*</span></label>
                 <p id="root_boundary__description" class="field-description">For internal use, choose the boundary to which
-                  this comment applies. This will not be displayed to public users.</p><input rows="5" id="root_boundary"
+                  this comment applies. This will not be displayed to public users.</p>
+                  <input name="boundary" rows="5" id="root_boundary"
                   required="" autocomplete="off" list="options" class="govuk-input"
                   value="{{ comment.boundary }}"><datalist id="options">
                   <option>Cumbria and Lancashire (CLA)</option>
@@ -95,7 +97,7 @@
                                     href="/comment-guidance" target="_blank" previewlistener="true">comment guidance</a>
                                   before writing or pasting anything. The maximum number of characters is 150.</p>
                               </div>
-                              <div><textarea rows="5" id="root_features_{{ features.indexOf(feature) }}_properties_info" maxlength="150"
+                              <div><textarea name="features_{{ features.indexOf(feature) }}_properties_info" rows="5" maxlength="150"
                                   class="govuk-textarea">{{ feature.properties.info }}</textarea>
                                 <p class="govuk-hint govuk-character-count__message">You have <span class="remaining-chars-text"></span> characters remaining</p>
                               </div>
@@ -105,7 +107,8 @@
                               <p id="root_features_{{ features.indexOf(feature) }}_properties_start__description" class="field-description">For your
                                 reference and will not be displayed to public users. Your comments will not be uploaded
                                 automatically on this date. Your comments will go live once they’re approved. If a date picker
-                                is not available, use YYYY-MM-DD.</p><input type="date" id="root_features_{{ features.indexOf(feature) }}_properties_start"
+                                is not available, use YYYY-MM-DD.</p>
+                                <input name="features_{{ features.indexOf(feature) }}_properties_start" type="date"
                                 class="govuk-input govuk-input--width-2{{ features.indexOf(feature) }}" autocomplete="off" required="" value="{{ feature.properties.start }}">
                             </div>
                             <div class="form-group field field-string  govuk-form-group end"><label class="control-label"
@@ -113,7 +116,8 @@
                               <p id="root_features_{{ features.indexOf(feature) }}_properties_end__description" class="field-description">For your reference
                                 and will not be displayed to public users. Your comments will not be removed automatically. It
                                 is your responsibility to remove them on the ‘valid to’ date. If a date picker is not
-                                available, use YYYY-MM-DD.</p><input type="date" id="root_features_{{ features.indexOf(feature) }}_properties_end"
+                                available, use YYYY-MM-DD.</p>
+                                <input name="features_{{ features.indexOf(feature) }}_properties_end" type="date"
                                 class="govuk-input govuk-input--width-2{{ features.indexOf(feature) }}" autocomplete="off" required="" value="{{ feature.properties.end }}">
                             </div>
                           </fieldset>
@@ -126,7 +130,8 @@
                 </div>
               </div>
             </fieldset>
-          </div><button type="submit" class="govuk-button">Save</button>
+          </div>
+          <button type="submit" class="govuk-button">Save</button>
         </form>
       </div>
     </div>

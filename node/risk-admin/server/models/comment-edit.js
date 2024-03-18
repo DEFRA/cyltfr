@@ -1,5 +1,5 @@
 class CommentEdit {
-  constructor (comment, geometry, auth, capabilities, features) {
+  constructor (comment, geometry, auth, capabilities, features, id) {
     this.comment = comment
     this.geometry = geometry
     this.capabilities = capabilities
@@ -7,6 +7,7 @@ class CommentEdit {
     this.allowDelete = auth.credentials.isApprover ||
       comment.createdBy === auth.credentials.profile.email
     this.features = features
+    this.id = id
   }
 }
 

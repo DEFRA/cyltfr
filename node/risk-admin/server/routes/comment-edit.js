@@ -17,7 +17,7 @@ module.exports = [
       const comment = comments.find(c => c.id === id)
       const key = `${config.holdingCommentsPrefix}/${comment.keyname}`
       const geometryFile = await provider.getFile(key)
-      const geometry = JSON.parse(geometryFile.Body)
+      const geometry = JSON.parse(geometryFile.Body)      
 
       return h.view('comment-view', new CommentView(comment, geometry, request.auth, capabilities))
     },
@@ -42,9 +42,8 @@ module.exports = [
       const geometryFile = await provider.getFile(key)
       const geometry = JSON.parse(geometryFile.Body)
       const features = geometry.features
-      
 
-      return h.view('comment-edit', new CommentEdit(comment, geometry, request.auth, capabilities, features))
+      return h.view('comment-edit', new CommentEdit(comment, geometry, request.auth, capabilities, features, id))
     },
     options: {
       validate: {
@@ -55,7 +54,7 @@ module.exports = [
     }
   },
   {
-    method: 'PUT',
+    method: 'POST',
     path: '/comment/edit/{id}',
     handler: async (request, h) => {
       const { payload, params, auth } = request
@@ -63,7 +62,11 @@ module.exports = [
       const provider = request.provider
       const comments = await provider.load()
       const comment = comments.find(c => c.id === id)
-      const key = `${comment.keyname}`
+      const key = `${config.holdingCommentsPrefix}/${comment.keyname}`
+      const geometryFile = await provider.getFile(key)
+      const geometry = JSON.parse(geometryFile.Body)
+      const features = geometry.features
+      const formattedPayload = geometry
 
       // Only approvers or comment authors can update
       const allowUpdate = auth.credentials.isApprover ||
@@ -83,20 +86,46 @@ module.exports = [
         updatedBy: auth.credentials.profile.email
       })
 
+      if (payload.name !== geometry.name) {
+        formattedPayload.name = payload.name
+      }
+      if (payload.boundary !== geometry.boundary) {
+        formattedPayload.name = payload.boundary
+      }
+
+      features.forEach((feature, index) => {
+        const { properties } = feature
+        const {
+          [`features_${index}_properties_info`]: info,
+          [`features_${index}_properties_start`]: start,
+          [`features_${index}_properties_end`]: end,
+          [`features_${index}_properties_riskOverride`]: riskOverride
+        } = payload
+      
+        if (info !== properties.info) formattedPayload.features[index].properties.info = info
+        if (start !== properties.start) formattedPayload.features[index].properties.start = start
+        if (end !== properties.end) formattedPayload.features[index].properties.end = end
+        if (riskOverride !== properties.riskOverride) formattedPayload.features[index].properties.riskOverride = riskOverride
+      })
+
       // Upload file to s3
-      await provider.uploadObject(key, JSON.stringify(payload))
+      await provider.uploadObject(`${comment.keyname}`, JSON.stringify(formattedPayload))
 
       await provider.save(comments)
 
-      return {
-        ok: true
-      }
+      return h.redirect('/')
     },
     options: {
       validate: {
         params: joi.object().keys({
           id: joi.string().required()
-        })
+        }),
+        failAction: async (request, h, err) => {
+          console.log(err)
+          const data = request.payload
+          const type = request.params.type
+          return h.view('/comment/create')
+        }
       },
       app: {
         useErrorPages: false
