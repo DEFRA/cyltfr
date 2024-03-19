@@ -1,5 +1,5 @@
 class CommentEdit {
-  constructor (comment, geometry, auth, capabilities, features, id, type) {
+  constructor (comment, geometry, auth, capabilities, features, id, type, selectedRadio) {
     this.comment = comment
     this.geometry = geometry
     this.capabilities = capabilities
@@ -9,6 +9,7 @@ class CommentEdit {
     this.features = features
     this.id = id
     this.type = type
+    this.selectedRadio = selectedRadio
   }
 }
 

@@ -43,8 +43,20 @@ module.exports = [
       const geometry = JSON.parse(geometryFile.Body)
       const features = geometry.features
       const type = comment.type
+      let selectedRadio = []
 
-      return h.view('comment-edit', new CommentEdit(comment, geometry, request.auth, capabilities, features, id, type))
+      features.forEach(function (feature) {
+        if (type === 'holding') {
+          selectedRadio.push(feature.properties.riskOverride)
+        } else {
+          selectedRadio.push(feature.properties.riskReportType)
+        }
+      })
+
+      return h.view(
+        'comment-edit',
+        new CommentEdit(comment, geometry, request.auth, capabilities, features, id, type, selectedRadio)
+      )
     },
     options: {
       validate: {
@@ -100,13 +112,15 @@ module.exports = [
           [`features_${index}_properties_info`]: info,
           [`features_${index}_properties_start`]: start,
           [`features_${index}_properties_end`]: end,
-          [`features_${index}_properties_riskOverride`]: riskOverride
+          [`features_${index}_properties_riskOverride`]: riskOverride,
+          [`features_${index}_properties_report_type`]: riskReportType
         } = payload
       
         if (info !== properties.info) formattedPayload.features[index].properties.info = info
         if (start !== properties.start) formattedPayload.features[index].properties.start = start
         if (end !== properties.end) formattedPayload.features[index].properties.end = end
         if (riskOverride !== properties.riskOverride) formattedPayload.features[index].properties.riskOverride = riskOverride
+        if (riskReportType !== properties.riskReportType) formattedPayload.features[index].properties.riskReportType = riskReportType
       })
 
       // Upload file to s3

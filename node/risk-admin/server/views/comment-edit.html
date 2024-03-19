@@ -54,8 +54,6 @@
                 </datalist>
               </div>
 
-              
-
               <div class="form-group field field-array">
                 <div>
                   {% for feature in features %}
@@ -76,20 +74,32 @@
                                 risk</label>
                               <p id="root_features_{{ features.indexOf(feature) }}_properties_riskOverride__description" class="field-description">Choose if
                                 the risk for surface water flooding should be overriden for points inside this area</p>
-                              <ul class="field-radio-group" id="root_features_{{ features.indexOf(feature) }}_properties_riskOverride">
-                                <li><input class="radio " type="radio" id="map_{{ features.indexOf(feature) }}-no-override" name="override_{{ features.indexOf(feature) }}" value="Do not override" checked="">
-                                <label for="map_{{ features.indexOf(feature) }}-no-override">Do not override</label></li>
-                                <li><input class="radio " type="radio" id="map_{{ features.indexOf(feature) }}-override" name="override_{{ features.indexOf(feature) }}" value="Override">
-                                <label for="map_{{ features.indexOf(feature) }}-override">Override</label></li>
-                                <ul class="risk-options">
-                                  <li><input class="radio risk-option" type="radio" id="map_{{ features.indexOf(feature) }}-override-very-low" name="override_{{ features.indexOf(feature) }}-risk" value="Very low">
-                                  <label for="map_{{ features.indexOf(feature) }}-override-very-low">Very low</label></li>
-                                  <li><input class="radio risk-option" type="radio" id="map_{{ features.indexOf(feature) }}-override-low" name="override_{{ features.indexOf(feature) }}-risk" value="Low">
-                                  <label for="map_{{ features.indexOf(feature) }}-override-low">Low</label></li>
-                                  <li><input class="radio risk-option" type="radio" id="map_{{ features.indexOf(feature) }}-override-medium" name="override_{{ features.indexOf(feature) }}-risk" value="Medium">
-                                  <label for="map_{{ features.indexOf(feature) }}-override-medium">Medium</label></li>
-                                  <li><input class="radio risk-option" type="radio" id="map_{{ features.indexOf(feature) }}-override-high" name="override_{{ features.indexOf(feature) }}-risk" value="High">
-                                  <label for="map_{{ features.indexOf(feature) }}-override-high">High</label></li>
+                              <ul class="field-radio-group" id="features_{{ features.indexOf(feature) }}_properties_riskOverride">
+                                <li>
+                                  <input class="radio override_radio_{{ features.indexOf(feature) }}" type="radio" id="map_{{ features.indexOf(feature) }}-no-override" name="override_{{ features.indexOf(feature) }}"
+                                  value="Do not override">
+                                  <label for="map_{{ features.indexOf(feature) }}-no-override">Do not override</label></li>
+                                <li>
+                                  <input class="radio " type="radio" id="map_{{ features.indexOf(feature) }}-override" name="override_{{ features.indexOf(feature) }}"
+                                  value="Override">
+                                  <label for="map_{{ features.indexOf(feature) }}-override">Override</label></li>
+                                <ul id="risk-options_{{ features.indexOf(feature) }}" style="display: none;">
+                                  <li>
+                                    <input class="radio risk-option_{{ features.indexOf(feature) }}" type="radio" id="map_{{ features.indexOf(feature) }}-override-very-low" name="override_{{ features.indexOf(feature) }}-risk"
+                                    value="Very low">
+                                    <label for="map_{{ features.indexOf(feature) }}-override-very-low">Very low</label></li>
+                                  <li>
+                                    <input class="radio risk-option_{{ features.indexOf(feature) }}" type="radio" id="map_{{ features.indexOf(feature) }}-override-low" name="override_{{ features.indexOf(feature) }}-risk"
+                                    value="Low">
+                                    <label for="map_{{ features.indexOf(feature) }}-override-low">Low</label></li>
+                                  <li>
+                                    <input class="radio risk-option_{{ features.indexOf(feature) }}" type="radio" id="map_{{ features.indexOf(feature) }}-override-medium" name="override_{{ features.indexOf(feature) }}-risk"
+                                    value="Medium">
+                                    <label for="map_{{ features.indexOf(feature) }}-override-medium">Medium</label></li>
+                                  <li>
+                                    <input class="radio risk-option_{{ features.indexOf(feature) }}" type="radio" id="map_{{ features.indexOf(feature) }}-override-high" name="override_{{ features.indexOf(feature) }}-risk"
+                                    value="High">
+                                    <label for="map_{{ features.indexOf(feature) }}-override-high">High</label></li>
                                 </ul>
                               </ul>
                             </div>
@@ -194,6 +204,7 @@
     window.LTFMGMT.comment = {{ comment | dump | safe }}
     window.LTFMGMT.geometry = {{ geometry | dump | safe }}
     window.LTFMGMT.capabilities = {{ capabilities | dump | safe }}
+    window.LTFMGMT.selectedRadio = {{ selectedRadio | dump | safe }}
   </script>
   <script src="/assets/js/edit-comment.js"></script>
 {% endblock %}

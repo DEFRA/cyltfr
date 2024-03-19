@@ -9,12 +9,9 @@ const fileInput = document.getElementById('geometry')
 
 const type = window.LTFMGMT.type
 const isHoldingComment = type === 'holding'
-const commentSchema = isHoldingComment
-  ? window.LTFMGMT.holdingCommentSchema
-  : window.LTFMGMT.llfaCommentSchema
 
-// Handle file change event
 fileInput.addEventListener('change', function (e) {
+  // Read file and add to form data fields
   const formData = new FormData()
 
   if (!fileInput.files || !fileInput.files.length) {
@@ -26,6 +23,7 @@ fileInput.addEventListener('change', function (e) {
   fileInput.style.display = 'none'
   spinner.style.display = 'inline'
 
+  // Process data using the shp2json router
   fetch('/shp2json/' + type, {
     method: 'post',
     body: formData
@@ -38,8 +36,10 @@ fileInput.addEventListener('change', function (e) {
 
     return response
   }).then(function (response) {
+    // Convert response to Json
     return response.json()
   }).then(function (jsonFileData) {
+    // Add feature sections for each feature
     const featureForm = document.getElementById('features')
 
     jsonFileData.features.forEach(function (_feature, index) {
@@ -48,6 +48,7 @@ fileInput.addEventListener('change', function (e) {
 
     return jsonFileData
   }).then(function (jsonFileData) {
+    // Add ID values and import maps and form field values based on provided file data
     const featureMapDivs = document.querySelectorAll('.comment-map')
     const featureTextAreas = document.querySelectorAll('.govuk-textarea')
     const startDateField = document.querySelectorAll('.start-date')
@@ -69,7 +70,7 @@ fileInput.addEventListener('change', function (e) {
       }
       startDateField[index].value = `${jsonFileData.features[index].properties.start}`
       endDateField[index].value = `${jsonFileData.features[index].properties.end}`
-      if (type === 'holding') {
+      if (isHoldingComment) {
         featureTextAreas[index].value = `${jsonFileData.features[index].properties.info}`
       }
       commentMap(geo, 'map_' + index, capabilities)
@@ -79,6 +80,7 @@ fileInput.addEventListener('change', function (e) {
       commentMap(jsonFileData, 'map', capabilities, 'The map below shows all geometries contained within the shapefile')
     } 
 
+    // Add char count for the text areas
     const textareas = document.querySelectorAll('textarea')
     const remainingCharsTexts = document.querySelectorAll('.remaining-chars-text')
 
@@ -96,6 +98,7 @@ fileInput.addEventListener('change', function (e) {
     
     return jsonFileData
   }).then(function (jsonFileData) {
+    // Construct the form data checking for any changes made by user in fields ready for payload
     const commentForm = document.getElementById('comment-form')
 
     function handleFormSubmit(event) {
@@ -107,6 +110,9 @@ fileInput.addEventListener('change', function (e) {
 
       jsonFileData.features.forEach(function (_feature, index) {
         const riskOverrideValue = formData.get(`features_${index}_properties_riskOverride`)
+        const riskReportType = formData.get(`features_${index}_properties_report_type`)
+
+        jsonFileData.features[index].properties.riskReportType = riskReportType
         jsonFileData.features[index].properties.riskOverride = riskOverrideValue
 
         if (jsonFileData.name !== formData.get(`name`)) {
