@@ -119,6 +119,9 @@ module.exports = [
         if (payload[`override_${index}-risk`] !== features[index].properties.riskOverride ) {
           formattedPayload.features[index].properties.riskOverride = payload[`override_${index}-risk`]
         }
+        if (payload[`features_${index}_properties_report_type`] !== features[index].properties.riskReportType ) {
+          formattedPayload.features[index].properties.riskReportType = payload[`features_${index}_properties_report_type`]
+        }
       })
 
       // Upload file to s3

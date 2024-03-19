@@ -153,14 +153,20 @@
                                 for="root_features_{{ features.indexOf(feature) }}_properties_info">Report</label>
                               <p id="root_features_{{ features.indexOf(feature) }}_properties_info__description" class="field-description">The report text will display
                                 to public users in this geometry.</p>
-                              <div class="field-radio-group" id="root_features_{{ features.indexOf(feature) }}_properties_info">
-                                <div class="radio "><label><span><input type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Flood report"><span>Flood report</span></span></label></div>
-                                <div class="radio "><label><span><input type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Non compliant mapping"><span>Non compliant mapping</span></span></label></div>
-                                <div class="radio "><label><span><input type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Proposed schemes"><span>Proposed schemes</span></span></label></div>
-                                <div class="radio "><label><span><input type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Completed schemes"><span>Completed schemes</span></span></label></div>
-                                <div class="radio "><label><span><input type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Flood action plan"><span>Flood action plan</span></span></label></div>
-                                <div class="radio "><label><span><input type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Other info"><span>Other info</span></span></label></div>
-                              </div>
+                              <ul class="field-radio-group" id="root_features_{{ features.indexOf(feature) }}_properties_info">
+                                <li><input class="radio risk-report_{{ features.indexOf(feature) }}" type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Flood report">
+                                <label><span><span>Flood report</span></span></label></li>
+                                <li><input class="radio risk-report_{{ features.indexOf(feature) }}" type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Non compliant mapping">
+                                <label><span><span>Non compliant mapping</span></span></label></li>
+                                <li><input class="radio risk-report_{{ features.indexOf(feature) }}" type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Proposed schemes">
+                                <label><span><span>Proposed schemes</span></span></label></li>
+                                <li><input class="radio risk-report_{{ features.indexOf(feature) }}" type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Completed schemes">
+                                <label><span><span>Completed schemes</span></span></label></li>
+                                <li><input class="radio risk-report_{{ features.indexOf(feature) }}" type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Flood action plan">
+                                <label><span><span>Flood action plan</span></span></label></li>
+                                <li><input class="radio risk-report_{{ features.indexOf(feature) }}" type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Other info">
+                                <label><span><span>Other info</span></span></label></li>
+                              </ul>
                             </div>
                             <div class="form-group field field-string  govuk-form-group start"><label class="control-label"
                                 for="root_features_{{ features.indexOf(feature) }}_properties_start">Valid from<span class="required">*</span></label>
@@ -205,6 +211,7 @@
     window.LTFMGMT.geometry = {{ geometry | dump | safe }}
     window.LTFMGMT.capabilities = {{ capabilities | dump | safe }}
     window.LTFMGMT.selectedRadio = {{ selectedRadio | dump | safe }}
+    window.LTFMGMT.type = {{ type | dump | safe }}
   </script>
   <script src="/assets/js/edit-comment.js"></script>
 {% endblock %}
