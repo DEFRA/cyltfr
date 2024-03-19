@@ -106,21 +106,19 @@ module.exports = [
         formattedPayload.name = payload.boundary
       }
 
-      features.forEach((feature, index) => {
-        const { properties } = feature
-        const {
-          [`features_${index}_properties_info`]: info,
-          [`features_${index}_properties_start`]: start,
-          [`features_${index}_properties_end`]: end,
-          [`features_${index}_properties_riskOverride`]: riskOverride,
-          [`features_${index}_properties_report_type`]: riskReportType
-        } = payload
-      
-        if (info !== properties.info) formattedPayload.features[index].properties.info = info
-        if (start !== properties.start) formattedPayload.features[index].properties.start = start
-        if (end !== properties.end) formattedPayload.features[index].properties.end = end
-        if (riskOverride !== properties.riskOverride) formattedPayload.features[index].properties.riskOverride = riskOverride
-        if (riskReportType !== properties.riskReportType) formattedPayload.features[index].properties.riskReportType = riskReportType
+      features.forEach(function (feature, index) {
+        if (payload[`features_${index}_properties_info`] !== features[index].properties.info ) {
+          formattedPayload.features[index].properties.info = payload[`features_${index}_properties_info`]
+        }
+        if (payload[`features_${index}_properties_start`] !== features[index].properties.start ) {
+          formattedPayload.features[index].properties.start = payload[`features_${index}_properties_start`]
+        }
+        if (payload[`features_${index}_properties_end`] !== features[index].properties.end ) {
+          formattedPayload.features[index].properties.end = payload[`features_${index}_properties_end`]
+        }
+        if (payload[`override_${index}-risk`] !== features[index].properties.riskOverride ) {
+          formattedPayload.features[index].properties.riskOverride = payload[`override_${index}-risk`]
+        }
       })
 
       // Upload file to s3
