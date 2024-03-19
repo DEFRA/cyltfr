@@ -43,22 +43,7 @@ fileInput.addEventListener('change', function (e) {
     const featureForm = document.getElementById('features')
 
     jsonFileData.features.forEach(function (_feature, index) {
-      featureForm.insertAdjacentHTML('beforeend', addFeature(index))
-      
-      const textareas = document.querySelectorAll('textarea')
-      const remainingCharsTexts = document.querySelectorAll('.remaining-chars-text')
-
-      textareas.forEach((textarea, index) => {
-        updateRemainingChars(textarea, remainingCharsTexts[index])
-        textarea.addEventListener('input', () => {
-          updateRemainingChars(textarea, remainingCharsTexts[index])
-        })
-      })
-
-      function updateRemainingChars(textarea, remainingCharsText) {
-        const maxLength = parseInt(textarea.getAttribute('maxLength'))
-        remainingCharsText.innerHTML = maxLength - textarea.value.length
-      }
+      featureForm.insertAdjacentHTML('beforeend', addFeature(index, type))
     })
 
     return jsonFileData
@@ -84,13 +69,30 @@ fileInput.addEventListener('change', function (e) {
       }
       startDateField[index].value = `${jsonFileData.features[index].properties.start}`
       endDateField[index].value = `${jsonFileData.features[index].properties.end}`
-      featureTextAreas[index].value = `${jsonFileData.features[index].properties.info}`
+      if (type === 'holding') {
+        featureTextAreas[index].value = `${jsonFileData.features[index].properties.info}`
+      }
       commentMap(geo, 'map_' + index, capabilities)
     })
 
     if (jsonFileData.features.length > 1) {
       commentMap(jsonFileData, 'map', capabilities, 'The map below shows all geometries contained within the shapefile')
     } 
+
+    const textareas = document.querySelectorAll('textarea')
+    const remainingCharsTexts = document.querySelectorAll('.remaining-chars-text')
+
+    textareas.forEach((textarea, index) => {
+      updateRemainingChars(textarea, remainingCharsTexts[index])
+      textarea.addEventListener('input', () => {
+        updateRemainingChars(textarea, remainingCharsTexts[index])
+      })
+    })
+
+    function updateRemainingChars(textarea, remainingCharsText) {
+      const maxLength = parseInt(textarea.getAttribute('maxLength'))
+      remainingCharsText.innerHTML = maxLength - textarea.value.length
+    }
     
     return jsonFileData
   }).then(function (jsonFileData) {

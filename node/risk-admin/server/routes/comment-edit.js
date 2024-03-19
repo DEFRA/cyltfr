@@ -42,8 +42,9 @@ module.exports = [
       const geometryFile = await provider.getFile(key)
       const geometry = JSON.parse(geometryFile.Body)
       const features = geometry.features
+      const type = comment.type
 
-      return h.view('comment-edit', new CommentEdit(comment, geometry, request.auth, capabilities, features, id))
+      return h.view('comment-edit', new CommentEdit(comment, geometry, request.auth, capabilities, features, id, type))
     },
     options: {
       validate: {

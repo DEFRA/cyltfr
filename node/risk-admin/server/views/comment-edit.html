@@ -54,10 +54,13 @@
                 </datalist>
               </div>
 
-              {% for feature in features %}
+              
 
               <div class="form-group field field-array">
                 <div>
+                  {% for feature in features %}
+
+                  {% if type === 'holding' %}
                   <div id="item_{{ features.indexOf(feature) }}" class="array-item">
                     <div class="form-group field field-object">
                       <fieldset id="root_features_{{ features.indexOf(feature) }}">
@@ -126,6 +129,54 @@
                     </div>
                   </div>
 
+                  {% else %}
+
+                  <div id="item_{{ features.indexOf(feature) }}" class="array-item">
+                    <div class="form-group field field-object">
+                      <fieldset id="root_features_{{ features.indexOf(feature) }}">
+                        <div class="form-group field field-object">
+                          <fieldset id="root_features_{{ features.indexOf(feature) }}_properties">
+                            <legend id="root_features_{{ features.indexOf(feature) }}_properties__title">properties</legend>
+                            <div class="hidden"><input type="hidden" id="root_features_{{ features.indexOf(feature) }}_properties_apply" value="llfa"></div>
+                            <div class="hidden"><input type="hidden" id="root_features_{{ features.indexOf(feature) }}_properties_riskOverride" value=""></div>
+                            <div class="form-group field field-string  govuk-form-group info"><label class="control-label"
+                                for="root_features_{{ features.indexOf(feature) }}_properties_info">Report</label>
+                              <p id="root_features_{{ features.indexOf(feature) }}_properties_info__description" class="field-description">The report text will display
+                                to public users in this geometry.</p>
+                              <div class="field-radio-group" id="root_features_{{ features.indexOf(feature) }}_properties_info">
+                                <div class="radio "><label><span><input type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Flood report"><span>Flood report</span></span></label></div>
+                                <div class="radio "><label><span><input type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Non compliant mapping"><span>Non compliant mapping</span></span></label></div>
+                                <div class="radio "><label><span><input type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Proposed schemes"><span>Proposed schemes</span></span></label></div>
+                                <div class="radio "><label><span><input type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Completed schemes"><span>Completed schemes</span></span></label></div>
+                                <div class="radio "><label><span><input type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Flood action plan"><span>Flood action plan</span></span></label></div>
+                                <div class="radio "><label><span><input type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Other info"><span>Other info</span></span></label></div>
+                              </div>
+                            </div>
+                            <div class="form-group field field-string  govuk-form-group start"><label class="control-label"
+                                for="root_features_{{ features.indexOf(feature) }}_properties_start">Valid from<span class="required">*</span></label>
+                              <p id="root_features_{{ features.indexOf(feature) }}_properties_start__description" class="field-description">For your reference and will
+                                not be displayed to public users. Your comments will not be uploaded automatically on this date. Your
+                                comments will go live once they’re approved. If a date picker is not available, use YYYY-MM-DD.</p>
+                                <input name="features_{{ features.indexOf(feature) }}_properties_start" type="date" id="root_features_{{ features.indexOf(feature) }}_properties_start" class="govuk-input govuk-input--width-20 start-date"
+                                autocomplete="off" required="" value="{{ feature.properties.end }}">
+                            </div>
+                            <div class="form-group field field-string  govuk-form-group end"><label class="control-label"
+                                for="root_features_{{ features.indexOf(feature) }}_properties_end">Valid to<span class="required">*</span></label>
+                              <p id="root_features_{{ features.indexOf(feature) }}_properties_end__description" class="field-description">For your reference and will
+                                not be displayed to public users. Your comments will not be removed automatically. It is your
+                                responsibility to remove them on the ‘valid to’ date. If a date picker is not available, use YYYY-MM-DD.
+                              </p>
+                              <input name="features_{{ features.indexOf(feature) }}_properties_end" type="date" id="root_features_{{ features.indexOf(feature) }}_properties_end" class="govuk-input govuk-input--width-20 end-date"
+                                autocomplete="off" required="" value="{{ feature.properties.start }}">
+                            </div>
+                          </fieldset>
+                        </div>
+                      </fieldset>
+                    </div>
+                    <div id="map_{{ features.indexOf(feature) }}" class="comment-map"></div>
+                  </div>
+
+                  {% endif %}
                   {% endfor %}
                 </div>
               </div>
