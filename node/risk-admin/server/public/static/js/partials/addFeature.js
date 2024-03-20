@@ -2,7 +2,8 @@ function addFeature(featureIndex, type) {
   let featureHTML
 
   if (type === 'llfa') {
-    // Generate HTML for the feature on LLFA reports
+    // Generate HTML for the feature on 
+    // LLFA reports
     featureHTML = `
       <div id="item_${featureIndex}" class="array-item">
         <div class="form-group field field-object">
@@ -51,7 +52,8 @@ function addFeature(featureIndex, type) {
     `
 
   } else {
-    // Generate HTML for the feature on holding comments
+    // Generate HTML for the feature on 
+    // holding comments
     featureHTML = `
       <div id="item_${featureIndex}" class="array-item">
         <div class="form-group field field-object">
@@ -92,13 +94,21 @@ function addFeature(featureIndex, type) {
                   </div>
                 </div>
                 <div class="form-group field field-string  govuk-form-group start">
-                  <label class="control-label" for="features_${featureIndex}_properties_start">Valid from<span class="required">*</span></label>
-                  <p id="features_${featureIndex}_properties_start__description" class="field-description">For your reference and will not be displayed to public users. Your comments will not be uploaded automatically on this date. Your comments will go live once they’re approved. If a date picker is not available, use YYYY-MM-DD.</p>
+                  <label class="control-label" for="features_${featureIndex}_properties_start">Enter the start date<span class="required">*</span></label>
+                  <p id="features_${featureIndex}_properties_start__description" class="field-description">
+                    Select the date the holding comment is valid from. 
+                    Your holding comment will not go live automatically - it’ll be uploaded after it’s approved. 
+                    For internal use only - the date will not be displayed to public users.
+                  </p>
                   <input name="features_${featureIndex}_properties_start" type="date" id="features_${featureIndex}_properties_start" class="start-date govuk-input govuk-input--width-20" autocomplete="off" required="">
                 </div>
                 <div class="form-group field field-string  govuk-form-group end">
-                  <label class="control-label" for="features_${featureIndex}_properties_end">Valid to<span class="required">*</span></label>
-                  <p id="features_${featureIndex}_properties_end__description" class="field-description">For your reference and will not be displayed to public users. Your comments will not be removed automatically. It is your responsibility to remove them on the ‘valid to’ date. If a date picker is not available, use YYYY-MM-DD.</p>
+                  <label class="control-label" for="features_${featureIndex}_properties_end">Enter the end date<span class="required">*</span></label>
+                  <p id="features_${featureIndex}_properties_end__description" class="field-description">
+                    Select the date the holding comment is valid to. 
+                    You must remove your holding comment on the end date - it will not be removed automatically. 
+                    For internal use only - the date will not be displayed to public users.
+                  </p>
                   <input name="features_${featureIndex}_properties_end" type="date" id="features_${featureIndex}_properties_end" class="end-date govuk-input govuk-input--width-20" autocomplete="off" required="">
                 </div>
               </fieldset>

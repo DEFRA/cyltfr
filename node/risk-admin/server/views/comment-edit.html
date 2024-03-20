@@ -58,6 +58,8 @@
                 <div>
                   {% for feature in features %}
 
+                  <!-- Holding comment -->
+
                   {% if type === 'holding' %}
                   <div id="item_{{ features.indexOf(feature) }}" class="array-item">
                     <div class="form-group field field-object">
@@ -108,22 +110,24 @@
                               </div>
                             </div>
                             <div class="form-group field field-string  govuk-form-group start"><label class="control-label"
-                                for="features_{{ features.indexOf(feature) }}_properties_start">Valid from<span class="required">*</span></label>
-                              <p id="features_{{ features.indexOf(feature) }}_properties_start__description" class="field-description">For your
-                                reference and will not be displayed to public users. Your comments will not be uploaded
-                                automatically on this date. Your comments will go live once they’re approved. If a date picker
-                                is not available, use YYYY-MM-DD.</p>
-                                <input name="features_{{ features.indexOf(feature) }}_properties_start" type="date"
+                                for="features_{{ features.indexOf(feature) }}_properties_start">Enter the start date<span class="required">*</span></label>
+                              <p id="features_{{ features.indexOf(feature) }}_properties_start__description" class="field-description">
+                                Select the date the holding comment is valid from. 
+                                Your holding comment will not go live automatically - it’ll be uploaded after it’s approved. 
+                                For internal use only - the date will not be displayed to public users.
+                              </p>
+                              <input name="features_{{ features.indexOf(feature) }}_properties_start" type="date"
                                 class="govuk-input govuk-input--width-2{{ features.indexOf(feature) }}" autocomplete="off" required="" value="{{ feature.properties.start }}">
                             </div>
                             <div class="form-group field field-string  govuk-form-group end"><label class="control-label"
-                                for="features_{{ features.indexOf(feature) }}_properties_end">Valid to<span class="required">*</span></label>
-                              <p id="features_{{ features.indexOf(feature) }}_properties_end__description" class="field-description">For your reference
-                                and will not be displayed to public users. Your comments will not be removed automatically. It
-                                is your responsibility to remove them on the ‘valid to’ date. If a date picker is not
-                                available, use YYYY-MM-DD.</p>
-                                <input name="features_{{ features.indexOf(feature) }}_properties_end" type="date"
-                                class="govuk-input govuk-input--width-2{{ features.indexOf(feature) }}" autocomplete="off" required="" value="{{ feature.properties.end }}">
+                                for="features_{{ features.indexOf(feature) }}_properties_end">Enter the end date<span class="required">*</span></label>
+                              <p id="features_{{ features.indexOf(feature) }}_properties_end__description" class="field-description">
+                                Select the date the holding comment is valid to. 
+                                You must remove your holding comment on the end date - it will not be removed automatically. 
+                                For internal use only - the date will not be displayed to public users.
+                              </p>
+                              <input name="features_{{ features.indexOf(feature) }}_properties_end" type="date"
+                              class="govuk-input govuk-input--width-2{{ features.indexOf(feature) }}" autocomplete="off" required="" value="{{ feature.properties.end }}">
                             </div>
                           </fieldset>
                         </div>
@@ -132,6 +136,8 @@
                   </div>
 
                   {% else %}
+
+                  <!-- LLFA -->
 
                   <div id="item_{{ features.indexOf(feature) }}" class="array-item">
                     <div class="form-group field field-object">
