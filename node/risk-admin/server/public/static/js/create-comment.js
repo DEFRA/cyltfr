@@ -1,4 +1,3 @@
-
 const FormData = window.FormData
 const fetch = window.fetch
 const commentMap = window.LTFMGMT.commentMap
@@ -64,14 +63,27 @@ fileInput.addEventListener('change', function (e) {
     })
 
     jsonFileData.features.forEach(function (feature, index) {
+      const overrideOrNoOverrideRadio = document.getElementById(`features_${index}_properties_riskOverride`)
+      const riskOptionRadios = document.getElementById(`risk-options_${index}`)
+      const overrideRadio = document.getElementById(`map_${index}-override`)
+      const noOverrideRadio = document.getElementById(`map_${index}-no-override`)
       const geo = {
         ...jsonFileData,
         features: jsonFileData.features.filter(f => f === feature)
       }
       startDateField[index].value = `${jsonFileData.features[index].properties.start}`
       endDateField[index].value = `${jsonFileData.features[index].properties.end}`
+
       if (isHoldingComment) {
         featureTextAreas[index].value = `${jsonFileData.features[index].properties.info}`
+        overrideRadio.addEventListener('click', function () {
+          noOverrideRadio.checked = false
+          riskOptionRadios.style.display = 'block'
+        })
+        noOverrideRadio.addEventListener('click', function () {
+          overrideRadio.checked = false
+          riskOptionRadios.style.display = 'none'
+        })
       }
       commentMap(geo, 'map_' + index, capabilities)
     })
@@ -109,7 +121,7 @@ fileInput.addEventListener('change', function (e) {
       jsonFileData.boundary = boundaryValue
 
       jsonFileData.features.forEach(function (_feature, index) {
-        const riskOverrideValue = formData.get(`features_${index}_properties_riskOverride`)
+        const riskOverrideValue = formData.get(`override_${index}-risk`)
         const riskReportType = formData.get(`features_${index}_properties_report_type`)
 
         jsonFileData.features[index].properties.riskReportType = riskReportType

@@ -21,20 +21,20 @@
         <form id="comment-form-edit" action="/comment/edit/{{id}}" method="POST">
           <div class="form-group field field-object">
             <fieldset id="root">
-              <legend id="root__title">A geojson form</legend>
+              <legend id="root_title">A geojson form</legend>
               <div class="form-group field field-string  govuk-form-group name"><label class="control-label"
-                  for="root_name">Description<span class="required">*</span></label>
-                <p id="root_name__description" class="field-description">For internal use, to describe the comments that you
+                  for="name">Description<span class="required">*</span></label>
+                <p id="name__description" class="field-description">For internal use, to describe the comments that you
                   are uploading. This will not be displayed to public users.</p>
                   <input name="name" type="text"
-                  class="govuk-input govuk-input--width-2{{ features.indexOf(feature) }}" autocomplete="off" required="" maxlength="75"
+                  id="root_name" class="govuk-input govuk-input--width-2{{ features.indexOf(feature) }}" autocomplete="off" required="" maxlength="75"
                   value="{{ comment.description }}">
               </div>
               <div class="form-group field field-string  govuk-form-group boundary"><label class="control-label"
-                  for="root_boundary">Boundary<span class="required">*</span></label>
-                <p id="root_boundary__description" class="field-description">For internal use, choose the boundary to which
+                  for="boundary">Boundary<span class="required">*</span></label>
+                <p id="boundary__description" class="field-description">For internal use, choose the boundary to which
                   this comment applies. This will not be displayed to public users.</p>
-                  <input name="boundary" rows="5" id="root_boundary"
+                  <input name="boundary" rows="5" id="boundary"
                   required="" autocomplete="off" list="options" class="govuk-input"
                   value="{{ comment.boundary }}"><datalist id="options">
                   <option>Cumbria and Lancashire (CLA)</option>
@@ -61,23 +61,23 @@
                   {% if type === 'holding' %}
                   <div id="item_{{ features.indexOf(feature) }}" class="array-item">
                     <div class="form-group field field-object">
-                      <fieldset id="root_features_{{ features.indexOf(feature) }}">
+                      <fieldset id="features_{{ features.indexOf(feature) }}">
                         <div class="form-group field field-object">
-                          <fieldset id="root_features_{{ features.indexOf(feature) }}_properties">
-                            <legend id="root_features_{{ features.indexOf(feature) }}_properties__title">properties</legend>
-                            <div class="hidden"><input type="hidden" id="root_features_{{ features.indexOf(feature) }}_properties_apply" value="holding">
+                          <fieldset id="features_{{ features.indexOf(feature) }}_properties">
+                            <legend id="features_{{ features.indexOf(feature) }}_properties__title">properties</legend>
+                            <div class="hidden"><input type="hidden" id="features_{{ features.indexOf(feature) }}_properties_apply" value="holding">
                             </div>
                             <div id="map_{{ features.indexOf(feature) }}" class="comment-map">
                             </div>
                             <div class="form-group field field-string  govuk-form-group riskOverride"><label
-                                class="control-label" for="root_features_{{ features.indexOf(feature) }}_properties_riskOverride">Override surface water
+                                class="control-label" for="features_{{ features.indexOf(feature) }}_properties_riskOverride">Override surface water
                                 risk</label>
-                              <p id="root_features_{{ features.indexOf(feature) }}_properties_riskOverride__description" class="field-description">Choose if
+                              <p id="features_{{ features.indexOf(feature) }}_properties_riskOverride__description" class="field-description">Choose if
                                 the risk for surface water flooding should be overriden for points inside this area</p>
                               <ul class="field-radio-group" id="features_{{ features.indexOf(feature) }}_properties_riskOverride">
                                 <li>
-                                  <input class="radio override_radio_{{ features.indexOf(feature) }}" type="radio" id="map_{{ features.indexOf(feature) }}-no-override" name="override_{{ features.indexOf(feature) }}"
-                                  value="Do not override">
+                                  <input class="radio override_radio_{{ features.indexOf(feature) }}" type="radio" id="map_{{ features.indexOf(feature) }}-no-override" name="override_{{ features.indexOf(feature) }}-risk"
+                                  value="Do not override" checked>
                                   <label for="map_{{ features.indexOf(feature) }}-no-override">Do not override</label></li>
                                 <li>
                                   <input class="radio " type="radio" id="map_{{ features.indexOf(feature) }}-override" name="override_{{ features.indexOf(feature) }}"
@@ -104,8 +104,8 @@
                               </ul>
                             </div>
                             <div class="form-group field field-string  govuk-form-group info"><label class="control-label"
-                                for="root_features_{{ features.indexOf(feature) }}_properties_info">Info</label>
-                              <div id="root_features_{{ features.indexOf(feature) }}_properties_info__description" class="field-description">
+                                for="features_{{ features.indexOf(feature) }}_properties_info">Info</label>
+                              <div id="features_{{ features.indexOf(feature) }}_properties_info__description" class="field-description">
                                 <p>The info text will display to public users in this geometry. Read <a
                                     href="/comment-guidance" target="_blank" previewlistener="true">comment guidance</a>
                                   before writing or pasting anything. The maximum number of characters is 150.</p>
@@ -116,8 +116,8 @@
                               </div>
                             </div>
                             <div class="form-group field field-string  govuk-form-group start"><label class="control-label"
-                                for="root_features_{{ features.indexOf(feature) }}_properties_start">Valid from<span class="required">*</span></label>
-                              <p id="root_features_{{ features.indexOf(feature) }}_properties_start__description" class="field-description">For your
+                                for="features_{{ features.indexOf(feature) }}_properties_start">Valid from<span class="required">*</span></label>
+                              <p id="features_{{ features.indexOf(feature) }}_properties_start__description" class="field-description">For your
                                 reference and will not be displayed to public users. Your comments will not be uploaded
                                 automatically on this date. Your comments will go live once they’re approved. If a date picker
                                 is not available, use YYYY-MM-DD.</p>
@@ -125,8 +125,8 @@
                                 class="govuk-input govuk-input--width-2{{ features.indexOf(feature) }}" autocomplete="off" required="" value="{{ feature.properties.start }}">
                             </div>
                             <div class="form-group field field-string  govuk-form-group end"><label class="control-label"
-                                for="root_features_{{ features.indexOf(feature) }}_properties_end">Valid to<span class="required">*</span></label>
-                              <p id="root_features_{{ features.indexOf(feature) }}_properties_end__description" class="field-description">For your reference
+                                for="features_{{ features.indexOf(feature) }}_properties_end">Valid to<span class="required">*</span></label>
+                              <p id="features_{{ features.indexOf(feature) }}_properties_end__description" class="field-description">For your reference
                                 and will not be displayed to public users. Your comments will not be removed automatically. It
                                 is your responsibility to remove them on the ‘valid to’ date. If a date picker is not
                                 available, use YYYY-MM-DD.</p>
@@ -143,17 +143,17 @@
 
                   <div id="item_{{ features.indexOf(feature) }}" class="array-item">
                     <div class="form-group field field-object">
-                      <fieldset id="root_features_{{ features.indexOf(feature) }}">
+                      <fieldset id="features_{{ features.indexOf(feature) }}">
                         <div class="form-group field field-object">
-                          <fieldset id="root_features_{{ features.indexOf(feature) }}_properties">
-                            <legend id="root_features_{{ features.indexOf(feature) }}_properties__title">properties</legend>
-                            <div class="hidden"><input type="hidden" id="root_features_{{ features.indexOf(feature) }}_properties_apply" value="llfa"></div>
-                            <div class="hidden"><input type="hidden" id="root_features_{{ features.indexOf(feature) }}_properties_riskOverride" value=""></div>
+                          <fieldset id="features_{{ features.indexOf(feature) }}_properties">
+                            <legend id="features_{{ features.indexOf(feature) }}_properties__title">properties</legend>
+                            <div class="hidden"><input type="hidden" id="features_{{ features.indexOf(feature) }}_properties_apply" value="llfa"></div>
+                            <div class="hidden"><input type="hidden" id="features_{{ features.indexOf(feature) }}_properties_riskOverride" value=""></div>
                             <div class="form-group field field-string  govuk-form-group info"><label class="control-label"
-                                for="root_features_{{ features.indexOf(feature) }}_properties_info">Report</label>
-                              <p id="root_features_{{ features.indexOf(feature) }}_properties_info__description" class="field-description">The report text will display
+                                for="features_{{ features.indexOf(feature) }}_properties_info">Report</label>
+                              <p id="features_{{ features.indexOf(feature) }}_properties_info__description" class="field-description">The report text will display
                                 to public users in this geometry.</p>
-                              <ul class="field-radio-group" id="root_features_{{ features.indexOf(feature) }}_properties_info">
+                              <ul class="field-radio-group" id="features_{{ features.indexOf(feature) }}_properties_info">
                                 <li><input class="radio risk-report_{{ features.indexOf(feature) }}" type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Flood report">
                                 <label><span><span>Flood report</span></span></label></li>
                                 <li><input class="radio risk-report_{{ features.indexOf(feature) }}" type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Non compliant mapping">
@@ -169,20 +169,20 @@
                               </ul>
                             </div>
                             <div class="form-group field field-string  govuk-form-group start"><label class="control-label"
-                                for="root_features_{{ features.indexOf(feature) }}_properties_start">Valid from<span class="required">*</span></label>
-                              <p id="root_features_{{ features.indexOf(feature) }}_properties_start__description" class="field-description">For your reference and will
+                                for="features_{{ features.indexOf(feature) }}_properties_start">Valid from<span class="required">*</span></label>
+                              <p id="features_{{ features.indexOf(feature) }}_properties_start__description" class="field-description">For your reference and will
                                 not be displayed to public users. Your comments will not be uploaded automatically on this date. Your
                                 comments will go live once they’re approved. If a date picker is not available, use YYYY-MM-DD.</p>
-                                <input name="features_{{ features.indexOf(feature) }}_properties_start" type="date" id="root_features_{{ features.indexOf(feature) }}_properties_start" class="govuk-input govuk-input--width-20 start-date"
+                                <input name="features_{{ features.indexOf(feature) }}_properties_start" type="date" id="features_{{ features.indexOf(feature) }}_properties_start" class="govuk-input govuk-input--width-20 start-date"
                                 autocomplete="off" required="" value="{{ feature.properties.end }}">
                             </div>
                             <div class="form-group field field-string  govuk-form-group end"><label class="control-label"
-                                for="root_features_{{ features.indexOf(feature) }}_properties_end">Valid to<span class="required">*</span></label>
-                              <p id="root_features_{{ features.indexOf(feature) }}_properties_end__description" class="field-description">For your reference and will
+                                for="features_{{ features.indexOf(feature) }}_properties_end">Valid to<span class="required">*</span></label>
+                              <p id="features_{{ features.indexOf(feature) }}_properties_end__description" class="field-description">For your reference and will
                                 not be displayed to public users. Your comments will not be removed automatically. It is your
                                 responsibility to remove them on the ‘valid to’ date. If a date picker is not available, use YYYY-MM-DD.
                               </p>
-                              <input name="features_{{ features.indexOf(feature) }}_properties_end" type="date" id="root_features_{{ features.indexOf(feature) }}_properties_end" class="govuk-input govuk-input--width-20 end-date"
+                              <input name="features_{{ features.indexOf(feature) }}_properties_end" type="date" id="features_{{ features.indexOf(feature) }}_properties_end" class="govuk-input govuk-input--width-20 end-date"
                                 autocomplete="off" required="" value="{{ feature.properties.start }}">
                             </div>
                           </fieldset>

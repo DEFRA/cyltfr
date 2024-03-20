@@ -53,10 +53,25 @@ module.exports = [
         }
       })
 
+      const commentData = {
+        comment: comment,
+        geometry: geometry,
+        capabilities: capabilities,
+        features: features,
+        id: id,
+        type: type,
+        selectedRadio: selectedRadio
+      }
+
+      const authData = {
+        isApprover: request.auth.credentials.isApprover,
+        profile: request.auth.credentials.profile
+      }    
+
+      const commentEdit = new CommentEdit(commentData, authData)
+
       return h.view(
-        'comment-edit',
-        new CommentEdit(comment, geometry, request.auth, capabilities, features, id, type, selectedRadio)
-      )
+        'comment-edit', commentEdit)
     },
     options: {
       validate: {

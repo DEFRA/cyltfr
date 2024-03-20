@@ -1,15 +1,15 @@
 class CommentEdit {
-  constructor (comment, geometry, auth, capabilities, features, id, type, selectedRadio) {
-    this.comment = comment
-    this.geometry = geometry
-    this.capabilities = capabilities
-    this.isApprover = auth.credentials.isApprover
-    this.allowDelete = auth.credentials.isApprover ||
-      comment.createdBy === auth.credentials.profile.email
-    this.features = features
-    this.id = id
-    this.type = type
-    this.selectedRadio = selectedRadio
+  constructor (commentData, authData) {
+    this.comment = commentData.comment
+    this.geometry = commentData.geometry
+    this.capabilities = commentData.capabilities
+    this.isApprover = authData.isApprover
+    this.allowDelete = authData.isApprover ||
+      comment.createdBy === authData.profile.email
+    this.features = commentData.features
+    this.id = commentData.id
+    this.type = commentData.type
+    this.selectedRadio = commentData.selectedRadio
   }
 }
 

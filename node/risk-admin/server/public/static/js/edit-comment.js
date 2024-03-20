@@ -11,6 +11,7 @@ const editForm = document.getElementById('comment-form-edit')
 document.addEventListener('DOMContentLoaded', () => {
   geometry.features.forEach(function (feature, index) {
     const overrideOrNoOverrideRadio = document.getElementById(`features_${index}_properties_riskOverride`)
+    const noOverrideRadio = document.getElementById(`map_${index}-no-override`)
     const riskOptionRadios = document.getElementById(`risk-options_${index}`)
     const overrideRadio = document.getElementById(`map_${index}-override`)
     const riskRadios = document.getElementsByClassName(`risk-option_${index}`)
@@ -22,25 +23,26 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     if (type === 'holding') {
-      if (overrideRadio.checked) {
-        riskOptionRadios.style.display = 'block'
-      }
-
-      overrideOrNoOverrideRadio.addEventListener('change', function () {
-        if (overrideRadio.checked) {
-          riskOptionRadios.style.display = 'block'
-        } else {
-          riskOptionRadios.style.display = 'none'
-        }
-      })
-
       for(let i = 0; i < riskRadios.length; i++) {
         if (riskRadios[i].value === selectedRadio[index]) {
           riskOptionRadios.style.display = 'block'
           overrideRadio.checked = true
           riskRadios[i].checked = true
-        } 
+        }
       }
+
+      if (overrideRadio.checked) {
+        riskOptionRadios.style.display = 'block'
+      }
+
+      overrideRadio.addEventListener('click', function () {
+        noOverrideRadio.checked = false
+        riskOptionRadios.style.display = 'block'
+      })
+      noOverrideRadio.addEventListener('click', function () {
+        overrideRadio.checked = false
+        riskOptionRadios.style.display = 'none'
+      })
     } else {
       for(let i = 0; i < riskReportRadios.length; i++) {
         if (riskReportRadios[i].value === selectedRadio[index]) {
@@ -49,10 +51,10 @@ document.addEventListener('DOMContentLoaded', () => {
       } 
     }
 
-
+    console.log('selectedRadio[index]', selectedRadio[index])
     commentMap(geo, 'map_' + index, capabilities)
   })
-  })
+})
 
 document.addEventListener('DOMContentLoaded', () => {
   textareas.forEach((textarea, index) => {
