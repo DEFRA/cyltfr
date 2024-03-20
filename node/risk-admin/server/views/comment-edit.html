@@ -65,8 +65,6 @@
                         <div class="form-group field field-object">
                           <fieldset id="features_{{ features.indexOf(feature) }}_properties">
                             <legend id="features_{{ features.indexOf(feature) }}_properties__title">properties</legend>
-                            <div class="hidden"><input type="hidden" id="features_{{ features.indexOf(feature) }}_properties_apply" value="holding">
-                            </div>
                             <div id="map_{{ features.indexOf(feature) }}" class="comment-map">
                             </div>
                             <div class="form-group field field-string  govuk-form-group riskOverride"><label
@@ -76,30 +74,24 @@
                                 the risk for surface water flooding should be overriden for points inside this area</p>
                               <ul class="field-radio-group" id="features_{{ features.indexOf(feature) }}_properties_riskOverride">
                                 <li>
-                                  <input class="radio override_radio_{{ features.indexOf(feature) }}" type="radio" id="map_{{ features.indexOf(feature) }}-no-override" name="override_{{ features.indexOf(feature) }}-risk"
-                                  value="Do not override" checked>
-                                  <label for="map_{{ features.indexOf(feature) }}-no-override">Do not override</label></li>
+                                  <label for="map_{{ features.indexOf(feature) }}-no-override"><input class="radio override_radio_{{ features.indexOf(feature) }}" type="radio" id="map_{{ features.indexOf(feature) }}-no-override" name="override_{{ features.indexOf(feature) }}-risk"
+                                    value="Do not override" checked>Do not override</label></li>
                                 <li>
-                                  <input class="radio " type="radio" id="map_{{ features.indexOf(feature) }}-override" name="override_{{ features.indexOf(feature) }}"
-                                  value="Override">
-                                  <label for="map_{{ features.indexOf(feature) }}-override">Override</label></li>
+                                  <label for="map_{{ features.indexOf(feature) }}-override"><input class="radio " type="radio" id="map_{{ features.indexOf(feature) }}-override" name="override_{{ features.indexOf(feature) }}"
+                                  value="Override">Override</label></li>
                                 <ul id="risk-options_{{ features.indexOf(feature) }}" style="display: none;">
                                   <li>
-                                    <input class="radio risk-option_{{ features.indexOf(feature) }}" type="radio" id="map_{{ features.indexOf(feature) }}-override-very-low" name="override_{{ features.indexOf(feature) }}-risk"
-                                    value="Very low">
-                                    <label for="map_{{ features.indexOf(feature) }}-override-very-low">Very low</label></li>
+                                    <label for="map_{{ features.indexOf(feature) }}-override-very-low"><input class="radio risk-option_{{ features.indexOf(feature) }}" type="radio" id="map_{{ features.indexOf(feature) }}-override-very-low" name="override_{{ features.indexOf(feature) }}-risk"
+                                      value="Very low">Very low</label></li>
                                   <li>
-                                    <input class="radio risk-option_{{ features.indexOf(feature) }}" type="radio" id="map_{{ features.indexOf(feature) }}-override-low" name="override_{{ features.indexOf(feature) }}-risk"
-                                    value="Low">
-                                    <label for="map_{{ features.indexOf(feature) }}-override-low">Low</label></li>
+                                    <label for="map_{{ features.indexOf(feature) }}-override-low"><input class="radio risk-option_{{ features.indexOf(feature) }}" type="radio" id="map_{{ features.indexOf(feature) }}-override-low" name="override_{{ features.indexOf(feature) }}-risk"
+                                      value="Low">Low</label></li>
                                   <li>
-                                    <input class="radio risk-option_{{ features.indexOf(feature) }}" type="radio" id="map_{{ features.indexOf(feature) }}-override-medium" name="override_{{ features.indexOf(feature) }}-risk"
-                                    value="Medium">
-                                    <label for="map_{{ features.indexOf(feature) }}-override-medium">Medium</label></li>
+                                    <label for="map_{{ features.indexOf(feature) }}-override-medium"><input class="radio risk-option_{{ features.indexOf(feature) }}" type="radio" id="map_{{ features.indexOf(feature) }}-override-medium" name="override_{{ features.indexOf(feature) }}-risk"
+                                      value="Medium">Medium</label></li>
                                   <li>
-                                    <input class="radio risk-option_{{ features.indexOf(feature) }}" type="radio" id="map_{{ features.indexOf(feature) }}-override-high" name="override_{{ features.indexOf(feature) }}-risk"
-                                    value="High">
-                                    <label for="map_{{ features.indexOf(feature) }}-override-high">High</label></li>
+                                    <label for="map_{{ features.indexOf(feature) }}-override-high"><input class="radio risk-option_{{ features.indexOf(feature) }}" type="radio" id="map_{{ features.indexOf(feature) }}-override-high" name="override_{{ features.indexOf(feature) }}-risk"
+                                      value="High">High</label></li>
                                 </ul>
                               </ul>
                             </div>
@@ -147,25 +139,29 @@
                         <div class="form-group field field-object">
                           <fieldset id="features_{{ features.indexOf(feature) }}_properties">
                             <legend id="features_{{ features.indexOf(feature) }}_properties__title">properties</legend>
-                            <div class="hidden"><input type="hidden" id="features_{{ features.indexOf(feature) }}_properties_apply" value="llfa"></div>
-                            <div class="hidden"><input type="hidden" id="features_{{ features.indexOf(feature) }}_properties_riskOverride" value=""></div>
                             <div class="form-group field field-string  govuk-form-group info"><label class="control-label"
                                 for="features_{{ features.indexOf(feature) }}_properties_info">Report</label>
                               <p id="features_{{ features.indexOf(feature) }}_properties_info__description" class="field-description">The report text will display
                                 to public users in this geometry.</p>
                               <ul class="field-radio-group" id="features_{{ features.indexOf(feature) }}_properties_info">
-                                <li><input class="radio risk-report_{{ features.indexOf(feature) }}" type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Flood report">
-                                <label><span><span>Flood report</span></span></label></li>
-                                <li><input class="radio risk-report_{{ features.indexOf(feature) }}" type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Non compliant mapping">
-                                <label><span><span>Non compliant mapping</span></span></label></li>
-                                <li><input class="radio risk-report_{{ features.indexOf(feature) }}" type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Proposed schemes">
-                                <label><span><span>Proposed schemes</span></span></label></li>
-                                <li><input class="radio risk-report_{{ features.indexOf(feature) }}" type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Completed schemes">
-                                <label><span><span>Completed schemes</span></span></label></li>
-                                <li><input class="radio risk-report_{{ features.indexOf(feature) }}" type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Flood action plan">
-                                <label><span><span>Flood action plan</span></span></label></li>
-                                <li><input class="radio risk-report_{{ features.indexOf(feature) }}" type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Other info">
-                                <label><span><span>Other info</span></span></label></li>
+                                <li>
+                                  <label><input class="radio risk-report_{{ features.indexOf(feature) }}" type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Flood report">Flood report</label>
+                                </li>
+                                <li>
+                                  <label><input class="radio risk-report_{{ features.indexOf(feature) }}" type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Non compliant mapping">Non compliant mapping</label>
+                                </li>
+                                <li>
+                                  <label><input class="radio risk-report_{{ features.indexOf(feature) }}" type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Proposed schemes">Proposed schemes</label>
+                                </li>
+                                <li>
+                                  <label><input class="radio risk-report_{{ features.indexOf(feature) }}" type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Completed schemes">Completed schemes</label>
+                                </li>
+                                <li>
+                                  <label><input class="radio risk-report_{{ features.indexOf(feature) }}" type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Flood action plan">Flood action plan</label>
+                                </li>
+                                <li>
+                                  <label><input class="radio risk-report_{{ features.indexOf(feature) }}" type="radio" name="features_{{ features.indexOf(feature) }}_properties_report_type" value="Other info">Other info</label>
+                                </li>
                               </ul>
                             </div>
                             <div class="form-group field field-string  govuk-form-group start"><label class="control-label"
@@ -174,7 +170,7 @@
                                 not be displayed to public users. Your comments will not be uploaded automatically on this date. Your
                                 comments will go live once they’re approved. If a date picker is not available, use YYYY-MM-DD.</p>
                                 <input name="features_{{ features.indexOf(feature) }}_properties_start" type="date" id="features_{{ features.indexOf(feature) }}_properties_start" class="govuk-input govuk-input--width-20 start-date"
-                                autocomplete="off" required="" value="{{ feature.properties.end }}">
+                                autocomplete="off" required="" value="{{ feature.properties.start }}">
                             </div>
                             <div class="form-group field field-string  govuk-form-group end"><label class="control-label"
                                 for="features_{{ features.indexOf(feature) }}_properties_end">Valid to<span class="required">*</span></label>
@@ -183,7 +179,7 @@
                                 responsibility to remove them on the ‘valid to’ date. If a date picker is not available, use YYYY-MM-DD.
                               </p>
                               <input name="features_{{ features.indexOf(feature) }}_properties_end" type="date" id="features_{{ features.indexOf(feature) }}_properties_end" class="govuk-input govuk-input--width-20 end-date"
-                                autocomplete="off" required="" value="{{ feature.properties.start }}">
+                                autocomplete="off" required="" value="{{ feature.properties.end }}">
                             </div>
                           </fieldset>
                         </div>

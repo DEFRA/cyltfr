@@ -5,7 +5,7 @@ class CommentEdit {
     this.capabilities = commentData.capabilities
     this.isApprover = authData.isApprover
     this.allowDelete = authData.isApprover ||
-      comment.createdBy === authData.profile.email
+    commentData.comment.createdBy === authData.profile.email
     this.features = commentData.features
     this.id = commentData.id
     this.type = commentData.type

@@ -63,7 +63,6 @@ fileInput.addEventListener('change', function (e) {
     })
 
     jsonFileData.features.forEach(function (feature, index) {
-      const overrideOrNoOverrideRadio = document.getElementById(`features_${index}_properties_riskOverride`)
       const riskOptionRadios = document.getElementById(`risk-options_${index}`)
       const overrideRadio = document.getElementById(`map_${index}-override`)
       const noOverrideRadio = document.getElementById(`map_${index}-no-override`)
@@ -115,29 +114,29 @@ fileInput.addEventListener('change', function (e) {
 
     function handleFormSubmit(event) {
       event.preventDefault()
-      const formData = new FormData(event.target)
+      const eventFormData = new FormData(event.target)
 
-      const boundaryValue = formData.get('boundary')
+      const boundaryValue = eventFormData.get('boundary')
       jsonFileData.boundary = boundaryValue
 
       jsonFileData.features.forEach(function (_feature, index) {
-        const riskOverrideValue = formData.get(`override_${index}-risk`)
-        const riskReportType = formData.get(`features_${index}_properties_report_type`)
+        const riskOverrideValue = eventFormData.get(`override_${index}-risk`)
+        const riskReportType = eventFormData.get(`features_${index}_properties_report_type`)
 
         jsonFileData.features[index].properties.riskReportType = riskReportType
         jsonFileData.features[index].properties.riskOverride = riskOverrideValue
 
-        if (jsonFileData.name !== formData.get(`name`)) {
-          jsonFileData.name = formData.get(`name`)
+        if (jsonFileData.name !== eventFormData.get(`name`)) {
+          jsonFileData.name = eventFormData.get(`name`)
         }
-        if (jsonFileData.features[index].properties.start !== formData.get(`features_${index}_properties_start`)) {
-          jsonFileData.features[index].properties.start = formData.get(`features_${index}_properties_start`)
+        if (jsonFileData.features[index].properties.start !== eventFormData.get(`features_${index}_properties_start`)) {
+          jsonFileData.features[index].properties.start = eventFormData.get(`features_${index}_properties_start`)
         }
-        if (jsonFileData.features[index].properties.end !== formData.get(`features_${index}_properties_end`)) {
-          jsonFileData.features[index].properties.end = formData.get(`features_${index}_properties_end`)
+        if (jsonFileData.features[index].properties.end !== eventFormData.get(`features_${index}_properties_end`)) {
+          jsonFileData.features[index].properties.end = eventFormData.get(`features_${index}_properties_end`)
         }
-        if (jsonFileData.features[index].properties.info !== formData.get(`features_${index}_properties_info`)) {
-          jsonFileData.features[index].properties.info = formData.get(`features_${index}_properties_info`)
+        if (jsonFileData.features[index].properties.info !== eventFormData.get(`features_${index}_properties_info`)) {
+          jsonFileData.features[index].properties.info = eventFormData.get(`features_${index}_properties_info`)
         }
       })
     }

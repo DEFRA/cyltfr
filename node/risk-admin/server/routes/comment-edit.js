@@ -43,7 +43,7 @@ module.exports = [
       const geometry = JSON.parse(geometryFile.Body)
       const features = geometry.features
       const type = comment.type
-      let selectedRadio = []
+      const selectedRadio = []
 
       features.forEach(function (feature) {
         if (type === 'holding') {
@@ -121,7 +121,7 @@ module.exports = [
         formattedPayload.name = payload.boundary
       }
 
-      features.forEach(function (feature, index) {
+      features.forEach(function (_feature, index) {
         if (payload[`features_${index}_properties_info`] !== features[index].properties.info ) {
           formattedPayload.features[index].properties.info = payload[`features_${index}_properties_info`]
         }
@@ -153,8 +153,6 @@ module.exports = [
         }),
         failAction: async (request, h, err) => {
           console.log(err)
-          const data = request.payload
-          const type = request.params.type
           return h.view('/comment/create')
         }
       },

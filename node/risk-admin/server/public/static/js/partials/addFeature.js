@@ -17,12 +17,12 @@ function addFeature(featureIndex, type) {
                   <p id="features_${featureIndex}_properties_info__description" class="field-description">The report text will display
                     to public users in this geometry.</p>
                   <div class="field-radio-group" id="features_${featureIndex}_properties_info">
-                    <div class="radio "><label><span><input type="radio" name="features_${featureIndex}_properties_report_type" value="Flood report"><span>Flood report</span></span></label></div>
-                    <div class="radio "><label><span><input type="radio" name="features_${featureIndex}_properties_report_type" value="Non compliant mapping"><span>Non compliant mapping</span></span></label></div>
-                    <div class="radio "><label><span><input type="radio" name="features_${featureIndex}_properties_report_type" value="Proposed schemes"><span>Proposed schemes</span></span></label></div>
-                    <div class="radio "><label><span><input type="radio" name="features_${featureIndex}_properties_report_type" value="Completed schemes"><span>Completed schemes</span></span></label></div>
-                    <div class="radio "><label><span><input type="radio" name="features_${featureIndex}_properties_report_type" value="Flood action plan"><span>Flood action plan</span></span></label></div>
-                    <div class="radio "><label><span><input type="radio" name="features_${featureIndex}_properties_report_type" value="Other info"><span>Other info</span></span></label></div>
+                    <div class="radio "><label><input type="radio" name="features_${featureIndex}_properties_report_type" value="Flood report">Flood report</label></div>
+                    <div class="radio "><label><input type="radio" name="features_${featureIndex}_properties_report_type" value="Non compliant mapping">Non compliant mapping</label></div>
+                    <div class="radio "><label><input type="radio" name="features_${featureIndex}_properties_report_type" value="Proposed schemes">Proposed schemes</label></div>
+                    <div class="radio "><label><input type="radio" name="features_${featureIndex}_properties_report_type" value="Completed schemes">Completed schemes</label></div>
+                    <div class="radio "><label><input type="radio" name="features_${featureIndex}_properties_report_type" value="Flood action plan">Flood action plan</label></div>
+                    <div class="radio "><label><input type="radio" name="features_${featureIndex}_properties_report_type" value="Other info">Other info</label></div>
                   </div>
                 </div>
                 <div class="form-group field field-string  govuk-form-group start"><label class="control-label"
@@ -70,13 +70,13 @@ function addFeature(featureIndex, type) {
                     Choose if the risk for surface water flooding should be overriden for points inside this area
                   </p>
                   <ul class="field-radio-group" id="features_${featureIndex}_properties_riskOverride">
-                    <li class="radio "><label><span><input id="map_${featureIndex}-no-override" type="radio" name="override_${featureIndex}-risk" value="Do not override" checked ><span>Do not override</span></span></label></li>
-                    <li class="radio "><label><span><input id="map_${featureIndex}-override" type="radio" name="override_${featureIndex}" value="Override"><span>Override</span></span></label></li>
+                    <li class="radio "><label><input id="map_${featureIndex}-no-override" type="radio" name="override_${featureIndex}-risk" value="Do not override" checked >Do not override</label></li>
+                    <li class="radio "><label><input id="map_${featureIndex}-override" type="radio" name="override_${featureIndex}" value="Override">Override</label></li>
                     <ul id="risk-options_${featureIndex}" style="display: none">
-                      <li class="radio "><label><span><input type="radio" name="override_${featureIndex}-risk" value="Very low"><span>Very low</span></span></label></li>
-                      <li class="radio "><label><span><input type="radio" name="override_${featureIndex}-risk" value="Low"><span>Low</span></span></label></li>
-                      <li class="radio "><label><span><input type="radio" name="override_${featureIndex}-risk" value="Medium"><span>Medium</span></span></label></li>
-                      <li class="radio "><label><span><input type="radio" name="override_${featureIndex}-risk" value="High"><span>High</span></span></label></li>
+                      <li class="radio "><label><input type="radio" name="override_${featureIndex}-risk" value="Very low">Very low</label></li>
+                      <li class="radio "><label><input type="radio" name="override_${featureIndex}-risk" value="Low">Low</label></li>
+                      <li class="radio "><label><input type="radio" name="override_${featureIndex}-risk" value="Medium">Medium</label></li>
+                      <li class="radio "><label><input type="radio" name="override_${featureIndex}-risk" value="High">High</label></li>
                     </ul>
                   </ul>
                 </div>

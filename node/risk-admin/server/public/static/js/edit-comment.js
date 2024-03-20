@@ -10,7 +10,6 @@ const editForm = document.getElementById('comment-form-edit')
 
 document.addEventListener('DOMContentLoaded', () => {
   geometry.features.forEach(function (feature, index) {
-    const overrideOrNoOverrideRadio = document.getElementById(`features_${index}_properties_riskOverride`)
     const noOverrideRadio = document.getElementById(`map_${index}-no-override`)
     const riskOptionRadios = document.getElementById(`risk-options_${index}`)
     const overrideRadio = document.getElementById(`map_${index}-override`)
@@ -23,11 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     if (type === 'holding') {
-      for(let i = 0; i < riskRadios.length; i++) {
-        if (riskRadios[i].value === selectedRadio[index]) {
+      for(let radio of riskRadios) {
+        if (radio.value === selectedRadio[index]) {
           riskOptionRadios.style.display = 'block'
           overrideRadio.checked = true
-          riskRadios[i].checked = true
+          radio.checked = true
         }
       }
 
@@ -44,14 +43,12 @@ document.addEventListener('DOMContentLoaded', () => {
         riskOptionRadios.style.display = 'none'
       })
     } else {
-      for(let i = 0; i < riskReportRadios.length; i++) {
-        if (riskReportRadios[i].value === selectedRadio[index]) {
-          riskReportRadios[i].checked = true
+      for(let radio of riskReportRadios) {
+        if (radio.value === selectedRadio[index]) {
+          radio.checked = true
         } 
       } 
     }
-
-    console.log('selectedRadio[index]', selectedRadio[index])
     commentMap(geo, 'map_' + index, capabilities)
   })
 })
