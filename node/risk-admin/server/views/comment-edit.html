@@ -139,6 +139,7 @@
                         <div class="form-group field field-object">
                           <fieldset id="features_{{ features.indexOf(feature) }}_properties">
                             <legend id="features_{{ features.indexOf(feature) }}_properties__title">properties</legend>
+                            <div id="map_{{ features.indexOf(feature) }}" class="comment-map"></div>
                             <div class="form-group field field-string  govuk-form-group info"><label class="control-label"
                                 for="features_{{ features.indexOf(feature) }}_properties_info">Report</label>
                               <p id="features_{{ features.indexOf(feature) }}_properties_info__description" class="field-description">The report text will display
@@ -185,7 +186,6 @@
                         </div>
                       </fieldset>
                     </div>
-                    <div id="map_{{ features.indexOf(feature) }}" class="comment-map"></div>
                   </div>
 
                   {% endif %}

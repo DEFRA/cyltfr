@@ -12,6 +12,7 @@ function addFeature(featureIndex, type) {
                 <legend id="features_${featureIndex}_properties__title">properties</legend>
                 <div class="hidden"><input type="hidden" id="features_${featureIndex}_properties_apply" value="llfa"></div>
                 <div class="hidden"><input type="hidden" id="features_${featureIndex}_properties_riskOverride" value=""></div>
+                <div id="map_${featureIndex}" class="comment-map"></div>
                 <div class="form-group field field-string  govuk-form-group info"><label class="control-label"
                     for="features_${featureIndex}_properties_info">Report</label>
                   <p id="features_${featureIndex}_properties_info__description" class="field-description">The report text will display
@@ -46,7 +47,6 @@ function addFeature(featureIndex, type) {
             </div>
           </fieldset>
         </div>
-        <div id="map_${featureIndex}" class="comment-map"></div>
       </div>
     `
 
@@ -62,6 +62,7 @@ function addFeature(featureIndex, type) {
                 <div class="hidden">
                   <input type="hidden" id="features_${featureIndex}_properties_apply" value="holding">
                 </div>
+                <div class="comment-map"></div>
                 <div class="form-group field field-string  govuk-form-group riskOverride">
                   <label class="control-label" for="features_${featureIndex}_properties_riskOverride">
                     Override surface water risk
@@ -104,7 +105,6 @@ function addFeature(featureIndex, type) {
             </div>
           </fieldset>
         </div>
-        <div class="comment-map"></div>
       </div>
     `
   }
