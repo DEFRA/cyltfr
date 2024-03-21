@@ -68,7 +68,6 @@ fileInput.addEventListener('change', function (e) {
       const noOverrideRadio = document.getElementById(`map_${index}-no-override`)
       const riskTypeRadios = document.getElementById(`features_${index}_properties_risk_type`)
       const rsRadio = document.getElementById(`rs_${index}`)
-      // continue with the below to make section disappear when sw not selected
       const overrideRadioSection = document.getElementById(`risk-override-radios_${index}`)
       const geo = {
         ...jsonFileData,

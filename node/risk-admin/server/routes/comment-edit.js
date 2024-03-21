@@ -137,7 +137,8 @@ module.exports = [
         }
         if (payload[`override_${index}-risk`] !== features[index].properties.riskOverride) {
           formattedPayload.features[index].properties.riskOverride = payload[`override_${index}-risk`]
-        } else if ( features[index].properties.riskType !== 'Rivers and the sea') {
+        }
+        if ( features[index].properties.riskType !== 'Rivers and the sea') {
           formattedPayload.features[index].properties.riskOverride = null
         }
         if (payload[`features_${index}_properties_report_type`] !== features[index].properties.riskReportType ) {
@@ -160,7 +161,7 @@ module.exports = [
         params: joi.object().keys({
           id: joi.string().required()
         }),
-        failAction: async (request, h, err) => {
+        failAction: async (_request, h, err) => {
           console.log(err)
           return h.view('/comment/create')
         }
