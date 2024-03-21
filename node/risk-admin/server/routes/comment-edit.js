@@ -43,6 +43,7 @@ module.exports = [
       const geometry = JSON.parse(geometryFile.Body)
       const features = geometry.features
       const type = comment.type
+      const riskType = []
       const selectedRadio = []
 
       features.forEach(function (feature) {
@@ -51,6 +52,8 @@ module.exports = [
         } else {
           selectedRadio.push(feature.properties.riskReportType)
         }
+
+        riskType.push(feature.properties.riskType)
       })
 
       const commentData = {
@@ -60,6 +63,7 @@ module.exports = [
         features: features,
         id: id,
         type: type,
+        riskType: riskType,
         selectedRadio: selectedRadio
       }
 
@@ -131,11 +135,16 @@ module.exports = [
         if (payload[`features_${index}_properties_end`] !== features[index].properties.end ) {
           formattedPayload.features[index].properties.end = payload[`features_${index}_properties_end`]
         }
-        if (payload[`override_${index}-risk`] !== features[index].properties.riskOverride ) {
+        if (payload[`override_${index}-risk`] !== features[index].properties.riskOverride) {
           formattedPayload.features[index].properties.riskOverride = payload[`override_${index}-risk`]
+        } else if ( features[index].properties.riskType !== 'Rivers and the sea') {
+          formattedPayload.features[index].properties.riskOverride = null
         }
         if (payload[`features_${index}_properties_report_type`] !== features[index].properties.riskReportType ) {
           formattedPayload.features[index].properties.riskReportType = payload[`features_${index}_properties_report_type`]
+        }
+        if (payload[`sw_or_rs_${index}`] !== features[index].properties.riskType ) {
+          formattedPayload.features[index].properties.riskType = payload[`sw_or_rs_${index}`]
         }
       })
 

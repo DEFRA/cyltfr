@@ -79,7 +79,7 @@ function addFeature(featureIndex, type) {
                       value="Rivers and the sea">Rivers and the sea</label></li>
                   </ul>
                 </div>
-                <div id="risk-override-radios_${featureIndex}" class="form-group field field-string  govuk-form-group riskOverride">
+                <div id="risk-override-radios_${featureIndex}" class="form-group field field-string govuk-form-group riskOverride">
                   <label class="control-label" for="features_${featureIndex}_properties_riskOverride">
                   Do you want to override the flood risk rating?'
                   </label>

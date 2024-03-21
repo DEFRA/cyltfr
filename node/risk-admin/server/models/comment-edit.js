@@ -10,6 +10,7 @@ class CommentEdit {
     this.id = commentData.id
     this.type = commentData.type
     this.selectedRadio = commentData.selectedRadio
+    this.riskType = commentData.riskType
   }
 }
 
