@@ -30,22 +30,26 @@ module.exports = [
       const keyname = `${id}.json`
       const now = new Date()
 
-      // Update manifest
-      await provider.addComment({
-        type,
-        description: payload.name,
-        boundary: payload.boundary,
-        featureCount: payload.features.length,
-        createdAt: now,
-        createdBy: request.auth.credentials.profile.email,
-        updatedAt: now,
-        updatedBy: request.auth.credentials.profile.email,
-        keyname,
-        id
-      })
+      try {
+        // Update manifest
+        await provider.addComment({
+          type,
+          description: payload.name,
+          boundary: payload.boundary,
+          featureCount: payload.features.length,
+          createdAt: now,
+          createdBy: request.auth.credentials.profile.email,
+          updatedAt: now,
+          updatedBy: request.auth.credentials.profile.email,
+          keyname,
+          id
+        })
 
-      // Upload file to s3
-      await provider.uploadObject(keyname, JSON.stringify(payload))
+        // Upload file to s3
+        await provider.uploadObject(keyname, JSON.stringify(payload))
+      } catch {
+        console.log('failed to upload')
+      }
 
       // Return ok
       return {
@@ -63,6 +67,7 @@ module.exports = [
           features: joi.array().required()
         }).unknown(),
         failAction: async (request, h, err) => {
+          console.log(err)
           const data = request.payload
           const type = request.params.type
           return h.view('comment-create', new Model(type, data, err)).takeover()
