@@ -133,25 +133,29 @@ fileInput.addEventListener('change', function (e) {
         const riskTypeValue = eventFormData.get(`sw_or_rs_${index}`)
         const riskOverrideValue = eventFormData.get(`override_${index}-risk`)
         const riskReportType = eventFormData.get(`features_${index}_properties_report_type`)
-
-        jsonFileData.features[index].properties.riskType = riskTypeValue
-        if (riskTypeValue === 'Surface water') {
-          jsonFileData.features[index].properties.riskOverride = riskOverrideValue
-        }
-        jsonFileData.features[index].properties.riskReportType = riskReportType
-
+        
         if (jsonFileData.name !== eventFormData.get(`name`)) {
           jsonFileData.name = eventFormData.get(`name`)
-        }
-        if (jsonFileData.features[index].properties.start !== eventFormData.get(`features_${index}_properties_start`)) {
-          jsonFileData.features[index].properties.start = eventFormData.get(`features_${index}_properties_start`)
         }
         if (jsonFileData.features[index].properties.end !== eventFormData.get(`features_${index}_properties_end`)) {
           jsonFileData.features[index].properties.end = eventFormData.get(`features_${index}_properties_end`)
         }
-        if (jsonFileData.features[index].properties.info !== eventFormData.get(`features_${index}_properties_info`)) {
-          jsonFileData.features[index].properties.info = eventFormData.get(`features_${index}_properties_info`)
+        if (jsonFileData.features[index].properties.start !== eventFormData.get(`features_${index}_properties_start`)) {
+          jsonFileData.features[index].properties.start = eventFormData.get(`features_${index}_properties_start`)
         }
+
+        if (isHoldingComment) {
+          jsonFileData.features[index].properties.riskType = riskTypeValue
+          if (jsonFileData.features[index].properties.info !== eventFormData.get(`features_${index}_properties_info`)) {
+            jsonFileData.features[index].properties.info = eventFormData.get(`features_${index}_properties_info`)
+          }
+          if (riskTypeValue === 'Surface water') {
+            jsonFileData.features[index].properties.riskOverride = riskOverrideValue
+          }
+        } else {
+          jsonFileData.features[index].properties.info = riskReportType
+        }
+
       })
     }
 

@@ -50,7 +50,7 @@ module.exports = [
         if (type === 'holding') {
           selectedRadio.push(feature.properties.riskOverride)
         } else {
-          selectedRadio.push(feature.properties.riskReportType)
+          selectedRadio.push(feature.properties.info)
         }
 
         riskType.push(feature.properties.riskType)
@@ -99,6 +99,8 @@ module.exports = [
       const geometry = JSON.parse(geometryFile.Body)
       const features = geometry.features
       const formattedPayload = geometry
+      const type = comment.type
+
 
       // Only approvers or comment authors can update
       const allowUpdate = auth.credentials.isApprover ||
@@ -126,26 +128,29 @@ module.exports = [
       }
 
       features.forEach(function (_feature, index) {
-        if (payload[`features_${index}_properties_info`] !== features[index].properties.info ) {
-          formattedPayload.features[index].properties.info = payload[`features_${index}_properties_info`]
+        if (type === 'llfa') {
+          if (payload[`features_${index}_properties_report_type`] !== features[index].properties.info ) {
+            formattedPayload.features[index].properties.info = payload[`features_${index}_properties_report_type`]
+          }
+        } else {
+          if (payload[`features_${index}_properties_info`] !== features[index].properties.info ) {
+            formattedPayload.features[index].properties.info = payload[`features_${index}_properties_info`]
+          }
+          if (payload[`override_${index}-risk`] !== features[index].properties.riskOverride) {
+            formattedPayload.features[index].properties.riskOverride = payload[`override_${index}-risk`]
+          }
+          if (features[index].properties.riskType !== 'Rivers and the sea') {
+            formattedPayload.features[index].properties.riskOverride = null
+          }
+          if (payload[`sw_or_rs_${index}`] !== features[index].properties.riskType ) {
+            formattedPayload.features[index].properties.riskType = payload[`sw_or_rs_${index}`]
+          }
         }
         if (payload[`features_${index}_properties_start`] !== features[index].properties.start ) {
           formattedPayload.features[index].properties.start = payload[`features_${index}_properties_start`]
         }
         if (payload[`features_${index}_properties_end`] !== features[index].properties.end ) {
           formattedPayload.features[index].properties.end = payload[`features_${index}_properties_end`]
-        }
-        if (payload[`override_${index}-risk`] !== features[index].properties.riskOverride) {
-          formattedPayload.features[index].properties.riskOverride = payload[`override_${index}-risk`]
-        }
-        if ( features[index].properties.riskType !== 'Rivers and the sea') {
-          formattedPayload.features[index].properties.riskOverride = null
-        }
-        if (payload[`features_${index}_properties_report_type`] !== features[index].properties.riskReportType ) {
-          formattedPayload.features[index].properties.riskReportType = payload[`features_${index}_properties_report_type`]
-        }
-        if (payload[`sw_or_rs_${index}`] !== features[index].properties.riskType ) {
-          formattedPayload.features[index].properties.riskType = payload[`sw_or_rs_${index}`]
         }
       })
 
