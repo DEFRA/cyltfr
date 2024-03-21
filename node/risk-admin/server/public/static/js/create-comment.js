@@ -66,6 +66,10 @@ fileInput.addEventListener('change', function (e) {
       const riskOptionRadios = document.getElementById(`risk-options_${index}`)
       const overrideRadio = document.getElementById(`map_${index}-override`)
       const noOverrideRadio = document.getElementById(`map_${index}-no-override`)
+      const riskTypeRadios = document.getElementById(`features_${index}_properties_risk_type`)
+      const rsRadio = document.getElementById(`rs_${index}`)
+      // continue with the below to make section disappear when sw not selected
+      const overrideRadioSection = document.getElementById(`risk-override-radios_${index}`)
       const geo = {
         ...jsonFileData,
         features: jsonFileData.features.filter(f => f === feature)
@@ -82,6 +86,13 @@ fileInput.addEventListener('change', function (e) {
         noOverrideRadio.addEventListener('click', function () {
           overrideRadio.checked = false
           riskOptionRadios.style.display = 'none'
+        })
+        riskTypeRadios.addEventListener('change', function () {
+          if (rsRadio.checked) {
+            overrideRadioSection.style.display = 'none'
+          } else {
+            overrideRadioSection.style.display = 'block'
+          }
         })
       }
       commentMap(geo, 'map_' + index, capabilities)
@@ -120,11 +131,15 @@ fileInput.addEventListener('change', function (e) {
       jsonFileData.boundary = boundaryValue
 
       jsonFileData.features.forEach(function (_feature, index) {
+        const riskTypeValue = eventFormData.get(`sw_or_rs_${index}`)
         const riskOverrideValue = eventFormData.get(`override_${index}-risk`)
         const riskReportType = eventFormData.get(`features_${index}_properties_report_type`)
 
+        jsonFileData.features[index].properties.riskType = riskTypeValue
+        if (riskTypeValue === 'Surface water') {
+          jsonFileData.features[index].properties.riskOverride = riskOverrideValue
+        }
         jsonFileData.features[index].properties.riskReportType = riskReportType
-        jsonFileData.features[index].properties.riskOverride = riskOverrideValue
 
         if (jsonFileData.name !== eventFormData.get(`name`)) {
           jsonFileData.name = eventFormData.get(`name`)

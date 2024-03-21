@@ -66,15 +66,26 @@ function addFeature(featureIndex, type) {
                 </div>
                 <div class="comment-map"></div>
                 <div class="form-group field field-string  govuk-form-group riskOverride">
-                  <label class="control-label" for="features_${featureIndex}_properties_riskOverride">
-                    Override surface water risk
+                  <label
+                    class="control-label" for="features_${featureIndex}_properties_risk_type">
+                    Select the flood risk you want to update for points inside this area
                   </label>
-                  <p id="features_${featureIndex}_properties_riskOverride__description" class="field-description">
-                    Choose if the risk for surface water flooding should be overriden for points inside this area
-                  </p>
+                  <ul class="field-radio-group" id="features_${featureIndex}_properties_risk_type">
+                    <li>
+                      <label for="sw_${featureIndex}"><input class="radio" id="sw_${featureIndex}" type="radio" name="sw_or_rs_${featureIndex}"
+                        value="Surface water" checked>Surface water</label></li>
+                    <li>
+                      <label for="rs_${featureIndex}"><input class="radio" type="radio" id="rs_${featureIndex}" name="sw_or_rs_${featureIndex}"
+                      value="Rivers and the sea">Rivers and the sea</label></li>
+                  </ul>
+                </div>
+                <div id="risk-override-radios_${featureIndex}" class="form-group field field-string  govuk-form-group riskOverride">
+                  <label class="control-label" for="features_${featureIndex}_properties_riskOverride">
+                  Do you want to override the flood risk rating?'
+                  </label>
                   <ul class="field-radio-group" id="features_${featureIndex}_properties_riskOverride">
-                    <li class="radio "><label><input id="map_${featureIndex}-no-override" type="radio" name="override_${featureIndex}-risk" value="Do not override" checked >Do not override</label></li>
-                    <li class="radio "><label><input id="map_${featureIndex}-override" type="radio" name="override_${featureIndex}" value="Override">Override</label></li>
+                    <li class="radio "><label><input id="map_${featureIndex}-no-override" type="radio" name="override_${featureIndex}-risk" value="Do not override" checked >No, do not override</label></li>
+                    <li class="radio "><label><input id="map_${featureIndex}-override" type="radio" name="override_${featureIndex}" value="Override">Yes, override surface water</label></li>
                     <ul id="risk-options_${featureIndex}" style="display: none">
                       <li class="radio "><label><input type="radio" name="override_${featureIndex}-risk" value="Very low">Very low</label></li>
                       <li class="radio "><label><input type="radio" name="override_${featureIndex}-risk" value="Low">Low</label></li>
@@ -84,9 +95,10 @@ function addFeature(featureIndex, type) {
                   </ul>
                 </div>
                 <div class="form-group field field-string  govuk-form-group info">
-                  <label class="control-label" for="features_${featureIndex}_properties_info">Info</label>
+                  <label class="control-label" for="features_${featureIndex}_properties_info">Enter the holding comment text</label>
                   <div id="features_${featureIndex}_properties_info__description" class="field-description">
-                    <p>The info text will display to public users in this geometry. Read <a href="/comment-guidance" target="_blank" previewlistener="true">comment guidance</a> before writing or pasting anything. The maximum number of characters is 150.</p>
+                    <p>For example: “The rivers and sea flood risk for this area has changed. For more information, email <a href="mailto:enquiries@environment-agency.gov.uk">enquiries@environment-agency.gov.uk</a>.”</p>
+                    <p>The holding comment text will display to public users in this area. Read <a href="/comment-guidance" target="_blank" previewlistener="true">comment guidance</a> before writing or pasting anything. The maximum number of characters is 150.</p>
                   </div>
                   <div>
                     <textarea name="features_${featureIndex}_properties_info" rows="5" id="features_${featureIndex}_properties_info" maxlength="150" class="govuk-textarea"></textarea>
