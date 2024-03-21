@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     if (type === 'holding') {
-      for(let radio of riskRadios) {
+      for(const radio of riskRadios) {
         if (radio.value === selectedRadio[index]) {
           riskOptionRadios.style.display = 'block'
           overrideRadio.checked = true
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      for(let typeRadio of riskTypes) {
+      for(const typeRadio of riskTypes) {
         if (typeRadio.value === riskType[index]) {
           typeRadio.checked = true
         }
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       })
     } else {
-      for(let radio of riskReportRadios) {
+      for(const radio of riskReportRadios) {
         if (radio.value === selectedRadio[index]) {
           radio.checked = true
         } 
