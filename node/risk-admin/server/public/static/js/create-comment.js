@@ -69,6 +69,9 @@ fileInput.addEventListener('change', function (e) {
       const riskTypeRadios = document.getElementById(`features_${index}_properties_risk_type`)
       const rsRadio = document.getElementById(`rs_${index}`)
       const overrideRadioSection = document.getElementById(`risk-override-radios_${index}`)
+      const addCommentRadios = document.getElementById(`features_${index}_properties_add_comment`)
+      const noHoldingCommentTextRadio = document.getElementById(`text_no_${index}`)
+      const textArea = document.getElementById(`text_area_${index}`)
       const geo = {
         ...jsonFileData,
         features: jsonFileData.features.filter(f => f === feature)
@@ -91,6 +94,13 @@ fileInput.addEventListener('change', function (e) {
             overrideRadioSection.style.display = 'none'
           } else {
             overrideRadioSection.style.display = 'block'
+          }
+        })
+        addCommentRadios.addEventListener('change', function () {
+          if (noHoldingCommentTextRadio.checked) {
+            textArea.style.display = 'none'
+          } else {
+            textArea.style.display = 'block'
           }
         })
       }
@@ -133,6 +143,7 @@ fileInput.addEventListener('change', function (e) {
         const riskTypeValue = eventFormData.get(`sw_or_rs_${index}`)
         const riskOverrideValue = eventFormData.get(`override_${index}-risk`)
         const riskReportType = eventFormData.get(`features_${index}_properties_report_type`)
+        const addCommentRadio = eventFormData.get(`add_holding_comment_${index}`)
         
         if (jsonFileData.name !== eventFormData.get(`name`)) {
           jsonFileData.name = eventFormData.get(`name`)
@@ -151,6 +162,12 @@ fileInput.addEventListener('change', function (e) {
           }
           if (riskTypeValue === 'Surface water') {
             jsonFileData.features[index].properties.riskOverride = riskOverrideValue
+          }
+          if (addCommentRadio === 'No') {
+            jsonFileData.features[index].properties.commentText = 'No'
+            jsonFileData.features[index].properties.info = ""
+          } else {
+            jsonFileData.features[index].properties.commentText = 'Yes'
           }
         } else {
           jsonFileData.features[index].properties.info = riskReportType

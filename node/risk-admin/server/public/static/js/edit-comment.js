@@ -20,6 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const riskTypeRadios = document.getElementById(`features_${index}_properties_risk_type`)
     const rsRadio = document.getElementById(`rs_${index}`)
     const overrideRadioSection = document.getElementById(`risk-override-radios_${index}`)
+    const addCommentRadios = document.getElementById(`features_${index}_properties_add_comment`)
+    const noHoldingCommentTextRadio = document.getElementById(`text_no_${index}`)
+    const textArea = document.getElementById(`text_area_${index}`)
 
     const geo = Object.assign({}, geometry, {
       features: geometry.features.filter(function (f) {
@@ -65,6 +68,13 @@ document.addEventListener('DOMContentLoaded', () => {
           overrideRadioSection.style.display = 'none'
         } else {
           overrideRadioSection.style.display = 'block'
+        }
+      })
+      addCommentRadios.addEventListener('change', function () {
+        if (noHoldingCommentTextRadio.checked) {
+          textArea.style.display = 'none'
+        } else {
+          textArea.style.display = 'block'
         }
       })
     } else {
