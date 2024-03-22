@@ -139,7 +139,7 @@ module.exports = [
           if (payload[`override_${index}-risk`] !== features[index].properties.riskOverride) {
             formattedPayload.features[index].properties.riskOverride = payload[`override_${index}-risk`]
           }
-          if (features[index].properties.riskType !== 'Rivers and the sea') {
+          if (features[index].properties.riskType === 'Rivers and the sea') {
             formattedPayload.features[index].properties.riskOverride = null
           }
           if (payload[`sw_or_rs_${index}`] !== features[index].properties.riskType ) {
