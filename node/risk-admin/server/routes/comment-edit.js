@@ -45,10 +45,12 @@ module.exports = [
       const type = comment.type
       const riskType = []
       const selectedRadio = []
+      const textCommentRadio = []
 
       features.forEach(function (feature) {
         if (type === 'holding') {
           selectedRadio.push(feature.properties.riskOverride)
+          textCommentRadio.push(feature.properties.commentText)
         } else {
           selectedRadio.push(feature.properties.info)
         }
@@ -64,7 +66,8 @@ module.exports = [
         id: id,
         type: type,
         riskType: riskType,
-        selectedRadio: selectedRadio
+        selectedRadio: selectedRadio,
+        textCommentRadio: textCommentRadio
       }
 
       const authData = {

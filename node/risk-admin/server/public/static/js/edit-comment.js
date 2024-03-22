@@ -4,6 +4,7 @@ const capabilities = window.LTFMGMT.capabilities
 const selectedRadio = window.LTFMGMT.selectedRadio
 const riskType = window.LTFMGMT.riskType
 const type = window.LTFMGMT.type
+const textCommentRadio = window.LTFMGMT.textCommentRadio
 const textareas = document.querySelectorAll('textarea')
 const remainingCharsTexts = document.querySelectorAll('.remaining-chars-text')
 const maxLengths = Array.from(textareas).map(textarea => parseInt(textarea.getAttribute('maxLength')))
@@ -18,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const riskReportRadios = document.getElementsByClassName(`risk-report_${index}`)
     const riskTypes = document.getElementsByClassName(`risk-type-${index}`)
     const riskTypeRadios = document.getElementById(`features_${index}_properties_risk_type`)
+    const textCommentRadios = document.getElementsByClassName(`textComment_radio_${index}`)
     const rsRadio = document.getElementById(`rs_${index}`)
     const overrideRadioSection = document.getElementById(`risk-override-radios_${index}`)
     const addCommentRadios = document.getElementById(`features_${index}_properties_add_comment`)
@@ -42,6 +44,15 @@ document.addEventListener('DOMContentLoaded', () => {
       for(const typeRadio of riskTypes) {
         if (typeRadio.value === riskType[index]) {
           typeRadio.checked = true
+        }
+      }
+
+      for(const commentRadio of textCommentRadios) {
+        if (commentRadio.value === textCommentRadio[index]) {
+          commentRadio.checked = true
+        }
+        if (textCommentRadio[index] === 'No') {
+          textArea.style.display = 'none'
         }
       }
 
