@@ -148,6 +148,14 @@ module.exports = [
           if (payload[`sw_or_rs_${index}`] !== features[index].properties.riskType ) {
             formattedPayload.features[index].properties.riskType = payload[`sw_or_rs_${index}`]
           }
+          if (payload[`add_holding_comment_${index}`] !== features[index].properties.commentText ) {
+            if(payload[`add_holding_comment_${index}`] === 'No') {
+              formattedPayload.features[index].properties.commentText = payload[`add_holding_comment_${index}`]
+              formattedPayload.features[index].properties.info = ""
+            } else {
+              formattedPayload.features[index].properties.commentText = payload[`add_holding_comment_${index}`]
+            }
+          }
         }
         if (payload[`features_${index}_properties_start`] !== features[index].properties.start ) {
           formattedPayload.features[index].properties.start = payload[`features_${index}_properties_start`]
