@@ -45,10 +45,12 @@ module.exports = [
       const type = comment.type
       const riskType = []
       const selectedRadio = []
+      const textCommentRadio = []
 
       features.forEach(function (feature) {
         if (type === 'holding') {
           selectedRadio.push(feature.properties.riskOverride)
+          textCommentRadio.push(feature.properties.commentText)
         } else {
           selectedRadio.push(feature.properties.info)
         }
@@ -64,7 +66,8 @@ module.exports = [
         id: id,
         type: type,
         riskType: riskType,
-        selectedRadio: selectedRadio
+        selectedRadio: selectedRadio,
+        textCommentRadio: textCommentRadio
       }
 
       const authData = {
@@ -139,11 +142,19 @@ module.exports = [
           if (payload[`override_${index}-risk`] !== features[index].properties.riskOverride) {
             formattedPayload.features[index].properties.riskOverride = payload[`override_${index}-risk`]
           }
-          if (features[index].properties.riskType !== 'Rivers and the sea') {
+          if (features[index].properties.riskType === 'Rivers and the sea') {
             formattedPayload.features[index].properties.riskOverride = null
           }
           if (payload[`sw_or_rs_${index}`] !== features[index].properties.riskType ) {
             formattedPayload.features[index].properties.riskType = payload[`sw_or_rs_${index}`]
+          }
+          if (payload[`add_holding_comment_${index}`] !== features[index].properties.commentText ) {
+            if(payload[`add_holding_comment_${index}`] === 'No') {
+              formattedPayload.features[index].properties.commentText = payload[`add_holding_comment_${index}`]
+              formattedPayload.features[index].properties.info = ""
+            } else {
+              formattedPayload.features[index].properties.commentText = payload[`add_holding_comment_${index}`]
+            }
           }
         }
         if (payload[`features_${index}_properties_start`] !== features[index].properties.start ) {

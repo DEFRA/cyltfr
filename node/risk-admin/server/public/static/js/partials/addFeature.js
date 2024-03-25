@@ -86,15 +86,29 @@ function addFeature(featureIndex, type) {
                   <ul class="field-radio-group" id="features_${featureIndex}_properties_riskOverride">
                     <li class="radio "><label><input id="map_${featureIndex}-no-override" type="radio" name="override_${featureIndex}-risk" value="Do not override" checked >No, do not override</label></li>
                     <li class="radio "><label><input id="map_${featureIndex}-override" type="radio" name="override_${featureIndex}" value="Override">Yes, override surface water</label></li>
-                    <ul id="risk-options_${featureIndex}" style="display: none">
+                    <ul id="risk-options_${featureIndex}" class="risk-option-radios" style="display: none">
                       <li class="radio "><label><input type="radio" name="override_${featureIndex}-risk" value="Very low">Very low</label></li>
                       <li class="radio "><label><input type="radio" name="override_${featureIndex}-risk" value="Low">Low</label></li>
                       <li class="radio "><label><input type="radio" name="override_${featureIndex}-risk" value="Medium">Medium</label></li>
                       <li class="radio "><label><input type="radio" name="override_${featureIndex}-risk" value="High">High</label></li>
                     </ul>
                   </ul>
-                </div>
-                <div class="form-group field field-string  govuk-form-group info">
+                  </div>
+                  <div class="form-group field field-string  govuk-form-group">
+                    <label
+                      class="control-label" for="features_${featureIndex}_properties_add_comment">
+                      Do you want to add holding comment text?
+                    </label>
+                    <ul class="field-radio-group" id="features_${featureIndex}_properties_add_comment">
+                      <li>
+                        <label for="text_no_${featureIndex}"><input class="radio" id="text_no_${featureIndex}" type="radio" name="add_holding_comment_${featureIndex}"
+                          value="No">No, do not add a holding comment text</label></li>
+                      <li>
+                        <label for="text_yes_${featureIndex}"><input class="radio" type="radio" id="text_yes_${featureIndex}" name="add_holding_comment_${featureIndex}"
+                        value="Yes" checked>Yes, add holding comment text</label></li>
+                    </ul>
+                  </div>
+                <div class="form-group field field-string  govuk-form-group info" id="text_area_${featureIndex}">
                   <label class="control-label" for="features_${featureIndex}_properties_info">Enter the holding comment text</label>
                   <div id="features_${featureIndex}_properties_info__description" class="field-description">
                     <p>For example: “The rivers and sea flood risk for this area has changed. For more information, email <a href="mailto:enquiries@environment-agency.gov.uk">enquiries@environment-agency.gov.uk</a>.”</p>
