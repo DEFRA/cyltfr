@@ -20,10 +20,10 @@ module.exports = {
       const zipfile = tmpfile + '.zip'
       await rename(tmpfile, zipfile)
 
-      const { data: geojson } = await ogr2ogr(zipfile)
+      // const { data: geojson } = await ogr2ogr(zipfile)
 
       // uncomment the below to use dummy data to bypass having to upload an actual shape file on dev
-      // const geojson = exampleJson
+      const geojson = exampleJson
 
       geojson.features.forEach(f => {
         const props = f.properties
