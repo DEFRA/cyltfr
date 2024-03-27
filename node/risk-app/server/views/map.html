@@ -56,7 +56,7 @@
     </button>
 
     <!-- Advanced options button -->
-    <button class="defra-map__advanced" id="advanced-key-button" tabindex="1" style="color:	#0b0c0c;">
+    <button class="defra-map__advanced" id="advanced-key-button" tabindex="1">
       <svg viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
         <path id="advanced-button-image"
           d="m3.485 15.126-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5-.971-1.748L12 19.856ZM20 8V6h2V4h-2V2h-2v2h-2v2h2v2zM2.513 12.833l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5a1 1 0 0 0-.002-1.749l-9.022-5a1 1 0 0 0-.968-.001l-8.978 4.96a1 1 0 0 0-.003 1.749z">
@@ -69,7 +69,7 @@
     <div class="defra-map-controls-bottom">
 
       <!-- open map on mobile -->
-      <button class="defra-map__open-key" focusable="true" id="open-key" style="display: none">
+      <button class="defra-map__open-key" focusable="true" id="open-key">
         <div class="button-content">
         <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20"><path d="M17.215,11.31L19,12.5L10,18.5L1,12.5L2.785,11.31L9.945,16.083C9.978,16.106 10.022,16.106 10.055,16.083L17.215,11.31Z" style="fill:currentColor;"></path><path d="M10,1.5L1,7.5L10,13.5L19,7.5L10,1.5ZM10,3.88L15.43,7.5L10,11.12L4.57,7.5L10,3.88Z" style="fill:currentColor;"></path></svg>
         <span class="govuk-visually-hidden">open</span><span class="open-button-text">Key</span>
@@ -544,6 +544,7 @@
   window.mapCategories = {{ maps | dump | safe }}
 </script>
 <script src="{{ assetPath }}/js/map-page.js"></script>
+
 {% endblock %}
 
 {% block footer %}
