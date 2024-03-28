@@ -472,7 +472,7 @@ $scenarioWidthCap: 980px;
 .defra-map-key__symbol-container {
   position: relative;
   display: block;
-  margin-left: 34px;
+  margin-left: 30px;
 }
 
 .defra-map-key__symbol {
@@ -501,6 +501,10 @@ svg:not(:root) {
 
 #surface-water-extent-heading {
   padding-left: 34px;
+}
+
+.defra-map-key-labels__symbol {
+  margin-left: 34px;
 }
 
 .govuk-radios__label {

@@ -17,8 +17,18 @@ module.exports = {
       const address = request.yar.get('address')
       const path = request.path
       const backLinkUri = defineBackLink(path)
+      const mapType = request.query.map
+      let keyTitle
 
-      return h.view('map', new MapViewModel(easting, northing, address, backLinkUri))
+      if (mapType === 'RiversOrSea') {
+        keyTitle = 'Rivers and the sea'
+      } else if (mapType === 'SurfaceWater') {
+        keyTitle = 'Surface water'
+      } else {
+        keyTitle = 'Key'
+      }
+
+      return h.view('map', new MapViewModel(easting, northing, address, backLinkUri, keyTitle))
     },
     validate: {
       query: joi.object().keys({

@@ -247,7 +247,7 @@
   <div id="map-key" class="defra-map-key" style="display: block;">
     <div class="defra-map-key__container" id="defra-map-key__container">
       <h2 id="mapKeyLabel" class="defra-map-key__title">
-        <span role="text">Key<span class="govuk-visually-hidden">for map features</span></span>
+        <span role="text">{{ keyTitle }}<span class="govuk-visually-hidden">for map features</span></span>
       </h2>
       <button class="defra-map-key__close" id="close-key" onclick="closeKey()">
         <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20"><path d="M10,8.6L15.6,3L17,4.4L11.4,10L17,15.6L15.6,17L10,11.4L4.4,17L3,15.6L8.6,10L3,4.4L4.4,3L10,8.6Z" fill="" style="fill:currentColor;stroke:currentColor;stroke-width:0.1px;"></path>
@@ -260,7 +260,7 @@
           <div id="sw-section-container">
             <fieldset class="govuk-fieldset">
               <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-                <h3 class="defra-map-key__section-title" ontoken="this.onscrolling = false">Surface water: yearly chance of flooding</h3>
+                <h3 class="defra-map-key__section-title" ontoken="this.onscrolling = false">Yearly chance of flooding</h3>
               </legend>
 
               <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
@@ -271,7 +271,7 @@
                   <label class="govuk-label govuk-radios__label" for="sw-extent-radio">
                     <span class="surface-water-bulletpoint__heading" id="surface-water-extent__heading">Flood area (extent)</span>
 
-                    <div id="sw-extent-desc-container">
+                    <div id="sw-extent-desc-container" class="defra-map-key-labels__symbol">
                       <span
                         class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-extent-container"
                         id="sw-extent-high">
@@ -428,8 +428,7 @@
           <div class="key-item-container" id="rs-section-container">
             <fieldset class="govuk-fieldset">
               <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-                <h3 class="defra-map-key__section-title" id="rs-title" ontoken="this.onscrolling = false">Rivers and the
-                  sea: yearly chance of flooding</h3>
+                <h3 class="defra-map-key__section-title" id="rs-title" ontoken="this.onscrolling = false">Yearly chance of flooding</h3>
               </legend>
 
               <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
@@ -440,7 +439,7 @@
                     name="measurements" type="radio">
                   <label class="govuk-label govuk-radios__label" for="rs-radio">
                     <span class="bulletpoint__heading" id="rs-extent__heading">Flood Area (extent)</span>
-                    <div class="extent-desc-container" id="rs-extent-desc-container">
+                    <div class="extent-desc-container defra-map-key-labels__symbol" id="rs-extent-desc-container">
                       <span
                         class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi extent-container"
                         id="rs-extent-high">
@@ -562,7 +561,7 @@
                     name="measurements" type="radio">
                   <label class="govuk-label govuk-radios__label" for="rs-ccrs2-radio">
                     <span class="bulletpoint__heading" id="rs-ccrs2-extent__heading">Flood area (extent)</span>
-                    <div class="extent-desc-container" id="rs-ccrs2-extent-desc-container">
+                    <div class="extent-desc-container defra-map-key-labels__symbol" id="rs-ccrs2-extent-desc-container">
                       <span
                         class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi extent-container"
                         id="rs-ccrs2-extent-high">
@@ -630,7 +629,7 @@
                   <label class="govuk-label govuk-radios__label" for="sw-ccrs3-extent-radio">
                     <span class="surface-water-bulletpoint__heading" id="surface-water-ccrs3-extent__heading">Flood area (extent)</span>
 
-                    <div id="sw-ccrs3-extent-desc-container">
+                    <div id="sw-ccrs3-extent-desc-container" class="defra-map-key-labels__symbol">
                       <span
                         class="defra-map-key__symbol-container-v3 defra-map-key__symbol-container--multi sw-extent-container"
                         id="sw-ccrs3-extent-high">
