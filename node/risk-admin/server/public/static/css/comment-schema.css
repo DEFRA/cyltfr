@@ -6,7 +6,7 @@
   padding-left: 10px;
   /* padding-top: 20px; */
   display: list-item;
-  list-style: decimal;
+  list-style: none;
 }
 
 legend {

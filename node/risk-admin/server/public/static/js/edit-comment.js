@@ -1,74 +1,116 @@
+const commentMap = window.LTFMGMT.commentMap
+const geometry = window.LTFMGMT.geometry
+const capabilities = window.LTFMGMT.capabilities
+const selectedRadio = window.LTFMGMT.selectedRadio
+const riskType = window.LTFMGMT.riskType
+const type = window.LTFMGMT.type
+const textCommentRadio = window.LTFMGMT.textCommentRadio
+const textareas = document.querySelectorAll('textarea')
+const remainingCharsTexts = document.querySelectorAll('.remaining-chars-text')
+const maxLengths = Array.from(textareas).map(textarea => parseInt(textarea.getAttribute('maxLength')))
+const editForm = document.getElementById('comment-form-edit')
 
-;(function () {
-  const Form = window.JSONSchemaForm.default
-  const React = window.React
-  const ReactDOM = window.ReactDOM
-  const fetch = window.fetch
-  const geometry = window.LTFMGMT.geometry
-  const comment = window.LTFMGMT.comment
-  const type = comment.type
-  const isHoldingComment = type === 'holding'
-  const commentSchema = isHoldingComment
-    ? window.LTFMGMT.holdingCommentSchema
-    : window.LTFMGMT.llfaCommentSchema
-  const commentMap = window.LTFMGMT.commentMap
-  const capabilities = window.LTFMGMT.capabilities
-
-  const props = {
-    formData: geometry,
-    schema: commentSchema.schema,
-    uiSchema: commentSchema.uiSchema,
-    ArrayFieldTemplate: window.LTFMGMT.ArrayFieldTemplate,
-    onSubmit: function (e) {
-      if (comment.approvedAt) {
-        // Comment is already approved.
-        // The edit will cause it to be unapproved.
-        // Warn the user they will need to get it re-approved.
-        if (!window.confirm('The comment will need re-approving. Continue?')) {
-          return
-        }
-      }
-
-      fetch(window.location.href, {
-        method: 'put',
-        body: JSON.stringify(e.formData),
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        }
-      }).then(function (response) {
-        if (response.ok) {
-          window.location.href = '/'
-        } else {
-          throw new Error(response.statusText)
-        }
-      }).catch(function (err) {
-        window.alert('Error: ' + err)
-      })
-    }
-  }
-
-  const submitButton = React.createElement('button', {
-    type: 'submit',
-    className: 'govuk-button'
-  }, 'Save')
-
-  ReactDOM.render(
-    React.createElement(Form, props, submitButton),
-    document.getElementById('root')
-  )
-
+document.addEventListener('DOMContentLoaded', () => {
   geometry.features.forEach(function (feature, index) {
+    const noOverrideRadio = document.getElementById(`map_${index}-no-override`)
+    const riskOptionRadios = document.getElementById(`risk-options_${index}`)
+    const overrideRadio = document.getElementById(`map_${index}-override`)
+    const riskRadios = document.getElementsByClassName(`risk-option_${index}`)
+    const riskReportRadios = document.getElementsByClassName(`risk-report_${index}`)
+    const riskTypes = document.getElementsByClassName(`risk-type-${index}`)
+    const riskTypeRadios = document.getElementById(`features_${index}_properties_risk_type`)
+    const textCommentRadios = document.getElementsByClassName(`textComment_radio_${index}`)
+    const rsRadio = document.getElementById(`rs_${index}`)
+    const overrideRadioSection = document.getElementById(`risk-override-radios_${index}`)
+    const addCommentRadios = document.getElementById(`features_${index}_properties_add_comment`)
+    const noHoldingCommentTextRadio = document.getElementById(`text_no_${index}`)
+    const textArea = document.getElementById(`text_area_${index}`)
+
     const geo = Object.assign({}, geometry, {
       features: geometry.features.filter(function (f) {
         return f === feature
       })
     })
 
+    if (type === 'holding') {
+      for(const radio of riskRadios) {
+        if (radio.value === selectedRadio[index]) {
+          riskOptionRadios.style.display = 'block'
+          overrideRadio.checked = true
+          radio.checked = true
+        }
+      }
+
+      for(const typeRadio of riskTypes) {
+        if (typeRadio.value === riskType[index]) {
+          typeRadio.checked = true
+        }
+      }
+
+      for(const commentRadio of textCommentRadios) {
+        if (commentRadio.value === textCommentRadio[index]) {
+          commentRadio.checked = true
+        }
+        if (textCommentRadio[index] === 'No') {
+          textArea.style.display = 'none'
+        }
+      }
+
+      if (rsRadio.checked) {
+        overrideRadioSection.style.display = 'none'
+      } else {
+        overrideRadioSection.style.display = 'block'
+      }
+
+      if (overrideRadio.checked) {
+        riskOptionRadios.style.display = 'block'
+      }
+
+      overrideRadio.addEventListener('click', function () {
+        noOverrideRadio.checked = false
+        riskOptionRadios.style.display = 'block'
+      })
+      noOverrideRadio.addEventListener('click', function () {
+        overrideRadio.checked = false
+        riskOptionRadios.style.display = 'none'
+      })
+      riskTypeRadios.addEventListener('change', function () {
+        if (rsRadio.checked) {
+          overrideRadioSection.style.display = 'none'
+        } else {
+          overrideRadioSection.style.display = 'block'
+        }
+      })
+      addCommentRadios.addEventListener('change', function () {
+        if (noHoldingCommentTextRadio.checked) {
+          textArea.style.display = 'none'
+        } else {
+          textArea.style.display = 'block'
+        }
+      })
+    } else {
+      for(const radio of riskReportRadios) {
+        if (radio.value === selectedRadio[index]) {
+          radio.checked = true
+        } 
+      } 
+    }
     commentMap(geo, 'map_' + index, capabilities)
   })
+})
 
-  if (geometry.features.length > 1) {
-    commentMap(geometry, 'map', capabilities, 'The map below shows all geometries contained within the shapefile')
-  }
-})()
+document.addEventListener('DOMContentLoaded', () => {
+  textareas.forEach((textarea, index) => {
+    updateRemainingChars(textarea, remainingCharsTexts[index])
+    textarea.addEventListener('input', () => {
+      updateRemainingChars(textarea, remainingCharsTexts[index])
+    })
+  })
+})
+
+function updateRemainingChars(textarea, remainingCharsText) {
+  const maxLength = parseInt(textarea.getAttribute('maxLength'))
+  remainingCharsText.innerHTML = maxLength - textarea.value.length
+}
+
+commentMap(geometry, 'map', capabilities, 'The map below shows all geometries contained within the shapefile')
