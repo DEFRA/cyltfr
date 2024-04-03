@@ -14,7 +14,7 @@ module.exports = {
       const path = request.path
       const backLinkUri = defineBackLink(path)
 
-      return h.view('map2', new MapViewModel(easting, northing, address, backLinkUri))
+      return h.view('map', new MapViewModel(easting, northing, address, backLinkUri))
     },
     validate: {
       query: joi.object().keys({

@@ -5,7 +5,7 @@ module.exports = {
   mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
   devtool: 'source-map',
   entry: {
-    mapv2: './server/src/js/mapv2.js'
+    map: './server/src/js/map.js'
   },
   node: {
     global: true
