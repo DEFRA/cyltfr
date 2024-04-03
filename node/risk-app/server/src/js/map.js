@@ -63,7 +63,7 @@ export async function loadMap (point) {
   // add the base map layer
   layers.push(layer)
 
-  createFeatureLayers(WMS, source, layers)
+  createFeatureLayers(WMS, source.tileGrid.getResolutions(), layers)
 
   if (point) {
     const centreLayer = createCentreLayer(point)
@@ -98,7 +98,7 @@ export async function loadMap (point) {
   }
 }
 
-function createFeatureLayers (WMS, source, layers) {
+function createFeatureLayers (WMS, resolutions, layers) {
   const wmsparser = new WMSCapabilities()
   const wmsResult = wmsparser.read(WMS)
 
@@ -115,7 +115,7 @@ function createFeatureLayers (WMS, source, layers) {
       },
       tileGrid: new WMTSTileGrid({
         extent: layer.BoundingBox[0].extent,
-        resolutions: source.tileGrid.getResolutions(),
+        resolutions,
         tileSize: TILE_SIZE
       })
     })
