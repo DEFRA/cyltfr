@@ -21,11 +21,18 @@ import Icon from 'ol/style/Icon.js'
 let map, callback, currentLayer
 let maxResolution = 1000
 
+const SURFACE_WATER_RADIUS_METRE = 15
+const SURFACE_WATER_MAX_RESOLUTION = 20
+const DEFAULT_MAP_CENTRE = [440000, 310000]
+const MAP_EXTENT = [0, 0, 800000, 1400000]
+const TILE_SIZE = [250, 250]
+const DEFAULT_ZOOM_ADDRESS = 9
+const DEFAULT_ZOOM_WHOLE_MAP = 0
 const config = {
   projection: {
     ref: 'EPSG:27700',
     proj4: '+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.06,0.15,0.247,0.842,-20.489 +units=m +no_defs',
-    extent: [0, 0, 800000, 1400000]
+    extent: MAP_EXTENT
   },
   OSGetCapabilities: 'os-get-capabilities',
   OSWMTS: 'os-maps-proxy',
@@ -49,97 +56,18 @@ export async function loadMap (point) {
   const responses = await Promise.all([fetch(config.OSGetCapabilities), fetch(config.GSWMSGetCapabilities)])
   const OS = await responses[0].text()
   const WMS = await responses[1].text()
-  const parser = new WMTSCapabilities()
-  const wmsparser = new WMSCapabilities()
-  const result = parser.read(OS)
 
-  const options = optionsFromCapabilities(result, {
-    layer: config.OSLayer,
-    matrixSet: config.OSMatrixSet,
-    crossOrigin: 'anonymous'
-  })
+  const { layer, source } = createBaseLayer(OS)
 
-  const source = new WMTS(options)
-  source.setUrl(config.OSWMTS)
-
-  const layer = new TileLayer({
-    ref: config.OSLayer,
-    source
-  })
   const layers = []
   // add the base map layer
   layers.push(layer)
 
-  const wmsResult = wmsparser.read(WMS)
-
-  // I can't find a better way of doing this for a tileWMS source, WMTS souce has
-  // optionsFromCapabilities function which does some of the work for you, but it looks
-  // like that function just does this anyway, although i think the WMTS version does a lot more with setting up matrixSet and things
-  for (let i = 0; i < wmsResult.Capability.Layer.Layer.length; i++) {
-    const WmsSource = new TileWMS({
-      url: config.GSWMS,
-      params: {
-        LAYERS: wmsResult.Capability.Layer.Layer[i].Name,
-        TILED: true,
-        VERSION: wmsResult.version
-      },
-      tileGrid: new WMTSTileGrid({
-        extent: wmsResult.Capability.Layer.Layer[i].BoundingBox[0].extent,
-        resolutions: source.tileGrid.getResolutions(),
-        tileSize: [250, 250]
-      })
-    })
-
-    if (wmsResult.Capability.Layer.Layer[i].Name.indexOf('SW') > -1) {
-      maxResolution = 20
-    }
-
-    layers.push(new TileLayer({
-      ref: wmsResult.Capability.Layer.Layer[i].Name,
-      source: WmsSource,
-      opacity: 0.7,
-      visible: false,
-      maxResolution
-    }))
-  }
+  createFeatureLayers(WMS, source, layers)
 
   if (point) {
-    const radiusLayer = new VectorLayer({
-      ref: 'radiusMarker',
-      className: 'radiusMarker',
-      visible: false,
-      source: new VectorSource({
-        features: [new Feature({
-          geometry: new Circle(point, 15)
-        })]
-      }),
-      style: new Style({
-        fill: new Fill({
-          color: 'rgba(237, 231, 46, 0.6)'
-        }),
-        stroke: new Stroke({
-          color: 'rgba(237, 231, 46, 1)',
-          width: 2
-        })
-      })
-    })
-
-    const centreLayer = new VectorLayer({
-      ref: 'pointMarker',
-      className: 'pointMarker',
-      visible: true,
-      source: new VectorSource({
-        features: [new Feature({
-          geometry: new Point(point)
-        })]
-      }),
-      style: new Style({
-        image: new Icon({
-          anchor: [0.5, 1],
-          src: 'assets/images/icon-location.png'
-        })
-      })
-    })
+    const centreLayer = createCentreLayer(point)
+    const radiusLayer = createRadiusLayer(point)
     layers.push(centreLayer, radiusLayer)
   }
 
@@ -157,29 +85,132 @@ export async function loadMap (point) {
     view: new View({
       resolutions,
       projection,
-      center: point || [440000, 310000],
-      zoom: point ? 9 : 0,
+      center: point || DEFAULT_MAP_CENTRE,
+      zoom: point ? DEFAULT_ZOOM_ADDRESS : DEFAULT_ZOOM_WHOLE_MAP,
       extent: config.projection.extent
     })
   })
 
-  map.on('pointermove', function (e) {
-    if (e.dragging) {
-      return
-    }
-
-    const currentLayerRef = currentLayer && currentLayer.get('ref')
-    const $body = document.getElementsByTagName('body')[0]
-    if ((currentLayerRef === 'risk:1-ROFRS' || currentLayerRef === 'risk:6-SW-Extent') || !(currentLayerRef !== 'risk:1-ROFRS' && currentLayerRef !== 'risk:6-SW-Extent' && currentLayerRef !== 'risk:2-FWLRSF')) {
-      $body.style.cursor = 'pointer'
-    } else {
-      $body.style.cursor = 'default'
-    }
-  })
+  map.on('pointermove', onPointerMove)
 
   if (callback) {
     callback()
   }
+}
+
+function createFeatureLayers (WMS, source, layers) {
+  const wmsparser = new WMSCapabilities()
+  const wmsResult = wmsparser.read(WMS)
+
+  // I can't find a better way of doing this for a tileWMS source, WMTS souce has
+  // optionsFromCapabilities function which does some of the work for you, but it looks
+  // like that function just does this anyway, although i think the WMTS version does a lot more with setting up matrixSet and things
+  for (const layer of wmsResult.Capability.Layer.Layer) {
+    const WmsSource = new TileWMS({
+      url: config.GSWMS,
+      params: {
+        LAYERS: layer.Name,
+        TILED: true,
+        VERSION: wmsResult.version
+      },
+      tileGrid: new WMTSTileGrid({
+        extent: layer.BoundingBox[0].extent,
+        resolutions: source.tileGrid.getResolutions(),
+        tileSize: TILE_SIZE
+      })
+    })
+
+    if (isSurfaceWaterLayer(layer.Name)) {
+      maxResolution = SURFACE_WATER_MAX_RESOLUTION
+    }
+
+    layers.push(new TileLayer({
+      ref: layer.Name,
+      source: WmsSource,
+      opacity: 0.7,
+      visible: false,
+      maxResolution
+    }))
+  }
+}
+
+function createBaseLayer (OS) {
+  const parser = new WMTSCapabilities()
+  const result = parser.read(OS)
+
+  const options = optionsFromCapabilities(result, {
+    layer: config.OSLayer,
+    matrixSet: config.OSMatrixSet,
+    crossOrigin: 'anonymous'
+  })
+
+  const source = new WMTS(options)
+  source.setUrl(config.OSWMTS)
+
+  const layer = new TileLayer({
+    ref: config.OSLayer,
+    source
+  })
+  return { layer, source }
+}
+
+function onPointerMove (e) {
+  if (e.dragging) {
+    return
+  }
+
+  const currentLayerRef = currentLayer?.get('ref')
+  const $body = document.getElementsByTagName('body')[0]
+  if ((currentLayerRef === 'risk:1-ROFRS' || currentLayerRef === 'risk:6-SW-Extent') || !(currentLayerRef !== 'risk:1-ROFRS' && currentLayerRef !== 'risk:6-SW-Extent' && currentLayerRef !== 'risk:2-FWLRSF')) {
+    $body.style.cursor = 'pointer'
+  } else {
+    $body.style.cursor = 'default'
+  }
+}
+
+function createCentreLayer (point) {
+  return new VectorLayer({
+    ref: 'pointMarker',
+    className: 'pointMarker',
+    visible: true,
+    source: new VectorSource({
+      features: [new Feature({
+        geometry: new Point(point)
+      })]
+    }),
+    style: new Style({
+      image: new Icon({
+        anchor: [0.5, 1],
+        src: 'assets/images/icon-location.png'
+      })
+    })
+  })
+}
+
+function createRadiusLayer (point) {
+  return new VectorLayer({
+    ref: 'radiusMarker',
+    className: 'radiusMarker',
+    visible: false,
+    source: new VectorSource({
+      features: [new Feature({
+        geometry: new Circle(point, SURFACE_WATER_RADIUS_METRE)
+      })]
+    }),
+    style: new Style({
+      fill: new Fill({
+        color: 'rgba(237, 231, 46, 0.6)'
+      }),
+      stroke: new Stroke({
+        color: 'rgba(237, 231, 46, 1)',
+        width: 2
+      })
+    })
+  })
+}
+
+function isSurfaceWaterLayer (layerName) {
+  return layerName.substr(7, 2) === 'SW'
 }
 
 export function showMap (layerReference, hasLocation) {
@@ -194,7 +225,7 @@ export function showMap (layerReference, hasLocation) {
       layer.setVisible(true)
       layer.setZIndex(1)
     }
-    if (layerName === 'radiusMarker' && hasLocation && layerReference.substr(7, 2) === 'SW') {
+    if (layerName === 'radiusMarker' && hasLocation && isSurfaceWaterLayer(layerReference)) {
       layer.setVisible(true)
       layer.setZIndex(0)
     }
