@@ -1,7 +1,7 @@
 $govuk-assets-path: '/assets/';
 
-@import "node_modules/govuk-frontend/dist/govuk/settings/all";
-@import "node_modules/govuk-frontend/dist/govuk/helpers/all";
+@import "govuk-frontend/dist/govuk/settings/all";
+@import "govuk-frontend/dist/govuk/helpers/all";
 @import url(//fonts.googleapis.com/css?family=Source+Sans+Pro);
 
 $small-mobile-width: 400px;
