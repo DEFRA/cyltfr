@@ -1,4 +1,4 @@
-import { Map, View } from 'ol'
+import { Map as OlMap, View } from 'ol'
 import proj4 from 'proj4'
 import { get as getProjection } from 'ol/proj.js'
 import { register } from 'ol/proj/proj4'
@@ -73,7 +73,7 @@ export async function loadMap (point) {
 
   const resolutions = source.tileGrid.getResolutions().slice(0, 10)
 
-  map = new Map({
+  map = new OlMap({
     // controls,
     // interactions: ol.interaction.defaults({
     //   altShiftDragRotate: false,
