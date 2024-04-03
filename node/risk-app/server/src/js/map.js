@@ -108,7 +108,7 @@ function mapControls () {
     const retval = document.createElementNS('http://www.w3.org/2000/svg', tagName)
     if (props) {
       for (const name in props) {
-        if (Object.prototype.hasOwnProperty.call(props, name)) {
+        if (Object.hasOwn(props, name)) {
           retval.setAttribute(name, props[name])
         }
       }
