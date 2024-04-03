@@ -104,7 +104,7 @@ export async function loadMap (point) {
 }
 
 function mapControls () {
-  function ne (tagName, props) {
+  function newElement (tagName, props) {
     const retval = document.createElementNS('http://www.w3.org/2000/svg', tagName)
     if (props) {
       for (const name in props) {
@@ -115,11 +115,11 @@ function mapControls () {
     }
     return retval
   }
-  const zoomIn = ne('svg', { width: 20, height: 20 })
-  zoomIn.appendChild(ne('rect', { x: 3, y: 9, width: 14, height: 2 }))
-  zoomIn.appendChild(ne('rect', { x: 9, y: 3, width: 2, height: 14 }))
-  const zoomOut = ne('svg', { width: '20', height: '20' })
-  zoomOut.appendChild(ne('rect', { x: '3', y: '9', width: '14', height: '2' }))
+  const zoomIn = newElement('svg', { width: 20, height: 20 })
+  zoomIn.appendChild(newElement('rect', { x: 3, y: 9, width: 14, height: 2 }))
+  zoomIn.appendChild(newElement('rect', { x: 9, y: 3, width: 2, height: 14 }))
+  const zoomOut = newElement('svg', { width: '20', height: '20' })
+  zoomOut.appendChild(newElement('rect', { x: '3', y: '9', width: '14', height: '2' }))
   const controls = defaultControls({
     attributionOptions: { collapsible: true },
     zoomOptions: {
