@@ -17,6 +17,8 @@ import Fill from 'ol/style/Fill.js'
 import Stroke from 'ol/style/Stroke.js'
 import Point from 'ol/geom/Point.js'
 import Icon from 'ol/style/Icon.js'
+import { defaults as interactionDefaults } from 'ol/interaction/defaults'
+import { defaults as defaultControls } from 'ol/control.js'
 
 let map, callback, currentLayer
 let maxResolution = 1000
@@ -72,13 +74,14 @@ export async function loadMap (point) {
   }
 
   const resolutions = source.tileGrid.getResolutions().slice(0, 10)
+  const controls = mapControls()
 
   map = new OlMap({
-    // controls,
-    // interactions: ol.interaction.defaults({
-    //   altShiftDragRotate: false,
-    //   pinchRotate: false
-    // }),
+    controls,
+    interactions: interactionDefaults({
+      altShiftDragRotate: false,
+      pinchRotate: false
+    }),
     layers,
     pixelRatio: 1,
     target: 'map',
@@ -96,6 +99,32 @@ export async function loadMap (point) {
   if (callback) {
     callback()
   }
+}
+
+function mapControls () {
+  function ne (tagName, props) {
+    const retval = document.createElementNS('http://www.w3.org/2000/svg', tagName)
+    if (props) {
+      for (const name in props) {
+        retval.setAttribute(name, props[name])
+      }
+    }
+    return retval
+  }
+  const zoomIn = ne('svg', { width: 20, height: 20 })
+  zoomIn.appendChild(ne('rect', { x: 3, y: 9, width: 14, height: 2 }))
+  zoomIn.appendChild(ne('rect', { x: 9, y: 3, width: 2, height: 14 }))
+  const zoomOut = ne('svg', { width: '20', height: '20' })
+  zoomOut.appendChild(ne('rect', { x: '3', y: '9', width: '14', height: '2' }))
+  const controls = defaultControls({
+    attributionOptions: { collapsible: true },
+    zoomOptions: {
+      zoomInLabel: zoomIn,
+      zoomOutLabel: zoomOut
+    }
+  })
+
+  return controls
 }
 
 function createFeatureLayers (WMS, resolutions, layers) {
