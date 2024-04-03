@@ -48,36 +48,12 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/ol/{param*}',
+    path: '/ol/ol.css',
     handler: {
-      directory: {
-        path: 'node_modules/ol/',
-        index: false,
-        listing: false
-      }
+      file: 'node_modules/ol/ol.css'
     },
     options: {
-      description: 'Get the openlayers library'
-    }
-  },
-  {
-    method: 'GET',
-    path: '/proj4/proj4.js',
-    handler: {
-      file: 'node_modules/proj4/dist/proj4.js'
-    },
-    options: {
-      description: 'Get the proj4 js asset'
-    }
-  },
-  {
-    method: 'GET',
-    path: '/proj4/proj4-src.js',
-    handler: {
-      file: 'node_modules/proj4/dist/proj4-src.js'
-    },
-    options: {
-      description: 'Get the proj4 js asset'
+      description: 'Get the openlayers css file'
     }
   }
 ]
