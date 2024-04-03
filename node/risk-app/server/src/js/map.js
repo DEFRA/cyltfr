@@ -96,6 +96,8 @@ export async function loadMap (point) {
 
   map.on('pointermove', onPointerMove)
 
+  fixUpDetails()
+
   if (callback) {
     callback()
   }
@@ -125,6 +127,18 @@ function mapControls () {
   })
 
   return controls
+}
+
+function fixUpDetails () {
+  // Add aria-label to Zoom in and Zoom out buttons
+  function addAriaLabel (classname, label) {
+    const elements = document.getElementsByClassName(classname)
+    for (const element of elements) {
+      element.setAttribute('aria-label', label)
+    }
+  }
+  addAriaLabel('ol-zoom-in', 'Zoom into map')
+  addAriaLabel('ol-zoom-out', 'Zoom out of map')
 }
 
 function createFeatureLayers (WMS, resolutions, layers) {
