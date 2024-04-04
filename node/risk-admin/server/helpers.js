@@ -10,6 +10,26 @@ function formatDate (str, format = dateFormat) {
   return moment(str).format(format)
 }
 
+function updateAndValidateGeoJson (geojson, type) {
+  geojson.features.forEach(f => {
+    const props = f.properties
+    f.properties = {
+      apply: type,
+      start: props.Start_date
+        ? moment(props.Start_date, 'YYYY/MM/DD').format('YYYY-MM-DD')
+        : '',
+      end: props.End_date
+        ? moment(props.End_date, 'YYYY/MM/DD').format('YYYY-MM-DD')
+        : '',
+      info: props.display2 || props.Data_Type || ''
+    }
+    if (f.geometry.type !== 'Polygon') {
+      throw new Error('Shape file contains invalid data. Must only contain Polygon types')
+    }
+  })
+  return geojson
+}
+
 function run (cmd, args, opts) {
   return new Promise((resolve, reject) => {
     console.log('Spawning', cmd, args, opts)
@@ -41,5 +61,6 @@ function run (cmd, args, opts) {
 module.exports = {
   run,
   shortId,
-  formatDate
+  formatDate,
+  updateAndValidateGeoJson
 }
