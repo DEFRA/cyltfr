@@ -1,12 +1,10 @@
-
 const fs = require('fs')
 const util = require('util')
 const joi = require('joi')
 const boom = require('@hapi/boom')
+const helpers = require('../helpers')
 const ogr2ogr = require('ogr2ogr').default
-const moment = require('moment-timezone')
 const rename = util.promisify(fs.rename)
-const exampleJson = require('./dummy-data/example_file.json')
 
 module.exports = {
   method: 'POST',
@@ -20,24 +18,18 @@ module.exports = {
       const zipfile = tmpfile + '.zip'
       await rename(tmpfile, zipfile)
 
-      const { data: geojson } = await ogr2ogr(zipfile)
+      let data
+      try {
+        ({ data } = await ogr2ogr(zipfile))
+      } catch (error) {
+        throw new Error('Could not process uploaded file. Check if it\'s a valid shapefile')
+      }
 
       // uncomment the below to use dummy data to bypass having to upload an actual shape file on dev
-      // const geojson = exampleJson
+      // const data = require('./dummy-data/example_file.json')
+      // const data = require('./dummy-data/example_file_broken.json')
 
-      geojson.features.forEach(f => {
-        const props = f.properties
-        f.properties = {
-          apply: params.type,
-          start: props.Start_date
-            ? moment(props.Start_date, 'YYYY/MM/DD').format('YYYY-MM-DD')
-            : '',
-          end: props.End_date
-            ? moment(props.End_date, 'YYYY/MM/DD').format('YYYY-MM-DD')
-            : '',
-          info: props.display2 || props.Data_Type || ''
-        }
-      })
+      const geojson = helpers.validateGeoJson(data, params.type)
 
       return geojson
     } catch (err) {
