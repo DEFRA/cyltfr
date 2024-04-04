@@ -10,7 +10,7 @@ function formatDate (str, format = dateFormat) {
   return moment(str).format(format)
 }
 
-function validateGeoJson (geojson, type) {
+function updateAndValidateGeoJson (geojson, type) {
   geojson.features.forEach(f => {
     const props = f.properties
     f.properties = {
@@ -62,5 +62,5 @@ module.exports = {
   run,
   shortId,
   formatDate,
-  validateGeoJson
+  updateAndValidateGeoJson
 }

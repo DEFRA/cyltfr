@@ -29,7 +29,7 @@ module.exports = {
       // const data = require('./dummy-data/example_file.json')
       // const data = require('./dummy-data/example_file_broken.json')
 
-      const geojson = helpers.validateGeoJson(data, params.type)
+      const geojson = helpers.updateAndValidateGeoJson(data, params.type)
 
       return geojson
     } catch (err) {
