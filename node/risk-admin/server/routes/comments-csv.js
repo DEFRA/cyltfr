@@ -27,13 +27,20 @@ module.exports = {
         return file.features.map(feature => {
           const { start, end, info, riskType, riskOverride } = feature.properties
 
+          let FloodRiskType = ''
+          let FloodRiskOverride = ''
+          if (comment.type === 'holding') {
+            FloodRiskType = riskType === 'Rivers and the sea' ? riskType : 'Surface water'
+            FloodRiskOverride = riskType === 'Rivers and the sea' ? '' : riskOverride
+          }
+
           return {
             ...comment,
             start,
             end,
             info,
-            FloodRiskType: comment.type === 'holding' ? (riskType === 'Rivers and the sea' ? riskType : 'Surface water') : '',
-            FloodRiskOverride: comment.type === 'holding' ? (riskType === 'Rivers and the sea' ? '' : riskOverride) : '',
+            FloodRiskType,
+            FloodRiskOverride,
             url: `${baseUrl}/comment/view/${comment.id}`
           }
         })
