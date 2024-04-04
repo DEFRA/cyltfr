@@ -15,17 +15,6 @@ module.exports = {
       ? comments
       : comments.filter(c => c.createdBy === auth.credentials.profile.email)
 
-    // const cleanComments = []
-    // for (const comment of comments) {
-    //   try {
-    //     const file = await provider.getFile(`${config.holdingCommentsPrefix}/${comment.keyname}`)
-    //     cleanComments.push(comment)
-    //   } catch (error) {
-
-    //   }
-    // }
-    // await provider.save(cleanComments)
-
     const files = await Promise
       .all(homeComments
         .map(c => provider.getFile(`${config.holdingCommentsPrefix}/${c.keyname}`)))
