@@ -1,4 +1,3 @@
-
 const fs = require('fs')
 const util = require('util')
 const joi = require('joi')
@@ -6,7 +5,6 @@ const boom = require('@hapi/boom')
 const ogr2ogr = require('ogr2ogr').default
 const moment = require('moment-timezone')
 const rename = util.promisify(fs.rename)
-const exampleJson = require('./dummy-data/example_file.json')
 
 module.exports = {
   method: 'POST',
@@ -23,7 +21,7 @@ module.exports = {
       const { data: geojson } = await ogr2ogr(zipfile)
 
       // uncomment the below to use dummy data to bypass having to upload an actual shape file on dev
-      // const geojson = exampleJson
+      // const geojson = require('./dummy-data/example_file.json')
 
       geojson.features.forEach(f => {
         const props = f.properties

@@ -15,6 +15,17 @@ module.exports = {
       ? comments
       : comments.filter(c => c.createdBy === auth.credentials.profile.email)
 
+    // const cleanComments = []
+    // for (const comment of comments) {
+    //   try {
+    //     const file = await provider.getFile(`${config.holdingCommentsPrefix}/${comment.keyname}`)
+    //     cleanComments.push(comment)
+    //   } catch (error) {
+
+    //   }
+    // }
+    // await provider.save(cleanComments)
+
     const files = await Promise
       .all(homeComments
         .map(c => provider.getFile(`${config.holdingCommentsPrefix}/${c.keyname}`)))
@@ -25,13 +36,15 @@ module.exports = {
         const file = JSON.parse(files[i].Body.toString())
 
         return file.features.map(feature => {
-          const { start, end, info } = feature.properties
+          const { start, end, info, riskType, riskOverride } = feature.properties
 
           return {
             ...comment,
             start,
             end,
             info,
+            FloodRiskType: comment.type === 'holding' ? (riskType === 'Rivers and the sea' ? riskType : 'Surface water') : '',
+            FloodRiskOverride: comment.type === 'holding' ? (riskType === 'Rivers and the sea' ? '' : riskOverride) : '',
             url: `${baseUrl}/comment/view/${comment.id}`
           }
         })
