@@ -31,7 +31,7 @@ describe('postcode page', () => {
       }
     }
     const response = await server.inject(options)
-    expect(response.statusCode).toEqual(200)
+    expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
     expect(response.result).toMatch('This postcode does not appear to exist')
   })
 
