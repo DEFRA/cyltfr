@@ -20,31 +20,14 @@
 {% block skipLink %}
 {% endblock %}
 <style>
-  html {
-    overflow-x: hidden;
-  }
-
-  body {
-    margin: 0;
-    height: 100vh;
-    position: absolute;
-    overflow-x: hidden;
-  }
-
-  .higher {
-    top: calc(100vh - 177px);
-  }
-
-  .lower {
-    top: calc(100vh - 110px);
-  }
+  
 </style>
 {{ super() }}
 {% endblock %}
 
 {% block main %}
 <div class="map-container">
-  <div class="defra-map-controls">
+  <div id="defra-map-controls">
 
     <!-- Exit button -->
     <button class="defra-map__exit" id="exit-map" tabindex="1" onclick="window.location='{{ backLink }}'">
