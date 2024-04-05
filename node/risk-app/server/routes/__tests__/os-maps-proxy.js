@@ -8,6 +8,7 @@ const options = {
 }
 
 jest.mock('../../util')
+jest.mock('../../config')
 
 beforeAll(async () => {
   server = await createServer()
