@@ -30,7 +30,7 @@
   <div id="defra-map-controls">
 
     <!-- Exit button -->
-    <button class="defra-map__exit" id="exit-map" tabindex="1" onclick="window.location='{{ backLink }}'">
+    <button class="defra-map__exit" id="exit-map" tabindex="1" data-backlink="{{ backLink }}">
       <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20">
         <path d="M4.828,11L12.314,18.485L10.899,19.899L1,10L10.899,0.101L12.314,1.515L4.828,9L19,9L19,11L4.828,11Z"
           style="fill:currentColor;stroke:currentColor;stroke-width:0.1px"></path>
@@ -93,7 +93,7 @@
         <div class="defra-map-scenarios-v3_container" id="scenarios-controls-depth">
           <div class="govuk-radios govuk-radios--small" id="scenario-selection-depth" data-module="govuk-radios">
             <div id="high-risk-depth" class="govuk-radios__item" style="border-bottom: 7px solid rgb(29, 112, 184);">
-              <input class="govuk-radios__input scenario-radio-button" id="risk-radio-high-depth" onchange="scenarioDisplayUpdate('depth')"
+              <input class="govuk-radios__input scenario-radio-button" id="risk-radio-high-depth"
                 name="scenarios-depth" type="radio" value="{{maps.categories[1].maps[1].ref}}" checked="">
               <label class="govuk-label govuk-radios__label" for="risk-radio-high-depth">
                 <strong class="scenario-heading">High risk</strong>
@@ -101,7 +101,7 @@
               </label>
             </div>
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input scenario-radio-button" id="risk-radio-medium-depth" onchange="scenarioDisplayUpdate('depth')"
+              <input class="govuk-radios__input scenario-radio-button" id="risk-radio-medium-depth"
                 name="scenarios-depth" type="radio" value="{{maps.categories[1].maps[3].ref}}">
               <label class="govuk-label govuk-radios__label" for="risk-radio-medium-depth">
                 <strong class="scenario-heading"
@@ -110,7 +110,7 @@
               </label>
             </div>
             <div id="low-risk-depth" class="govuk-radios__item" id="low-depth-label">
-              <input class="govuk-radios__input scenario-radio-button" id="risk-radio-low-depth" onchange="scenarioDisplayUpdate('depth')"
+              <input class="govuk-radios__input scenario-radio-button" id="risk-radio-low-depth"
                 name="scenarios-depth" type="radio" value="{{maps.categories[1].maps[5].ref}}">
               <label class="govuk-label govuk-radios__label" for="risk-radio-low-depth">
                 <strong class="scenario-heading" style="text-decoration: underline; text-decoration-thickness: 2px;">Low
@@ -143,7 +143,7 @@
 
             <div class="govuk-radios__item" style="border-bottom: 7px solid rgb(29, 112, 184);">
               <input class="govuk-radios__input scenario-radio-button" id="risk-radio-high-velocity"
-                onchange="scenarioDisplayUpdate('velocity')" name="scenarios-velocity" type="radio"
+                name="scenarios-velocity" type="radio"
                 value="{{maps.categories[1].maps[2].ref}}" checked="">
               <label class="govuk-label govuk-radios__label" for="risk-radio-high-velocity">
                 <strong class="scenario-heading">High risk</strong>
@@ -153,7 +153,7 @@
 
             <div class="govuk-radios__item">
               <input class="govuk-radios__input scenario-radio-button" id="risk-radio-medium-velocity"
-                onchange="scenarioDisplayUpdate('velocity')" name="scenarios-velocity" type="radio"
+                name="scenarios-velocity" type="radio"
                 value="{{maps.categories[1].maps[4].ref}}">
               <label class="govuk-label govuk-radios__label" for="risk-radio-medium-velocity">
                 <strong class="scenario-heading"
@@ -164,7 +164,7 @@
 
             <div class="govuk-radios__item">
               <input class="govuk-radios__input scenario-radio-button" id="risk-radio-low-velocity"
-                onchange="scenarioDisplayUpdate('velocity')" name="scenarios-velocity" type="radio"
+                name="scenarios-velocity" type="radio"
                 value="{{maps.categories[1].maps[6].ref}}">
               <label class="govuk-label govuk-radios__label" for="risk-radio-low-velocity">
                 <strong class="scenario-heading" style="text-decoration: underline; text-decoration-thickness: 2px;">Low
@@ -195,7 +195,7 @@
     <div class="defra-map-key__container" id="defra-map-key__container">
       <h2 id="mapKeyLabel" class="defra-map-key__title">
         <span role="text">Key<span class="govuk-visually-hidden">for map features</span></span>
-        <button class="defra-map-key__close" id="close-key" onclick="closeKey()">
+        <button class="defra-map-key__close" id="close-key">
           <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20"><path d="M10,8.6L15.6,3L17,4.4L11.4,10L17,15.6L15.6,17L10,11.4L4.4,17L3,15.6L8.6,10L3,4.4L4.4,3L10,8.6Z" fill="" style="fill:currentColor;stroke:currentColor;stroke-width:0.1px;"></path>
           </svg>
           <span class="govuk-visually-hidden">Close key</span>
@@ -212,8 +212,8 @@
 
               <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
                 <div class="govuk-radios__item">
-                  <input class="govuk-radios__input extent-radio" id="sw-extent-radio"
-                    onchange="handleRadioChange('extent', 'surface water')" value="{{maps.categories[1].maps[0].ref}}"
+                  <input class="govuk-radios__input extent-radio risk-measurement" id="sw-extent-radio"
+                    value="{{maps.categories[1].maps[0].ref}}"
                     title="Extent of flooding from surface water" name="measurements" type="radio" checked="">
                   <label class="govuk-label govuk-radios__label" for="sw-extent-radio">
                     <span class="surface-water-bulletpoint__heading" id="surface-water-extent__heading">Extent</span>
@@ -260,7 +260,7 @@
                 </div>
 
                 <div class="govuk-radios__item">
-                  <input class="govuk-radios__input" id="sw-depth-radio" onchange="handleRadioChange('depth')"
+                  <input class="govuk-radios__input risk-measurement" id="sw-depth-radio"
                     value="{{maps.categories[1].maps[1].ref}}" name="measurements"
                     title="Surface water flood risk: water depth in a high risk scenario" type="radio">
                   <label class="govuk-label govuk-radios__label" for="sw-depth-radio">
@@ -304,7 +304,7 @@
                 </div>
 
                 <div class="govuk-radios__item showing advanced-map-option" id="sw-velocity-section-container">
-                  <input class="govuk-radios__input" id="sw-velocity-radio" onchange="handleRadioChange('velocity')"
+                  <input class="govuk-radios__input risk-measurement" id="sw-velocity-radio"
                     value="{{maps.categories[1].maps[2].ref}}" name="measurements"
                     title="Surface water flood risk: water velocity in a high risk scenario" type="radio">
                   <label class="govuk-label govuk-radios__label" for="sw-velocity-radio">
@@ -359,8 +359,7 @@
 
               <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
                 <div class="govuk-radios__item">
-                  <input class="govuk-radios__input extent-radio" id="rs-radio"
-                    onchange="handleRadioChange('extent', 'rivers and the sea')"
+                  <input class="govuk-radios__input extent-radio risk-measurement" id="rs-radio"
                     value="{{maps.categories[0].maps[0].ref}}" title="Extent of flooding from rivers and seas"
                     name="measurements" type="radio">
                   <label class="govuk-label govuk-radios__label" for="rs-radio">
@@ -427,9 +426,9 @@
 
               <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
                 <div class="govuk-radios__item">
-                  <input class="govuk-radios__input extent-radio" id="reservoirs-radio"
-                    onchange="handleRadioChange('extent', 'reservoirs')" value="{{maps.categories[2].maps[0].ref}}"
-                    title="Extent of flooding from reservoirs" name="measurements" type="radio">
+                  <input class="govuk-radios__input extent-radio risk-measurement" id="reservoirs-radio"
+                    value="{{maps.categories[2].maps[0].ref}}" title="Extent of flooding from reservoirs" name="measurements" 
+                    type="radio">
                   <label class="govuk-label govuk-radios__label" for="reservoirs-radio">
                     <span class="bulletpoint__heading" id="reservoirs-extent__heading">Extent</span>
                     <div class="extent-desc-container" id="reservoirs-extent-desc-container">
@@ -470,7 +469,7 @@
               <div class="govuk-radios govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
                 <div class="govuk-checkboxes__item">
                   <input class="govuk-checkboxes__input" id="display-layers-checkbox" name="map-toggle" type="checkbox"
-                    onchange="" value="30" checked="">
+                    value="30" checked="">
                   <label class="govuk-label  govuk-checkboxes__label" for="display-layers-checkbox">
                     Show flooding
                   </label>
