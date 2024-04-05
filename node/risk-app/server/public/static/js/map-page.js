@@ -120,7 +120,7 @@ document.addEventListener('click', function (event) {
   }
 })
 
-document.addEventListener('DOMContentLoaded', function () {  
+document.addEventListener('DOMContentLoaded', function () {
   scenarioRadioButtons.forEach(function (radio) {
     radio.addEventListener('change', function () {
       const label = document.querySelector(`label[for="${this.id}"]`)
