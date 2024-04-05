@@ -1,0 +1,41 @@
+<!-- Toggle checkbox -->
+<div class="govuk-form-group">
+  <fieldset class="govuk-fieldset">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+      <h3 class="defra-map-key__section-title" id="map-display-toggles-title">Map details</h3>
+    </legend>
+    <div class="govuk-radios govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+      <div class="govuk-checkboxes__item">
+        <input class="govuk-checkboxes__input" id="display-layers-checkbox" name="map-toggle" type="checkbox"
+          value="30" checked="">
+        <label class="govuk-label  govuk-checkboxes__label" for="display-layers-checkbox">
+          Show flooding
+        </label>
+      </div>
+      <div class="govuk-checkboxes__item" id="selected-address">
+        <input class="govuk-checkboxes__input" id="selected-address-checkbox" name="map-toggle" type="checkbox" value=""
+          checked="">
+        <label class="govuk-label govuk-checkboxes__label" for="selected-address-checkbox">
+          <span class="defra-map-key__symbol-container">
+            <span class="defra-map-key__symbol">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#160000" class="w-6 h-6">
+                <path fill-rule="evenodd"
+                  d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </span>
+            Selected address
+          </span>
+          <span class="defra-map-key__symbol-container defra-map-key__symbol-container--multi" id="boundary-container">
+            <span class="defra-map-key__symbol">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="#ede72e">
+                <circle cx="50" cy="50" r="40"></circle>
+              </svg>
+            </span>
+            15m boundary
+          </span>
+        </label>
+      </div>
+    </div>
+  </fieldset>
+</div>
