@@ -22,7 +22,7 @@ riskService.__updateReturnValue = function (newValue) {
   return returnValue
 }
 
-riskService.getByCoordinates.mockImplementation((x, y, radius) => {
+riskService.getByCoordinates.mockImplementation((_x, _y, _radius) => {
   return Promise.resolve(returnValue)
 })
 
