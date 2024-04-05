@@ -1,9 +1,9 @@
 const STATUS_CODES = require('http2').constants
 const createServer = require('../../../server')
-const riskService = require('../../services/risk')
 const floodService = require('../../services/flood')
 const addressService = require('../../services/address')
 const DEFAULT_POSTCODE = 'NP18 3EZ'
+const SEARCH_REDIRECT = '/search?postcode='
 const { mockOptions, mockSearchOptions } = require('../../../test/mock')
 let server, cookie
 
@@ -33,7 +33,7 @@ describe('search page route', () => {
     floodService.__updateReturnValue(noFloodWarning)
     const postResponse = await server.inject(postOptions)
     expect(postResponse.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_FOUND)
-    expect(postResponse.headers.location).toMatch('/search?postcode=')
+    expect(postResponse.headers.location).toMatch(SEARCH_REDIRECT)
 
     const getResponse = await server.inject(getOptions)
     expect(getResponse.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
@@ -50,7 +50,7 @@ describe('search page route', () => {
     })
     const postResponse = await server.inject(postOptions)
     expect(postResponse.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_FOUND)
-    expect(postResponse.headers.location).toMatch('/search?postcode=')
+    expect(postResponse.headers.location).toMatch(SEARCH_REDIRECT)
 
     const getResponse = await server.inject(getOptions)
     expect(getResponse.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
@@ -68,7 +68,7 @@ describe('search page route', () => {
     })
     const postResponse = await server.inject(postOptions)
     expect(postResponse.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_FOUND)
-    expect(postResponse.headers.location).toMatch('/search?postcode=')
+    expect(postResponse.headers.location).toMatch(SEARCH_REDIRECT)
 
     const getResponse = await server.inject(getOptions)
     expect(getResponse.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
@@ -82,7 +82,7 @@ describe('search page route', () => {
     floodService.__updateReturnValue(data)
     const postResponse = await server.inject(postOptions)
     expect(postResponse.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_FOUND)
-    expect(postResponse.headers.location).toMatch('/search?postcode=')
+    expect(postResponse.headers.location).toMatch(SEARCH_REDIRECT)
 
     const getResponse = await server.inject(getOptions)
     expect(getResponse.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
@@ -99,7 +99,7 @@ describe('search page route', () => {
     server.methods.notify = newNotify
     const postResponse = await server.inject(postOptions)
     expect(postResponse.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_FOUND)
-    expect(postResponse.headers.location).toMatch('/search?postcode=')
+    expect(postResponse.headers.location).toMatch(SEARCH_REDIRECT)
 
     const getResponse = await server.inject(getOptions)
     expect(getResponse.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
@@ -112,7 +112,7 @@ describe('search page route', () => {
     floodService.__updateReturnValue({})
     const postResponse = await server.inject(postOptions)
     expect(postResponse.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_FOUND)
-    expect(postResponse.headers.location).toMatch('/search?postcode=')
+    expect(postResponse.headers.location).toMatch(SEARCH_REDIRECT)
 
     const getResponse = await server.inject(getOptions)
     expect(getResponse.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
