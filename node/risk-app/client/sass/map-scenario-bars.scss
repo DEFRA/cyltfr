@@ -6,6 +6,8 @@ $scenarioWidthCap2: 920px;
 $scenarioArrowPoint: 640px;
 $scenarioArrowBackground: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), white);
 
+$gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+
 @mixin scenario-right-arrow {
   height: 100px;
   width: 60px;
@@ -148,7 +150,7 @@ $scenarioArrowBackground: linear-gradient(to right, rgba(255, 255, 255, 0), rgba
 
 .defra-map-scenarios .govuk-radios__item {
   flex: 1 1 auto;
-  font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+  font-family: $gov-font;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -192,7 +194,7 @@ $scenarioArrowBackground: linear-gradient(to right, rgba(255, 255, 255, 0), rgba
   margin-top: -2px;
   padding: 13px 15px 10px 1px;
   float: left;
-  font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+  font-family: $gov-font;
 }
 
 // Below is for the radio ring circle

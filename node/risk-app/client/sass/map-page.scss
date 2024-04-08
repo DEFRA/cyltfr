@@ -44,10 +44,6 @@ body {
   @media screen and (max-width: $tablet-width) {
     justify-content: start;
   }
-    
-  .defra-map-key__close {
-    display: none;
-  }
 
   .defra-map-os-logo {
     position: absolute;
@@ -103,7 +99,7 @@ label[for=location] {
 }
 
 .govuk-link {
-  font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+  font-family: $gov-font;
 }
 
 .govuk-link:hover {

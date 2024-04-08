@@ -1,24 +1,10 @@
-$govuk-assets-path: '/assets/';
-
-$small-mobile-width: 400px;
-$mobile-width: 480px;
 $tablet-width: 768px;
 $desktop-width: 769px;
-$scenarioWidthCap1: 1090px;
-$scenarioWidthCap2: 920px;
-$scenarioArrowPoint: 640px;
 
 $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
 
 #map-key {
   display: block;
-
-  @media screen and (min-width: $desktop-width) {
-    display: block !important;
-  }
-}
-
-.defra-map-key {
   z-index: 25;
   position: absolute;
   height: 100%;
@@ -27,34 +13,34 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
 
   #mapKeyLabel {
     font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+    position:fixed;
+    background-color: white;
+    line-height: 2.125;
+    height: 40px;
+    width: 100%;
+    padding: 0px 18px 0 20px;
+    font-size: 19px;
+    margin: 0;
+    z-index: 15;
 
     @media screen and (max-width: $tablet-width) {
       width: 236px;
     }
-    width: 250px;
+  }
+
+  @media screen and (min-width: $desktop-width) {
+    display: block !important;
   }
 }
 
-#mapKeyLabel {
-  position:fixed;
-  background-color: white;
-  line-height: 2.125;
-  height: 40px;
-  width: 100%;
-  padding: 0px 18px 0 20px;
-  font-size: 19px;
-  margin: 0;
-  z-index: 15;
-}
-
 .defra-map-key label {
-  font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+  font-family: $gov-font;
   font-size: 16px;
 }
 
 .defra-map-key__section-title {
   position: relative;
-  font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+  font-family: $gov-font;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
@@ -66,16 +52,16 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   padding: 10px 15px 0px 0px;
   box-sizing: border-box;
   width: 260px;
-}
 
-.defra-map-key__section-title::before {
-  position: absolute;
-  content: "";
-  height: 1px;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  border-top: 1px solid #b1b4b6;
+  &::before {
+    position: absolute;
+    content: "";
+    height: 1px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    border-top: 1px solid #b1b4b6;
+  }
 }
 
 #reservoir-title {
