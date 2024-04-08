@@ -49,6 +49,8 @@ body {
     position: absolute;
     left: 10px;
     bottom: 10px;
+    pointer-events: auto; 
+    display: block;
   
     @media screen and (max-width: $small-mobile-width) {
       bottom: 40px;

@@ -157,7 +157,10 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   line-height: 1.25;
   font-size: 14px;
   padding-left: 54px;
-  border-bottom: 7px solid transparent;
+}
+
+.selected-scenario {
+  border-bottom: 7px solid rgb(29, 112, 184)
 }
 
 .govuk-radios__label {

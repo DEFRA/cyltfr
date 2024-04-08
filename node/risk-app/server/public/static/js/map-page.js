@@ -162,12 +162,12 @@ riskMeasurementRadio.forEach(function (radio) {
     eventType = 'depth'
   } else if (radio.id.includes('sw-velocity')) {
     eventType = 'velocity'
-  } else if (radio.id.includes('rs')) {
-    eventType = 'extent'
-    extentType = 'rivers and the sea'
   } else if (radio.id.includes('reservoirs')) {
     eventType = 'extent'
     extentType = 'reservoirs'
+  } else if (radio.id.includes('rs-radio')) {
+    eventType = 'extent'
+    extentType = 'rivers and the sea'
   }
 
   if (eventType) {

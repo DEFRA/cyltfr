@@ -95,6 +95,19 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   margin-left: 0px;
 }
 
+.high-symbol {
+  fill: #555C9D;
+}
+.medium-symbol {
+  fill: #9AA0DE;
+}
+.low-symbol {
+  fill: #C4E1FF;
+}
+.very-low-symbol {
+  fill: #c9f8ff;
+}
+
 #map-display-toggles-title {
   margin-top: 5px;
 }

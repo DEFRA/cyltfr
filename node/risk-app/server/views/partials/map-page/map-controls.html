@@ -34,7 +34,7 @@
     </button>
 
     <img id="os-logo" class="defra-map-os-logo" alt="Ordnance Survey logo" 
-      src="{{ assetPath }}/images/os-logo-maps.svg" width="90" height="24" style="pointer-events: auto; display: block;">
+      src="{{ assetPath }}/images/os-logo-maps.svg" width="90" height="24">
 
     <div class="defra-map-info__container hide" id="copyright-info-container-top">
       <div id="infoContent" class="defra-map-info__content">
@@ -67,7 +67,7 @@
 
       <div class="defra-map-scenarios-v3_container" id="scenarios-controls-depth">
         <div class="govuk-radios govuk-radios--small" id="scenario-selection-depth" data-module="govuk-radios">
-          <div id="high-risk-depth" class="govuk-radios__item" style="border-bottom: 7px solid rgb(29, 112, 184);">
+          <div id="high-risk-depth" class="govuk-radios__item selected-scenario">
             <input class="govuk-radios__input scenario-radio-button" id="risk-radio-high-depth"
               name="scenarios-depth" type="radio" value="{{maps.categories[1].maps[1].ref}}" checked="">
             <label class="govuk-label govuk-radios__label" for="risk-radio-high-depth">
@@ -116,7 +116,7 @@
       <div class="defra-map-scenarios-v3_container" id="scenarios-controls-velocity">
         <div class="govuk-radios govuk-radios--small" id="scenario-selection-velocity" data-module="govuk-radios">
 
-          <div class="govuk-radios__item" style="border-bottom: 7px solid rgb(29, 112, 184);">
+          <div class="govuk-radios__item selected-scenario">
             <input class="govuk-radios__input scenario-radio-button" id="risk-radio-high-velocity"
               name="scenarios-velocity" type="radio"
               value="{{maps.categories[1].maps[2].ref}}" checked="">
