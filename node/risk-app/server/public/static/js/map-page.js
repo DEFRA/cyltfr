@@ -95,7 +95,8 @@ function mapPage () {
     $body.css('cursor', 'default')
   })
 }
-
+const SurfaceWater = 'surface water'
+const riversAndTheSea = 'rivers and the sea'
 const rightArrow = document.getElementsByClassName('right-scenario-arrow')
 const leftArrow = document.getElementsByClassName('left-scenario-arrow')
 const scenarioSelectionDepth = document.getElementById('scenario-selection-depth')
@@ -157,7 +158,7 @@ riskMeasurementRadio.forEach(function (radio) {
 
   if (radio.id.includes('sw-extent')) {
     eventType = 'extent'
-    extentType = 'surface water'
+    extentType = SurfaceWater
   } else if (radio.id.includes('sw-depth')) {
     eventType = 'depth'
   } else if (radio.id.includes('sw-velocity')) {
@@ -167,7 +168,7 @@ riskMeasurementRadio.forEach(function (radio) {
     extentType = 'reservoirs'
   } else if (radio.id.includes('rs-radio')) {
     eventType = 'extent'
-    extentType = 'rivers and the sea'
+    extentType = riversAndTheSea
   }
 
   if (eventType) {
@@ -285,7 +286,7 @@ function toggleAdvancedOptions () {
       rsContainer.style.display = 'none'
       reservoirsContainer.style.display = 'none'
       swExtentRadio.checked = true
-      handleRadioChange('extent', 'surface water')
+      handleRadioChange('extent', SurfaceWater)
     }
     if (window.location.href.includes('map=RiversOrSea')) {
       swContainer.style.display = 'none'
@@ -294,7 +295,7 @@ function toggleAdvancedOptions () {
       rsContainer.style.marginTop = '40px'
       rsExtentRadio.checked = true
       reservoirsContainer.style.display = 'none'
-      handleRadioChange('extent', 'rivers and the sea')
+      handleRadioChange('extent', riversAndTheSea)
     }
     if (window.location.href.includes('map=Reservoirs')) {
       swContainer.style.display = 'none'
@@ -430,7 +431,7 @@ function handleRadioChange (selected, type) {
       olZoom[0].style.top = 'calc(100% - 102px)'
       boundaryContainer.style.display = 'none'
     }
-    if (type === 'rivers and the sea') {
+    if (type === riversAndTheSea) {
       extentInfoRs.style.display = 'block'
       extentInfoReservoirs.style.display = 'none'
       extentInfoSw.style.display = 'none'
@@ -441,7 +442,7 @@ function handleRadioChange (selected, type) {
       olZoom[0].style.top = 'calc(100% - 102px)'
       boundaryContainer.style.display = 'none'
     }
-    if (type === 'surface water') {
+    if (type === SurfaceWater) {
       extentInfoRs.style.display = 'none'
       extentInfoReservoirs.style.display = 'none'
       extentInfoSw.style.display = 'block'
@@ -594,6 +595,8 @@ function showOrHideAdvancedToggleText () {
   if (window.innerWidth <= deviceScreenWidth) {
     advancedToggleText.classList.remove('hide')
   }
+  console.log(keyDisplay.style.display === '')
+  console.log(keyDisplay)
   if (window.innerWidth <= advancedToggleCutoff && keyDisplay.style.display === 'block') {
     advancedToggleText.classList.add('hide')
   }

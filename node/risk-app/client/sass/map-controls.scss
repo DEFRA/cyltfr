@@ -248,12 +248,9 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
     margin: 10px;
     vertical-align: top;
   }
-
+  
   .defra-map__exit span {
     vertical-align: top;
-  }
-
-  .defra-map__exit span {
     @media (max-width: 48.0525em) {
       clip: rect(0 0 0 0);
       clip-path: inset(50%);
@@ -323,16 +320,15 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
     margin: 10px;
     vertical-align: top;
   }
-  .defra-map__advanced span {
-    vertical-align: top;
-  }
   
   .defra-map__advanced span {
+    vertical-align: top;
     @media (max-width: 48.0525em) {
       font-size: 14px;
       padding-left: 0;
     }
   }
+
   .defra-map__advanced:hover {
     background-color: #f3f2f1;
   }

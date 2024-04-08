@@ -38,6 +38,11 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   @media screen and (max-width: $scenarioArrowPoint) {
     .scenario-arrows {
       display: block;
+
+      .arrow-svg {
+        width: 60px;
+        height: 100px;
+      }
     }
     
     .right-scenario-arrow {
