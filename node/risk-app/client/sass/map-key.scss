@@ -93,6 +93,8 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   position: relative;
   display: block;
   margin-left: 0px;
+  white-space: normal;
+  width: 200px;
 }
 
 .high-symbol {
@@ -170,6 +172,7 @@ svg:not(:root) {
 
 .risk-context {
   display: block;
+  white-space: normal;
   font-size: 14px;
   padding-top: 8px;
   padding-bottom: 0;
@@ -185,6 +188,7 @@ svg:not(:root) {
 
 .defra-map-key__symbol-container--multi {
   margin-top: 19px;
+
 }
 
 .sw-depth-container {
