@@ -75,6 +75,11 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
       display: block;
       margin: 10px;
     }
+
+    #open-btn {
+      width: 20px;
+      height: 20px;
+    }
     
     .button-content {
       display: flex;
@@ -292,6 +297,11 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   }
   .defra-map__exit::-moz-focus-inner {
     border: 0;
+  }
+
+  #exit-btn {
+    width: 24px;
+    height: 24px;
   }
 
   .defra-map__advanced {
