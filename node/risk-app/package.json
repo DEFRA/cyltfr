@@ -7,7 +7,7 @@
     "node": ">=20.11.0"
   },
   "scripts": {
-    "prepare": "cd ../.. && husky install node/risk-app/.husky",
+    "prepare": "cd ../.. && husky node/risk-app/.husky",
     "start": "pm2 start config/pm2.json",
     "build:webpack": "webpack",
     "build:js": "bin/build-js",
