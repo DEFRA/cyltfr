@@ -76,6 +76,7 @@
     "*.js": "standard --fix"
   },
   "jest": {
+    "automock": false,
     "collectCoverage": true,
     "collectCoverageFrom": ["server/**/*.js",
                             "!server/public/**/*",

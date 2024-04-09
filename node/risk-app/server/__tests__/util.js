@@ -1,13 +1,19 @@
 const STATUS_CODES = require('http2').constants
-jest.mock('@hapi/wreck')
-const wreck = require('@hapi/wreck')
-const util = require('../util')
+let wreck
+let util
 const MOCK_URL = 'http://localhost/'
 
 beforeAll(async () => {
+  jest.resetModules()
+  jest.mock('@hapi/wreck')
+  wreck = require('@hapi/wreck')
+  wreck.defaults.mockImplementation(() => wreck)
+  util = require('../util')
 })
 
 afterAll(async () => {
+  jest.unmock('@hapi/wreck')
+  jest.resetModules()
 })
 
 describe('util.js tests', () => {
