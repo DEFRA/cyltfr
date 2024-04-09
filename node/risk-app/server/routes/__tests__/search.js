@@ -160,6 +160,42 @@ describe('search page route', () => {
     expect(getResponse.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
   })
 
+  test('/search - Address service returns empty address array with POST', async () => {
+    const { getOptions, postOptions } = mockSearchOptions(DEFAULT_POSTCODE, cookie)
+    floodService.__updateReturnValue({})
+    addressService.find.mockImplementationOnce(() => { return Promise.resolve([]) })
+    const getResponse = await server.inject(getOptions)
+    expect(getResponse.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
+    postOptions.url = getOptions.url
+    postOptions.payload = 'address=-1'
+    const postResponse = await server.inject(postOptions)
+    expect(postResponse.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
+  })
+
+  test('/search - Address service returns empty address array with POST and selection', async () => {
+    const { getOptions, postOptions } = mockSearchOptions(DEFAULT_POSTCODE, cookie)
+    floodService.__updateReturnValue({})
+    addressService.find.mockImplementationOnce(() => { return Promise.resolve([]) })
+    const getResponse = await server.inject(getOptions)
+    expect(getResponse.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
+    postOptions.url = getOptions.url
+    postOptions.payload = 'address=0'
+    const postResponse = await server.inject(postOptions)
+    expect(postResponse.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
+  })
+
+  test('/search - select an address', async () => {
+    const { getOptions, postOptions } = mockSearchOptions(DEFAULT_POSTCODE, cookie)
+    floodService.__updateReturnValue({})
+    const getResponse = await server.inject(getOptions)
+    expect(getResponse.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
+    postOptions.url = getOptions.url
+    postOptions.payload = 'address=0'
+    const postResponse = await server.inject(postOptions)
+    expect(postResponse.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_FOUND)
+    expect(postResponse.headers.location).toMatch('/risk')
+  })
+
   test('/search - NI address to redirect to england-only', async () => {
     const { getOptions } = mockSearchOptions('BT11BT', cookie)
     floodService.__updateReturnValue({})

@@ -582,4 +582,53 @@ describe('Risk page test', () => {
     expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
     expect(payload).toMatch(/Very low risk means that this area has a chance of flooding of less than 0.1% each year./g)
   })
+
+  test('/risk with holding comments', async () => {
+    riskService.__updateReturnValue({
+      inEngland: true,
+      isGroundwaterArea: false,
+      floodAlertArea: [],
+      floodWarningArea: [],
+      inFloodAlertArea: false,
+      inFloodWarningArea: false,
+      leadLocalFloodAuthority: 'Bath and North East Somerset',
+      reservoirDryRisk: null,
+      reservoirWetRisk: null,
+      riverAndSeaRisk: null,
+      surfaceWaterRisk: 'High',
+      surfaceWaterSuitability: 'Town to Street',
+      extraInfo: [{
+        info: '',
+        apply: 'holding',
+        riskoverride: 'High'
+      },
+      {
+        info: '',
+        apply: 'holding',
+        riskoverride: 'Do not override'
+      },
+      {
+        info: 'There are improvements to the flood defences in this area, we expect the flood liklihood in this area to change on 1 April 2020',
+        apply: 'holding',
+        riskoverride: 'Do not override'
+      },
+      {
+        info: 'Some improvements to the flood defences in this area, we expect the flood liklihood in this area to change on 1 April 2020',
+        apply: 'holding',
+        riskoverride: 'Do not override'
+      },
+      {
+        info: 'Proposed schemes',
+        apply: 'llfa',
+        riskoverride: null
+      },
+      {
+        info: 'Flood action plan',
+        apply: 'llfa',
+        riskoverride: null
+      }]
+    })
+    const response = await server.inject(defaultOptions)
+    expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
+  })
 })
