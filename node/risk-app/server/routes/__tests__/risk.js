@@ -2,7 +2,6 @@ const STATUS_CODES = require('http2').constants
 const createServer = require('../../../server')
 const riskService = require('../../services/risk')
 const { mockOptions, mockSearchOptions } = require('../../../test/mock')
-const ENGLAND_ONLY_URL = '/england-only'
 const defaultOptions = {
   method: 'GET',
   url: '/risk'
