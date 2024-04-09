@@ -51,6 +51,8 @@ body {
     bottom: 10px;
     pointer-events: auto; 
     display: block;
+    width: 90px;
+    height: 24px;
   
     @media screen and (max-width: $small-mobile-width) {
       bottom: 40px;

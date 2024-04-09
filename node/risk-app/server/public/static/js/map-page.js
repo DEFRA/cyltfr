@@ -169,6 +169,8 @@ riskMeasurementRadio.forEach(function (radio) {
   } else if (radio.id.includes('rs-radio')) {
     eventType = 'extent'
     extentType = riversAndTheSea
+  } else {
+    console.log('No type selected.')
   }
 
   if (eventType) {

@@ -247,6 +247,11 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
     -moz-user-select: none;
     -ms-user-select: none;
     pointer-events: auto;
+
+    @media (min-width: 48.0625em) {
+      width: auto;
+      padding-right: 11px;
+    }
   }
   .defra-map__exit svg {
     display: inline-block;
@@ -264,13 +269,6 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
       position: absolute;
       white-space: nowrap;
       width: 1px;
-    }
-  }
-
-  .defra-map__exit {
-    @media (min-width: 48.0625em) {
-      width: auto;
-      padding-right: 11px;
     }
   }
 
@@ -300,6 +298,11 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   }
 
   #exit-btn {
+    width: 20px;
+    height: 20px;
+  }
+
+  #advanced-btn {
     width: 24px;
     height: 24px;
   }
