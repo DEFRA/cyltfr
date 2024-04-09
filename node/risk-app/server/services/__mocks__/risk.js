@@ -1,6 +1,6 @@
 const riskService = jest.createMockFromModule('../risk')
 
-const returnValue = {
+const originalReturnValue = {
   inEngland: true,
   isGroundwaterArea: false,
   floodAlertArea: [],
@@ -14,12 +14,17 @@ const returnValue = {
   surfaceWaterSuitability: 'County to Town',
   extraInfo: null
 }
+let returnValue = { ...originalReturnValue }
 
 riskService.__updateReturnValue = function (newValue) {
   Object.keys(newValue).forEach(function (key) {
     returnValue[key] = newValue[key]
   })
   return returnValue
+}
+
+riskService.__resetReturnValue = function () {
+  returnValue = { ...originalReturnValue }
 }
 
 riskService.getByCoordinates.mockImplementation((_x, _y, _radius) => {
