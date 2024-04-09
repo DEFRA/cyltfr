@@ -597,8 +597,6 @@ function showOrHideAdvancedToggleText () {
   if (window.innerWidth <= deviceScreenWidth) {
     advancedToggleText.classList.remove('hide')
   }
-  console.log(keyDisplay.style.display === '')
-  console.log(keyDisplay)
   if (window.innerWidth <= advancedToggleCutoff && keyDisplay.style.display === 'block') {
     advancedToggleText.classList.add('hide')
   }
