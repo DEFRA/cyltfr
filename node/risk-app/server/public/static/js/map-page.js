@@ -95,16 +95,21 @@ function mapPage () {
     $body.css('cursor', 'default')
   })
 }
-
+const SurfaceWater = 'surface water'
+const riversAndTheSea = 'rivers and the sea'
 const rightArrow = document.getElementsByClassName('right-scenario-arrow')
 const leftArrow = document.getElementsByClassName('left-scenario-arrow')
 const scenarioSelectionDepth = document.getElementById('scenario-selection-depth')
 const scenarioSelectionVelocity = document.getElementById('scenario-selection-velocity')
+const scenarioRadioButtons = document.querySelectorAll('.scenario-radio-button')
+const riskMeasurementRadio = document.querySelectorAll('.risk-measurement')
+const closeKeyBtn = document.getElementById('close-key')
 
 const advancedToggle = document.getElementById('advanced-key-button')
 const advancedToggleText = document.getElementById('advanced-button-text')
 const keyDisplay = document.getElementById('map-key')
 const openKeyBtn = document.getElementById('open-key')
+const exitMapBtn = document.getElementById('exit-map')
 const deviceScreenWidth = 768
 const advancedToggleCutoff = 510
 const rightMove = 150
@@ -117,9 +122,7 @@ document.addEventListener('click', function (event) {
 })
 
 document.addEventListener('DOMContentLoaded', function () {
-  const radios = document.querySelectorAll('input[type="radio"].scenario-radio-button')
-
-  radios.forEach(function (radio) {
+  scenarioRadioButtons.forEach(function (radio) {
     radio.addEventListener('change', function () {
       const label = document.querySelector(`label[for="${this.id}"]`)
       if (label) {
@@ -130,6 +133,72 @@ document.addEventListener('DOMContentLoaded', function () {
 
   showOrHideAdvancedToggleText()
 })
+
+exitMapBtn.addEventListener('click', function () {
+  const backLink = exitMapBtn.getAttribute('data-backlink')
+
+  window.location.href = backLink
+})
+
+scenarioRadioButtons.forEach(function (radio) {
+  if (radio.id.includes('depth')) {
+    radio.addEventListener('change', function () {
+      scenarioDisplayUpdate('depth')
+    })
+  } else {
+    radio.addEventListener('change', function () {
+      scenarioDisplayUpdate('velocity')
+    })
+  }
+})
+
+riskMeasurementRadio.forEach(function (radio) {
+  let eventType
+  let extentType
+
+  if (radio.id.includes('sw-extent')) {
+    eventType = 'extent'
+    extentType = SurfaceWater
+  } else if (radio.id.includes('sw-depth')) {
+    eventType = 'depth'
+  } else if (radio.id.includes('sw-velocity')) {
+    eventType = 'velocity'
+  } else if (radio.id.includes('reservoirs')) {
+    eventType = 'extent'
+    extentType = 'reservoirs'
+  } else if (radio.id.includes('rs-radio')) {
+    eventType = 'extent'
+    extentType = riversAndTheSea
+  } else {
+    console.log('No type selected.')
+  }
+
+  if (eventType) {
+    radio.addEventListener('change', function () {
+      handleRadioChange(eventType, extentType)
+    })
+  }
+})
+
+closeKeyBtn.addEventListener('click', closeKey)
+
+function scenarioDisplayUpdate (scenarioBar) {
+  const scenariosRadios = document.querySelectorAll(`input[name="scenarios-${scenarioBar}"]`)
+  scenariosRadios.forEach(radio => {
+    if (radio.checked) {
+      const parent = radio.parentNode
+      parent.style.borderBottom = '7px solid rgb(29, 112, 184)'
+      const scenarioHeading = parent.querySelector('.scenario-heading')
+      scenarioHeading.style.textDecoration = 'none'
+    } else {
+      const parent = radio.parentNode
+      parent.style.borderBottom = 'none'
+      const scenarioHeading = parent.querySelector('.scenario-heading')
+      scenarioHeading.style.textDecoration = 'underline'
+      scenarioHeading.style.textDecorationThickness = '2px'
+    }
+  })
+}
 
 handleArrowClick(rightArrow, rightMove)
 handleArrowClick(leftArrow, leftMove)
@@ -219,7 +288,7 @@ function toggleAdvancedOptions () {
       rsContainer.style.display = 'none'
       reservoirsContainer.style.display = 'none'
       swExtentRadio.checked = true
-      handleRadioChange('extent', 'surface water')
+      handleRadioChange('extent', SurfaceWater)
     }
     if (window.location.href.includes('map=RiversOrSea')) {
       swContainer.style.display = 'none'
@@ -228,7 +297,7 @@ function toggleAdvancedOptions () {
       rsContainer.style.marginTop = '40px'
       rsExtentRadio.checked = true
       reservoirsContainer.style.display = 'none'
-      handleRadioChange('extent', 'rivers and the sea')
+      handleRadioChange('extent', riversAndTheSea)
     }
     if (window.location.href.includes('map=Reservoirs')) {
       swContainer.style.display = 'none'
@@ -364,7 +433,7 @@ function handleRadioChange (selected, type) {
       olZoom[0].style.top = 'calc(100% - 102px)'
       boundaryContainer.style.display = 'none'
     }
-    if (type === 'rivers and the sea') {
+    if (type === riversAndTheSea) {
       extentInfoRs.style.display = 'block'
       extentInfoReservoirs.style.display = 'none'
       extentInfoSw.style.display = 'none'
@@ -375,7 +444,7 @@ function handleRadioChange (selected, type) {
       olZoom[0].style.top = 'calc(100% - 102px)'
       boundaryContainer.style.display = 'none'
     }
-    if (type === 'surface water') {
+    if (type === SurfaceWater) {
       extentInfoRs.style.display = 'none'
       extentInfoReservoirs.style.display = 'none'
       extentInfoSw.style.display = 'block'
@@ -389,24 +458,6 @@ function handleRadioChange (selected, type) {
     bottomCopyrightContainer.classList.remove('hide')
     topCopyrightContainer.classList.add('hide')
   }
-}
-
-function scenarioDisplayUpdate (scenarioBar) {
-  const scenariosRadios = document.querySelectorAll(`input[name="scenarios-${scenarioBar}"]`)
-  scenariosRadios.forEach(radio => {
-    if (radio.checked) {
-      const parent = radio.parentNode
-      parent.style.borderBottom = '7px solid rgb(29, 112, 184)'
-      const scenarioHeading = parent.querySelector('.scenario-heading')
-      scenarioHeading.style.textDecoration = 'none'
-    } else {
-      const parent = radio.parentNode
-      parent.style.borderBottom = 'none'
-      const scenarioHeading = parent.querySelector('.scenario-heading')
-      scenarioHeading.style.textDecoration = 'underline'
-      scenarioHeading.style.textDecorationThickness = '2px'
-    }
-  })
 }
 
 function selectedOption () {
