@@ -4,7 +4,7 @@ const result = {
   rows: []
 }
 
-const __queryResult = (newResult) => {
+const _queryResult = (newResult) => {
   result.rows = newResult
 }
 
@@ -14,5 +14,5 @@ query.mockImplementation(() => {
 
 module.exports = {
   query,
-  __queryResult
+  _queryResult
 }

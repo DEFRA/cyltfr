@@ -20,7 +20,7 @@ describe('Unit tests - /floodrisk', () => {
   })
 
   test('Normal get returns the payload', async () => {
-    db.__queryResult([
+    db._queryResult([
       {
         calculate_flood_risk: {
           in_england: true,
@@ -47,19 +47,14 @@ describe('Unit tests - /floodrisk', () => {
   })
 
   test('/floodrisk/{x}/{y}/{radius} - No db result', async () => {
-    db.__queryResult([])
+    db._queryResult([])
 
     const response = await server.inject(options)
     expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_BAD_REQUEST)
   })
 
   test('/floodrisk/{x}/{y}/{radius} - Valid db result', async () => {
-    const options = {
-      method: 'GET',
-      url: '/floodrisk/391416/102196/20'
-    }
-
-    db.__queryResult([
+    db._queryResult([
       {
         calculate_flood_risk: {
           in_england: true,
@@ -98,14 +93,14 @@ describe('Unit tests - /floodrisk', () => {
   })
 
   test('/floodrisk/{x}/{y}/{radius} - Invalid db result', async () => {
-    db.__queryResult([{ error_result: '' }])
+    db._queryResult([{ error_result: '' }])
 
     const response = await server.inject(options)
     expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_BAD_REQUEST)
   })
 
   test('/floodrisk/{x}/{y}/{radius} - Groundwater alert result', async () => {
-    db.__queryResult([
+    db._queryResult([
       {
         calculate_flood_risk: {
           in_england: true,
@@ -144,7 +139,7 @@ describe('Unit tests - /floodrisk', () => {
   })
 
   test('/floodrisk/{x}/{y}/{radius} - Groundwater warning result', async () => {
-    db.__queryResult([
+    db._queryResult([
       {
         calculate_flood_risk: {
           in_england: true,
@@ -183,7 +178,7 @@ describe('Unit tests - /floodrisk', () => {
   })
 
   test('/floodrisk/{x}/{y}/{radius} - Groundwater area error', async () => {
-    db.__queryResult([
+    db._queryResult([
       {
         calculate_flood_risk: {
           in_england: true,
@@ -198,7 +193,7 @@ describe('Unit tests - /floodrisk', () => {
   })
 
   test('/floodrisk/{x}/{y}/{radius} - Extra info error', async () => {
-    db.__queryResult([
+    db._queryResult([
       {
         calculate_flood_risk: {
           in_england: true,
@@ -237,7 +232,7 @@ describe('Unit tests - /floodrisk', () => {
   })
 
   test('/floodrisk/{x}/{y}/{radius} - Extra info result', async () => {
-    db.__queryResult([
+    db._queryResult([
       {
         calculate_flood_risk: {
           in_england: true,
