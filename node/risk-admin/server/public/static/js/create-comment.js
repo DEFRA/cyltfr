@@ -9,6 +9,14 @@ const fileInput = document.getElementById('geometry')
 const type = window.LTFMGMT.type
 const isHoldingComment = type === 'holding'
 
+const showErrorMessage = function (message) {
+  const messageBox = document.getElementById('error-message')
+  const messageText = document.getElementById('error-message-text')
+
+  messageText.textContent = message
+  messageBox.style.display = 'block'
+}
+
 fileInput.addEventListener('change', function (e) {
   // Read file and add to form data fields
   const formData = new FormData()
@@ -26,11 +34,12 @@ fileInput.addEventListener('change', function (e) {
   fetch('/shp2json/' + type, {
     method: 'post',
     body: formData
-  }).then(function (response) {
+  }).then(async function (response) {
     spinner.style.display = 'none'
 
     if (!response.ok) {
-      throw new Error(response.statusText)
+      const result = await response.json()
+      throw new Error(result.message)
     }
 
     return response
@@ -42,6 +51,7 @@ fileInput.addEventListener('change', function (e) {
     const featureForm = document.getElementById('features')
 
     jsonFileData.features.forEach(function (_feature, index) {
+      // eslint-disable-next-line no-undef
       featureForm.insertAdjacentHTML('beforeend', addFeature(index, type))
     })
 
@@ -109,7 +119,7 @@ fileInput.addEventListener('change', function (e) {
 
     if (jsonFileData.features.length > 1) {
       commentMap(jsonFileData, 'map', capabilities, 'The map below shows all geometries contained within the shapefile')
-    } 
+    }
 
     // Add char count for the text areas
     const textareas = document.querySelectorAll('textarea')
@@ -122,17 +132,17 @@ fileInput.addEventListener('change', function (e) {
       })
     })
 
-    function updateRemainingChars(textarea, remainingCharsText) {
+    function updateRemainingChars (textarea, remainingCharsText) {
       const maxLength = parseInt(textarea.getAttribute('maxLength'))
       remainingCharsText.innerHTML = maxLength - textarea.value.length
     }
-    
+
     return jsonFileData
   }).then(function (jsonFileData) {
     // Construct the form data checking for any changes made by user in fields ready for payload
     const commentForm = document.getElementById('comment-form')
 
-    function handleFormSubmit(event) {
+    function handleFormSubmit (event) {
       event.preventDefault()
       const eventFormData = new FormData(event.target)
 
@@ -144,9 +154,9 @@ fileInput.addEventListener('change', function (e) {
         const riskOverrideValue = eventFormData.get(`override_${index}-risk`)
         const riskReportType = eventFormData.get(`features_${index}_properties_report_type`)
         const addCommentRadio = eventFormData.get(`add_holding_comment_${index}`)
-        
-        if (jsonFileData.name !== eventFormData.get(`name`)) {
-          jsonFileData.name = eventFormData.get(`name`)
+
+        if (jsonFileData.name !== eventFormData.get('name')) {
+          jsonFileData.name = eventFormData.get('name')
         }
         if (jsonFileData.features[index].properties.end !== eventFormData.get(`features_${index}_properties_end`)) {
           jsonFileData.features[index].properties.end = eventFormData.get(`features_${index}_properties_end`)
@@ -165,14 +175,13 @@ fileInput.addEventListener('change', function (e) {
           }
           if (addCommentRadio === 'No') {
             jsonFileData.features[index].properties.commentText = 'No'
-            jsonFileData.features[index].properties.info = ""
+            jsonFileData.features[index].properties.info = ''
           } else {
             jsonFileData.features[index].properties.commentText = 'Yes'
           }
         } else {
           jsonFileData.features[index].properties.info = riskReportType
         }
-
       })
     }
 
@@ -199,6 +208,6 @@ fileInput.addEventListener('change', function (e) {
     })
   }).catch(function (err) {
     console.error(err)
-    window.alert('Invalid shapefile')
+    showErrorMessage('Invalid shapefile: ' + err.message)
   })
 })

@@ -1,27 +1,6 @@
 const util = require('../util')
 const config = require('../config')
-const { osUprnUrl, osPostcodeUrl, osSearchKey } = config
-
-async function findById (id) {
-  const uri = `${osUprnUrl}${id}&key=${osSearchKey}`
-  const payload = await util.getJson(uri, true)
-
-  if (!payload || !payload.results || payload.results.length !== 1) {
-    throw new Error('Invalid response')
-  }
-
-  const result = payload.results[0].DPA
-  const address = {
-    uprn: result.UPRN,
-    nameOrNumber: result.BUILDING_NUMBER || result.BUILDING_NAME || result.ORGANISATION_NAME,
-    postcode: result.POSTCODE,
-    x: result.X_COORDINATE,
-    y: result.Y_COORDINATE,
-    address: result.ADDRESS
-  }
-
-  return address
-}
+const { osPostcodeUrl, osSearchKey } = config
 
 async function find (postcode) {
   const uri = `${osPostcodeUrl}${postcode}&key=${osSearchKey}`
@@ -66,6 +45,5 @@ function capitaliseAddress (address) {
 
 module.exports = {
   find,
-  findById,
   capitaliseAddress
 }

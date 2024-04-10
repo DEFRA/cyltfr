@@ -48,3 +48,8 @@ fieldset {
 label.control-label {
   font-weight: bold;
 }
+
+#error-message {
+  display: none;
+  clear: both;
+}
