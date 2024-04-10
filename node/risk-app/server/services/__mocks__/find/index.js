@@ -8,5 +8,6 @@ module.exports = {
   DN75BN: require('./DN75BN.json'),
   TW197DP: require('./TW197DP.json'),
   DN200RP: require('./DN200RP.json'),
-  WA37ED: require('./WA37ED.json')
+  WA37ED: require('./WA37ED.json'),
+  NP183EZ: require('./NP183EZ.json')
 }
