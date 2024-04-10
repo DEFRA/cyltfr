@@ -20,7 +20,8 @@ module.exports = {
         prepare: (options, next) => {
           const env = nunjucks.configure([
             path.join(options.relativeTo || process.cwd(), options.path),
-            'node_modules/govuk-frontend/'
+            'node_modules/govuk-frontend/dist/govuk/',
+            'node_modules/govuk-frontend/dist/govuk/components/'
           ], {
             autoescape: true,
             watch: false
@@ -46,7 +47,7 @@ module.exports = {
       serviceRef: 'LTF-Admin',
       serviceName: 'LTFRI Admin Console',
       pageTitle: 'LTFRI Admin Console - EA.GOV.UK',
-      analyticsAccount: analyticsAccount
+      analyticsAccount
     }
   }
 }

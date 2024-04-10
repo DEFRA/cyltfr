@@ -9,6 +9,14 @@ const fileInput = document.getElementById('geometry')
 const type = window.LTFMGMT.type
 const isHoldingComment = type === 'holding'
 
+const showErrorMessage = function (message) {
+  const messageBox = document.getElementById('error-message')
+  const messageText = document.getElementById('error-message-text')
+
+  messageText.textContent = message
+  messageBox.style.display = 'block'
+}
+
 fileInput.addEventListener('change', function (e) {
   // Read file and add to form data fields
   const formData = new FormData()
@@ -43,6 +51,7 @@ fileInput.addEventListener('change', function (e) {
     const featureForm = document.getElementById('features')
 
     jsonFileData.features.forEach(function (_feature, index) {
+      // eslint-disable-next-line no-undef
       featureForm.insertAdjacentHTML('beforeend', addFeature(index, type))
     })
 
@@ -199,6 +208,6 @@ fileInput.addEventListener('change', function (e) {
     })
   }).catch(function (err) {
     console.error(err)
-    window.alert('Invalid shapefile: ' + err.message)
+    showErrorMessage('Invalid shapefile: ' + err.message)
   })
 })

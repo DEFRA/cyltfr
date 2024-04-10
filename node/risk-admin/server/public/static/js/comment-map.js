@@ -46,11 +46,11 @@
 
     const layer = new ol.layer.Tile({
       ref: 'osgb',
-      source: source
+      source
     })
 
     const map = new ol.Map({
-      target: target,
+      target,
       view: new ol.View({
         projection: proj27700,
         center: [0, 0],
