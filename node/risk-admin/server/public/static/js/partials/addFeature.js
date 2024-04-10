@@ -1,8 +1,9 @@
-function addFeature(featureIndex, type) {
+// eslint-disable-next-line no-unused-vars
+function addFeature (featureIndex, type) {
   let featureHTML
 
   if (type === 'llfa') {
-    // Generate HTML for the feature on 
+    // Generate HTML for the feature on
     // LLFA reports
     featureHTML = `
       <div id="item_${featureIndex}" class="array-item">
@@ -50,9 +51,8 @@ function addFeature(featureIndex, type) {
         </div>
       </div>
     `
-
   } else {
-    // Generate HTML for the feature on 
+    // Generate HTML for the feature on
     // holding comments
     featureHTML = `
       <div id="item_${featureIndex}" class="array-item">

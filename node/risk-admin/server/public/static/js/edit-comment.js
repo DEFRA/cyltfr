@@ -7,8 +7,6 @@ const type = window.LTFMGMT.type
 const textCommentRadio = window.LTFMGMT.textCommentRadio
 const textareas = document.querySelectorAll('textarea')
 const remainingCharsTexts = document.querySelectorAll('.remaining-chars-text')
-const maxLengths = Array.from(textareas).map(textarea => parseInt(textarea.getAttribute('maxLength')))
-const editForm = document.getElementById('comment-form-edit')
 
 document.addEventListener('DOMContentLoaded', () => {
   geometry.features.forEach(function (feature, index) {
@@ -33,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     if (type === 'holding') {
-      for(const radio of riskRadios) {
+      for (const radio of riskRadios) {
         if (radio.value === selectedRadio[index]) {
           riskOptionRadios.style.display = 'block'
           overrideRadio.checked = true
@@ -41,13 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      for(const typeRadio of riskTypes) {
+      for (const typeRadio of riskTypes) {
         if (typeRadio.value === riskType[index]) {
           typeRadio.checked = true
         }
       }
 
-      for(const commentRadio of textCommentRadios) {
+      for (const commentRadio of textCommentRadios) {
         if (commentRadio.value === textCommentRadio[index]) {
           commentRadio.checked = true
         }
@@ -89,11 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       })
     } else {
-      for(const radio of riskReportRadios) {
+      for (const radio of riskReportRadios) {
         if (radio.value === selectedRadio[index]) {
           radio.checked = true
-        } 
-      } 
+        }
+      }
     }
     commentMap(geo, 'map_' + index, capabilities)
   })
@@ -108,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 })
 
-function updateRemainingChars(textarea, remainingCharsText) {
+function updateRemainingChars (textarea, remainingCharsText) {
   const maxLength = parseInt(textarea.getAttribute('maxLength'))
   remainingCharsText.innerHTML = maxLength - textarea.value.length
 }

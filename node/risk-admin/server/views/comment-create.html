@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
-{% from "govuk/components/file-upload/macro.njk" import govukFileUpload %}
+{% from "components/file-upload/macro.njk" import govukFileUpload %}
+{% from "components/error-summary/macro.njk" import govukErrorSummary %}
 
 {% set bodyClasses = "internal" %}
 {% set pageTitle = "Create comment" %}
@@ -18,6 +19,7 @@
           <li>Attributes will be auto populated if they match directly with those on the service. If they do not you can manually fill them in.</li>
         </ul>
         <hr />
+        <div>
         {{ govukFileUpload({
           id: "geometry",
           name: "geometry",
@@ -29,6 +31,19 @@
             required: "required"
           }
         }) }}
+        </div>
+        <div id="error-message">
+        {{ govukErrorSummary({
+          titleText: "There is a problem",
+          disableAutoFocus: true,
+          errorList: [
+            {
+              html: "<span id='error-message-text'>Error</span>",
+              href: "/"
+            }
+          ]
+        }) }}
+        </div>
         <img id="spinner" class="loader" alt="loading" src="/assets/images/loading.gif" style="display: none;" />
       </div>
       <div id="map"></div>

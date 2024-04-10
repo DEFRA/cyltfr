@@ -36,7 +36,7 @@ module.exports = {
           }
 
           request.log('error', {
-            statusCode: statusCode,
+            statusCode,
             data: response.data,
             message: response.message
           })
