@@ -42,6 +42,10 @@
       "text",
       "lcov"
     ],
-    "coverageDirectory": "test/output"
+    "coverageDirectory": "test/output",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/__test_data__/"
+    ]
   }
 }
