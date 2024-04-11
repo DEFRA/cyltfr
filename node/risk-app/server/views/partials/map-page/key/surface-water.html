@@ -7,7 +7,7 @@
 
     <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
       <div class="govuk-radios__item">
-        <input class="govuk-radios__input extent-radio risk-measurement" id="sw-extent-radio"
+        <input class="risk-radio govuk-radios__input govuk-radios__inputs extent-radio risk-measurement" id="sw-extent-radio"
           value="{{maps.categories[1].maps[0].ref}}"
           title="Extent of flooding from surface water" name="measurements" type="radio" checked="">
         <label class="govuk-label govuk-radios__label" for="sw-extent-radio">
@@ -55,7 +55,7 @@
       </div>
 
       <div class="govuk-radios__item">
-        <input class="govuk-radios__input risk-measurement" id="sw-depth-radio"
+        <input class="risk-radio govuk-radios__input govuk-radios__inputs risk-measurement" id="sw-depth-radio"
           value="{{maps.categories[1].maps[1].ref}}" name="measurements"
           title="Surface water flood risk: water depth in a high risk scenario" type="radio">
         <label class="govuk-label govuk-radios__label" for="sw-depth-radio">
@@ -99,7 +99,7 @@
       </div>
 
       <div class="govuk-radios__item showing advanced-map-option" id="sw-velocity-section-container">
-        <input class="govuk-radios__input risk-measurement" id="sw-velocity-radio"
+        <input class="risk-radio govuk-radios__input govuk-radios__inputs risk-measurement" id="sw-velocity-radio"
           value="{{maps.categories[1].maps[2].ref}}" name="measurements"
           title="Surface water flood risk: water velocity in a high risk scenario" type="radio">
         <label class="govuk-label govuk-radios__label" for="sw-velocity-radio">

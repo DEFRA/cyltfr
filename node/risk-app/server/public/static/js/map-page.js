@@ -51,8 +51,7 @@ function mapPage () {
     const results = regex.exec(window.location.search)
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
   }
-  const $header = $('.govuk-radios')
-  const $advancedHeader = $('.defra-map-controls')
+  const measurements = document.querySelectorAll('.govuk-radios__inputs')
   const $map = $('#map')
   const $body = $(document.body)
 
@@ -65,26 +64,31 @@ function mapPage () {
 
   // Default to the first category/map
   maps.onReady(function () {
-    $header.on('change', 'input[name="measurements"]', function (e) {
-      e.preventDefault()
-      setCurrent($(this).val())
-    })
-    $header.on('change', 'input[name="scenarios-depth"]', function (e) {
-      e.preventDefault()
-      setCurrent($(this).val())
-    })
-    $header.on('change', 'input[name="scenarios-velocity"]', function (e) {
-      e.preventDefault()
-      setCurrent($(this).val())
-    })
-    $header.on('change', 'input[name="map-toggle"]', function (e) {
-      e.preventDefault()
-      setCurrent($(this).val())
-    })
-    $advancedHeader.on('click', '#advanced-key-button', function (e) {
-      toggleAdvancedOptions()
-      e.preventDefault()
-      setCurrent($(this).val())
+    measurements.forEach(function (measurement) {
+      if (measurement.name === 'measurements') {
+        measurement.addEventListener('change', function (event) {
+          event.preventDefault()
+          setCurrent(event.target.value)
+        })
+      }
+      if (measurement.name === 'scenarios-depth') {
+        measurement.addEventListener('change', function (event) {
+          event.preventDefault()
+          setCurrent(event.target.value)
+        })
+      }
+      if (measurement.name === 'scenarios-velocity') {
+        measurement.addEventListener('change', function (event) {
+          event.preventDefault()
+          setCurrent(event.target.value)
+        })
+      }
+      if (measurement.name === 'map-toggle') {
+        measurement.addEventListener('change', function (event) {
+          event.preventDefault()
+          setCurrent(event.target.value)
+        })
+      }
     })
 
     setCurrent(getParameterByName('map'))
