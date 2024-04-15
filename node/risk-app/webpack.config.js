@@ -4,7 +4,7 @@ module.exports = {
   mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
   devtool: 'source-map',
   entry: {
-    map: './server/src/js/map.js'
+    map: ['./server/src/js/map.js', './server/public/static/js/map-page/map-page.js']
   },
   node: {
     global: true
