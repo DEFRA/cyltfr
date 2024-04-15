@@ -1,10 +1,10 @@
-const {
+import {
   handleRadioChange,
   toggleAdvancedOptions,
   selectedOption,
   showOrHideAdvancedToggleText
-} = require('./dynamic-styling')
-const { showMap, loadMap } = require('../../../../src/js/map')
+} from './dynamic-styling.js'
+import { showMap, loadMap } from '../map.js'
 
 console.log(toggleAdvancedOptions)
 console.log(showMap)

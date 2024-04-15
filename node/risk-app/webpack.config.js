@@ -4,7 +4,11 @@ module.exports = {
   mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
   devtool: 'source-map',
   entry: {
-    map: ['./server/src/js/map.js', './server/public/static/js/map-page/map-page.js']
+    mapPage: './server/src/js/map-page/map-page.js',
+    map: {
+      dependOn: 'mapPage',
+      import: './server/src/js/map.js'
+    }
   },
   node: {
     global: true
