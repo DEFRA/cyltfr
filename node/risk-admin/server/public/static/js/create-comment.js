@@ -21,7 +21,7 @@ class CreateCommentPage {
     this.document.getElementById('geometry').style.display = 'block'
   }
 
-  addFeatureHtml = function (feature, index, features) {
+  addFeatureHtmlData = function (feature, index, features) {
     const riskOptionRadios = document.getElementById(`risk-options_${index}`)
     const overrideRadio = document.getElementById(`map_${index}-override`)
     const noOverrideRadio = document.getElementById(`map_${index}-no-override`)
@@ -110,7 +110,7 @@ class CreateCommentPage {
       createCommentPage: this
     }
 
-    jsonFileData.features.forEach(this.addFeatureHtml, contextData)
+    jsonFileData.features.forEach(this.addFeatureHtmlData, contextData)
 
     if (jsonFileData.features.length > 1) {
       this.commentMap(jsonFileData, 'map', this.capabilities, 'The map below shows all geometries contained within the shapefile')
