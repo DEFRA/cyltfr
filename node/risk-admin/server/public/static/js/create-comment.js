@@ -119,9 +119,9 @@ class CreateCommentPage {
     // Add char count for the text areas
     this.addCharacterCounts()
 
-    document.getElementById('comment-form').addEventListener('submit', async (event) => {
+    document.getElementById('comment-form').addEventListener('submit', async (e) => {
       try {
-        this.handleFormSubmit(event, jsonFileData)
+        this.updateDataToBeSubmitted(e, jsonFileData, this.isHoldingComment)
 
         const response = await fetch('/comment/create/' + this.type, {
           method: 'post',
@@ -143,7 +143,7 @@ class CreateCommentPage {
     })
   }
 
-  handleFormSubmit = (event, jsonFileData) => {
+  updateDataToBeSubmitted = (event, jsonFileData, isHoldingComment) => {
     event.preventDefault()
     const eventFormData = new FormData(event.target)
 
@@ -166,7 +166,7 @@ class CreateCommentPage {
         feature.properties.start = eventFormData.get(`features_${index}_properties_start`)
       }
 
-      if (this.isHoldingComment) {
+      if (isHoldingComment) {
         feature.properties.riskType = riskTypeValue
         if (feature.properties.info !== eventFormData.get(`features_${index}_properties_info`)) {
           feature.properties.info = eventFormData.get(`features_${index}_properties_info`)
