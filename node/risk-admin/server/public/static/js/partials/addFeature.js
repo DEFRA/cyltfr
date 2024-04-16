@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-window.LTFMGMT.addFeature = function (featureIndex, type) {
+window.LTFMGMT.addFeatureHtml = function (featureIndex, type) {
   let featureHTML
 
   if (type === 'llfa') {
