@@ -22,7 +22,7 @@ module.exports = [
   {
     method: 'POST',
     path: '/comment/create/{type}',
-    handler: async (request, h) => {
+    handler: async (request, _h) => {
       const provider = request.provider
       const payload = request.payload
       const type = request.params.type

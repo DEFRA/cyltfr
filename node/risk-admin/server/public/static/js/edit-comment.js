@@ -10,11 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
   geometry.features.forEach(function (feature, index) {
     window.LTFMGMT.sharedFunctions.setInitialValues(index, type === 'holding', selectedRadio, riskType, textCommentRadio)
 
-    const geo = Object.assign({}, geometry, {
-      features: geometry.features.filter(function (f) {
-        return f === feature
-      })
-    })
+    const geo = {
+      ...geometry,
+      features: geometry.features.filter(f => f === feature)
+    }
 
     commentMap(geo, 'map_' + index, capabilities)
   })
