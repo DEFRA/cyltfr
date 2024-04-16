@@ -17,17 +17,6 @@ const sharedFunctions = {
   },
 
   setInitialValues: (index, isHoldingComment, selectedRadio = [], riskType = [], textCommentRadio = []) => {
-    const overrideRadio = document.getElementById(`map_${index}-override`)
-    const noOverrideRadio = document.getElementById(`map_${index}-no-override`)
-    const riskOptionRadios = document.getElementById(`risk-options_${index}`)
-    const riskTypeRadios = document.getElementById(`features_${index}_properties_risk_type`)
-    const rsRadio = document.getElementById(`rs_${index}`)
-    const overrideRadioSection = document.getElementById(`risk-override-radios_${index}`)
-    const addCommentRadios = document.getElementById(`features_${index}_properties_add_comment`)
-    const noHoldingCommentTextRadio = document.getElementById(`text_no_${index}`)
-    const riskTypes = document.getElementsByClassName(`risk-type-${index}`)
-    const textCommentRadios = document.getElementsByClassName(`textComment_radio_${index}`)
-
     if (!isHoldingComment) {
       const riskReportRadios = document.getElementsByClassName(`risk-report_${index}`)
       for (const radio of riskReportRadios) {
@@ -35,6 +24,9 @@ const sharedFunctions = {
       }
       return
     }
+
+    const overrideRadio = document.getElementById(`map_${index}-override`)
+    const riskOptionRadios = document.getElementById(`risk-options_${index}`)
 
     const riskRadios = document.getElementsByClassName(`risk-option_${index}`)
     for (const radio of riskRadios) {
@@ -45,22 +37,23 @@ const sharedFunctions = {
       }
     }
 
+    const riskTypes = document.getElementsByClassName(`risk-type-${index}`)
     for (const typeRadio of riskTypes) {
       typeRadio.checked = (typeRadio.value === riskType[index])
     }
 
+    const textCommentRadios = document.getElementsByClassName(`textComment_radio_${index}`)
     for (const commentRadio of textCommentRadios) {
       if (commentRadio.value === textCommentRadio[index]) {
         commentRadio.checked = true
       }
     }
 
-    overrideRadioSection.style.display = rsRadio.checked ? 'none' : 'block'
-
     if (overrideRadio.checked) {
       riskOptionRadios.style.display = 'block'
     }
 
+    const noOverrideRadio = document.getElementById(`map_${index}-no-override`)
     overrideRadio.addEventListener('click', function () {
       noOverrideRadio.checked = false
       riskOptionRadios.style.display = 'block'
@@ -69,15 +62,18 @@ const sharedFunctions = {
       overrideRadio.checked = false
       riskOptionRadios.style.display = 'none'
     })
-    riskTypeRadios.addEventListener('change', function () {
-      overrideRadioSection.style.display = rsRadio.checked ? 'none' : 'block'
-    })
 
-    const textArea = document.getElementById(`text_area_${index}`)
-    textArea.style.display = noHoldingCommentTextRadio.checked ? 'none' : 'block'
-    addCommentRadios.addEventListener('change', function () {
-      textArea.style.display = noHoldingCommentTextRadio.checked ? 'none' : 'block'
-    })
+    const checkRiskOverride = () => {
+      document.getElementById(`risk-override-radios_${index}`).style.display = document.getElementById(`rs_${index}`).checked ? 'none' : 'block'
+    }
+    checkRiskOverride()
+    document.getElementById(`features_${index}_properties_risk_type`).addEventListener('change', checkRiskOverride)
+
+    const checkTextArea = () => {
+      document.getElementById(`text_area_${index}`).style.display = document.getElementById(`text_no_${index}`).checked ? 'none' : 'block'
+    }
+    checkTextArea()
+    document.getElementById(`features_${index}_properties_add_comment`).addEventListener('change', checkTextArea)
   }
 
 }
