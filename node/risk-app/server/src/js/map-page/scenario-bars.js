@@ -27,7 +27,20 @@ function handleScroll (scenarioBar, arrows) {
   })
 }
 
+function handleArrowClick (arrows, scrollDirection) {
+  const scenarioSelectionDepth = document.getElementById('scenario-selection-depth')
+  const scenarioSelectionVelocity = document.getElementById('scenario-selection-velocity')
+
+  for (const arrow of arrows) {
+    arrow.addEventListener('click', function () {
+      scenarioSelectionDepth.scrollBy({ top: 0, left: scrollDirection, behavior: 'smooth' })
+      scenarioSelectionVelocity.scrollBy({ top: 0, left: scrollDirection, behavior: 'smooth' })
+    })
+  }
+}
+
 module.exports = {
   scenarioDisplayUpdate,
-  handleScroll
+  handleScroll,
+  handleArrowClick
 }

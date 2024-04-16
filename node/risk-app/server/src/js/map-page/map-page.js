@@ -1,4 +1,4 @@
-import { scenarioDisplayUpdate, handleScroll } from './scenario-bars.js'
+import { scenarioDisplayUpdate, handleScroll, handleArrowClick } from './scenario-bars.js'
 import { openKey, closeKey, showOrHideAdvancedToggleText, toggleAdvancedOptions, handleRadioChange, selectedOption } from './map-controls.js'
 import { adjustPosition } from './screen-size-adjustments.js'
 
@@ -12,6 +12,18 @@ const scenarioSelectionVelocity = document.getElementById('scenario-selection-ve
 const scenarioRadioButtons = document.querySelectorAll('.scenario-radio-button')
 const riskMeasurementRadio = document.querySelectorAll('.risk-measurement')
 const closeKeyBtn = document.getElementById('close-key')
+
+const velocityContainer = document.getElementById('sw-velocity-section-container')
+const swContainer = document.getElementById('sw-section-container')
+const rsContainer = document.getElementById('rs-section-container')
+const reservoirsContainer = document.getElementById('reservoirs-section-container')
+const rsRadio = document.getElementById('rs-radio')
+const reservoirsRadio = document.getElementById('reservoirs-radio')
+const extentInfoRs = document.getElementById('rs-extent-desc-container')
+const extentInfoReservoirs = document.getElementById('reservoirs-extent-desc-container')
+const extentInfoSw = document.getElementById('sw-extent-desc-container')
+const selectedAddressInput = document.getElementById('selected-address')
+const boundaryContainer = document.getElementById('boundary-container')
 
 const advancedToggle = document.getElementById('advanced-key-button')
 const keyDisplay = document.getElementById('map-key')
@@ -217,33 +229,12 @@ handleArrowClick(leftArrow, leftMove)
 handleScroll(scenarioSelectionDepth, [rightArrow[0], leftArrow[0]])
 handleScroll(scenarioSelectionVelocity, [rightArrow[1], leftArrow[1]])
 
-function handleArrowClick (arrows, scrollDirection) {
-  for (const arrow of arrows) {
-    arrow.addEventListener('click', function () {
-      scenarioSelectionDepth.scrollBy({ top: 0, left: scrollDirection, behavior: 'smooth' })
-      scenarioSelectionVelocity.scrollBy({ top: 0, left: scrollDirection, behavior: 'smooth' })
-    })
-  }
-}
-
 openKeyBtn.addEventListener('click', function (event) {
   event.stopPropagation()
   openKey()
 })
 
 function getInitialKeyOptions () {
-  const velocityContainer = document.getElementById('sw-velocity-section-container')
-  const swContainer = document.getElementById('sw-section-container')
-  const rsContainer = document.getElementById('rs-section-container')
-  const reservoirsContainer = document.getElementById('reservoirs-section-container')
-  const rsRadio = document.getElementById('rs-radio')
-  const reservoirsRadio = document.getElementById('reservoirs-radio')
-  const extentInfoRs = document.getElementById('rs-extent-desc-container')
-  const extentInfoReservoirs = document.getElementById('reservoirs-extent-desc-container')
-  const extentInfoSw = document.getElementById('sw-extent-desc-container')
-  const selectedAddressInput = document.getElementById('selected-address')
-  const boundaryContainer = document.getElementById('boundary-container')
-
   if (window.location.href.includes('map=SurfaceWater')) {
     velocityContainer.style.display = 'none'
     rsContainer.style.display = 'none'

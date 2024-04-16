@@ -1,4 +1,5 @@
 import { showOrHideAdvancedToggleText } from './map-controls'
+
 const scenarioSelectionDepth = document.getElementById('scenario-selection-depth')
 const scenarioSelectionVelocity = document.getElementById('scenario-selection-velocity')
 const advancedToggle = document.getElementById('advanced-key-button')
@@ -13,7 +14,7 @@ const topCopyrightContainer = document.getElementById('copyright-info-container-
 const bottomCopyrightContainer = document.getElementById('copyright-info-container-bottom')
 const keyDisplay = document.getElementById('map-key')
 
-function adjustPosition () {
+export function adjustPosition () {
   if ((scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block') &&
   window.innerWidth <= deviceScreenWidth) {
     osLogo.classList.add('os-logo-position-change')
@@ -57,8 +58,4 @@ function adjustPosition () {
     zoomBtns[0].style.top = 'calc(100% - 200px)'
   }
   showOrHideAdvancedToggleText()
-}
-
-module.exports = {
-  adjustPosition
 }
