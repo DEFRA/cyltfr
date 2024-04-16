@@ -1,8 +1,8 @@
 const joi = require('joi')
 const boom = require('@hapi/boom')
 const config = require('../config')
-const CommentView = require('../models/comment-view')
-const CommentEdit = require('../models/comment-edit')
+const commentView = require('../models/comment-view')
+const commentEdit = require('../models/comment-edit')
 const capabilities = require('../models/capabilities')
 
 module.exports = [
@@ -19,7 +19,7 @@ module.exports = [
       const geometryFile = await provider.getFile(key)
       const geometry = JSON.parse(geometryFile.Body)
 
-      return h.view('comment-view', new CommentView(comment, geometry, request.auth, capabilities))
+      return h.view('comment-view', commentView(comment, geometry, request.auth, capabilities))
     },
     options: {
       validate: {
@@ -75,10 +75,8 @@ module.exports = [
         profile: request.auth.credentials.profile
       }
 
-      const commentEdit = new CommentEdit(commentData, authData)
-
       return h.view(
-        'comment-edit', commentEdit)
+        'comment-edit', commentEdit(commentData, authData))
     },
     options: {
       validate: {
