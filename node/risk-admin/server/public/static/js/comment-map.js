@@ -2,12 +2,14 @@
   function commentMap (geojson, target, capabilities, title) {
     const ol = window.ol
     const proj4 = window.proj4
+    const COORD_SYSTEM = 'EPSG:27700'
+    const DEFAULT_EXTENT = [0, 0, 700000, 1300000]
 
     const vectorSource = new ol.source.Vector({
       features: (new ol.format.GeoJSON()).readFeatures(geojson)
     })
 
-    const styleFunction = function (feature) {
+    const styleFunction = function (_feature) {
       return new ol.style.Style({
         stroke: new ol.style.Stroke({
           color: 'blue',
@@ -25,20 +27,20 @@
       style: styleFunction
     })
 
-    proj4.defs('EPSG:27700', '+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 ' +
+    proj4.defs(COORD_SYSTEM, '+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 ' +
         '+x_0=400000 +y_0=-100000 +ellps=airy ' +
         '+towgs84=446.448,-125.157,542.06,0.15,0.247,0.842,-20.489 ' +
         '+units=m +no_defs')
     ol.proj.proj4.register(proj4)
-    const proj27700 = ol.proj.get('EPSG:27700')
-    proj27700.setExtent([0, 0, 700000, 1300000])
+    const proj27700 = ol.proj.get(COORD_SYSTEM)
+    proj27700.setExtent(DEFAULT_EXTENT)
 
     const parser = new ol.format.WMTSCapabilities()
     const result = parser.read(capabilities)
 
     const options = ol.source.WMTS.optionsFromCapabilities(result, {
       layer: 'Road_27700',
-      matrixSet: 'EPSG:27700',
+      matrixSet: COORD_SYSTEM,
       crossOrigin: 'anonymous'
     })
 
@@ -64,7 +66,7 @@
     })
 
     map.setView(new ol.View({
-      projection: 'EPSG:27700'
+      projection: COORD_SYSTEM
     }))
 
     const ext = vectorSource.getExtent()

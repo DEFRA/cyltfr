@@ -1,63 +1,55 @@
-const FormData = window.FormData
-const fetch = window.fetch
-const commentMap = window.LTFMGMT.commentMap
-const capabilities = window.LTFMGMT.capabilities
+function setUpCreateComment (window) {
+  const FormData = window.FormData
+  const fetch = window.fetch
+  const commentMap = window.LTFMGMT.commentMap
+  const capabilities = window.LTFMGMT.capabilities
+  const document = window.document
 
-const spinner = document.getElementById('spinner')
-const fileInput = document.getElementById('geometry')
+  const spinner = document.getElementById('spinner')
+  const fileInput = document.getElementById('geometry')
 
-const type = window.LTFMGMT.type
-const isHoldingComment = type === 'holding'
+  const type = window.LTFMGMT.type
+  const isHoldingComment = type === 'holding'
 
-const showErrorMessage = function (message) {
-  const messageBox = document.getElementById('error-message')
-  const messageText = document.getElementById('error-message-text')
+  const showErrorMessage = function (message) {
+    const messageBox = document.getElementById('error-message')
+    const messageText = document.getElementById('error-message-text')
 
-  messageText.textContent = message
-  messageBox.style.display = 'block'
-}
-
-fileInput.addEventListener('change', function (e) {
-  // Read file and add to form data fields
-  const formData = new FormData()
-
-  if (!fileInput.files || !fileInput.files.length) {
-    return
+    messageText.textContent = message
+    messageBox.style.display = 'block'
+    spinner.style.display = 'none'
+    fileInput.style.display = 'block'
   }
 
-  formData.append('geometry', fileInput.files[0])
-
-  fileInput.style.display = 'none'
-  spinner.style.display = 'inline'
-
-  // Process data using the shp2json router
-  fetch('/shp2json/' + type, {
-    method: 'post',
-    body: formData
-  }).then(async function (response) {
-    spinner.style.display = 'none'
-
-    if (!response.ok) {
-      const result = await response.json()
-      throw new Error(result.message)
+  fileInput.addEventListener('change', async (_event) => {
+  // Read file and add to form data fields
+    if (!fileInput.files?.length) {
+      return
     }
 
-    return response
-  }).then(function (response) {
-    // Convert response to Json
-    return response.json()
-  }).then(function (jsonFileData) {
+    const formData = new FormData()
+
+    formData.append('geometry', fileInput.files[0])
+
+    fileInput.style.display = 'none'
+    spinner.style.display = 'inline'
+
+    let jsonFileData
+    try {
+    // Process data using the shp2json router
+      jsonFileData = await getJsonFileData(formData)
+    } catch (error) {
+      showErrorMessage('Invalid shapefile: ' + error.message)
+      return
+    }
+
     // Add feature sections for each feature
     const featureForm = document.getElementById('features')
 
     jsonFileData.features.forEach(function (_feature, index) {
-      // eslint-disable-next-line no-undef
-      featureForm.insertAdjacentHTML('beforeend', addFeature(index, type))
+      featureForm.insertAdjacentHTML('beforeend', window.LTFMGMT.addFeature(index, type))
     })
 
-    return jsonFileData
-  }).then(function (jsonFileData) {
-    // Add ID values and import maps and form field values based on provided file data
     const featureMapDivs = document.querySelectorAll('.comment-map')
     const featureTextAreas = document.querySelectorAll('.govuk-textarea')
     const startDateField = document.querySelectorAll('.start-date')
@@ -137,77 +129,87 @@ fileInput.addEventListener('change', function (e) {
       remainingCharsText.innerHTML = maxLength - textarea.value.length
     }
 
-    return jsonFileData
-  }).then(function (jsonFileData) {
-    // Construct the form data checking for any changes made by user in fields ready for payload
     const commentForm = document.getElementById('comment-form')
 
-    function handleFormSubmit (event) {
-      event.preventDefault()
-      const eventFormData = new FormData(event.target)
+    commentForm.addEventListener('submit', async (event) => {
+      try {
+        handleFormSubmit(event, jsonFileData)
 
-      const boundaryValue = eventFormData.get('boundary')
-      jsonFileData.boundary = boundaryValue
-
-      jsonFileData.features.forEach(function (_feature, index) {
-        const riskTypeValue = eventFormData.get(`sw_or_rs_${index}`)
-        const riskOverrideValue = eventFormData.get(`override_${index}-risk`)
-        const riskReportType = eventFormData.get(`features_${index}_properties_report_type`)
-        const addCommentRadio = eventFormData.get(`add_holding_comment_${index}`)
-
-        if (jsonFileData.name !== eventFormData.get('name')) {
-          jsonFileData.name = eventFormData.get('name')
-        }
-        if (jsonFileData.features[index].properties.end !== eventFormData.get(`features_${index}_properties_end`)) {
-          jsonFileData.features[index].properties.end = eventFormData.get(`features_${index}_properties_end`)
-        }
-        if (jsonFileData.features[index].properties.start !== eventFormData.get(`features_${index}_properties_start`)) {
-          jsonFileData.features[index].properties.start = eventFormData.get(`features_${index}_properties_start`)
-        }
-
-        if (isHoldingComment) {
-          jsonFileData.features[index].properties.riskType = riskTypeValue
-          if (jsonFileData.features[index].properties.info !== eventFormData.get(`features_${index}_properties_info`)) {
-            jsonFileData.features[index].properties.info = eventFormData.get(`features_${index}_properties_info`)
+        const response = await fetch('/comment/create/' + type, {
+          method: 'post',
+          body: JSON.stringify(jsonFileData),
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
           }
-          if (riskTypeValue === 'Surface water') {
-            jsonFileData.features[index].properties.riskOverride = riskOverrideValue
-          }
-          if (addCommentRadio === 'No') {
-            jsonFileData.features[index].properties.commentText = 'No'
-            jsonFileData.features[index].properties.info = ''
-          } else {
-            jsonFileData.features[index].properties.commentText = 'Yes'
-          }
-        } else {
-          jsonFileData.features[index].properties.info = riskReportType
-        }
-      })
-    }
-
-    commentForm.addEventListener('submit', function (event) {
-      handleFormSubmit(event)
-
-      fetch('/comment/create/' + type, {
-        method: 'post',
-        body: JSON.stringify(jsonFileData),
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        }
-      }).then(function (response) {
+        })
         if (response.ok) {
           window.location.href = '/'
         } else {
           throw new Error(response.statusText)
         }
-      }).catch(function (err) {
-        console.error(err)
-        window.alert('Save failed')
-      })
+      } catch (error) {
+        console.error(error)
+        showErrorMessage('Save failed')
+      }
     })
-  }).catch(function (err) {
-    console.error(err)
-    showErrorMessage('Invalid shapefile: ' + err.message)
   })
-})
+
+  function handleFormSubmit (event, jsonFileData) {
+    event.preventDefault()
+    const eventFormData = new FormData(event.target)
+
+    const boundaryValue = eventFormData.get('boundary')
+    jsonFileData.boundary = boundaryValue
+    if (jsonFileData.name !== eventFormData.get('name')) {
+      jsonFileData.name = eventFormData.get('name')
+    }
+
+    jsonFileData.features.forEach(function (feature, index) {
+      const riskTypeValue = eventFormData.get(`sw_or_rs_${index}`)
+      const riskOverrideValue = eventFormData.get(`override_${index}-risk`)
+      const riskReportType = eventFormData.get(`features_${index}_properties_report_type`)
+      const addCommentRadio = eventFormData.get(`add_holding_comment_${index}`)
+
+      if (feature.properties.end !== eventFormData.get(`features_${index}_properties_end`)) {
+        feature.properties.end = eventFormData.get(`features_${index}_properties_end`)
+      }
+      if (feature.properties.start !== eventFormData.get(`features_${index}_properties_start`)) {
+        feature.properties.start = eventFormData.get(`features_${index}_properties_start`)
+      }
+
+      if (isHoldingComment) {
+        feature.properties.riskType = riskTypeValue
+        if (feature.properties.info !== eventFormData.get(`features_${index}_properties_info`)) {
+          feature.properties.info = eventFormData.get(`features_${index}_properties_info`)
+        }
+        if (riskTypeValue === 'Surface water') {
+          feature.properties.riskOverride = riskOverrideValue
+        }
+        if (addCommentRadio === 'No') {
+          feature.properties.commentText = 'No'
+          feature.properties.info = ''
+        } else {
+          feature.properties.commentText = 'Yes'
+        }
+      } else {
+        feature.properties.info = riskReportType
+      }
+    })
+  }
+
+  async function getJsonFileData (formData) {
+    const response = await fetch('/shp2json/' + type, {
+      method: 'post',
+      body: formData
+    })
+    if (!response.ok) {
+      const result = await response.json()
+      throw new Error(result.message)
+    }
+    const jsonFileData = await response.json()
+    return jsonFileData
+  }
+}
+
+setUpCreateComment(window)

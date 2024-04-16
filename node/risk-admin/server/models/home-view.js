@@ -1,12 +1,12 @@
 const { formatDate } = require('../helpers')
 
 class HomeView {
-  constructor (comments, provider) {
+  constructor (comments) {
     const defaultMapper = (field, row) => ({
       text: row[field.name] || ''
     })
 
-    const loadedAtMapper = (field, row) => {
+    const loadedAtMapper = (_field, row) => {
       if (row.lastError) {
         return { html: '<span class="error-text">Error</span>' }
       }
@@ -18,13 +18,14 @@ class HomeView {
           attributes: { style: 'text-align: center;', 'data-sort': loadedAt }
         }
       }
+      return null
     }
 
-    const approvedMapper = (field, row) => {
+    const approvedMapper = (_field, row) => {
       const { approvedAt, approvedBy } = row
 
       if (!approvedAt) {
-        return
+        return null
       }
 
       return {
@@ -37,7 +38,7 @@ class HomeView {
       {
         name: 'description',
         title: 'Description',
-        mapper: (field, row) => ({
+        mapper: (_field, row) => ({
           html: `<a href="/comment/view/${row.id}">${row.description}</a>`
         })
       },

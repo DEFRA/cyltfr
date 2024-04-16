@@ -1,5 +1,5 @@
 const joi = require('joi')
-const Model = require('../models/comment-create')
+const CommentCreate = require('../models/comment-create')
 const { shortId } = require('../helpers')
 const capabilities = require('../models/capabilities')
 
@@ -9,7 +9,7 @@ module.exports = [
     path: '/comment/create/{type}',
     handler: async (request, h) => {
       const type = request.params.type
-      return h.view('comment-create', new Model(type, capabilities))
+      return h.view('comment-create', new CommentCreate(type, capabilities))
     },
     options: {
       validate: {
@@ -70,7 +70,7 @@ module.exports = [
           console.log(err)
           const data = request.payload
           const type = request.params.type
-          return h.view('comment-create', new Model(type, data, err)).takeover()
+          return h.view('comment-create', new CommentCreate(type, data, err)).takeover()
         }
       },
       app: {

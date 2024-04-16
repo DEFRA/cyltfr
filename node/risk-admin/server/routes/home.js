@@ -13,6 +13,6 @@ module.exports = {
       ? comments
       : comments.filter(c => c.createdBy === auth.credentials.profile.email)
 
-    return h.view('home', new HomeView(homeComments, provider))
+    return h.view('home', new HomeView(homeComments))
   }
 }
