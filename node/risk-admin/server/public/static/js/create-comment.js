@@ -21,51 +21,6 @@ class CreateCommentPage {
     this.document.getElementById('geometry').style.display = 'block'
   }
 
-  addFeatureHtmlData = function (feature, index, features) {
-    const riskOptionRadios = document.getElementById(`risk-options_${index}`)
-    const overrideRadio = document.getElementById(`map_${index}-override`)
-    const noOverrideRadio = document.getElementById(`map_${index}-no-override`)
-    const riskTypeRadios = document.getElementById(`features_${index}_properties_risk_type`)
-    const rsRadio = document.getElementById(`rs_${index}`)
-    const overrideRadioSection = document.getElementById(`risk-override-radios_${index}`)
-    const addCommentRadios = document.getElementById(`features_${index}_properties_add_comment`)
-    const noHoldingCommentTextRadio = document.getElementById(`text_no_${index}`)
-    const textArea = document.getElementById(`text_area_${index}`)
-    const geo = {
-      ...this.jsonFileData,
-      features: features.filter(f => f === feature)
-    }
-    this.startDateField[index].value = `${feature.properties.start}`
-    this.endDateField[index].value = `${feature.properties.end}`
-
-    if (this.createCommentPage.isHoldingComment) {
-      this.featureTextAreas[index].value = `${feature.properties.info}`
-      overrideRadio.addEventListener('click', function () {
-        noOverrideRadio.checked = false
-        riskOptionRadios.style.display = 'block'
-      })
-      noOverrideRadio.addEventListener('click', function () {
-        overrideRadio.checked = false
-        riskOptionRadios.style.display = 'none'
-      })
-      riskTypeRadios.addEventListener('change', function () {
-        if (rsRadio.checked) {
-          overrideRadioSection.style.display = 'none'
-        } else {
-          overrideRadioSection.style.display = 'block'
-        }
-      })
-      addCommentRadios.addEventListener('change', function () {
-        if (noHoldingCommentTextRadio.checked) {
-          textArea.style.display = 'none'
-        } else {
-          textArea.style.display = 'block'
-        }
-      })
-    }
-    this.createCommentPage.commentMap(geo, 'map_' + index, this.createCommentPage.capabilities)
-  }
-
   fileChange = async (event) => {
   // Read file and add to form data fields
     if (!event.target.files?.length) {
@@ -102,22 +57,31 @@ class CreateCommentPage {
     document.getElementById('file').remove()
     document.getElementById('comment-form').style.display = 'block'
 
-    const contextData = {
-      jsonFileData,
-      featureTextAreas: document.querySelectorAll('.govuk-textarea'),
-      startDateField: document.querySelectorAll('.start-date'),
-      endDateField: document.querySelectorAll('.end-date'),
-      createCommentPage: this
-    }
+    const featureTextAreas = document.querySelectorAll('.govuk-textarea')
+    const startDateField = document.querySelectorAll('.start-date')
+    const endDateField = document.querySelectorAll('.end-date')
 
-    jsonFileData.features.forEach(this.addFeatureHtmlData, contextData)
+    jsonFileData.features.forEach((feature, index, features) => {
+      const geo = {
+        ...jsonFileData,
+        features: features.filter(f => f === feature)
+      }
+      startDateField[index].value = `${feature.properties.start}`
+      endDateField[index].value = `${feature.properties.end}`
+
+      if (this.isHoldingComment) {
+        featureTextAreas[index].value = `${feature.properties.info}`
+      }
+      window.LTFMGMT.sharedFunctions.setInitialValues(index, this.isHoldingComment)
+      this.commentMap(geo, 'map_' + index, this.capabilities)
+    })
 
     if (jsonFileData.features.length > 1) {
       this.commentMap(jsonFileData, 'map', this.capabilities, 'The map below shows all geometries contained within the shapefile')
     }
 
     // Add char count for the text areas
-    this.addCharacterCounts()
+    window.LTFMGMT.sharedFunctions.addCharacterCounts()
 
     document.getElementById('comment-form').addEventListener('submit', async (e) => {
       try {
@@ -197,23 +161,6 @@ class CreateCommentPage {
     }
     const jsonFileData = await response.json()
     return jsonFileData
-  }
-
-  addCharacterCounts () {
-    const textareas = document.querySelectorAll('textarea')
-    const remainingCharsTexts = document.querySelectorAll('.remaining-chars-text')
-
-    textareas.forEach((textarea, index) => {
-      updateRemainingChars(textarea, remainingCharsTexts[index])
-      textarea.addEventListener('input', () => {
-        updateRemainingChars(textarea, remainingCharsTexts[index])
-      })
-    })
-
-    function updateRemainingChars (textarea, remainingCharsText) {
-      const maxLength = parseInt(textarea.getAttribute('maxLength'))
-      remainingCharsText.innerHTML = maxLength - textarea.value.length
-    }
   }
 }
 
