@@ -9,7 +9,7 @@ const rename = util.promisify(fs.rename)
 module.exports = {
   method: 'POST',
   path: '/shp2json/{type}',
-  handler: async (request, h) => {
+  handler: async (request, _h) => {
     const { payload, params } = request
     const { geometry } = payload
 
