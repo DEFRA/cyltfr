@@ -1,14 +1,25 @@
-import {
-  handleRadioChange,
-  toggleAdvancedOptions,
-  selectedOption,
-  showOrHideAdvancedToggleText
-} from './dynamic-styling.js'
-import { showMap, loadMap } from '../map.js'
+import { scenarioDisplayUpdate } from './scenario-bars.js'
+import { openKey, showOrHideAdvancedToggleText, toggleAdvancedOptions, handleRadioChange, selectedOption } from './map-controls.js'
 
-console.log(toggleAdvancedOptions)
-console.log(showMap)
-console.log(loadMap)
+const maps = window.maps
+const SurfaceWater = 'surface water'
+const riversAndTheSea = 'rivers and the sea'
+const rightArrow = document.getElementsByClassName('right-scenario-arrow')
+const leftArrow = document.getElementsByClassName('left-scenario-arrow')
+const scenarioSelectionDepth = document.getElementById('scenario-selection-depth')
+const scenarioSelectionVelocity = document.getElementById('scenario-selection-velocity')
+const scenarioRadioButtons = document.querySelectorAll('.scenario-radio-button')
+const riskMeasurementRadio = document.querySelectorAll('.risk-measurement')
+const closeKeyBtn = document.getElementById('close-key')
+
+const advancedToggle = document.getElementById('advanced-key-button')
+const advancedToggleText = document.getElementById('advanced-button-text')
+const keyDisplay = document.getElementById('map-key')
+const openKeyBtn = document.getElementById('open-key')
+const exitMapBtn = document.getElementById('exit-map')
+const deviceScreenWidth = 768
+const rightMove = 150
+const leftMove = -150
 
 /* global mapCategories */
 class MapController {
@@ -64,16 +75,29 @@ function mapPage () {
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
   }
   const measurements = document.querySelectorAll('.govuk-radios__inputs')
-  const map = document.getElementById('#map')
+  const map = document.getElementById('map')
   const body = document.body
 
   const easting = parseInt(getParameterByName('easting'), 10)
   const northing = parseInt(getParameterByName('northing'), 10)
   const hasLocation = !!easting
-  const maps = window.maps
-  console.log(maps)
 
   maps.loadMap((hasLocation && [easting, northing]))
+
+  // This function updates the map to the radio button you select (extent, depth, velocity)
+  function setCurrent (ref) {
+    const mapController = new MapController(mapCategories.categories)
+    mapController.setCurrent(ref)
+    const selectedAddressCheckbox = document.getElementById('selected-address-checkbox')
+    const showFloodingCheckbox = document.getElementById('display-layers-checkbox')
+    const mapReferenceValue = selectedOption()
+
+    if (showFloodingCheckbox.checked) {
+      maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1), selectedAddressCheckbox.checked)
+    } else {
+      maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1) + 'DONOTDISPLAY', selectedAddressCheckbox.checked)
+    }
+  }
 
   // Default to the first category/map
   maps.onReady(function () {
@@ -107,29 +131,19 @@ function mapPage () {
     setCurrent(getParameterByName('map'))
   })
 
+  advancedToggle.addEventListener('click', function (event) {
+    event.stopPropagation()
+    openKey()
+    toggleAdvancedOptions()
+    selectedOption()
+    setCurrent()
+  })
+
   // ensures mouse cursor returns to default if feature was at edge of map
   map.addEventListener('mouseleave', function (e) {
     body.style.cursor = 'default'
   })
 }
-const SurfaceWater = 'surface water'
-const riversAndTheSea = 'rivers and the sea'
-const rightArrow = document.getElementsByClassName('right-scenario-arrow')
-const leftArrow = document.getElementsByClassName('left-scenario-arrow')
-const scenarioSelectionDepth = document.getElementById('scenario-selection-depth')
-const scenarioSelectionVelocity = document.getElementById('scenario-selection-velocity')
-const scenarioRadioButtons = document.querySelectorAll('.scenario-radio-button')
-const riskMeasurementRadio = document.querySelectorAll('.risk-measurement')
-const closeKeyBtn = document.getElementById('close-key')
-
-const advancedToggle = document.getElementById('advanced-key-button')
-const advancedToggleText = document.getElementById('advanced-button-text')
-const keyDisplay = document.getElementById('map-key')
-const openKeyBtn = document.getElementById('open-key')
-const exitMapBtn = document.getElementById('exit-map')
-const deviceScreenWidth = 768
-const rightMove = 150
-const leftMove = -150
 
 document.addEventListener('click', function (event) {
   if (keyDisplay.style.display === 'block' && !keyDisplay.contains(event.target)) {
@@ -198,24 +212,6 @@ riskMeasurementRadio.forEach(function (radio) {
 
 closeKeyBtn.addEventListener('click', closeKey)
 
-function scenarioDisplayUpdate (scenarioBar) {
-  const scenariosRadios = document.querySelectorAll(`input[name="scenarios-${scenarioBar}"]`)
-  scenariosRadios.forEach(radio => {
-    if (radio.checked) {
-      const parent = radio.parentNode
-      parent.style.borderBottom = '7px solid rgb(29, 112, 184)'
-      const scenarioHeading = parent.querySelector('.scenario-heading')
-      scenarioHeading.style.textDecoration = 'none'
-    } else {
-      const parent = radio.parentNode
-      parent.style.borderBottom = 'none'
-      const scenarioHeading = parent.querySelector('.scenario-heading')
-      scenarioHeading.style.textDecoration = 'underline'
-      scenarioHeading.style.textDecorationThickness = '2px'
-    }
-  })
-}
-
 handleArrowClick(rightArrow, rightMove)
 handleArrowClick(leftArrow, leftMove)
 
@@ -246,38 +242,6 @@ openKeyBtn.addEventListener('click', function (event) {
   event.stopPropagation()
   openKey()
 })
-
-advancedToggle.addEventListener('click', function (event) {
-  event.stopPropagation()
-  openKey()
-  toggleAdvancedOptions()
-  selectedOption()
-  setCurrent()
-})
-
-// This function updates the map to the radio button you select (extent, depth, velocity)
-function setCurrent (ref) {
-  const maps = window.maps
-  const mapController = new MapController(mapCategories.categories)
-  mapController.setCurrent(ref)
-  const selectedAddressCheckbox = document.getElementById('selected-address-checkbox')
-  const showFloodingCheckbox = document.getElementById('display-layers-checkbox')
-  const mapReferenceValue = selectedOption()
-
-  if (showFloodingCheckbox.checked) {
-    maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1), selectedAddressCheckbox.checked)
-  } else {
-    maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1) + 'DONOTDISPLAY', selectedAddressCheckbox.checked)
-  }
-}
-
-function openKey () {
-  keyDisplay.style.display = 'block'
-  openKeyBtn.style.display = 'none'
-  scenarioSelectionDepth.style.display = 'none'
-  scenarioSelectionVelocity.style.display = 'none'
-  showOrHideAdvancedToggleText()
-}
 
 function getInitialKeyOptions () {
   const velocityContainer = document.getElementById('sw-velocity-section-container')

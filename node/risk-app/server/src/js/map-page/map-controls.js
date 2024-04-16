@@ -1,70 +1,21 @@
-const deviceScreenWidth = 768
 const keyDisplay = document.getElementById('map-key')
+const openKeyBtn = document.getElementById('open-key')
 const scenarioSelectionDepth = document.getElementById('scenario-selection-depth')
 const scenarioSelectionVelocity = document.getElementById('scenario-selection-velocity')
+const advancedToggleText = document.getElementById('advanced-button-text')
+const deviceScreenWidth = 768
+const advancedToggleCutoff = 510
+const advancedButtonText = document.getElementById('advanced-button-text')
+const advancedButtonImage = document.getElementById('advanced-button-image')
+const velocityContainer = document.getElementById('sw-velocity-section-container')
+const swContainer = document.getElementById('sw-section-container')
+const rsContainer = document.getElementById('rs-section-container')
+const reservoirsContainer = document.getElementById('reservoirs-section-container')
+const swExtentRadio = document.getElementById('sw-extent-radio')
+const rsExtentRadio = document.getElementById('rs-radio')
+const reservoirsRadio = document.getElementById('reservoirs-radio')
 const SurfaceWater = 'surface water'
 const riversAndTheSea = 'rivers and the sea'
-const advancedToggleText = document.getElementById('advanced-button-text')
-const advancedToggleCutoff = 510
-
-function toggleAdvancedOptions () {
-  const advancedButtonText = document.getElementById('advanced-button-text')
-  const advancedButtonImage = document.getElementById('advanced-button-image')
-  const velocityContainer = document.getElementById('sw-velocity-section-container')
-  const swContainer = document.getElementById('sw-section-container')
-  const rsContainer = document.getElementById('rs-section-container')
-  const reservoirsContainer = document.getElementById('reservoirs-section-container')
-  const swExtentRadio = document.getElementById('sw-extent-radio')
-  const rsExtentRadio = document.getElementById('rs-radio')
-  const reservoirsRadio = document.getElementById('reservoirs-radio')
-
-  if (window.innerWidth <= deviceScreenWidth) {
-    keyDisplay.style.display = 'block'
-    scenarioSelectionDepth.style.display = 'none'
-    showOrHideAdvancedToggleText()
-  }
-
-  if (advancedButtonText.textContent.includes('Show')) {
-    advancedButtonText.textContent = 'Hide advanced options'
-    advancedButtonImage.setAttribute('d', 'M20.515 15.126 12 19.856l-8.515-4.73-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5zM16 4h6v2h-6zm5.484 7.125-9.022-5a1 1 0 0 0-.968-.001l-8.978 4.96a1 1 0 0 0-.003 1.749l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5a1 1 0 0 0-.002-1.749z')
-    velocityContainer.style.display = 'block'
-    swContainer.style.display = 'block'
-    rsContainer.style.display = 'block'
-    rsContainer.style.marginTop = '0px'
-    reservoirsContainer.style.marginTop = '0px'
-    reservoirsContainer.style.display = 'block'
-  } else {
-    if (window.location.href.includes('map=SurfaceWater')) {
-      swContainer.style.display = 'block'
-      velocityContainer.style.display = 'none'
-      rsContainer.style.display = 'none'
-      reservoirsContainer.style.display = 'none'
-      swExtentRadio.checked = true
-      handleRadioChange('extent', SurfaceWater)
-    }
-    if (window.location.href.includes('map=RiversOrSea')) {
-      swContainer.style.display = 'none'
-      velocityContainer.style.display = 'none'
-      rsContainer.style.display = 'block'
-      rsContainer.style.marginTop = '40px'
-      rsExtentRadio.checked = true
-      reservoirsContainer.style.display = 'none'
-      handleRadioChange('extent', riversAndTheSea)
-    }
-    if (window.location.href.includes('map=Reservoirs')) {
-      swContainer.style.display = 'none'
-      velocityContainer.style.display = 'none'
-      rsContainer.style.display = 'none'
-      reservoirsContainer.style.display = 'block'
-      reservoirsContainer.style.marginTop = '40px'
-      reservoirsRadio.checked = true
-      handleRadioChange('extent', 'reservoirs')
-    }
-    selectedOption()
-    advancedButtonText.textContent = 'Show advanced options'
-    advancedButtonImage.setAttribute('d', 'm3.485 15.126-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5-.971-1.748L12 19.856ZM20 8V6h2V4h-2V2h-2v2h-2v2h2v2zM2.513 12.833l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5a1 1 0 0 0-.002-1.749l-9.022-5a1 1 0 0 0-.968-.001l-8.978 4.96a1 1 0 0 0-.003 1.749z')
-  }
-}
 
 function selectedOption () {
   const measurementsRadios = document.querySelector('input[name="measurements"]:checked')
@@ -201,6 +152,56 @@ function handleRadioChange (selected, type) {
     topCopyrightContainer.classList.add('hide')
   }
 }
+
+function toggleAdvancedOptions () {
+  if (window.innerWidth <= deviceScreenWidth) {
+    keyDisplay.style.display = 'block'
+    scenarioSelectionDepth.style.display = 'none'
+    showOrHideAdvancedToggleText()
+  }
+
+  if (advancedButtonText.textContent.includes('Show')) {
+    advancedButtonText.textContent = 'Hide advanced options'
+    advancedButtonImage.setAttribute('d', 'M20.515 15.126 12 19.856l-8.515-4.73-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5zM16 4h6v2h-6zm5.484 7.125-9.022-5a1 1 0 0 0-.968-.001l-8.978 4.96a1 1 0 0 0-.003 1.749l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5a1 1 0 0 0-.002-1.749z')
+    velocityContainer.style.display = 'block'
+    swContainer.style.display = 'block'
+    rsContainer.style.display = 'block'
+    rsContainer.style.marginTop = '0px'
+    reservoirsContainer.style.marginTop = '0px'
+    reservoirsContainer.style.display = 'block'
+  } else {
+    if (window.location.href.includes('map=SurfaceWater')) {
+      swContainer.style.display = 'block'
+      velocityContainer.style.display = 'none'
+      rsContainer.style.display = 'none'
+      reservoirsContainer.style.display = 'none'
+      swExtentRadio.checked = true
+      handleRadioChange('extent', SurfaceWater)
+    }
+    if (window.location.href.includes('map=RiversOrSea')) {
+      swContainer.style.display = 'none'
+      velocityContainer.style.display = 'none'
+      rsContainer.style.display = 'block'
+      rsContainer.style.marginTop = '40px'
+      rsExtentRadio.checked = true
+      reservoirsContainer.style.display = 'none'
+      handleRadioChange('extent', riversAndTheSea)
+    }
+    if (window.location.href.includes('map=Reservoirs')) {
+      swContainer.style.display = 'none'
+      velocityContainer.style.display = 'none'
+      rsContainer.style.display = 'none'
+      reservoirsContainer.style.display = 'block'
+      reservoirsContainer.style.marginTop = '40px'
+      reservoirsRadio.checked = true
+      handleRadioChange('extent', 'reservoirs')
+    }
+    selectedOption()
+    advancedButtonText.textContent = 'Show advanced options'
+    advancedButtonImage.setAttribute('d', 'm3.485 15.126-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5-.971-1.748L12 19.856ZM20 8V6h2V4h-2V2h-2v2h-2v2h2v2zM2.513 12.833l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5a1 1 0 0 0-.002-1.749l-9.022-5a1 1 0 0 0-.968-.001l-8.978 4.96a1 1 0 0 0-.003 1.749z')
+  }
+}
+
 function showOrHideAdvancedToggleText () {
   if (window.innerWidth <= deviceScreenWidth) {
     advancedToggleText.classList.remove('hide')
@@ -210,9 +211,18 @@ function showOrHideAdvancedToggleText () {
   }
 }
 
+function openKey () {
+  keyDisplay.style.display = 'block'
+  openKeyBtn.style.display = 'none'
+  scenarioSelectionDepth.style.display = 'none'
+  scenarioSelectionVelocity.style.display = 'none'
+  showOrHideAdvancedToggleText()
+}
+
 module.exports = {
+  openKey,
+  showOrHideAdvancedToggleText,
   toggleAdvancedOptions,
   selectedOption,
-  handleRadioChange,
-  showOrHideAdvancedToggleText
+  handleRadioChange
 }
