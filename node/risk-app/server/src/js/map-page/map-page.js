@@ -1,5 +1,6 @@
-import { scenarioDisplayUpdate } from './scenario-bars.js'
-import { openKey, showOrHideAdvancedToggleText, toggleAdvancedOptions, handleRadioChange, selectedOption } from './map-controls.js'
+import { scenarioDisplayUpdate, handleScroll } from './scenario-bars.js'
+import { openKey, closeKey, showOrHideAdvancedToggleText, toggleAdvancedOptions, handleRadioChange, selectedOption } from './map-controls.js'
+import { adjustPosition } from './screen-size-adjustments.js'
 
 const maps = window.maps
 const SurfaceWater = 'surface water'
@@ -13,11 +14,9 @@ const riskMeasurementRadio = document.querySelectorAll('.risk-measurement')
 const closeKeyBtn = document.getElementById('close-key')
 
 const advancedToggle = document.getElementById('advanced-key-button')
-const advancedToggleText = document.getElementById('advanced-button-text')
 const keyDisplay = document.getElementById('map-key')
 const openKeyBtn = document.getElementById('open-key')
 const exitMapBtn = document.getElementById('exit-map')
-const deviceScreenWidth = 768
 const rightMove = 150
 const leftMove = -150
 
@@ -227,17 +226,6 @@ function handleArrowClick (arrows, scrollDirection) {
   }
 }
 
-function handleScroll (scenarioBar, arrows) {
-  scenarioBar.addEventListener('scroll', function () {
-    const currentScrollPosition = scenarioBar.scrollLeft
-    const divWidth = scenarioBar.offsetWidth
-    const scrollWidth = scenarioBar.scrollWidth
-
-    arrows[0].classList.toggle('hide', currentScrollPosition === scrollWidth - divWidth)
-    arrows[1].classList.toggle('hide', currentScrollPosition === 0)
-  })
-}
-
 openKeyBtn.addEventListener('click', function (event) {
   event.stopPropagation()
   openKey()
@@ -279,103 +267,9 @@ function getInitialKeyOptions () {
     extentInfoReservoirs.style.display = 'block'
     boundaryContainer.style.display = 'none'
   } else {
-    advancedToggle.style.display = 'none'
-    selectedAddressInput.style.display = 'none'
+    advancedToggle.classList.add('hide')
+    selectedAddressInput.classList.add('hide')
   }
-}
-/* eslint-disable no-unused-vars */
-// This function adjusts the descriptions that appear/disappear depending on selected radio button
-
-function closeKey () {
-  const scenarioBarDepth = document.getElementById('scenario-container-depth')
-  const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
-  const depthRadio = document.getElementById('sw-depth-radio')
-  const velocityRadio = document.getElementById('sw-velocity-radio')
-  const osLogo = document.getElementById('os-logo')
-
-  keyDisplay.style.display = 'none'
-  if (window.location.href.includes('?')) {
-    advancedToggle.style.display = 'block'
-  }
-
-  if (depthRadio.checked) {
-    scenarioBarDepth.style.display = 'block'
-    scenarioSelectionDepth.style.display = 'flex'
-    scenarioSelectionDepth.style.top = null
-  }
-
-  if (velocityRadio.checked) {
-    scenarioBarVelocity.style.display = 'block'
-    scenarioSelectionVelocity.style.display = 'flex'
-    scenarioSelectionVelocity.style.top = null
-  }
-
-  openKeyBtn.style.display = 'block'
-  if (scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block') {
-    osLogo.classList.add('os-logo-position-change')
-  } else {
-    osLogo.classList.remove('os-logo-position-change')
-  }
-
-  if (window.innerWidth <= deviceScreenWidth) {
-    advancedToggleText.classList.remove('hide')
-  }
-}
-
-/* eslint-enable no-unused-vars */
-function adjustPosition () {
-  const zoomBtns = document.getElementsByClassName('ol-control')
-  const scenarioBarDepth = document.getElementById('scenario-container-depth')
-  const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
-  const depthRadio = document.getElementById('sw-depth-radio')
-  const velocityRadio = document.getElementById('sw-velocity-radio')
-  const osLogo = document.getElementById('os-logo')
-  const topCopyrightContainer = document.getElementById('copyright-info-container-top')
-  const bottomCopyrightContainer = document.getElementById('copyright-info-container-bottom')
-
-  if ((scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block') &&
-  window.innerWidth <= deviceScreenWidth) {
-    osLogo.classList.add('os-logo-position-change')
-    bottomCopyrightContainer.classList.add('hide')
-    topCopyrightContainer.classList.remove('hide')
-  } else {
-    osLogo.classList.remove('os-logo-position-change')
-    bottomCopyrightContainer.classList.remove('hide')
-    topCopyrightContainer.classList.add('hide')
-  }
-
-  if (keyDisplay.style.display === 'block' && window.innerWidth <= deviceScreenWidth) {
-    scenarioSelectionDepth.style.display = 'none'
-    scenarioSelectionVelocity.style.display = 'none'
-  } else if (keyDisplay.style.display === 'block' && window.innerWidth > deviceScreenWidth) {
-    if (window.location.href.includes('map=RiversOrSea') ||
-    window.location.href.includes('map=SurfaceWater') ||
-    window.location.href.includes('map=Reservoirs')) {
-      advancedToggle.style.display = 'block'
-    }
-    if (depthRadio.checked) {
-      scenarioBarDepth.style.display = 'block'
-      scenarioSelectionDepth.style.display = 'flex'
-    }
-    if (velocityRadio.checked) {
-      scenarioBarVelocity.style.display = 'block'
-      scenarioSelectionVelocity.style.display = 'flex'
-    }
-  }
-
-  if (depthRadio.checked && window.innerWidth > deviceScreenWidth) {
-    scenarioSelectionDepth.style.display = 'flex'
-  } else if (velocityRadio.checked && window.innerWidth > deviceScreenWidth) {
-    scenarioSelectionVelocity.style.display = 'flex'
-  }
-
-  if ((scenarioBarDepth.style.display === 'block' ||
-  scenarioBarVelocity.style.display === 'block') &&
-  window.innerWidth <= deviceScreenWidth
-  ) {
-    zoomBtns[0].style.top = 'calc(100% - 200px)'
-  }
-  showOrHideAdvancedToggleText()
 }
 
 window.onresize = adjustPosition

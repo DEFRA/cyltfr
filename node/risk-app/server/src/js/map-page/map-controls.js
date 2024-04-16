@@ -2,6 +2,7 @@ const keyDisplay = document.getElementById('map-key')
 const openKeyBtn = document.getElementById('open-key')
 const scenarioSelectionDepth = document.getElementById('scenario-selection-depth')
 const scenarioSelectionVelocity = document.getElementById('scenario-selection-velocity')
+const advancedToggle = document.getElementById('advanced-key-button')
 const advancedToggleText = document.getElementById('advanced-button-text')
 const deviceScreenWidth = 768
 const advancedToggleCutoff = 510
@@ -219,8 +220,45 @@ function openKey () {
   showOrHideAdvancedToggleText()
 }
 
+function closeKey () {
+  const scenarioBarDepth = document.getElementById('scenario-container-depth')
+  const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
+  const depthRadio = document.getElementById('sw-depth-radio')
+  const velocityRadio = document.getElementById('sw-velocity-radio')
+  const osLogo = document.getElementById('os-logo')
+
+  keyDisplay.style.display = 'none'
+  if (window.location.href.includes('?')) {
+    advancedToggle.style.display = 'block'
+  }
+
+  if (depthRadio.checked) {
+    scenarioBarDepth.style.display = 'block'
+    scenarioSelectionDepth.style.display = 'flex'
+    scenarioSelectionDepth.style.top = null
+  }
+
+  if (velocityRadio.checked) {
+    scenarioBarVelocity.style.display = 'block'
+    scenarioSelectionVelocity.style.display = 'flex'
+    scenarioSelectionVelocity.style.top = null
+  }
+
+  openKeyBtn.style.display = 'block'
+  if (scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block') {
+    osLogo.classList.add('os-logo-position-change')
+  } else {
+    osLogo.classList.remove('os-logo-position-change')
+  }
+
+  if (window.innerWidth <= deviceScreenWidth) {
+    advancedToggleText.classList.remove('hide')
+  }
+}
+
 module.exports = {
   openKey,
+  closeKey,
   showOrHideAdvancedToggleText,
   toggleAdvancedOptions,
   selectedOption,
