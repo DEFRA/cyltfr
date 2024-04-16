@@ -25,14 +25,11 @@ const sharedFunctions = {
     const overrideRadioSection = document.getElementById(`risk-override-radios_${index}`)
     const addCommentRadios = document.getElementById(`features_${index}_properties_add_comment`)
     const noHoldingCommentTextRadio = document.getElementById(`text_no_${index}`)
-    const riskRadios = document.getElementsByClassName(`risk-option_${index}`)
-    const riskReportRadios = document.getElementsByClassName(`risk-report_${index}`)
     const riskTypes = document.getElementsByClassName(`risk-type-${index}`)
     const textCommentRadios = document.getElementsByClassName(`textComment_radio_${index}`)
 
-    const textArea = document.getElementById(`text_area_${index}`)
-
-    if (isHoldingComment) {
+    const checkRiskOptions = () => {
+      const riskRadios = document.getElementsByClassName(`risk-option_${index}`)
       for (const radio of riskRadios) {
         if (radio.value === selectedRadio[index]) {
           riskOptionRadios.style.display = 'block'
@@ -40,11 +37,15 @@ const sharedFunctions = {
           radio.checked = true
         }
       }
+    }
+
+    const textArea = document.getElementById(`text_area_${index}`)
+
+    if (isHoldingComment) {
+      checkRiskOptions()
 
       for (const typeRadio of riskTypes) {
-        if (typeRadio.value === riskType[index]) {
-          typeRadio.checked = true
-        }
+        typeRadio.checked = (typeRadio.value === riskType[index])
       }
 
       for (const commentRadio of textCommentRadios) {
@@ -56,11 +57,7 @@ const sharedFunctions = {
         }
       }
 
-      if (rsRadio.checked) {
-        overrideRadioSection.style.display = 'none'
-      } else {
-        overrideRadioSection.style.display = 'block'
-      }
+      overrideRadioSection.style.display = rsRadio.checked ? 'none' : 'block'
 
       if (overrideRadio.checked) {
         riskOptionRadios.style.display = 'block'
@@ -75,24 +72,15 @@ const sharedFunctions = {
         riskOptionRadios.style.display = 'none'
       })
       riskTypeRadios.addEventListener('change', function () {
-        if (rsRadio.checked) {
-          overrideRadioSection.style.display = 'none'
-        } else {
-          overrideRadioSection.style.display = 'block'
-        }
+        overrideRadioSection.style.display = rsRadio.checked ? 'none' : 'block'
       })
       addCommentRadios.addEventListener('change', function () {
-        if (noHoldingCommentTextRadio.checked) {
-          textArea.style.display = 'none'
-        } else {
-          textArea.style.display = 'block'
-        }
+        textArea.style.display = noHoldingCommentTextRadio.checked ? 'none' : 'block'
       })
     } else {
+      const riskReportRadios = document.getElementsByClassName(`risk-report_${index}`)
       for (const radio of riskReportRadios) {
-        if (radio.value === selectedRadio[index]) {
-          radio.checked = true
-        }
+        radio.checked = (radio.value === selectedRadio[index])
       }
     }
   }
