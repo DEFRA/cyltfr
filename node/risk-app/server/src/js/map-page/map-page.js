@@ -1,36 +1,7 @@
 import { scenarioDisplayUpdate, handleScroll, handleArrowClick } from './scenario-bars.js'
 import { openKey, closeKey, showOrHideAdvancedToggleText, toggleAdvancedOptions, handleRadioChange, selectedOption } from './map-controls.js'
 import { adjustPosition } from './screen-size-adjustments.js'
-
-const maps = window.maps
-const SurfaceWater = 'surface water'
-const riversAndTheSea = 'rivers and the sea'
-const rightArrow = document.getElementsByClassName('right-scenario-arrow')
-const leftArrow = document.getElementsByClassName('left-scenario-arrow')
-const scenarioSelectionDepth = document.getElementById('scenario-selection-depth')
-const scenarioSelectionVelocity = document.getElementById('scenario-selection-velocity')
-const scenarioRadioButtons = document.querySelectorAll('.scenario-radio-button')
-const riskMeasurementRadio = document.querySelectorAll('.risk-measurement')
-const closeKeyBtn = document.getElementById('close-key')
-
-const velocityContainer = document.getElementById('sw-velocity-section-container')
-const swContainer = document.getElementById('sw-section-container')
-const rsContainer = document.getElementById('rs-section-container')
-const reservoirsContainer = document.getElementById('reservoirs-section-container')
-const rsRadio = document.getElementById('rs-radio')
-const reservoirsRadio = document.getElementById('reservoirs-radio')
-const extentInfoRs = document.getElementById('rs-extent-desc-container')
-const extentInfoReservoirs = document.getElementById('reservoirs-extent-desc-container')
-const extentInfoSw = document.getElementById('sw-extent-desc-container')
-const selectedAddressInput = document.getElementById('selected-address')
-const boundaryContainer = document.getElementById('boundary-container')
-
-const advancedToggle = document.getElementById('advanced-key-button')
-const keyDisplay = document.getElementById('map-key')
-const openKeyBtn = document.getElementById('open-key')
-const exitMapBtn = document.getElementById('exit-map')
-const rightMove = 150
-const leftMove = -150
+import { mapPageConsts } from './constants.js'
 
 /* global mapCategories */
 class MapController {
@@ -93,7 +64,7 @@ function mapPage () {
   const northing = parseInt(getParameterByName('northing'), 10)
   const hasLocation = !!easting
 
-  maps.loadMap((hasLocation && [easting, northing]))
+  mapPageConsts.maps.loadMap((hasLocation && [easting, northing]))
 
   // This function updates the map to the radio button you select (extent, depth, velocity)
   function setCurrent (ref) {
@@ -104,14 +75,14 @@ function mapPage () {
     const mapReferenceValue = selectedOption()
 
     if (showFloodingCheckbox.checked) {
-      maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1), selectedAddressCheckbox.checked)
+      mapPageConsts.maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1), selectedAddressCheckbox.checked)
     } else {
-      maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1) + 'DONOTDISPLAY', selectedAddressCheckbox.checked)
+      mapPageConsts.maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1) + 'DONOTDISPLAY', selectedAddressCheckbox.checked)
     }
   }
 
   // Default to the first category/map
-  maps.onReady(function () {
+  mapPageConsts.maps.onReady(function () {
     measurements.forEach(function (measurement) {
       if (measurement.name === 'measurements') {
         measurement.addEventListener('change', function (event) {
@@ -142,7 +113,7 @@ function mapPage () {
     setCurrent(getParameterByName('map'))
   })
 
-  advancedToggle.addEventListener('click', function (event) {
+  mapPageConsts.advancedToggle.addEventListener('click', function (event) {
     event.stopPropagation()
     openKey()
     toggleAdvancedOptions()
@@ -157,13 +128,13 @@ function mapPage () {
 }
 
 document.addEventListener('click', function (event) {
-  if (keyDisplay.style.display === 'block' && !keyDisplay.contains(event.target)) {
+  if (mapPageConsts.keyDisplay.style.display === 'block' && !mapPageConsts.keyDisplay.contains(event.target)) {
     closeKey()
   }
 })
 
 document.addEventListener('DOMContentLoaded', function () {
-  scenarioRadioButtons.forEach(function (radio) {
+  mapPageConsts.scenarioRadioButtons.forEach(function (radio) {
     radio.addEventListener('change', function () {
       const label = document.querySelector(`label[for="${this.id}"]`)
       if (label) {
@@ -175,13 +146,13 @@ document.addEventListener('DOMContentLoaded', function () {
   showOrHideAdvancedToggleText()
 })
 
-exitMapBtn.addEventListener('click', function () {
-  const backLink = exitMapBtn.getAttribute('data-backlink')
+mapPageConsts.exitMapBtn.addEventListener('click', function () {
+  const backLink = mapPageConsts.exitMapBtn.getAttribute('data-backlink')
 
   window.location.href = backLink
 })
 
-scenarioRadioButtons.forEach(function (radio) {
+mapPageConsts.scenarioRadioButtons.forEach(function (radio) {
   if (radio.id.includes('depth')) {
     radio.addEventListener('change', function () {
       scenarioDisplayUpdate('depth')
@@ -193,13 +164,13 @@ scenarioRadioButtons.forEach(function (radio) {
   }
 })
 
-riskMeasurementRadio.forEach(function (radio) {
+mapPageConsts.riskMeasurementRadio.forEach(function (radio) {
   let eventType
   let extentType
 
   if (radio.id.includes('sw-extent')) {
     eventType = 'extent'
-    extentType = SurfaceWater
+    extentType = mapPageConsts.surfaceWater
   } else if (radio.id.includes('sw-depth')) {
     eventType = 'depth'
   } else if (radio.id.includes('sw-velocity')) {
@@ -209,7 +180,7 @@ riskMeasurementRadio.forEach(function (radio) {
     extentType = 'reservoirs'
   } else if (radio.id.includes('rs-radio')) {
     eventType = 'extent'
-    extentType = riversAndTheSea
+    extentType = mapPageConsts.riversAndTheSea
   } else {
     console.log('No type selected.')
   }
@@ -221,45 +192,45 @@ riskMeasurementRadio.forEach(function (radio) {
   }
 })
 
-closeKeyBtn.addEventListener('click', closeKey)
+mapPageConsts.closeKeyBtn.addEventListener('click', closeKey)
 
-handleArrowClick(rightArrow, rightMove)
-handleArrowClick(leftArrow, leftMove)
+handleArrowClick(mapPageConsts.rightArrow, mapPageConsts.rightMove)
+handleArrowClick(mapPageConsts.leftArrow, mapPageConsts.leftMove)
 
-handleScroll(scenarioSelectionDepth, [rightArrow[0], leftArrow[0]])
-handleScroll(scenarioSelectionVelocity, [rightArrow[1], leftArrow[1]])
+handleScroll(mapPageConsts.scenarioSelectionDepth, [mapPageConsts.rightArrow[0], mapPageConsts.leftArrow[0]])
+handleScroll(mapPageConsts.scenarioSelectionVelocity, [mapPageConsts.rightArrow[1], mapPageConsts.leftArrow[1]])
 
-openKeyBtn.addEventListener('click', function (event) {
+mapPageConsts.openKeyBtn.addEventListener('click', function (event) {
   event.stopPropagation()
   openKey()
 })
 
 function getInitialKeyOptions () {
   if (window.location.href.includes('map=SurfaceWater')) {
-    velocityContainer.style.display = 'none'
-    rsContainer.style.display = 'none'
-    reservoirsContainer.style.display = 'none'
+    mapPageConsts.velocityContainer.style.display = 'none'
+    mapPageConsts.rsContainer.style.display = 'none'
+    mapPageConsts.reservoirsContainer.style.display = 'none'
   } else if (window.location.href.includes('map=RiversOrSea')) {
-    swContainer.style.display = 'none'
-    extentInfoSw.style.display = 'none'
-    rsContainer.style.display = 'block'
-    rsContainer.style.marginTop = '40px'
-    rsRadio.checked = true
-    extentInfoRs.style.display = 'block'
-    reservoirsContainer.style.display = 'none'
-    boundaryContainer.style.display = 'none'
+    mapPageConsts.swContainer.style.display = 'none'
+    mapPageConsts.extentInfoSw.style.display = 'none'
+    mapPageConsts.rsContainer.style.display = 'block'
+    mapPageConsts.rsContainer.style.marginTop = '40px'
+    mapPageConsts.rsRadio.checked = true
+    mapPageConsts.extentInfoRs.style.display = 'block'
+    mapPageConsts.reservoirsContainer.style.display = 'none'
+    mapPageConsts.boundaryContainer.style.display = 'none'
   } else if (window.location.href.includes('map=Reservoirs')) {
-    swContainer.style.display = 'none'
-    extentInfoSw.style.display = 'none'
-    rsContainer.style.display = 'none'
-    reservoirsContainer.style.display = 'block'
-    reservoirsContainer.style.marginTop = '40px'
-    reservoirsRadio.checked = true
-    extentInfoReservoirs.style.display = 'block'
-    boundaryContainer.style.display = 'none'
+    mapPageConsts.swContainer.style.display = 'none'
+    mapPageConsts.extentInfoSw.style.display = 'none'
+    mapPageConsts.rsContainer.style.display = 'none'
+    mapPageConsts.reservoirsContainer.style.display = 'block'
+    mapPageConsts.reservoirsContainer.style.marginTop = '40px'
+    mapPageConsts.reservoirsRadio.checked = true
+    mapPageConsts.extentInfoReservoirs.style.display = 'block'
+    mapPageConsts.boundaryContainer.style.display = 'none'
   } else {
-    advancedToggle.classList.add('hide')
-    selectedAddressInput.classList.add('hide')
+    mapPageConsts.advancedToggle.classList.add('hide')
+    mapPageConsts.selectedAddressInput.classList.add('hide')
   }
 }
 

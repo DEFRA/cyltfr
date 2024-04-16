@@ -37,17 +37,21 @@ export function adjustPosition () {
     }
     if (depthRadio.checked) {
       scenarioBarDepth.style.display = 'block'
+      scenarioSelectionDepth.classList.remove('hide')
       scenarioSelectionDepth.style.display = 'flex'
     }
     if (velocityRadio.checked) {
       scenarioBarVelocity.style.display = 'block'
+      scenarioSelectionVelocity.classList.remove('hide')
       scenarioSelectionVelocity.style.display = 'flex'
     }
   }
 
   if (depthRadio.checked && window.innerWidth > deviceScreenWidth) {
+    scenarioSelectionDepth.classList.remove('hide')
     scenarioSelectionDepth.style.display = 'flex'
   } else if (velocityRadio.checked && window.innerWidth > deviceScreenWidth) {
+    scenarioSelectionVelocity.classList.remove('hide')
     scenarioSelectionVelocity.style.display = 'flex'
   }
 
