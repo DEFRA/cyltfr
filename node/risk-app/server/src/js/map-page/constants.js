@@ -24,20 +24,6 @@ const surfaceWater = 'surface water'
 const swContainer = document.getElementById('sw-section-container')
 const velocityContainer = document.getElementById('sw-velocity-section-container')
 
-const measurementsRadios = document.querySelector('input[name="measurements"]:checked')
-const scenariosRadiosDepth = document.querySelector('input[name="scenarios-depth"]:checked')
-const scenariosRadiosVelocity = document.querySelector('input[name="scenarios-velocity"]:checked')
-
-const extentRadioReservoirs = document.getElementById('reservoirs-radio')
-const extentRadioSw = document.getElementById('sw-extent-radio')
-const depthRadio = document.getElementById('sw-depth-radio')
-const velocityRadio = document.getElementById('sw-velocity-radio')
-
-const mediumRadioDepth = document.getElementById('risk-radio-medium-depth')
-const lowRadioDepth = document.getElementById('risk-radio-low-depth')
-const mediumRadioVelocity = document.getElementById('risk-radio-medium-velocity')
-const lowRadioVelocity = document.getElementById('risk-radio-low-velocity')
-
 const scenarioBarDepth = document.getElementById('scenario-container-depth')
 const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
 const osLogo = document.getElementById('os-logo')
@@ -47,6 +33,18 @@ const velocityInfo = document.getElementById('sw-velocity-desc-container')
 const olZoom = document.getElementsByClassName('ol-zoom')
 const topCopyrightContainer = document.getElementById('copyright-info-container-top')
 const bottomCopyrightContainer = document.getElementById('copyright-info-container-bottom')
+
+const depthRadio = document.getElementById('sw-depth-radio')
+const velocityRadio = document.getElementById('sw-velocity-radio')
+
+const advancedToggleText = document.getElementById('advanced-button-text')
+const deviceScreenWidth = 768
+const advancedToggleCutoff = 510
+const advancedButtonText = document.getElementById('advanced-button-text')
+const advancedButtonImage = document.getElementById('advanced-button-image')
+
+const swExtentRadio = document.getElementById('sw-extent-radio')
+const rsExtentRadio = document.getElementById('rs-radio')
 
 const rightMove = 150
 const leftMove = -150
@@ -82,21 +80,28 @@ export const mapPageConsts = {
 }
 
 export const mapControlsConsts = {
-  measurementsRadios,
-  scenariosRadiosDepth,
-  scenariosRadiosVelocity,
-  extentRadioReservoirs,
-  extentRadioSw,
-  depthRadio,
-  velocityRadio,
-  mediumRadioDepth,
-  lowRadioDepth,
-  mediumRadioVelocity,
-  lowRadioVelocity,
   scenarioBarDepth,
   scenarioBarVelocity,
   osLogo,
   keyDisplay,
+  openKeyBtn,
+  scenarioSelectionDepth,
+  scenarioSelectionVelocity,
+  advancedToggle,
+  advancedToggleText,
+  deviceScreenWidth,
+  advancedToggleCutoff,
+  advancedButtonText,
+  advancedButtonImage,
+  velocityContainer,
+  swContainer,
+  rsContainer,
+  reservoirsContainer,
+  swExtentRadio,
+  rsExtentRadio,
+  reservoirsRadio,
+  surfaceWater,
+  riversAndTheSea,
   extentInfoRs,
   extentInfoReservoirs,
   extentInfoSw,
@@ -105,5 +110,7 @@ export const mapControlsConsts = {
   boundaryContainer,
   olZoom,
   topCopyrightContainer,
-  bottomCopyrightContainer
+  bottomCopyrightContainer,
+  depthRadio,
+  velocityRadio
 }
