@@ -42,6 +42,12 @@ const scenarioBarDepth = document.getElementById('scenario-container-depth')
 const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
 const osLogo = document.getElementById('os-logo')
 
+const depthInfo = document.getElementById('sw-depth-desc-container')
+const velocityInfo = document.getElementById('sw-velocity-desc-container')
+const olZoom = document.getElementsByClassName('ol-zoom')
+const topCopyrightContainer = document.getElementById('copyright-info-container-top')
+const bottomCopyrightContainer = document.getElementById('copyright-info-container-bottom')
+
 const rightMove = 150
 const leftMove = -150
 
@@ -90,5 +96,14 @@ export const mapControlsConsts = {
   scenarioBarDepth,
   scenarioBarVelocity,
   osLogo,
-  keyDisplay
+  keyDisplay,
+  extentInfoRs,
+  extentInfoReservoirs,
+  extentInfoSw,
+  depthInfo,
+  velocityInfo,
+  boundaryContainer,
+  olZoom,
+  topCopyrightContainer,
+  bottomCopyrightContainer
 }

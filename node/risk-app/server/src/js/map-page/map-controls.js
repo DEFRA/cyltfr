@@ -47,97 +47,85 @@ export function selectedOption () {
 }
 
 export function handleRadioChange (selected, type) {
-  const scenarioBarDepth = document.getElementById('scenario-container-depth')
-  const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
-  const extentInfoRs = document.getElementById('rs-extent-desc-container')
-  const extentInfoReservoirs = document.getElementById('reservoirs-extent-desc-container')
-  const extentInfoSw = document.getElementById('sw-extent-desc-container')
-  const depthInfo = document.getElementById('sw-depth-desc-container')
-  const velocityInfo = document.getElementById('sw-velocity-desc-container')
-  const boundaryContainer = document.getElementById('boundary-container')
-  const olZoom = document.getElementsByClassName('ol-zoom')
-  const topCopyrightContainer = document.getElementById('copyright-info-container-top')
-  const bottomCopyrightContainer = document.getElementById('copyright-info-container-bottom')
-
   if (selected === 'depth') {
-    extentInfoRs.style.display = 'none'
-    extentInfoReservoirs.style.display = 'none'
-    extentInfoSw.style.display = 'none'
-    depthInfo.style.display = 'block'
-    velocityInfo.style.display = 'none'
-    scenarioBarDepth.style.display = 'block'
+    mapControlsConsts.extentInfoRs.style.display = 'none'
+    mapControlsConsts.extentInfoReservoirs.style.display = 'none'
+    mapControlsConsts.extentInfoSw.style.display = 'none'
+    mapControlsConsts.depthInfo.style.display = 'block'
+    mapControlsConsts.velocityInfo.style.display = 'none'
+    mapControlsConsts.scenarioBarDepth.style.display = 'block'
     scenarioSelectionDepth.style.display = 'flex'
-    scenarioBarVelocity.style.display = 'none'
+    mapControlsConsts.scenarioBarVelocity.style.display = 'none'
     if (window.innerWidth <= deviceScreenWidth) {
       scenarioSelectionDepth.style.display = 'none'
       scenarioSelectionVelocity.style.display = 'none'
-      bottomCopyrightContainer.classList.add('hide')
-      topCopyrightContainer.classList.remove('hide')
+      mapControlsConsts.bottomCopyrightContainer.classList.add('hide')
+      mapControlsConsts.topCopyrightContainer.classList.remove('hide')
     }
-    olZoom[0].style.top = 'calc(100% - 200px)'
+    mapControlsConsts.olZoom[0].style.top = 'calc(100% - 200px)'
   }
   if (selected === 'velocity') {
-    extentInfoRs.style.display = 'none'
-    extentInfoReservoirs.style.display = 'none'
-    extentInfoSw.style.display = 'none'
-    depthInfo.style.display = 'none'
-    velocityInfo.style.display = 'block'
-    scenarioBarDepth.style.display = 'none'
-    scenarioBarVelocity.style.display = 'block'
+    mapControlsConsts.extentInfoRs.style.display = 'none'
+    mapControlsConsts.extentInfoReservoirs.style.display = 'none'
+    mapControlsConsts.extentInfoSw.style.display = 'none'
+    mapControlsConsts.depthInfo.style.display = 'none'
+    mapControlsConsts.velocityInfo.style.display = 'block'
+    mapControlsConsts.scenarioBarDepth.style.display = 'none'
+    mapControlsConsts.scenarioBarVelocity.style.display = 'block'
     scenarioSelectionVelocity.style.display = 'flex'
-    topCopyrightContainer.classList.add('hide')
-    bottomCopyrightContainer.classList.remove('hide')
+    mapControlsConsts.topCopyrightContainer.classList.add('hide')
+    mapControlsConsts.bottomCopyrightContainer.classList.remove('hide')
     scenarioSelectionVelocity.style.display = 'flex'
     if (window.innerWidth <= deviceScreenWidth && mapControlsConsts.keyDisplay.style.display === 'block') {
       scenarioSelectionVelocity.style.display = 'none'
     }
     if (window.innerWidth <= deviceScreenWidth) {
-      bottomCopyrightContainer.classList.add('hide')
-      topCopyrightContainer.classList.remove('hide')
+      mapControlsConsts.bottomCopyrightContainer.classList.add('hide')
+      mapControlsConsts.topCopyrightContainer.classList.remove('hide')
     }
     if (window.innerWidth <= deviceScreenWidth) {
-      bottomCopyrightContainer.classList.add('hide')
-      topCopyrightContainer.classList.remove('hide')
+      mapControlsConsts.bottomCopyrightContainer.classList.add('hide')
+      mapControlsConsts.topCopyrightContainer.classList.remove('hide')
     }
-    olZoom[0].style.top = 'calc(100% - 200px)'
+    mapControlsConsts.olZoom[0].style.top = 'calc(100% - 200px)'
   }
 
   if (selected === 'extent') {
     if (type === 'reservoirs') {
-      extentInfoRs.style.display = 'none'
-      extentInfoReservoirs.style.display = 'block'
-      extentInfoSw.style.display = 'none'
-      depthInfo.style.display = 'none'
-      velocityInfo.style.display = 'none'
-      scenarioBarDepth.style.display = 'none'
-      scenarioBarVelocity.style.display = 'none'
-      olZoom[0].style.top = 'calc(100% - 102px)'
-      boundaryContainer.style.display = 'none'
+      mapControlsConsts.extentInfoRs.style.display = 'none'
+      mapControlsConsts.extentInfoReservoirs.style.display = 'block'
+      mapControlsConsts.extentInfoSw.style.display = 'none'
+      mapControlsConsts.depthInfo.style.display = 'none'
+      mapControlsConsts.velocityInfo.style.display = 'none'
+      mapControlsConsts.scenarioBarDepth.style.display = 'none'
+      mapControlsConsts.scenarioBarVelocity.style.display = 'none'
+      mapControlsConsts.olZoom[0].style.top = 'calc(100% - 102px)'
+      mapControlsConsts.boundaryContainer.style.display = 'none'
     }
     if (type === riversAndTheSea) {
-      extentInfoRs.style.display = 'block'
-      extentInfoReservoirs.style.display = 'none'
-      extentInfoSw.style.display = 'none'
-      depthInfo.style.display = 'none'
-      velocityInfo.style.display = 'none'
-      scenarioBarDepth.style.display = 'none'
-      scenarioBarVelocity.style.display = 'none'
-      olZoom[0].style.top = 'calc(100% - 102px)'
-      boundaryContainer.style.display = 'none'
+      mapControlsConsts.extentInfoRs.style.display = 'block'
+      mapControlsConsts.extentInfoReservoirs.style.display = 'none'
+      mapControlsConsts.extentInfoSw.style.display = 'none'
+      mapControlsConsts.depthInfo.style.display = 'none'
+      mapControlsConsts.velocityInfo.style.display = 'none'
+      mapControlsConsts.scenarioBarDepth.style.display = 'none'
+      mapControlsConsts.scenarioBarVelocity.style.display = 'none'
+      mapControlsConsts.olZoom[0].style.top = 'calc(100% - 102px)'
+      mapControlsConsts.boundaryContainer.style.display = 'none'
     }
     if (type === SurfaceWater) {
-      extentInfoRs.style.display = 'none'
-      extentInfoReservoirs.style.display = 'none'
-      extentInfoSw.style.display = 'block'
-      depthInfo.style.display = 'none'
-      velocityInfo.style.display = 'none'
-      scenarioBarDepth.style.display = 'none'
-      scenarioBarVelocity.style.display = 'none'
-      olZoom[0].style.top = 'calc(100% - 102px)'
-      boundaryContainer.style.display = 'block'
+      mapControlsConsts.extentInfoRs.style.display = 'none'
+      mapControlsConsts.extentInfoReservoirs.style.display = 'none'
+      mapControlsConsts.extentInfoSw.style.display = 'block'
+      mapControlsConsts.depthInfo.style.display = 'none'
+      mapControlsConsts.velocityInfo.style.display = 'none'
+      mapControlsConsts.scenarioBarDepth.style.display = 'none'
+      mapControlsConsts.scenarioBarVelocity.style.display = 'none'
+      mapControlsConsts.olZoom[0].style.top = 'calc(100% - 102px)'
+      mapControlsConsts.boundaryContainer.style.display = 'block'
     }
-    bottomCopyrightContainer.classList.remove('hide')
-    topCopyrightContainer.classList.add('hide')
+    mapControlsConsts.bottomCopyrightContainer.classList.remove('hide')
+    mapControlsConsts.topCopyrightContainer.classList.add('hide')
   }
 }
 
