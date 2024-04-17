@@ -1,74 +1,75 @@
 const { formatDate } = require('../helpers')
+const { DATETIMEFORMAT } = require('../constants')
 
-class HomeView {
-  constructor (comments, provider) {
-    const defaultMapper = (field, row) => ({
-      text: row[field.name] || ''
-    })
+function homeView (comments) {
+  const defaultMapper = (field, row) => ({
+    text: row[field.name] || ''
+  })
 
-    const loadedAtMapper = (field, row) => {
-      if (row.lastError) {
-        return { html: '<span class="error-text">Error</span>' }
-      }
-
-      const { loadedAt } = row
-      if (loadedAt) {
-        return {
-          html: `<span title="Last loaded at ${formatDate(loadedAt, 'D/M/YYYY h:mma')}">✅</span>`,
-          attributes: { style: 'text-align: center;', 'data-sort': loadedAt }
-        }
-      }
+  const loadedAtMapper = (_field, row) => {
+    if (row.lastError) {
+      return { html: '<span class="error-text">Error</span>' }
     }
 
-    const approvedMapper = (field, row) => {
-      const { approvedAt, approvedBy } = row
-
-      if (!approvedAt) {
-        return
-      }
-
+    const { loadedAt } = row
+    if (loadedAt) {
       return {
-        html: `<span title="Approved by ${approvedBy} at ${formatDate(approvedAt, 'D/M/YYYY h:mma')}">✅</span>`,
-        attributes: { style: 'text-align: center;', 'data-sort': approvedAt }
+        html: `<span title="Last loaded at ${formatDate(loadedAt, DATETIMEFORMAT)}">✅</span>`,
+        attributes: { style: 'text-align: center;', 'data-sort': loadedAt }
       }
     }
+    return null
+  }
 
-    const fields = [
-      {
-        name: 'description',
-        title: 'Description',
-        mapper: (field, row) => ({
-          html: `<a href="/comment/view/${row.id}">${row.description}</a>`
-        })
-      },
-      {
-        name: 'type',
-        title: 'Type',
-        mapper: (field, row) => ({
-          text: row[field.name] === 'holding' ? 'Holding' : 'LLFA'
-        })
-      },
-      { name: 'featureCount', title: 'Features' },
-      { name: 'boundary', title: 'Boundary' },
-      { name: 'approvedAt', title: 'Approved', mapper: approvedMapper },
-      { name: 'loadedAt', title: 'Loaded', mapper: loadedAtMapper }
-    ]
+  const approvedMapper = (_field, row) => {
+    const { approvedAt, approvedBy } = row
 
-    const head = fields.map(f => ({
-      text: f.title
-    }))
+    if (!approvedAt) {
+      return null
+    }
 
-    const rows = comments.map(r => {
-      return fields.map(f => f.mapper ? f.mapper(f, r) : defaultMapper(f, r))
-    })
+    return {
+      html: `<span title="Approved by ${approvedBy} at ${formatDate(approvedAt, DATETIMEFORMAT)}">✅</span>`,
+      attributes: { style: 'text-align: center;', 'data-sort': approvedAt }
+    }
+  }
 
-    this.table = {
+  const fields = [
+    {
+      name: 'description',
+      title: 'Description',
+      mapper: (_field, row) => ({
+        html: `<a href="/comment/view/${row.id}">${row.description}</a>`
+      })
+    },
+    {
+      name: 'type',
+      title: 'Type',
+      mapper: (field, row) => ({
+        text: row[field.name] === 'holding' ? 'Holding' : 'LLFA'
+      })
+    },
+    { name: 'featureCount', title: 'Features' },
+    { name: 'boundary', title: 'Boundary' },
+    { name: 'approvedAt', title: 'Approved', mapper: approvedMapper },
+    { name: 'loadedAt', title: 'Loaded', mapper: loadedAtMapper }
+  ]
+
+  const head = fields.map(f => ({
+    text: f.title
+  }))
+
+  const rows = comments.map(r => {
+    return fields.map(f => f.mapper ? f.mapper(f, r) : defaultMapper(f, r))
+  })
+
+  return {
+    table: {
       head,
       rows
-    }
-
-    this.comments = comments
+    },
+    comments
   }
 }
 
-module.exports = HomeView
+module.exports = homeView

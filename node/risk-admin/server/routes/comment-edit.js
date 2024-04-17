@@ -1,8 +1,8 @@
 const joi = require('joi')
 const boom = require('@hapi/boom')
 const config = require('../config')
-const CommentView = require('../models/comment-view')
-const CommentEdit = require('../models/comment-edit')
+const commentView = require('../models/comment-view')
+const commentEdit = require('../models/comment-edit')
 const capabilities = require('../models/capabilities')
 
 module.exports = [
@@ -19,7 +19,7 @@ module.exports = [
       const geometryFile = await provider.getFile(key)
       const geometry = JSON.parse(geometryFile.Body)
 
-      return h.view('comment-view', new CommentView(comment, geometry, request.auth, capabilities))
+      return h.view('comment-view', commentView(comment, geometry, request.auth, capabilities))
     },
     options: {
       validate: {
@@ -75,10 +75,8 @@ module.exports = [
         profile: request.auth.credentials.profile
       }
 
-      const commentEdit = new CommentEdit(commentData, authData)
-
       return h.view(
-        'comment-edit', commentEdit)
+        'comment-edit', commentEdit(commentData, authData))
     },
     options: {
       validate: {
@@ -122,46 +120,28 @@ module.exports = [
         updatedBy: auth.credentials.profile.email
       })
 
-      if (payload.name !== geometry.name) {
-        formattedPayload.name = payload.name
-      }
-      if (payload.boundary !== geometry.boundary) {
-        formattedPayload.name = payload.boundary
-      }
+      formattedPayload.name = payload.name
+      formattedPayload.name = payload.boundary
 
       features.forEach(function (_feature, index) {
         if (type === 'llfa') {
-          if (payload[`features_${index}_properties_report_type`] !== features[index].properties.info) {
-            formattedPayload.features[index].properties.info = payload[`features_${index}_properties_report_type`]
-          }
+          formattedPayload.features[index].properties.info = payload[`features_${index}_properties_report_type`]
         } else {
-          if (payload[`features_${index}_properties_info`] !== features[index].properties.info) {
-            formattedPayload.features[index].properties.info = payload[`features_${index}_properties_info`]
-          }
-          if (payload[`override_${index}-risk`] !== features[index].properties.riskOverride) {
-            formattedPayload.features[index].properties.riskOverride = payload[`override_${index}-risk`]
-          }
-          if (features[index].properties.riskType === 'Rivers and the sea') {
+          formattedPayload.features[index].properties.info = payload[`features_${index}_properties_info`]
+          formattedPayload.features[index].properties.riskOverride = payload[`override_${index}-risk`]
+          formattedPayload.features[index].properties.riskType = payload[`sw_or_rs_${index}`]
+          if (formattedPayload.features[index].properties.riskType === 'Rivers and the sea') {
             formattedPayload.features[index].properties.riskOverride = null
           }
-          if (payload[`sw_or_rs_${index}`] !== features[index].properties.riskType) {
-            formattedPayload.features[index].properties.riskType = payload[`sw_or_rs_${index}`]
-          }
-          if (payload[`add_holding_comment_${index}`] !== features[index].properties.commentText) {
-            if (payload[`add_holding_comment_${index}`] === 'No') {
-              formattedPayload.features[index].properties.commentText = payload[`add_holding_comment_${index}`]
-              formattedPayload.features[index].properties.info = ''
-            } else {
-              formattedPayload.features[index].properties.commentText = payload[`add_holding_comment_${index}`]
-            }
+          if (payload[`add_holding_comment_${index}`] === 'No') {
+            formattedPayload.features[index].properties.commentText = payload[`add_holding_comment_${index}`]
+            formattedPayload.features[index].properties.info = ''
+          } else {
+            formattedPayload.features[index].properties.commentText = payload[`add_holding_comment_${index}`]
           }
         }
-        if (payload[`features_${index}_properties_start`] !== features[index].properties.start) {
-          formattedPayload.features[index].properties.start = payload[`features_${index}_properties_start`]
-        }
-        if (payload[`features_${index}_properties_end`] !== features[index].properties.end) {
-          formattedPayload.features[index].properties.end = payload[`features_${index}_properties_end`]
-        }
+        formattedPayload.features[index].properties.start = payload[`features_${index}_properties_start`]
+        formattedPayload.features[index].properties.end = payload[`features_${index}_properties_end`]
       })
 
       // Upload file to s3

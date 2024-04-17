@@ -5,7 +5,7 @@ module.exports = [
   {
     method: 'GET',
     path: '/process',
-    handler: async (request, h) => {
+    handler: async (_request, h) => {
       return h.view('process', { process })
     }
   },
