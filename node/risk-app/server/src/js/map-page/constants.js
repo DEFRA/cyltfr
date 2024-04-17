@@ -23,28 +23,24 @@ const scenarioSelectionVelocity = document.getElementById('scenario-selection-ve
 const surfaceWater = 'surface water'
 const swContainer = document.getElementById('sw-section-container')
 const velocityContainer = document.getElementById('sw-velocity-section-container')
-
 const scenarioBarDepth = document.getElementById('scenario-container-depth')
 const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
 const osLogo = document.getElementById('os-logo')
-
 const depthInfo = document.getElementById('sw-depth-desc-container')
 const velocityInfo = document.getElementById('sw-velocity-desc-container')
 const olZoom = document.getElementsByClassName('ol-zoom')
 const topCopyrightContainer = document.getElementById('copyright-info-container-top')
 const bottomCopyrightContainer = document.getElementById('copyright-info-container-bottom')
-
 const depthRadio = document.getElementById('sw-depth-radio')
 const velocityRadio = document.getElementById('sw-velocity-radio')
-
 const advancedToggleText = document.getElementById('advanced-button-text')
 const deviceScreenWidth = 768
 const advancedToggleCutoff = 510
 const advancedButtonText = document.getElementById('advanced-button-text')
 const advancedButtonImage = document.getElementById('advanced-button-image')
-
 const swExtentRadio = document.getElementById('sw-extent-radio')
 const rsExtentRadio = document.getElementById('rs-radio')
+const zoomBtns = document.getElementsByClassName('ol-control')
 
 const rightMove = 150
 const leftMove = -150
@@ -113,4 +109,20 @@ export const mapControlsConsts = {
   bottomCopyrightContainer,
   depthRadio,
   velocityRadio
+}
+
+export const screenAdjustConsts = {
+  scenarioSelectionDepth,
+  scenarioSelectionVelocity,
+  advancedToggle,
+  deviceScreenWidth,
+  zoomBtns,
+  scenarioBarDepth,
+  scenarioBarVelocity,
+  depthRadio,
+  velocityRadio,
+  osLogo,
+  topCopyrightContainer,
+  bottomCopyrightContainer,
+  keyDisplay
 }

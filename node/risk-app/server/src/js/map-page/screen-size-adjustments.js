@@ -1,65 +1,52 @@
 import { showOrHideAdvancedToggleText } from './map-controls'
-
-const scenarioSelectionDepth = document.getElementById('scenario-selection-depth')
-const scenarioSelectionVelocity = document.getElementById('scenario-selection-velocity')
-const advancedToggle = document.getElementById('advanced-key-button')
-const deviceScreenWidth = 768
-const zoomBtns = document.getElementsByClassName('ol-control')
-const scenarioBarDepth = document.getElementById('scenario-container-depth')
-const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
-const depthRadio = document.getElementById('sw-depth-radio')
-const velocityRadio = document.getElementById('sw-velocity-radio')
-const osLogo = document.getElementById('os-logo')
-const topCopyrightContainer = document.getElementById('copyright-info-container-top')
-const bottomCopyrightContainer = document.getElementById('copyright-info-container-bottom')
-const keyDisplay = document.getElementById('map-key')
+import { screenAdjustConsts } from './constants'
 
 export function adjustPosition () {
-  if ((scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block') &&
-  window.innerWidth <= deviceScreenWidth) {
-    osLogo.classList.add('os-logo-position-change')
-    bottomCopyrightContainer.classList.add('hide')
-    topCopyrightContainer.classList.remove('hide')
+  if ((screenAdjustConsts.scenarioBarDepth.style.display === 'block' || screenAdjustConsts.scenarioBarVelocity.style.display === 'block') &&
+  window.innerWidth <= screenAdjustConsts.deviceScreenWidth) {
+    screenAdjustConsts.osLogo.classList.add('os-logo-position-change')
+    screenAdjustConsts.bottomCopyrightContainer.classList.add('hide')
+    screenAdjustConsts.topCopyrightContainer.classList.remove('hide')
   } else {
-    osLogo.classList.remove('os-logo-position-change')
-    bottomCopyrightContainer.classList.remove('hide')
-    topCopyrightContainer.classList.add('hide')
+    screenAdjustConsts.osLogo.classList.remove('os-logo-position-change')
+    screenAdjustConsts.bottomCopyrightContainer.classList.remove('hide')
+    screenAdjustConsts.topCopyrightContainer.classList.add('hide')
   }
 
-  if (keyDisplay.style.display === 'block' && window.innerWidth <= deviceScreenWidth) {
-    scenarioSelectionDepth.style.display = 'none'
-    scenarioSelectionVelocity.style.display = 'none'
-  } else if (keyDisplay.style.display === 'block' && window.innerWidth > deviceScreenWidth) {
+  if (screenAdjustConsts.keyDisplay.style.display === 'block' && window.innerWidth <= screenAdjustConsts.deviceScreenWidth) {
+    screenAdjustConsts.scenarioSelectionDepth.style.display = 'none'
+    screenAdjustConsts.scenarioSelectionVelocity.style.display = 'none'
+  } else if (screenAdjustConsts.keyDisplay.style.display === 'block' && window.innerWidth > screenAdjustConsts.deviceScreenWidth) {
     if (window.location.href.includes('map=RiversOrSea') ||
     window.location.href.includes('map=SurfaceWater') ||
     window.location.href.includes('map=Reservoirs')) {
-      advancedToggle.style.display = 'block'
+      screenAdjustConsts.advancedToggle.style.display = 'block'
     }
-    if (depthRadio.checked) {
-      scenarioBarDepth.style.display = 'block'
-      scenarioSelectionDepth.classList.remove('hide')
-      scenarioSelectionDepth.style.display = 'flex'
+    if (screenAdjustConsts.depthRadio.checked) {
+      screenAdjustConsts.scenarioBarDepth.style.display = 'block'
+      screenAdjustConsts.scenarioSelectionDepth.classList.remove('hide')
+      screenAdjustConsts.scenarioSelectionDepth.style.display = 'flex'
     }
-    if (velocityRadio.checked) {
-      scenarioBarVelocity.style.display = 'block'
-      scenarioSelectionVelocity.classList.remove('hide')
-      scenarioSelectionVelocity.style.display = 'flex'
+    if (screenAdjustConsts.velocityRadio.checked) {
+      screenAdjustConsts.scenarioBarVelocity.style.display = 'block'
+      screenAdjustConsts.scenarioSelectionVelocity.classList.remove('hide')
+      screenAdjustConsts.scenarioSelectionVelocity.style.display = 'flex'
     }
   }
 
-  if (depthRadio.checked && window.innerWidth > deviceScreenWidth) {
-    scenarioSelectionDepth.classList.remove('hide')
-    scenarioSelectionDepth.style.display = 'flex'
-  } else if (velocityRadio.checked && window.innerWidth > deviceScreenWidth) {
-    scenarioSelectionVelocity.classList.remove('hide')
-    scenarioSelectionVelocity.style.display = 'flex'
+  if (screenAdjustConsts.depthRadio.checked && window.innerWidth > screenAdjustConsts.deviceScreenWidth) {
+    screenAdjustConsts.scenarioSelectionDepth.classList.remove('hide')
+    screenAdjustConsts.scenarioSelectionDepth.style.display = 'flex'
+  } else if (screenAdjustConsts.velocityRadio.checked && window.innerWidth > screenAdjustConsts.deviceScreenWidth) {
+    screenAdjustConsts.scenarioSelectionVelocity.classList.remove('hide')
+    screenAdjustConsts.scenarioSelectionVelocity.style.display = 'flex'
   }
 
-  if ((scenarioBarDepth.style.display === 'block' ||
-  scenarioBarVelocity.style.display === 'block') &&
-  window.innerWidth <= deviceScreenWidth
+  if ((screenAdjustConsts.scenarioBarDepth.style.display === 'block' ||
+  screenAdjustConsts.scenarioBarVelocity.style.display === 'block') &&
+  window.innerWidth <= screenAdjustConsts.deviceScreenWidth
   ) {
-    zoomBtns[0].style.top = 'calc(100% - 200px)'
+    screenAdjustConsts.zoomBtns[0].style.top = 'calc(100% - 200px)'
   }
   showOrHideAdvancedToggleText()
 }
