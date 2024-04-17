@@ -24,6 +24,24 @@ const surfaceWater = 'surface water'
 const swContainer = document.getElementById('sw-section-container')
 const velocityContainer = document.getElementById('sw-velocity-section-container')
 
+const measurementsRadios = document.querySelector('input[name="measurements"]:checked')
+const scenariosRadiosDepth = document.querySelector('input[name="scenarios-depth"]:checked')
+const scenariosRadiosVelocity = document.querySelector('input[name="scenarios-velocity"]:checked')
+
+const extentRadioReservoirs = document.getElementById('reservoirs-radio')
+const extentRadioSw = document.getElementById('sw-extent-radio')
+const depthRadio = document.getElementById('sw-depth-radio')
+const velocityRadio = document.getElementById('sw-velocity-radio')
+
+const mediumRadioDepth = document.getElementById('risk-radio-medium-depth')
+const lowRadioDepth = document.getElementById('risk-radio-low-depth')
+const mediumRadioVelocity = document.getElementById('risk-radio-medium-velocity')
+const lowRadioVelocity = document.getElementById('risk-radio-low-velocity')
+
+const scenarioBarDepth = document.getElementById('scenario-container-depth')
+const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
+const osLogo = document.getElementById('os-logo')
+
 const rightMove = 150
 const leftMove = -150
 
@@ -55,4 +73,22 @@ export const mapPageConsts = {
   velocityContainer,
   rightMove,
   leftMove
+}
+
+export const mapControlsConsts = {
+  measurementsRadios,
+  scenariosRadiosDepth,
+  scenariosRadiosVelocity,
+  extentRadioReservoirs,
+  extentRadioSw,
+  depthRadio,
+  velocityRadio,
+  mediumRadioDepth,
+  lowRadioDepth,
+  mediumRadioVelocity,
+  lowRadioVelocity,
+  scenarioBarDepth,
+  scenarioBarVelocity,
+  osLogo,
+  keyDisplay
 }

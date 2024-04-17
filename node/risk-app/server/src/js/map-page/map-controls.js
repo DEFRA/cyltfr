@@ -1,4 +1,4 @@
-const keyDisplay = document.getElementById('map-key')
+import { mapControlsConsts } from './constants'
 const openKeyBtn = document.getElementById('open-key')
 const scenarioSelectionDepth = document.getElementById('scenario-selection-depth')
 const scenarioSelectionVelocity = document.getElementById('scenario-selection-velocity')
@@ -18,48 +18,35 @@ const reservoirsRadio = document.getElementById('reservoirs-radio')
 const SurfaceWater = 'surface water'
 const riversAndTheSea = 'rivers and the sea'
 
-function selectedOption () {
-  const measurementsRadios = document.querySelector('input[name="measurements"]:checked')
-  const scenariosRadiosDepth = document.querySelector('input[name="scenarios-depth"]:checked')
-  const scenariosRadiosVelocity = document.querySelector('input[name="scenarios-velocity"]:checked')
-
-  const extentRadioReservoirs = document.getElementById('reservoirs-radio')
-  const extentRadioSw = document.getElementById('sw-extent-radio')
-  const depthRadio = document.getElementById('sw-depth-radio')
-  const velocityRadio = document.getElementById('sw-velocity-radio')
-
-  const mediumRadioDepth = document.getElementById('risk-radio-medium-depth')
-  const lowRadioDepth = document.getElementById('risk-radio-low-depth')
-  const mediumRadioVelocity = document.getElementById('risk-radio-medium-velocity')
-  const lowRadioVelocity = document.getElementById('risk-radio-low-velocity')
-  if (extentRadioSw.checked) {
-    return measurementsRadios.value
+export function selectedOption () {
+  if (mapControlsConsts.extentRadioSw.checked) {
+    return mapControlsConsts.measurementsRadios.value
   }
-  if (extentRadioReservoirs.checked) {
-    return measurementsRadios.value
+  if (mapControlsConsts.extentRadioReservoirs.checked) {
+    return mapControlsConsts.measurementsRadios.value
   }
-  if (depthRadio.checked) {
-    if (mediumRadioDepth.checked) {
-      return mediumRadioDepth.value
+  if (mapControlsConsts.depthRadio.checked) {
+    if (mapControlsConsts.mediumRadioDepth.checked) {
+      return mapControlsConsts.mediumRadioDepth.value
     }
-    if (lowRadioDepth.checked) {
-      return lowRadioDepth.value
+    if (mapControlsConsts.lowRadioDepth.checked) {
+      return mapControlsConsts.lowRadioDepth.value
     }
-    return scenariosRadiosDepth.value
+    return mapControlsConsts.scenariosRadiosDepth.value
   }
-  if (velocityRadio.checked) {
-    if (mediumRadioVelocity.checked) {
-      return mediumRadioVelocity.value
+  if (mapControlsConsts.velocityRadio.checked) {
+    if (mapControlsConsts.mediumRadioVelocity.checked) {
+      return mapControlsConsts.mediumRadioVelocity.value
     }
-    if (lowRadioVelocity.checked) {
-      return lowRadioVelocity.value
+    if (mapControlsConsts.lowRadioVelocity.checked) {
+      return mapControlsConsts.lowRadioVelocity.value
     }
-    return scenariosRadiosVelocity.value
+    return mapControlsConsts.scenariosRadiosVelocity.value
   }
-  return measurementsRadios.value
+  return mapControlsConsts.measurementsRadios.value
 }
 
-function handleRadioChange (selected, type) {
+export function handleRadioChange (selected, type) {
   const scenarioBarDepth = document.getElementById('scenario-container-depth')
   const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
   const extentInfoRs = document.getElementById('rs-extent-desc-container')
@@ -101,7 +88,7 @@ function handleRadioChange (selected, type) {
     topCopyrightContainer.classList.add('hide')
     bottomCopyrightContainer.classList.remove('hide')
     scenarioSelectionVelocity.style.display = 'flex'
-    if (window.innerWidth <= deviceScreenWidth && keyDisplay.style.display === 'block') {
+    if (window.innerWidth <= deviceScreenWidth && mapControlsConsts.keyDisplay.style.display === 'block') {
       scenarioSelectionVelocity.style.display = 'none'
     }
     if (window.innerWidth <= deviceScreenWidth) {
@@ -154,9 +141,9 @@ function handleRadioChange (selected, type) {
   }
 }
 
-function toggleAdvancedOptions () {
+export function toggleAdvancedOptions () {
   if (window.innerWidth <= deviceScreenWidth) {
-    keyDisplay.style.display = 'block'
+    mapControlsConsts.keyDisplay.style.display = 'block'
     scenarioSelectionDepth.style.display = 'none'
     showOrHideAdvancedToggleText()
   }
@@ -203,64 +190,49 @@ function toggleAdvancedOptions () {
   }
 }
 
-function showOrHideAdvancedToggleText () {
+export function showOrHideAdvancedToggleText () {
   if (window.innerWidth <= deviceScreenWidth) {
     advancedToggleText.classList.remove('hide')
   }
-  if (window.innerWidth <= advancedToggleCutoff && keyDisplay.style.display === 'block') {
+  if (window.innerWidth <= advancedToggleCutoff && mapControlsConsts.keyDisplay.style.display === 'block') {
     advancedToggleText.classList.add('hide')
   }
 }
 
-function openKey () {
-  keyDisplay.style.display = 'block'
+export function openKey () {
+  mapControlsConsts.keyDisplay.style.display = 'block'
   openKeyBtn.style.display = 'none'
   scenarioSelectionDepth.style.display = 'none'
   scenarioSelectionVelocity.style.display = 'none'
   showOrHideAdvancedToggleText()
 }
 
-function closeKey () {
-  const scenarioBarDepth = document.getElementById('scenario-container-depth')
-  const scenarioBarVelocity = document.getElementById('scenario-container-velocity')
-  const depthRadio = document.getElementById('sw-depth-radio')
-  const velocityRadio = document.getElementById('sw-velocity-radio')
-  const osLogo = document.getElementById('os-logo')
-
-  keyDisplay.style.display = 'none'
+export function closeKey () {
+  mapControlsConsts.keyDisplay.style.display = 'none'
   if (window.location.href.includes('?')) {
     advancedToggle.style.display = 'block'
   }
 
-  if (depthRadio.checked) {
-    scenarioBarDepth.style.display = 'block'
+  if (mapControlsConsts.depthRadio.checked) {
+    mapControlsConsts.scenarioBarDepth.style.display = 'block'
     scenarioSelectionDepth.style.display = 'flex'
     scenarioSelectionDepth.style.top = null
   }
 
-  if (velocityRadio.checked) {
-    scenarioBarVelocity.style.display = 'block'
+  if (mapControlsConsts.velocityRadio.checked) {
+    mapControlsConsts.scenarioBarVelocity.style.display = 'block'
     scenarioSelectionVelocity.style.display = 'flex'
     scenarioSelectionVelocity.style.top = null
   }
 
   openKeyBtn.style.display = 'block'
-  if (scenarioBarDepth.style.display === 'block' || scenarioBarVelocity.style.display === 'block') {
-    osLogo.classList.add('os-logo-position-change')
+  if (mapControlsConsts.scenarioBarDepth.style.display === 'block' || mapControlsConsts.scenarioBarVelocity.style.display === 'block') {
+    mapControlsConsts.osLogo.classList.add('os-logo-position-change')
   } else {
-    osLogo.classList.remove('os-logo-position-change')
+    mapControlsConsts.osLogo.classList.remove('os-logo-position-change')
   }
 
   if (window.innerWidth <= deviceScreenWidth) {
     advancedToggleText.classList.remove('hide')
   }
-}
-
-module.exports = {
-  openKey,
-  closeKey,
-  showOrHideAdvancedToggleText,
-  toggleAdvancedOptions,
-  selectedOption,
-  handleRadioChange
 }
