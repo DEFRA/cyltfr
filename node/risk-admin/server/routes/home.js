@@ -1,4 +1,4 @@
-const HomeView = require('../models/home-view')
+const homeView = require('../models/home-view')
 
 module.exports = {
   method: 'GET',
@@ -13,6 +13,6 @@ module.exports = {
       ? comments
       : comments.filter(c => c.createdBy === auth.credentials.profile.email)
 
-    return h.view('home', new HomeView(homeComments, provider))
+    return h.view('home', homeView(homeComments))
   }
 }

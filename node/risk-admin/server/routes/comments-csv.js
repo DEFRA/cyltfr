@@ -1,4 +1,3 @@
-// const boom = require('@hapi/boom')
 const util = require('util')
 const jsonexport = require('jsonexport')
 const config = require('../config')

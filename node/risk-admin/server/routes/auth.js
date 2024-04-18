@@ -6,7 +6,7 @@ module.exports = [{
   path: '/login',
   handler: (request, h) => {
     if (!request.auth.isAuthenticated) {
-      const message = request.auth.error && request.auth.error.message
+      const message = request.auth.error?.message
       return boom.unauthorized(`Authentication failed due to: ${message}`)
     }
 
