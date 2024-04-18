@@ -1,123 +1,53 @@
 import { mapControlsConsts } from './constants'
 
 export function selectedOption () {
+  // The below const cannot be removed from the file otherwise it breaks reservoirs and rivers and the sea
   const measurementsRadios = document.querySelector('input[name="measurements"]:checked')
-  const scenariosRadiosDepth = document.querySelector('input[name="scenarios-depth"]:checked')
-  const scenariosRadiosVelocity = document.querySelector('input[name="scenarios-velocity"]:checked')
 
-  const extentRadioReservoirs = document.getElementById('reservoirs-radio')
-  const extentRadioSw = document.getElementById('sw-extent-radio')
-  const depthRadio = document.getElementById('sw-depth-radio')
-  const velocityRadio = document.getElementById('sw-velocity-radio')
-
-  const mediumRadioDepth = document.getElementById('risk-radio-medium-depth')
-  const lowRadioDepth = document.getElementById('risk-radio-low-depth')
-  const mediumRadioVelocity = document.getElementById('risk-radio-medium-velocity')
-  const lowRadioVelocity = document.getElementById('risk-radio-low-velocity')
-  if (extentRadioSw.checked) {
+  if (mapControlsConsts.extentRadioSw.checked) {
+    return mapControlsConsts.measurementsRadios.value
+  }
+  if (mapControlsConsts.extentRadioReservoirs.checked) {
     return measurementsRadios.value
   }
-  if (extentRadioReservoirs.checked) {
-    return measurementsRadios.value
+  if (mapControlsConsts.depthRadio.checked) {
+    if (mapControlsConsts.mediumRadioDepth.checked) {
+      return mapControlsConsts.mediumRadioDepth.value
+    }
+    if (mapControlsConsts.lowRadioDepth.checked) {
+      return mapControlsConsts.lowRadioDepth.value
+    }
+    return mapControlsConsts.scenariosRadiosDepth.value
   }
-  if (depthRadio.checked) {
-    if (mediumRadioDepth.checked) {
-      return mediumRadioDepth.value
+  if (mapControlsConsts.velocityRadio.checked) {
+    if (mapControlsConsts.mediumRadioVelocity.checked) {
+      return mapControlsConsts.mediumRadioVelocity.value
     }
-    if (lowRadioDepth.checked) {
-      return lowRadioDepth.value
+    if (mapControlsConsts.lowRadioVelocity.checked) {
+      return mapControlsConsts.lowRadioVelocity.value
     }
-    return scenariosRadiosDepth.value
-  }
-  if (velocityRadio.checked) {
-    if (mediumRadioVelocity.checked) {
-      return mediumRadioVelocity.value
-    }
-    if (lowRadioVelocity.checked) {
-      return lowRadioVelocity.value
-    }
-    return scenariosRadiosVelocity.value
+    return mapControlsConsts.scenariosRadiosVelocity.value
   }
   return measurementsRadios.value
 }
 
 export function handleRadioChange (selected, type) {
   if (selected === 'depth') {
-    mapControlsConsts.extentInfoRs.style.display = 'none'
-    mapControlsConsts.extentInfoReservoirs.style.display = 'none'
-    mapControlsConsts.extentInfoSw.style.display = 'none'
-    mapControlsConsts.depthInfo.style.display = 'block'
-    mapControlsConsts.velocityInfo.style.display = 'none'
-    mapControlsConsts.scenarioBarDepth.style.display = 'block'
-    mapControlsConsts.scenarioSelectionDepth.style.display = 'flex'
-    mapControlsConsts.scenarioBarVelocity.style.display = 'none'
-    if (window.innerWidth <= mapControlsConsts.deviceScreenWidth) {
-      mapControlsConsts.scenarioSelectionDepth.style.display = 'none'
-      mapControlsConsts.scenarioSelectionVelocity.style.display = 'none'
-      mapControlsConsts.bottomCopyrightContainer.classList.add('hide')
-      mapControlsConsts.topCopyrightContainer.classList.remove('hide')
-    }
-    mapControlsConsts.olZoom[0].style.top = 'calc(100% - 200px)'
+    depthRadioChanges()
   }
   if (selected === 'velocity') {
-    mapControlsConsts.extentInfoRs.style.display = 'none'
-    mapControlsConsts.extentInfoReservoirs.style.display = 'none'
-    mapControlsConsts.extentInfoSw.style.display = 'none'
-    mapControlsConsts.depthInfo.style.display = 'none'
-    mapControlsConsts.velocityInfo.style.display = 'block'
-    mapControlsConsts.scenarioBarDepth.style.display = 'none'
-    mapControlsConsts.scenarioBarVelocity.style.display = 'block'
-    mapControlsConsts.scenarioSelectionVelocity.style.display = 'flex'
-    mapControlsConsts.topCopyrightContainer.classList.add('hide')
-    mapControlsConsts.bottomCopyrightContainer.classList.remove('hide')
-    mapControlsConsts.scenarioSelectionVelocity.style.display = 'flex'
-    if (window.innerWidth <= mapControlsConsts.deviceScreenWidth && mapControlsConsts.keyDisplay.style.display === 'block') {
-      mapControlsConsts.scenarioSelectionVelocity.style.display = 'none'
-    }
-    if (window.innerWidth <= mapControlsConsts.deviceScreenWidth) {
-      mapControlsConsts.bottomCopyrightContainer.classList.add('hide')
-      mapControlsConsts.topCopyrightContainer.classList.remove('hide')
-    }
-    if (window.innerWidth <= mapControlsConsts.deviceScreenWidth) {
-      mapControlsConsts.bottomCopyrightContainer.classList.add('hide')
-      mapControlsConsts.topCopyrightContainer.classList.remove('hide')
-    }
-    mapControlsConsts.olZoom[0].style.top = 'calc(100% - 200px)'
+    velocityRadioChanges()
   }
 
   if (selected === 'extent') {
     if (type === 'reservoirs') {
-      mapControlsConsts.extentInfoRs.style.display = 'none'
-      mapControlsConsts.extentInfoReservoirs.style.display = 'block'
-      mapControlsConsts.extentInfoSw.style.display = 'none'
-      mapControlsConsts.depthInfo.style.display = 'none'
-      mapControlsConsts.velocityInfo.style.display = 'none'
-      mapControlsConsts.scenarioBarDepth.style.display = 'none'
-      mapControlsConsts.scenarioBarVelocity.style.display = 'none'
-      mapControlsConsts.olZoom[0].style.top = 'calc(100% - 102px)'
-      mapControlsConsts.boundaryContainer.style.display = 'none'
+      extentReservoirChanges()
     }
     if (type === mapControlsConsts.riversAndTheSea) {
-      mapControlsConsts.extentInfoRs.style.display = 'block'
-      mapControlsConsts.extentInfoReservoirs.style.display = 'none'
-      mapControlsConsts.extentInfoSw.style.display = 'none'
-      mapControlsConsts.depthInfo.style.display = 'none'
-      mapControlsConsts.velocityInfo.style.display = 'none'
-      mapControlsConsts.scenarioBarDepth.style.display = 'none'
-      mapControlsConsts.scenarioBarVelocity.style.display = 'none'
-      mapControlsConsts.olZoom[0].style.top = 'calc(100% - 102px)'
-      mapControlsConsts.boundaryContainer.style.display = 'none'
+      extentRiversAndTheSeaChanges()
     }
     if (type === mapControlsConsts.surfaceWater) {
-      mapControlsConsts.extentInfoRs.style.display = 'none'
-      mapControlsConsts.extentInfoReservoirs.style.display = 'none'
-      mapControlsConsts.extentInfoSw.style.display = 'block'
-      mapControlsConsts.depthInfo.style.display = 'none'
-      mapControlsConsts.velocityInfo.style.display = 'none'
-      mapControlsConsts.scenarioBarDepth.style.display = 'none'
-      mapControlsConsts.scenarioBarVelocity.style.display = 'none'
-      mapControlsConsts.olZoom[0].style.top = 'calc(100% - 102px)'
-      mapControlsConsts.boundaryContainer.style.display = 'block'
+      extentSurfaceWaterChanges()
     }
     mapControlsConsts.bottomCopyrightContainer.classList.remove('hide')
     mapControlsConsts.topCopyrightContainer.classList.add('hide')
@@ -218,4 +148,84 @@ export function closeKey () {
   if (window.innerWidth <= mapControlsConsts.deviceScreenWidth) {
     mapControlsConsts.advancedToggleText.classList.remove('hide')
   }
+}
+
+function depthRadioChanges () {
+  mapControlsConsts.extentInfoRs.style.display = 'none'
+  mapControlsConsts.extentInfoReservoirs.style.display = 'none'
+  mapControlsConsts.extentInfoSw.style.display = 'none'
+  mapControlsConsts.depthInfo.style.display = 'block'
+  mapControlsConsts.velocityInfo.style.display = 'none'
+  mapControlsConsts.scenarioBarDepth.style.display = 'block'
+  mapControlsConsts.scenarioSelectionDepth.style.display = 'flex'
+  mapControlsConsts.scenarioBarVelocity.style.display = 'none'
+  if (window.innerWidth <= mapControlsConsts.deviceScreenWidth) {
+    mapControlsConsts.scenarioSelectionDepth.style.display = 'none'
+    mapControlsConsts.scenarioSelectionVelocity.style.display = 'none'
+    mapControlsConsts.bottomCopyrightContainer.classList.add('hide')
+    mapControlsConsts.topCopyrightContainer.classList.remove('hide')
+  }
+  mapControlsConsts.olZoom[0].style.top = 'calc(100% - 200px)'
+}
+
+function velocityRadioChanges () {
+  mapControlsConsts.extentInfoRs.style.display = 'none'
+  mapControlsConsts.extentInfoReservoirs.style.display = 'none'
+  mapControlsConsts.extentInfoSw.style.display = 'none'
+  mapControlsConsts.depthInfo.style.display = 'none'
+  mapControlsConsts.velocityInfo.style.display = 'block'
+  mapControlsConsts.scenarioBarDepth.style.display = 'none'
+  mapControlsConsts.scenarioBarVelocity.style.display = 'block'
+  mapControlsConsts.scenarioSelectionVelocity.style.display = 'flex'
+  mapControlsConsts.topCopyrightContainer.classList.add('hide')
+  mapControlsConsts.bottomCopyrightContainer.classList.remove('hide')
+  mapControlsConsts.scenarioSelectionVelocity.style.display = 'flex'
+  if (window.innerWidth <= mapControlsConsts.deviceScreenWidth && mapControlsConsts.keyDisplay.style.display === 'block') {
+    mapControlsConsts.scenarioSelectionVelocity.style.display = 'none'
+  }
+  if (window.innerWidth <= mapControlsConsts.deviceScreenWidth) {
+    mapControlsConsts.bottomCopyrightContainer.classList.add('hide')
+    mapControlsConsts.topCopyrightContainer.classList.remove('hide')
+  }
+  if (window.innerWidth <= mapControlsConsts.deviceScreenWidth) {
+    mapControlsConsts.bottomCopyrightContainer.classList.add('hide')
+    mapControlsConsts.topCopyrightContainer.classList.remove('hide')
+  }
+  mapControlsConsts.olZoom[0].style.top = 'calc(100% - 200px)'
+}
+
+function extentReservoirChanges () {
+  mapControlsConsts.extentInfoRs.style.display = 'none'
+  mapControlsConsts.extentInfoReservoirs.style.display = 'block'
+  mapControlsConsts.extentInfoSw.style.display = 'none'
+  mapControlsConsts.depthInfo.style.display = 'none'
+  mapControlsConsts.velocityInfo.style.display = 'none'
+  mapControlsConsts.scenarioBarDepth.style.display = 'none'
+  mapControlsConsts.scenarioBarVelocity.style.display = 'none'
+  mapControlsConsts.olZoom[0].style.top = 'calc(100% - 102px)'
+  mapControlsConsts.boundaryContainer.style.display = 'none'
+}
+
+function extentRiversAndTheSeaChanges () {
+  mapControlsConsts.extentInfoRs.style.display = 'block'
+  mapControlsConsts.extentInfoReservoirs.style.display = 'none'
+  mapControlsConsts.extentInfoSw.style.display = 'none'
+  mapControlsConsts.depthInfo.style.display = 'none'
+  mapControlsConsts.velocityInfo.style.display = 'none'
+  mapControlsConsts.scenarioBarDepth.style.display = 'none'
+  mapControlsConsts.scenarioBarVelocity.style.display = 'none'
+  mapControlsConsts.olZoom[0].style.top = 'calc(100% - 102px)'
+  mapControlsConsts.boundaryContainer.style.display = 'none'
+}
+
+function extentSurfaceWaterChanges () {
+  mapControlsConsts.extentInfoRs.style.display = 'none'
+  mapControlsConsts.extentInfoReservoirs.style.display = 'none'
+  mapControlsConsts.extentInfoSw.style.display = 'block'
+  mapControlsConsts.depthInfo.style.display = 'none'
+  mapControlsConsts.velocityInfo.style.display = 'none'
+  mapControlsConsts.scenarioBarDepth.style.display = 'none'
+  mapControlsConsts.scenarioBarVelocity.style.display = 'none'
+  mapControlsConsts.olZoom[0].style.top = 'calc(100% - 102px)'
+  mapControlsConsts.boundaryContainer.style.display = 'block'
 }

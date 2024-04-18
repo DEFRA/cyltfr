@@ -31,8 +31,7 @@ const velocityInfo = document.getElementById('sw-velocity-desc-container')
 const olZoom = document.getElementsByClassName('ol-zoom')
 const topCopyrightContainer = document.getElementById('copyright-info-container-top')
 const bottomCopyrightContainer = document.getElementById('copyright-info-container-bottom')
-const depthRadio = document.getElementById('sw-depth-radio')
-const velocityRadio = document.getElementById('sw-velocity-radio')
+
 const advancedToggleText = document.getElementById('advanced-button-text')
 const deviceScreenWidth = 768
 const advancedToggleCutoff = 510
@@ -41,6 +40,19 @@ const advancedButtonImage = document.getElementById('advanced-button-image')
 const swExtentRadio = document.getElementById('sw-extent-radio')
 const rsExtentRadio = document.getElementById('rs-radio')
 const zoomBtns = document.getElementsByClassName('ol-control')
+
+const scenariosRadiosDepth = document.querySelector('input[name="scenarios-depth"]:checked')
+const scenariosRadiosVelocity = document.querySelector('input[name="scenarios-velocity"]:checked')
+
+const extentRadioReservoirs = document.getElementById('reservoirs-radio')
+const extentRadioSw = document.getElementById('sw-extent-radio')
+const depthRadio = document.getElementById('sw-depth-radio')
+const velocityRadio = document.getElementById('sw-velocity-radio')
+
+const mediumRadioDepth = document.getElementById('risk-radio-medium-depth')
+const lowRadioDepth = document.getElementById('risk-radio-low-depth')
+const mediumRadioVelocity = document.getElementById('risk-radio-medium-velocity')
+const lowRadioVelocity = document.getElementById('risk-radio-low-velocity')
 
 const rightMove = 150
 const leftMove = -150
@@ -108,7 +120,15 @@ export const mapControlsConsts = {
   topCopyrightContainer,
   bottomCopyrightContainer,
   depthRadio,
-  velocityRadio
+  velocityRadio,
+  scenariosRadiosDepth,
+  scenariosRadiosVelocity,
+  extentRadioReservoirs,
+  extentRadioSw,
+  mediumRadioDepth,
+  lowRadioDepth,
+  mediumRadioVelocity,
+  lowRadioVelocity
 }
 
 export const screenAdjustConsts = {
