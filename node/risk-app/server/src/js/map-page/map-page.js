@@ -3,7 +3,6 @@ import { openKey, closeKey, showOrHideAdvancedToggleText, toggleAdvancedOptions,
 import { adjustPosition } from './screen-size-adjustments.js'
 import { mapPageConsts } from './constants.js'
 
-/* global mapCategories */
 class MapController {
   constructor (categories) {
     this._categories = categories
@@ -68,7 +67,7 @@ function mapPage () {
 
   // This function updates the map to the radio button you select (extent, depth, velocity)
   function setCurrent (ref) {
-    const mapController = new MapController(mapCategories.categories)
+    const mapController = new MapController(window.mapCategories.categories)
     mapController.setCurrent(ref)
     const selectedAddressCheckbox = document.getElementById('selected-address-checkbox')
     const showFloodingCheckbox = document.getElementById('display-layers-checkbox')
@@ -84,25 +83,12 @@ function mapPage () {
   // Default to the first category/map
   mapPageConsts.maps.onReady(function () {
     measurements.forEach(function (measurement) {
-      if (measurement.name === 'measurements') {
-        measurement.addEventListener('change', function (event) {
-          event.preventDefault()
-          setCurrent(event.target.value)
-        })
-      }
-      if (measurement.name === 'scenarios-depth') {
-        measurement.addEventListener('change', function (event) {
-          event.preventDefault()
-          setCurrent(event.target.value)
-        })
-      }
-      if (measurement.name === 'scenarios-velocity') {
-        measurement.addEventListener('change', function (event) {
-          event.preventDefault()
-          setCurrent(event.target.value)
-        })
-      }
-      if (measurement.name === 'map-toggle') {
+      if (
+        measurement.name === 'measurements' ||
+        measurement.name === 'scenarios-depth' ||
+        measurement.name === 'scenarios-velocity' ||
+        measurement.name === 'map-toggle'
+      ) {
         measurement.addEventListener('change', function (event) {
           event.preventDefault()
           setCurrent(event.target.value)
