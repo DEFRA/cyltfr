@@ -2,6 +2,14 @@ import { showOrHideAdvancedToggleText } from './map-controls'
 import { screenAdjustConsts } from './constants'
 
 export function adjustPosition () {
+  adjustLogoAndCopyright()
+  keyToggleAdjustments()
+  scenarioBarAdjustments()
+  zoomBtnAdjustments()
+  showOrHideAdvancedToggleText()
+}
+
+function adjustLogoAndCopyright () {
   if ((screenAdjustConsts.scenarioBarDepth.style.display === 'block' || screenAdjustConsts.scenarioBarVelocity.style.display === 'block') &&
   window.innerWidth <= screenAdjustConsts.deviceScreenWidth) {
     screenAdjustConsts.osLogo.classList.add('os-logo-position-change')
@@ -12,7 +20,9 @@ export function adjustPosition () {
     screenAdjustConsts.bottomCopyrightContainer.classList.remove('hide')
     screenAdjustConsts.topCopyrightContainer.classList.add('hide')
   }
+}
 
+function keyToggleAdjustments () {
   if (screenAdjustConsts.keyDisplay.style.display === 'block' && window.innerWidth <= screenAdjustConsts.deviceScreenWidth) {
     screenAdjustConsts.scenarioSelectionDepth.style.display = 'none'
     screenAdjustConsts.scenarioSelectionVelocity.style.display = 'none'
@@ -33,7 +43,9 @@ export function adjustPosition () {
       screenAdjustConsts.scenarioSelectionVelocity.style.display = 'flex'
     }
   }
+}
 
+function scenarioBarAdjustments () {
   if (screenAdjustConsts.depthRadio.checked && window.innerWidth > screenAdjustConsts.deviceScreenWidth) {
     screenAdjustConsts.scenarioSelectionDepth.classList.remove('hide')
     screenAdjustConsts.scenarioSelectionDepth.style.display = 'flex'
@@ -41,12 +53,13 @@ export function adjustPosition () {
     screenAdjustConsts.scenarioSelectionVelocity.classList.remove('hide')
     screenAdjustConsts.scenarioSelectionVelocity.style.display = 'flex'
   }
+}
 
+function zoomBtnAdjustments () {
   if ((screenAdjustConsts.scenarioBarDepth.style.display === 'block' ||
   screenAdjustConsts.scenarioBarVelocity.style.display === 'block') &&
   window.innerWidth <= screenAdjustConsts.deviceScreenWidth
   ) {
     screenAdjustConsts.zoomBtns[0].style.top = 'calc(100% - 200px)'
   }
-  showOrHideAdvancedToggleText()
 }
