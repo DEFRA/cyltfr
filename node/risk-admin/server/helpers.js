@@ -1,12 +1,13 @@
 const spawn = require('child_process').spawn
 const moment = require('moment-timezone')
-const { dateFormat } = require('./constants')
+const { DATEFORMAT } = require('./constants')
+const CONVERSION_BASE = 36
 
 function shortId () {
-  return Math.random().toString(36).substring(2)
+  return Math.random().toString(CONVERSION_BASE).substring(2)
 }
 
-function formatDate (str, format = dateFormat) {
+function formatDate (str, format = DATEFORMAT) {
   return moment(str).format(format)
 }
 

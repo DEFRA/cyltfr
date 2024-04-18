@@ -1,7 +1,7 @@
 module.exports = {
   method: 'GET',
   path: '/status',
-  handler: async (request, h) => {
+  handler: async (_request, _h) => {
     return 'ok'
   },
   options: {
