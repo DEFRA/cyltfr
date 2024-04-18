@@ -60,10 +60,10 @@
 {{ super() }}
 <script src="{{ assetPath }}/nunjucks-slim.js"></script>
 <script src="{{ assetPath }}/js/map.js"></script>
+<script src="{{ assetPath }}/js/mapPage.js"></script>
 <script>
   window.mapCategories = {{ maps | dump | safe }}
 </script>
-<script src="{{ assetPath }}/js/map-page.js"></script>
 
 {% endblock %}
 
