@@ -115,7 +115,9 @@ function mapPage () {
 
   mapPageConsts.advancedToggle.addEventListener('click', function (event) {
     event.stopPropagation()
-    openKey()
+    if (window.innerWidth <= mapPageConsts.deviceScreenWidth) {
+      openKey()
+    }
     toggleAdvancedOptions()
     selectedOption()
     setCurrent()

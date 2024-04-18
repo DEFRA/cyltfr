@@ -1,5 +1,6 @@
 import { mapControlsConsts } from './constants'
-const olZoomBtns = mapControlsConsts.olZoom[0]
+
+console.log(mapControlsConsts.olZoom[0])
 
 export function selectedOption () {
   // The below const cannot be removed from the file otherwise it breaks reservoirs and rivers and the sea
@@ -166,7 +167,7 @@ function depthRadioChanges () {
     mapControlsConsts.bottomCopyrightContainer.classList.add('hide')
     mapControlsConsts.topCopyrightContainer.classList.remove('hide')
   }
-  olZoomBtns.style.top = 'calc(100% - 200px)'
+  mapControlsConsts.olZoom[0].style.top = 'calc(100% - 200px)'
 }
 
 function velocityRadioChanges () {
@@ -192,7 +193,7 @@ function velocityRadioChanges () {
     mapControlsConsts.bottomCopyrightContainer.classList.add('hide')
     mapControlsConsts.topCopyrightContainer.classList.remove('hide')
   }
-  olZoomBtns.style.top = 'calc(100% - 200px)'
+  mapControlsConsts.olZoom[0].style.top = 'calc(100% - 200px)'
 }
 
 function extentReservoirChanges () {
@@ -203,7 +204,7 @@ function extentReservoirChanges () {
   mapControlsConsts.velocityInfo.style.display = 'none'
   mapControlsConsts.scenarioBarDepth.style.display = 'none'
   mapControlsConsts.scenarioBarVelocity.style.display = 'none'
-  olZoomBtns.style.top = 'calc(100% - 102px)'
+  mapControlsConsts.olZoom[0].style.top = 'calc(100% - 102px)'
   mapControlsConsts.boundaryContainer.style.display = 'none'
 }
 
@@ -215,7 +216,7 @@ function extentRiversAndTheSeaChanges () {
   mapControlsConsts.velocityInfo.style.display = 'none'
   mapControlsConsts.scenarioBarDepth.style.display = 'none'
   mapControlsConsts.scenarioBarVelocity.style.display = 'none'
-  olZoomBtns.style.top = 'calc(100% - 102px)'
+  mapControlsConsts.olZoom[0].style.top = 'calc(100% - 102px)'
   mapControlsConsts.boundaryContainer.style.display = 'none'
 }
 
@@ -227,6 +228,6 @@ function extentSurfaceWaterChanges () {
   mapControlsConsts.velocityInfo.style.display = 'none'
   mapControlsConsts.scenarioBarDepth.style.display = 'none'
   mapControlsConsts.scenarioBarVelocity.style.display = 'none'
-  olZoomBtns.style.top = 'calc(100% - 102px)'
+  mapControlsConsts.olZoom[0].style.top = 'calc(100% - 102px)'
   mapControlsConsts.boundaryContainer.style.display = 'block'
 }
