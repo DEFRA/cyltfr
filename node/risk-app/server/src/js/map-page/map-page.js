@@ -75,9 +75,9 @@ function mapPage () {
     const mapReferenceValue = selectedOption()
 
     if (showFloodingCheckbox.checked) {
-      mapPageConsts.maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1), selectedAddressCheckbox.checked)
+      mapPageConsts.maps.showMap(`risk:${mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1)}`, selectedAddressCheckbox.checked)
     } else {
-      mapPageConsts.maps.showMap('risk:' + mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1) + 'DONOTDISPLAY', selectedAddressCheckbox.checked)
+      mapPageConsts.maps.showMap(`risk:${mapReferenceValue.substring(mapReferenceValue.indexOf('_') + 1)}DONOTDISPLAY`, selectedAddressCheckbox.checked)
     }
   }
 
@@ -124,7 +124,7 @@ function mapPage () {
   })
 
   // ensures mouse cursor returns to default if feature was at edge of map
-  map.addEventListener('mouseleave', function (e) {
+  map.addEventListener('mouseleave', function () {
     body.style.cursor = 'default'
   })
 }

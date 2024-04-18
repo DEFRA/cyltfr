@@ -1,7 +1,5 @@
 import { mapControlsConsts } from './constants'
 
-console.log(mapControlsConsts.olZoom[0])
-
 export function selectedOption () {
   // The below const cannot be removed from the file otherwise it breaks reservoirs and rivers and the sea
   const measurementsRadios = document.querySelector('input[name="measurements"]:checked')
