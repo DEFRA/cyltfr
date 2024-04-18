@@ -193,6 +193,10 @@ mapPageConsts.riskMeasurementRadio.forEach(function (radio) {
 })
 
 mapPageConsts.closeKeyBtn.addEventListener('click', closeKey)
+mapPageConsts.openKeyBtn.addEventListener('click', function (event) {
+  event.stopPropagation()
+  openKey()
+})
 
 handleArrowClick(mapPageConsts.rightArrow, mapPageConsts.rightMove)
 handleArrowClick(mapPageConsts.leftArrow, mapPageConsts.leftMove)
@@ -200,38 +204,45 @@ handleArrowClick(mapPageConsts.leftArrow, mapPageConsts.leftMove)
 handleScroll(mapPageConsts.scenarioSelectionDepth, [mapPageConsts.rightArrow[0], mapPageConsts.leftArrow[0]])
 handleScroll(mapPageConsts.scenarioSelectionVelocity, [mapPageConsts.rightArrow[1], mapPageConsts.leftArrow[1]])
 
-mapPageConsts.openKeyBtn.addEventListener('click', function (event) {
-  event.stopPropagation()
-  openKey()
-})
-
 function getInitialKeyOptions () {
   if (window.location.href.includes('map=SurfaceWater')) {
-    mapPageConsts.velocityContainer.style.display = 'none'
-    mapPageConsts.rsContainer.style.display = 'none'
-    mapPageConsts.reservoirsContainer.style.display = 'none'
+    surfaceWaterInitialOptions()
   } else if (window.location.href.includes('map=RiversOrSea')) {
-    mapPageConsts.swContainer.style.display = 'none'
-    mapPageConsts.extentInfoSw.style.display = 'none'
-    mapPageConsts.rsContainer.style.display = 'block'
-    mapPageConsts.rsContainer.style.marginTop = '40px'
-    mapPageConsts.rsRadio.checked = true
-    mapPageConsts.extentInfoRs.style.display = 'block'
-    mapPageConsts.reservoirsContainer.style.display = 'none'
-    mapPageConsts.boundaryContainer.style.display = 'none'
+    riversAndTheSeaInitialOptions()
   } else if (window.location.href.includes('map=Reservoirs')) {
-    mapPageConsts.swContainer.style.display = 'none'
-    mapPageConsts.extentInfoSw.style.display = 'none'
-    mapPageConsts.rsContainer.style.display = 'none'
-    mapPageConsts.reservoirsContainer.style.display = 'block'
-    mapPageConsts.reservoirsContainer.style.marginTop = '40px'
-    mapPageConsts.reservoirsRadio.checked = true
-    mapPageConsts.extentInfoReservoirs.style.display = 'block'
-    mapPageConsts.boundaryContainer.style.display = 'none'
+    reservoirsInitialOptions()
   } else {
     mapPageConsts.advancedToggle.classList.add('hide')
     mapPageConsts.selectedAddressInput.classList.add('hide')
   }
+}
+
+function surfaceWaterInitialOptions () {
+  mapPageConsts.velocityContainer.style.display = 'none'
+  mapPageConsts.rsContainer.style.display = 'none'
+  mapPageConsts.reservoirsContainer.style.display = 'none'
+}
+
+function riversAndTheSeaInitialOptions () {
+  mapPageConsts.swContainer.style.display = 'none'
+  mapPageConsts.extentInfoSw.style.display = 'none'
+  mapPageConsts.rsContainer.style.display = 'block'
+  mapPageConsts.rsContainer.style.marginTop = '40px'
+  mapPageConsts.rsRadio.checked = true
+  mapPageConsts.extentInfoRs.style.display = 'block'
+  mapPageConsts.reservoirsContainer.style.display = 'none'
+  mapPageConsts.boundaryContainer.style.display = 'none'
+}
+
+function reservoirsInitialOptions () {
+  mapPageConsts.swContainer.style.display = 'none'
+  mapPageConsts.extentInfoSw.style.display = 'none'
+  mapPageConsts.rsContainer.style.display = 'none'
+  mapPageConsts.reservoirsContainer.style.display = 'block'
+  mapPageConsts.reservoirsContainer.style.marginTop = '40px'
+  mapPageConsts.reservoirsRadio.checked = true
+  mapPageConsts.extentInfoReservoirs.style.display = 'block'
+  mapPageConsts.boundaryContainer.style.display = 'none'
 }
 
 window.onresize = adjustPosition
