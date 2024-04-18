@@ -1,11 +1,12 @@
 import { mapControlsConsts } from './constants'
+const olZoomBtns = mapControlsConsts.olZoom[0]
 
 export function selectedOption () {
   // The below const cannot be removed from the file otherwise it breaks reservoirs and rivers and the sea
   const measurementsRadios = document.querySelector('input[name="measurements"]:checked')
 
   if (mapControlsConsts.extentRadioSw.checked) {
-    return mapControlsConsts.measurementsRadios.value
+    return measurementsRadios.value
   }
   if (mapControlsConsts.extentRadioReservoirs.checked) {
     return measurementsRadios.value
@@ -165,7 +166,7 @@ function depthRadioChanges () {
     mapControlsConsts.bottomCopyrightContainer.classList.add('hide')
     mapControlsConsts.topCopyrightContainer.classList.remove('hide')
   }
-  mapControlsConsts.olZoom[0].style.top = 'calc(100% - 200px)'
+  olZoomBtns.style.top = 'calc(100% - 200px)'
 }
 
 function velocityRadioChanges () {
@@ -191,7 +192,7 @@ function velocityRadioChanges () {
     mapControlsConsts.bottomCopyrightContainer.classList.add('hide')
     mapControlsConsts.topCopyrightContainer.classList.remove('hide')
   }
-  mapControlsConsts.olZoom[0].style.top = 'calc(100% - 200px)'
+  olZoomBtns.style.top = 'calc(100% - 200px)'
 }
 
 function extentReservoirChanges () {
@@ -202,7 +203,7 @@ function extentReservoirChanges () {
   mapControlsConsts.velocityInfo.style.display = 'none'
   mapControlsConsts.scenarioBarDepth.style.display = 'none'
   mapControlsConsts.scenarioBarVelocity.style.display = 'none'
-  mapControlsConsts.olZoom[0].style.top = 'calc(100% - 102px)'
+  olZoomBtns.style.top = 'calc(100% - 102px)'
   mapControlsConsts.boundaryContainer.style.display = 'none'
 }
 
@@ -214,7 +215,7 @@ function extentRiversAndTheSeaChanges () {
   mapControlsConsts.velocityInfo.style.display = 'none'
   mapControlsConsts.scenarioBarDepth.style.display = 'none'
   mapControlsConsts.scenarioBarVelocity.style.display = 'none'
-  mapControlsConsts.olZoom[0].style.top = 'calc(100% - 102px)'
+  olZoomBtns.style.top = 'calc(100% - 102px)'
   mapControlsConsts.boundaryContainer.style.display = 'none'
 }
 
@@ -226,6 +227,6 @@ function extentSurfaceWaterChanges () {
   mapControlsConsts.velocityInfo.style.display = 'none'
   mapControlsConsts.scenarioBarDepth.style.display = 'none'
   mapControlsConsts.scenarioBarVelocity.style.display = 'none'
-  mapControlsConsts.olZoom[0].style.top = 'calc(100% - 102px)'
+  olZoomBtns.style.top = 'calc(100% - 102px)'
   mapControlsConsts.boundaryContainer.style.display = 'block'
 }
