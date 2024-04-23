@@ -1,0 +1,10 @@
+version: '3'
+services:
+  riskapp:
+    image: risk-app:dev-v1
+    ports:
+     - 3000:3000
+  riskservice:
+    image: risk-service:dev-v1
+    ports:
+     - 8050:8050
