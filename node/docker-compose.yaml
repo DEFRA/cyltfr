@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  riskapp:
+    build: ./risk-app
+    container_name: risk_app
+    ports:
+     - 3000:3000
+    volumes:
+     - ./risk-app:/home/node/app
+     - ./risk-app/node_modules
+  riskservice:
+    build: ./risk-service
+    container_name: risk_service
+    ports:
+     - 8050:8050
+    volumes:
+     - ./risk-service:/home/node/app
+     - ./risk-service/node_modules
