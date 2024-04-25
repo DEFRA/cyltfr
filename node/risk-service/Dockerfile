@@ -3,7 +3,7 @@ FROM node:20-alpine AS node
 RUN set -xe \
     && apk update && apk upgrade \
     && apk add bash make gcc g++ py-pip curl npm \
-    && npm install -g npm --ignore-scripts \
+    && npm install --ignore-scripts -g npm \
     && rm -rf /var/cache/apk/* \
     && addgroup -S node \
     && adduser -S -D -G node node \
@@ -17,8 +17,6 @@ RUN mkdir -p ./node_modules
 COPY --chown=root:root ./package*.json ./
 
 COPY --chown=root:root ./index.js .
-
-COPY --chown=root:root ./config ./config
 
 RUN npm ci --ignore-scripts
 
