@@ -68,6 +68,7 @@ export function toggleAdvancedOptions () {
     mapControlsConsts.swContainer.classList.remove('hide')
     mapControlsConsts.rsContainer.classList.remove('hide')
     mapControlsConsts.rsContainer.classList.add('key-container-hidden')
+    mapControlsConsts.rsContainer.classList.remove('key-container')
     mapControlsConsts.reservoirsContainer.style.marginTop = '0px'
     mapControlsConsts.reservoirsContainer.style.display = 'block'
   } else {
@@ -83,6 +84,7 @@ export function toggleAdvancedOptions () {
       mapControlsConsts.swContainer.classList.add('hide')
       mapControlsConsts.velocityContainer.style.display = 'none'
       mapControlsConsts.rsContainer.classList.add('key-container')
+      mapControlsConsts.rsContainer.classList.remove('key-container-hidden')
       mapControlsConsts.rsExtentRadio.checked = true
       mapControlsConsts.reservoirsContainer.style.display = 'none'
       handleRadioChange('extent', mapControlsConsts.riversAndTheSea)

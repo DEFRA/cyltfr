@@ -224,7 +224,7 @@ function riversAndTheSeaInitialOptions () {
 function reservoirsInitialOptions () {
   mapPageConsts.swContainer.classList.add('hide')
   mapPageConsts.extentInfoSw.style.display = 'none'
-  mapPageConsts.rsContainer.style.display = 'none'
+  mapPageConsts.rsContainer.classList.add('hide')
   mapPageConsts.reservoirsContainer.style.display = 'block'
   mapPageConsts.reservoirsContainer.style.marginTop = '40px'
   mapPageConsts.reservoirsRadio.checked = true
