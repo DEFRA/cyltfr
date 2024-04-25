@@ -207,15 +207,14 @@ function getInitialKeyOptions () {
 
 function surfaceWaterInitialOptions () {
   mapPageConsts.velocityContainer.style.display = 'none'
-  mapPageConsts.rsContainer.style.display = 'none'
+  mapPageConsts.rsContainer.classList.add('hide')
   mapPageConsts.reservoirsContainer.style.display = 'none'
 }
 
 function riversAndTheSeaInitialOptions () {
-  mapPageConsts.swContainer.style.display = 'none'
+  mapPageConsts.swContainer.classList.add('hide')
   mapPageConsts.extentInfoSw.style.display = 'none'
-  mapPageConsts.rsContainer.style.display = 'block'
-  mapPageConsts.rsContainer.style.marginTop = '40px'
+  mapPageConsts.rsContainer.classList.add('key-container')
   mapPageConsts.rsRadio.checked = true
   mapPageConsts.extentInfoRs.style.display = 'block'
   mapPageConsts.reservoirsContainer.style.display = 'none'
@@ -223,7 +222,7 @@ function riversAndTheSeaInitialOptions () {
 }
 
 function reservoirsInitialOptions () {
-  mapPageConsts.swContainer.style.display = 'none'
+  mapPageConsts.swContainer.classList.add('hide')
   mapPageConsts.extentInfoSw.style.display = 'none'
   mapPageConsts.rsContainer.style.display = 'none'
   mapPageConsts.reservoirsContainer.style.display = 'block'

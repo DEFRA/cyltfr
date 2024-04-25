@@ -260,3 +260,13 @@ svg:not(:root) {
   display: flex;
   justify-content: flex-end;
 }
+
+.key-container {
+  display: block;
+  margin-top: 40px;
+}
+
+.key-container-hidden {
+  display: block;
+  margin-top: 0px;
+}
