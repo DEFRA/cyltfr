@@ -3,8 +3,8 @@ FROM node:20-alpine
 RUN set -xe \
     && apk update && apk upgrade \
     && apk add bash make gcc g++ py-pip curl npm \
-    && npm install -g npm --ignore-scripts \
-    && npm install -g nodemon --ignore-scripts \
+    && npm install --ignore-scripts -g npm \
+    && npm install --ignore-scripts -g nodemon \
     && rm -rf /var/cache/apk/* \
     && mkdir /home/node/app \
     && chown -R node:node /home/node/
@@ -32,5 +32,7 @@ COPY --chown=root:root ./server ./server
 RUN npm run build
 
 EXPOSE 3000
+
+USER node
 
 CMD [ "npm", "run", "dev" ]
