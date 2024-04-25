@@ -6,8 +6,6 @@ COPY --from=node /usr/local/lib /usr/local/lib
 COPY --from=node /usr/local/include /usr/local/include
 COPY --from=node /usr/local/bin /usr/local/bin
 
-USER root
-
 RUN set -xe \
     && apk update && apk upgrade \
     && apk add bash make gcc g++ py-pip curl postgresql-client npm \

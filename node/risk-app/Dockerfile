@@ -1,7 +1,5 @@
 FROM node:20-alpine
 
-USER root
-
 RUN set -xe \
     && apk update && apk upgrade \
     && apk add bash make gcc g++ py-pip curl npm \
@@ -22,8 +20,6 @@ COPY --chown=root:root ./bin ./bin
 COPY --chown=root:root ./index.js .
 
 COPY --chown=root:root ./client ./client
-
-COPY --chown=root:root ./config ./config
 
 COPY --chown=root:root ./.husky ./.husky
 
