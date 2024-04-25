@@ -3,8 +3,8 @@ FROM node:20-alpine
 RUN set -xe \
     && apk update && apk upgrade \
     && apk add bash make gcc g++ py-pip curl npm \
-    && npm install -g npm \
-    && npm install -g nodemon \
+    && npm install -g npm --ignore-scripts \
+    && npm install -g nodemon --ignore-scripts \
     && rm -rf /var/cache/apk/* \
     && mkdir /home/node/app \
     && chown -R node:node /home/node/
@@ -25,7 +25,7 @@ COPY --chown=root:root ./.husky ./.husky
 
 COPY --chown=root:root ./webpack.config.js .
 
-RUN npm ci
+RUN npm ci --ignore-scripts
 
 COPY --chown=root:root ./server ./server
 
