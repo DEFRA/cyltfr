@@ -67,16 +67,17 @@ export function toggleAdvancedOptions () {
     mapControlsConsts.velocityContainer.classList.remove('hide')
     mapControlsConsts.swContainer.classList.remove('hide')
     mapControlsConsts.rsContainer.classList.remove('hide')
-    mapControlsConsts.rsContainer.classList.add('key-container-hidden')
+    mapControlsConsts.rsContainer.classList.add('key-adv-options-container')
     mapControlsConsts.rsContainer.classList.remove('key-container')
-    mapControlsConsts.reservoirsContainer.style.marginTop = '0px'
-    mapControlsConsts.reservoirsContainer.style.display = 'block'
+    mapControlsConsts.reservoirsContainer.classList.remove('hide')
+    mapControlsConsts.reservoirsContainer.classList.add('key-adv-options-container')
+    mapControlsConsts.reservoirsContainer.classList.remove('key-container')
   } else {
     if (window.location.href.includes('map=SurfaceWater')) {
       mapControlsConsts.swContainer.classList.remove('hide')
       mapControlsConsts.velocityContainer.classList.add('hide')
       mapControlsConsts.rsContainer.classList.add('hide')
-      mapControlsConsts.reservoirsContainer.style.display = 'none'
+      mapControlsConsts.reservoirsContainer.classList.add('hide')
       mapControlsConsts.swExtentRadio.checked = true
       handleRadioChange('extent', mapControlsConsts.surfaceWater)
     }
@@ -84,17 +85,17 @@ export function toggleAdvancedOptions () {
       mapControlsConsts.swContainer.classList.add('hide')
       mapControlsConsts.velocityContainer.classList.add('hide')
       mapControlsConsts.rsContainer.classList.add('key-container')
-      mapControlsConsts.rsContainer.classList.remove('key-container-hidden')
+      mapControlsConsts.rsContainer.classList.remove('key-adv-options-container')
       mapControlsConsts.rsExtentRadio.checked = true
-      mapControlsConsts.reservoirsContainer.style.display = 'none'
+      mapControlsConsts.reservoirsContainer.classList.add('hide')
       handleRadioChange('extent', mapControlsConsts.riversAndTheSea)
     }
     if (window.location.href.includes('map=Reservoirs')) {
       mapControlsConsts.swContainer.classList.add('hide')
       mapControlsConsts.velocityContainer.classList.add('hide')
       mapControlsConsts.rsContainer.classList.add('hide')
-      mapControlsConsts.reservoirsContainer.style.display = 'block'
-      mapControlsConsts.reservoirsContainer.style.marginTop = '40px'
+      mapControlsConsts.reservoirsContainer.classList.add('key-container')
+      mapControlsConsts.reservoirsContainer.classList.remove('key-adv-options-container')
       mapControlsConsts.reservoirsRadio.checked = true
       handleRadioChange('extent', 'reservoirs')
     }
