@@ -153,7 +153,7 @@ export function closeKey () {
 }
 
 function depthRadioChanges () {
-  mapControlsConsts.extentInfoRs.style.display = 'none'
+  mapControlsConsts.extentInfoRs.classList.add('extent-desc-container')
   mapControlsConsts.extentInfoReservoirs.style.display = 'none'
   mapControlsConsts.extentInfoSw.style.display = 'none'
   mapControlsConsts.depthInfo.style.display = 'block'
@@ -171,7 +171,7 @@ function depthRadioChanges () {
 }
 
 function velocityRadioChanges () {
-  mapControlsConsts.extentInfoRs.style.display = 'none'
+  mapControlsConsts.extentInfoRs.classList.add('extent-desc-container')
   mapControlsConsts.extentInfoReservoirs.style.display = 'none'
   mapControlsConsts.extentInfoSw.style.display = 'none'
   mapControlsConsts.depthInfo.style.display = 'none'
@@ -197,7 +197,7 @@ function velocityRadioChanges () {
 }
 
 function extentReservoirChanges () {
-  mapControlsConsts.extentInfoRs.style.display = 'none'
+  mapControlsConsts.extentInfoRs.classList.add('extent-desc-container')
   mapControlsConsts.extentInfoReservoirs.style.display = 'block'
   mapControlsConsts.extentInfoSw.style.display = 'none'
   mapControlsConsts.depthInfo.style.display = 'none'
@@ -209,7 +209,7 @@ function extentReservoirChanges () {
 }
 
 function extentRiversAndTheSeaChanges () {
-  mapControlsConsts.extentInfoRs.style.display = 'block'
+  mapControlsConsts.extentInfoRs.classList.remove('extent-desc-container')
   mapControlsConsts.extentInfoReservoirs.style.display = 'none'
   mapControlsConsts.extentInfoSw.style.display = 'none'
   mapControlsConsts.depthInfo.style.display = 'none'
@@ -221,7 +221,7 @@ function extentRiversAndTheSeaChanges () {
 }
 
 function extentSurfaceWaterChanges () {
-  mapControlsConsts.extentInfoRs.style.display = 'none'
+  mapControlsConsts.extentInfoRs.classList.add('extent-desc-container')
   mapControlsConsts.extentInfoReservoirs.style.display = 'none'
   mapControlsConsts.extentInfoSw.style.display = 'block'
   mapControlsConsts.depthInfo.style.display = 'none'

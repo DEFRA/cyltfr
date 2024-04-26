@@ -216,7 +216,7 @@ function riversAndTheSeaInitialOptions () {
   mapPageConsts.extentInfoSw.style.display = 'none'
   mapPageConsts.rsContainer.classList.add('key-container')
   mapPageConsts.rsRadio.checked = true
-  mapPageConsts.extentInfoRs.style.display = 'block'
+  mapPageConsts.extentInfoRs.classList.remove('extent-desc-container')
   mapPageConsts.reservoirsContainer.classList.add('hide')
   mapPageConsts.boundaryContainer.style.display = 'none'
 }
