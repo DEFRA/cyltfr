@@ -206,7 +206,7 @@ function getInitialKeyOptions () {
 }
 
 function surfaceWaterInitialOptions () {
-  mapPageConsts.velocityContainer.style.display = 'none'
+  mapPageConsts.velocityContainer.classList.add('hide')
   mapPageConsts.rsContainer.classList.add('hide')
   mapPageConsts.reservoirsContainer.style.display = 'none'
 }
