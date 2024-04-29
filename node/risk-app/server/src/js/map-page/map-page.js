@@ -213,7 +213,7 @@ function surfaceWaterInitialOptions () {
 
 function riversAndTheSeaInitialOptions () {
   mapPageConsts.swContainer.classList.add('hide')
-  mapPageConsts.extentInfoSw.style.display = 'none'
+  mapPageConsts.extentInfoSw.classList.add('extent-desc-container')
   mapPageConsts.rsContainer.classList.add('key-container')
   mapPageConsts.rsRadio.checked = true
   mapPageConsts.extentInfoRs.classList.remove('extent-desc-container')
@@ -223,7 +223,7 @@ function riversAndTheSeaInitialOptions () {
 
 function reservoirsInitialOptions () {
   mapPageConsts.swContainer.classList.add('hide')
-  mapPageConsts.extentInfoSw.style.display = 'none'
+  mapPageConsts.extentInfoSw.classList.add('extent-desc-container')
   mapPageConsts.rsContainer.classList.add('hide')
   mapPageConsts.reservoirsContainer.classList.add('key-container')
   mapPageConsts.reservoirsRadio.checked = true
