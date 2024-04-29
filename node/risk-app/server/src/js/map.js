@@ -288,6 +288,7 @@ export function showMap (layerReference, hasLocation) {
     zoomOutMax: 2,
     zoomOutEnable: 0
   }
+  const disableClass = 'zoom-disabled'
 
   zoomControls.zoomIn.addEventListener('click', () => {
     disableZoomIn()
@@ -299,26 +300,26 @@ export function showMap (layerReference, hasLocation) {
 
   function disableZoomIn () {
     if (map.getView().getZoom() >= disableThresholds.zoomInMax) {
-      zoomControls.zoomIn.classList.add('zoom-disabled')
+      zoomControls.zoomIn.classList.add(disableClass)
     }
     if (map.getView().getZoom() > disableThresholds.zoomOutEnable) {
-      zoomControls.zoomOut.classList.remove('zoom-disabled')
+      zoomControls.zoomOut.classList.remove(disableClass)
     }
   }
 
   function disableZoomOut () {
     if (map.getView().getZoom() < disableThresholds.zoomOutMax) {
-      zoomControls.zoomOut.classList.add('zoom-disabled')
+      zoomControls.zoomOut.classList.add(disableClass)
     }
     if (map.getView().getZoom() < disableThresholds.zoomInEnable) {
-      zoomControls.zoomIn.classList.remove('zoom-disabled')
+      zoomControls.zoomIn.classList.remove(disableClass)
     }
   }
 
   function initialZoomState () {
     const zoom = map.getView().getZoom()
-    zoomControls.zoomIn.classList.toggle('zoom-disabled', zoom >= 8)
-    zoomControls.zoomOut.classList.toggle('zoom-disabled', zoom <= 2)
+    zoomControls.zoomIn.classList.toggle(disableClass, zoom >= 8)
+    zoomControls.zoomOut.classList.toggle(disableClass, zoom <= 2)
   }
 
   initialZoomState()
