@@ -275,6 +275,53 @@ export function showMap (layerReference, hasLocation) {
       layer.setZIndex(0)
     }
   })
+
+  // The below toggles whether the zoom buttons are disabled. They are placed within this function
+  // as the map object was not accessible outside of it.
+  const zoomControls = {
+    zoomIn: document.querySelector('.ol-zoom-in'),
+    zoomOut: document.querySelector('.ol-zoom-out')
+  }
+  const disableThresholds = {
+    zoomInMax: 8,
+    zoomInEnable: 10,
+    zoomOutMax: 2,
+    zoomOutEnable: 0
+  }
+
+  zoomControls.zoomIn.addEventListener('click', () => {
+    disableZoomIn()
+  })
+
+  zoomControls.zoomOut.addEventListener('click', () => {
+    disableZoomOut()
+  })
+
+  function disableZoomIn () {
+    if (map.getView().getZoom() >= disableThresholds.zoomInMax) {
+      zoomControls.zoomIn.classList.add('zoom-disabled')
+    }
+    if (map.getView().getZoom() > disableThresholds.zoomOutEnable) {
+      zoomControls.zoomOut.classList.remove('zoom-disabled')
+    }
+  }
+
+  function disableZoomOut () {
+    if (map.getView().getZoom() < disableThresholds.zoomOutMax) {
+      zoomControls.zoomOut.classList.add('zoom-disabled')
+    }
+    if (map.getView().getZoom() < disableThresholds.zoomInEnable) {
+      zoomControls.zoomIn.classList.remove('zoom-disabled')
+    }
+  }
+
+  function initialZoomState () {
+    const zoom = map.getView().getZoom()
+    zoomControls.zoomIn.classList.toggle('zoom-disabled', zoom >= 8)
+    zoomControls.zoomOut.classList.toggle('zoom-disabled', zoom <= 2)
+  }
+
+  initialZoomState()
 }
 
 export function updateSize () {
