@@ -154,7 +154,7 @@ export function closeKey () {
 
 function depthRadioChanges () {
   mapControlsConsts.extentInfoRs.classList.add(mapControlsConsts.extentDesc)
-  mapControlsConsts.extentInfoReservoirs.style.display = 'none'
+  mapControlsConsts.extentInfoReservoirs.classList.add(mapControlsConsts.extentDesc)
   mapControlsConsts.extentInfoSw.classList.add(mapControlsConsts.extentDesc)
   mapControlsConsts.depthInfo.style.display = 'block'
   mapControlsConsts.velocityInfo.style.display = 'none'
@@ -172,7 +172,7 @@ function depthRadioChanges () {
 
 function velocityRadioChanges () {
   mapControlsConsts.extentInfoRs.classList.add(mapControlsConsts.extentDesc)
-  mapControlsConsts.extentInfoReservoirs.style.display = 'none'
+  mapControlsConsts.extentInfoReservoirs.classList.add(mapControlsConsts.extentDesc)
   mapControlsConsts.extentInfoSw.classList.add(mapControlsConsts.extentDesc)
   mapControlsConsts.depthInfo.style.display = 'none'
   mapControlsConsts.velocityInfo.style.display = 'block'
@@ -198,7 +198,7 @@ function velocityRadioChanges () {
 
 function extentReservoirChanges () {
   mapControlsConsts.extentInfoRs.classList.add(mapControlsConsts.extentDesc)
-  mapControlsConsts.extentInfoReservoirs.style.display = 'block'
+  mapControlsConsts.extentInfoReservoirs.classList.remove(mapControlsConsts.extentDesc)
   mapControlsConsts.extentInfoSw.classList.add(mapControlsConsts.extentDesc)
   mapControlsConsts.depthInfo.style.display = 'none'
   mapControlsConsts.velocityInfo.style.display = 'none'
@@ -210,7 +210,7 @@ function extentReservoirChanges () {
 
 function extentRiversAndTheSeaChanges () {
   mapControlsConsts.extentInfoRs.classList.remove(mapControlsConsts.extentDesc)
-  mapControlsConsts.extentInfoReservoirs.style.display = 'none'
+  mapControlsConsts.extentInfoReservoirs.classList.add(mapControlsConsts.extentDesc)
   mapControlsConsts.extentInfoSw.classList.add(mapControlsConsts.extentDesc)
   mapControlsConsts.depthInfo.style.display = 'none'
   mapControlsConsts.velocityInfo.style.display = 'none'
@@ -222,7 +222,7 @@ function extentRiversAndTheSeaChanges () {
 
 function extentSurfaceWaterChanges () {
   mapControlsConsts.extentInfoRs.classList.add(mapControlsConsts.extentDesc)
-  mapControlsConsts.extentInfoReservoirs.style.display = 'none'
+  mapControlsConsts.extentInfoReservoirs.classList.add(mapControlsConsts.extentDesc)
   mapControlsConsts.extentInfoSw.classList.remove(mapControlsConsts.extentDesc)
   mapControlsConsts.depthInfo.style.display = 'none'
   mapControlsConsts.velocityInfo.style.display = 'none'

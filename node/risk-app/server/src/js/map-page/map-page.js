@@ -227,7 +227,7 @@ function reservoirsInitialOptions () {
   mapPageConsts.rsContainer.classList.add('hide')
   mapPageConsts.reservoirsContainer.classList.add(mapPageConsts.keyContainer)
   mapPageConsts.reservoirsRadio.checked = true
-  mapPageConsts.extentInfoReservoirs.style.display = 'block'
+  mapPageConsts.extentInfoReservoirs.classList.remove(mapPageConsts.extentDesc)
   mapPageConsts.boundaryContainer.style.display = 'none'
 }
 
