@@ -67,11 +67,11 @@ export function toggleAdvancedOptions () {
     mapControlsConsts.velocityContainer.classList.remove('hide')
     mapControlsConsts.swContainer.classList.remove('hide')
     mapControlsConsts.rsContainer.classList.remove('hide')
-    mapControlsConsts.rsContainer.classList.add('key-adv-options-container')
-    mapControlsConsts.rsContainer.classList.remove('key-container')
+    mapControlsConsts.rsContainer.classList.add(mapControlsConsts.keyAdvOptionsContainer)
+    mapControlsConsts.rsContainer.classList.remove(mapControlsConsts.keyContainer)
     mapControlsConsts.reservoirsContainer.classList.remove('hide')
-    mapControlsConsts.reservoirsContainer.classList.add('key-adv-options-container')
-    mapControlsConsts.reservoirsContainer.classList.remove('key-container')
+    mapControlsConsts.reservoirsContainer.classList.add(mapControlsConsts.keyAdvOptionsContainer)
+    mapControlsConsts.reservoirsContainer.classList.remove(mapControlsConsts.keyContainer)
   } else {
     if (window.location.href.includes('map=SurfaceWater')) {
       mapControlsConsts.swContainer.classList.remove('hide')
@@ -84,8 +84,8 @@ export function toggleAdvancedOptions () {
     if (window.location.href.includes('map=RiversOrSea')) {
       mapControlsConsts.swContainer.classList.add('hide')
       mapControlsConsts.velocityContainer.classList.add('hide')
-      mapControlsConsts.rsContainer.classList.add('key-container')
-      mapControlsConsts.rsContainer.classList.remove('key-adv-options-container')
+      mapControlsConsts.rsContainer.classList.add(mapControlsConsts.keyContainer)
+      mapControlsConsts.rsContainer.classList.remove(mapControlsConsts.keyAdvOptionsContainer)
       mapControlsConsts.rsExtentRadio.checked = true
       mapControlsConsts.reservoirsContainer.classList.add('hide')
       handleRadioChange('extent', mapControlsConsts.riversAndTheSea)
@@ -94,8 +94,8 @@ export function toggleAdvancedOptions () {
       mapControlsConsts.swContainer.classList.add('hide')
       mapControlsConsts.velocityContainer.classList.add('hide')
       mapControlsConsts.rsContainer.classList.add('hide')
-      mapControlsConsts.reservoirsContainer.classList.add('key-container')
-      mapControlsConsts.reservoirsContainer.classList.remove('key-adv-options-container')
+      mapControlsConsts.reservoirsContainer.classList.add(mapControlsConsts.keyContainer)
+      mapControlsConsts.reservoirsContainer.classList.remove(mapControlsConsts.keyAdvOptionsContainer)
       mapControlsConsts.reservoirsRadio.checked = true
       handleRadioChange('extent', 'reservoirs')
     }

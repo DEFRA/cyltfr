@@ -213,19 +213,19 @@ function surfaceWaterInitialOptions () {
 
 function riversAndTheSeaInitialOptions () {
   mapPageConsts.swContainer.classList.add('hide')
-  mapPageConsts.extentInfoSw.classList.add('extent-desc-container')
-  mapPageConsts.rsContainer.classList.add('key-container')
+  mapPageConsts.extentInfoSw.classList.add(mapPageConsts.extentDesc)
+  mapPageConsts.rsContainer.classList.add(mapPageConsts.keyContainer)
   mapPageConsts.rsRadio.checked = true
-  mapPageConsts.extentInfoRs.classList.remove('extent-desc-container')
+  mapPageConsts.extentInfoRs.classList.remove(mapPageConsts.extentDesc)
   mapPageConsts.reservoirsContainer.classList.add('hide')
   mapPageConsts.boundaryContainer.style.display = 'none'
 }
 
 function reservoirsInitialOptions () {
   mapPageConsts.swContainer.classList.add('hide')
-  mapPageConsts.extentInfoSw.classList.add('extent-desc-container')
+  mapPageConsts.extentInfoSw.classList.add(mapPageConsts.extentDesc)
   mapPageConsts.rsContainer.classList.add('hide')
-  mapPageConsts.reservoirsContainer.classList.add('key-container')
+  mapPageConsts.reservoirsContainer.classList.add(mapPageConsts.keyContainer)
   mapPageConsts.reservoirsRadio.checked = true
   mapPageConsts.extentInfoReservoirs.style.display = 'block'
   mapPageConsts.boundaryContainer.style.display = 'none'

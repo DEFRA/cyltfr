@@ -57,6 +57,8 @@ const lowRadioVelocity = document.getElementById('risk-radio-low-velocity')
 const rightMove = 150
 const leftMove = -150
 
+const keyContainer = 'key-container'
+const keyAdvOptionsContainer = 'key-adv-options-container'
 const extentDesc = 'extent-desc-container'
 
 export const mapPageConsts = {
@@ -86,7 +88,9 @@ export const mapPageConsts = {
   swContainer,
   velocityContainer,
   rightMove,
-  leftMove
+  leftMove,
+  keyContainer,
+  extentDesc
 }
 
 export const mapControlsConsts = {
@@ -131,6 +135,8 @@ export const mapControlsConsts = {
   lowRadioDepth,
   mediumRadioVelocity,
   lowRadioVelocity,
+  keyContainer,
+  keyAdvOptionsContainer,
   extentDesc
 }
 
