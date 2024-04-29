@@ -205,7 +205,7 @@ function extentReservoirChanges () {
   mapControlsConsts.scenarioBarDepth.style.display = 'none'
   mapControlsConsts.scenarioBarVelocity.style.display = 'none'
   mapControlsConsts.olZoom[0].style.top = 'calc(100% - 102px)'
-  mapControlsConsts.boundaryContainer.style.display = 'none'
+  mapControlsConsts.boundaryContainer.classList.add('hide')
 }
 
 function extentRiversAndTheSeaChanges () {
@@ -217,7 +217,7 @@ function extentRiversAndTheSeaChanges () {
   mapControlsConsts.scenarioBarDepth.style.display = 'none'
   mapControlsConsts.scenarioBarVelocity.style.display = 'none'
   mapControlsConsts.olZoom[0].style.top = 'calc(100% - 102px)'
-  mapControlsConsts.boundaryContainer.style.display = 'none'
+  mapControlsConsts.boundaryContainer.classList.add('hide')
 }
 
 function extentSurfaceWaterChanges () {
@@ -229,5 +229,5 @@ function extentSurfaceWaterChanges () {
   mapControlsConsts.scenarioBarDepth.style.display = 'none'
   mapControlsConsts.scenarioBarVelocity.style.display = 'none'
   mapControlsConsts.olZoom[0].style.top = 'calc(100% - 102px)'
-  mapControlsConsts.boundaryContainer.style.display = 'block'
+  mapControlsConsts.boundaryContainer.classList.remove('hide')
 }

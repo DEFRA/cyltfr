@@ -218,7 +218,7 @@ function riversAndTheSeaInitialOptions () {
   mapPageConsts.rsRadio.checked = true
   mapPageConsts.extentInfoRs.classList.remove(mapPageConsts.extentDesc)
   mapPageConsts.reservoirsContainer.classList.add('hide')
-  mapPageConsts.boundaryContainer.style.display = 'none'
+  mapPageConsts.boundaryContainer.classList.add('hide')
 }
 
 function reservoirsInitialOptions () {
@@ -228,7 +228,7 @@ function reservoirsInitialOptions () {
   mapPageConsts.reservoirsContainer.classList.add(mapPageConsts.keyContainer)
   mapPageConsts.reservoirsRadio.checked = true
   mapPageConsts.extentInfoReservoirs.classList.remove(mapPageConsts.extentDesc)
-  mapPageConsts.boundaryContainer.style.display = 'none'
+  mapPageConsts.boundaryContainer.classList.add('hide')
 }
 
 window.onresize = adjustPosition
