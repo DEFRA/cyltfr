@@ -28,7 +28,7 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
 }
 
 #scenario-container-depth {
-  display: none;
+  display: block;
   align-self: flex-end;
 
   .scenario-arrows {
