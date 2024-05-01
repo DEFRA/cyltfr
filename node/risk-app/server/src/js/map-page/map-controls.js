@@ -57,7 +57,7 @@ export function handleRadioChange (selected, type) {
 export function toggleAdvancedOptions () {
   if (window.innerWidth <= mapControlsConsts.deviceScreenWidth) {
     mapControlsConsts.keyDisplay.style.display = 'block'
-    mapControlsConsts.scenarioSelectionDepth.style.display = 'none'
+    mapControlsConsts.scenarioSelectionDepth.classList.add('hide')
     showOrHideAdvancedToggleText()
   }
 
@@ -117,7 +117,7 @@ export function showOrHideAdvancedToggleText () {
 export function openKey () {
   mapControlsConsts.keyDisplay.style.display = 'block'
   mapControlsConsts.openKeyBtn.style.display = 'none'
-  mapControlsConsts.scenarioSelectionDepth.style.display = 'none'
+  mapControlsConsts.scenarioSelectionDepth.classList.add('hide')
   mapControlsConsts.scenarioSelectionVelocity.style.display = 'none'
   showOrHideAdvancedToggleText()
 }
@@ -130,7 +130,7 @@ export function closeKey () {
 
   if (mapControlsConsts.depthRadio.checked) {
     mapControlsConsts.scenarioBarDepth.classList.remove('hide')
-    mapControlsConsts.scenarioSelectionDepth.style.display = 'flex'
+    mapControlsConsts.scenarioSelectionDepth.classList.remove('hide')
     mapControlsConsts.scenarioSelectionDepth.style.top = null
   }
 
@@ -159,10 +159,10 @@ function depthRadioChanges () {
   mapControlsConsts.depthInfo.classList.remove('hide')
   mapControlsConsts.velocityInfo.classList.add('hide')
   mapControlsConsts.scenarioBarDepth.classList.remove('hide')
-  mapControlsConsts.scenarioSelectionDepth.style.display = 'flex'
+  mapControlsConsts.scenarioSelectionDepth.classList.remove('hide')
   mapControlsConsts.scenarioBarVelocity.classList.add('hide')
   if (window.innerWidth <= mapControlsConsts.deviceScreenWidth) {
-    mapControlsConsts.scenarioSelectionDepth.style.display = 'none'
+    mapControlsConsts.scenarioSelectionDepth.classList.add('hide')
     mapControlsConsts.scenarioSelectionVelocity.style.display = 'none'
     mapControlsConsts.bottomCopyrightContainer.classList.add('hide')
     mapControlsConsts.topCopyrightContainer.classList.remove('hide')

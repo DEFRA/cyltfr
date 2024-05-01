@@ -83,6 +83,10 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   }
 }
 
+#scenario-selection-depth {
+  display:flex;
+}
+
 @media (max-width: 820px) {
   .horizontal-overflow {
     overflow-x: auto;
