@@ -129,13 +129,13 @@ export function closeKey () {
   }
 
   if (mapControlsConsts.depthRadio.checked) {
-    mapControlsConsts.scenarioBarDepth.classList.add('hide')
+    mapControlsConsts.scenarioBarDepth.classList.remove('hide')
     mapControlsConsts.scenarioSelectionDepth.style.display = 'flex'
     mapControlsConsts.scenarioSelectionDepth.style.top = null
   }
 
   if (mapControlsConsts.velocityRadio.checked) {
-    mapControlsConsts.scenarioBarVelocity.style.display = 'block'
+    mapControlsConsts.scenarioBarVelocity.classList.remove('hide')
     mapControlsConsts.scenarioSelectionVelocity.style.display = 'flex'
     mapControlsConsts.scenarioSelectionVelocity.style.top = null
   }
@@ -160,7 +160,7 @@ function depthRadioChanges () {
   mapControlsConsts.velocityInfo.classList.add('hide')
   mapControlsConsts.scenarioBarDepth.classList.remove('hide')
   mapControlsConsts.scenarioSelectionDepth.style.display = 'flex'
-  mapControlsConsts.scenarioBarVelocity.style.display = 'none'
+  mapControlsConsts.scenarioBarVelocity.classList.add('hide')
   if (window.innerWidth <= mapControlsConsts.deviceScreenWidth) {
     mapControlsConsts.scenarioSelectionDepth.style.display = 'none'
     mapControlsConsts.scenarioSelectionVelocity.style.display = 'none'
@@ -177,7 +177,7 @@ function velocityRadioChanges () {
   mapControlsConsts.depthInfo.classList.add('hide')
   mapControlsConsts.velocityInfo.classList.remove('hide')
   mapControlsConsts.scenarioBarDepth.classList.add('hide')
-  mapControlsConsts.scenarioBarVelocity.style.display = 'block'
+  mapControlsConsts.scenarioBarVelocity.classList.remove('hide')
   mapControlsConsts.scenarioSelectionVelocity.style.display = 'flex'
   mapControlsConsts.topCopyrightContainer.classList.add('hide')
   mapControlsConsts.bottomCopyrightContainer.classList.remove('hide')
@@ -203,7 +203,7 @@ function extentReservoirChanges () {
   mapControlsConsts.depthInfo.classList.add('hide')
   mapControlsConsts.velocityInfo.classList.add('hide')
   mapControlsConsts.scenarioBarDepth.classList.add('hide')
-  mapControlsConsts.scenarioBarVelocity.style.display = 'none'
+  mapControlsConsts.scenarioBarVelocity.classList.add('hide')
   mapControlsConsts.olZoom[0].style.top = 'calc(100% - 102px)'
   mapControlsConsts.boundaryContainer.classList.add('hide')
 }
@@ -215,7 +215,7 @@ function extentRiversAndTheSeaChanges () {
   mapControlsConsts.depthInfo.classList.add('hide')
   mapControlsConsts.velocityInfo.classList.add('hide')
   mapControlsConsts.scenarioBarDepth.classList.add('hide')
-  mapControlsConsts.scenarioBarVelocity.style.display = 'none'
+  mapControlsConsts.scenarioBarVelocity.classList.add('hide')
   mapControlsConsts.olZoom[0].style.top = 'calc(100% - 102px)'
   mapControlsConsts.boundaryContainer.classList.add('hide')
 }
@@ -227,7 +227,7 @@ function extentSurfaceWaterChanges () {
   mapControlsConsts.depthInfo.classList.add('hide')
   mapControlsConsts.velocityInfo.classList.add('hide')
   mapControlsConsts.scenarioBarDepth.classList.add('hide')
-  mapControlsConsts.scenarioBarVelocity.style.display = 'none'
+  mapControlsConsts.scenarioBarVelocity.classList.add('hide')
   mapControlsConsts.olZoom[0].style.top = 'calc(100% - 102px)'
   mapControlsConsts.boundaryContainer.classList.remove('hide')
 }

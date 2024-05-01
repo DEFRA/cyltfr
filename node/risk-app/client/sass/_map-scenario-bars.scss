@@ -56,7 +56,7 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
 }
 
 #scenario-container-velocity {
-  display: none;
+  display: block;
   justify-content: flex-end;
 
   .scenario-arrows {
