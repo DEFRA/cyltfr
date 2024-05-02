@@ -118,7 +118,7 @@ export function openKey () {
   mapControlsConsts.keyDisplay.style.display = 'block'
   mapControlsConsts.openKeyBtn.style.display = 'none'
   mapControlsConsts.scenarioSelectionDepth.classList.add('hide')
-  mapControlsConsts.scenarioSelectionVelocity.style.display = 'none'
+  mapControlsConsts.scenarioSelectionVelocity.classList.add('hide')
   showOrHideAdvancedToggleText()
 }
 
@@ -136,7 +136,7 @@ export function closeKey () {
 
   if (mapControlsConsts.velocityRadio.checked) {
     mapControlsConsts.scenarioBarVelocity.classList.remove('hide')
-    mapControlsConsts.scenarioSelectionVelocity.style.display = 'flex'
+    mapControlsConsts.scenarioSelectionVelocity.classList.remove('hide')
     mapControlsConsts.scenarioSelectionVelocity.style.top = null
   }
 
@@ -163,7 +163,7 @@ function depthRadioChanges () {
   mapControlsConsts.scenarioBarVelocity.classList.add('hide')
   if (window.innerWidth <= mapControlsConsts.deviceScreenWidth) {
     mapControlsConsts.scenarioSelectionDepth.classList.add('hide')
-    mapControlsConsts.scenarioSelectionVelocity.style.display = 'none'
+    mapControlsConsts.scenarioSelectionVelocity.classList.add('hide')
     mapControlsConsts.bottomCopyrightContainer.classList.add('hide')
     mapControlsConsts.topCopyrightContainer.classList.remove('hide')
   }
@@ -178,12 +178,11 @@ function velocityRadioChanges () {
   mapControlsConsts.velocityInfo.classList.remove('hide')
   mapControlsConsts.scenarioBarDepth.classList.add('hide')
   mapControlsConsts.scenarioBarVelocity.classList.remove('hide')
-  mapControlsConsts.scenarioSelectionVelocity.style.display = 'flex'
+  mapControlsConsts.scenarioSelectionVelocity.classList.remove('hide')
   mapControlsConsts.topCopyrightContainer.classList.add('hide')
   mapControlsConsts.bottomCopyrightContainer.classList.remove('hide')
-  mapControlsConsts.scenarioSelectionVelocity.style.display = 'flex'
   if (window.innerWidth <= mapControlsConsts.deviceScreenWidth && mapControlsConsts.keyDisplay.style.display === 'block') {
-    mapControlsConsts.scenarioSelectionVelocity.style.display = 'none'
+    mapControlsConsts.scenarioSelectionVelocity.classList.add('hide')
   }
   if (window.innerWidth <= mapControlsConsts.deviceScreenWidth) {
     mapControlsConsts.bottomCopyrightContainer.classList.add('hide')
