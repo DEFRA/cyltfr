@@ -27,7 +27,6 @@ module.exports = [
     path: '/sandpit-login',
     handler: async (request, h) => {
       const { username, password } = request.payload
-      let isAdmin = false
       const destination = '/postcode'
 
       if ((password) && (password === config.authcookie.sitepassword) && (username === config.authcookie.siteusername)) {
@@ -36,9 +35,9 @@ module.exports = [
       } else if (password) {
         request.yar.set('isAdmin', '')
         request.cookieAuth.clear()
-      } else (
+      } else {
         console.log('Failed to login')
-      )
+      }
       return h.redirect(destination)
     },
     options: {
