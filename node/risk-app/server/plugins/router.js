@@ -19,6 +19,7 @@ const routes = [].concat(
   require('../routes/privacy-notice'),
   require('../routes/terms-and-conditions'),
   require('../routes/login'),
+  require('../routes/sandpit-login'),
   require('../routes/healthcheck')
 )
 

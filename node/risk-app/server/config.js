@@ -48,6 +48,7 @@ const schema = joi.object().keys({
   }),
   authcookie: {
     cookiepassword: joi.string().required(),
+    siteusername: joi.string().required(),
     sitepassword: joi.string().required(),
     secure: joi.boolean().default(true),
     defaultdestination: joi.string().default('')
