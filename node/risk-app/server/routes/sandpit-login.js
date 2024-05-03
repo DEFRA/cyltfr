@@ -6,7 +6,7 @@ module.exports = [
   {
     method: 'GET',
     path: '/sandpit-login',
-    handler: async (request, h) => {
+    handler: async (_request, h) => {
       return h.view('sandpit-login')
     },
     options: {
@@ -26,19 +26,19 @@ module.exports = [
     method: 'POST',
     path: '/sandpit-login',
     handler: async (request, h) => {
-      const { username, password, generate, url } = request.payload
+      const { username, password } = request.payload
       let isAdmin = false
       const destination = '/postcode'
 
       if ((password) && (password === config.authcookie.sitepassword) && (username === config.authcookie.siteusername)) {
-        isAdmin = true
         request.yar.set('isAdmin', true)
         request.cookieAuth.set({ isAdmin: true })
-        console.log('request.cookieAuth', request.cookieAuth)
       } else if (password) {
         request.yar.set('isAdmin', '')
         request.cookieAuth.clear()
-      }
+      } else (
+        console.log('Failed to login')
+      )
       return h.redirect(destination)
     },
     options: {
