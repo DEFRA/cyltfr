@@ -3,11 +3,10 @@
   const capabilities = window.LTFMGMT.capabilities
 
   geometry.features.forEach(function (feature, index) {
-    const geo = Object.assign({}, geometry, {
-      features: geometry.features.filter(function (f) {
-        return f === feature
-      })
-    })
+    const geo = {
+      ...geometry,
+      features: geometry.features.filter(f => f === feature)
+    }
 
     window.LTFMGMT.commentMap(geo, 'map_' + index, capabilities)
   })

@@ -19,16 +19,16 @@ function mapErrors (errors) {
   return map
 }
 
-class CommentCreate {
-  constructor (type, capabilities, data, err) {
-    this.type = type
-    this.data = data
-    this.capabilities = capabilities
-
-    if (err) {
-      this.errors = mapErrors(err.details)
-    }
+function commentCreate (type, capabilities, data, err) {
+  const retval = {
+    type,
+    data,
+    capabilities
   }
+  if (err) {
+    retval.errors = mapErrors(err.details)
+  }
+  return retval
 }
 
-module.exports = CommentCreate
+module.exports = commentCreate

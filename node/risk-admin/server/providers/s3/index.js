@@ -33,11 +33,12 @@ class S3Provider {
 
   async uploadFile (keyname, filename) {
     const data = await new Promise((resolve, reject) => {
-      fs.readFile(filename, (err, data) => {
+      fs.readFile(filename, (err, readData) => {
         if (err) {
-          return reject(err)
+          reject(err)
+        } else {
+          resolve(readData)
         }
-        resolve(data)
       })
     })
 

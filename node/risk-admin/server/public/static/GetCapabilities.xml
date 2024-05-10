@@ -10,7 +10,6 @@
         <ows:Title>OS Maps API</ows:Title>
         <ows:ServiceType>OGC WMTS</ows:ServiceType>
         <ows:ServiceTypeVersion>1.0.0</ows:ServiceTypeVersion>
-        <!-- TODO: Set Abstract, Fees and AccessConstraints -->
         <ows:Abstract>
             The OS Maps API (WMTS) provides access to backdrop mapping from an overview of Great Britain down to street level.
             The mapping is available in Leisure, Light, Outdoor and Road styles.

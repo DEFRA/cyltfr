@@ -1,3 +1,6 @@
+const SESSION_TIMEOUT_IN_MS = 10 * 60 * 1000
+const TOKEN_NAME = 'thisisatoken'
+const TOKEN_DEFAULT_POSTCODE = '1111111'
 const createMockYar = () => {
   class YarMock {
     constructor () {
@@ -53,7 +56,7 @@ describe('/captchacheck test', () => {
 
     const captchacheck = require('../captchacheck')
 
-    const results = await captchacheck.captchaCheck('', '1111111', yar, null)
+    const results = await captchacheck.captchaCheck('', TOKEN_DEFAULT_POSTCODE, yar, null)
     expect(results.tokenValid).toBeTruthy()
   })
 
@@ -62,7 +65,7 @@ describe('/captchacheck test', () => {
     config.setConfigOptions(getConfigOptions({}))
 
     const captchacheck = require('../captchacheck')
-    const results = await captchacheck.captchaCheck('', '1111111', yar, null)
+    const results = await captchacheck.captchaCheck('', TOKEN_DEFAULT_POSTCODE, yar, null)
 
     expect(results.tokenValid).toBeFalsy()
   })
@@ -73,7 +76,7 @@ describe('/captchacheck test', () => {
     config.setConfigOptions(getConfigOptions({}))
 
     const captchacheck = require('../captchacheck')
-    const results = await captchacheck.captchaCheck('', '1111111', yar, null)
+    const results = await captchacheck.captchaCheck('', TOKEN_DEFAULT_POSTCODE, yar, null)
 
     expect(results.tokenValid).toBeTruthy()
   })
@@ -84,12 +87,12 @@ describe('/captchacheck test', () => {
 
     const captchacheck = require('../captchacheck')
 
-    yar.set('token', 'thisisatoken')
-    yar.set('tokenPostcode', '1111111')
+    yar.set('token', TOKEN_NAME)
+    yar.set('tokenPostcode', TOKEN_DEFAULT_POSTCODE)
     yar.set('tokenSet', Date.now())
     yar.set('tokenValid', true)
 
-    const results = await captchacheck.captchaCheck('thisisatoken', '1111111', yar, null)
+    const results = await captchacheck.captchaCheck(TOKEN_NAME, TOKEN_DEFAULT_POSTCODE, yar, null)
 
     expect(results.tokenValid).toBeTruthy()
   })
@@ -100,12 +103,12 @@ describe('/captchacheck test', () => {
 
     const captchacheck = require('../captchacheck')
 
-    yar.set('token', 'thisisatoken')
-    yar.set('tokenPostcode', '1111111')
+    yar.set('token', TOKEN_NAME)
+    yar.set('tokenPostcode', TOKEN_DEFAULT_POSTCODE)
     yar.set('tokenSet', '')
     yar.set('tokenValid', true)
 
-    const results = await captchacheck.captchaCheck('thisisatoken', '1111111', yar, null)
+    const results = await captchacheck.captchaCheck(TOKEN_NAME, TOKEN_DEFAULT_POSTCODE, yar, null)
 
     expect(results.tokenValid).toBeFalsy()
   })
@@ -116,12 +119,12 @@ describe('/captchacheck test', () => {
 
     const captchacheck = require('../captchacheck')
 
-    yar.set('token', 'thisisatoken')
+    yar.set('token', TOKEN_NAME)
     yar.set('tokenPostcode', 'Ab23op')
     yar.set('tokenSet', Date.now())
     yar.set('tokenValid', true)
 
-    const results = await captchacheck.captchaCheck('thisisatoken', 'PO45LE', yar, null)
+    const results = await captchacheck.captchaCheck(TOKEN_NAME, 'PO45LE', yar, null)
 
     expect(results.tokenValid).toBeFalsy()
   })
@@ -132,12 +135,12 @@ describe('/captchacheck test', () => {
 
     const captchacheck = require('../captchacheck')
 
-    yar.set('token', 'thisisatoken')
+    yar.set('token', TOKEN_NAME)
     yar.set('tokenPostcode', 'sp09rA')
     yar.set('tokenSet', Date.now())
     yar.set('tokenValid', true)
 
-    const results = await captchacheck.captchaCheck('thisisatoken', 'SP09RA', yar, null)
+    const results = await captchacheck.captchaCheck(TOKEN_NAME, 'SP09RA', yar, null)
 
     expect(results.tokenValid).toBeTruthy()
   })
@@ -147,14 +150,13 @@ describe('/captchacheck test', () => {
     config.setConfigOptions(getConfigOptions({}))
 
     const captchacheck = require('../captchacheck')
-    const SessionTimeoutInMs = 10 * 60 * 1000
 
-    yar.set('token', 'thisisatoken')
-    yar.set('tokenPostcode', '1111111')
-    yar.set('tokenSet', (Date.now() - 1) - SessionTimeoutInMs)
+    yar.set('token', TOKEN_NAME)
+    yar.set('tokenPostcode', TOKEN_DEFAULT_POSTCODE)
+    yar.set('tokenSet', (Date.now() - 1) - SESSION_TIMEOUT_IN_MS)
     yar.set('tokenValid', true)
 
-    const results = await captchacheck.captchaCheck('thisisatoken', '1111111', yar, null)
+    const results = await captchacheck.captchaCheck(TOKEN_NAME, TOKEN_DEFAULT_POSTCODE, yar, null)
 
     expect(results.tokenValid).toBeFalsy()
   })
@@ -165,12 +167,12 @@ describe('/captchacheck test', () => {
 
     const captchacheck = require('../captchacheck')
 
-    yar.set('token', 'thisisatoken')
-    yar.set('tokenPostcode', '1111111')
+    yar.set('token', TOKEN_NAME)
+    yar.set('tokenPostcode', TOKEN_DEFAULT_POSTCODE)
     yar.set('tokenSet', Date.now())
     yar.set('tokenValid', true)
 
-    const results = await captchacheck.captchaCheck('', '1111111', yar, null)
+    const results = await captchacheck.captchaCheck('', TOKEN_DEFAULT_POSTCODE, yar, null)
 
     expect(results.tokenValid).toBeTruthy()
   })
@@ -181,12 +183,12 @@ describe('/captchacheck test', () => {
 
     const captchacheck = require('../captchacheck')
 
-    yar.set('token', 'thisisatoken')
-    yar.set('tokenPostcode', '1111111')
-    yar.set('tokenSet', (Date.now() - 1) - (10 * 60 * 1000))
+    yar.set('token', TOKEN_NAME)
+    yar.set('tokenPostcode', TOKEN_DEFAULT_POSTCODE)
+    yar.set('tokenSet', (Date.now() - 1) - SESSION_TIMEOUT_IN_MS)
     yar.set('tokenValid', true)
 
-    const results = await captchacheck.captchaCheck('', '1111111', yar, null)
+    const results = await captchacheck.captchaCheck('', TOKEN_DEFAULT_POSTCODE, yar, null)
 
     expect(results.tokenValid).toBeFalsy()
   })
@@ -197,12 +199,12 @@ describe('/captchacheck test', () => {
 
     const captchacheck = require('../captchacheck')
 
-    yar.set('token', 'thisisatoken')
-    yar.set('tokenPostcode', '1111111')
-    yar.set('tokenSet', (Date.now() - 1) - (10 * 60 * 1000))
+    yar.set('token', TOKEN_NAME)
+    yar.set('tokenPostcode', TOKEN_DEFAULT_POSTCODE)
+    yar.set('tokenSet', (Date.now() - 1) - SESSION_TIMEOUT_IN_MS)
     yar.set('tokenValid', true)
 
-    const results = await captchacheck.captchaCheck('', '1111111', yar, null)
+    const results = await captchacheck.captchaCheck('', TOKEN_DEFAULT_POSTCODE, yar, null)
 
     expect(results.tokenValid).toBeFalsy()
   })
@@ -213,12 +215,12 @@ describe('/captchacheck test', () => {
 
     const captchacheck = require('../captchacheck')
 
-    yar.set('token', 'thisisatoken')
-    yar.set('tokenPostcode', '1111111')
-    yar.set('tokenSet', (Date.now() - 1) - (10 * 60 * 1000))
+    yar.set('token', TOKEN_NAME)
+    yar.set('tokenPostcode', TOKEN_DEFAULT_POSTCODE)
+    yar.set('tokenSet', (Date.now() - 1) - SESSION_TIMEOUT_IN_MS)
     yar.set('tokenValid', true)
 
-    const results = await captchacheck.captchaCheck('.UNFINISHED', '1111111', yar, null)
+    const results = await captchacheck.captchaCheck('.UNFINISHED', TOKEN_DEFAULT_POSTCODE, yar, null)
 
     expect(results.tokenValid).toBeFalsy()
   })
@@ -229,12 +231,12 @@ describe('/captchacheck test', () => {
 
     const captchacheck = require('../captchacheck')
 
-    yar.set('token', 'thisisatoken')
-    yar.set('tokenPostcode', '1111111')
-    yar.set('tokenSet', (Date.now() - 1) - (10 * 60 * 1000))
+    yar.set('token', TOKEN_NAME)
+    yar.set('tokenPostcode', TOKEN_DEFAULT_POSTCODE)
+    yar.set('tokenSet', (Date.now() - 1) - SESSION_TIMEOUT_IN_MS)
     yar.set('tokenValid', true)
 
-    const results = await captchacheck.captchaCheck('.UNSTARTED', '1111111', yar, null)
+    const results = await captchacheck.captchaCheck('.UNSTARTED', TOKEN_DEFAULT_POSTCODE, yar, null)
 
     expect(results.tokenValid).toBeFalsy()
   })
@@ -245,12 +247,12 @@ describe('/captchacheck test', () => {
 
     const captchacheck = require('../captchacheck')
 
-    yar.set('token', 'thisisatoken')
-    yar.set('tokenPostcode', '1111111')
-    yar.set('tokenSet', (Date.now() - 1) - (10 * 60 * 1000))
+    yar.set('token', TOKEN_NAME)
+    yar.set('tokenPostcode', TOKEN_DEFAULT_POSTCODE)
+    yar.set('tokenSet', (Date.now() - 1) - SESSION_TIMEOUT_IN_MS)
     yar.set('tokenValid', true)
 
-    const results = await captchacheck.captchaCheck('.EXPIRED', '1111111', yar, null)
+    const results = await captchacheck.captchaCheck('.EXPIRED', TOKEN_DEFAULT_POSTCODE, yar, null)
 
     expect(results.tokenValid).toBeFalsy()
   })
@@ -261,12 +263,12 @@ describe('/captchacheck test', () => {
 
     const captchacheck = require('../captchacheck')
 
-    yar.set('token', 'thisisatoken')
-    yar.set('tokenPostcode', '1111111')
-    yar.set('tokenSet', (Date.now() - 1) - (10 * 60 * 1000))
+    yar.set('token', TOKEN_NAME)
+    yar.set('tokenPostcode', TOKEN_DEFAULT_POSTCODE)
+    yar.set('tokenSet', (Date.now() - 1) - SESSION_TIMEOUT_IN_MS)
     yar.set('tokenValid', true)
 
-    const results = await captchacheck.captchaCheck('undefined', '1111111', yar, null)
+    const results = await captchacheck.captchaCheck('undefined', TOKEN_DEFAULT_POSTCODE, yar, null)
 
     expect(results.tokenValid).toBeFalsy()
   })
@@ -277,12 +279,12 @@ describe('/captchacheck test', () => {
 
     const captchacheck = require('../captchacheck')
 
-    yar.set('token', 'thisisatoken')
-    yar.set('tokenPostcode', '1111111')
-    yar.set('tokenSet', (Date.now() - 1) - (10 * 60 * 1000))
+    yar.set('token', TOKEN_NAME)
+    yar.set('tokenPostcode', TOKEN_DEFAULT_POSTCODE)
+    yar.set('tokenSet', (Date.now() - 1) - SESSION_TIMEOUT_IN_MS)
     yar.set('tokenValid', true)
 
-    const results = await captchacheck.captchaCheck('.FETCHING', '1111111', yar, null)
+    const results = await captchacheck.captchaCheck('.FETCHING', TOKEN_DEFAULT_POSTCODE, yar, null)
 
     expect(results.tokenValid).toBeFalsy()
   })
@@ -293,12 +295,12 @@ describe('/captchacheck test', () => {
 
     const captchacheck = require('../captchacheck')
 
-    yar.set('token', 'thisisatoken')
-    yar.set('tokenPostcode', '1111111')
-    yar.set('tokenSet', (Date.now() - 1) - (10 * 60 * 1000))
+    yar.set('token', TOKEN_NAME)
+    yar.set('tokenPostcode', TOKEN_DEFAULT_POSTCODE)
+    yar.set('tokenSet', (Date.now() - 1) - SESSION_TIMEOUT_IN_MS)
     yar.set('tokenValid', true)
 
-    const results = await captchacheck.captchaCheck('.ERROR', '1111111', yar, null)
+    const results = await captchacheck.captchaCheck('.ERROR', TOKEN_DEFAULT_POSTCODE, yar, null)
 
     expect(results.tokenValid).toBeFalsy()
   })
@@ -309,8 +311,8 @@ describe('/captchacheck test', () => {
 
     const captchacheck = require('../captchacheck')
 
-    yar.set('token', 'thisisatoken')
-    yar.set('tokenPostcode', '1111111')
+    yar.set('token', TOKEN_NAME)
+    yar.set('tokenPostcode', TOKEN_DEFAULT_POSTCODE)
     yar.set('tokenSet', Date.now())
     yar.set('tokenValid', true)
 
@@ -328,7 +330,7 @@ describe('/captchacheck test', () => {
 
     const captchacheck = require('../captchacheck')
 
-    const results = await captchacheck.captchaCheck('newtoken', '1111111', yar, null)
+    const results = await captchacheck.captchaCheck('newtoken', TOKEN_DEFAULT_POSTCODE, yar, null)
 
     expect(results.tokenValid).toBeTruthy()
     expect(util.post.mock.calls).toHaveLength(1)
@@ -342,11 +344,11 @@ describe('/captchacheck test', () => {
     })
 
     const captchacheck = require('../captchacheck')
-    yar.set('token', 'thisisatoken')
-    yar.set('tokenPostcode', '1111111')
+    yar.set('token', TOKEN_NAME)
+    yar.set('tokenPostcode', TOKEN_DEFAULT_POSTCODE)
     yar.set('tokenSet', Date.now())
     yar.set('tokenValid', true)
-    const results = await captchacheck.captchaCheck('newtoken', '1111111', yar, null)
+    const results = await captchacheck.captchaCheck('newtoken', TOKEN_DEFAULT_POSTCODE, yar, null)
 
     expect(results.tokenValid).toBeTruthy()
     expect(util.post.mock.calls).toHaveLength(1)
@@ -360,8 +362,8 @@ describe('/captchacheck test', () => {
     })
 
     const captchacheck = require('../captchacheck')
-    yar.set('token', 'thisisatoken')
-    yar.set('tokenPostcode', '1111111')
+    yar.set('token', TOKEN_NAME)
+    yar.set('tokenPostcode', TOKEN_DEFAULT_POSTCODE)
     yar.set('tokenSet', Date.now())
     yar.set('tokenValid', true)
     const results = await captchacheck.captchaCheck('newtoken', '11111112', yar, null)
@@ -381,7 +383,7 @@ describe('/captchacheck test', () => {
     let notifyResult
     const server = { methods: { notify: (error) => { notifyResult = error } } }
 
-    const results = await captchacheck.captchaCheck('newtoken', '1111111', yar, server)
+    const results = await captchacheck.captchaCheck('newtoken', TOKEN_DEFAULT_POSTCODE, yar, server)
 
     expect(results.tokenValid).toBeFalsy()
     expect(util.post.mock.calls).toHaveLength(1)
@@ -398,7 +400,7 @@ describe('/captchacheck test', () => {
     const captchacheck = require('../captchacheck')
     const server = { methods: { } }
 
-    const results = await captchacheck.captchaCheck('newtoken', '1111111', yar, server)
+    const results = await captchacheck.captchaCheck('newtoken', TOKEN_DEFAULT_POSTCODE, yar, server)
 
     expect(results.tokenValid).toBeFalsy()
     expect(util.post.mock.calls).toHaveLength(1)
@@ -414,7 +416,7 @@ describe('/captchacheck test', () => {
     let notifyResult
     const server = { methods: { notify: (error) => { notifyResult = error } } }
 
-    const results = await captchacheck.captchaCheck('newtoken', '1111111', yar, server)
+    const results = await captchacheck.captchaCheck('newtoken', TOKEN_DEFAULT_POSTCODE, yar, server)
 
     expect(results.tokenValid).toBeTruthy()
     expect(util.post.mock.calls).toHaveLength(1)
@@ -430,7 +432,7 @@ describe('/captchacheck test', () => {
     const server = { methods: { } }
     const captchacheck = require('../captchacheck')
 
-    const results = await captchacheck.captchaCheck('newtoken', '1111111', yar, server)
+    const results = await captchacheck.captchaCheck('newtoken', TOKEN_DEFAULT_POSTCODE, yar, server)
 
     expect(results.tokenValid).toBeTruthy()
     expect(util.post.mock.calls).toHaveLength(1)

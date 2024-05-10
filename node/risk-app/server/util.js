@@ -12,7 +12,6 @@ if (config.http_proxy) {
     agent: new HttpsProxyAgent(config.http_proxy)
   })
 }
-
 function get (url, options, ext = false) {
   const thisWreck = (ext && wreckExt) ? wreckExt : wreck
   return thisWreck.get(url, options)
@@ -49,42 +48,10 @@ function cleanseLocation (location) {
   }
 }
 
-function convertLocationToNGR (location) {
-  const splitLocation = location.split(',')
-  const east = splitLocation[0]
-  const north = splitLocation[1]
-  let eX = east / 500000
-  let nX = north / 500000
-  let tmp = Math.floor(eX) - 5.0 * Math.floor(nX) + 17.0
-  nX = 5 * (nX - Math.floor(nX))
-  eX = 20 - 5.0 * Math.floor(nX) + Math.floor(5.0 * (eX - Math.floor(eX)))
-  if (eX > 7.5) {
-    eX = eX + 1 // I is not used
-  }
-  if (tmp > 7.5) {
-    tmp = tmp + 1 // I is not used
-  }
-  const eing = east - (Math.floor(east / 100000) * 100000)
-  const ning = north - (Math.floor(north / 100000) * 100000)
-  let estr = eing.toFixed(0)
-  let nstr = ning.toFixed(0)
-  while (estr.length < 5) {
-    estr = '0' + estr
-  }
-  while (nstr.length < 5) {
-    nstr = '0' + nstr
-  }
-  const ngr = String.fromCharCode(tmp + 65) +
-    String.fromCharCode(eX + 65) +
-    estr + nstr
-  return ngr
-}
-
 module.exports = {
   get,
   getJson,
   post,
   postJson,
-  cleanseLocation,
-  convertLocationToNGR
+  cleanseLocation
 }

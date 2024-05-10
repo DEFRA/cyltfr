@@ -95,15 +95,17 @@ module.exports = [
         return h.redirect('/postcode#')
       }
       let errorMessage
+      if (addresses.length <= 0) {
+        errorMessage = 'Enter a valid postcode'
+      }
       if (address < 0) {
         errorMessage = 'Select an address'
-        if (addresses.length <= 0) {
-          errorMessage = 'Enter a valid postcode'
-        }
-        let warnings
-        try {
-          warnings = await getWarnings(postcode, request)
-        } catch {}
+      }
+      let warnings
+      try {
+        warnings = await getWarnings(postcode, request)
+      } catch {}
+      if (errorMessage) {
         const model = new SearchViewModel(postcode, addresses, errorMessage, warnings)
 
         return h.view('search', model)
