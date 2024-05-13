@@ -1,3 +1,4 @@
+const STATUS_CODES = require('http2').constants
 const createServer = require('../../../server')
 let server
 
@@ -11,12 +12,12 @@ afterAll(async () => {
 })
 
 describe('risk data page', () => {
-  test('gets the risk data page with an 200OK', async () => {
+  test('gets the risk data page with an OK', async () => {
     const options = {
       method: 'GET',
       url: '/risk-data'
     }
     const response = await server.inject(options)
-    expect(response.statusCode).toEqual(200)
+    expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
   })
 })

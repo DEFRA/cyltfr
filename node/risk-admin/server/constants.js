@@ -1,4 +1,5 @@
 module.exports = {
-  dateFormat: 'DD/MM/YYYY',
-  longDateFormat: 'dddd D MMMM YYYY'
+  DATEFORMAT: 'DD/MM/YYYY',
+  DATETIMEFORMAT: 'DD/MM/YYYY h:mma',
+  LONGDATEFORMAT: 'dddd D MMMM YYYY'
 }

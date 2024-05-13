@@ -35,10 +35,6 @@ async function createServer () {
   await server.register(require('./plugins/cookies'))
   await server.register(require('blipp'))
 
-  if (config.mockAddressService) {
-    require('../mock/address')
-    server.log('info', 'Address server is being mocked')
-  }
   if (config.errbit.postErrors) {
     await server.register({
       plugin: require('./plugins/airbrake'),
