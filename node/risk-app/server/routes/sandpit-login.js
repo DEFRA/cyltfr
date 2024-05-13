@@ -1,6 +1,7 @@
 const joi = require('joi')
 const config = require('../config')
 const sndPassword = require('../services/snd-password')
+const SandpitViewModel = require('../models/sandpit-login')
 
 module.exports = [
   {
@@ -36,7 +37,10 @@ module.exports = [
         request.yar.set('isAdmin', '')
         request.cookieAuth.clear()
       } else {
-        console.log('Failed to login')
+        const errorMessage = 'Incorrect username or password'
+        const model = new SandpitViewModel(errorMessage)
+
+        return h.view('sandpit-login', model)
       }
       return h.redirect(destination)
     },

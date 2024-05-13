@@ -1,22 +1,44 @@
-{% extends 'layout.html' %}
-
 {% from "components/notification-banner/macro.njk" import govukNotificationBanner %}
 {% from "components/radios/macro.njk" import govukRadios %}
 {% from "components/input/macro.njk" import govukInput %}
+{% from "components/password-input/macro.njk" import govukPasswordInput %}
 {% from "components/back-link/macro.njk" import govukBackLink %}
 {% from "components/table/macro.njk" import govukTable %}
 
 {% set pageTitle = "Sandpit Login" %}
 
-{% block content %}
+<body>
+  <style>
+    body {
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    form {
+      width: 250px;
+    }
+
+    .govuk-form-group {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    #error-message {
+      font-weight: 700;
+    }
+  </style>
   <main>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
 
+
         <h1 class="govuk-heading-l">Sandpit Login</h1>
+        
         <p class="govuk-body">
           You must be an authorised user to access the sandpit environment.
         </p>
+
+        <p id="error-message">{{ errorMessage.text }}</p>
 
         <form method="POST">
           {{ govukInput({
@@ -28,11 +50,11 @@
             name: 'username',
             classes: 'govuk-input--width-10'
           }) }}
-          {{ govukInput({
+          {{ govukPasswordInput({
             label: {
               text: 'Password'
             },
-            id: 'password',
+            id: 'password-input',
             value: "",
             name: 'password',
             classes: 'govuk-input--width-10'
@@ -42,4 +64,4 @@
       </div>
     </div>
   </main>
-{% endblock %}
+</body>
