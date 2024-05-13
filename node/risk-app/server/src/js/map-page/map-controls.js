@@ -140,8 +140,12 @@ export function closeKey () {
     mapControlsConsts.scenarioSelectionVelocity.style.top = null
   }
 
+  const depthDisplay = window.getComputedStyle(mapControlsConsts.scenarioBarDepth).display
+  const velocityDisplay = window.getComputedStyle(mapControlsConsts.scenarioBarVelocity).display
+
   mapControlsConsts.openKeyBtn.style.display = 'block'
-  if (mapControlsConsts.scenarioBarDepth.style.display === 'block' || mapControlsConsts.scenarioBarVelocity.style.display === 'block') {
+
+  if (depthDisplay === 'block' || velocityDisplay === 'block') {
     mapControlsConsts.osLogo.classList.add('os-logo-position-change')
   } else {
     mapControlsConsts.osLogo.classList.remove('os-logo-position-change')
