@@ -116,7 +116,7 @@ export function showOrHideAdvancedToggleText () {
 
 export function openKey () {
   mapControlsConsts.keyDisplay.style.display = 'block'
-  mapControlsConsts.openKeyBtn.style.display = 'none'
+  mapControlsConsts.openKeyBtn.classList.add('hide')
   mapControlsConsts.scenarioSelectionDepth.classList.add('hide')
   mapControlsConsts.scenarioSelectionVelocity.classList.add('hide')
   showOrHideAdvancedToggleText()
@@ -143,7 +143,7 @@ export function closeKey () {
   const depthDisplay = window.getComputedStyle(mapControlsConsts.scenarioBarDepth).display
   const velocityDisplay = window.getComputedStyle(mapControlsConsts.scenarioBarVelocity).display
 
-  mapControlsConsts.openKeyBtn.style.display = 'block'
+  mapControlsConsts.openKeyBtn.classList.remove('hide')
 
   if (depthDisplay === 'block' || velocityDisplay === 'block') {
     mapControlsConsts.osLogo.classList.add('os-logo-position-change')
