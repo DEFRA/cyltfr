@@ -1,0 +1,42 @@
+{
+  "name": "risk-data",
+  "version": "1.0.0",
+  "description": "Service to return admin data for CYLTFR service",
+  "main": "index.js",
+  "engines": {
+    "node": ">=20.11.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matthew Collins <matthew.collins@defra.gov.uk>",
+  "license": "OGL-UK-3.0",
+  "dependencies": {
+    "@hapi/boom": "^10.0.1",
+    "@hapi/hapi": "^21.3.9",
+    "blipp": "^4.0.2",
+    "hapi-pino": "^12.1.0",
+    "joi": "^17.13.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "standard": "^17.1.0"
+  },
+  "standard": {
+    "env": [
+      "jest"
+    ]
+  },
+  "jest": {
+    "automock": false,
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "server/**/*.js"
+    ],
+    "coverageReporters": [
+      "text",
+      "lcov"
+    ],
+    "coverageDirectory": "test/output"
+  }
+}
