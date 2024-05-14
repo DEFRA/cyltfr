@@ -1,4 +1,3 @@
-// const boom = require('@hapi/boom')
 const util = require('util')
 const jsonexport = require('jsonexport')
 const config = require('../config')
@@ -25,13 +24,22 @@ module.exports = {
         const file = JSON.parse(files[i].Body.toString())
 
         return file.features.map(feature => {
-          const { start, end, info } = feature.properties
+          const { start, end, info, riskType, riskOverride } = feature.properties
+
+          let FloodRiskType = ''
+          let FloodRiskOverride = ''
+          if (comment.type === 'holding') {
+            FloodRiskType = riskType === 'Rivers and the sea' ? riskType : 'Surface water'
+            FloodRiskOverride = riskType === 'Rivers and the sea' ? '' : riskOverride
+          }
 
           return {
             ...comment,
             start,
             end,
             info,
+            FloodRiskType,
+            FloodRiskOverride,
             url: `${baseUrl}/comment/view/${comment.id}`
           }
         })

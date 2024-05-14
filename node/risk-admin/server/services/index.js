@@ -7,7 +7,6 @@ const logger = console.log.bind(console)
 
 function commentFilter (c) {
   return c.approvedBy
-  // return !c.loaded && c.approvedBy && moment().isBetween(c.start, c.end)
 }
 
 async function processManifest (provider, log = logger) {
@@ -69,9 +68,10 @@ async function processManifest (provider, log = logger) {
       // log('Found the extracted shapefile', shapeFileName)
 
       // Shell env vars
-      const env = Object.assign({
+      const env = {
+        ...process.env,
         GEOSPATIALFILE: tmpFileName
-      }, process.env)
+      }
 
       // Load data
       log(`Loading the geospatial ${tmpFileName}`)
@@ -93,7 +93,7 @@ async function processManifest (provider, log = logger) {
       result[comment.id] = true
     } catch (err) {
       comment.lastError = {
-        message: (err && err.toString()) || 'An error occured processing the file',
+        message: (err?.toString()) || 'An error occured processing the file',
         timestamp: new Date()
       }
 

@@ -5,7 +5,7 @@ const config = require('../config')
 module.exports = {
   method: 'GET',
   path: '/comment/file/{key}',
-  handler: async (request, h) => {
+  handler: async (request, _h) => {
     const { key } = request.params
 
     try {
