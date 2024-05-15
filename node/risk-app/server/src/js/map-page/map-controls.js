@@ -115,7 +115,7 @@ export function showOrHideAdvancedToggleText () {
 }
 
 export function openKey () {
-  mapControlsConsts.keyDisplay.style.display = 'block'
+  mapControlsConsts.keyDisplay.classList.remove('hide')
   mapControlsConsts.openKeyBtn.classList.add('hide')
   mapControlsConsts.scenarioSelectionDepth.classList.add('hide')
   mapControlsConsts.scenarioSelectionVelocity.classList.add('hide')
@@ -123,7 +123,7 @@ export function openKey () {
 }
 
 export function closeKey () {
-  mapControlsConsts.keyDisplay.style.display = 'none'
+  mapControlsConsts.keyDisplay.classList.add('hide')
   if (window.location.href.includes('?')) {
     mapControlsConsts.advancedToggle.style.display = 'block'
   }

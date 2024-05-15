@@ -65,6 +65,7 @@ export const mapPageConsts = {
   advancedToggle,
   boundaryContainer,
   closeKeyBtn,
+  deviceScreenWidth,
   exitMapBtn,
   extentInfoReservoirs,
   extentInfoRs,
