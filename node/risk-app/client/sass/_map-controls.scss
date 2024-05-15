@@ -352,6 +352,10 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   .defra-map__advanced::-moz-focus-inner {
     border: 0;
   }
+
+  .key-adv-button-display {
+  display: block;
+}
   
   .ol-zoom {
     float: right;

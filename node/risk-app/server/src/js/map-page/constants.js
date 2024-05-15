@@ -60,6 +60,7 @@ const leftMove = -150
 const keyContainer = 'key-container'
 const keyAdvOptionsContainer = 'key-adv-options-container'
 const extentDesc = 'extent-desc-container'
+const keyAdvButtonDisplay = 'key-adv-button-display'
 
 export const mapPageConsts = {
   advancedToggle,
@@ -138,7 +139,8 @@ export const mapControlsConsts = {
   lowRadioVelocity,
   keyContainer,
   keyAdvOptionsContainer,
-  extentDesc
+  extentDesc,
+  keyAdvButtonDisplay
 }
 
 export const screenAdjustConsts = {

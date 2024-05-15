@@ -125,7 +125,7 @@ export function openKey () {
 export function closeKey () {
   mapControlsConsts.keyDisplay.classList.add('hide')
   if (window.location.href.includes('?')) {
-    mapControlsConsts.advancedToggle.style.display = 'block'
+    mapControlsConsts.advancedToggle.classList.add(mapControlsConsts.keyAdvButtonDisplay)
   }
 
   if (mapControlsConsts.depthRadio.checked) {
