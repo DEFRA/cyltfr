@@ -1,6 +1,7 @@
 const joi = require('joi')
 const config = require('../config')
 const sndPassword = require('../services/snd-password')
+const { plugin } = require('@hapi/h2o2')
 
 module.exports = [
   {
@@ -8,6 +9,19 @@ module.exports = [
     path: '/login',
     handler: async (request, h) => {
       let PasswordValues = {}
+      let error = false
+      let loggedIn = false
+
+      if (request.query.failed === true) {
+        error = true
+      } else {
+        request.query.failed === false
+      }
+
+      if (request.query.auth === true) {
+        loggedIn = true
+      }
+
       if (request.yar.get('isAdmin') === true) {
         PasswordValues = await sndPassword.PasswordValues()
       }
@@ -24,19 +38,27 @@ module.exports = [
         isAdmin: request.yar.get('isAdmin'),
         linkurl: PasswordValues.pwConfigLinkUrl ? PasswordValues.pwConfigLinkUrl : '',
         defaultdestination,
-        destinationurl: PasswordValues.pwConfigRedirectUrl ? PasswordValues.pwConfigRedirectUrl : ''
+        destinationurl: PasswordValues.pwConfigRedirectUrl ? PasswordValues.pwConfigRedirectUrl : '',
+        error,
+        loggedIn
       })
     },
     options: {
       description: 'Get Login Page',
       auth: {
         strategy: 'session',
-        mode: 'try'
+        mode: 'optional'
+      },
+      plugins: {
+        cookie: {
+          redirectTo: false
+        }
       },
       validate: {
         query: joi.object({
-          updated: joi.boolean().default(false)
-        }).required()
+          failed: joi.boolean().default(false),
+          auth: joi.boolean().default(false)
+        }).optional()
       }
     }
   },
@@ -46,14 +68,19 @@ module.exports = [
     handler: async (request, h) => {
       const { password, generate, url } = request.payload
       let isAdmin = false
-      const destination = '/login'
+      let destination = 'login'
+
       if ((password) && (password === config.authcookie.sitepassword)) {
         isAdmin = true
         request.yar.set('isAdmin', true)
         request.cookieAuth.set({ isAdmin: true })
+        destination = 'login?auth=true'
       } else if (password) {
         request.yar.set('isAdmin', '')
         request.cookieAuth.clear()
+        destination = 'login?failed=true'
+      } else {
+        destination = 'login?failed=true'
       }
       if (request.yar.get('isAdmin')) { isAdmin = true }
       if (isAdmin) {
@@ -63,6 +90,7 @@ module.exports = [
           sndPassword.setNewPassword(randompass, linkurl, url)
         }
       }
+
       return h.redirect(destination)
     },
     options: {

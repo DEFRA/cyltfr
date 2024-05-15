@@ -44,7 +44,7 @@ async function createServer () {
       isSecure: config.authcookie.secure,
       isSameSite: 'Lax'
     },
-    redirectTo: '/sandpit-login',
+    redirectTo: '/login',
     validate: sndPassword.validate
   })
 
