@@ -15,7 +15,7 @@ module.exports = [
       if (request.query.failed === true) {
         error = true
       } else {
-        error === false
+        error = false
       }
 
       if (request.query.auth === true) {
@@ -68,6 +68,7 @@ module.exports = [
     handler: async (request, h) => {
       const { password, generate, url } = request.payload
       let isAdmin = false
+      let destination
 
       if ((password) && (password === config.authcookie.sitepassword)) {
         isAdmin = true
