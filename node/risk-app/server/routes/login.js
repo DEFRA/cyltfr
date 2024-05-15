@@ -14,8 +14,6 @@ module.exports = [
 
       if (request.query.failed === true) {
         error = true
-      } else {
-        error = false
       }
 
       if (request.query.auth === true) {
