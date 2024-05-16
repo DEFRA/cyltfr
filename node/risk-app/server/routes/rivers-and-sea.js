@@ -1,4 +1,6 @@
 const riskService = require('../services/risk')
+const boom = require('@hapi/boom')
+const errors = require('../models/errors.json')
 const RiversAndSeaModel = require('../models/rivers-and-sea')
 
 module.exports = {
@@ -6,20 +8,24 @@ module.exports = {
   path: '/rivers-and-sea',
   handler: async (request, h) => {
     const address = request.yar.get('address')
-    console.log('addess: ', address)
-    const { x, y } = address
-    const radius = 15
 
-    const backLinkUri = '/risk'
     if (!address) {
       return h.redirect('/postcode')
     }
 
-    const risk = await riskService.getByCoordinates(x, y, radius)
-    const riskProbability = risk.riverAndSeaRisk.probabilityForBand
-    const model = new RiversAndSeaModel(riskProbability, address, backLinkUri)
+    const { x, y } = address
+    const radius = 15
+    const backLinkUri = '/risk'
 
-    return h.view('rivers-and-sea', model)
+    try {
+      const risk = await riskService.getByCoordinates(x, y, radius)
+      const riskProbability = risk.riverAndSeaRisk.probabilityForBand
+      const model = new RiversAndSeaModel(riskProbability, address, backLinkUri)
+
+      return h.view('rivers-and-sea', model)
+    } catch (err) {
+      return boom.badRequest(errors.riskProfile.message, err)
+    }
   },
   options: {
     description: 'Understand rivers and the sea page'
