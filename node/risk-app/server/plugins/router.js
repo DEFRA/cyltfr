@@ -18,7 +18,8 @@ const routes = [].concat(
   require('../routes/cookies'),
   require('../routes/privacy-notice'),
   require('../routes/terms-and-conditions'),
-  require('../routes/healthcheck')
+  require('../routes/healthcheck'),
+  require('../routes/rivers-and-sea')
 )
 const config = require('../config')
 
