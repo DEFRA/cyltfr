@@ -1,21 +1,17 @@
 const STATUS_CODES = require('http2').constants
 const createServer = require('../../../server')
 const riskService = require('../../services/risk')
+const mockYar = require('@hapi/yar')
+
+console.log(mockYar.plugin.register)
 
 jest.mock('@hapi/yar', () => ({
   plugin: {
     name: '@hapi/yar',
-    register: jest.fn(async (server, options) => {
+    register: jest.fn(async (server, _options) => {
       server.decorate('request', 'yar', {
         set: jest.fn(),
-        get: jest.fn(() => {
-          return {
-            address: {
-              x: 360948.42,
-              y: 387764.37
-            }
-          }
-        })
+        get: jest.fn()
       })
     })
   }
@@ -44,14 +40,14 @@ describe('GET /rivers-and-sea', () => {
   it('returns view with model if risk data is retrieved successfully', async () => {
     const mockRequest = {
       method: 'GET',
-      url: '/rivers-and-sea',
-      payload: {
-        address: {
-          x: 360948.42,
-          y: 387764.37
-        }
-      }
+      url: '/rivers-and-sea'
     }
+
+    mockYar.plugin.register.mockImplementationOnce(() => {
+      return { address: { x: 123, y: 123 } }
+    })
+
+    console.log(mockYar)
 
     const mockResponse = { riverAndSeaRisk: { probabilityForBand: 'high' } }
     riskService.getByCoordinates.mockResolvedValue(mockResponse)
@@ -62,20 +58,16 @@ describe('GET /rivers-and-sea', () => {
     expect(payload).toMatch(/Rivers and the sea: understand your flood risk/g)
   })
 
-  // it('redirects to /postcode if address is not set in session', async () => {
-  //   const request = {
-  //     method: 'GET',
-  //     url: '/rivers-and-sea',
-  //     yar: {
-  //       get: jest.fn().mockReturnValue(null)
-  //     }
-  //   }
+  it('redirects to postcode page if user does not have an address set in session', async () => {
+    const mockRequest = {
+      method: 'GET',
+      url: '/rivers-and-sea'
+    }
+    const response = await server.inject(mockRequest)
 
-  //   const response = await server.inject(request)
-
-  //   expect(response.statusCode).toBe(302)
-  //   expect(response.headers.location).toBe('/postcode')
-  // })
+    expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_FOUND)
+    expect(response.headers.location).toBe('/postcode')
+  })
 
   // it('returns 400 if there is an error retrieving risk data', async () => {
   //   const address` = { x: 1, y: 2 }
