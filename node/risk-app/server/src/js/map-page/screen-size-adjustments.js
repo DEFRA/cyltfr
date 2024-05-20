@@ -10,7 +10,7 @@ export function adjustPosition () {
 }
 
 function adjustLogoAndCopyright () {
-  if ((screenAdjustConsts.scenarioBarDepth.style.display === 'block' || screenAdjustConsts.scenarioBarVelocity.style.display === 'block') &&
+  if ((screenAdjustConsts.scenarioBarDepth.classList.contains('hide') || screenAdjustConsts.scenarioBarVelocity.classList.contains('hide')) &&
   window.innerWidth <= screenAdjustConsts.deviceScreenWidth) {
     screenAdjustConsts.osLogo.classList.add('os-logo-position-change')
     screenAdjustConsts.bottomCopyrightContainer.classList.add('hide')
@@ -23,10 +23,10 @@ function adjustLogoAndCopyright () {
 }
 
 function keyToggleAdjustments () {
-  if (screenAdjustConsts.keyDisplay.style.display === 'block' && window.innerWidth <= screenAdjustConsts.deviceScreenWidth) {
+  if (!screenAdjustConsts.keyDisplay.classList.contains('hide') && window.innerWidth <= screenAdjustConsts.deviceScreenWidth) {
     screenAdjustConsts.scenarioSelectionDepth.style.display = 'none'
     screenAdjustConsts.scenarioSelectionVelocity.style.display = 'none'
-  } else if (screenAdjustConsts.keyDisplay.style.display === 'block' && window.innerWidth > screenAdjustConsts.deviceScreenWidth) {
+  } else if (!screenAdjustConsts.keyDisplay.classList.contains('hide') && window.innerWidth > screenAdjustConsts.deviceScreenWidth) {
     if (window.location.href.includes('map=RiversOrSea') ||
     window.location.href.includes('map=SurfaceWater') ||
     window.location.href.includes('map=Reservoirs')) {

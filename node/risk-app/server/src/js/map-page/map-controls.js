@@ -56,7 +56,7 @@ export function handleRadioChange (selected, type) {
 
 export function toggleAdvancedOptions () {
   if (window.innerWidth <= mapControlsConsts.deviceScreenWidth) {
-    mapControlsConsts.keyDisplay.style.display = 'block'
+    mapControlsConsts.keyDisplay.classList.remove('hide')
     mapControlsConsts.scenarioSelectionDepth.classList.add('hide')
     showOrHideAdvancedToggleText()
   }
