@@ -2,6 +2,7 @@ const riskService = require('../services/risk')
 const boom = require('@hapi/boom')
 const errors = require('../models/errors.json')
 const RiversAndSeaModel = require('../models/rivers-and-sea')
+const config = require('../config')
 
 module.exports = {
   method: 'GET',
@@ -17,14 +18,22 @@ module.exports = {
     const radius = 15
     const backLinkUri = '/risk'
 
-    try {
-      const risk = await riskService.getByCoordinates(x, y, radius)
-      const riskProbability = risk.riverAndSeaRisk.probabilityForBand
-      const model = new RiversAndSeaModel(riskProbability, address, backLinkUri)
-
-      return h.view('rivers-and-sea', model)
-    } catch (err) {
-      return boom.badRequest(errors.riskProfile.message, err)
+    if (config.riskPageFlag) {
+      try {
+        let riskProbability
+        const risk = await riskService.getByCoordinates(x, y, radius)
+        if (risk.riverAndSeaRisk) {
+          riskProbability = risk.riverAndSeaRisk.probabilityForBand
+        } else {
+          riskProbability = 'Very low'
+        }
+        const model = new RiversAndSeaModel(riskProbability, address, backLinkUri)
+        return h.view('rivers-and-sea', model)
+      } catch (err) {
+        return boom.badRequest(errors.riskProfile.message, err)
+      }
+    } else {
+      return boom.forbidden(errors.pageNotAvailable.message)
     }
   },
   options: {
