@@ -30,14 +30,12 @@ function keyToggleAdjustments () {
     if (window.location.href.includes('map=RiversOrSea') ||
     window.location.href.includes('map=SurfaceWater') ||
     window.location.href.includes('map=Reservoirs')) {
-      screenAdjustConsts.advancedToggle.style.display = 'block'
+      screenAdjustConsts.advancedToggle.classList.add(screenAdjustConsts.keyAdvButtonDisplay)
     }
     if (screenAdjustConsts.depthRadio.checked) {
-      screenAdjustConsts.scenarioBarDepth.style.display = 'block'
       screenAdjustConsts.scenarioSelectionDepth.classList.remove('hide')
     }
     if (screenAdjustConsts.velocityRadio.checked) {
-      screenAdjustConsts.scenarioBarVelocity.style.display = 'block'
       screenAdjustConsts.scenarioSelectionVelocity.classList.remove('hide')
     }
   }

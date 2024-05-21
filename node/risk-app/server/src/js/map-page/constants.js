@@ -156,5 +156,6 @@ export const screenAdjustConsts = {
   osLogo,
   topCopyrightContainer,
   bottomCopyrightContainer,
-  keyDisplay
+  keyDisplay,
+  keyAdvButtonDisplay
 }
