@@ -24,8 +24,8 @@ function adjustLogoAndCopyright () {
 
 function keyToggleAdjustments () {
   if (!screenAdjustConsts.keyDisplay.classList.contains('hide') && window.innerWidth <= screenAdjustConsts.deviceScreenWidth) {
-    screenAdjustConsts.scenarioSelectionDepth.style.display = 'none'
-    screenAdjustConsts.scenarioSelectionVelocity.style.display = 'none'
+    screenAdjustConsts.scenarioSelectionDepth.classList.add('hide')
+    screenAdjustConsts.scenarioSelectionVelocity.classList.add('hide')
   } else if (!screenAdjustConsts.keyDisplay.classList.contains('hide') && window.innerWidth > screenAdjustConsts.deviceScreenWidth) {
     if (window.location.href.includes('map=RiversOrSea') ||
     window.location.href.includes('map=SurfaceWater') ||
@@ -35,12 +35,10 @@ function keyToggleAdjustments () {
     if (screenAdjustConsts.depthRadio.checked) {
       screenAdjustConsts.scenarioBarDepth.style.display = 'block'
       screenAdjustConsts.scenarioSelectionDepth.classList.remove('hide')
-      screenAdjustConsts.scenarioSelectionDepth.style.display = 'flex'
     }
     if (screenAdjustConsts.velocityRadio.checked) {
       screenAdjustConsts.scenarioBarVelocity.style.display = 'block'
       screenAdjustConsts.scenarioSelectionVelocity.classList.remove('hide')
-      screenAdjustConsts.scenarioSelectionVelocity.style.display = 'flex'
     }
   }
 }
@@ -48,10 +46,8 @@ function keyToggleAdjustments () {
 function scenarioBarAdjustments () {
   if (screenAdjustConsts.depthRadio.checked && window.innerWidth > screenAdjustConsts.deviceScreenWidth) {
     screenAdjustConsts.scenarioSelectionDepth.classList.remove('hide')
-    screenAdjustConsts.scenarioSelectionDepth.style.display = 'flex'
   } else if (screenAdjustConsts.velocityRadio.checked && window.innerWidth > screenAdjustConsts.deviceScreenWidth) {
     screenAdjustConsts.scenarioSelectionVelocity.classList.remove('hide')
-    screenAdjustConsts.scenarioSelectionVelocity.style.display = 'flex'
   }
 }
 
