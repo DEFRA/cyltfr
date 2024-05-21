@@ -1,5 +1,6 @@
 const STATUS_CODES = require('http2').constants
 const createServer = require('../../../server')
+const riskService = require('../../services/risk')
 
 let mockAddress
 
@@ -15,11 +16,7 @@ jest.mock('@hapi/yar', () => ({
   }
 }))
 
-jest.mock('../../services/risk', () => ({
-  getByCoordinates: jest.fn().mockResolvedValue({
-    riverAndSeaRisk: { probabilityForBand: 'high' }
-  })
-}))
+jest.mock('../../services/risk')
 
 describe('GET /rivers-and-sea', () => {
   let server
@@ -34,6 +31,7 @@ describe('GET /rivers-and-sea', () => {
   })
 
   afterEach(async () => {
+    riskService.__resetReturnValue()
     jest.clearAllMocks()
   })
 
@@ -44,14 +42,14 @@ describe('GET /rivers-and-sea', () => {
       method: 'GET',
       url: '/rivers-and-sea'
     }
-
+    riskService.__updateReturnValue({ riverAndSeaRisk: { probabilityForBand: 'high' } })
     const response = await server.inject(mockRequest)
 
     expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_FOUND)
     expect(response.headers.location).toBe('/postcode')
   })
 
-  it('returns 200 OK and renders view if user has an address set in session', async () => {
+  it('returns 200 OK and renders rivers and sea page if user has an address set in session', async () => {
     mockAddress = { x: 123, y: 123 }
 
     const mockRequest = {
@@ -59,9 +57,28 @@ describe('GET /rivers-and-sea', () => {
       url: '/rivers-and-sea'
     }
 
+    riskService.__updateReturnValue({ riverAndSeaRisk: { probabilityForBand: 'high' } })
+
     const response = await server.inject(mockRequest)
 
     expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
-    expect(response.result).toContain('rivers-and-sea') 
+    expect(response.result).toContain('rivers-and-sea')
+  })
+
+  it('should show an error page if an error occurs', async () => {
+    mockAddress = { x: 123, y: 123 }
+
+    const mockRequest = {
+      method: 'GET',
+      url: '/rivers-and-sea'
+    }
+
+    riskService.__updateReturnValue(() => {
+      throw new Error('User not found')
+    })
+
+    const response = await server.inject(mockRequest)
+
+    expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_BAD_REQUEST)
   })
 })
