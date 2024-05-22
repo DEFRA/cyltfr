@@ -3,6 +3,7 @@ const createServer = require('../../../server')
 const riskService = require('../../services/risk')
 const { getByCoordinates } = require('../../services/risk')
 const config = require('../../config')
+const riversAndSeaRouter = require('../rivers-and-sea')
 
 let mockAddress
 
@@ -22,6 +23,8 @@ jest.mock('../../services/risk')
 
 describe('GET /rivers-and-sea', () => {
   let server
+  let h
+  let request
 
   beforeAll(async () => {
     server = await createServer()
@@ -29,6 +32,15 @@ describe('GET /rivers-and-sea', () => {
   })
 
   beforeEach(async () => {
+    request = {
+      yar: {
+        get: jest.fn().mockReturnValue({ x: 123, y: 456 })
+      }
+    }
+
+    h = {
+      view: jest.fn()
+    }
     config.riskPageFlag = true
   })
 
@@ -91,5 +103,19 @@ describe('GET /rivers-and-sea', () => {
     const response = await server.inject(mockRequest)
 
     expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_BAD_REQUEST)
+  })
+
+  it('should return "Very low" risk probability when riverAndSeaRisk is not present', async () => {
+    riskService.getByCoordinates.mockResolvedValue({})
+
+    const handler = riversAndSeaRouter.handler
+    await handler(request, h)
+
+    expect(h.view).toHaveBeenCalledWith(
+      'rivers-and-sea',
+      expect.objectContaining({
+        riskProbability: 'Very low'
+      })
+    )
   })
 })
