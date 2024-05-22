@@ -27,7 +27,7 @@
       role="navigation">
       <ol class="gem-c-contents-list__list">
         <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
-          <a class="gem-c-contents-list__link govuk-link" href="/surface-water" previewlistener="true">Surface
+          <a class="gem-c-contents-list__link govuk-link" href="/surface-water" previewlistener="true" aria-label="A link to the surface water understand your flood risk page.">Surface
             water</a>
         </li>
         <li
@@ -36,7 +36,7 @@
           <strong>Rivers and the sea</strong>
         </li>
         <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
-          <a class="gem-c-contents-list__link govuk-link" href="groundwater-and-reservoirs"
+          <a class="gem-c-contents-list__link govuk-link" href="/ground-water" aria-label="A link to the ground water and reservoirs understand your flood risk page."
             previewlistener="true">Groundwater and reservoirs</a>
         </li>
       </ol>
@@ -51,8 +51,8 @@
             <span>{{ riskProbability }}</span>
           </strong>
         </p>
-        <details class="govuk-details govuk-!-margin-bottom-6 govuk-!-margin-top-2" data-module="govuk-details" open="">
-          <summary class="govuk-details__summary">
+        <details class="govuk-details govuk-!-margin-bottom-6 govuk-!-margin-top-2" data-module="govuk-details">
+          <summary class="govuk-details__summary" aria-label="Open dropdown for further information on the flood ratings.">
             <span class="govuk-details__summary-text">
               What the flood risk ratings mean
             </span>
@@ -99,7 +99,7 @@
   
         <nav class="govuk-pagination govuk-pagination--block" role="navigation" aria-label="results">
           <div class="govuk-pagination__prev">
-            <a class="govuk-link govuk-pagination__link" href="results-full-sw.html" rel="prev" previewlistener="true">
+            <a class="govuk-link govuk-pagination__link" href="/surface-water" rel="prev" previewlistener="true">
               <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg"
                 height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
                 <path
@@ -110,7 +110,7 @@
               <span class="govuk-pagination__link-label">Surface water</span></a>
           </div>
           <div class="govuk-pagination__next">
-            <a class="govuk-link govuk-pagination__link" href="results-full-other-flood.html" rel="next"
+            <a class="govuk-link govuk-pagination__link" href="/ground-water" rel="next"
               previewlistener="true"> <svg class="govuk-pagination__icon govuk-pagination__icon--next"
                 xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false"
                 viewBox="0 0 15 13">
