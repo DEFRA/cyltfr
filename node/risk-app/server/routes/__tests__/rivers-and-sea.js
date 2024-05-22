@@ -66,7 +66,7 @@ describe('GET /rivers-and-sea', () => {
   })
 
   it('redirects to postcode page if user does not have an address set in session', async () => {
-    mockAddress = undefined
+    mockAddress = null
     const mockRequest = {
       method: 'GET',
       url: '/rivers-and-sea'

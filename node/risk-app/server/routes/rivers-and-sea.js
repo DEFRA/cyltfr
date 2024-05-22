@@ -1,7 +1,7 @@
 const riskService = require('../services/risk')
 const boom = require('@hapi/boom')
 const errors = require('../models/errors.json')
-const RiversAndSeaModel = require('../models/rivers-and-sea')
+const RiversAndSeaViewModel = require('../models/rivers-and-sea')
 const config = require('../config')
 
 module.exports = {
@@ -27,7 +27,7 @@ module.exports = {
         } else {
           riskProbability = 'Very low'
         }
-        const model = new RiversAndSeaModel(riskProbability, address, backLinkUri)
+        const model = new RiversAndSeaViewModel(riskProbability, address, backLinkUri)
         return h.view('rivers-and-sea', model)
       } catch (err) {
         return boom.badRequest(errors.riskProfile.message, err)
