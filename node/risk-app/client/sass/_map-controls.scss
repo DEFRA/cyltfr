@@ -370,3 +370,9 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
     z-index: 12;
   }
 }
+
+.ol-zoom.ol-zoom-checked {
+  float: right;
+  top: calc(100% - 200px);
+  left: calc(100% - 340px);
+}

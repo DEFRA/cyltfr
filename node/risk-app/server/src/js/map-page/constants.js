@@ -61,6 +61,7 @@ const keyContainer = 'key-container'
 const keyAdvOptionsContainer = 'key-adv-options-container'
 const extentDesc = 'extent-desc-container'
 const keyAdvButtonDisplay = 'key-adv-button-display'
+const olZoomChecked = 'ol-zoom-checked'
 
 export const mapPageConsts = {
   advancedToggle,
@@ -125,6 +126,7 @@ export const mapControlsConsts = {
   velocityInfo,
   boundaryContainer,
   olZoom,
+  olZoomChecked,
   topCopyrightContainer,
   bottomCopyrightContainer,
   depthRadio,

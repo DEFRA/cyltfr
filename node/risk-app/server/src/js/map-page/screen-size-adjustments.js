@@ -10,7 +10,7 @@ export function adjustPosition () {
 }
 
 function adjustLogoAndCopyright () {
-  if ((screenAdjustConsts.scenarioBarDepth.classList.contains('hide') || screenAdjustConsts.scenarioBarVelocity.classList.contains('hide')) &&
+  if ((!screenAdjustConsts.scenarioBarDepth.classList.contains('hide') || !screenAdjustConsts.scenarioBarVelocity.classList.contains('hide')) &&
   window.innerWidth <= screenAdjustConsts.deviceScreenWidth) {
     screenAdjustConsts.osLogo.classList.add('os-logo-position-change')
     screenAdjustConsts.bottomCopyrightContainer.classList.add('hide')
