@@ -1,13 +1,127 @@
 {% extends 'layout.html' %}
 
-{% block content %}
-<div id="">
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-xl">Rivers and Sea</h1>
-      <p class="govuk-body">
-      </p> 
-    </div>
-  </div>
+{% set pageTitle = "Rivers and the sea: understand your flood risk" %}
+
+{% block head %}
+{{ super() }}
+<link href="{{ assetPath }}/stylesheets/risk-data.css" rel="stylesheet" />
+<link href="{{ assetPath }}/stylesheets/rivers-and-sea.css" rel="stylesheet" />
+
+{% endblock %}
+
+{% block beforeContent %}
+<div class="top-page-links">
+  <a href="{{ backLink }}" class="govuk-back-link" data-id="risk-address">Back to summary</a>
 </div>
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-width-container">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full">
+        <h1 class="govuk-heading-l govuk-!-padding-top-0 h1-gap">
+          Rivers and the sea: understand your flood risk
+        </h1>
+      </div>
+    </div>
+  
+    <nav aria-label="Pages with more detail on this service" class="gem-c-contents-list govuk-!-margin-bottom-3"
+      role="navigation">
+      <ol class="gem-c-contents-list__list">
+        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
+          <a class="gem-c-contents-list__link govuk-link" href="/surface-water" previewlistener="true" aria-label="A link to the surface water understand your flood risk page.">Surface
+            water</a>
+        </li>
+        <li
+          class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed gem-c-contents-list__list-item--active"
+          aria-current="true">
+          <strong>Rivers and the sea</strong>
+        </li>
+        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
+          <a class="gem-c-contents-list__link govuk-link" href="/ground-water" aria-label="A link to the ground water and reservoirs understand your flood risk page."
+            previewlistener="true">Groundwater and reservoirs</a>
+        </li>
+      </ol>
+    </nav>
+  
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+        <h2 class="govuk-heading-m">Yearly chance of flooding</h2>
+        <p class="govuk-body">The yearly chance of flooding from rivers and the sea is:
+          <strong class="govuk-tag govuk-tag--{{ riskProbability }} label-mod-depth">
+            <span>{{ riskProbability }}</span>
+          </strong>
+        </p>
+        <details class="govuk-details govuk-!-margin-bottom-6 govuk-!-margin-top-2" data-module="govuk-details">
+          <summary class="govuk-details__summary" aria-label="Open dropdown for further information on the flood ratings.">
+            <span class="govuk-details__summary-text">
+              What the flood risk ratings mean
+            </span>
+          </summary>
+          <div class="govuk-details__text">
+            <p class="govuk-body">'High' means more than 3.3% chance of a flood each year.</p>
+  
+            <p class="govuk-body">'Medium' means between 1% and 3.3% chance of a flood each year.</p>
+  
+            <p class="govuk-body">'Low' means between 0.1% and 1% chance of a flood each year.</p>
+  
+            <p class="govuk-body">'Very low' means less than 0.1% chance of a flood each year.</p>
+          </div>
+        </details>
+  
+        <h2 class="govuk-heading-m">See a map of rivers and sea flood risk</h2>
+        
+        <p class="govuk-body"><a class="govuk-link" href="/map?easting={{easting}}&northing={{northing}}&map=RiversOrSea"
+            previewlistener="true">View a rivers and
+            sea map</a> for information on where any flood water might spread to (extent).</p>
+            
+        <h2 class="govuk-heading-m">What you can do</h2>
+
+        {% if riskProbability !== 'Very low' %}
+        <p class="govuk-body">It's a good idea to check your flood risk regularly because the information may change.
+        </p>
+        <p class="govuk-body">You can also:</p>
+        <ul class="govuk-list--bullet">
+          <li class="govuk-body"><a class="govuk-link" href="https://www.gov.uk/sign-up-for-flood-warnings"
+              previewlistener="true">sign up
+              to receive flood warnings by phone, text or email</a></li>
+          <li class="govuk-body">read about <a class="govuk-link" href="https://www.gov.uk/prepare-for-flooding"
+              previewlistener="true">how
+              to prepare yourself and your property</a></li>
+  
+        </ul>
+        {% else %}
+        <p class="govuk-body">It's a good idea to check your flood risk regularly because the information may change.</p>
+        <p class="govuk-body">You can also read about <a href="https://www.gov.uk/prepare-for-flooding">how to prepare yourself and your property</a>.</p>
+        {% endif %}
+
+        <hr
+          class="govuk-section-break govuk-section-break--m govuk-section-break--visible  govuk-!-margin-top-6 govuk-!-margin-bottom-3">
+  
+        <nav class="govuk-pagination govuk-pagination--block" role="navigation" aria-label="results">
+          <div class="govuk-pagination__prev">
+            <a class="govuk-link govuk-pagination__link" href="/surface-water" rel="prev" previewlistener="true">
+              <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg"
+                height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+                <path
+                  d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z">
+                </path>
+              </svg>
+              <span class="govuk-pagination__link-title">Previous</span><span class="govuk-visually-hidden">:</span>
+              <span class="govuk-pagination__link-label">Surface water</span></a>
+          </div>
+          <div class="govuk-pagination__next">
+            <a class="govuk-link govuk-pagination__link" href="/ground-water" rel="next"
+              previewlistener="true"> <svg class="govuk-pagination__icon govuk-pagination__icon--next"
+                xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false"
+                viewBox="0 0 15 13">
+                <path
+                  d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z">
+                </path>
+              </svg> <span class="govuk-pagination__link-title">Next</span><span class="govuk-visually-hidden">:</span>
+              <span class="govuk-pagination__link-label">Groundwater and reservoirs</span></a>
+          </div>
+        </nav>
+      </div>
 {% endblock %}

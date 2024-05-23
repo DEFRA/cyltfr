@@ -20,6 +20,7 @@ const routes = [].concat(
   require('../routes/terms-and-conditions'),
   require('../routes/healthcheck')
 )
+
 const config = require('../config')
 
 if (config.riskPageFlag) {
