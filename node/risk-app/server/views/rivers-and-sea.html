@@ -49,26 +49,11 @@
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
         <h2 class="govuk-heading-m">Yearly chance of flooding</h2>
         <p class="govuk-body">The yearly chance of flooding from rivers and the sea is:
-          <strong class="govuk-tag govuk-tag--{{ riskProbability }} label-mod-depth">
+          <strong class="govuk-tag govuk-tag--{{ riskStyle }} label-mod-depth">
             <span>{{ riskProbability }}</span>
           </strong>
         </p>
-        <details class="govuk-details govuk-!-margin-bottom-6 govuk-!-margin-top-2" data-module="govuk-details">
-          <summary class="govuk-details__summary" aria-label="Open dropdown for further information on the flood ratings.">
-            <span class="govuk-details__summary-text">
-              What the flood risk ratings mean
-            </span>
-          </summary>
-          <div class="govuk-details__text">
-            <p class="govuk-body">'High' means more than 3.3% chance of a flood each year.</p>
-  
-            <p class="govuk-body">'Medium' means between 1% and 3.3% chance of a flood each year.</p>
-  
-            <p class="govuk-body">'Low' means between 0.1% and 1% chance of a flood each year.</p>
-  
-            <p class="govuk-body">'Very low' means less than 0.1% chance of a flood each year.</p>
-          </div>
-        </details>
+        {% include 'partials/floodRatings.html' %}
   
         <h2 class="govuk-heading-m">See a map of rivers and sea flood risk</h2>
         
