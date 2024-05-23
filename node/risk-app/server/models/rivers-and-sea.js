@@ -1,4 +1,4 @@
-function RiversAndSeaModel (riskProbability, address, backLink) {
+function RiversAndSeaViewModel (riskProbability, address, backLink) {
   let riskColour
 
   if (riskProbability === 'High') {
@@ -18,4 +18,4 @@ function RiversAndSeaModel (riskProbability, address, backLink) {
   this.riskColour = riskColour
 }
 
-module.exports = RiversAndSeaModel
+module.exports = RiversAndSeaViewModel
