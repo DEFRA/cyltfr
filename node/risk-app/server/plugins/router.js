@@ -26,6 +26,7 @@ if (config.simulateAddressService) {
   routes.push(require('../routes/os-maps-proxy'))
   routes.push(require('../routes/os-get-capabilities'))
 }
+
 if (config.riskPageFlag) {
   routes.push(require('../routes/surface-water'))
   routes.push(require('../routes/rivers-and-sea'))
