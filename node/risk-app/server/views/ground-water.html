@@ -1,13 +1,164 @@
 {% extends 'layout.html' %}
 
-{% block content %}
-<div id="">
+{% set pageTitle = "Groundwater and reservoirs: understand your flood risk" %}
+
+{% block head %}
+{{ super() }}
+<link href="{{ assetPath }}/stylesheets/risk-data.css" rel="stylesheet" />
+{% endblock %}
+
+{% block beforeContent %}
+<div class="top-page-links">
+  <a href="{{ backLink }}" class="govuk-back-link" data-id="risk-address">Back to summary</a>
+</div>
+{% endblock %}
+
+{% block content %}          
+  <div class="govuk-width-container">
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-xl">Groundwater</h1>
-      <p class="govuk-body">
-      </p> 
+  <!-- two thirds column for title and address-->
+    <div class="govuk-grid-column-full">
+        <h1 class="govuk-heading-l govuk-!-padding-top-0 h1-gap">
+       Groundwater and reservoirs: understand your flood risk
+        </h1>
+  
+        <!-- <ul class="govuk-list--bullet">
+          <li class="govuk-body">high risk of surface water flooding</li>
+          <li class="govuk-body">medium risk of flooding from rivers and the sea</li>
+        </ul> -->
+  <!--       <p class="govuk-body">This information is not specific to a property.</p> -->
+    <!--     <a href="" class="govuk-back-link hidden-search-link">Search for another address</a> -->
+      </div>
+  </div>
+  
+  <nav aria-label="Pages with more detail" class="gem-c-contents-list" role="navigation">
+    <!-- <h2 class="gem-c-contents-list__title">
+      
+  </h2> -->
+    <ol class="gem-c-contents-list__list">
+        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
+          <a class="gem-c-contents-list__link govuk-link" href="/surface-water" previewlistener="true">Surface water</a>
+        </li>
+        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
+          <a class="gem-c-contents-list__link govuk-link" href="/rivers-and-sea" previewlistener="true">Rivers and the sea</a>
+        </li>
+        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed gem-c-contents-list__list-item--active" aria-current="true">
+          <strong>Groundwater and reservoirs</strong>
+         </li>
+    </ol>
+  </nav>
+  
+  
+  <!-- Start of cards -->
+  
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+    
+      <!-- gw -->
+  <div class="govuk-summary-card" id="groundwater">
+    <div class="govuk-summary-card__title-wrapper vlow card-padding-left">
+      <h2 class="govuk-summary-card__title">Groundwater<span class="chance-content gw-context">Flooding is possible when groundwater levels are high</span></h2>
+      <ul class="govuk-summary-card__actions">
+        <!-- <li class="govuk-summary-card__action"> <a class="govuk-link" href="#">
+            Withdraw<span class="govuk-visually-hidden"> from University of Bristol</span>
+          </a>
+        </li> -->
+      </ul>
+    </div>
+    <div class="govuk-summary-card__content">
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            What groundwater is
+          </dt>
+          <dd class="govuk-summary-list__value">
+            <p class="govuk-body">Groundwater is the water that is usually held in rocks and soil underground.</p> <p class="govuk-body">Groundwater flooding happens when this water rises and flows above the surface.</p>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            How we check an area's risk
+          </dt>
+          <dd class="govuk-summary-list__value">
+            <p class="govuk-body govuk-!-margin-bottom-2">We use flood alert data to check the risk of flooding from groundwater.</p>
+          </dd>
+        </div>
+      <!--   <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+           What you can do
+          </dt>
+          <dd class="govuk-summary-list__value">
+            Use the <a class="govuk-link" href="https://check-for-flooding.service.gov.uk/river-and-sea-levels?group=groundwater&v=map&lyr=mv,gr&ext=-3.83782,50.318786,1.98395,52.900313">'check for flooding' service</a> to check current groundwater levels (where data is available).
+          </dd>
+        </div> -->
+        
+      </dl>
     </div>
   </div>
-</div>
+  
+  <!-- res -->
+  <div class="govuk-summary-card" id="reservoirs">
+    <div class="govuk-summary-card__title-wrapper vlow card-padding-left">
+      <h2 class="govuk-summary-card__title">Reservoirs<span class="chance-content gw-context">Flooding from reservoirs is unlikely in this area</span></h2>
+      <ul class="govuk-summary-card__actions">
+      
+        <!-- <li class="govuk-summary-card__action"> <a class="govuk-link" href="#">
+            Withdraw<span class="govuk-visually-hidden"> from University of Bristol</span>
+          </a>
+        </li> -->
+      </ul>
+    </div>
+    <div class="govuk-summary-card__content">
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            What a reservoir is
+          </dt>
+          <dd class="govuk-summary-list__value">
+            A reservoir is a large natural or artificial lake that is designed to collect and store water.
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            How we check an area's risk
+          </dt>
+          <dd class="govuk-summary-list__value">
+            We use predicted scenarios to understand the risk of flooding from reservoirs.
+            <br><br>
+            Flooding from reservoirs is extremely unlikely. An area is considered at risk if people’s lives could be threatened in the event of a dam or reservoir failure.        </dd>
+        </div>
+        <!-- <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            What you can do
+          </dt>
+          <dd class="govuk-summary-list__value">
+            View the map of the risk of reservoir flooding to see information on where any flood water might spread to:
+            <ul class="govuk-list--bullet">
+              <li>when river levels are normal</li>
+              <li>when there is also flooding from nearby rivers
+              </li>
+            </ul>
+          </dd>
+        </div> -->
+        
+      </dl>
+    </div>
+  </div>
+  </div>
+  </div>
+      
+      </div>
+  
+      <!-- end of details -->
+      <nav class="govuk-pagination govuk-pagination--block" role="navigation" aria-label="results">
+        <div class="govuk-pagination__prev">
+          <a class="govuk-link govuk-pagination__link" href="/rivers-and-sea" rel="prev" previewlistener="true">
+            <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+              <path d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"></path>
+            </svg>
+            <span class="govuk-pagination__link-title">Previous</span><span class="govuk-visually-hidden">:</span>
+            <span class="govuk-pagination__link-label">Rivers and the sea</span></a>
+        </div>
+      </nav>
+      <!-- end of nav -->
 {% endblock %}
