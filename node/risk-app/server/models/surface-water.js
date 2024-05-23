@@ -3,6 +3,7 @@ function SurfaceWaterViewModel (riskProbability, address, llfa, backLink) {
   this.northing = address.y
   this.backLink = backLink
   this.riskProbability = riskProbability
+  this.riskStyle = riskProbability.replace(/ /g, '-')
   this.llfa = llfa
 }
 
