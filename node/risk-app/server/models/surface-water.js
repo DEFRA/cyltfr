@@ -1,4 +1,4 @@
-function SurfaceWaterViewModel (riskProbability, address, llfa, backLink) {
+function surfaceWaterViewModel (riskProbability, address, llfa, backLink) {
   this.easting = address.x
   this.northing = address.y
   this.backLink = backLink
@@ -7,4 +7,4 @@ function SurfaceWaterViewModel (riskProbability, address, llfa, backLink) {
   this.llfa = llfa
 }
 
-module.exports = SurfaceWaterViewModel
+module.exports = surfaceWaterViewModel

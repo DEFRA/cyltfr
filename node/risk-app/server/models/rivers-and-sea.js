@@ -1,4 +1,4 @@
-function RiversAndSeaViewModel (riskProbability, address, backLink) {
+function riversAndSeaViewModel (riskProbability, address, backLink) {
   this.easting = address.x
   this.northing = address.y
   this.backLink = backLink
@@ -6,4 +6,4 @@ function RiversAndSeaViewModel (riskProbability, address, backLink) {
   this.riskStyle = riskProbability.replace(/ /g, '-')
 }
 
-module.exports = RiversAndSeaViewModel
+module.exports = riversAndSeaViewModel
