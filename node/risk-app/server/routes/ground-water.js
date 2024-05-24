@@ -20,15 +20,13 @@ module.exports = {
 
     if (config.riskPageFlag) {
       try {
-        let riskProbability
         const risk = await riskService.getByCoordinates(x, y, radius)
-        console.log(risk)
-        if (risk.riverAndSeaRisk) {
-          riskProbability = risk.riverAndSeaRisk.probabilityForBand
-        } else {
-          riskProbability = 'Very low'
-        }
-        const model = new GroundWaterViewModel(riskProbability, address, backLinkUri)
+        const groundWaterRisk = risk.isGroundwaterArea
+        const reservoirDryRisk = !!(risk.reservoirDryRisk && risk.reservoirDryRisk.length)
+        const reservoirWetRisk = !!(risk.reservoirWetRisk && risk.reservoirWetRisk.length)
+        const reservoirRisk = reservoirDryRisk || reservoirWetRisk
+
+        const model = new GroundWaterViewModel(reservoirRisk, groundWaterRisk, address, backLinkUri)
         return h.view('ground-water', model)
       } catch (err) {
         return boom.badRequest(errors.riskProfile.message, err)
