@@ -8,7 +8,7 @@ async function findWarnings (location) {
   return util.getJson(url, true)
 }
 
-async function simulateFindWarnings (location) {
+async function simulateFindWarnings (_location) {
   const simulatedData = require('../routes/simulated/data/warnings-service.json')
 
   return simulatedData
