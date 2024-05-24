@@ -95,6 +95,22 @@
             {% if (reservoirRisk) %}
             <br><br>
             <a class="govuk-link" href="/map?easting={{easting}}&northing={{northing}}&map=Reservoirs">View a map of the risk of flooding from reservoirs</a>
+            <br><br>
+            <details class="govuk-details reservoirs" data-module="govuk-details">
+              <summary class="govuk-details__summary reservoirs" data-journey-click="ltfri:risk:reservoir-details">
+                <span class="govuk-details__summary-text reservoirs">
+                  Reservoirs that could affect this area
+                </span>
+              </summary>
+              {% for reservoir in reservoirs %}
+              <ul class="govuk-list reservoirs" id="reservoirs-risk-reservoir-list">
+                <li><strong>{{reservoir.name}}</strong> (grid reference {{reservoir.location}})</li>
+                <li>Owner: {{reservoir.owner}}</li>
+                <li>Lead Local Flood Authority: {{reservoir.authority}}</li>
+                <li>Comments: {{reservoir.comments}}</li>
+              </ul>
+              {% endfor %}
+            </details>
             {% endif %}
           </dd>
         </div>    

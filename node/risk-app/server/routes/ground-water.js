@@ -25,8 +25,33 @@ module.exports = {
         const reservoirDryRisk = !!(risk.reservoirDryRisk && risk.reservoirDryRisk.length)
         const reservoirWetRisk = !!(risk.reservoirWetRisk && risk.reservoirWetRisk.length)
         const reservoirRisk = reservoirDryRisk || reservoirWetRisk
+        const reservoirs = []
 
-        const model = new GroundWaterViewModel(reservoirRisk, groundWaterRisk, address, backLinkUri)
+        if (reservoirRisk) {
+          const add = function (item) {
+            reservoirs.push({
+              name: item.reservoirName,
+              owner: item.undertaker,
+              authority: item.leadLocalFloodAuthority,
+              location: item.location,
+              riskDesignation: item.riskDesignation,
+              comments: item.comments
+            })
+          }
+          if (reservoirDryRisk) {
+            risk.reservoirDryRisk.forEach(add)
+          }
+          if (reservoirWetRisk) {
+            risk.reservoirWetRisk.forEach(function (item) {
+              const exists = !!reservoirs.find(r => r.location === item.location)
+              if (!exists) {
+                add(item)
+              }
+            })
+          }
+        }
+
+        const model = new GroundWaterViewModel(reservoirRisk, groundWaterRisk, reservoirs, address, backLinkUri)
         return h.view('ground-water', model)
       } catch (err) {
         return boom.badRequest(errors.riskProfile.message, err)
