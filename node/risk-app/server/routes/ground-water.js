@@ -21,6 +21,7 @@ module.exports = {
     if (config.riskPageFlag) {
       try {
         const risk = await riskService.getByCoordinates(x, y, radius)
+        console.log(risk)
         const groundWaterRisk = risk.isGroundwaterArea
         const reservoirDryRisk = !!(risk.reservoirDryRisk && risk.reservoirDryRisk.length)
         const reservoirWetRisk = !!(risk.reservoirWetRisk && risk.reservoirWetRisk.length)
@@ -28,6 +29,7 @@ module.exports = {
         const reservoirs = []
 
         if (reservoirRisk) {
+          console.log('here')
           const add = function (item) {
             reservoirs.push({
               name: item.reservoirName,
@@ -50,6 +52,7 @@ module.exports = {
             })
           }
         }
+        console.log(reservoirs)
 
         const model = new GroundWaterViewModel(reservoirRisk, groundWaterRisk, reservoirs, address, backLinkUri)
         return h.view('ground-water', model)
