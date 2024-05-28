@@ -44,9 +44,11 @@ async function createServer () {
       isSecure: config.authcookie.secure,
       isSameSite: 'Lax'
     },
-    redirectTo: '/postcode?login=invalid',
+    redirectTo: '/login',
     validate: sndPassword.validate
   })
+
+  server.auth.default('session')
 
   await server.register(require('./plugins/router'))
 

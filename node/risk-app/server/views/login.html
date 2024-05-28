@@ -3,30 +3,35 @@
 {% from "components/notification-banner/macro.njk" import govukNotificationBanner %}
 {% from "components/radios/macro.njk" import govukRadios %}
 {% from "components/input/macro.njk" import govukInput %}
+{% from "components/password-input/macro.njk" import govukPasswordInput %}
 {% from "components/back-link/macro.njk" import govukBackLink %}
 {% from "components/table/macro.njk" import govukTable %}
 
 {% set pageTitle = "Login" %}
+
+{% set errorText = "Incorrect password or you do not have admin rights" %}
 
 {% block content %}
   <main>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
 
-        <h1 class="govuk-heading-l">Login</h1>
+        <h1 class="govuk-heading-l">Sandpit login</h1>
+
         <p class="govuk-body">
-          Login here
+          Please enter the password in order to use the sandpit environment
         </p>
 
         <form method="POST">
-          {{ govukInput({
+          {{ govukPasswordInput({
             label: {
               text: 'Enter the password'
             },
             id: 'password',
             value: "",
             name: 'password',
-            classes: 'govuk-input--width-10'
+            classes: 'govuk-input--width-6',
+            errorMessage: { text: errorText } if error
           }) }}
           {{ govukRadios({
             classes: "govuk-radios--inline",
@@ -52,6 +57,11 @@
               }
             ]
           }) }}
+
+          {% if loggedIn %}
+          <p class="govuk-body">Logged in successfully, please select a link</p>
+          {% endif %}
+
           {{ govukInput(defaultdestination) }}
           <button class="govuk-button" type="submit">Login</button>
           {% if isAdmin %}

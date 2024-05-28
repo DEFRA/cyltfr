@@ -6,7 +6,8 @@ module.exports = [
       file: 'server/public/static/robots.txt'
     },
     options: {
-      description: 'Get the robots.txt'
+      description: 'Get the robots.txt',
+      auth: false
     }
   },
   {
@@ -16,7 +17,8 @@ module.exports = [
       file: 'node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.js'
     },
     options: {
-      description: 'Get the GDS govuk-frontend.min.js asset'
+      description: 'Get the GDS govuk-frontend.min.js asset',
+      auth: false
     }
   },
   {
@@ -26,7 +28,8 @@ module.exports = [
       file: 'node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.js.map'
     },
     options: {
-      description: 'Get the GDS govuk-frontend.min.js.map asset'
+      description: 'Get the GDS govuk-frontend.min.js.map asset',
+      auth: false
     }
   },
   {
@@ -43,7 +46,8 @@ module.exports = [
       }
     },
     options: {
-      description: 'Get public assets'
+      description: 'Get public assets',
+      auth: false
     }
   }
 ]
