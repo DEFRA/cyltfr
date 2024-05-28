@@ -151,6 +151,7 @@ export const screenAdjustConsts = {
   advancedToggle,
   deviceScreenWidth,
   zoomBtns,
+  olZoomChecked,
   scenarioBarDepth,
   scenarioBarVelocity,
   depthRadio,

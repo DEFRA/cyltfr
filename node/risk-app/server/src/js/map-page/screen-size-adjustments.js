@@ -54,6 +54,6 @@ function zoomBtnAdjustments () {
   screenAdjustConsts.scenarioBarVelocity.style.display === 'block') &&
   window.innerWidth <= screenAdjustConsts.deviceScreenWidth
   ) {
-    screenAdjustConsts.zoomBtns[0].style.top = 'calc(100% - 200px)'
+    screenAdjustConsts.zoomBtns[0].classList.add(screenAdjustConsts.olZoomChecked)
   }
 }
