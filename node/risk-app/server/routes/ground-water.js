@@ -39,15 +39,12 @@ module.exports = {
         if (reservoirDryRisk) {
           risk.reservoirDryRisk.forEach(add)
         }
+        // Checks to see if any of the wet reservoirs is not already noted
+        // from the dry reservoirs, if it isn't then it is added to the array.
         if (reservoirWetRisk) {
-          risk.reservoirWetRisk.forEach(function (item) {
-            // Checks to see if any of the wet reservoirs is not already noted
-            // from the dry reservoirs, if it isn't then it is added to the array.
-            const exists = !!reservoirs.find(r => r.location === item.location)
-            if (!exists) {
-              add(item)
-            }
-          })
+          risk.reservoirWetRisk
+            .filter(item => !reservoirs.find(r => r.location === item.location))
+            .forEach(item => add(item))
         }
       }
 
