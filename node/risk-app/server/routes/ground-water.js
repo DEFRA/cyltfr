@@ -20,8 +20,8 @@ module.exports = {
     try {
       const risk = await riskService.getByCoordinates(x, y, radius)
       const groundWaterRisk = risk.isGroundwaterArea
-      const reservoirDryRisk = !!(risk.reservoirDryRisk && risk.reservoirDryRisk.length)
-      const reservoirWetRisk = !!(risk.reservoirWetRisk && risk.reservoirWetRisk.length)
+      const reservoirDryRisk = !!(risk.reservoirDryRisk?.length)
+      const reservoirWetRisk = !!(risk.reservoirWetRisk?.length)
       const reservoirRisk = reservoirDryRisk || reservoirWetRisk
       const reservoirs = []
 
