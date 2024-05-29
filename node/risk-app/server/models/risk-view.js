@@ -157,11 +157,9 @@ function processReservoirs (reservoirDryRisk, risk, reservoirWetRisk) {
   }
 
   if (reservoirWetRisk) {
-    risk.reservoirWetRisk.forEach(function (item) {
-      if (!reservoirs.find(r => r.location === item.location)) {
-        add(item)
-      }
-    })
+    risk.reservoirWetRisk
+      .filter(item => !reservoirs.find(r => r.location === item.location))
+      .forEach(item => add(item))
   }
 
   this.reservoirs = reservoirs
