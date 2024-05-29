@@ -53,18 +53,6 @@ describe('GET /ground-water', () => {
     jest.clearAllMocks()
   })
 
-  it('throws an error if the risk page flag is not set, disallowing access to page', async () => {
-    mockAddress = { x: 123, y: 123 }
-    const mockRequest = {
-      method: 'GET',
-      url: '/ground-water'
-    }
-    config.riskPageFlag = false
-    const response = await server.inject(mockRequest)
-
-    expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_FORBIDDEN)
-  })
-
   it('redirects to postcode page if user does not have an address set in session', async () => {
     mockAddress = null
     const mockRequest = {

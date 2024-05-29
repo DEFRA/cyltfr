@@ -1,4 +1,4 @@
-function GroundWaterViewModel (reservoirRisk, groundWaterRisk, reservoirs, address, backLink) {
+function groundWaterViewModel (reservoirRisk, groundWaterRisk, reservoirs, address, backLink) {
   const reservoirRiskText = reservoirRisk ? 'There is a risk of flooding from reservoirs in this area' : 'Flooding from reservoirs is unlikely in this area'
   const groundWaterRiskText = groundWaterRisk ? 'Flooding is possible when groundwater levels are high' : 'Flooding from groundwater is unlikely in this area'
 
@@ -11,4 +11,4 @@ function GroundWaterViewModel (reservoirRisk, groundWaterRisk, reservoirs, addre
   this.reservoirs = reservoirs
 }
 
-module.exports = GroundWaterViewModel
+module.exports = groundWaterViewModel
