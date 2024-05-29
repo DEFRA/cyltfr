@@ -45,22 +45,7 @@ function riskViewModel (risk, address, backLinkUri) {
   }
 
   // River and sea suitability
-  const riverAndSeaSuitability = risk.riverAndSeaRisk?.suitability
-  if (riverAndSeaSuitability) {
-    const name = riverAndSeaSuitability.toLowerCase()
-    if (suitabilities.includes(name)) {
-      this.riverAndSeaSuitabilityName = `partials/suitability/${name.replace(/ /g, '-')}.html`
-    }
-  }
-
-  // Surface water suitability
-  const surfaceWaterSuitability = risk.surfaceWaterSuitability
-  if (surfaceWaterSuitability) {
-    const name = surfaceWaterSuitability.toLowerCase()
-    if (suitabilities.includes(name)) {
-      this.surfaceWaterSuitabilityName = `partials/suitability/${name.replace(/ /g, '-')}.html`
-    }
-  }
+  processSuitability.call(this, risk)
 
   // Groundwater area
   this.isGroundwaterArea = risk.isGroundwaterArea
@@ -97,14 +82,8 @@ function riskViewModel (risk, address, backLinkUri) {
   const riversAndSeaLevel = Levels.indexOf(riverAndSeaRisk)
   const surfaceWaterLevel = Levels.indexOf(surfaceWaterRisk)
   const surfaceWaterIsFirst = surfaceWaterLevel >= riversAndSeaLevel
-  this.highestRisk = 'partials/flagged/blank.html'
-  if (riversAndSeaLevel > surfaceWaterLevel) {
-    if (riverAndSeaRisk !== 'Very Low') { this.highestRisk = 'partials/flagged/rsl.html' }
-  } else if (surfaceWaterLevel > riversAndSeaLevel) {
-    if (surfaceWaterRisk !== 'Very Low') { this.highestRisk = 'partials/flagged/w.html' }
-  } else if (surfaceWaterLevel === riversAndSeaLevel) {
-    if (riverAndSeaRisk !== 'Very Low') { this.highestRisk = 'partials/flagged/rsl-sw.html' }
-  }
+
+  processHighestRisk.call(this, surfaceWaterLevel, riversAndSeaLevel, riverAndSeaRisk)
 
   if (surfaceWaterIsFirst) {
     this.firstSource = 'surface-water.html'
@@ -132,6 +111,32 @@ function riskViewModel (risk, address, backLinkUri) {
 }
 
 module.exports = riskViewModel
+
+function processHighestRisk (surfaceWaterLevel, riversAndSeaLevel, riverAndSeaRisk) {
+  this.highestRisk = 'partials/flagged/blank.html'
+  if ((surfaceWaterLevel < riversAndSeaLevel) && (riverAndSeaRisk !== 'Very Low')) { this.highestRisk = 'partials/flagged/rsl.html' }
+  if ((surfaceWaterLevel > riversAndSeaLevel) && (riverAndSeaRisk !== 'Very Low')) { this.highestRisk = 'partials/flagged/w.html' }
+  if ((surfaceWaterLevel === riversAndSeaLevel) && (riverAndSeaRisk !== 'Very Low')) { this.highestRisk = 'partials/flagged/rsl-sw.html' }
+}
+
+function processSuitability (risk) {
+  const riverAndSeaSuitability = risk.riverAndSeaRisk?.suitability
+  if (riverAndSeaSuitability) {
+    const name = riverAndSeaSuitability.toLowerCase()
+    if (suitabilities.includes(name)) {
+      this.riverAndSeaSuitabilityName = `partials/suitability/${name.replace(/ /g, '-')}.html`
+    }
+  }
+
+  // Surface water suitability
+  const surfaceWaterSuitability = risk.surfaceWaterSuitability
+  if (surfaceWaterSuitability) {
+    const name = surfaceWaterSuitability.toLowerCase()
+    if (suitabilities.includes(name)) {
+      this.surfaceWaterSuitabilityName = `partials/suitability/${name.replace(/ /g, '-')}.html`
+    }
+  }
+}
 
 function processReservoirs (reservoirDryRisk, risk, reservoirWetRisk) {
   const reservoirs = []

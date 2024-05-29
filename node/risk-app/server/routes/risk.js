@@ -42,14 +42,10 @@ module.exports = {
 
         if (!risk.inEngland) {
           return h.redirect('/england-only')
-        } else {
-          const backLinkUri = defineBackLink(path, address.postcode)
-          if (config.riskPageFlag) {
-            return h.view('risk-flagged', new RiskViewModel(risk, address, backLinkUri))
-          } else {
-            return h.view('risk', new RiskViewModel(risk, address, backLinkUri))
-          }
         }
+        const backLinkUri = defineBackLink(path, address.postcode)
+        const htmlFile = config.riskPageFlag ? 'risk-flagged' : 'risk'
+        return h.view(htmlFile, new RiskViewModel(risk, address, backLinkUri))
       } catch (err) {
         return boom.badRequest(errors.riskProfile.message, err)
       }
