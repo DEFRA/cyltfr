@@ -21,7 +21,6 @@ module.exports = {
     if (config.riskPageFlag) {
       try {
         const risk = await riskService.getByCoordinates(x, y, radius)
-        console.log(risk)
         const groundWaterRisk = risk.isGroundwaterArea
         const reservoirDryRisk = !!(risk.reservoirDryRisk && risk.reservoirDryRisk.length)
         const reservoirWetRisk = !!(risk.reservoirWetRisk && risk.reservoirWetRisk.length)
@@ -29,7 +28,6 @@ module.exports = {
         const reservoirs = []
 
         if (reservoirRisk) {
-          console.log('here')
           const add = function (item) {
             reservoirs.push({
               name: item.reservoirName,
@@ -45,6 +43,8 @@ module.exports = {
           }
           if (reservoirWetRisk) {
             risk.reservoirWetRisk.forEach(function (item) {
+              // Checks to see if any of the wet reservoirs is not already noted
+              // from the dry reservoirs, if it isn't then it is added to the array.
               const exists = !!reservoirs.find(r => r.location === item.location)
               if (!exists) {
                 add(item)
@@ -52,7 +52,6 @@ module.exports = {
             })
           }
         }
-        console.log(reservoirs)
 
         const model = new GroundWaterViewModel(reservoirRisk, groundWaterRisk, reservoirs, address, backLinkUri)
         return h.view('ground-water', model)

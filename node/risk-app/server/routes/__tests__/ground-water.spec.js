@@ -104,18 +104,10 @@ describe('GET /ground-water', () => {
     expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_BAD_REQUEST)
   })
 
-  it.only('should create an array of reservoirs if there is a reservoirs risk', async () => {
+  it('should create an array of reservoirs if there is a reservoirs risk', async () => {
     riskService.getByCoordinates.mockResolvedValue({
       reservoirDryRisk: [{
         reservoirName: 'Dry Risk Resevoir',
-        location: 'SJ917968',
-        riskDesignation: 'High-risk',
-        undertaker: 'United Utilities PLC',
-        leadLocalFloodAuthority: 'Tameside',
-        comments: 'If you have questions about local emergency plans for this reservoir you should contact the named Local Authority'
-      }],
-      reservoirWetRisk: [{
-        reservoirName: 'Wet risk reservoir',
         location: 'SJ917968',
         riskDesignation: 'High-risk',
         undertaker: 'United Utilities PLC',
@@ -131,15 +123,59 @@ describe('GET /ground-water', () => {
       'ground-water',
       expect.objectContaining({
         reservoirs: [{
-            reservoirName: 'Dry Risk Resevoir',
-            location: 'SJ917968',
-            riskDesignation: 'High-risk',
-            undertaker: 'United Utilities PLC',
-            leadLocalFloodAuthority: 'Tameside',
-            comments: 'If you have questions about local emergency plans for this reservoir you should contact the named Local Authority'
-          }]
-        }
-      )
+          name: 'Dry Risk Resevoir',
+          location: 'SJ917968',
+          riskDesignation: 'High-risk',
+          owner: 'United Utilities PLC',
+          authority: 'Tameside',
+          comments: 'If you have questions about local emergency plans for this reservoir you should contact the named Local Authority'
+        }]
+      })
+    )
+  })
+
+  it('should add any reservoirs that are not in the list when it is wet', async () => {
+    riskService.getByCoordinates.mockResolvedValue({
+      reservoirDryRisk: [{
+        reservoirName: 'Dry Risk Resevoir',
+        location: 'SJ917968',
+        riskDesignation: 'High-risk',
+        undertaker: 'United Utilities PLC',
+        leadLocalFloodAuthority: 'Tameside',
+        comments: 'If you have questions about local emergency plans for this reservoir you should contact the named Local Authority'
+      }],
+      reservoirWetRisk: [{
+        reservoirName: 'Wet Risk Reservoir',
+        location: 'Another location',
+        riskDesignation: 'High-risk',
+        undertaker: 'United Utilities PLC',
+        leadLocalFloodAuthority: 'Tameside',
+        comments: 'If you have questions about local emergency plans for this reservoir you should contact the named Local Authority'
+      }]
+    })
+
+    const handler = groundWater.handler
+    await handler(request, h)
+
+    expect(h.view).toHaveBeenCalledWith(
+      'ground-water',
+      expect.objectContaining({
+        reservoirs: [{
+          name: 'Dry Risk Resevoir',
+          location: 'SJ917968',
+          riskDesignation: 'High-risk',
+          owner: 'United Utilities PLC',
+          authority: 'Tameside',
+          comments: 'If you have questions about local emergency plans for this reservoir you should contact the named Local Authority'
+        }, {
+          name: 'Wet Risk Reservoir',
+          location: 'Another location',
+          riskDesignation: 'High-risk',
+          owner: 'United Utilities PLC',
+          authority: 'Tameside',
+          comments: 'If you have questions about local emergency plans for this reservoir you should contact the named Local Authority'
+        }]
+      })
     )
   })
 })
