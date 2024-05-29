@@ -23,7 +23,7 @@ function checkCookie (response) {
   }
 }
 
-describe('GET /ground-water', () => {
+describe('GET /rivers-and-sea - flag enabled', () => {
   beforeAll(async () => {
     config.setConfigOptions({
       riskPageFlag: true,
@@ -75,7 +75,7 @@ describe('GET /ground-water', () => {
 
     expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
 
-    mockRequest.url = '/ground-water'
+    mockRequest.url = '/rivers-and-sea'
     const swResponse = await server.inject(mockRequest)
     expect(swResponse.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_FOUND)
     expect(swResponse.headers.location).toBe('/postcode')
@@ -84,19 +84,19 @@ describe('GET /ground-water', () => {
   it('returns 200 OK and renders rivers and sea page if user has an address set in session', async () => {
     const mockRequest = {
       method: 'GET',
-      url: '/ground-water',
+      url: '/rivers-and-sea',
       headers: defaultOptions.headers
     }
     const response = await server.inject(mockRequest)
 
     expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
-    expect(response.result).toContain('ground-water')
+    expect(response.result).toContain('rivers-and-sea')
   })
 
   it('should show an error page if an error occurs', async () => {
     const mockRequest = {
       method: 'GET',
-      url: '/ground-water',
+      url: '/rivers-and-sea',
       headers: defaultOptions.headers
     }
     getByCoordinates.mockImplementationOnce(() => {
@@ -107,60 +107,19 @@ describe('GET /ground-water', () => {
     expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_BAD_REQUEST)
   })
 
-  it('should create an array of reservoirs if there is a reservoirs risk', async () => {
-    riskService.getByCoordinates.mockResolvedValue({
-      reservoirDryRisk: [{
-        reservoirName: 'Dry Risk Resevoir',
-        location: 'SJ917968',
-        riskDesignation: 'High-risk',
-        undertaker: 'United Utilities PLC',
-        leadLocalFloodAuthority: 'Tameside',
-        comments: 'If you have questions about local emergency plans for this reservoir you should contact the named Local Authority'
-      }]
-    })
-
+  it('should return "Very low" risk probability when riverAndSeaRisk is not present', async () => {
     const mockRequest = {
       method: 'GET',
-      url: '/ground-water',
+      url: '/rivers-and-sea',
       headers: defaultOptions.headers
     }
+    riskService.__updateReturnValue({
+      riverAndSeaRisk: ''
+    })
 
     const response = await server.inject(mockRequest)
 
     expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
-    expect(response.result).toContain('Dry Risk Resevoir')
-  })
-
-  it('should add any reservoirs that are not in the list when it is wet', async () => {
-    riskService.getByCoordinates.mockResolvedValue({
-      reservoirDryRisk: [{
-        reservoirName: 'Dry Risk Resevoir',
-        location: 'SJ917968',
-        riskDesignation: 'High-risk',
-        undertaker: 'United Utilities PLC',
-        leadLocalFloodAuthority: 'Tameside',
-        comments: 'If you have questions about local emergency plans for this reservoir you should contact the named Local Authority'
-      }],
-      reservoirWetRisk: [{
-        reservoirName: 'Wet Risk Reservoir',
-        location: 'Another location',
-        riskDesignation: 'High-risk',
-        undertaker: 'United Utilities PLC',
-        leadLocalFloodAuthority: 'Tameside',
-        comments: 'If you have questions about local emergency plans for this reservoir you should contact the named Local Authority'
-      }]
-    })
-
-    const mockRequest = {
-      method: 'GET',
-      url: '/ground-water',
-      headers: defaultOptions.headers
-    }
-
-    const response = await server.inject(mockRequest)
-
-    expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
-    expect(response.result).toContain('Dry Risk Resevoir')
-    expect(response.result).toContain('Wet Risk Reservoir')
+    expect(response.result).toContain('govuk-tag--Very-Low')
   })
 })
