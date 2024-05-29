@@ -37,6 +37,8 @@ function riskViewModel (risk, address, backLinkUri) {
   this.surfaceWaterRisk = surfaceWaterRisk
   this.riverAndSeaClassName = riverAndSeaRisk.toLowerCase().replace(' ', '-')
   this.surfaceWaterClassName = surfaceWaterRisk.toLowerCase().replace(' ', '-')
+  this.riversSeaRiskStyle = riverAndSeaRisk.replace(/ /g, '-')
+  this.surfaceWaterStyle = surfaceWaterRisk.replace(/ /g, '-')
   this.reservoirRisk = reservoirRisk
   this.backLink = backLinkUri
 
@@ -101,7 +103,7 @@ function riskViewModel (risk, address, backLinkUri) {
     this.secondSource = 'partials/' + this.secondSource
     this.additionalInformation = 'partials/groundwaterAndReservoirs.html'
   }
-
+  this.surfaceWaterIsFirst = surfaceWaterIsFirst
   this.testInfo = JSON.stringify({
     riverAndSeaRisk,
     surfaceWaterRisk,

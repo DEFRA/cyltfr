@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 
 {% set pageTitle = "Groundwater and reservoirs: understand your flood risk" %}
+{% set currentpage = "groundwater" %}
 
 {% block head %}
 {{ super() }}
@@ -26,23 +27,26 @@
   
   <nav aria-label="Pages with more detail" class="gem-c-contents-list" role="navigation">
     <ol class="gem-c-contents-list__list">
-        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
-          <a class="gem-c-contents-list__link govuk-link" href="/surface-water" previewlistener="true">Surface water</a>
-        </li>
-        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
-          <a class="gem-c-contents-list__link govuk-link" href="/rivers-and-sea" previewlistener="true">Rivers and the sea</a>
-        </li>
-        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed gem-c-contents-list__list-item--active" aria-current="true">
-          <strong>Groundwater and reservoirs</strong>
-         </li>
-    </ol>
+      {% if surfaceWaterIsFirst %}
+      {% include 'partials/flagged/nav-sw.html' %}
+      {% endif %}
+      {% include 'partials/flagged/nav-rs.html' %}
+      {% if not surfaceWaterIsFirst %}
+      {% include 'partials/flagged/nav-sw.html' %}
+      {% endif %}
+      {% include 'partials/flagged/nav-gw.html' %}
+        </ol>
   </nav>
   
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
   <div class="govuk-summary-card" id="groundwater">
     <div class="govuk-summary-card__title-wrapper vlow card-padding-left">
-      <h2 class="govuk-summary-card__title">Groundwater<span class="chance-content gw-context">{{ groundWaterRiskText }}</span></h2>
+      <h2 class="govuk-summary-card__title">Groundwater<span class="chance-content gw-context">{% if isGroundwaterArea %}
+        Flooding is possible when groundwater levels are high.
+        {% else %}
+        Flooding from groundwater is unlikely in this area.
+        {% endif %}</span></h2>
       <ul class="govuk-summary-card__actions">
       </ul>
     </div>
@@ -70,7 +74,11 @@
   
   <div class="govuk-summary-card" id="reservoirs">
     <div class="govuk-summary-card__title-wrapper vlow card-padding-left">
-      <h2 class="govuk-summary-card__title">Reservoirs<span class="chance-content gw-context">{{ reservoirRiskText }}</span></h2>
+      <h2 class="govuk-summary-card__title">Reservoirs<span class="chance-content gw-context">{% if reservoirRisk %}
+        There is a risk of flooding from reservoirs in this area.
+        {% else %}
+        Flooding from reservoirs is unlikely in this area.
+        {% endif %}</span></h2>
       <ul class="govuk-summary-card__actions">
       </ul>
     </div>
@@ -124,6 +132,7 @@
   
       <!-- end of details -->
       <nav class="govuk-pagination govuk-pagination--block" role="navigation" aria-label="results">
+        {% if surfaceWaterIsFirst %}
         <div class="govuk-pagination__prev">
           <a class="govuk-link govuk-pagination__link" href="/rivers-and-sea" rel="prev" previewlistener="true">
             <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
@@ -132,6 +141,16 @@
             <span class="govuk-pagination__link-title">Previous</span><span class="govuk-visually-hidden">:</span>
             <span class="govuk-pagination__link-label">Rivers and the sea</span></a>
         </div>
+        {% else %}
+        <div class="govuk-pagination__prev">
+          <a class="govuk-link govuk-pagination__link" href="/surface-water" rel="prev" previewlistener="true">
+            <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+              <path d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"></path>
+            </svg>
+            <span class="govuk-pagination__link-title">Previous</span><span class="govuk-visually-hidden">:</span>
+            <span class="govuk-pagination__link-label">Surface water</span></a>
+        </div>
+        {% endif %}
       </nav>
       <!-- end of nav -->
 {% endblock %}

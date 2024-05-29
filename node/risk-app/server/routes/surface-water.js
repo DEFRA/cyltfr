@@ -1,6 +1,6 @@
 const boom = require('@hapi/boom')
 const riskService = require('../services/risk')
-const SurfaceWaterViewModel = require('../models/surface-water')
+const SurfaceWaterViewModel = require('../models/risk-view')
 const errors = require('../models/errors.json')
 
 module.exports = {
@@ -20,12 +20,11 @@ module.exports = {
 
       try {
         const risk = await riskService.getByCoordinates(x, y, radius)
-        const surfaceWaterRisk = risk.surfaceWaterRisk || 'Very Low'
 
         if (!risk.inEngland) {
           return h.redirect('/england-only')
         } else {
-          return h.view('surface-water', new SurfaceWaterViewModel(surfaceWaterRisk, address, risk.leadLocalFloodAuthority, backLinkUri))
+          return h.view('surface-water', new SurfaceWaterViewModel(risk, address, backLinkUri))
         }
       } catch (err) {
         return boom.badRequest(errors.riskProfile.message, err)

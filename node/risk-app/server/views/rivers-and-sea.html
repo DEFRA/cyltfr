@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 
 {% set pageTitle = "Rivers and the sea: understand your flood risk" %}
+{% set currentpage = "rivers-and-sea" %}
 
 {% block head %}
 {{ super() }}
@@ -28,20 +29,15 @@
     <nav aria-label="Pages with more detail on this service" class="gem-c-contents-list govuk-!-margin-bottom-3"
       role="navigation">
       <ol class="gem-c-contents-list__list">
-        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
-          <a class="gem-c-contents-list__link govuk-link" href="/surface-water" previewlistener="true" aria-label="A link to the surface water understand your flood risk page.">Surface
-            water</a>
-        </li>
-        <li
-          class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed gem-c-contents-list__list-item--active"
-          aria-current="true">
-          <strong>Rivers and the sea</strong>
-        </li>
-        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
-          <a class="gem-c-contents-list__link govuk-link" href="/ground-water" aria-label="A link to the ground water and reservoirs understand your flood risk page."
-            previewlistener="true">Groundwater and reservoirs</a>
-        </li>
-      </ol>
+        {% if surfaceWaterIsFirst %}
+        {% include 'partials/flagged/nav-sw.html' %}
+        {% endif %}
+        {% include 'partials/flagged/nav-rs.html' %}
+        {% if not surfaceWaterIsFirst %}
+        {% include 'partials/flagged/nav-sw.html' %}
+        {% endif %}
+        {% include 'partials/flagged/nav-gw.html' %}
+        </ol>
     </nav>
   
     <div class="govuk-grid-row">
@@ -49,8 +45,8 @@
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
         <h2 class="govuk-heading-m">Yearly chance of flooding</h2>
         <p class="govuk-body">The yearly chance of flooding from rivers and the sea is:
-          <strong class="govuk-tag govuk-tag--{{ riskStyle }} label-mod-depth">
-            <span>{{ riskProbability }}</span>
+          <strong class="govuk-tag govuk-tag--{{ riversSeaRiskStyle }} label-mod-depth">
+            <span>{{ riverAndSeaRisk }}</span>
           </strong>
         </p>
         {% include 'partials/floodRatings.html' %}
@@ -63,7 +59,7 @@
             
         <h2 class="govuk-heading-m">What you can do</h2>
 
-        {% if riskProbability !== 'Very low' %}
+        {% if riverAndSeaRisk !== 'Very low' %}
         <p class="govuk-body">It's a good idea to check your flood risk regularly because the information may change.
         </p>
         <p class="govuk-body">You can also:</p>
@@ -85,6 +81,7 @@
           class="govuk-section-break govuk-section-break--m govuk-section-break--visible  govuk-!-margin-top-6 govuk-!-margin-bottom-3">
   
         <nav class="govuk-pagination govuk-pagination--block" role="navigation" aria-label="results">
+          {% if surfaceWaterIsFirst %}
           <div class="govuk-pagination__prev">
             <a class="govuk-link govuk-pagination__link" href="/surface-water" rel="prev" previewlistener="true">
               <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg"
@@ -107,6 +104,19 @@
               </svg> <span class="govuk-pagination__link-title">Next</span><span class="govuk-visually-hidden">:</span>
               <span class="govuk-pagination__link-label">Groundwater and reservoirs</span></a>
           </div>
-        </nav>
+          {% else %}
+          <div class="govuk-pagination__next">
+            <a class="govuk-link govuk-pagination__link" href="/surface-water" rel="next"
+              previewlistener="true"> <svg class="govuk-pagination__icon govuk-pagination__icon--next"
+                xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false"
+                viewBox="0 0 15 13">
+                <path
+                  d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z">
+                </path>
+              </svg> <span class="govuk-pagination__link-title">Next</span><span class="govuk-visually-hidden">:</span>
+              <span class="govuk-pagination__link-label">Surface water</span></a>
+          </div>
+          {% endif %}
+          </nav>
       </div>
 {% endblock %}
