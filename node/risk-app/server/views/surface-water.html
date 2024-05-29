@@ -29,13 +29,13 @@
   role="navigation">
   <ol class="gem-c-contents-list__list">
     {% if surfaceWaterIsFirst %}
-    {% include 'partials/flagged/nav-sw.html' %}
+    {% include 'partials/flagged/nav-sw.njk' %}
     {% endif %}
-    {% include 'partials/flagged/nav-rs.html' %}
+    {% include 'partials/flagged/nav-rs.njk' %}
     {% if not surfaceWaterIsFirst %}
-    {% include 'partials/flagged/nav-sw.html' %}
+    {% include 'partials/flagged/nav-sw.njk' %}
     {% endif %}
-    {% include 'partials/flagged/nav-gw.html' %}
+    {% include 'partials/flagged/nav-gw.njk' %}
 </ol>
 </nav>
 
