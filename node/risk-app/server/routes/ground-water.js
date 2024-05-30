@@ -27,6 +27,10 @@ module.exports = {
     }
   },
   options: {
-    description: 'Understand rivers and the sea page'
+    description: 'Understand rivers and the sea page',
+    cache: {
+      expiresIn: 30 * 1000,
+      privacy: 'private'
+    }
   }
 }

@@ -34,6 +34,10 @@ module.exports = {
     }
   },
   options: {
-    description: 'Surface water risk description'
+    description: 'Surface water risk description',
+    cache: {
+      expiresIn: 30 * 1000,
+      privacy: 'private'
+    }
   }
 }

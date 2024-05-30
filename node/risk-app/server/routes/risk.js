@@ -54,6 +54,10 @@ module.exports = {
     }
   },
   options: {
-    description: 'Get risk text page'
+    description: 'Get risk text page',
+    cache: {
+      expiresIn: 30 * 1000,
+      privacy: 'private'
+    }
   }
 }
