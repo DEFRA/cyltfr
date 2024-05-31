@@ -46,8 +46,9 @@ describe('Address service', () => {
     const result = await addressService.find('NP18 3EZ')
     const willow = result.find(item => item.uprn === '10093088549')
     const numberOne = result.find(item => item.uprn === '100050522998')
+    const WILLOW_LOCATION_X = 459974.88
     expect(result.length).toEqual(2)
-    expect(willow.x).toEqual(459974.88)
+    expect(willow.x).toEqual(WILLOW_LOCATION_X)
     expect(willow.postcode).toEqual('DPA 4JL')
     expect(numberOne.postcode).toEqual('YO8 LPI')
   })
