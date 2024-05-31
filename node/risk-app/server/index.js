@@ -1,6 +1,7 @@
 const hapi = require('@hapi/hapi')
 const config = require('./config')
 const cache = require('./cache')
+const { find } = require('../server/services/address')
 
 async function createServer () {
   // Create the hapi server
@@ -34,6 +35,14 @@ async function createServer () {
   await server.register(require('./plugins/session'))
   await server.register(require('./plugins/cookies'))
   await server.register(require('blipp'))
+
+  server.method('find', find, {
+    cache: {
+      cache: 'server_cache',
+      expiresIn: 100 * 1000,
+      generateTimeout: 2000
+    }
+  })
 
   if (config.errbit.postErrors) {
     await server.register({
