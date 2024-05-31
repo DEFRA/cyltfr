@@ -374,3 +374,11 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
 .ol-zoom.ol-zoom-checked {
   top: calc(100% - 200px);
 }
+
+.zoom-disabled {
+  fill: #c7c7c7;
+  pointer-events: none;
+  cursor: auto;
+  outline: none;
+  box-shadow: none;
+}
