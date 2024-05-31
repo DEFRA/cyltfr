@@ -2,6 +2,7 @@ const hapi = require('@hapi/hapi')
 const config = require('./config')
 const cache = require('./cache')
 const { find } = require('../server/services/address')
+const { getByCoordinates } = require('../server/services/risk')
 
 async function createServer () {
   // Create the hapi server
@@ -40,7 +41,15 @@ async function createServer () {
     cache: {
       cache: 'server_cache',
       expiresIn: 100 * 1000,
-      generateTimeout: 2000
+      generateTimeout: 20000
+    }
+  })
+
+  server.method('riskService', getByCoordinates, {
+    cache: {
+      cache: 'server_cache',
+      expiresIn: 100 * 1000,
+      generateTimeout: 20000
     }
   })
 

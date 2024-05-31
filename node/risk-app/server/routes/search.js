@@ -48,8 +48,7 @@ module.exports = [
         }
 
         try {
-          const result = await request.server.methods.find(postcode)
-          addresses = result.value
+          addresses = await request.server.methods.find(postcode)
         } catch {
           return h.redirect('/postcode?error=postcode_does_not_exist')
         }
