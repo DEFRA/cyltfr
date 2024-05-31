@@ -2,6 +2,7 @@ const addressService = require('../address')
 const util = require('../../util')
 const address1 = require('./data/address1.json')
 const address2 = require('./data/address2.json')
+const config = require('../../config')
 
 let returnValue = {}
 function setReturnValue (value) {
@@ -51,5 +52,10 @@ describe('Address service', () => {
     expect(willow.x).toEqual(WILLOW_LOCATION_X)
     expect(willow.postcode).toEqual('DPA 4JL')
     expect(numberOne.postcode).toEqual('YO8 LPI')
+  })
+
+  test('Config file osPostcodeUrl does not have parameters in the url', async () => {
+    expect(config.osPostcodeUrl).not.toMatch(/dataset=DPA/g)
+    expect(config.osPostcodeUrl).not.toMatch(/postcode=/g)
   })
 })
