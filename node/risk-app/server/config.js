@@ -9,10 +9,11 @@ const schema = joi.object().keys({
   port: joi.number().required(),
   geoserverUrl: joi.string().uri().required(),
   serviceUrl: joi.string().uri().required(),
-  mockAddressService: joi.boolean().required(),
+  simulateAddressService: joi.boolean().default(false),
   httpTimeoutMs: joi.number().required().min(0).max(30000),
   analyticsAccount: joi.string().default(''),
   G4AnalyticsAccount: joi.string().default(''),
+  GTagManagerId: joi.string().default(''),
   floodWarningsUrl: joi.string().uri().required(),
   floodRiskUrl: joi.string().uri().required(),
   osUprnUrl: joi.string().uri().required(),
@@ -37,6 +38,7 @@ const schema = joi.object().keys({
   friendlyCaptchaUrl: joi.string().when('friendlyCaptchaEnabled', { is: true, then: joi.required() }),
   friendlyCaptchaBypass: joi.string().default(''),
   sessionTimeout: joi.number().default(10),
+  riskPageFlag: joi.boolean().default(false),
   errbit: joi.object().required().keys({
     postErrors: joi.boolean().required(),
     options: {

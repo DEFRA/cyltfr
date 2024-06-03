@@ -364,6 +364,14 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
     top: calc(100% - 102px);
     left: calc(100% - 340px);
   }
+
+  .zoom-disabled {
+    fill: #c7c7c7;
+    pointer-events: none;
+    cursor: auto;
+    outline: none;
+    box-shadow: none;
+  }
   
   .ol-zoom .ol-zoom-in:focus {
     /* Ensures the focus boarder overlaps the other zoom button rather than hides behind */
