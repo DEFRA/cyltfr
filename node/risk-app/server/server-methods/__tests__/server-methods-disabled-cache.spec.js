@@ -10,6 +10,7 @@ const defaultOptions = {
 jest.mock('../../services/flood')
 jest.mock('../../services/address')
 jest.mock('../../services/risk')
+jest.mock('../../config')
 
 describe('server methods', () => {
   let server, cookie
@@ -45,9 +46,10 @@ describe('server methods', () => {
     await server.stop()
   })
 
-  describe('cache enabled', () => {
-    it('should return initial cached address', async () => {
+  describe('cache disabled', () => {
+    it('should return updated cached address', async () => {
       const response = await server.methods.find('CV37 6YZ')
+
       expect(response).toEqual([
         expect.objectContaining({
           uprn: '100070216073',
@@ -72,7 +74,7 @@ describe('server methods', () => {
         expect.objectContaining({
           uprn: '100070216073',
           postcode: 'CV37 6YZ',
-          address: '11, BANCROFT PLACE, STRATFORD-UPON-AVON, CV37 6YZ',
+          address: '12, BANCROFT PLACE, STRATFORD-UPON-AVON, CV37 6YZ',
           country: 'ENGLAND'
         })
       ])
