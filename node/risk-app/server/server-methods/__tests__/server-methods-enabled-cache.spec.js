@@ -1,7 +1,8 @@
 const STATUS_CODES = require('http2').constants
 const createServer = require('../..')
-const addressService = require('../../services/__mocks__/address')
-const riskService = require('../../services/__mocks__/risk')
+const addressService = require('../../services/address')
+const riskService = require('../../services/risk')
+const mockConfig = require('../../__mocks__/config')
 const { mockOptions, mockSearchOptions } = require('../../../test/mock')
 const defaultOptions = {
   method: 'GET',
@@ -11,6 +12,9 @@ const defaultOptions = {
 jest.mock('../../services/flood')
 jest.mock('../../services/address')
 jest.mock('../../services/risk')
+jest.mock('../../config')
+
+mockConfig.setConfigOptions({ cacheEnabled: true })
 
 describe('server methods', () => {
   let server, cookie
@@ -81,7 +85,7 @@ describe('server methods', () => {
     })
 
     it('should return original cached risk details', async () => {
-      const response = await server.methods.riskService()
+      const response = await server.methods.riskService(40.7128, -74.0060, 15)
 
       expect(response).toEqual(
         expect.objectContaining({
@@ -92,19 +96,17 @@ describe('server methods', () => {
           inFloodAlertArea: false,
           inFloodWarningArea: false,
           isGroundwaterArea: false,
-          leadLocalFloodAuthority: "Cheshire West and Chester",
+          leadLocalFloodAuthority: 'Cheshire West and Chester',
           reservoirRisk: null,
           riverAndSeaRisk: null,
-          surfaceWaterRisk: "Very Low",
-          surfaceWaterSuitability: "County to Town"
+          surfaceWaterRisk: 'Very Low',
+          surfaceWaterSuitability: 'County to Town'
         })
       )
 
-      riskService.__updateReturnValue({ leadLocalFloodAuthority: "Wessex" })
+      riskService.__updateReturnValue({ leadLocalFloodAuthority: 'Wessex' })
 
-      console.log(riskService.getByCoordinates(40.7128, -74.0060, 15))
-
-      const changedResponse = await server.methods.riskService()
+      const changedResponse = await server.methods.riskService(40.7128, -74.0060, 15)
 
       expect(changedResponse).toEqual(
         expect.objectContaining({
@@ -115,11 +117,11 @@ describe('server methods', () => {
           inFloodAlertArea: false,
           inFloodWarningArea: false,
           isGroundwaterArea: false,
-          leadLocalFloodAuthority: "Cheshire West and Chester",
+          leadLocalFloodAuthority: 'Cheshire West and Chester',
           reservoirRisk: null,
           riverAndSeaRisk: null,
-          surfaceWaterRisk: "Very Low",
-          surfaceWaterSuitability: "County to Town"
+          surfaceWaterRisk: 'Very Low',
+          surfaceWaterSuitability: 'County to Town'
         })
       )
     })

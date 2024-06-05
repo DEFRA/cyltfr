@@ -1,7 +1,7 @@
 const STATUS_CODES = require('http2').constants
 const createServer = require('../../../server')
-const addressService = require('../../services/__mocks__/address')
-const riskService = require('../../services/__mocks__/risk')
+const addressService = require('../../services/address')
+const riskService = require('../../services/risk')
 const { mockOptions, mockSearchOptions } = require('../../../test/mock')
 const defaultOptions = {
   method: 'GET',
@@ -82,8 +82,8 @@ describe('server methods', () => {
       ])
     })
 
-    it.only('should return updated risk details', async () => {
-      const response = await server.methods.riskService()
+    it('should return updated risk details', async () => {
+      const response = await server.methods.riskService(40.7128, -74.0060, 15)
 
       expect(response).toEqual(
         expect.objectContaining({
@@ -94,21 +94,17 @@ describe('server methods', () => {
           inFloodAlertArea: false,
           inFloodWarningArea: false,
           isGroundwaterArea: false,
-          leadLocalFloodAuthority: "Cheshire West and Chester",
+          leadLocalFloodAuthority: 'Cheshire West and Chester',
           reservoirRisk: null,
           riverAndSeaRisk: null,
-          surfaceWaterRisk: "Very Low",
-          surfaceWaterSuitability: "County to Town"
+          surfaceWaterRisk: 'Very Low',
+          surfaceWaterSuitability: 'County to Town'
         })
       )
 
-      const updated = riskService.__updateReturnValue({ leadLocalFloodAuthority: "Wessex" })
+      riskService.__updateReturnValue({ leadLocalFloodAuthority: 'Wessex' })
 
-      console.log(updated)
-      console.log(riskService.getByCoordinates(40.7128, -74.0060, 15))
-      
-      const changedResponse = await server.methods.riskService()
-      console.log(changedResponse)
+      const changedResponse = await server.methods.riskService(40.7128, -74.0060, 15)
 
       expect(changedResponse).toEqual(
         expect.objectContaining({
@@ -119,11 +115,11 @@ describe('server methods', () => {
           inFloodAlertArea: false,
           inFloodWarningArea: false,
           isGroundwaterArea: false,
-          leadLocalFloodAuthority: "Wessex",
+          leadLocalFloodAuthority: 'Wessex',
           reservoirRisk: null,
           riverAndSeaRisk: null,
-          surfaceWaterRisk: "Very Low",
-          surfaceWaterSuitability: "County to Town"
+          surfaceWaterRisk: 'Very Low',
+          surfaceWaterSuitability: 'County to Town'
         })
       )
     })

@@ -4,8 +4,6 @@ const config = require('../config')
 
 const cacheEnabled = config.cacheEnabled
 
-console.log(cacheEnabled)
-
 const serverMethods = [
   {
     name: 'find',

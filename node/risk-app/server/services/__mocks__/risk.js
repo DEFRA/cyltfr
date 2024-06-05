@@ -17,11 +17,9 @@ const originalReturnValue = {
 let returnValue = { ...originalReturnValue }
 
 riskService.__updateReturnValue = function (newValue) {
-  console.log('here')
   Object.keys(newValue).forEach(function (key) {
     returnValue[key] = newValue[key]
   })
-  console.log(returnValue)
   return returnValue
 }
 

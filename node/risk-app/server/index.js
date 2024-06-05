@@ -1,7 +1,6 @@
 const hapi = require('@hapi/hapi')
 const config = require('./config')
 const cache = require('./cache')
-const serverMethods = require('./server-methods/server-methods')
 
 async function createServer () {
   // Create the hapi server
@@ -37,6 +36,8 @@ async function createServer () {
   await server.register(require('blipp'))
 
   // Register the server methods
+  const serverMethods = require('./server-methods/server-methods')
+
   for (const method of serverMethods) {
     server.method(method.name, method.method, method.options)
   }
