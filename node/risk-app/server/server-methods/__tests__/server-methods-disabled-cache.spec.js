@@ -8,6 +8,10 @@ const defaultOptions = {
   url: '/risk'
 }
 
+const x = 40.7128
+const y = -74.0060
+const radius = 15
+
 jest.mock('../../services/flood')
 jest.mock('../../services/address')
 jest.mock('../../services/risk')
@@ -83,7 +87,7 @@ describe('server methods', () => {
     })
 
     it('should return updated risk details', async () => {
-      const response = await server.methods.riskService(40.7128, -74.0060, 15)
+      const response = await server.methods.riskService(x, y, radius)
 
       expect(response).toEqual(
         expect.objectContaining({
@@ -104,7 +108,7 @@ describe('server methods', () => {
 
       riskService.__updateReturnValue({ leadLocalFloodAuthority: 'Wessex' })
 
-      const changedResponse = await server.methods.riskService(40.7128, -74.0060, 15)
+      const changedResponse = await server.methods.riskService(x, y, radius)
 
       expect(changedResponse).toEqual(
         expect.objectContaining({
