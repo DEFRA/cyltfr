@@ -1,6 +1,5 @@
 const joi = require('joi')
 const config = require('../config/server.json')
-const { runningUnitTests } = require('./helpers.js')
 
 // Define config schema
 const schema = joi.object().keys({
@@ -16,7 +15,6 @@ const schema = joi.object().keys({
   GTagManagerId: joi.string().default(''),
   floodWarningsUrl: joi.string().uri().required(),
   floodRiskUrl: joi.string().uri().required(),
-  osUprnUrl: joi.string().uri().required(),
   osPostcodeUrl: joi.string().uri().required(),
   osGetCapabilitiesUrl: joi.string().required().allow(''),
   osMapsUrl: joi.string().uri().required(),
@@ -39,6 +37,7 @@ const schema = joi.object().keys({
   friendlyCaptchaBypass: joi.string().default(''),
   sessionTimeout: joi.number().default(10),
   riskPageFlag: joi.boolean().default(false),
+  cacheEnabled: joi.boolean().default(true),
   errbit: joi.object().required().keys({
     postErrors: joi.boolean().required(),
     options: {
@@ -69,7 +68,5 @@ const value = result.value
 value.isDev = value.env === 'dev'
 value.isTest = value.env === 'test'
 value.isProd = value.env.startsWith('prod-')
-
-if (runningUnitTests()) { value.redisCacheEnabled = false }
 
 module.exports = value

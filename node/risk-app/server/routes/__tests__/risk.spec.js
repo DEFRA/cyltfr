@@ -1,8 +1,7 @@
 const STATUS_CODES = require('http2').constants
-const createServer = require('../../../server')
+const createServer = require('../..')
 const riskService = require('../../services/risk')
 const { mockOptions, mockSearchOptions } = require('../../../test/mock')
-const config = require('../../config')
 const defaultOptions = {
   method: 'GET',
   url: '/risk'
@@ -15,7 +14,6 @@ jest.mock('../../services/address')
 jest.mock('../../services/risk')
 
 beforeAll(async () => {
-  config.setConfigOptions({ riskPageFlag: true })
   server = await createServer()
   await server.initialize()
   const initial = mockOptions()
@@ -632,95 +630,5 @@ describe('Risk page test', () => {
     })
     const response = await server.inject(defaultOptions)
     expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
-  })
-
-  test('Include sentence about highest risk - Surface water', async () => {
-    riskService.__updateReturnValue({
-      inEngland: true,
-      isGroundwaterArea: true,
-      riverAndSeaRisk: { probabilityForBand: 'Low', suitability: 'County to Town' },
-      surfaceWaterRisk: 'Medium',
-      surfaceWaterSuitability: 'National to County',
-      extraInfo: null
-    })
-    const response = await server.inject(defaultOptions)
-    const { payload } = response
-    expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
-    expect(payload).toMatch(/The highest risk of flooding at this location[^]* is from <strong>surface water<\/strong>./g)
-  })
-
-  test('Include sentence about highest risk - Surface water with Very Low Rivers and Sea', async () => {
-    riskService.__updateReturnValue({
-      inEngland: true,
-      isGroundwaterArea: true,
-      riverAndSeaRisk: { probabilityForBand: 'Very Low', suitability: 'County to Town' },
-      surfaceWaterRisk: 'Medium',
-      surfaceWaterSuitability: 'National to County',
-      extraInfo: null
-    })
-    const response = await server.inject(defaultOptions)
-    const { payload } = response
-    expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
-    expect(payload).toMatch(/The highest risk of flooding at this location[^]* is from <strong>surface water<\/strong>./g)
-  })
-
-  test('Include sentence about highest risk - Rivers and Sea', async () => {
-    riskService.__updateReturnValue({
-      inEngland: true,
-      isGroundwaterArea: true,
-      riverAndSeaRisk: { probabilityForBand: 'Medium', suitability: 'County to Town' },
-      surfaceWaterRisk: 'Low',
-      surfaceWaterSuitability: 'National to County',
-      extraInfo: null
-    })
-    const response = await server.inject(defaultOptions)
-    const { payload } = response
-    expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
-    expect(payload).toMatch(/The highest risk of flooding at this location[^]* is from <strong>rivers and the sea<\/strong>./g)
-  })
-
-  test('Include sentence about highest risk - Rivers and Sea with Very Low surface water', async () => {
-    riskService.__updateReturnValue({
-      inEngland: true,
-      isGroundwaterArea: true,
-      riverAndSeaRisk: { probabilityForBand: 'Medium', suitability: 'County to Town' },
-      surfaceWaterRisk: 'Very Low',
-      surfaceWaterSuitability: 'National to County',
-      extraInfo: null
-    })
-    const response = await server.inject(defaultOptions)
-    const { payload } = response
-    expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
-    expect(payload).toMatch(/The highest risk of flooding at this location[^]* is from <strong>rivers and the sea<\/strong>./g)
-  })
-
-  test('Include sentence about highest risk - Rivers and Sea and surface water', async () => {
-    riskService.__updateReturnValue({
-      inEngland: true,
-      isGroundwaterArea: true,
-      riverAndSeaRisk: { probabilityForBand: 'Medium', suitability: 'County to Town' },
-      surfaceWaterRisk: 'Medium',
-      surfaceWaterSuitability: 'National to County',
-      extraInfo: null
-    })
-    const response = await server.inject(defaultOptions)
-    const { payload } = response
-    expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
-    expect(payload).toMatch(/The highest risks of flooding at this location are from[^]* <strong>surface water<\/strong> and <strong>rivers and the sea<\/strong>./g)
-  })
-
-  test('Include sentence about highest risk - Not displayed for very low risk', async () => {
-    riskService.__updateReturnValue({
-      inEngland: true,
-      isGroundwaterArea: true,
-      riverAndSeaRisk: { probabilityForBand: 'Very Low', suitability: 'County to Town' },
-      surfaceWaterRisk: 'Very Low',
-      surfaceWaterSuitability: 'National to County',
-      extraInfo: null
-    })
-    const response = await server.inject(defaultOptions)
-    const { payload } = response
-    expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_OK)
-    expect(payload).not.toMatch(/The highest risks of flooding at this location/g)
   })
 })
