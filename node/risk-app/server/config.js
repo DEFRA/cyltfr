@@ -1,5 +1,4 @@
 const joi = require('joi')
-const config = require('../config/server.json')
 
 // Define config schema
 const schema = joi.object().keys({
@@ -10,7 +9,6 @@ const schema = joi.object().keys({
   serviceUrl: joi.string().uri().required(),
   simulateAddressService: joi.boolean().default(false),
   httpTimeoutMs: joi.number().required().min(0).max(30000),
-  analyticsAccount: joi.string().default(''),
   G4AnalyticsAccount: joi.string().default(''),
   GTagManagerId: joi.string().default(''),
   floodWarningsUrl: joi.string().uri().required(),
@@ -49,7 +47,53 @@ const schema = joi.object().keys({
   })
 })
 
-config.http_proxy = process.env.http_proxy
+const config = {
+  env: process.env.env,
+  host: process.env.host,
+  port: process.env.port,
+  geoserverUrl: process.env.geoserverUrl,
+  serviceUrl: process.env.serviceUrl,
+  simulateAddressService: process.env.simulateAddressService,
+  httpTimeoutMs: process.env.httpTimeoutMs,
+  G4AnalyticsAccount: process.env.G4AnalyticsAccount,
+  GTagManagerId: process.env.GTagManagerId,
+  floodWarningsUrl: process.env.floodWarningsUrl,
+  floodRiskUrl: process.env.floodRiskUrl,
+  osPostcodeUrl: process.env.osPostcodeUrl,
+  osGetCapabilitiesUrl: process.env.osGetCapabilitiesUrl,
+  osMapsUrl: process.env.osMapsUrl,
+  osNamesUrl: process.env.osNamesUrl,
+  osSearchKey: process.env.osSearchKey,
+  osMapsKey: process.env.osMapsKey,
+  http_proxy: process.env.http_proxy,
+  rateLimitEnabled: process.env.rateLimitEnabled,
+  rateLimitRequests: process.env.rateLimitRequests,
+  rateLimitExpiresIn: process.env.rateLimitExpiresIn,
+  rateLimitWhitelist: process.env.rateLimitWhitelist,
+  redisCacheEnabled: process.env.redisCacheEnabled,
+  redisCacheHost: process.env.redisCacheHost,
+  redisCachePort: process.env.redisCachePort,
+  cookiePassword: process.env.cookiePassword,
+  friendlyCaptchaEnabled: process.env.friendlyCaptchaEnabled,
+  friendlyCaptchaSiteKey: process.env.friendlyCaptchaSiteKey,
+  friendlyCaptchaSecretKey: process.env.friendlyCaptchaSecretKey,
+  friendlyCaptchaUrl: process.env.friendlyCaptchaUrl,
+  friendlyCaptchaBypass: process.env.friendlyCaptchaBypass,
+  sessionTimeout: process.env.sessionTimeout,
+  riskPageFlag: process.env.riskPageFlag,
+  cacheEnabled: process.env.cacheEnabled,
+  errbit: {
+    postErrors: process.env.errbitpostErrors,
+    options: {
+      env: process.env.errbitenv,
+      key: process.env.errbitkey,
+      host: process.env.errbithost,
+      proxy: process.env.errbitproxy
+    }
+  }
+}
+
+config.rateLimitWhitelist = config.rateLimitWhitelist ? config.rateLimitWhitelist.split(',') : []
 
 // Validate config
 const result = schema.validate(config, {

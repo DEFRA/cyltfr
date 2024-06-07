@@ -7,3 +7,4 @@ node/flood-gazetteer-import
 spatial-data-loader/scripts/log
 .vscode
 .DS_Store
+node/risk-admin/ltfri-mgmt-tool-task-definition.json
