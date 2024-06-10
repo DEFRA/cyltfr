@@ -1,5 +1,11 @@
 const joi = require('joi')
-const config = require('../config/server.json')
+
+function readConfigFile () {
+  const fileValues = require('../config/server.json')
+  Object.keys(fileValues).forEach(function (key) {
+    config[key] = fileValues[key]
+  })
+}
 
 // Define config schema
 const schema = joi.object().keys({
@@ -49,12 +55,66 @@ const schema = joi.object().keys({
   })
 })
 
-config.http_proxy = process.env.http_proxy
+const config = {
+  env: process.env.env,
+  host: process.env.host,
+  port: process.env.port,
+  geoserverUrl: process.env.geoserverUrl,
+  serviceUrl: process.env.serviceUrl,
+  simulateAddressService: process.env.simulateAddressService,
+  httpTimeoutMs: process.env.httpTimeoutMs,
+  G4AnalyticsAccount: process.env.G4AnalyticsAccount,
+  GTagManagerId: process.env.GTagManagerId,
+  floodWarningsUrl: process.env.floodWarningsUrl,
+  floodRiskUrl: process.env.floodRiskUrl,
+  osPostcodeUrl: process.env.osPostcodeUrl,
+  osGetCapabilitiesUrl: process.env.osGetCapabilitiesUrl,
+  osMapsUrl: process.env.osMapsUrl,
+  osNamesUrl: process.env.osNamesUrl,
+  osSearchKey: process.env.osSearchKey,
+  osMapsKey: process.env.osMapsKey,
+  http_proxy: process.env.http_proxy,
+  rateLimitEnabled: process.env.rateLimitEnabled,
+  rateLimitRequests: process.env.rateLimitRequests,
+  rateLimitExpiresIn: process.env.rateLimitExpiresIn,
+  rateLimitWhitelist: process.env.rateLimitWhitelist,
+  redisCacheEnabled: process.env.redisCacheEnabled,
+  redisCacheHost: process.env.redisCacheHost,
+  redisCachePort: process.env.redisCachePort,
+  cookiePassword: process.env.cookiePassword,
+  friendlyCaptchaEnabled: process.env.friendlyCaptchaEnabled,
+  friendlyCaptchaSiteKey: process.env.friendlyCaptchaSiteKey,
+  friendlyCaptchaSecretKey: process.env.friendlyCaptchaSecretKey,
+  friendlyCaptchaUrl: process.env.friendlyCaptchaUrl,
+  friendlyCaptchaBypass: process.env.friendlyCaptchaBypass,
+  sessionTimeout: process.env.sessionTimeout,
+  riskPageFlag: process.env.riskPageFlag,
+  cacheEnabled: process.env.cacheEnabled,
+  errbit: {
+    postErrors: process.env.errbitpostErrors,
+    options: {
+      env: process.env.errbitenv,
+      key: process.env.errbitkey,
+      host: process.env.errbithost,
+      proxy: process.env.errbitproxy
+    }
+  }
+}
+
+config.rateLimitWhitelist = config.rateLimitWhitelist ? config.rateLimitWhitelist.split(',') : []
 
 // Validate config
-const result = schema.validate(config, {
+let result = schema.validate(config, {
   abortEarly: false
 })
+
+if (result.error) {
+  // read from config file
+  readConfigFile()
+  result = schema.validate(config, {
+    abortEarly: false
+  })
+}
 
 // Throw if config is invalid
 if (result.error) {
