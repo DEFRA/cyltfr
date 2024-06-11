@@ -75,7 +75,9 @@
     "*.js": "standard --fix"
   },
   "jest": {
-    "setupFiles": ["dotenv/config"],
+    "setupFiles": [
+      "dotenv/config"
+    ],
     "automock": false,
     "collectCoverage": true,
     "collectCoverageFrom": [
