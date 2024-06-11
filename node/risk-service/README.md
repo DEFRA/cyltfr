@@ -61,6 +61,10 @@ Then you can run the container in debug mode using
 
 `$ npm run container:debug`
 
+or 
+
+`$ npm run cd`
+
 This maps your source directory into the container, so that you can make changes locally and they'll be reflected in the container.
 
 If you have auto-attach configured in vscode you might need to disable it for this to work.
@@ -68,3 +72,7 @@ If you have auto-attach configured in vscode you might need to disable it for th
 When you have finished end the debug container using
 
 `$ npm run container:stopdebug`
+
+or 
+
+`$ npm run cx`
