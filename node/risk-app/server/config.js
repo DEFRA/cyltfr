@@ -55,51 +55,72 @@ const schema = joi.object().keys({
   })
 })
 
-const config = {
-  env: process.env.env,
-  host: process.env.host,
-  port: process.env.port,
-  geoserverUrl: process.env.geoserverUrl,
-  serviceUrl: process.env.serviceUrl,
-  simulateAddressService: process.env.simulateAddressService,
-  httpTimeoutMs: process.env.httpTimeoutMs,
-  G4AnalyticsAccount: process.env.G4AnalyticsAccount,
-  GTagManagerId: process.env.GTagManagerId,
-  floodWarningsUrl: process.env.floodWarningsUrl,
-  floodRiskUrl: process.env.floodRiskUrl,
-  osPostcodeUrl: process.env.osPostcodeUrl,
-  osGetCapabilitiesUrl: process.env.osGetCapabilitiesUrl,
-  osMapsUrl: process.env.osMapsUrl,
-  osNamesUrl: process.env.osNamesUrl,
-  osSearchKey: process.env.osSearchKey,
-  osMapsKey: process.env.osMapsKey,
-  http_proxy: process.env.http_proxy,
-  rateLimitEnabled: process.env.rateLimitEnabled,
-  rateLimitRequests: process.env.rateLimitRequests,
-  rateLimitExpiresIn: process.env.rateLimitExpiresIn,
-  rateLimitWhitelist: process.env.rateLimitWhitelist,
-  redisCacheEnabled: process.env.redisCacheEnabled,
-  redisCacheHost: process.env.redisCacheHost,
-  redisCachePort: process.env.redisCachePort,
-  cookiePassword: process.env.cookiePassword,
-  friendlyCaptchaEnabled: process.env.friendlyCaptchaEnabled,
-  friendlyCaptchaSiteKey: process.env.friendlyCaptchaSiteKey,
-  friendlyCaptchaSecretKey: process.env.friendlyCaptchaSecretKey,
-  friendlyCaptchaUrl: process.env.friendlyCaptchaUrl,
-  friendlyCaptchaBypass: process.env.friendlyCaptchaBypass,
-  sessionTimeout: process.env.sessionTimeout,
-  riskPageFlag: process.env.riskPageFlag,
-  cacheEnabled: process.env.cacheEnabled,
-  errbit: {
-    postErrors: process.env.errbitpostErrors,
+const names = {
+  env: 'NODE_ENV',
+  host: 'RISK_APP_HOST',
+  port: 'PORT',
+  geoserverUrl: 'GEOSERVER_URL',
+  serviceUrl: 'SERVICE_URL',
+  simulateAddressService: 'SIMULATE_ADDRESS_SERVICE',
+  httpTimeoutMs: 'HTTP_TIMEOUT_MS',
+  G4AnalyticsAccount: 'G4_ANALYTICS_ACCOUNT',
+  GTagManagerId: 'GTAG_MANAGER_ID',
+  floodWarningsUrl: 'FLOOD_WARNINGS_URL',
+  floodRiskUrl: 'FLOOD_RISK_URL',
+  osPostcodeUrl: 'OS_POSTCODE_URL',
+  osGetCapabilitiesUrl: 'OS_CAPABILITIES_URL',
+  osMapsUrl: 'OS_MAPS_URL',
+  osNamesUrl: 'OS_NAMES_URL',
+  osSearchKey: 'OS_SEARCH_KEY',
+  osMapsKey: 'OS_MAPS_KEY',
+  http_proxy: 'HTTP_PROXY',
+  rateLimitEnabled: 'RATE_LIMIT_ENABLED',
+  rateLimitRequests: 'RATE_LIMIT_REQUESTS',
+  rateLimitExpiresIn: 'RATE_LIMIT_EXPIRES_IN',
+  rateLimitWhitelist: 'RATE_LIMIT_WHITELIST',
+  redisCacheEnabled: 'REDIS_CACHE_ENABLED',
+  redisCacheHost: 'REDIS_CACHE_HOST',
+  redisCachePort: 'REDIS_CACHE_PORT',
+  cookiePassword: 'COOKIE_PASSWORD',
+  friendlyCaptchaEnabled: 'FRIENDLY_CAPTCHA_ENABLED',
+  friendlyCaptchaSiteKey: 'FRIENDLY_CAPTCHA_SITE_KEY',
+  friendlyCaptchaSecretKey: 'FRIENDLY_CAPTCHA_SECRET_KEY',
+  friendlyCaptchaUrl: 'FRIENDLY_CAPTCHA_URL',
+  friendlyCaptchaBypass: 'FRIENDLY_CAPTCHA_BYPASS',
+  sessionTimeout: 'SESSION_TIMEOUT',
+  riskPageFlag: 'RISK_PAGE_FLAG',
+  cacheEnabled: 'CACHE_ENABLED',
+  errbitpostErrors: 'ERRBIT_POST_ERRORS',
+  errbitenv: 'ERRBIT_ENV',
+  errbitkey: 'ERRBIT_KEY',
+  errbithost: 'ERRBIT_HOST',
+  errbitproxy: 'ERRBIT_PROXY'
+}
+
+const config = {}
+
+Object.keys(names).forEach((key) => {
+  config[key] = process.env[names[key]]
+})
+
+// This needs changing after the move to env vars. This is a bit untidy.
+if (config.errbitpostErrors) {
+  config.errbit = {
+    postErrors: config.errbitpostErrors,
     options: {
-      env: process.env.errbitenv,
-      key: process.env.errbitkey,
-      host: process.env.errbithost,
-      proxy: process.env.errbitproxy
+      env: config.errbitenv,
+      key: config.errbitkey,
+      host: config.errbithost,
+      proxy: config.errbitproxy
     }
   }
 }
+delete config.errbitpostErrors
+delete config.errbitenv
+delete config.errbitkey
+delete config.errbithost
+delete config.errbitproxy
+//
 
 config.rateLimitWhitelist = config.rateLimitWhitelist ? config.rateLimitWhitelist.split(',') : []
 
@@ -108,6 +129,7 @@ let result = schema.validate(config, {
   abortEarly: false
 })
 
+// Remove this after the move to env vars
 if (result.error) {
   // read from config file
   readConfigFile()
@@ -115,6 +137,7 @@ if (result.error) {
     abortEarly: false
   })
 }
+//
 
 // Throw if config is invalid
 if (result.error) {
@@ -128,5 +151,7 @@ const value = result.value
 value.isDev = value.env === 'dev'
 value.isTest = value.env === 'test'
 value.isProd = value.env.startsWith('prod-')
+
+value.names = names
 
 module.exports = value
