@@ -3,7 +3,7 @@ module.exports = {
   path: '/healthcheck',
   options: {
     description: 'Container healthcheck',
-    handler: async (request, h) => {
+    handler: async (_request, _h) => {
       return { healthy: 1 }
     }
   }
