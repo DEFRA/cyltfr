@@ -11,7 +11,6 @@ RUN set -xe \
     && apk add curl \
     && rm -rf /var/cache/apk/* \
     && mkdir /home/node/app \
-    && mkdir /home/node/app/config \
     && chown -R node:node /home/node/
 
 WORKDIR /home/node/app

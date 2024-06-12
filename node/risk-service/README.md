@@ -54,6 +54,7 @@ Configure vscode using a debug configuration launch.json like
       "remoteRoot": "/home/node/app",
       "type": "node"
     }
+  ]
 }
 ```
 
