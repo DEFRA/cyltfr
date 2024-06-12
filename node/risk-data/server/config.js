@@ -1,5 +1,11 @@
 const joi = require('joi')
-const config = require('../config/server.json')
+
+function readConfigFile () {
+  const fileValues = require('../config/server.json')
+  Object.keys(fileValues).forEach(function (key) {
+    config[key] = fileValues[key]
+  })
+}
 
 // Define config schema
 const schema = joi.object().keys({
@@ -8,11 +14,24 @@ const schema = joi.object().keys({
   port: joi.number().integer().required()
 })
 
+const config = {
+  env: process.env.NODE_ENV,
+  host: process.env.RISK_SERVICE_HOST,
+  port: process.env.PORT
+}
+
 // Validate config
-const result = schema.validate(config, {
+let result = schema.validate(config, {
   abortEarly: false
 })
 
+if (result.error) {
+  // read from config file
+  readConfigFile()
+  result = schema.validate(config, {
+    abortEarly: false
+  })
+}
 // Throw if config is invalid
 if (result.error) {
   throw new Error(`The server config is invalid. ${result.error.message}`)
