@@ -16,7 +16,7 @@ const schema = joi.object().keys({
 
 const config = {
   env: process.env.NODE_ENV,
-  host: process.env.RISK_SERVICE_HOST,
+  host: process.env.RISK_DATA_HOST,
   port: process.env.PORT
 }
 
