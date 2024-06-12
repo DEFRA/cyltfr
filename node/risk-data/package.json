@@ -7,7 +7,10 @@
     "node": ">=20.11.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "test": "npm run test:lint && npm run test:jest",
+    "test:jest": "jest --no-cache  --detectOpenHandles --runInBand --forceExit  --collectCoverage server/",
+    "test:lint": "standard",
     "container:build": "docker build -t cyltfr-risk-data --target production .",
     "container:start": "docker run -d --rm --env-file .env -p 8050:8050 --name risk-data cyltfr-risk-data",
     "container:stop": "docker container kill risk-data",

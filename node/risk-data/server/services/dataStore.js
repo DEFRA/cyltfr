@@ -16,10 +16,6 @@ class DataStore {
     this._featureDataLoaded = true
   }
 
-  loadIndividualFeature (item) {
-
-  }
-
   featuresAtPoint (x, y, approvedOnly) {
     if (!this._featureDataLoaded) {
       this.loadFeatureData()
@@ -29,9 +25,6 @@ class DataStore {
     const dataToReturn = []
     dataToCheck.forEach((item) => {
       item.features.features.forEach((feature) => {
-        // if (!feature.polygon) {
-        //   feature.polygon = polygon(feature.geometry.coordinates)
-        // }
         if (booleanPointInPolygon(pointToCheck, feature)) {
           dataToReturn.push([item, feature])
         }
