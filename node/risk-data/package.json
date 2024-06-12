@@ -11,6 +11,7 @@
     "test": "npm run test:lint && npm run test:jest",
     "test:jest": "jest --no-cache  --detectOpenHandles --runInBand --forceExit  --collectCoverage server/",
     "test:lint": "standard",
+    "test:watch": "jest --watch --no-cache --detectOpenHandles --runInBand --forceExit server/",
     "container:build": "docker build -t cyltfr-risk-data --target production .",
     "container:start": "docker run -d --rm --env-file .env -p 8050:8050 --name risk-data cyltfr-risk-data",
     "container:stop": "docker container kill risk-data",

@@ -1,5 +1,5 @@
 const extraInfoService = {
-  getExtraInfo: function (x, y) {
+  getExtraInfo: async function (x, y) {
     const queryResult = { }
 
     return queryResult

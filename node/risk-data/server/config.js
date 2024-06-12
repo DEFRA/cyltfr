@@ -11,7 +11,11 @@ function readConfigFile () {
 const schema = joi.object().keys({
   env: joi.string().valid('dev', 'test', 'prod-green', 'prod-blue'),
   host: joi.string().hostname().required(),
-  port: joi.number().integer().required()
+  port: joi.number().integer().required(),
+  awsBucketRegion: joi.string().required(),
+  awsBucketName: joi.string().required(),
+  holdingCommentsPrefix: joi.string().default('holding-comments'),
+  manifestFilename: joi.string().default('manifest.json')
 })
 
 const config = {

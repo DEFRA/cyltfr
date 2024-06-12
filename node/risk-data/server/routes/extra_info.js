@@ -7,7 +7,7 @@ module.exports = {
   path: '/extra_info/{x}/{y}',
   options: {
     description: 'Get the extra info associated with a point',
-    handler: async (request, h) => {
+    handler: async (request, _h) => {
       const params = request.params
 
       try {
