@@ -71,7 +71,7 @@ const names = {
   osMapsUrl: 'OS_MAPS_URL',
   osSearchKey: 'OS_SEARCH_KEY',
   osMapsKey: 'OS_MAPS_KEY',
-  http_proxy: 'HTTP_PROXY',
+  http_proxy: 'http_proxy',
   rateLimitEnabled: 'RATE_LIMIT_ENABLED',
   rateLimitRequests: 'RATE_LIMIT_REQUESTS',
   rateLimitExpiresIn: 'RATE_LIMIT_EXPIRES_IN',
@@ -97,9 +97,9 @@ const names = {
 
 const config = {}
 
-// Object.keys(names).forEach((key) => {
-//   config[key] = process.env[names[key]]
-// })
+Object.keys(names).forEach((key) => {
+  config[key] = process.env[names[key]]
+})
 
 // This needs changing after the move to env vars. This is a bit untidy.
 if (config.errbitpostErrors) {
@@ -131,7 +131,6 @@ let result = schema.validate(config, {
 if (result.error) {
   // read from config file
   readConfigFile()
-  config.http_proxy = process.env.http_proxy
 
   result = schema.validate(config, {
     abortEarly: false
