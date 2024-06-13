@@ -97,9 +97,9 @@ const names = {
 
 const config = {}
 
-Object.keys(names).forEach((key) => {
-  config[key] = process.env[names[key]]
-})
+// Object.keys(names).forEach((key) => {
+//   config[key] = process.env[names[key]]
+// })
 
 // This needs changing after the move to env vars. This is a bit untidy.
 if (config.errbitpostErrors) {
@@ -131,6 +131,8 @@ let result = schema.validate(config, {
 if (result.error) {
   // read from config file
   readConfigFile()
+  config.http_proxy = process.env.http_proxy
+
   result = schema.validate(config, {
     abortEarly: false
   })
