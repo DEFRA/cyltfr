@@ -6,7 +6,8 @@ module.exports = [
       return 'ok'
     },
     options: {
-      description: 'Get healthcheck response: "ok" 200'
+      description: 'Get healthcheck response: "ok" 200',
+      auth: false
     }
   }
 ]
