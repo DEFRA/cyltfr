@@ -1,19 +1,19 @@
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_rod-licensing&metric=alert_status)](https://sonarcloud.io/dashboard?id=DEFRA_rod-licensing)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_rod-licensing&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=DEFRA_rod-licensing)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_rod-licensing&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=DEFRA_rod-licensing)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_rod-licensing&metric=security_rating)](https://sonarcloud.io/dashboard?id=DEFRA_rod-licensing)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_rod-licensing&metric=ncloc)](https://sonarcloud.io/dashboard?id=DEFRA_rod-licensing)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_rod-licensing&metric=coverage)](https://sonarcloud.io/dashboard?id=DEFRA_rod-licensing)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_rod-licensing&metric=bugs)](https://sonarcloud.io/dashboard?id=DEFRA_rod-licensing)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_rod-licensing&metric=code_smells)](https://sonarcloud.io/dashboard?id=DEFRA_rod-licensing)
-[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_rod-licensing&metric=sqale_index)](https://sonarcloud.io/dashboard?id=DEFRA_rod-licensing)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_rod-licensing&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=DEFRA_rod-licensing)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=cyltfr&metric=alert_status)](https://sonarcloud.io/dashboard?id=DEFRA_cyltfr)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_cyltfr&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=DEFRA_cyltfr)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_cyltfr&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=DEFRA_cyltfr)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_cyltfr&metric=security_rating)](https://sonarcloud.io/dashboard?id=DEFRA_cyltfr)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_cyltfr&metric=ncloc)](https://sonarcloud.io/dashboard?id=DEFRA_cyltfr)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_cyltfr&metric=coverage)](https://sonarcloud.io/dashboard?id=DEFRA_cyltfr)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_cyltfr&metric=bugs)](https://sonarcloud.io/dashboard?id=DEFRA_cyltfr)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_cyltfr&metric=code_smells)](https://sonarcloud.io/dashboard?id=DEFRA_cyltfr)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_cyltfr&metric=sqale_index)](https://sonarcloud.io/dashboard?id=DEFRA_cyltfr)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_cyltfr&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=DEFRA_cyltfr)
 [![Lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![Jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
-[![GitHub issues](https://img.shields.io/github/issues/DEFRA/rod-licensing.svg)](https://github.com/DEFRA/rod-licensing/issues/)
-[![Code size](https://img.shields.io/github/languages/code-size/DEFRA/rod-licensing.svg)]()
-[![Repo size](https://img.shields.io/github/repo-size/DEFRA/rod-licensing.svg)]()
+[![GitHub issues](https://img.shields.io/github/issues/DEFRA/cyltfr.svg)](https://github.com/DEFRA/cyltfr/issues/)
+[![Code size](https://img.shields.io/github/languages/code-size/DEFRA/cyltfr.svg)]()
+[![Repo size](https://img.shields.io/github/repo-size/DEFRA/cyltfr.svg)]()
 [![Licence](https://img.shields.io/badge/licence-OGLv3-blue.svg)](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3)
 
 # Check Your Long Term Flood Risk Services (CYLTFR)
@@ -55,7 +55,7 @@ docker-compose down
 To run the risk-admin Docker follow the instructions within the [risk-admin README.md](node/risk-admin/readme.md)
 
 ## Contributing to this project
-Please read our [contribution guidelines](https://github.com/DEFRA/rod-licensing/blob/develop/CONTRIBUTING.md)
+Please read our [contribution guidelines](https://github.com/DEFRA/cyltfr/blob/develop/CONTRIBUTING.md)
 
 ## License
 THIS INFORMATION IS LICENSED UNDER THE CONDITIONS OF THE OPEN GOVERNMENT LICENCE found at:
