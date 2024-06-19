@@ -1,3 +1,5 @@
+![Build status](https://github.com/DEFRA/cyltfr/actions/workflows/ci.yml/badge.svg)[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_cyltfr&metric=alert_status)](https://sonarcloud.io/dashboard?id=DEFRA_cyltfr)[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_cyltfr&metric=coverage)](https://sonarcloud.io/dashboard?id=DEFRA_cyltfr)
+
 # Check Your Long Term Flood Risk Services (CYLTFR)
 Mono-repo for the Check Your Long Term Flood services.
 
