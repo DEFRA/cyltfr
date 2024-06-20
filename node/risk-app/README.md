@@ -31,10 +31,9 @@
 | OS_POSTCODE_URL             | OS postcode API                         |   yes     |             |                             |       |
 | OS_CAPABILITIES_URL         | OS capabilites API                      |   yes     |             |                             |       |
 | OS_MAPS_URL                 | OS map API                              |   yes     |             |                             |       |
-| OS_NAMES_URL                | OS names API                            |   yes     |             |                             |       |
 | OS_SEARCH_KEY               | OS search key                           |   yes     |             |                             |       |
 | OS_MAPS_KEY                 | OS map key                              |   yes     |             |                             |       |
-| HTTP_PROXY                  |                                         |    no     |             |                             |       |
+| http_proxy                  | Proxy that is used for external calls by the service |    no     |             |                             |       |
 | RATE_LIMIT_ENABLED          | Enable limit on postcode requests       |    no     | false       |                             |       |
 | RATE_LIMIT_REQUESTS         | Amount of requests per user             |    no     |             |                             |       |
 | RATE_LIMIT_EXPIRES_IN       | Time user request limit expires         |    no     |             |                             |       |
@@ -48,9 +47,9 @@
 | FRIENDLY_CAPTCHA_SECRET_KEY | Secret key for website captcha          |    no     |             |                             |       |
 | FRIENDLY_CAPTCHA_URL        | Friendly Captcha API                    |    no     |             |                             |       |
 | FRIENDLY_CAPTCHA_BYPASS     | Friendly Capctha bypass key             |    no     |             |                             |       |
-| SESSION_TIMEOUT             | Timeout for session cookies             |    no     | 10          |                             |       |
+| SESSION_TIMEOUT             | Timeout for session cookies of 10 minutes |    no     | 10          |                             |       |
 | RISK_PAGE_FLAG              | Flag to allow view of updated risk pages |   no    | false       |                             |       |
-| CACHE_ENABLED               | If enabled uses Redis caching           |    no     | true        |                             |       |
+| CACHE_ENABLED               | If disabled external APIs will not be cahced |    no     | true        |                             |       |
 | ERRBIT_POST_ERRORS          | Allow Errbit errors to be sent for post requests |   yes     |             |                             |       |
 | ERRBIT_ENV                  | Option for info of of which environment is sent to Errbit |   yes     |             |                             |       |
 | ERRBIT_KEY                  | Key for Errbit error logging            |   yes     |             |                             |       |
