@@ -2,7 +2,7 @@ module.exports = [
   {
     method: 'GET',
     path: '/healthcheck',
-    handler: async (request, h) => {
+    handler: async (_request, _h) => {
       return 'ok'
     },
     options: {

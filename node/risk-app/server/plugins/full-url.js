@@ -5,7 +5,7 @@ const config = require('../config')
  */
 exports.plugin = {
   name: 'full-url',
-  register: (server, options) => {
+  register: (server, _options) => {
     server.ext('onPostHandler', function (request, h) {
       if (request.response.variety === 'view') {
         let fullUrl = config.floodRiskUrl + (request.path !== '/' ? request.path : '')

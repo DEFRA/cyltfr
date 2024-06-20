@@ -3,7 +3,7 @@ module.exports = {
   path: '/os-terms',
   options: {
     description: 'Get Ordnance Survey terms and conditions',
-    handler: (request, h) => {
+    handler: (_request, h) => {
       return h.view('os-terms', {
         year: new Date().getFullYear()
       })
