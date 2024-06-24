@@ -1,0 +1,9 @@
+.DS_Store
+.vscode
+node_modules
+npm-debug.log
+lcov.info
+config/server.json
+test/output/*
+.env
+.env.*
