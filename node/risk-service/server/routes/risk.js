@@ -7,7 +7,7 @@ module.exports = {
   path: '/floodrisk/{x}/{y}/{radius}',
   options: {
     description: 'Get the long term flood risk associated with a point',
-    handler: async (request, h) => {
+    handler: async (request, _h) => {
       const params = request.params
 
       try {

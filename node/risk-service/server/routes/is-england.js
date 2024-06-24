@@ -7,7 +7,7 @@ module.exports = {
   path: '/is-england/{x}/{y}',
   options: {
     description: 'Check if coordinates are in england',
-    handler: async (request, h) => {
+    handler: async (request, _h) => {
       const params = request.params
 
       try {
