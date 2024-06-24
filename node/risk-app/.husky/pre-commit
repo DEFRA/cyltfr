@@ -9,7 +9,3 @@ npm test
 cd ../../risk-service
 
 npm test
-
-cd ../risk-admin
-
-npm test

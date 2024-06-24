@@ -56,6 +56,8 @@ export function handleRadioChange (selected, type) {
 
 const searchParams = new URLSearchParams(window.location.search)
 const currentMapPage = searchParams.get('map')
+console.log(searchParams)
+console.log(currentMapPage)
 
 export function toggleAdvancedOptions () {
   if (window.innerWidth <= mapControlsConsts.deviceScreenWidth) {
@@ -76,7 +78,7 @@ export function toggleAdvancedOptions () {
     mapControlsConsts.reservoirsContainer.classList.add(mapControlsConsts.keyAdvOptionsContainer)
     mapControlsConsts.reservoirsContainer.classList.remove(mapControlsConsts.keyContainer)
   } else {
-    if (currentMapPage === 'map=SurfaceWater') {
+    if (currentMapPage === 'SurfaceWater') {
       mapControlsConsts.swContainer.classList.remove('hide')
       mapControlsConsts.velocityContainer.classList.add('hide')
       mapControlsConsts.rsContainer.classList.add('hide')
@@ -84,7 +86,7 @@ export function toggleAdvancedOptions () {
       mapControlsConsts.swExtentRadio.checked = true
       handleRadioChange('extent', mapControlsConsts.surfaceWater)
     }
-    if (currentMapPage === 'map=RiversOrSea') {
+    if (currentMapPage === 'RiversOrSea') {
       mapControlsConsts.swContainer.classList.add('hide')
       mapControlsConsts.velocityContainer.classList.add('hide')
       mapControlsConsts.rsContainer.classList.add(mapControlsConsts.keyContainer)
@@ -93,7 +95,7 @@ export function toggleAdvancedOptions () {
       mapControlsConsts.reservoirsContainer.classList.add('hide')
       handleRadioChange('extent', mapControlsConsts.riversAndTheSea)
     }
-    if (currentMapPage === 'map=Reservoirs') {
+    if (currentMapPage === 'Reservoirs') {
       mapControlsConsts.swContainer.classList.add('hide')
       mapControlsConsts.velocityContainer.classList.add('hide')
       mapControlsConsts.rsContainer.classList.add('hide')

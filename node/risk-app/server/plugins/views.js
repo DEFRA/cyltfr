@@ -44,14 +44,14 @@ module.exports = {
       G4AnalyticsAccount,
       GTagManagerId,
       appStage: config.env,
-      floodWarningsUrl: config.floodWarningsUrl ? config.floodWarningsUrl : process.env.FLOOD_WARNINGS_URL,
+      floodWarningsUrl: config.floodWarningsUrl,
       phase: 'beta',
       feedback: true,
-      siteUrl: config.floodRiskUrl ? config.floodRiskUrl : process.env.FLOOD_RISK_URL,
+      siteUrl: config.floodRiskUrl,
       ogDescription: 'Check your risk of flooding and use flood risk maps',
       noIndex: true, // stop robot crawl by default
-      friendlyCaptchaEnabled: config.friendlyCaptchaEnabled ? config.friendlyCaptchaEnabled : process.env.FRIENDLY_CAPTCHA_ENABLED,
-      friendlyCaptchaSiteKey: config.friendlyCaptchaSiteKey ? config.friendlyCaptchaSiteKey : process.env.FRIENDLY_CAPTCHA_SITE_KEY
+      friendlyCaptchaEnabled: config.friendlyCaptchaEnabled,
+      friendlyCaptchaSiteKey: config.friendlyCaptchaSiteKey
     }
   }
 }
