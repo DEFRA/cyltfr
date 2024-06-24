@@ -5,3 +5,11 @@ cd node/risk-app/.husky
 npx lint-staged
 
 npm test
+
+cd ../../risk-service
+
+npm test
+
+cd ../risk-admin
+
+npm test
