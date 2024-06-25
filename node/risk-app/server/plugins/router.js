@@ -12,7 +12,6 @@ const routes = [].concat(
   require('../routes/gwc-proxy'),
   require('../routes/feedback'),
   require('../routes/os-terms'),
-  require('../routes/geocode'),
   require('../routes/accessibility-statement'),
   require('../routes/cookies'),
   require('../routes/privacy-notice'),
@@ -25,6 +24,12 @@ if (config.simulateAddressService) {
 } else {
   routes.push(require('../routes/os-maps-proxy'))
   routes.push(require('../routes/os-get-capabilities'))
+}
+
+if (config.riskPageFlag) {
+  routes.push(require('../routes/surface-water'))
+  routes.push(require('../routes/rivers-and-sea'))
+  routes.push(require('../routes/ground-water'))
 }
 
 module.exports = {
