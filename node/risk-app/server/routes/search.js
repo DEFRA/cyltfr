@@ -2,8 +2,6 @@ const joi = require('joi')
 const boom = require('@hapi/boom')
 const { postcodeRegex, redirectToHomeCounty } = require('../helpers')
 const config = require('../config')
-const floodService = require('../services/flood')
-const addressService = require('../services/address')
 const SearchViewModel = require('../models/search-view')
 const errors = require('../models/errors.json')
 const { captchaCheck } = require('../services/captchacheck')
@@ -11,7 +9,7 @@ const { defineBackLink } = require('../services/defineBackLink')
 
 const getWarnings = async (postcode, request) => {
   try {
-    let warnings = await floodService.findWarnings(postcode)
+    let warnings = await request.server.methods.floodService(postcode)
     if (warnings?.address === 'England') {
       warnings = {}
     }
@@ -28,7 +26,10 @@ module.exports = [
     path: '/search',
     handler: async (request, h) => {
       let addresses
-      const { postcode } = request.query
+      let { postcode } = request.query
+      if (!postcode) {
+        postcode = request.yar.get('postcode')
+      }
       const path = request.path
 
       // Our Address service doesn't support NI addresses
@@ -46,14 +47,15 @@ module.exports = [
         }
 
         try {
-          addresses = await addressService.find(postcode)
+          addresses = await request.server.methods.find(postcode)
         } catch {
           return h.redirect('/postcode?error=postcode_does_not_exist')
         }
 
         // Set addresses to session
         request.yar.set({
-          addresses
+          addresses,
+          postcode
         })
 
         if (!addresses || !addresses.length) {
@@ -78,8 +80,8 @@ module.exports = [
       },
       validate: {
         query: joi.object().keys({
-          postcode: joi.string().trim().regex(postcodeRegex).required()
-        }).required()
+          postcode: joi.string().trim().regex(postcodeRegex).default('')
+        })
       }
     }
   },
@@ -87,7 +89,10 @@ module.exports = [
     method: 'POST',
     path: '/search',
     handler: async (request, h) => {
-      const { postcode } = request.query
+      let { postcode } = request.query
+      if (!postcode) {
+        postcode = request.yar.get('postcode')
+      }
       const { address } = request.payload
       const addresses = request.yar.get('addresses')
 
@@ -121,7 +126,7 @@ module.exports = [
       description: 'Post to the search page',
       validate: {
         query: joi.object().keys({
-          postcode: joi.string().trim().regex(postcodeRegex).required()
+          postcode: joi.string().trim().regex(postcodeRegex).default('')
         }),
         payload: joi.object().keys({
           address: joi.number().required()
