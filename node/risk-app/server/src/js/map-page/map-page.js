@@ -192,12 +192,15 @@ handleArrowClick(mapPageConsts.leftArrow, mapPageConsts.leftMove)
 handleScroll(mapPageConsts.scenarioSelectionDepth, [mapPageConsts.rightArrow[0], mapPageConsts.leftArrow[0]])
 handleScroll(mapPageConsts.scenarioSelectionVelocity, [mapPageConsts.rightArrow[1], mapPageConsts.leftArrow[1]])
 
+const searchParams = new URLSearchParams(window.location.search)
+const currentMapPage = searchParams.get('map')
+
 function getInitialKeyOptions () {
-  if (window.location.href.includes('map=SurfaceWater')) {
+  if (currentMapPage === 'SurfaceWater') {
     surfaceWaterInitialOptions()
-  } else if (window.location.href.includes('map=RiversOrSea')) {
+  } else if (currentMapPage === 'RiversOrSea') {
     riversAndTheSeaInitialOptions()
-  } else if (window.location.href.includes('map=Reservoirs')) {
+  } else if (currentMapPage === 'Reservoirs') {
     reservoirsInitialOptions()
   } else {
     mapPageConsts.advancedToggle.classList.add('hide')

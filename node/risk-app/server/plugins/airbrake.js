@@ -17,10 +17,8 @@ exports.plugin = {
       environment: result.value.env
     })
 
-    // airbrake.requestOptions.proxy = result.value.proxy ? result.value.proxy : null
-
     // notify airbrake on request error
-    server.events.on({ name: 'request', channels: ['error', 'app'], filter: 'error' }, (req, event, tags) => {
+    server.events.on({ name: 'request', channels: ['error', 'app'], filter: 'error' }, (req, event, _tags) => {
       const error = event.error || event.data
       error.component = 'hapi'
 

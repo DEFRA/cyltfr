@@ -2,7 +2,7 @@ module.exports = [
   {
     method: 'GET',
     path: '/',
-    handler: (request, h) => {
+    handler: (_request, h) => {
       return h.redirect('/postcode').permanent()
     },
     options: {
