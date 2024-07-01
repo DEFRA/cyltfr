@@ -56,8 +56,6 @@ export function handleRadioChange (selected, type) {
 
 const searchParams = new URLSearchParams(window.location.search)
 const currentMapPage = searchParams.get('map')
-console.log(searchParams)
-console.log(currentMapPage)
 
 export function toggleAdvancedOptions () {
   if (window.innerWidth <= mapControlsConsts.deviceScreenWidth) {
@@ -176,7 +174,6 @@ function depthRadioChanges () {
     mapControlsConsts.bottomCopyrightContainer.classList.add('hide')
     mapControlsConsts.topCopyrightContainer.classList.remove('hide')
   }
-  mapControlsConsts.olZoom[0].classList.add(mapControlsConsts.olZoomChecked)
 }
 
 function velocityRadioChanges () {
@@ -201,7 +198,6 @@ function velocityRadioChanges () {
     mapControlsConsts.bottomCopyrightContainer.classList.add('hide')
     mapControlsConsts.topCopyrightContainer.classList.remove('hide')
   }
-  mapControlsConsts.olZoom[0].classList.add(mapControlsConsts.olZoomChecked)
 }
 
 function extentReservoirChanges () {
@@ -212,7 +208,6 @@ function extentReservoirChanges () {
   mapControlsConsts.velocityInfo.classList.add('hide')
   mapControlsConsts.scenarioBarDepth.classList.add('hide')
   mapControlsConsts.scenarioBarVelocity.classList.add('hide')
-  mapControlsConsts.olZoom[0].classList.remove(mapControlsConsts.olZoomChecked)
   mapControlsConsts.boundaryContainer.classList.add('hide')
 }
 
@@ -224,7 +219,6 @@ function extentRiversAndTheSeaChanges () {
   mapControlsConsts.velocityInfo.classList.add('hide')
   mapControlsConsts.scenarioBarDepth.classList.add('hide')
   mapControlsConsts.scenarioBarVelocity.classList.add('hide')
-  mapControlsConsts.olZoom[0].classList.remove(mapControlsConsts.olZoomChecked)
   mapControlsConsts.boundaryContainer.classList.add('hide')
 }
 
@@ -236,6 +230,5 @@ function extentSurfaceWaterChanges () {
   mapControlsConsts.velocityInfo.classList.add('hide')
   mapControlsConsts.scenarioBarDepth.classList.add('hide')
   mapControlsConsts.scenarioBarVelocity.classList.add('hide')
-  mapControlsConsts.olZoom[0].classList.remove(mapControlsConsts.olZoomChecked)
   mapControlsConsts.boundaryContainer.classList.remove('hide')
 }

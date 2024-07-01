@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="/ol/ol.css" type="text/css">
 <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="/assets/images/favicon.ico" type="image/x-icon">
 <link href="{{ assetPath }}/stylesheets/map-page.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/<theme-name>/main.css">
+
 {% endblock %}
 
 {% block main %}
@@ -58,12 +60,14 @@
 
 {% block bodyEnd %}
 {{ super() }}
+<script>
+  window.mapCategories = {{ maps | dump | safe }}
+  window.mapToken = "{{ mapToken }}"
+</script>
 <script src="{{ assetPath }}/nunjucks-slim.js"></script>
 <script src="{{ assetPath }}/js/map.js"></script>
 <script src="{{ assetPath }}/js/mapPage.js"></script>
-<script>
-  window.mapCategories = {{ maps | dump | safe }}
-</script>
+
 
 {% endblock %}
 
