@@ -1,5 +1,5 @@
 import Extent from '@arcgis/core/geometry/Extent.js'
-import Map from '@arcgis/core/Map'
+import Map from '@arcgis/core/Map.js'
 import MapView from '@arcgis/core/views/MapView.js'
 import Point from '@arcgis/core/geometry/Point.js'
 import SpatialReference from '@arcgis/core/geometry/SpatialReference.js'
@@ -32,7 +32,6 @@ export async function loadMap (point) {
     layers
   })
 
-  /* eslint-disable no-unused-vars */
   const mapView = new MapView({
     container: 'map',
     map,
@@ -48,7 +47,14 @@ export async function loadMap (point) {
       rotationEnabled: false
     }
   })
-  /* eslint-enable no-unused-vars */
+
+  mapView.when(function () {
+    // MapView is now ready for display and can be used. Here we will
+    // use goTo to view a particular location at a given zoom level and center
+    mapView.goTo({
+      zoom: 8
+    })
+  })
 
   if (callback) {
     callback()
@@ -60,11 +66,11 @@ function createFeatureLayers (layers) {
   const categories = window.mapCategories.categories
   for (const layer of categories) {
     const maps = layer.maps
-    for (const map of maps) {
-      if (map.url) {
+    for (const featureMap of maps) {
+      if (featureMap.url) {
         layers.push(new VectorTileLayer({
-          id: map.ref,
-          url: map.url,
+          id: featureMap.ref,
+          url: featureMap.url,
           apiKey: window.mapToken,
           visible: false
         }))
@@ -87,7 +93,7 @@ function createBaseLayer () {
   const layer = new WebTileLayer({
     // initial commit, using OS Proxy but needs to be reviewed or maybe use OAuth2.0 instead
     id: 'base-map',
-    urlTemplate: 'http://' + window.location.host + '/os-maps-proxy?{level}/{col}/{row}.png',
+    urlTemplate: window.location.origin + '/os-maps-proxy?{level}/{col}/{row}.png',
     fullExtent: extent,
     spatialReference: bng,
     tileInfo: {
