@@ -1,5 +1,5 @@
 import Extent from '@arcgis/core/geometry/Extent.js'
-import Map from '@arcgis/core/Map.js'
+import ArcMap from '@arcgis/core/Map.js'
 import MapView from '@arcgis/core/views/MapView.js'
 import Point from '@arcgis/core/geometry/Point.js'
 import SpatialReference from '@arcgis/core/geometry/SpatialReference.js'
@@ -28,19 +28,21 @@ export async function loadMap (point) {
   // Create the vector layers
   createFeatureLayers(layers)
 
-  map = new Map({
+  map = new ArcMap({
     layers
+  })
+
+  const centrePoint = new Point({
+    x: point[0] || 440000,
+    y: point[1] || 310000,
+    spatialReference: config.projection
   })
 
   const mapView = new MapView({
     container: 'map',
     map,
     zoom: 7,
-    center: new Point({
-      x: 337297,
-      y: 503695,
-      spatialReference: config.projection
-    }),
+    center: centrePoint,
     constraints: {
       minZoom: 0,
       maxZoom: 9,
@@ -51,9 +53,7 @@ export async function loadMap (point) {
   mapView.when(function () {
     // MapView is now ready for display and can be used. Here we will
     // use goTo to view a particular location at a given zoom level and center
-    mapView.goTo({
-      zoom: 8
-    })
+    mapView.ui.move('zoom', 'bottom-left')
   })
 
   if (callback) {
