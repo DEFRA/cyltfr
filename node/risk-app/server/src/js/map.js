@@ -32,9 +32,11 @@ export async function loadMap (point) {
     layers
   })
 
+  const DEFAULT_X = 440000
+  const DEFAULT_Y = 310000
   const centrePoint = new Point({
-    x: point[0] || 440000,
-    y: point[1] || 310000,
+    x: point[0] || DEFAULT_X,
+    y: point[1] || DEFAULT_Y,
     spatialReference: config.projection
   })
 
