@@ -31,14 +31,14 @@ describe('Unit tests - /floodrisk', () => {
   test('/floodrisk/{x}/{y}/{radius} - Throws db error', async () => {
     db.query.mockImplementationOnce(() => { throw new Error('Mock Error') })
     const response = await server.inject(options)
-    expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_BAD_REQUEST)
+    expect(response.statusCode).toEqual(500)
   })
 
   test('/floodrisk/{x}/{y}/{radius} - No db result', async () => {
     db._queryResult([])
 
     const response = await server.inject(options)
-    expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_BAD_REQUEST)
+    expect(response.statusCode).toEqual(500)
   })
 
   test('/floodrisk/{x}/{y}/{radius} - Valid db result', async () => {
@@ -53,7 +53,7 @@ describe('Unit tests - /floodrisk', () => {
     db._queryResult([{ error_result: '' }])
 
     const response = await server.inject(options)
-    expect(response.statusCode).toEqual(STATUS_CODES.HTTP_STATUS_BAD_REQUEST)
+    expect(response.statusCode).toEqual(500)
   })
 
   test('/floodrisk/{x}/{y}/{radius} - Groundwater alert result', async () => {
