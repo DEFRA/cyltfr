@@ -179,6 +179,7 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
     bottom: 0px;
     left: 0px;
     pointer-events: none;
+    height: 100dvh;
     
     @media (min-width: 48.0625em) {
         right: 290px;
