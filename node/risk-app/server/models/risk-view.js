@@ -1,5 +1,4 @@
 const { capitaliseAddress } = require('../services/address.js')
-const config = require('../config.js')
 
 const RiskLevel = {
   VeryLow: 'Very Low',
@@ -94,15 +93,10 @@ function riskViewModel (risk, address, backLinkUri) {
     this.firstSource = 'rivers-sea.html'
     this.secondSource = 'surface-water.html'
   }
-  if (config.riskPageFlag) {
-    this.firstSource = 'partials/' + this.firstSource
-    this.secondSource = 'partials/' + this.secondSource
-    this.additionalInformation = 'partials/groundwaterAndReservoirs.html'
-  } else {
-    this.firstSource = 'partials/' + this.firstSource
-    this.secondSource = 'partials/' + this.secondSource
-    this.additionalInformation = 'partials/groundwaterAndReservoirs.html'
-  }
+
+  this.firstSource = 'partials/' + this.firstSource
+  this.secondSource = 'partials/' + this.secondSource
+  this.additionalInformation = 'partials/groundwaterAndReservoirs.html'
   this.surfaceWaterIsFirst = surfaceWaterIsFirst
   this.testInfo = JSON.stringify({
     riverAndSeaRisk,
