@@ -10,6 +10,12 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   width: 290px;
   background-color: white;
 
+  @media screen and (max-width: $tablet-width) {
+    height: 100%;
+    width: 290px;
+    position: absolute;
+  }
+
   #mapKeyLabel {
     font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
     position:fixed;

@@ -30,7 +30,7 @@ body {
   width: 100%;
   margin: 0;
   position: absolute;
-  overflow-x: hidden;
+  // overflow-x: hidden;
 }
 
 .hide {
@@ -48,6 +48,7 @@ body {
   flex-wrap: wrap;
 
   @media screen and (max-width: $tablet-width) {
+    display: flex;
     justify-content: start;
   }
 
