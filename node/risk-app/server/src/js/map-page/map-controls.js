@@ -54,6 +54,11 @@ export function handleRadioChange (selected, type) {
   }
 }
 
+const searchParams = new URLSearchParams(window.location.search)
+const currentMapPage = searchParams.get('map')
+console.log(searchParams)
+console.log(currentMapPage)
+
 export function toggleAdvancedOptions () {
   if (window.innerWidth <= mapControlsConsts.deviceScreenWidth) {
     mapControlsConsts.keyDisplay.classList.remove('hide')
@@ -73,7 +78,7 @@ export function toggleAdvancedOptions () {
     mapControlsConsts.reservoirsContainer.classList.add(mapControlsConsts.keyAdvOptionsContainer)
     mapControlsConsts.reservoirsContainer.classList.remove(mapControlsConsts.keyContainer)
   } else {
-    if (window.location.href.includes('map=SurfaceWater')) {
+    if (currentMapPage === 'SurfaceWater') {
       mapControlsConsts.swContainer.classList.remove('hide')
       mapControlsConsts.velocityContainer.classList.add('hide')
       mapControlsConsts.rsContainer.classList.add('hide')
@@ -81,7 +86,7 @@ export function toggleAdvancedOptions () {
       mapControlsConsts.swExtentRadio.checked = true
       handleRadioChange('extent', mapControlsConsts.surfaceWater)
     }
-    if (window.location.href.includes('map=RiversOrSea')) {
+    if (currentMapPage === 'RiversOrSea') {
       mapControlsConsts.swContainer.classList.add('hide')
       mapControlsConsts.velocityContainer.classList.add('hide')
       mapControlsConsts.rsContainer.classList.add(mapControlsConsts.keyContainer)
@@ -90,7 +95,7 @@ export function toggleAdvancedOptions () {
       mapControlsConsts.reservoirsContainer.classList.add('hide')
       handleRadioChange('extent', mapControlsConsts.riversAndTheSea)
     }
-    if (window.location.href.includes('map=Reservoirs')) {
+    if (currentMapPage === 'Reservoirs') {
       mapControlsConsts.swContainer.classList.add('hide')
       mapControlsConsts.velocityContainer.classList.add('hide')
       mapControlsConsts.rsContainer.classList.add('hide')
@@ -124,7 +129,7 @@ export function openKey () {
 
 export function closeKey () {
   mapControlsConsts.keyDisplay.classList.add('hide')
-  if (window.location.href.includes('?')) {
+  if (searchParams) {
     mapControlsConsts.advancedToggle.classList.add(mapControlsConsts.keyAdvButtonDisplay)
   }
 

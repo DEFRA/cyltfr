@@ -5,7 +5,7 @@
 module.exports = {
   plugin: {
     name: 'log-errors',
-    register: (server, options) => {
+    register: (server, _options) => {
       server.ext('onPreResponse', (request, h) => {
         const response = request.response
 

@@ -16,7 +16,10 @@ const routes = [].concat(
   require('../routes/cookies'),
   require('../routes/privacy-notice'),
   require('../routes/terms-and-conditions'),
-  require('../routes/healthcheck')
+  require('../routes/healthcheck'),
+  require('../routes/surface-water'),
+  require('../routes/rivers-and-sea'),
+  require('../routes/ground-water')
 )
 if (config.simulateAddressService) {
   routes.push(require('../routes/simulated/os-maps-proxy'))
@@ -26,16 +29,10 @@ if (config.simulateAddressService) {
   routes.push(require('../routes/os-get-capabilities'))
 }
 
-if (config.riskPageFlag) {
-  routes.push(require('../routes/surface-water'))
-  routes.push(require('../routes/rivers-and-sea'))
-  routes.push(require('../routes/ground-water'))
-}
-
 module.exports = {
   plugin: {
     name: 'router',
-    register: (server, options) => {
+    register: (server, _options) => {
       server.route(routes)
     }
   }

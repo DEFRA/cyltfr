@@ -1,9 +1,6 @@
 $govuk-assets-path: '/assets/';
 
 @import "govuk-frontend/dist/govuk/all";
-@import "./legend";
-@import "./overlay";
-@import "./social";
 
 .nojs-hidden {
   display: none;
