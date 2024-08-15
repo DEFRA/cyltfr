@@ -6,10 +6,14 @@ A full code build needs to be performed to update the RISK-APP and RISK-SERVICE.
 
 # Code and Content changes
 
-Story
-
 LTFRI-1347 remove 'warning' text from holding comment
+
+LTFRI-1370 Remove 'Risk' language from map pages
+
+LTFRI-1384 Remove old risk pages
 
 LTFRI-1087 Map interface exceeds device screen
 
 LTFRI-1344 Investigate print summary page not displaying
+
+LTFRI-1387 Service shows an error when going direct to the search page
