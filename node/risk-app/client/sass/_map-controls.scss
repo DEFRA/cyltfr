@@ -194,7 +194,7 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   // within the map element.
   #map {
     height: 100%;
-    border: 3px solid transparent;
+    border: 5px solid transparent;
 
     @media screen and (max-width: $tablet-width) {
       height: 100%;
@@ -202,7 +202,8 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
     }
 
     &:focus-visible {
-      border: 3px solid #ffdd00;
+      outline: 0;
+      border: 5px solid #ffdd00;
     }
 
     .ol-control {
