@@ -193,15 +193,16 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   // only generate after the JS imports the map and are contained
   // within the map element.
   #map {
+    height: 100%;
+    border: 3px solid transparent;
+
     @media screen and (max-width: $tablet-width) {
       height: 100%;
       width: 100%;
     }
-    height: 100%;
+
     &:focus-visible {
-      outline: 3px solid transparent;
-      box-shadow: $focusBorder;
-      // border: 5px solid #ffdd00;
+      border: 3px solid #ffdd00;
     }
 
     .ol-control {
@@ -382,7 +383,7 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
     /* As the zoom buttons are within the map they are not as easily positioned, which is why I
       have used the calculation as seen below. */
     top: calc(100% - 105px);
-    left: calc(100% - 54px);
+    left: calc(100% - 50px);
   }
 
   .zoom-disabled {
