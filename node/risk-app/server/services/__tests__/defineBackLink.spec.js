@@ -5,7 +5,8 @@ describe('defineBackLink', () => {
     const searchPagePath = '/search?postcode='
     const cachedPostcode = 'CF1%204QR'
     const currentPage = '/risk'
-    const backLink = defineBackLink.defineBackLink(currentPage, cachedPostcode)
+    const referer = null
+    const backLink = defineBackLink.defineBackLink(currentPage, referer, cachedPostcode)
     expect(backLink).toEqual(searchPagePath + cachedPostcode)
   })
 
@@ -17,11 +18,11 @@ describe('defineBackLink', () => {
     expect(backLink).toEqual(postcodePage)
   })
 
-  test('Map page backlink takes user back to risk page', async () => {
-    const riskPage = '/risk'
+  test('Map page backlink takes user back to previous page', async () => {
+    const referer = '/surface-water'
     const currentPage = '/map'
-    const backLink = defineBackLink.defineBackLink(currentPage)
-    expect(backLink).toEqual(riskPage)
+    const backLink = defineBackLink.defineBackLink(currentPage, referer)
+    expect(backLink).toEqual(referer)
   })
 
   test('Search page backlink takes user back to postcode page', async () => {
