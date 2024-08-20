@@ -18,10 +18,7 @@ $scenarioArrowPoint: 640px;
 $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
 
 html {
-  overflow-x: hidden;
-
   @media screen and (max-width: $tablet-width) {
-    overflow: hidden;
   }
 }
 
@@ -29,7 +26,6 @@ body {
   margin: 0;
   height: 100vh;
   position: absolute;
-  overflow-x: hidden;
 }
 
 .hide {
