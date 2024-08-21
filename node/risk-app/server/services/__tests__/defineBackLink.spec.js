@@ -5,8 +5,8 @@ describe('defineBackLink', () => {
     const searchPagePath = '/search?postcode='
     const cachedPostcode = 'CF1%204QR'
     const currentPage = '/risk'
-    const referer = null
-    const backLink = defineBackLink.defineBackLink(currentPage, referer, cachedPostcode)
+    const previousPage = null
+    const backLink = defineBackLink.defineBackLink(currentPage, previousPage, cachedPostcode)
     expect(backLink).toEqual(searchPagePath + cachedPostcode)
   })
 
@@ -18,11 +18,33 @@ describe('defineBackLink', () => {
     expect(backLink).toEqual(postcodePage)
   })
 
-  test('Map page backlink takes user back to previous page', async () => {
-    const referer = '/surface-water'
+  test('Map page backlink takes user back to surface water page if this is the page they came from', async () => {
+    const previousPage = '/surface-water'
     const currentPage = '/map'
-    const backLink = defineBackLink.defineBackLink(currentPage, referer)
-    expect(backLink).toEqual(referer)
+    const backLink = defineBackLink.defineBackLink(currentPage, previousPage)
+    expect(backLink).toEqual(previousPage)
+  })
+
+  test('Map page backlink takes user back to rivers and sea page if this is the page they came from', async () => {
+    const previousPage = '/rivers-and-sea'
+    const currentPage = '/map'
+    const backLink = defineBackLink.defineBackLink(currentPage, previousPage)
+    expect(backLink).toEqual(previousPage)
+  })
+
+  test('Map page backlink takes user back to ground water page if this is the page they came from', async () => {
+    const previousPage = '/ground-water'
+    const currentPage = '/map'
+    const backLink = defineBackLink.defineBackLink(currentPage, previousPage)
+    expect(backLink).toEqual(previousPage)
+  })
+
+  test('Map page backlink takes user back to postcode page if user did not come from risk pages', async () => {
+    const postcodePage = '/postcode'
+    const previousPage = ''
+    const currentPage = '/map'
+    const backLink = defineBackLink.defineBackLink(currentPage, previousPage)
+    expect(backLink).toEqual(postcodePage)
   })
 
   test('Search page backlink takes user back to postcode page', async () => {

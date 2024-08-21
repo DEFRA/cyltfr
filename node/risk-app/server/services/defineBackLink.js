@@ -1,4 +1,4 @@
-function defineBackLink (currentPage, referer, postcode) {
+function defineBackLink (currentPage, previousPage, postcode) {
   if ((currentPage === '/search') && (postcode)) {
     return '/search?postcode=' + postcode.split(' ').join('%20')
   }
@@ -7,7 +7,7 @@ function defineBackLink (currentPage, referer, postcode) {
     return '/search?postcode=' + postcode.split(' ').join('%20')
   }
   if (currentPage === '/map') {
-    return referer || '/postcode'
+    return previousPage || '/postcode'
   }
   return '/postcode'
 }
