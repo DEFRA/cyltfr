@@ -18,33 +18,15 @@ describe('defineBackLink', () => {
     expect(backLink).toEqual(postcodePage)
   })
 
-  test('Map page backlink takes user back to surface water page if this is the page they came from', async () => {
-    const previousPage = '/surface-water'
+  test.each([
+    { previousPage: '/surface-water', expectedBackLink: '/surface-water' },
+    { previousPage: '/rivers-and-sea', expectedBackLink: '/rivers-and-sea' },
+    { previousPage: '/ground-water', expectedBackLink: '/ground-water' },
+    { previousPage: '', expectedBackLink: '/postcode' }
+  ])('Back link is $expectedBackLink when page on map page', ({ previousPage, expectedBackLink }) => {
     const currentPage = '/map'
     const backLink = defineBackLink.defineBackLink(currentPage, previousPage)
-    expect(backLink).toEqual(previousPage)
-  })
-
-  test('Map page backlink takes user back to rivers and sea page if this is the page they came from', async () => {
-    const previousPage = '/rivers-and-sea'
-    const currentPage = '/map'
-    const backLink = defineBackLink.defineBackLink(currentPage, previousPage)
-    expect(backLink).toEqual(previousPage)
-  })
-
-  test('Map page backlink takes user back to ground water page if this is the page they came from', async () => {
-    const previousPage = '/ground-water'
-    const currentPage = '/map'
-    const backLink = defineBackLink.defineBackLink(currentPage, previousPage)
-    expect(backLink).toEqual(previousPage)
-  })
-
-  test('Map page backlink takes user back to postcode page if user did not come from risk pages', async () => {
-    const postcodePage = '/postcode'
-    const previousPage = ''
-    const currentPage = '/map'
-    const backLink = defineBackLink.defineBackLink(currentPage, previousPage)
-    expect(backLink).toEqual(postcodePage)
+    expect(backLink).toEqual(expectedBackLink)
   })
 
   test('Search page backlink takes user back to postcode page', async () => {
