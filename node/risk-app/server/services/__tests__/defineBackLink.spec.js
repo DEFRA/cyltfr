@@ -1,7 +1,6 @@
 const defineBackLink = require('../defineBackLink.js')
 
 describe('defineBackLink', () => {
-
   test.each([
     { previousPage: '/surface-water', expectedBackLink: '/surface-water' },
     { previousPage: '/rivers-and-sea', expectedBackLink: '/rivers-and-sea' },

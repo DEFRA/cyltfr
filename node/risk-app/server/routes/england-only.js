@@ -12,12 +12,12 @@ module.exports = {
     if (!postcodeIn) {
       return h.redirect('/postcode')
     }
-    const backLink = '/postcode'
+    const backLinkUri = '/postcode'
     const model = {
       isWales: request.query.region === 'wales',
       isScotland: request.query.region === 'scotland',
       isNorthernIreland: request.query.region === 'northern-ireland',
-      backLink
+      backLinkUri
     }
 
     return h.view('england-only', model)
