@@ -1,13 +1,6 @@
 const defineBackLink = require('../defineBackLink.js')
 
 describe('defineBackLink', () => {
-  test('England-only page backlink takes user back to postcode page', async () => {
-    const postcodePage = '/postcode'
-    const cachedPostcode = 'NP18%203EZ'
-    const currentPage = '/england-only'
-    const backLink = defineBackLink.defineBackLink(currentPage, cachedPostcode)
-    expect(backLink).toEqual(postcodePage)
-  })
 
   test.each([
     { previousPage: '/surface-water', expectedBackLink: '/surface-water' },
