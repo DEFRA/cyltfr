@@ -1,11 +1,8 @@
-const AWS = require('aws-sdk')
+const { S3Client } = require('@aws-sdk/client-s3')
 const config = require('./config')
-const s3 = new AWS.S3({
-  apiVersion: '2006-03-01',
-  region: config.awsBucketRegion,
-  params: {
-    Bucket: config.awsBucketName
-  }
+
+const s3Client = new S3Client({
+  region: config.awsBucketRegion
 })
 
-module.exports = s3
+module.exports = s3Client
