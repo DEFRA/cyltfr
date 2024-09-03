@@ -1,0 +1,11 @@
+# LTFRI 4.5.4 Thursday 5th September 2024
+
+# Instructions
+
+A full code build needs to be performed to update the RISK-APP and RISK-SERVICE.
+
+# Code and Content changes
+
+LTFRI-1389 Exiting the map should take you back to the correct page.
+
+LTFRI-1409 Remove 'risk' from depth and velocity maps
