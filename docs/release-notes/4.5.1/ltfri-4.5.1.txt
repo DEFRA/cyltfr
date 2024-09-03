@@ -1,0 +1,10 @@
+# LTFRI 4.5.1 Wednesday 14th August 2024
+
+# Instructions
+
+This is a data update.
+ 
+1. In Jenkins Run LTF_<ENVIRONMENT>_UPDATE_TARGET_AREAS in non-live production environment.
+2. Test and approve switch over of non-live/live.
+3. Switch environments to make change live.
+4. Repeat step 1 in non-live environment.
