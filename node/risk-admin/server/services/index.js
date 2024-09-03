@@ -50,23 +50,6 @@ async function processManifest (provider, log = logger) {
       await writeFile(tmpFileName, file.Body)
       log(`Wrote temp geospatial file ${key} as ${tmpFileName}`)
 
-      // Unzip temp zip
-      // log(`Unzipping temp shapefile archive ${tmpArchiveFileName}`)
-      // const unzipRes = await run('unzip', ['-j', '-d', tmpDir, tmpArchiveFileName])
-      // log(`Unzipped temp shapefile archive ${unzipRes}`)
-
-      // // List data
-      // log(`Listing the contents of temporary dir ${tmpDir}`)
-      // const listRes = await run('ls', ['-alh', tmpDir])
-      // log(`Listed the contents of temporary dir ${tmpDir}`, listRes)
-
-      // Find extracted shapefile
-      // log(`Finding the extracted shapefile ${tmpDir}/*.shp`)
-      // const shapeFileName = (await run('find', [tmpDir, '-name', '*.shp'])).trim()
-      // assert.ok(shapeFileName, 'Not shapefile found in the archive')
-      // assert.strictEqual(shapeFileName.indexOf('\n'), -1, 'Multiple shapefiles found in the archive')
-      // log('Found the extracted shapefile', shapeFileName)
-
       // Shell env vars
       const env = {
         ...process.env,

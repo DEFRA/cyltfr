@@ -1,13 +1,13 @@
 {
   "name": "risk-service",
-  "version": "4.5.0",
+  "version": "4.5.4",
   "description": "Flood Service",
   "main": "index.js",
   "engines": {
     "node": ">=20.11.0"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "pm2 start config/pm2.json",
     "test": "npm run test:lint && npm run test:jest && npm run test:integration",
     "test:jest": "jest --no-cache  --detectOpenHandles --runInBand --forceExit  --collectCoverage server/",
     "test:integration": "jest --no-cache  --detectOpenHandles --runInBand --forceExit test/integration/",

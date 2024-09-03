@@ -7,7 +7,7 @@ const { osMapsUrl, osMapsKey, osGetCapabilitiesUrl } = config
 module.exports = {
   method: 'GET',
   path: '/os-get-capabilities',
-  handler: async (request, h) => {
+  handler: async (_request, h) => {
     try {
       const url = `${osMapsUrl}?key=${osMapsKey}&${osGetCapabilitiesUrl}`
       let payload = await util.get(url, {}, true)
