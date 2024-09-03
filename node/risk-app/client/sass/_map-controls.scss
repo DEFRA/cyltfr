@@ -173,7 +173,6 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
   #defra-map-controls {
     position: absolute;
     z-index: 1;
-    overflow: hidden;
     top: 0px;
     right: 0px;
     bottom: 0px;
@@ -266,7 +265,6 @@ $gov-font: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
       clip: rect(0 0 0 0);
       clip-path: inset(50%);
       height: 1px;
-      overflow: hidden;
       position: absolute;
       white-space: nowrap;
       width: 1px;
