@@ -1,0 +1,10 @@
+# LTFRI 4.5.3 Thursday 5th September 2024
+
+# Instructions
+
+This is a data update.
+ 
+1. In the standby production environment (prdb or prdg) run the  Jenkins job LTF_{standy_env}_99_UPDATE_DRY_WET_RESERVOIRS
+2. In the standby production environment (prdb or prdg) run the  Jenkins job LTF_{stage}_99_COPY_CACHE -RES option selected 
+3. Switch environments to make change live.
+4. Repeat steps 1 and 2 in non-live environment.
