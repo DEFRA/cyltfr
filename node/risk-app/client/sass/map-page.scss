@@ -23,8 +23,9 @@ html {
 }
 
 body {
+  height: 100%;
+  width: 100%;
   margin: 0;
-  height: 100vh;
   position: absolute;
 }
 
@@ -33,15 +34,17 @@ body {
 }
 
 .map-container {
-  height: 100dvh;
   width: 100dvw;
+  height: 100%;
   margin: 0;
-  display: flex;
+  display: grid;
+  grid-template-columns: 5fr 1fr;
   justify-content: end;
   flex-basis: 100%;
   flex-wrap: wrap;
 
   @media screen and (max-width: $tablet-width) {
+    display: flex;
     justify-content: start;
   }
 
@@ -49,16 +52,16 @@ body {
     position: absolute;
     left: 10px;
     bottom: 10px;
-    pointer-events: auto; 
+    pointer-events: auto;
     display: block;
     width: 90px;
     height: 24px;
-  
+
     @media screen and (max-width: $small-mobile-width) {
       bottom: 40px;
     }
   }
-  
+
   .os-logo-position-change {
     @media screen and (max-width: $tablet-width) {
       bottom: 110px;
