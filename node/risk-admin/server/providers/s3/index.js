@@ -3,13 +3,12 @@ const fs = require('fs')
 const s3 = require('../../s3')
 const config = require('../../config')
 const manifestKey = `${config.holdingCommentsPrefix}/${config.manifestFilename}`
-console.log('here')
+
 class S3Provider {
   async load() {
-    console.log('in load')
     const result = await this.getFile(manifestKey)
-    console.log('result', result)
-    return JSON.parse(result.Body.toString())
+
+    return JSON.parse(await result.Body.transformToString())
   }
 
   async save(comments) {

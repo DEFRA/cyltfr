@@ -5,7 +5,6 @@ module.exports = {
   path: '/',
   handler: async (request, h) => {
     const { provider, auth } = request
-    console.log('in home')
     const comments = await provider.load()
 
     // Approvers can see all comments
