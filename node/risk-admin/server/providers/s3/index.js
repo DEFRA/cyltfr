@@ -1,13 +1,16 @@
-const { GetObjectCommand, PutObjectCommand, DeleteObjectCommand } = require('@aws-sdk/client-s3')
+const { S3Client, GetObjectCommand, PutObjectCommand, DeleteObjectCommand } = require('@aws-sdk/client-s3')
 const fs = require('fs')
-const s3 = require('../../s3')
 const config = require('../../config')
 const manifestKey = `${config.holdingCommentsPrefix}/${config.manifestFilename}`
+
+const s3Client = new S3Client({
+  region: config.awsBucketRegion
+})
 
 class S3Provider {
   async getFile(key) {
     const fileKey = key ? key : manifestKey
-    const result = await s3.send(new GetObjectCommand({
+    const result = await s3Client.send(new GetObjectCommand({
       Bucket: config.awsBucketName,
       Key: fileKey,
     }))
@@ -16,7 +19,7 @@ class S3Provider {
   }
 
   async save(comments) {
-    await s3.send(new PutObjectCommand({
+    await s3Client.send(new PutObjectCommand({
       Bucket: config.awsBucketName,
       Key: manifestKey,
       Body: JSON.stringify(comments, null, 2),
@@ -32,7 +35,7 @@ class S3Provider {
   async uploadFile(keyname, filename) {
     const data = await fs.promises.readFile(filename)
 
-    await s3.send(new PutObjectCommand({
+    await s3Client.send(new PutObjectCommand({
       Bucket: config.awsBucketName,
       Key: `${config.holdingCommentsPrefix}/${keyname}`,
       Body: data,
@@ -40,7 +43,7 @@ class S3Provider {
   }
 
   async uploadObject(keyname, data) {
-    await s3.send(new PutObjectCommand({
+    await s3Client.send(new PutObjectCommand({
       Bucket: config.awsBucketName,
       Key: `${config.holdingCommentsPrefix}/${keyname}`,
       Body: data,
@@ -48,7 +51,7 @@ class S3Provider {
   }
 
   async deleteFile(keyname) {
-    await s3.send(new DeleteObjectCommand({
+    await s3Client.send(new DeleteObjectCommand({
       Bucket: config.awsBucketName,
       Key: `${config.holdingCommentsPrefix}/${keyname}`,
     }))
@@ -56,13 +59,13 @@ class S3Provider {
 
   async ensureManifestFile() {
     try {
-      await s3.send(new GetObjectCommand({
+      await s3Client.send(new GetObjectCommand({
         Bucket: config.awsBucketName,
         Key: manifestKey,
       }))
     } catch (err) {
       if (err.name === 'NoSuchKey') {
-        await s3.send(new PutObjectCommand({
+        await s3Client.send(new PutObjectCommand({
           Bucket: config.awsBucketName,
           Key: manifestKey,
           Body: '[]',
