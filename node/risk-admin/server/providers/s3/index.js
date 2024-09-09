@@ -5,9 +5,13 @@ const config = require('../../config')
 const manifestKey = `${config.holdingCommentsPrefix}/${config.manifestFilename}`
 
 class S3Provider {
-  async load() {
-    const result = await this.getFile(manifestKey)
-
+  async getFile(key) {
+    const fileKey = key ? key : manifestKey
+    const result = await s3.send(new GetObjectCommand({
+      Bucket: config.awsBucketName,
+      Key: fileKey,
+    }))
+    
     return JSON.parse(await result.Body.transformToString())
   }
 
@@ -20,17 +24,9 @@ class S3Provider {
   }
 
   async addComment(item) {
-    const comments = await this.load()
+    const comments = await this.getFile()
     comments.push(item)
     return this.save(comments)
-  }
-
-  async getFile(key) {
-    const result = await s3.send(new GetObjectCommand({
-      Bucket: config.awsBucketName,
-      Key: key,
-    }))
-    return result
   }
 
   async uploadFile(keyname, filename) {
