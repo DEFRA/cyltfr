@@ -1,0 +1,13 @@
+# LTFRI 4.5.5 Tuesday 22 October 2024
+
+# Instructions
+
+A full code build needs to be performed to update the RISK-APP and RISK-SERVICE.
+
+# Code and Content changes
+
+LTFRI-1495 Update accessibility statement in LIVE and NAFRA2
+
+LTFRI-1096 Add focus highlight to map
+
+LTFRI-1223 Side Scroll option not available

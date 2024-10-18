@@ -56,8 +56,6 @@ export function handleRadioChange (selected, type) {
 
 const searchParams = new URLSearchParams(window.location.search)
 const currentMapPage = searchParams.get('map')
-console.log(searchParams)
-console.log(currentMapPage)
 
 export function toggleAdvancedOptions () {
   if (window.innerWidth <= mapControlsConsts.deviceScreenWidth) {

@@ -16,7 +16,7 @@ async function processManifest (provider, log = logger) {
 
   // Read manifest
   log('Reading manifest')
-  const comments = await provider.load()
+  const comments = await provider.getFile()
   log('Read manifest', comments.length)
 
   // Find active comments
