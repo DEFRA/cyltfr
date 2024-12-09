@@ -9,7 +9,7 @@ async function simulatedFind (_postcode) {
 }
 
 async function callOsApi (postcode, offset = 0) {
-  const uri = `${osPostcodeUrl}lr=EN&fq=logical_status_code:1&postcode=${postcode}&key=${osSearchKey}&dataset=DPA,LPI&offset=${offset}&maxresults=100`
+  const uri = `${osPostcodeUrl}lr=EN&fq=logical_status_code:1 logical_status_code:6&postcode=${postcode}&key=${osSearchKey}&dataset=DPA&offset=${offset}&maxresults=100`
   const payload = await util.getJson(uri, true)
 
   return payload
