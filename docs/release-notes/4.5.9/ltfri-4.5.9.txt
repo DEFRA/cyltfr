@@ -1,0 +1,9 @@
+# LTFRI 4.5.9 Wednesday 11th December 2024
+
+# Instructions
+
+A full code build needs to be performed to update the RISK-APP and RISK-SERVICE.
+
+# Code and Content changes
+
+LTFRI-1601 Change dataset of address search to remove LPI dataset and include provisional addresses

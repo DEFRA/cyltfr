@@ -47,7 +47,7 @@ async function processManifest (provider, log = logger) {
       // Write temp geo file
       const tmpFileName = `${tmpDir}/geo.json`
       log(`Writing temp geospatial file ${key} as ${tmpFileName}`)
-      await writeFile(tmpFileName, file.Body)
+      await writeFile(tmpFileName, JSON.stringify(file))
       log(`Wrote temp geospatial file ${key} as ${tmpFileName}`)
 
       // Shell env vars
