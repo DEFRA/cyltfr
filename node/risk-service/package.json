@@ -1,6 +1,6 @@
 {
   "name": "risk-service",
-  "version": "4.5.5",
+  "version": "4.5.9",
   "description": "Flood Service",
   "main": "index.js",
   "engines": {
